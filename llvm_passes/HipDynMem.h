@@ -11,6 +11,7 @@ class HipDynMemExternReplaceNewPass
     : public PassInfoMixin<HipDynMemExternReplaceNewPass> {
 public:
   PreservedAnalyses run(Module &M, ModuleAnalysisManager &AM);
+  static bool isRequired() { return true; }
 };
 #endif
 

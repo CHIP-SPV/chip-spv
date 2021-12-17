@@ -11,6 +11,7 @@ class HipDefrostPass
     : public PassInfoMixin<HipDefrostPass> {
 public:
   PreservedAnalyses run(Function &M, FunctionAnalysisManager &AM);
+  static bool isRequired() { return true; }
 };
 #endif
 

@@ -11,6 +11,7 @@ class HipStripCompilerUsedPass
     : public PassInfoMixin<HipStripCompilerUsedPass> {
 public:
   PreservedAnalyses run(Module &M, ModuleAnalysisManager &AM);
+  static bool isRequired() { return true; }
 };
 #endif
 

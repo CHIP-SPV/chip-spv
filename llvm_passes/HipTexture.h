@@ -576,6 +576,7 @@ class HipTextureExternReplaceNewPass
     : public PassInfoMixin<HipTextureExternReplaceNewPass> {
 public:
   PreservedAnalyses run(Module &M, ModuleAnalysisManager &AM);
+  static bool isRequired() { return true; }
 };
 #endif
 
