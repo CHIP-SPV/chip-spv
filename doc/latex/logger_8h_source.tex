@@ -1,0 +1,194 @@
+\hypertarget{logger_8h_source}{}\doxysection{logger.\+h}
+\label{logger_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/logger.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/logger.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015-\/2108 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{// Thread safe logger (except for set\_pattern(..), set\_formatter(..) and}}
+\DoxyCodeLine{9 \textcolor{comment}{// set\_error\_handler())}}
+\DoxyCodeLine{10 \textcolor{comment}{// Has name, log level, vector of std::shared sink pointers and formatter}}
+\DoxyCodeLine{11 \textcolor{comment}{// Upon each log write the logger:}}
+\DoxyCodeLine{12 \textcolor{comment}{// 1. Checks if its log level is enough to log the message and if yes:}}
+\DoxyCodeLine{13 \textcolor{comment}{// 2. Call the underlying sinks to do the job.}}
+\DoxyCodeLine{14 \textcolor{comment}{// 3. Each sink use its own private copy of a formatter to format the message}}
+\DoxyCodeLine{15 \textcolor{comment}{// and send to its destination.}}
+\DoxyCodeLine{16 \textcolor{comment}{//}}
+\DoxyCodeLine{17 \textcolor{comment}{// The use of private formatter per sink provides the opportunity to cache some}}
+\DoxyCodeLine{18 \textcolor{comment}{// formatted data,}}
+\DoxyCodeLine{19 \textcolor{comment}{// and support customize format per each sink.}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}spdlog/common.h"{}}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}spdlog/formatter.h"{}}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}spdlog/sinks/sink.h"{}}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1logger}{logger}}}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \mbox{\hyperlink{classspdlog_1_1logger}{logger}}(std::string name, sink\_ptr single\_sink);}
+\DoxyCodeLine{35     \mbox{\hyperlink{classspdlog_1_1logger}{logger}}(std::string name, sinks\_init\_list sinks);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keyword}{template}<\textcolor{keyword}{typename} It>}
+\DoxyCodeLine{38     \mbox{\hyperlink{classspdlog_1_1logger}{logger}}(std::string name, It begin, It end);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keyword}{virtual} \mbox{\hyperlink{classspdlog_1_1logger}{\string~logger}}();}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \mbox{\hyperlink{classspdlog_1_1logger}{logger}}(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1logger}{logger}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{43     \mbox{\hyperlink{classspdlog_1_1logger}{logger}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1logger}{logger}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{46     \textcolor{keywordtype}{void} log(level::level\_enum lvl, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} log(\mbox{\hyperlink{structspdlog_1_1source__loc}{source\_loc}} loc, level::level\_enum lvl, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} log(level::level\_enum lvl, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *msg);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} log(\mbox{\hyperlink{structspdlog_1_1source__loc}{source\_loc}} loc, level::level\_enum lvl, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *msg);}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} trace(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} debug(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} info(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} warn(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} error(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} critical(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#ifdef SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#ifndef \_WIN32}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#error SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT only supported on windows}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{77     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} log(level::level\_enum lvl, \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} log(\mbox{\hyperlink{structspdlog_1_1source__loc}{source\_loc}} source, level::level\_enum lvl, \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{84     \textcolor{keywordtype}{void} trace(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} debug(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{90     \textcolor{keywordtype}{void} info(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{93     \textcolor{keywordtype}{void} warn(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} error(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{99     \textcolor{keywordtype}{void} critical(\textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *fmt, \textcolor{keyword}{const} Args \&... args);}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_WIN32}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{comment}{// T can be statically converted to string\_view}}
+\DoxyCodeLine{104     template<class T, typename std::enable\_if<std::is\_convertible<T, spdlog::string\_view\_t>::value, T>::type * = \textcolor{keyword}{nullptr}>}
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} log(level::level\_enum lvl, \textcolor{keyword}{const} T \&);}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{comment}{// T can be statically converted to string\_view}}
+\DoxyCodeLine{108     template<class T, typename std::enable\_if<std::is\_convertible<T, spdlog::string\_view\_t>::value, T>::type * = \textcolor{keyword}{nullptr}>}
+\DoxyCodeLine{109     \textcolor{keywordtype}{void} log(\mbox{\hyperlink{structspdlog_1_1source__loc}{source\_loc}} loc, level::level\_enum lvl, \textcolor{keyword}{const} T \&);}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{comment}{// T cannot be statically converted to string\_view}}
+\DoxyCodeLine{112     template<class T, typename std::enable\_if<!std::is\_convertible<T, spdlog::string\_view\_t>::value, T>::type * = \textcolor{keyword}{nullptr}>}
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} log(level::level\_enum lvl, \textcolor{keyword}{const} T \&);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{comment}{// T cannot be statically converted to string\_view}}
+\DoxyCodeLine{116     template<class T, typename std::enable\_if<!std::is\_convertible<T, spdlog::string\_view\_t>::value, T>::type * = \textcolor{keyword}{nullptr}>}
+\DoxyCodeLine{117     \textcolor{keywordtype}{void} log(\mbox{\hyperlink{structspdlog_1_1source__loc}{source\_loc}} loc, level::level\_enum lvl, \textcolor{keyword}{const} T \&);}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} trace(\textcolor{keyword}{const} T \&msg);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{123     \textcolor{keywordtype}{void} debug(\textcolor{keyword}{const} T \&msg);}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{126     \textcolor{keywordtype}{void} info(\textcolor{keyword}{const} T \&msg);}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} warn(\textcolor{keyword}{const} T \&msg);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{132     \textcolor{keywordtype}{void} error(\textcolor{keyword}{const} T \&msg);}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} critical(\textcolor{keyword}{const} T \&msg);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{keywordtype}{bool} should\_log(level::level\_enum msg\_level) \textcolor{keyword}{const};}
+\DoxyCodeLine{138     \textcolor{keywordtype}{void} set\_level(level::level\_enum log\_level);}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keyword}{static} level::level\_enum default\_level();}
+\DoxyCodeLine{141     level::level\_enum level() \textcolor{keyword}{const};}
+\DoxyCodeLine{142     \textcolor{keyword}{const} std::string \&name() \textcolor{keyword}{const};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144     \textcolor{comment}{// set formatting for the sinks in this logger.}}
+\DoxyCodeLine{145     \textcolor{comment}{// each sink will get a seperate instance of the formatter object.}}
+\DoxyCodeLine{146     \textcolor{keywordtype}{void} set\_formatter(std::unique\_ptr<formatter> \mbox{\hyperlink{classspdlog_1_1formatter}{formatter}});}
+\DoxyCodeLine{147     \textcolor{keywordtype}{void} set\_pattern(std::string pattern, pattern\_time\_type time\_type = pattern\_time\_type::local);}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149     \textcolor{comment}{// flush functions}}
+\DoxyCodeLine{150     \textcolor{keywordtype}{void} flush();}
+\DoxyCodeLine{151     \textcolor{keywordtype}{void} flush\_on(level::level\_enum log\_level);}
+\DoxyCodeLine{152     level::level\_enum flush\_level() \textcolor{keyword}{const};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     \textcolor{comment}{// sinks}}
+\DoxyCodeLine{155     \textcolor{keyword}{const} std::vector<sink\_ptr> \&sinks() \textcolor{keyword}{const};}
+\DoxyCodeLine{156     std::vector<sink\_ptr> \&sinks();}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158     \textcolor{comment}{// error handler}}
+\DoxyCodeLine{159     \textcolor{keywordtype}{void} set\_error\_handler(log\_err\_handler err\_handler);}
+\DoxyCodeLine{160     log\_err\_handler error\_handler() \textcolor{keyword}{const};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \textcolor{comment}{// create new logger with same sinks and configuration.}}
+\DoxyCodeLine{163     \textcolor{keyword}{virtual} std::shared\_ptr<logger> clone(std::string logger\_name);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{166     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} sink\_it\_(\mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg);}
+\DoxyCodeLine{167     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} flush\_();}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169     \textcolor{keywordtype}{bool} should\_flush\_(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg);}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171     \textcolor{comment}{// default error handler.}}
+\DoxyCodeLine{172     \textcolor{comment}{// print the error to stderr with the max rate of 1 message/minute.}}
+\DoxyCodeLine{173     \textcolor{keywordtype}{void} default\_err\_handler\_(\textcolor{keyword}{const} std::string \&msg);}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     \textcolor{comment}{// increment the message count (only if defined(SPDLOG\_ENABLE\_MESSAGE\_COUNTER))}}
+\DoxyCodeLine{176     \textcolor{keywordtype}{void} incr\_msg\_counter\_(\mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg);}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keyword}{const} std::string name\_;}
+\DoxyCodeLine{179     std::vector<sink\_ptr> sinks\_;}
+\DoxyCodeLine{180     spdlog::level\_t level\_\{spdlog::logger::default\_level()\};}
+\DoxyCodeLine{181     spdlog::level\_t flush\_level\_\{level::off\};}
+\DoxyCodeLine{182     log\_err\_handler err\_handler\_\{[\textcolor{keyword}{this}](\textcolor{keyword}{const} std::string \&msg) \{ this-\/>default\_err\_handler\_(msg); \}\};}
+\DoxyCodeLine{183     std::atomic<time\_t> last\_err\_time\_\{0\};}
+\DoxyCodeLine{184     std::atomic<size\_t> msg\_counter\_\{1\};}
+\DoxyCodeLine{185 \};}
+\DoxyCodeLine{186 \} \textcolor{comment}{// namespace spdlog}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{preprocessor}{\#include "{}details/logger\_impl.h"{}}}
+
+\end{DoxyCode}

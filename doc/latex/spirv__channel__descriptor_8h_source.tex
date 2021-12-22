@@ -1,0 +1,361 @@
+\hypertarget{spirv__channel__descriptor_8h_source}{}\doxysection{spirv\+\_\+channel\+\_\+descriptor.\+h}
+\label{spirv__channel__descriptor_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_channel\_descriptor.h@{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_channel\_descriptor.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_SPIRV\_CHANNEL\_DESCRIPTOR\_H}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_SPIRV\_CHANNEL\_DESCRIPTOR\_H}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{//\#include "{}channel\_descriptor.h"{}}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <hip/hip\_common.h>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <hip/driver\_types.h>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <hip/spirv\_hip\_vector\_types.h>}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} HIP\_PUBLIC\_API hipChannelFormatDesc}
+\DoxyCodeLine{35 hipCreateChannelDesc(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, \textcolor{keywordtype}{int} z, \textcolor{keywordtype}{int} w, hipChannelFormatKind f);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y, \textcolor{keywordtype}{int} z, \textcolor{keywordtype}{int} w,}
+\DoxyCodeLine{38                                                  hipChannelFormatKind f) \{}
+\DoxyCodeLine{39   \textcolor{keywordflow}{return} \{x, y, z, w, f\};}
+\DoxyCodeLine{40 \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDescHalf() \{}
+\DoxyCodeLine{43   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{44   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindFloat);}
+\DoxyCodeLine{45 \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDescHalf1() \{}
+\DoxyCodeLine{48   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{49   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindFloat);}
+\DoxyCodeLine{50 \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDescHalf2() \{}
+\DoxyCodeLine{53   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{54   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindFloat);}
+\DoxyCodeLine{55 \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{58 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc() \{}
+\DoxyCodeLine{59   \textcolor{keywordflow}{return} hipCreateChannelDesc(0, 0, 0, 0, hipChannelFormatKindNone);}
+\DoxyCodeLine{60 \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{63 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<char>() \{}
+\DoxyCodeLine{64   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{65   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{66 \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{69 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<signed char>() \{}
+\DoxyCodeLine{70   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{71   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{72 \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{75 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<unsigned char>() \{}
+\DoxyCodeLine{76   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{77   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{78 \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{81 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uchar1>() \{}
+\DoxyCodeLine{82   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{83   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{84 \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{87 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<char1>() \{}
+\DoxyCodeLine{88   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{89   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{90 \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{93 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uchar2>() \{}
+\DoxyCodeLine{94   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{95   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{96 \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{99 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<char2>() \{}
+\DoxyCodeLine{100   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{101   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{102 \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#ifndef \_\_GNUC\_\_  }\textcolor{comment}{// vector3 is the same as vector4}}
+\DoxyCodeLine{105 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{106 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uchar3>() \{}
+\DoxyCodeLine{107   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{108   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{109 \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{112 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<char3>() \{}
+\DoxyCodeLine{113   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{114   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{115 \}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{119 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uchar4>() \{}
+\DoxyCodeLine{120   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{121   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindSigned);}
+\DoxyCodeLine{122 \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{125 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<char4>() \{}
+\DoxyCodeLine{126   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{char}) * 8;}
+\DoxyCodeLine{127   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindSigned);}
+\DoxyCodeLine{128 \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{131 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<unsigned short>() \{}
+\DoxyCodeLine{132   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{133   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{134 \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{137 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<signed short>() \{}
+\DoxyCodeLine{138   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{139   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{140 \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{143 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ushort1>() \{}
+\DoxyCodeLine{144   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{145   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{146 \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{149 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<short1>() \{}
+\DoxyCodeLine{150   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{151   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{152 \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{155 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ushort2>() \{}
+\DoxyCodeLine{156   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{157   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{158 \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{161 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<short2>() \{}
+\DoxyCodeLine{162   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{163   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{164 \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#ifndef \_\_GNUC\_\_}}
+\DoxyCodeLine{167 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{168 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ushort3>() \{}
+\DoxyCodeLine{169   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{170   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{171 \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{174 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<short3>() \{}
+\DoxyCodeLine{175   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{176   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{177 \}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{181 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ushort4>() \{}
+\DoxyCodeLine{182   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{183   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{184 \}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{187 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<short4>() \{}
+\DoxyCodeLine{188   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{short}) * 8;}
+\DoxyCodeLine{189   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindSigned);}
+\DoxyCodeLine{190 \}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{193 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<unsigned int>() \{}
+\DoxyCodeLine{194   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{195   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{196 \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{199 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<signed int>() \{}
+\DoxyCodeLine{200   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{201   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{202 \}}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{205 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uint1>() \{}
+\DoxyCodeLine{206   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{207   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{208 \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{211 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<int1>() \{}
+\DoxyCodeLine{212   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{213   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{214 \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{217 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uint2>() \{}
+\DoxyCodeLine{218   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{219   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{220 \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{223 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<int2>() \{}
+\DoxyCodeLine{224   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{225   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{226 \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228 \textcolor{preprocessor}{\#ifndef \_\_GNUC\_\_}}
+\DoxyCodeLine{229 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{230 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uint3>() \{}
+\DoxyCodeLine{231   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{232   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{233 \}}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{236 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<int3>() \{}
+\DoxyCodeLine{237   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{238   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{239 \}}
+\DoxyCodeLine{240 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{243 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<uint4>() \{}
+\DoxyCodeLine{244   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{245   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{246 \}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{249 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<int4>() \{}
+\DoxyCodeLine{250   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{int}) * 8;}
+\DoxyCodeLine{251   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindSigned);}
+\DoxyCodeLine{252 \}}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{255 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<float>() \{}
+\DoxyCodeLine{256   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}) * 8;}
+\DoxyCodeLine{257   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindFloat);}
+\DoxyCodeLine{258 \}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{261 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<float1>() \{}
+\DoxyCodeLine{262   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}) * 8;}
+\DoxyCodeLine{263   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindFloat);}
+\DoxyCodeLine{264 \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{267 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<float2>() \{}
+\DoxyCodeLine{268   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}) * 8;}
+\DoxyCodeLine{269   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindFloat);}
+\DoxyCodeLine{270 \}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272 \textcolor{preprocessor}{\#ifndef \_\_GNUC\_\_}}
+\DoxyCodeLine{273 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{274 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<float3>() \{}
+\DoxyCodeLine{275   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}) * 8;}
+\DoxyCodeLine{276   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindFloat);}
+\DoxyCodeLine{277 \}}
+\DoxyCodeLine{278 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{281 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<float4>() \{}
+\DoxyCodeLine{282   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}) * 8;}
+\DoxyCodeLine{283   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindFloat);}
+\DoxyCodeLine{284 \}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{287 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<unsigned long>() \{}
+\DoxyCodeLine{288   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{289   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{290 \}}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{293 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<signed long>() \{}
+\DoxyCodeLine{294   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{295   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{296 \}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{299 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ulong1>() \{}
+\DoxyCodeLine{300   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{301   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{302 \}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{305 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<long1>() \{}
+\DoxyCodeLine{306   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{307   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, 0, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{308 \}}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{311 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ulong2>() \{}
+\DoxyCodeLine{312   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{313   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{314 \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{317 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<long2>() \{}
+\DoxyCodeLine{318   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{319   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, 0, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{320 \}}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322 \textcolor{preprocessor}{\#ifndef \_\_GNUC\_\_}}
+\DoxyCodeLine{323 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{324 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ulong3>() \{}
+\DoxyCodeLine{325   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{326   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{327 \}}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{330 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<long3>() \{}
+\DoxyCodeLine{331   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{332   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, 0, hipChannelFormatKindSigned);}
+\DoxyCodeLine{333 \}}
+\DoxyCodeLine{334 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{337 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<ulong4>() \{}
+\DoxyCodeLine{338   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{339   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindUnsigned);}
+\DoxyCodeLine{340 \}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{343 \textcolor{keyword}{inline} hipChannelFormatDesc hipCreateChannelDesc<long4>() \{}
+\DoxyCodeLine{344   \textcolor{keywordtype}{int} e = (int)\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{signed} \textcolor{keywordtype}{long}) * 8;}
+\DoxyCodeLine{345   \textcolor{keywordflow}{return} hipCreateChannelDesc(e, e, e, e, hipChannelFormatKindSigned);}
+\DoxyCodeLine{346 \}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350 \textcolor{keyword}{struct }hipChannelFormatDesc hipCreateChannelDesc(int x, int y, int z, int w,}
+\DoxyCodeLine{351                                                  enum hipChannelFormatKind f);}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

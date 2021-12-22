@@ -1,0 +1,55 @@
+\hypertarget{clasship_perf_mandel_brot}{}\doxysection{hip\+Perf\+Mandel\+Brot Class Reference}
+\label{clasship_perf_mandel_brot}\index{hipPerfMandelBrot@{hipPerfMandelBrot}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_a56718d939353a707042a43f3c8e05eda}\label{clasship_perf_mandel_brot_a56718d939353a707042a43f3c8e05eda}} 
+typedef void(hip\+Perf\+Mandel\+Brot\+::$\ast$ {\bfseries fun\+Ptr}) (uint $\ast$out, uint width, float x\+Pos, float y\+Pos, float x\+Step, float y\+Step, uint max\+Iter, \mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} $\ast$streams, int blocks, int threads\+\_\+per\+\_\+block, int kernel\+Cnt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_abac0831ead6d8f3d4d8a3b36970bd080}\label{clasship_perf_mandel_brot_abac0831ead6d8f3d4d8a3b36970bd080}} 
+void {\bfseries set\+Num\+Kernels} (unsigned int num)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_a75b03fab24077f0de3d351f867ffb47c}\label{clasship_perf_mandel_brot_a75b03fab24077f0de3d351f867ffb47c}} 
+unsigned int {\bfseries get\+Num\+Kernels} ()
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_af2fbbc1e6f057cbb5b0768254b79cd18}\label{clasship_perf_mandel_brot_af2fbbc1e6f057cbb5b0768254b79cd18}} 
+void {\bfseries set\+Num\+Streams} (unsigned int num)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_a15ac47ba82e45b61f96aecbd7317e987}\label{clasship_perf_mandel_brot_a15ac47ba82e45b61f96aecbd7317e987}} 
+unsigned int {\bfseries get\+Num\+Streams} ()
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_a9976007d228903cfd4ff68ff8dec963d}\label{clasship_perf_mandel_brot_a9976007d228903cfd4ff68ff8dec963d}} 
+void {\bfseries open} (int device\+ID)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_afcff2d0fd14d9c0230bce3bb8a809c34}\label{clasship_perf_mandel_brot_afcff2d0fd14d9c0230bce3bb8a809c34}} 
+void {\bfseries run} (unsigned int test\+Case, unsigned int device\+Id)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_a7973b412b93d8935964c0329761ef9c6}\label{clasship_perf_mandel_brot_a7973b412b93d8935964c0329761ef9c6}} 
+void {\bfseries print\+Results} (void)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_ade7a4fc5037c4eb5f3bc0b00d797c877}\label{clasship_perf_mandel_brot_ade7a4fc5037c4eb5f3bc0b00d797c877}} 
+void {\bfseries float\+\_\+mad} (uint $\ast$out, uint width, float x\+Pos, float y\+Pos, float x\+Step, float y\+Step, uint max\+Iter, \mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} $\ast$streams, int blocks, int threads\+\_\+per\+\_\+block, int kernel\+Cnt)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_ab36d7d8a99c192a43390e1c94c157f72}\label{clasship_perf_mandel_brot_ab36d7d8a99c192a43390e1c94c157f72}} 
+void {\bfseries float\+\_\+mandel\+\_\+unroll} (uint $\ast$out, uint width, float x\+Pos, float y\+Pos, float x\+Step, float y\+Step, uint max\+Iter, \mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} $\ast$streams, int blocks, int threads\+\_\+per\+\_\+block, int kernel\+Cnt)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_a3ad35d14f22982684c88d11864adb2b1}\label{clasship_perf_mandel_brot_a3ad35d14f22982684c88d11864adb2b1}} 
+void {\bfseries double\+\_\+mad} (uint $\ast$out, uint width, float x\+Pos, float y\+Pos, float x\+Step, float y\+Step, uint max\+Iter, \mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} $\ast$streams, int blocks, int threads\+\_\+per\+\_\+block, int kernel\+Cnt)
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_ad3b898c8907a40eea430b8251aa8ef43}\label{clasship_perf_mandel_brot_ad3b898c8907a40eea430b8251aa8ef43}} 
+void {\bfseries double\+\_\+mandel\+\_\+unroll} (uint $\ast$out, uint width, float x\+Pos, float y\+Pos, float x\+Step, float y\+Step, uint max\+Iter, \mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} $\ast$streams, int blocks, int threads\+\_\+per\+\_\+block, int kernel\+Cnt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{clasship_perf_mandel_brot_ac2f738fa83d5448dff5115356a6b86ee}\label{clasship_perf_mandel_brot_ac2f738fa83d5448dff5115356a6b86ee}} 
+\mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} {\bfseries streams} \mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/performance/compute/hip\+Perf\+Mandelbrot.\+cpp\end{DoxyCompactItemize}

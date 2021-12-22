@@ -1,0 +1,100 @@
+\hypertarget{dist__sink_8h_source}{}\doxysection{dist\+\_\+sink.\+h}
+\label{dist__sink_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/dist\_sink.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/dist\_sink.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright (c) 2015 David Schury, Gabi Melman}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef SPDLOG\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#error "{}spdlog.h must be included before this file."{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}base\_sink.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}spdlog/details/log\_msg.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}spdlog/details/null\_mutex.h"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{comment}{// Distribution sink (mux). Stores a vector of sinks which get called when log}}
+\DoxyCodeLine{22 \textcolor{comment}{// is called}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{25 \textcolor{keyword}{namespace }sinks \{}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Mutex>}
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink}}<Mutex>}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{31     \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{32     \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink}}(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{33     \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} add\_sink(std::shared\_ptr<sink> \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}})}
+\DoxyCodeLine{36     \{}
+\DoxyCodeLine{37         std::lock\_guard<Mutex> lock(\mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink<Mutex>::mutex\_}});}
+\DoxyCodeLine{38         sinks\_.push\_back(\mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}});}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{void} remove\_sink(std::shared\_ptr<sink> \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}})}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43         std::lock\_guard<Mutex> lock(\mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink<Mutex>::mutex\_}});}
+\DoxyCodeLine{44         sinks\_.erase(std::remove(sinks\_.begin(), sinks\_.end(), \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}), sinks\_.end());}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} set\_sinks(std::vector<std::shared\_ptr<sink>> sinks)}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{49         std::lock\_guard<Mutex> lock(\mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink<Mutex>::mutex\_}});}
+\DoxyCodeLine{50         sinks\_ = std::move(sinks);}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} sink\_it\_(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg)\textcolor{keyword}{ override}}
+\DoxyCodeLine{55 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}} : sinks\_)}
+\DoxyCodeLine{58         \{}
+\DoxyCodeLine{59             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}-\/>should\_log(msg.level))}
+\DoxyCodeLine{60             \{}
+\DoxyCodeLine{61                 \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}-\/>log(msg);}
+\DoxyCodeLine{62             \}}
+\DoxyCodeLine{63         \}}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} flush\_()\textcolor{keyword}{ override}}
+\DoxyCodeLine{67 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{68         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}} : sinks\_)}
+\DoxyCodeLine{69         \{}
+\DoxyCodeLine{70             \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}-\/>flush();}
+\DoxyCodeLine{71         \}}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} set\_pattern\_(\textcolor{keyword}{const} std::string \&pattern)\textcolor{keyword}{ override}}
+\DoxyCodeLine{75 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{76         set\_formatter\_(details::make\_unique<spdlog::pattern\_formatter>(pattern));}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{keywordtype}{void} set\_formatter\_(std::unique\_ptr<spdlog::formatter> sink\_formatter)\textcolor{keyword}{ override}}
+\DoxyCodeLine{80 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{81         \mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink<Mutex>::formatter\_}} = std::move(sink\_formatter);}
+\DoxyCodeLine{82         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}} : sinks\_)}
+\DoxyCodeLine{83         \{}
+\DoxyCodeLine{84             \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}-\/>set\_formatter(\mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink<Mutex>::formatter\_}}-\/>clone());}
+\DoxyCodeLine{85         \}}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87     std::vector<std::shared\_ptr<sink>> sinks\_;}
+\DoxyCodeLine{88 \};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{keyword}{using} \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink\_mt}} = \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink<std::mutex>}};}
+\DoxyCodeLine{91 \textcolor{keyword}{using} \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink\_st}} = \mbox{\hyperlink{classspdlog_1_1sinks_1_1dist__sink}{dist\_sink<details::null\_mutex>}};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \} \textcolor{comment}{// namespace sinks}}
+\DoxyCodeLine{94 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

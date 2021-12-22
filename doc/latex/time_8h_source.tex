@@ -1,0 +1,162 @@
+\hypertarget{time_8h_source}{}\doxysection{time.\+h}
+\label{time_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/bundled/time.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/bundled/time.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Formatting library for C++ -\/ time formatting}}
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{// Copyright (c) 2012 -\/ 2016, Victor Zverovich}}
+\DoxyCodeLine{4 \textcolor{comment}{// All rights reserved.}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{// For the license information refer to format.h.}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef FMT\_TIME\_H\_}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define FMT\_TIME\_H\_}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}format.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 FMT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{// Prevents expansion of a preceding token as a function-\/style macro.}}
+\DoxyCodeLine{17 \textcolor{comment}{// Usage: f FMT\_NOMACRO()}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FMT\_NOMACRO}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{namespace }internal\{}
+\DoxyCodeLine{21 \textcolor{keyword}{inline} null<> localtime\_r FMT\_NOMACRO(...) \{ \textcolor{keywordflow}{return} null<>(); \}}
+\DoxyCodeLine{22 \textcolor{keyword}{inline} null<> localtime\_s(...) \{ \textcolor{keywordflow}{return} null<>(); \}}
+\DoxyCodeLine{23 \textcolor{keyword}{inline} null<> gmtime\_r(...) \{ \textcolor{keywordflow}{return} null<>(); \}}
+\DoxyCodeLine{24 \textcolor{keyword}{inline} null<> gmtime\_s(...) \{ \textcolor{keywordflow}{return} null<>(); \}}
+\DoxyCodeLine{25 \}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{// Thread-\/safe replacement for std::localtime}}
+\DoxyCodeLine{28 \textcolor{keyword}{inline} std::tm localtime(std::time\_t time) \{}
+\DoxyCodeLine{29   \textcolor{keyword}{struct }dispatcher \{}
+\DoxyCodeLine{30     std::time\_t time\_;}
+\DoxyCodeLine{31     std::tm tm\_;}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     dispatcher(std::time\_t t): time\_(t) \{\}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordtype}{bool} run() \{}
+\DoxyCodeLine{36       \textcolor{keyword}{using namespace }fmt::internal;}
+\DoxyCodeLine{37       \textcolor{keywordflow}{return} handle(localtime\_r(\&time\_, \&tm\_));}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{bool} handle(std::tm *tm) \{ \textcolor{keywordflow}{return} tm != FMT\_NULL; \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{bool} handle(\mbox{\hyperlink{structinternal_1_1null}{internal::null<>}}) \{}
+\DoxyCodeLine{43       \textcolor{keyword}{using namespace }fmt::internal;}
+\DoxyCodeLine{44       \textcolor{keywordflow}{return} fallback(localtime\_s(\&tm\_, \&time\_));}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{bool} fallback(\textcolor{keywordtype}{int} res) \{ \textcolor{keywordflow}{return} res == 0; \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{bool} fallback(\mbox{\hyperlink{structinternal_1_1null}{internal::null<>}}) \{}
+\DoxyCodeLine{50       \textcolor{keyword}{using namespace }fmt::internal;}
+\DoxyCodeLine{51       std::tm *tm = std::localtime(\&time\_);}
+\DoxyCodeLine{52       \textcolor{keywordflow}{if} (tm) tm\_ = *tm;}
+\DoxyCodeLine{53       \textcolor{keywordflow}{return} tm != FMT\_NULL;}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55   \};}
+\DoxyCodeLine{56   dispatcher lt(time);}
+\DoxyCodeLine{57   \textcolor{keywordflow}{if} (lt.run())}
+\DoxyCodeLine{58     \textcolor{keywordflow}{return} lt.tm\_;}
+\DoxyCodeLine{59   \textcolor{comment}{// Too big time values may be unsupported.}}
+\DoxyCodeLine{60   FMT\_THROW(\mbox{\hyperlink{classformat__error}{format\_error}}(\textcolor{stringliteral}{"{}time\_t value out of range"{}}));}
+\DoxyCodeLine{61 \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{comment}{// Thread-\/safe replacement for std::gmtime}}
+\DoxyCodeLine{64 \textcolor{keyword}{inline} std::tm gmtime(std::time\_t time) \{}
+\DoxyCodeLine{65   \textcolor{keyword}{struct }dispatcher \{}
+\DoxyCodeLine{66     std::time\_t time\_;}
+\DoxyCodeLine{67     std::tm tm\_;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     dispatcher(std::time\_t t): time\_(t) \{\}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{bool} run() \{}
+\DoxyCodeLine{72       \textcolor{keyword}{using namespace }fmt::internal;}
+\DoxyCodeLine{73       \textcolor{keywordflow}{return} handle(gmtime\_r(\&time\_, \&tm\_));}
+\DoxyCodeLine{74     \}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{bool} handle(std::tm *tm) \{ \textcolor{keywordflow}{return} tm != FMT\_NULL; \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} handle(\mbox{\hyperlink{structinternal_1_1null}{internal::null<>}}) \{}
+\DoxyCodeLine{79       \textcolor{keyword}{using namespace }fmt::internal;}
+\DoxyCodeLine{80       \textcolor{keywordflow}{return} fallback(gmtime\_s(\&tm\_, \&time\_));}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{bool} fallback(\textcolor{keywordtype}{int} res) \{ \textcolor{keywordflow}{return} res == 0; \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keywordtype}{bool} fallback(\mbox{\hyperlink{structinternal_1_1null}{internal::null<>}}) \{}
+\DoxyCodeLine{86       std::tm *tm = std::gmtime(\&time\_);}
+\DoxyCodeLine{87       \textcolor{keywordflow}{if} (tm) tm\_ = *tm;}
+\DoxyCodeLine{88       \textcolor{keywordflow}{return} tm != FMT\_NULL;}
+\DoxyCodeLine{89     \}}
+\DoxyCodeLine{90   \};}
+\DoxyCodeLine{91   dispatcher gt(time);}
+\DoxyCodeLine{92   \textcolor{keywordflow}{if} (gt.run())}
+\DoxyCodeLine{93     \textcolor{keywordflow}{return} gt.tm\_;}
+\DoxyCodeLine{94   \textcolor{comment}{// Too big time values may be unsupported.}}
+\DoxyCodeLine{95   FMT\_THROW(\mbox{\hyperlink{classformat__error}{format\_error}}(\textcolor{stringliteral}{"{}time\_t value out of range"{}}));}
+\DoxyCodeLine{96 \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{keyword}{namespace }internal \{}
+\DoxyCodeLine{99 \textcolor{keyword}{inline} std::size\_t strftime(\textcolor{keywordtype}{char} *str, std::size\_t count, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *format,}
+\DoxyCodeLine{100                             \textcolor{keyword}{const} std::tm *time) \{}
+\DoxyCodeLine{101   \textcolor{keywordflow}{return} std::strftime(str, count, format, time);}
+\DoxyCodeLine{102 \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{inline} std::size\_t strftime(\textcolor{keywordtype}{wchar\_t} *str, std::size\_t count,}
+\DoxyCodeLine{105                             \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t} *format, \textcolor{keyword}{const} std::tm *time) \{}
+\DoxyCodeLine{106   \textcolor{keywordflow}{return} std::wcsftime(str, count, format, time);}
+\DoxyCodeLine{107 \}}
+\DoxyCodeLine{108 \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Char>}
+\DoxyCodeLine{111 \textcolor{keyword}{struct }\mbox{\hyperlink{structformatter}{formatter}}<std::tm, Char> \{}
+\DoxyCodeLine{112   \textcolor{keyword}{template} <\textcolor{keyword}{typename} ParseContext>}
+\DoxyCodeLine{113   \textcolor{keyword}{auto} parse(ParseContext \&ctx) -\/> \textcolor{keyword}{decltype}(ctx.begin()) \{}
+\DoxyCodeLine{114     \textcolor{keyword}{auto} it = \mbox{\hyperlink{classinternal_1_1null__terminating__iterator}{internal::null\_terminating\_iterator<Char>}}(ctx);}
+\DoxyCodeLine{115     \textcolor{keywordflow}{if} (*it == \textcolor{charliteral}{':'})}
+\DoxyCodeLine{116       ++it;}
+\DoxyCodeLine{117     \textcolor{keyword}{auto} end = it;}
+\DoxyCodeLine{118     \textcolor{keywordflow}{while} (*end \&\& *end != \textcolor{charliteral}{'\}'})}
+\DoxyCodeLine{119       ++end;}
+\DoxyCodeLine{120     tm\_format.reserve(end -\/ it + 1);}
+\DoxyCodeLine{121     \textcolor{keyword}{using} internal::pointer\_from;}
+\DoxyCodeLine{122     tm\_format.append(pointer\_from(it), pointer\_from(end));}
+\DoxyCodeLine{123     tm\_format.push\_back(\textcolor{charliteral}{'\(\backslash\)0'});}
+\DoxyCodeLine{124     \textcolor{keywordflow}{return} pointer\_from(end);}
+\DoxyCodeLine{125   \}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127   \textcolor{keyword}{template} <\textcolor{keyword}{typename} FormatContext>}
+\DoxyCodeLine{128   \textcolor{keyword}{auto} format(\textcolor{keyword}{const} std::tm \&tm, FormatContext \&ctx) -\/> \textcolor{keyword}{decltype}(ctx.out()) \{}
+\DoxyCodeLine{129     \mbox{\hyperlink{classinternal_1_1basic__buffer}{internal::basic\_buffer<Char>}} \&buf = internal::get\_container(ctx.out());}
+\DoxyCodeLine{130     std::size\_t start = buf.\mbox{\hyperlink{classinternal_1_1basic__buffer_abc95713c3873c5820f10105fe7c7af93}{size}}();}
+\DoxyCodeLine{131     \textcolor{keywordflow}{for} (;;) \{}
+\DoxyCodeLine{132       std::size\_t size = buf.\mbox{\hyperlink{classinternal_1_1basic__buffer_ae88bfc1cb8c896fa0b689ad8158cccae}{capacity}}() -\/ start;}
+\DoxyCodeLine{133       std::size\_t count =}
+\DoxyCodeLine{134         internal::strftime(\&buf[start], size, \&tm\_format[0], \&tm);}
+\DoxyCodeLine{135       \textcolor{keywordflow}{if} (count != 0) \{}
+\DoxyCodeLine{136         buf.\mbox{\hyperlink{classinternal_1_1basic__buffer_adbd2b147e114f0cc4573f734d4326669}{resize}}(start + count);}
+\DoxyCodeLine{137         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{138       \}}
+\DoxyCodeLine{139       \textcolor{keywordflow}{if} (size >= tm\_format.size() * 256) \{}
+\DoxyCodeLine{140         \textcolor{comment}{// If the buffer is 256 times larger than the format string, assume}}
+\DoxyCodeLine{141         \textcolor{comment}{// that `strftime` gives an empty result. There doesn't seem to be a}}
+\DoxyCodeLine{142         \textcolor{comment}{// better way to distinguish the two cases:}}
+\DoxyCodeLine{143         \textcolor{comment}{// https://github.com/fmtlib/fmt/issues/367}}
+\DoxyCodeLine{144         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{145       \}}
+\DoxyCodeLine{146       \textcolor{keyword}{const} std::size\_t MIN\_GROWTH = 10;}
+\DoxyCodeLine{147       buf.\mbox{\hyperlink{classinternal_1_1basic__buffer_ab4bbc728c01282567eebc165d545772a}{reserve}}(buf.\mbox{\hyperlink{classinternal_1_1basic__buffer_ae88bfc1cb8c896fa0b689ad8158cccae}{capacity}}() + (size > MIN\_GROWTH ? size : MIN\_GROWTH));}
+\DoxyCodeLine{148     \}}
+\DoxyCodeLine{149     \textcolor{keywordflow}{return} ctx.out();}
+\DoxyCodeLine{150   \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152   \mbox{\hyperlink{classbasic__memory__buffer}{basic\_memory\_buffer<Char>}} tm\_format;}
+\DoxyCodeLine{153 \};}
+\DoxyCodeLine{154 FMT\_END\_NAMESPACE}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// FMT\_TIME\_H\_}}
+
+\end{DoxyCode}

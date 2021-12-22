@@ -1,0 +1,48 @@
+\hypertarget{struct__ze__external__memory__import__fd__t}{}\doxysection{\+\_\+ze\+\_\+external\+\_\+memory\+\_\+import\+\_\+fd\+\_\+t Struct Reference}
+\label{struct__ze__external__memory__import__fd__t}\index{\_ze\_external\_memory\_import\_fd\_t@{\_ze\_external\_memory\_import\_fd\_t}}
+
+
+Additional allocation descriptor for importing external memory as a file descriptor.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__external__memory__import__fd__t_ab47977c27f68f0c78ddb89e6250db42d}\label{struct__ze__external__memory__import__fd__t_ab47977c27f68f0c78ddb89e6250db42d}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__external__memory__import__fd__t_af88adae2b89594207a0c150c390cb5c9}\label{struct__ze__external__memory__import__fd__t_af88adae2b89594207a0c150c390cb5c9}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__external__memory__import__fd__t_ad279e56df802df6cb5a39804c178feaf}{flags}}
+\item 
+\mbox{\Hypertarget{struct__ze__external__memory__import__fd__t_a380e66920a0d382fca159210b492268c}\label{struct__ze__external__memory__import__fd__t_a380e66920a0d382fca159210b492268c}} 
+int {\bfseries fd}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} the file descriptor handle to import \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Additional allocation descriptor for importing external memory as a file descriptor. 
+
+
+\begin{DoxyItemize}
+\item This structure may be passed to \+::ze\+Mem\+Alloc\+Device, via the {\ttfamily p\+Next} member of \+::ze\+\_\+device\+\_\+mem\+\_\+alloc\+\_\+desc\+\_\+t, to import memory from a file descriptor.
+\item This structure may be passed to \+::ze\+Image\+Create, via the {\ttfamily p\+Next} member of \+::ze\+\_\+image\+\_\+desc\+\_\+t, to import memory from a file descriptor. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__external__memory__import__fd__t_ad279e56df802df6cb5a39804c178feaf}\label{struct__ze__external__memory__import__fd__t_ad279e56df802df6cb5a39804c178feaf}} 
+\index{\_ze\_external\_memory\_import\_fd\_t@{\_ze\_external\_memory\_import\_fd\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_external\_memory\_import\_fd\_t@{\_ze\_external\_memory\_import\_fd\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \+\_\+ze\+\_\+external\+\_\+memory\+\_\+import\+\_\+fd\+\_\+t\+::flags}
+
+\mbox{[}in\mbox{]} flags specifying the memory import type for the file descriptor. must be 0 (default) or a valid combination of \+::ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

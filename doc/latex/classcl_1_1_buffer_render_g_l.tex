@@ -1,0 +1,152 @@
+\hypertarget{classcl_1_1_buffer_render_g_l}{}\doxysection{cl\+::Buffer\+Render\+GL Class Reference}
+\label{classcl_1_1_buffer_render_g_l}\index{cl::BufferRenderGL@{cl::BufferRenderGL}}
+
+
+Class interface for GL Render \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} Objects.  
+
+
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Buffer\+Render\+GL\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.994652cm]{classcl_1_1_buffer_render_g_l}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l_ac2f60478116d35c2a96c522205fcf932}{Buffer\+Render\+GL}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+mem\+\_\+flags flags, cl\+\_\+\+GLuint bufobj, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} in a specified context, from a given GL Renderbuffer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a9ae513ba0c6664353c389764c7e1011d}\label{classcl_1_1_buffer_render_g_l_a9ae513ba0c6664353c389764c7e1011d}} 
+{\bfseries Buffer\+Render\+GL} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS \mbox{\hyperlink{classcl_1_1_buffer_render_g_l_a6e389464dd1f004a790563a7822a5b63}{Buffer\+Render\+GL}} (const cl\+\_\+mem \&buffer)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+mem -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \& \mbox{\hyperlink{classcl_1_1_buffer_render_g_l_aeb0b208f83304c4b375a844c59ad6785}{operator=}} (const cl\+\_\+mem \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment from cl\+\_\+mem -\/ performs shallow copy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a9bbd05ded89c1c3d3c4fd52f0f5922b3}\label{classcl_1_1_buffer_render_g_l_a9bbd05ded89c1c3d3c4fd52f0f5922b3}} 
+{\bfseries Buffer\+Render\+GL} (const \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \&buf)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_ae8a660abc277570d2ff69ffa76d344e1}\label{classcl_1_1_buffer_render_g_l_ae8a660abc277570d2ff69ffa76d344e1}} 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a148deb18e39ee7553a96eb8e56557f5f}\label{classcl_1_1_buffer_render_g_l_a148deb18e39ee7553a96eb8e56557f5f}} 
+cl\+\_\+int {\bfseries get\+Object\+Info} (cl\+\_\+gl\+\_\+object\+\_\+type $\ast$type, cl\+\_\+\+GLuint $\ast$gl\+\_\+object\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+GLObject\+Info(). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l_ac2f60478116d35c2a96c522205fcf932}{Buffer\+Render\+GL}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+mem\+\_\+flags flags, cl\+\_\+\+GLuint bufobj, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} in a specified context, from a given GL Renderbuffer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a9ae513ba0c6664353c389764c7e1011d}\label{classcl_1_1_buffer_render_g_l_a9ae513ba0c6664353c389764c7e1011d}} 
+{\bfseries Buffer\+Render\+GL} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l_a3214caef962ed7c7ff20e102f498eff6}{Buffer\+Render\+GL}} (const cl\+\_\+mem \&buffer, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+mem -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \& \mbox{\hyperlink{classcl_1_1_buffer_render_g_l_aeb0b208f83304c4b375a844c59ad6785}{operator=}} (const cl\+\_\+mem \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment from cl\+\_\+mem -\/ performs shallow copy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a9bbd05ded89c1c3d3c4fd52f0f5922b3}\label{classcl_1_1_buffer_render_g_l_a9bbd05ded89c1c3d3c4fd52f0f5922b3}} 
+{\bfseries Buffer\+Render\+GL} (const \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \&buf)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a7a6eba55f3d3b3cc77602640c9de6b0e}\label{classcl_1_1_buffer_render_g_l_a7a6eba55f3d3b3cc77602640c9de6b0e}} 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \&buf)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a387a6e721fd3283d288d86e9dbfda3a5}\label{classcl_1_1_buffer_render_g_l_a387a6e721fd3283d288d86e9dbfda3a5}} 
+{\bfseries Buffer\+Render\+GL} (\mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \&\&buf) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\begin{DoxyCompactList}\small\item\em Move constructor to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a1671d5138388db59225fc32b197df0d6}\label{classcl_1_1_buffer_render_g_l_a1671d5138388db59225fc32b197df0d6}} 
+\mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \& {\bfseries operator=} (\mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \&\&buf)
+\begin{DoxyCompactList}\small\item\em Move assignment to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a148deb18e39ee7553a96eb8e56557f5f}\label{classcl_1_1_buffer_render_g_l_a148deb18e39ee7553a96eb8e56557f5f}} 
+cl\+\_\+int {\bfseries get\+Object\+Info} (cl\+\_\+gl\+\_\+object\+\_\+type $\ast$type, cl\+\_\+\+GLuint $\ast$gl\+\_\+object\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+GLObject\+Info(). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class interface for GL Render \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} Objects. 
+
+This is provided to facilitate interoperability with Open\+GL.
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for details about copy semantics, etc.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classcl_1_1_memory}{Memory}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_ac2f60478116d35c2a96c522205fcf932}\label{classcl_1_1_buffer_render_g_l_ac2f60478116d35c2a96c522205fcf932}} 
+\index{cl::BufferRenderGL@{cl::BufferRenderGL}!BufferRenderGL@{BufferRenderGL}}
+\index{BufferRenderGL@{BufferRenderGL}!cl::BufferRenderGL@{cl::BufferRenderGL}}
+\doxysubsubsection{\texorpdfstring{BufferRenderGL()}{BufferRenderGL()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+Render\+GL\+::\+Buffer\+Render\+GL (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{cl\+\_\+\+GLuint}]{bufobj,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} in a specified context, from a given GL Renderbuffer. 
+
+Wraps cl\+Create\+From\+GLRenderbuffer(). \mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a6e389464dd1f004a790563a7822a5b63}\label{classcl_1_1_buffer_render_g_l_a6e389464dd1f004a790563a7822a5b63}} 
+\index{cl::BufferRenderGL@{cl::BufferRenderGL}!BufferRenderGL@{BufferRenderGL}}
+\index{BufferRenderGL@{BufferRenderGL}!cl::BufferRenderGL@{cl::BufferRenderGL}}
+\doxysubsubsection{\texorpdfstring{BufferRenderGL()}{BufferRenderGL()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS cl\+::\+Buffer\+Render\+GL\+::\+Buffer\+Render\+GL (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor from cl\+\_\+mem -\/ takes ownership. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. \mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_ac2f60478116d35c2a96c522205fcf932}\label{classcl_1_1_buffer_render_g_l_ac2f60478116d35c2a96c522205fcf932}} 
+\index{cl::BufferRenderGL@{cl::BufferRenderGL}!BufferRenderGL@{BufferRenderGL}}
+\index{BufferRenderGL@{BufferRenderGL}!cl::BufferRenderGL@{cl::BufferRenderGL}}
+\doxysubsubsection{\texorpdfstring{BufferRenderGL()}{BufferRenderGL()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+Render\+GL\+::\+Buffer\+Render\+GL (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{cl\+\_\+\+GLuint}]{bufobj,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} in a specified context, from a given GL Renderbuffer. 
+
+Wraps cl\+Create\+From\+GLRenderbuffer(). \mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_a3214caef962ed7c7ff20e102f498eff6}\label{classcl_1_1_buffer_render_g_l_a3214caef962ed7c7ff20e102f498eff6}} 
+\index{cl::BufferRenderGL@{cl::BufferRenderGL}!BufferRenderGL@{BufferRenderGL}}
+\index{BufferRenderGL@{BufferRenderGL}!cl::BufferRenderGL@{cl::BufferRenderGL}}
+\doxysubsubsection{\texorpdfstring{BufferRenderGL()}{BufferRenderGL()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+Render\+GL\+::\+Buffer\+Render\+GL (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{buffer,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+mem -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions. See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_aeb0b208f83304c4b375a844c59ad6785}\label{classcl_1_1_buffer_render_g_l_aeb0b208f83304c4b375a844c59ad6785}} 
+\index{cl::BufferRenderGL@{cl::BufferRenderGL}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::BufferRenderGL@{cl::BufferRenderGL}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \& cl\+::\+Buffer\+Render\+GL\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment from cl\+\_\+mem -\/ performs shallow copy. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. \mbox{\Hypertarget{classcl_1_1_buffer_render_g_l_aeb0b208f83304c4b375a844c59ad6785}\label{classcl_1_1_buffer_render_g_l_aeb0b208f83304c4b375a844c59ad6785}} 
+\index{cl::BufferRenderGL@{cl::BufferRenderGL}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::BufferRenderGL@{cl::BufferRenderGL}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{Buffer\+Render\+GL}} \& cl\+::\+Buffer\+Render\+GL\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment from cl\+\_\+mem -\/ performs shallow copy. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

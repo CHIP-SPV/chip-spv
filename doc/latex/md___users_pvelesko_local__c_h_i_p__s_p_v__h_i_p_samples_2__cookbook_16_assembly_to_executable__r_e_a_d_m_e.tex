@@ -1,0 +1,53 @@
+This sample shows how to generate the assembly code for a simple HIP source application, then re-\/compiling it and generating a valid HIP executable.
+
+This sample uses a previous HIP application sample, please see \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/samples/0_Intro/square}{\texttt{ 0\+\_\+\+Intro/square}}.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md884}{}\doxysection{Compiling the HIP source into assembly}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md884}
+Using HIP flags {\ttfamily -\/c -\/S} will help generate the host x86\+\_\+64 and the device AMDGCN assembly code when paired with {\ttfamily -\/-\/cuda-\/host-\/only} and {\ttfamily -\/-\/cuda-\/device-\/only} respectively. In this sample we use these commands\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/opt/rocm/hip/bin/hipcc -\/c -\/S -\/-\/cuda-\/host-\/only -\/target x86\_64-\/linux-\/gnu -\/o square\_host.s square.cpp}
+\DoxyCodeLine{/opt/rocm/hip/bin/hipcc -\/c -\/S -\/-\/cuda-\/device-\/only -\/-\/offload-\/arch=gfx900 -\/-\/offload-\/arch=gfx906 square.cpp}
+
+\end{DoxyCode}
+
+
+The device assembly will be output into two separate files\+:
+\begin{DoxyItemize}
+\item square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx900.\+s
+\item square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx906.\+s
+\end{DoxyItemize}
+
+You may modify {\ttfamily -\/-\/offload-\/arch} flag to build other archs and choose to enable or disable xnack and sram-\/ecc.
+
+{\bfseries{Note\+:}} At this point, you may evaluate the assembly code, and make modifications if you are familiar with the AMDGCN assembly language and architecture.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md885}{}\doxysection{Compiling the assembly into a valid HIP executable}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md885}
+If valid, the modified host and device assembly may be compiled into a HIP executable. The host assembly can be compiled into an object using this command\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/opt/rocm/hip/bin/hipcc -\/c square\_host.s -\/o square\_host.o}
+
+\end{DoxyCode}
+
+
+However, the device assembly code will require a few extra steps. The device assemblies needs to be compiled into device objects, then offload-\/bundled into a HIP fat binary using the clang-\/offload-\/bundler, then llvm-\/mc embeds the binary inside of a host object using the MC directives provided in {\ttfamily hip\+\_\+obj\+\_\+gen.\+mcin}. The output is a host object with an embedded device object. Here are the steps for device side compilation into an object\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/opt/rocm/hip/../llvm/bin/clang -\/target amdgcn-\/amd-\/amdhsa -\/mcpu=gfx900 square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx900.s -\/o square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx900.o}
+\DoxyCodeLine{/opt/rocm/hip/../llvm/bin/clang -\/target amdgcn-\/amd-\/amdhsa -\/mcpu=gfx906 square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx906.s -\/o square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx906.o}
+\DoxyCodeLine{/opt/rocm/llvm/bin/clang-\/offload-\/bundler -\/type=o -\/bundle-\/align=4096 -\/targets=host-\/x86\_64-\/unknown-\/linux,hip-\/amdgcn-\/amd-\/amdhsa-\/gfx900,hip-\/amdgcn-\/amd-\/amdhsa-\/gfx906 -\/inputs=/dev/null,square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx900.o,square-\/hip-\/amdgcn-\/amd-\/amdhsa-\/gfx906.o -\/outputs=offload\_bundle.hipfb}
+\DoxyCodeLine{/opt/rocm/llvm/bin/llvm-\/mc -\/triple x86\_64-\/unknown-\/linux-\/gnu hip\_obj\_gen.mcin -\/o square\_device.o -\/-\/filetype=obj}
+
+\end{DoxyCode}
+
+
+{\bfseries{Note\+:}} Using option {\ttfamily -\/bundle-\/align=4096} only works on ROCm 4.\+0 and newer compilers. Also, the architecture must match the same arch as when compiling to assembly.
+
+Finally, using the system linker, hipcc, or clang, link the host and device objects into an executable\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/opt/rocm/hip/bin/hipcc square\_host.o square\_device.o -\/o square\_asm.out}
+
+\end{DoxyCode}
+ If you haven\textquotesingle{}t modified the GPU archs, this executable should run on both {\ttfamily gfx900} and {\ttfamily gfx906}.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md886}{}\doxysection{How to build and run this sample\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md886}
+Use these make commands to compile into assembly, compile assembly into executable, and execute it.
+\begin{DoxyItemize}
+\item To compile the HIP application into host and device assembly\+: {\ttfamily make src\+\_\+to\+\_\+asm}.
+\item To compile the assembly files into an executable\+: {\ttfamily make asm\+\_\+to\+\_\+exec}.
+\item To execute, run {\ttfamily ./square\+\_\+asm.out}.
+\end{DoxyItemize}
+
+{\bfseries{Note\+:}} The default arch is {\ttfamily gfx900} and {\ttfamily gfx906}, this can be modified with make argument {\ttfamily GPU\+\_\+\+ARCH1} and {\ttfamily GPU\+\_\+\+ARCH2}.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md887}{}\doxysection{For More Information, please refer to the HIP FAQ.}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_16_assembly_to_executable__r_e_a_d_m_e_autotoc_md887}

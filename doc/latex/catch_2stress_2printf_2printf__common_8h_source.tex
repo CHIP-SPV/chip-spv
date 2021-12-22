@@ -1,0 +1,105 @@
+\hypertarget{catch_2stress_2printf_2printf__common_8h_source}{}\doxysection{printf\+\_\+common.\+h}
+\label{catch_2stress_2printf_2printf__common_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/catch/stress/printf/printf\_common.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/catch/stress/printf/printf\_common.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef \_STRESSTEST\_PRINTF\_COMMON\_H\_}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define \_STRESSTEST\_PRINTF\_COMMON\_H\_}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <error.h>}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <sys/stat.h>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_capture_stream}{CaptureStream}} \{}
+\DoxyCodeLine{39   \textcolor{keywordtype}{int} saved\_fd;}
+\DoxyCodeLine{40   \textcolor{keywordtype}{int} orig\_fd;}
+\DoxyCodeLine{41   \textcolor{keywordtype}{int} temp\_fd;}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43   \textcolor{keywordtype}{char} tempname[13] = \textcolor{stringliteral}{"{}mytestXXXXXX"{}};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45   \textcolor{keyword}{explicit} \mbox{\hyperlink{struct_capture_stream}{CaptureStream}}(FILE *original) \{}
+\DoxyCodeLine{46     orig\_fd = fileno(original);}
+\DoxyCodeLine{47     saved\_fd = dup(orig\_fd);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordflow}{if} ((temp\_fd = mkstemp(tempname)) == -\/1) \{}
+\DoxyCodeLine{50       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{51       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     fflush(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{55     \textcolor{keywordflow}{if} (dup2(temp\_fd, orig\_fd) == -\/1) \{}
+\DoxyCodeLine{56       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{57       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59     \textcolor{keywordflow}{if} (close(temp\_fd) != 0) \{}
+\DoxyCodeLine{60       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{61       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63   \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65   \textcolor{keywordtype}{void} restoreStream() \{}
+\DoxyCodeLine{66     \textcolor{keywordflow}{if} (saved\_fd == -\/1)}
+\DoxyCodeLine{67       \textcolor{keywordflow}{return};}
+\DoxyCodeLine{68     fflush(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{69     \textcolor{keywordflow}{if} (dup2(saved\_fd, orig\_fd) == -\/1) \{}
+\DoxyCodeLine{70       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{71       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73     \textcolor{keywordflow}{if} (close(saved\_fd) != 0) \{}
+\DoxyCodeLine{74       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{75       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77     saved\_fd = -\/1;}
+\DoxyCodeLine{78   \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80   \textcolor{keyword}{const} \textcolor{keywordtype}{char} *getTempFilename() \{}
+\DoxyCodeLine{81     \textcolor{keywordflow}{return} (\textcolor{keyword}{const} \textcolor{keywordtype}{char}*)tempname;}
+\DoxyCodeLine{82   \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84   std::ifstream getCapturedData() \{}
+\DoxyCodeLine{85     restoreStream();}
+\DoxyCodeLine{86     std::ifstream temp(tempname);}
+\DoxyCodeLine{87     \textcolor{keywordflow}{return} temp;}
+\DoxyCodeLine{88   \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90   \mbox{\hyperlink{struct_capture_stream}{\string~CaptureStream}}() \{}
+\DoxyCodeLine{91     restoreStream();}
+\DoxyCodeLine{92     \textcolor{keywordflow}{if} (remove(tempname) != 0) \{}
+\DoxyCodeLine{93       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{94       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{95     \}}
+\DoxyCodeLine{96   \}}
+\DoxyCodeLine{97 \};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_STRESSTEST\_PRINTF\_COMMON\_H\_}}
+
+\end{DoxyCode}

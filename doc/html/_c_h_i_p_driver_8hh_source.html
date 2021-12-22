@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CHIP-SPV: /Users/pvelesko/local/HIPxx/src/CHIPDriver.hh Source File</title>
+<title>CHIP-SPV: /Users/pvelesko/local/CHIP-SPV/src/CHIPDriver.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -97,12 +97,12 @@ $(function() {
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="a_c_h_i_p_backend_8hh_html"><div class="ttname"><a href="_c_h_i_p_backend_8hh.html">CHIPBackend.hh</a></div><div class="ttdoc">CHIPBackend class definition. CHIP backends are to inherit from this base class and override desired ...</div></div>
 <div class="ttc" id="a_c_h_i_p_driver_8hh_html_a27fe04307130a8043d19828381435ebb"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a27fe04307130a8043d19828381435ebb">initialized</a></div><div class="ttdeci">std::once_flag initialized</div><div class="ttdoc">Singleton backend initialization flag.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:19</div></div>
-<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a32e90614e4468abc87bec72fb574b5f9"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a32e90614e4468abc87bec72fb574b5f9">CHIPInitializeCallOnce</a></div><div class="ttdeci">void CHIPInitializeCallOnce(std::string BE=&quot;&quot;)</div><div class="ttdoc">Singleton backend initialization function called via std::call_once.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:52</div></div>
-<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a3cff58225abf577aba3989f33fc4b136"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a3cff58225abf577aba3989f33fc4b136">CHIPInitialize</a></div><div class="ttdeci">void CHIPInitialize(std::string BE=&quot;&quot;)</div><div class="ttdoc">Singleton backend initialization function outer wrapper.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:83</div></div>
-<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a4968379477021105777fbbdfae3e3289"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a4968379477021105777fbbdfae3e3289">CHIPUninitializeCallOnce</a></div><div class="ttdeci">void CHIPUninitializeCallOnce()</div><div class="ttdoc">Singleton backend uninitialization function called via std::call_once.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:87</div></div>
-<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a5b31cbf21849a03fc84fd384ba45a0cf"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a5b31cbf21849a03fc84fd384ba45a0cf">CHIPUninitialize</a></div><div class="ttdeci">void CHIPUninitialize()</div><div class="ttdoc">Singleton backend initialization function outer wrapper.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:92</div></div>
+<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a32e90614e4468abc87bec72fb574b5f9"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a32e90614e4468abc87bec72fb574b5f9">CHIPInitializeCallOnce</a></div><div class="ttdeci">void CHIPInitializeCallOnce(std::string BE=&quot;&quot;)</div><div class="ttdoc">Singleton backend initialization function called via std::call_once.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:55</div></div>
+<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a3cff58225abf577aba3989f33fc4b136"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a3cff58225abf577aba3989f33fc4b136">CHIPInitialize</a></div><div class="ttdeci">void CHIPInitialize(std::string BE=&quot;&quot;)</div><div class="ttdoc">Singleton backend initialization function outer wrapper.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:87</div></div>
+<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a4968379477021105777fbbdfae3e3289"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a4968379477021105777fbbdfae3e3289">CHIPUninitializeCallOnce</a></div><div class="ttdeci">void CHIPUninitializeCallOnce()</div><div class="ttdoc">Singleton backend uninitialization function called via std::call_once.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:91</div></div>
+<div class="ttc" id="a_c_h_i_p_driver_8hh_html_a5b31cbf21849a03fc84fd384ba45a0cf"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a5b31cbf21849a03fc84fd384ba45a0cf">CHIPUninitialize</a></div><div class="ttdeci">void CHIPUninitialize()</div><div class="ttdoc">Singleton backend initialization function outer wrapper.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:96</div></div>
 <div class="ttc" id="a_c_h_i_p_driver_8hh_html_a90f41d29e43faf484f0ea833bcf14627"><div class="ttname"><a href="_c_h_i_p_driver_8hh.html#a90f41d29e43faf484f0ea833bcf14627">Backend</a></div><div class="ttdeci">CHIPBackend * Backend</div><div class="ttdoc">Global Backend pointer through which backend-specific operations are performed.</div><div class="ttdef"><b>Definition:</b> CHIPDriver.cc:21</div></div>
-<div class="ttc" id="aclass_c_h_i_p_backend_html"><div class="ttname"><a href="class_c_h_i_p_backend.html">CHIPBackend</a></div><div class="ttdoc">Primary object to interact with the backend.</div><div class="ttdef"><b>Definition:</b> CHIPBackend.hh:933</div></div>
+<div class="ttc" id="aclass_c_h_i_p_backend_html"><div class="ttname"><a href="class_c_h_i_p_backend.html">CHIPBackend</a></div><div class="ttdoc">Primary object to interact with the backend.</div><div class="ttdef"><b>Definition:</b> CHIPBackend.hh:1131</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

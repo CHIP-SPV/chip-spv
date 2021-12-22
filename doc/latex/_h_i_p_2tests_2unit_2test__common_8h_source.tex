@@ -1,0 +1,479 @@
+\hypertarget{_h_i_p_2tests_2unit_2test__common_8h_source}{}\doxysection{test\+\_\+common.\+h}
+\label{_h_i_p_2tests_2unit_2test__common_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/unit/test\_common.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/unit/test\_common.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2020 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{4 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{5 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{6 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{7 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{8 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{10 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{11 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{12 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{13 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{14 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{15 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{16 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{17 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{18 \textcolor{comment}{*/}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{comment}{/*}}
+\DoxyCodeLine{21 \textcolor{comment}{ * File is intended to C and CPP compliant hence any CPP specic changes}}
+\DoxyCodeLine{22 \textcolor{comment}{ * should be added into CPP section}}
+\DoxyCodeLine{23 \textcolor{comment}{ *}}
+\DoxyCodeLine{24 \textcolor{comment}{ */}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{    \#include <iostream>}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{    \#include <iomanip>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{    \#if \_\_CUDACC\_\_}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{        \#include <sys/time.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{    \#else}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{        \#include <chrono>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{// ************************ GCC section **************************}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#include "{}hip/hip\_runtime.h"{}}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{hip__runtime__api_8h}{hip/hip\_runtime\_api.h}}"{}}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define HC \_\_attribute\_\_((hc))}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define KNRM "{}\(\backslash\)x1B[0m"{}}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define KRED "{}\(\backslash\)x1B[31m"{}}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define KGRN "{}\(\backslash\)x1B[32m"{}}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#define KYEL "{}\(\backslash\)x1B[33m"{}}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define KBLU "{}\(\backslash\)x1B[34m"{}}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define KMAG "{}\(\backslash\)x1B[35m"{}}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define KCYN "{}\(\backslash\)x1B[36m"{}}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define KWHT "{}\(\backslash\)x1B[37m"{}}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define passed()                                                                                   \(\backslash\)}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{    printf("{}\%sPASSED!\%s\(\backslash\)n"{}}, KGRN, KNRM);                                                           \(\backslash\)}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define failed(...)                                                                                \(\backslash\)}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{    printf("{}\%serror: "{}}, KRED);                                                                     \(\backslash\)}
+\DoxyCodeLine{58     printf(\_\_VA\_ARGS\_\_);                                                                           \(\backslash\)}
+\DoxyCodeLine{59     printf("{}\%s\(\backslash\)n"{},KNRM);                                                                                  \(\backslash\)}
+\DoxyCodeLine{60     return false;}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define warn(...)                                                                                  \(\backslash\)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{    printf("{}\%swarn: "{}}, KYEL);                                                                      \(\backslash\)}
+\DoxyCodeLine{64     printf(\_\_VA\_ARGS\_\_);                                                                           \(\backslash\)}
+\DoxyCodeLine{65     printf("{}\(\backslash\)n"{});                                                                                  \(\backslash\)}
+\DoxyCodeLine{66     printf("{}warn: TEST WARNING\(\backslash\)n\%s"{}, KNRM);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define skipped() printf("{}\%sSkipped subtest \%s\%s\(\backslash\)n"{}},KYEL,\_\_FUNCTION\_\_,KNRM);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define HIPCHECK(error)                                                                            \(\backslash\)}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{    \{                                                                                              \(\backslash\)}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{        hipError\_t localError = error;                                                             \(\backslash\)}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{        if ((localError != hipSuccess) \&\& (localError != hipErrorPeerAccessAlreadyEnabled)) \{      \(\backslash\)}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{           failed("{}\%serror: '\%s'(\%d) from \%s at \%s:\%d\%s\(\backslash\)n"{}}, KRED, hipGetErrorString(localError),   \(\backslash\)}
+\DoxyCodeLine{75                    localError, \#error, \_\_FUNCTION\_\_, \_\_LINE\_\_, KNRM);                              \(\backslash\)}
+\DoxyCodeLine{76         \}                                                                                          \(\backslash\)}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define HIPASSERT(condition)                                                                       \(\backslash\)}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{    if (!(condition)) \{                                                                            \(\backslash\)}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{        failed("{}\%sassertion \%s at \%s:\%d\%s \(\backslash\)n"{}}, KRED, \#condition, \_\_FUNCTION\_\_, \_\_LINE\_\_, KNRM);    \(\backslash\)}
+\DoxyCodeLine{82     \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define HIPCHECK\_API(API\_CALL, EXPECTED\_ERROR)                                                     \(\backslash\)}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{    \{                                                                                              \(\backslash\)}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{        hipError\_t \_e = (API\_CALL);                                                                \(\backslash\)}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{        if (\_e != (EXPECTED\_ERROR)) \{                                                              \(\backslash\)}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{            failed("{}\%sAPI '\%s' returned \%d(\%s) but test expected \%d(\%s) at \%s:\%d\%s \(\backslash\)n"{}}, KRED,      \(\backslash\)}
+\DoxyCodeLine{90                    \#API\_CALL, \_e, hipGetErrorName(\_e), EXPECTED\_ERROR,                             \(\backslash\)}
+\DoxyCodeLine{91                    hipGetErrorName(EXPECTED\_ERROR), \_\_FILE\_\_, \_\_LINE\_\_, KNRM);                     \(\backslash\)}
+\DoxyCodeLine{92         \}                                                                                          \(\backslash\)}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#ifdef \_WIN64}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#include <tchar.h>}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define aligned\_alloc(x,y) \_aligned\_malloc(y,x)}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define aligned\_free(x) \_aligned\_free(x)}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define popen(x,y) \_popen(x,y)}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define pclose(x) \_pclose(x)}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define setenv(x,y,z) \_putenv\_s(x,y)}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define unsetenv \_putenv}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#define fileno(x) \_fileno(x)}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#define dup(x) \_dup(x)}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define dup2(x,y) \_dup2(x,y)}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#define close(x) \_close(x)}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#define aligned\_free(x) free(x)}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{comment}{// standard command-\/line variables:}}
+\DoxyCodeLine{112 \textcolor{keyword}{extern} \textcolor{keywordtype}{size\_t} N;}
+\DoxyCodeLine{113 \textcolor{keyword}{extern} \textcolor{keywordtype}{char} memsetval;}
+\DoxyCodeLine{114 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} memsetD32val;}
+\DoxyCodeLine{115 \textcolor{keyword}{extern} \textcolor{keywordtype}{short} memsetD16val;}
+\DoxyCodeLine{116 \textcolor{keyword}{extern} \textcolor{keywordtype}{char} memsetD8val;}
+\DoxyCodeLine{117 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} iterations;}
+\DoxyCodeLine{118 \textcolor{keyword}{extern} \textcolor{keywordtype}{unsigned} blocksPerCU;}
+\DoxyCodeLine{119 \textcolor{keyword}{extern} \textcolor{keywordtype}{unsigned} threadsPerBlock;}
+\DoxyCodeLine{120 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} p\_gpuDevice;}
+\DoxyCodeLine{121 \textcolor{keyword}{extern} \textcolor{keywordtype}{unsigned} p\_verbose;}
+\DoxyCodeLine{122 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} p\_tests;}
+\DoxyCodeLine{123 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* HIP\_VISIBLE\_DEVICES\_STR;}
+\DoxyCodeLine{124 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* CUDA\_VISIBLE\_DEVICES\_STR;}
+\DoxyCodeLine{125 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* PATH\_SEPERATOR\_STR;}
+\DoxyCodeLine{126 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* NULL\_DEVICE;}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{comment}{// ********************* CPP section *********************}}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#ifdef \_\_HIP\_PLATFORM\_HCC}}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#define TYPENAME(T) typeid(T).name()}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#define TYPENAME(T) "{}?"{}}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{keyword}{namespace }HipTest \{}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 \textcolor{comment}{// Returns the current system time in microseconds}}
+\DoxyCodeLine{140 \textcolor{keyword}{inline} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} get\_time() \{}
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#if \_\_CUDACC\_\_}}
+\DoxyCodeLine{142     \textcolor{keyword}{struct }timeval tv;}
+\DoxyCodeLine{143     gettimeofday(\&tv, 0);}
+\DoxyCodeLine{144     \textcolor{keywordflow}{return} (tv.tv\_sec * 1000000) + tv.tv\_usec;}
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{146     \textcolor{keywordflow}{return} std::chrono::high\_resolution\_clock::now().time\_since\_epoch()}
+\DoxyCodeLine{147         /std::chrono::microseconds(1);}
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{149 \}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{keywordtype}{double} elapsed\_time(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} startTimeUs, \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} stopTimeUs);}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 \textcolor{keywordtype}{int} parseSize(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* str, \textcolor{keywordtype}{size\_t}* output);}
+\DoxyCodeLine{154 \textcolor{keywordtype}{int} parseUInt(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* str, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* output);}
+\DoxyCodeLine{155 \textcolor{keywordtype}{int} parseInt(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* str, \textcolor{keywordtype}{int}* output);}
+\DoxyCodeLine{156 \textcolor{keywordtype}{int} parseStandardArguments(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[], \textcolor{keywordtype}{bool} failOnUndefinedArg);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 \textcolor{keywordtype}{unsigned} setNumBlocks(\textcolor{keywordtype}{unsigned} blocksPerCU, \textcolor{keywordtype}{unsigned} threadsPerBlock, \textcolor{keywordtype}{size\_t} N);}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{comment}{// pointer type}}
+\DoxyCodeLine{161 \textcolor{keywordtype}{bool} checkArray(T hData, T hOutputData, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height,\textcolor{keywordtype}{size\_t} depth)}
+\DoxyCodeLine{162 \{}
+\DoxyCodeLine{163    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < depth; i++) \{}
+\DoxyCodeLine{164       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < height; j++) \{}
+\DoxyCodeLine{165           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < width; k++) \{}
+\DoxyCodeLine{166               \textcolor{keywordtype}{int} offset = i*width*height + j*width + k;}
+\DoxyCodeLine{167               \textcolor{keywordflow}{if} (hData[offset] != hOutputData[offset]) \{}
+\DoxyCodeLine{168                   std::cerr << \textcolor{charliteral}{'['} << i << \textcolor{charliteral}{','} << j << \textcolor{charliteral}{','} << k << \textcolor{stringliteral}{"{}]:"{}} << hData[offset] << \textcolor{stringliteral}{"{}-\/-\/-\/-\/"{}} << hOutputData[offset]<<\textcolor{stringliteral}{"{}  "{}};}
+\DoxyCodeLine{169                   failed(\textcolor{stringliteral}{"{}mistmatch at:\%d \%d \%d"{}},i,j,k);}
+\DoxyCodeLine{170               \}}
+\DoxyCodeLine{171           \}}
+\DoxyCodeLine{172        \}}
+\DoxyCodeLine{173    \}}
+\DoxyCodeLine{174    \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{175 \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{178 \textcolor{keywordtype}{bool} checkArray(T input, T output, \textcolor{keywordtype}{size\_t} height, \textcolor{keywordtype}{size\_t} width)}
+\DoxyCodeLine{179 \{}
+\DoxyCodeLine{180     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<height; i++ )\{}
+\DoxyCodeLine{181         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<width; j++ )\{}
+\DoxyCodeLine{182             \textcolor{keywordtype}{int} offset = i*width + j;}
+\DoxyCodeLine{183             \textcolor{keywordflow}{if}( input[offset] !=  output[offset] )\{}
+\DoxyCodeLine{184                  std::cerr << \textcolor{charliteral}{'['} << i << \textcolor{charliteral}{','} << j << \textcolor{charliteral}{','} << \textcolor{stringliteral}{"{}]:"{}} << input[offset] << \textcolor{stringliteral}{"{}-\/-\/-\/-\/"{}} << output[offset]<<\textcolor{stringliteral}{"{}  "{}};}
+\DoxyCodeLine{185                  failed(\textcolor{stringliteral}{"{}mistmatch at:\%d \%d"{}},i,j);}
+\DoxyCodeLine{186             \}}
+\DoxyCodeLine{187         \}}
+\DoxyCodeLine{188     \}}
+\DoxyCodeLine{189     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{190 \}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{194 \_\_global\_\_ \textcolor{keywordtype}{void} vectorADD(\textcolor{keyword}{const} T* A\_d, \textcolor{keyword}{const} T* B\_d, T* C\_d, \textcolor{keywordtype}{size\_t} NELEM) \{}
+\DoxyCodeLine{195     \textcolor{keywordtype}{size\_t} offset = (blockIdx.x * blockDim.x + threadIdx.x);}
+\DoxyCodeLine{196     \textcolor{keywordtype}{size\_t} stride = blockDim.x * gridDim.x;}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = offset; i < NELEM; i += stride) \{}
+\DoxyCodeLine{199         C\_d[i] = A\_d[i] + B\_d[i];}
+\DoxyCodeLine{200     \}}
+\DoxyCodeLine{201 \}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{205 \_\_global\_\_ \textcolor{keywordtype}{void} vectorADDReverse(\textcolor{keyword}{const} T* A\_d, \textcolor{keyword}{const} T* B\_d, T* C\_d,}
+\DoxyCodeLine{206                                  \textcolor{keywordtype}{size\_t} NELEM) \{}
+\DoxyCodeLine{207     \textcolor{keywordtype}{size\_t} offset = (blockIdx.x * blockDim.x + threadIdx.x);}
+\DoxyCodeLine{208     \textcolor{keywordtype}{size\_t} stride = blockDim.x * gridDim.x;}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{keywordflow}{for} (int64\_t i = NELEM -\/ stride + offset; i >= 0; i -\/= stride) \{}
+\DoxyCodeLine{211         C\_d[i] = A\_d[i] + B\_d[i];}
+\DoxyCodeLine{212     \}}
+\DoxyCodeLine{213 \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{217 \_\_global\_\_ \textcolor{keywordtype}{void} addCount(\textcolor{keyword}{const} T* A\_d, T* C\_d, \textcolor{keywordtype}{size\_t} NELEM, \textcolor{keywordtype}{int} count) \{}
+\DoxyCodeLine{218     \textcolor{keywordtype}{size\_t} offset = (blockIdx.x * blockDim.x + threadIdx.x);}
+\DoxyCodeLine{219     \textcolor{keywordtype}{size\_t} stride = blockDim.x * gridDim.x;}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221     \textcolor{comment}{// Deliberately do this in an inefficient way to increase kernel runtime}}
+\DoxyCodeLine{222     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < count; i++) \{}
+\DoxyCodeLine{223         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = offset; i < NELEM; i += stride) \{}
+\DoxyCodeLine{224             C\_d[i] = A\_d[i] + (T)count;}
+\DoxyCodeLine{225         \}}
+\DoxyCodeLine{226     \}}
+\DoxyCodeLine{227 \}}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{231 \_\_global\_\_ \textcolor{keywordtype}{void} addCountReverse(\textcolor{keyword}{const} T* A\_d, T* C\_d, int64\_t NELEM, \textcolor{keywordtype}{int} count) \{}
+\DoxyCodeLine{232     \textcolor{keywordtype}{size\_t} offset = (blockIdx.x * blockDim.x + threadIdx.x);}
+\DoxyCodeLine{233     \textcolor{keywordtype}{size\_t} stride = blockDim.x * gridDim.x;}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235     \textcolor{comment}{// Deliberately do this in an inefficient way to increase kernel runtime}}
+\DoxyCodeLine{236     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < count; i++) \{}
+\DoxyCodeLine{237         \textcolor{keywordflow}{for} (int64\_t i = NELEM -\/ stride + offset; i >= 0; i -\/= stride) \{}
+\DoxyCodeLine{238             C\_d[i] = A\_d[i] + (T)count;}
+\DoxyCodeLine{239         \}}
+\DoxyCodeLine{240     \}}
+\DoxyCodeLine{241 \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{245 \_\_global\_\_ \textcolor{keywordtype}{void} memsetReverse(T* C\_d, T val, int64\_t NELEM) \{}
+\DoxyCodeLine{246     \textcolor{keywordtype}{size\_t} offset = (blockIdx.x * blockDim.x + threadIdx.x);}
+\DoxyCodeLine{247     \textcolor{keywordtype}{size\_t} stride = blockDim.x * gridDim.x;}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249     \textcolor{keywordflow}{for} (int64\_t i = NELEM -\/ stride + offset; i >= 0; i -\/= stride) \{}
+\DoxyCodeLine{250         C\_d[i] = val;}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252 \}}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{256 \textcolor{keywordtype}{void} setDefaultData(\textcolor{keywordtype}{size\_t} numElements, T* A\_h, T* B\_h, T* C\_h) \{}
+\DoxyCodeLine{257     \textcolor{comment}{// Initialize the host data:}}
+\DoxyCodeLine{258     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < numElements; i++) \{}
+\DoxyCodeLine{259         \textcolor{keywordflow}{if} (A\_h) (A\_h)[i] = 3.146f + i;  \textcolor{comment}{// Pi}}
+\DoxyCodeLine{260         \textcolor{keywordflow}{if} (B\_h) (B\_h)[i] = 1.618f + i;  \textcolor{comment}{// Phi}}
+\DoxyCodeLine{261         \textcolor{keywordflow}{if} (C\_h) (C\_h)[i] = 0.0f + i;}
+\DoxyCodeLine{262     \}}
+\DoxyCodeLine{263 \}}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{267 \textcolor{keywordtype}{bool} initArraysForHost(T** A\_h, T** B\_h, T** C\_h, \textcolor{keywordtype}{size\_t} N, \textcolor{keywordtype}{bool} usePinnedHost = \textcolor{keyword}{false}) \{}
+\DoxyCodeLine{268     \textcolor{keywordtype}{size\_t} Nbytes = N * \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270     \textcolor{keywordflow}{if} (usePinnedHost) \{}
+\DoxyCodeLine{271         \textcolor{keywordflow}{if} (A\_h) \{}
+\DoxyCodeLine{272             HIPCHECK(hipHostMalloc((\textcolor{keywordtype}{void}**)A\_h, Nbytes));}
+\DoxyCodeLine{273         \}}
+\DoxyCodeLine{274         \textcolor{keywordflow}{if} (B\_h) \{}
+\DoxyCodeLine{275             HIPCHECK(hipHostMalloc((\textcolor{keywordtype}{void}**)B\_h, Nbytes));}
+\DoxyCodeLine{276         \}}
+\DoxyCodeLine{277         \textcolor{keywordflow}{if} (C\_h) \{}
+\DoxyCodeLine{278             HIPCHECK(hipHostMalloc((\textcolor{keywordtype}{void}**)C\_h, Nbytes));}
+\DoxyCodeLine{279         \}}
+\DoxyCodeLine{280     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{281         \textcolor{keywordflow}{if} (A\_h) \{}
+\DoxyCodeLine{282             *A\_h = (T*)malloc(Nbytes);}
+\DoxyCodeLine{283             HIPASSERT(*A\_h != NULL);}
+\DoxyCodeLine{284         \}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286         \textcolor{keywordflow}{if} (B\_h) \{}
+\DoxyCodeLine{287             *B\_h = (T*)malloc(Nbytes);}
+\DoxyCodeLine{288             HIPASSERT(*B\_h != NULL);}
+\DoxyCodeLine{289         \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291         \textcolor{keywordflow}{if} (C\_h) \{}
+\DoxyCodeLine{292             *C\_h = (T*)malloc(Nbytes);}
+\DoxyCodeLine{293             HIPASSERT(*C\_h != NULL);}
+\DoxyCodeLine{294         \}}
+\DoxyCodeLine{295     \}}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297     setDefaultData(N, A\_h ? *A\_h : NULL, B\_h ? *B\_h : NULL, C\_h ? *C\_h : NULL);}
+\DoxyCodeLine{298     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{299 \}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{303 \textcolor{keywordtype}{bool} initArrays(T** A\_d, T** B\_d, T** C\_d, T** A\_h, T** B\_h, T** C\_h, \textcolor{keywordtype}{size\_t} N,}
+\DoxyCodeLine{304                 \textcolor{keywordtype}{bool} usePinnedHost = \textcolor{keyword}{false}) \{}
+\DoxyCodeLine{305     \textcolor{keywordtype}{size\_t} Nbytes = N * \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     \textcolor{keywordflow}{if} (A\_d) \{}
+\DoxyCodeLine{308         HIPCHECK(hipMalloc(A\_d, Nbytes));}
+\DoxyCodeLine{309     \}}
+\DoxyCodeLine{310     \textcolor{keywordflow}{if} (B\_d) \{}
+\DoxyCodeLine{311         HIPCHECK(hipMalloc(B\_d, Nbytes));}
+\DoxyCodeLine{312     \}}
+\DoxyCodeLine{313     \textcolor{keywordflow}{if} (C\_d) \{}
+\DoxyCodeLine{314         HIPCHECK(hipMalloc(C\_d, Nbytes));}
+\DoxyCodeLine{315     \}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317     \textcolor{keywordflow}{return} initArraysForHost(A\_h, B\_h, C\_h, N, usePinnedHost);}
+\DoxyCodeLine{318 \}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{322 \textcolor{keywordtype}{bool} freeArraysForHost(T* A\_h, T* B\_h, T* C\_h, \textcolor{keywordtype}{bool} usePinnedHost) \{}
+\DoxyCodeLine{323     \textcolor{keywordflow}{if} (usePinnedHost) \{}
+\DoxyCodeLine{324         \textcolor{keywordflow}{if} (A\_h) \{}
+\DoxyCodeLine{325             HIPCHECK(hipHostFree(A\_h));}
+\DoxyCodeLine{326         \}}
+\DoxyCodeLine{327         \textcolor{keywordflow}{if} (B\_h) \{}
+\DoxyCodeLine{328             HIPCHECK(hipHostFree(B\_h));}
+\DoxyCodeLine{329         \}}
+\DoxyCodeLine{330         \textcolor{keywordflow}{if} (C\_h) \{}
+\DoxyCodeLine{331             HIPCHECK(hipHostFree(C\_h));}
+\DoxyCodeLine{332         \}}
+\DoxyCodeLine{333     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{334         \textcolor{keywordflow}{if} (A\_h) \{}
+\DoxyCodeLine{335             free(A\_h);}
+\DoxyCodeLine{336         \}}
+\DoxyCodeLine{337         \textcolor{keywordflow}{if} (B\_h) \{}
+\DoxyCodeLine{338             free(B\_h);}
+\DoxyCodeLine{339         \}}
+\DoxyCodeLine{340         \textcolor{keywordflow}{if} (C\_h) \{}
+\DoxyCodeLine{341             free(C\_h);}
+\DoxyCodeLine{342         \}}
+\DoxyCodeLine{343     \}}
+\DoxyCodeLine{344     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{345 \}}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{348 \textcolor{keywordtype}{bool} freeArrays(T* A\_d, T* B\_d, T* C\_d, T* A\_h, T* B\_h, T* C\_h, \textcolor{keywordtype}{bool} usePinnedHost) \{}
+\DoxyCodeLine{349     \textcolor{keywordflow}{if} (A\_d) \{}
+\DoxyCodeLine{350         HIPCHECK(hipFree(A\_d));}
+\DoxyCodeLine{351     \}}
+\DoxyCodeLine{352     \textcolor{keywordflow}{if} (B\_d) \{}
+\DoxyCodeLine{353         HIPCHECK(hipFree(B\_d));}
+\DoxyCodeLine{354     \}}
+\DoxyCodeLine{355     \textcolor{keywordflow}{if} (C\_d) \{}
+\DoxyCodeLine{356         HIPCHECK(hipFree(C\_d));}
+\DoxyCodeLine{357     \}}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359     \textcolor{keywordflow}{return} freeArraysForHost(A\_h, B\_h, C\_h, usePinnedHost);}
+\DoxyCodeLine{360 \}}
+\DoxyCodeLine{361 }
+\DoxyCodeLine{362 \textcolor{preprocessor}{\#if defined(\_\_HIP\_PLATFORM\_AMD\_\_)}}
+\DoxyCodeLine{363 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{364 \textcolor{keywordtype}{bool} initArrays2DPitch(T** A\_d, T** B\_d, T** C\_d, \textcolor{keywordtype}{size\_t}* pitch\_A, \textcolor{keywordtype}{size\_t}* pitch\_B, \textcolor{keywordtype}{size\_t}* pitch\_C,}
+\DoxyCodeLine{365                        \textcolor{keywordtype}{size\_t} numW, \textcolor{keywordtype}{size\_t} numH) \{}
+\DoxyCodeLine{366     \textcolor{keywordflow}{if} (A\_d) \{}
+\DoxyCodeLine{367         HIPCHECK(hipMallocPitch((\textcolor{keywordtype}{void}**)A\_d, pitch\_A, numW * \textcolor{keyword}{sizeof}(T), numH));}
+\DoxyCodeLine{368     \}}
+\DoxyCodeLine{369     \textcolor{keywordflow}{if} (B\_d) \{}
+\DoxyCodeLine{370         HIPCHECK(hipMallocPitch((\textcolor{keywordtype}{void}**)B\_d, pitch\_B, numW * \textcolor{keyword}{sizeof}(T), numH));}
+\DoxyCodeLine{371     \}}
+\DoxyCodeLine{372     \textcolor{keywordflow}{if} (C\_d) \{}
+\DoxyCodeLine{373         HIPCHECK(hipMallocPitch((\textcolor{keywordtype}{void}**)C\_d, pitch\_C, numW * \textcolor{keyword}{sizeof}(T), numH));}
+\DoxyCodeLine{374     \}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376     HIPASSERT(*pitch\_A == *pitch\_B);}
+\DoxyCodeLine{377     HIPASSERT(*pitch\_A == *pitch\_C)}
+\DoxyCodeLine{378     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{379 \}}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} initHIPArrays(hipArray** A\_d, hipArray** B\_d, hipArray** C\_d,}
+\DoxyCodeLine{382                           \textcolor{keyword}{const} hipChannelFormatDesc* desc, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} numW, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} numH,}
+\DoxyCodeLine{383                           \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags) \{}
+\DoxyCodeLine{384     \textcolor{keywordflow}{if} (A\_d) \{}
+\DoxyCodeLine{385         HIPCHECK(hipMallocArray(A\_d, desc, numW, numH, flags));}
+\DoxyCodeLine{386     \}}
+\DoxyCodeLine{387     \textcolor{keywordflow}{if} (B\_d) \{}
+\DoxyCodeLine{388         HIPCHECK(hipMallocArray(B\_d, desc, numW, numH, flags));}
+\DoxyCodeLine{389     \}}
+\DoxyCodeLine{390     \textcolor{keywordflow}{if} (C\_d) \{}
+\DoxyCodeLine{391         HIPCHECK(hipMallocArray(C\_d, desc, numW, numH, flags));}
+\DoxyCodeLine{392     \}}
+\DoxyCodeLine{393     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{394 \}}
+\DoxyCodeLine{395 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397 \textcolor{comment}{// Assumes C\_h contains vector add of A\_h + B\_h}}
+\DoxyCodeLine{398 \textcolor{comment}{// Calls the test "{}failed"{} macro if a mismatch is detected.}}
+\DoxyCodeLine{399 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{400 \textcolor{keywordtype}{size\_t} checkVectorADD(T* A\_h, T* B\_h, T* result\_H, \textcolor{keywordtype}{size\_t} N, \textcolor{keywordtype}{bool} expectMatch = \textcolor{keyword}{true},}
+\DoxyCodeLine{401                       \textcolor{keywordtype}{bool} reportMismatch = \textcolor{keyword}{true}) \{}
+\DoxyCodeLine{402     \textcolor{keywordtype}{size\_t} mismatchCount = 0;}
+\DoxyCodeLine{403     \textcolor{keywordtype}{size\_t} firstMismatch = 0;}
+\DoxyCodeLine{404     \textcolor{keywordtype}{size\_t} mismatchesToPrint = 10;}
+\DoxyCodeLine{405     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < N; i++) \{}
+\DoxyCodeLine{406         T expected = A\_h[i] + B\_h[i];}
+\DoxyCodeLine{407         \textcolor{keywordflow}{if} (result\_H[i] != expected) \{}
+\DoxyCodeLine{408             \textcolor{keywordflow}{if} (mismatchCount == 0) \{}
+\DoxyCodeLine{409                 firstMismatch = i;}
+\DoxyCodeLine{410             \}}
+\DoxyCodeLine{411             mismatchCount++;}
+\DoxyCodeLine{412             \textcolor{keywordflow}{if} ((mismatchCount <= mismatchesToPrint) \&\& expectMatch) \{}
+\DoxyCodeLine{413                 std::cout << std::fixed << std::setprecision(32);}
+\DoxyCodeLine{414                 std::cout << \textcolor{stringliteral}{"{}At "{}} << i << std::endl;}
+\DoxyCodeLine{415                 std::cout << \textcolor{stringliteral}{"{}  Computed:"{}} << result\_H[i] << std::endl;}
+\DoxyCodeLine{416                 std::cout << \textcolor{stringliteral}{"{}  Expected:"{}} << expected << std::endl;}
+\DoxyCodeLine{417             \}}
+\DoxyCodeLine{418         \}}
+\DoxyCodeLine{419     \}}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421     \textcolor{keywordflow}{if} (reportMismatch) \{}
+\DoxyCodeLine{422         \textcolor{keywordflow}{if} (expectMatch) \{}
+\DoxyCodeLine{423             \textcolor{keywordflow}{if} (mismatchCount) \{}
+\DoxyCodeLine{424                 failed(\textcolor{stringliteral}{"{}\%zu mismatches ; first at index:\%zu\(\backslash\)n"{}}, mismatchCount, firstMismatch);}
+\DoxyCodeLine{425             \}}
+\DoxyCodeLine{426         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{427             \textcolor{keywordflow}{if} (mismatchCount == 0) \{}
+\DoxyCodeLine{428                 failed(\textcolor{stringliteral}{"{}expected mismatches but did not detect any!"{}});}
+\DoxyCodeLine{429             \}}
+\DoxyCodeLine{430         \}}
+\DoxyCodeLine{431     \}}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433     \textcolor{keywordflow}{return} mismatchCount;}
+\DoxyCodeLine{434 \}}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437 \textcolor{comment}{// Assumes C\_h contains vector add of A\_h + B\_h}}
+\DoxyCodeLine{438 \textcolor{comment}{// Calls the test "{}failed"{} macro if a mismatch is detected.}}
+\DoxyCodeLine{439 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{440 \textcolor{keywordtype}{bool} checkTest(T* expected\_H, T* result\_H, \textcolor{keywordtype}{size\_t} N, \textcolor{keywordtype}{bool} expectMatch = \textcolor{keyword}{true}) \{}
+\DoxyCodeLine{441     \textcolor{keywordtype}{size\_t} mismatchCount = 0;}
+\DoxyCodeLine{442     \textcolor{keywordtype}{size\_t} firstMismatch = 0;}
+\DoxyCodeLine{443     \textcolor{keywordtype}{size\_t} mismatchesToPrint = 10;}
+\DoxyCodeLine{444     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < N; i++) \{}
+\DoxyCodeLine{445         \textcolor{keywordflow}{if} (result\_H[i] != expected\_H[i]) \{}
+\DoxyCodeLine{446             \textcolor{keywordflow}{if} (mismatchCount == 0) \{}
+\DoxyCodeLine{447                 firstMismatch = i;}
+\DoxyCodeLine{448             \}}
+\DoxyCodeLine{449             mismatchCount++;}
+\DoxyCodeLine{450             \textcolor{keywordflow}{if} ((mismatchCount <= mismatchesToPrint) \&\& expectMatch) \{}
+\DoxyCodeLine{451                 std::cout << std::fixed << std::setprecision(32);}
+\DoxyCodeLine{452                 std::cout << \textcolor{stringliteral}{"{}At "{}} << i << std::endl;}
+\DoxyCodeLine{453                 std::cout << \textcolor{stringliteral}{"{}  Computed:"{}} << result\_H[i] << std::endl;}
+\DoxyCodeLine{454                 std::cout << \textcolor{stringliteral}{"{}  Expected:"{}} << expected\_H[i] << std::endl;}
+\DoxyCodeLine{455             \}}
+\DoxyCodeLine{456         \}}
+\DoxyCodeLine{457     \}}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{459     \textcolor{keywordflow}{if} (expectMatch) \{}
+\DoxyCodeLine{460         \textcolor{keywordflow}{if} (mismatchCount) \{}
+\DoxyCodeLine{461             fprintf(stderr, \textcolor{stringliteral}{"{}\%zu mismatches ; first at index:\%zu\(\backslash\)n"{}}, mismatchCount, firstMismatch);}
+\DoxyCodeLine{462             \textcolor{comment}{// failed("{}\%zu mismatches ; first at index:\%zu\(\backslash\)n"{}, mismatchCount, firstMismatch);}}
+\DoxyCodeLine{463         \}}
+\DoxyCodeLine{464     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{465         \textcolor{keywordflow}{if} (mismatchCount == 0) \{}
+\DoxyCodeLine{466             failed(\textcolor{stringliteral}{"{}expected mismatches but did not detect any!"{}});}
+\DoxyCodeLine{467         \}}
+\DoxyCodeLine{468     \}}
+\DoxyCodeLine{469     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{470 \}}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472 \};  \textcolor{comment}{// namespace HipTest}}
+\DoxyCodeLine{473 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//\_\_cplusplus}}
+
+\end{DoxyCode}

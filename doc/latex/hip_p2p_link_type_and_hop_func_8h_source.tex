@@ -1,0 +1,71 @@
+\hypertarget{hip_p2p_link_type_and_hop_func_8h_source}{}\doxysection{hip\+P2p\+Link\+Type\+And\+Hop\+Func.\+h}
+\label{hip_p2p_link_type_and_hop_func_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/runtimeApi/p2p/hipP2pLinkTypeAndHopFunc.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/runtimeApi/p2p/hipP2pLinkTypeAndHopFunc.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2020 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef \_HIP\_DIRTEST\_P2PLINKTYPEHOP\_H\_}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define \_HIP\_DIRTEST\_P2PLINKTYPEHOP\_H\_}}
+\DoxyCodeLine{28 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{29   RSMI\_STATUS\_SUCCESS = 0x0,             }
+\DoxyCodeLine{30   RSMI\_STATUS\_INVALID\_ARGS,              }
+\DoxyCodeLine{31   RSMI\_STATUS\_NOT\_SUPPORTED,             }
+\DoxyCodeLine{34   RSMI\_STATUS\_FILE\_ERROR,                }
+\DoxyCodeLine{39   RSMI\_STATUS\_PERMISSION,                }
+\DoxyCodeLine{42   RSMI\_STATUS\_OUT\_OF\_RESOURCES,          }
+\DoxyCodeLine{44   RSMI\_STATUS\_INTERNAL\_EXCEPTION,        }
+\DoxyCodeLine{45   RSMI\_STATUS\_INPUT\_OUT\_OF\_BOUNDS,       }
+\DoxyCodeLine{47   RSMI\_STATUS\_INIT\_ERROR,                }
+\DoxyCodeLine{50   RSMI\_INITIALIZATION\_ERROR = RSMI\_STATUS\_INIT\_ERROR,}
+\DoxyCodeLine{51   RSMI\_STATUS\_NOT\_YET\_IMPLEMENTED,       }
+\DoxyCodeLine{55   RSMI\_STATUS\_NOT\_FOUND,                 }
+\DoxyCodeLine{57   RSMI\_STATUS\_INSUFFICIENT\_SIZE,         }
+\DoxyCodeLine{59   RSMI\_STATUS\_INTERRUPT,                 }
+\DoxyCodeLine{61   RSMI\_STATUS\_UNEXPECTED\_SIZE,           }
+\DoxyCodeLine{63   RSMI\_STATUS\_NO\_DATA,                   }
+\DoxyCodeLine{65   RSMI\_STATUS\_UNEXPECTED\_DATA,           }
+\DoxyCodeLine{67   RSMI\_STATUS\_BUSY,                      }
+\DoxyCodeLine{70   RSMI\_STATUS\_REFCOUNT\_OVERFLOW,          }
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73   RSMI\_STATUS\_UNKNOWN\_ERROR = 0xFFFFFFFF,  }
+\DoxyCodeLine{74 \} rsmi\_status\_t;}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{79 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \_RSMI\_IO\_LINK\_TYPE \{}
+\DoxyCodeLine{80   RSMI\_IOLINK\_TYPE\_UNDEFINED      = 0,          }
+\DoxyCodeLine{81   RSMI\_IOLINK\_TYPE\_PCIEXPRESS     = 1,          }
+\DoxyCodeLine{82   RSMI\_IOLINK\_TYPE\_XGMI           = 2,          }
+\DoxyCodeLine{83   RSMI\_IOLINK\_TYPE\_NUMIOLINKTYPES,              }
+\DoxyCodeLine{84   RSMI\_IOLINK\_TYPE\_SIZE           = 0xFFFFFFFF  }
+\DoxyCodeLine{85 \} RSMI\_IO\_LINK\_TYPE;}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{90 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{94   HSA\_AMD\_LINK\_INFO\_TYPE\_HYPERTRANSPORT = 0,}
+\DoxyCodeLine{98   HSA\_AMD\_LINK\_INFO\_TYPE\_QPI = 1,}
+\DoxyCodeLine{102   HSA\_AMD\_LINK\_INFO\_TYPE\_PCIE = 2,}
+\DoxyCodeLine{106   HSA\_AMD\_LINK\_INFO\_TYPE\_INFINBAND = 3,}
+\DoxyCodeLine{110   HSA\_AMD\_LINK\_INFO\_TYPE\_XGMI = 4}
+\DoxyCodeLine{111 \} hsa\_amd\_link\_info\_type\_t;}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_HIP\_DIRTEST\_P2PLINKTYPEHOP\_H\_}}
+
+\end{DoxyCode}

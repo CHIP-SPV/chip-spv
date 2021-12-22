@@ -1,0 +1,97 @@
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md958}{}\doxysection{Intro and Motivation}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md958}
+HIP Tests were using HIT framework (a custom framework tailored for HIP) to add, build and run tests. As time progressed the frame got big and took substantial amount of effort to maintain and extend. It also took substantial amount of time to configure. We took this oppurtunity to rewrite the HIP\textquotesingle{}s testing framework and porting the test infra to Catch2 format.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md959}{}\doxysection{How to write tests}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md959}
+Tests in Catch2 are declared via {\ttfamily TEST\+\_\+\+CASE}.
+
+\href{https://github.com/catchorg/Catch2/blob/v2.13.6/docs/tutorial.md\#top}{\texttt{ Please read the Catch2 documentation on how to write test cases}}
+
+\href{https://github.com/catchorg/Catch2/blob/v2.13.6/docs/Readme.md\#top}{\texttt{ Catch2 Detailed Reference}}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md960}{}\doxysection{Taking care of existing features}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md960}
+
+\begin{DoxyItemize}
+\item Don’t build on platform\+: EXCLUDE\+\_\+(HIP\+\_\+\+PLATFORM/\+HIP\+\_\+\+RUNTIME), can be done via CMAKE. Adding source in if(HIP\+\_\+\+PLATFORM == amd/nvidia).
+\item HIPCC\+\_\+\+OPTIONS/\+CLANG Options\+: Can be done via\+: set\+\_\+source\+\_\+files\+\_\+properties(src.\+cc PROPERTIES COMPILE\+\_\+\+FLAGS “…”).
+\item Additional libraries\+: Can be done via target\+\_\+link\+\_\+libraries()
+\item Multiple runs with different args\+: This can be done by Catch’s Feature\+: GENERATE(…) Running Subtest\+: ctest –R “...” (Regex to match the subtest name)
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md961}{}\doxysection{New Features}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md961}
+
+\begin{DoxyItemize}
+\item Skip test without recompiling tests, by addition of a json file. Default name is {\ttfamily config.\+json} , this can be overridden by using the variable {\ttfamily HT\+\_\+\+CONFIG\+\_\+\+FILE=some\+\_\+config.\+json}.
+\item Json file supports regex. Ex\+: All tests which has the word ‘\+Memset’ can be skipped using ‘$\ast$\+Memset$\ast$’
+\item Support multiple skip test list which can be set via environment variable, so you can have multiple files containing different skip test lists and can pick and choose among them depending on your platform and os.
+\item Better CI integration via xunit compatible output
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md962}{}\doxysection{Testing Context}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md962}
+HIP testing framework gives you a context for each test. This context will have useful information about the environment your test is running.
+
+Some useful functions are\+:
+\begin{DoxyItemize}
+\item {\ttfamily bool is\+Windows()} \+: true if os is windows
+\item {\ttfamily bool is\+Linux()} \+: true if os is linux
+\item {\ttfamily bool is\+Amd()} \+: true if platform is AMD
+\item {\ttfamily bool is\+Nvidia()} \+: true if platform is NVIDIA
+\end{DoxyItemize}
+
+This information can be accessed in any test via using\+: {\ttfamily Test\+Context\+::get().is\+Amd()}.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md963}{}\doxysection{Config file schema}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md963}
+Some tests can be skipped using a config file placed in same directory as the exe.
+
+The schema of the json file is as follows\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    "{}DisabledTests"{}:}
+\DoxyCodeLine{    [}
+\DoxyCodeLine{        "{}TestName1"{},}
+\DoxyCodeLine{        "{}TestName2"{},}
+\DoxyCodeLine{        ...}
+\DoxyCodeLine{    ]}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md964}{}\doxysection{Env Variables}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md964}
+
+\begin{DoxyItemize}
+\item {\ttfamily HT\+\_\+\+CONFIG\+\_\+\+FILE} \+: This variable can be set to the config file name or full path. Disabled tests will be read from this.
+\item {\ttfamily HT\+\_\+\+LOG\+\_\+\+ENABLE} \+: This is for debugging the HIP Test Framework itself. Setting it to 1, all {\ttfamily Log\+Printf} will be printed on screen
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md965}{}\doxysection{Enabling New Tests}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md965}
+Initially, the new tests can be enabled via using {\ttfamily -\/DHIP\+\_\+\+CATCH\+\_\+\+TEST=ON}. After porting existing tests, this will be turned on by default.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md966}{}\doxysection{Building a single test}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md966}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{hipcc <path\_to\_test.cpp> -\/I<HIP\_SRC\_DIR>/tests/newTests/include <HIP\_SRC\_DIR>/tests/newTests/hipTestMain/standalone\_main.cc -\/I<HIP\_SRC\_DIR>/tests/newTests/external/Catch2 -\/g -\/o <out\_file\_name>}
+
+\end{DoxyCode}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md967}{}\doxysection{Debugging support}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md967}
+Catch2 allows multiple ways in which you can debug the test case.
+\begin{DoxyItemize}
+\item {\ttfamily -\/b} options breaks into a debugger as soon as there is a failure encountered \href{https://github.com/catchorg/Catch2/blob/devel/docs/command-line.md\#breaking-into-the-debugger}{\texttt{ Catch2 Options Reference}}
+\item Catch2 provided \href{https://github.com/catchorg/Catch2/blob/v2.13.6/docs/logging.md\#top}{\texttt{ logging macro}} that print useful information on test case failure
+\item User can also call \href{https://github.com/catchorg/Catch2/blob/devel/docs/configuration.md\#overriding-catchs-debug-break--b}{\texttt{ CATCH\+\_\+\+BREAK\+\_\+\+INTO\+\_\+\+DEBUGGER}} macro to break at a certain point in a test case.
+\item User can also mention filename.\+cc\+:{\bfseries{Line\+Number}} to break into a test case via gdb.
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md968}{}\doxysection{External Libs being used}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md968}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/catchorg/Catch2}{\texttt{ Catch2}} -\/ Testing framework
+\item \href{https://github.com/kazuho/picojson}{\texttt{ picojson}} -\/ For config file parsing
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md969}{}\doxysection{Testing Guidelines}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_tests_catch__r_e_a_d_m_e_autotoc_md969}
+Tests fall in 5 categories and its file name prefix are as follows\+:
+\begin{DoxyItemize}
+\item Unit tests (Prefix\+: Unit\+\_\+$\ast$\+API$\ast$\+\_\+$\ast$\+Optional Scenario$\ast$, example \+: Unit\+\_\+hip\+Malloc\+\_\+\+Negative or Unit\+\_\+hip\+Malloc)\+: Unit Tests are simplest test for an API, the target here is to test the API with different types of input and different ways of calling.
+\item Application Behavior Modelling tests (Prefix\+: ABM\+\_\+$\ast$\+Intent$\ast$\+\_\+$\ast$\+Optional Scenario$\ast$, example\+: ABM\+\_\+\+Module\+Load\+And\+Run)\+: ABM tests are used to model a specific use case of HIP APIs, either seen in a customer app or a general purpose app. It mimics the calling behavior seen in aforementioned app.
+\item Stress/\+Scale tests (Prefix\+: Stress\+\_\+$\ast$\+API$\ast$\+\_\+$\ast$\+Intent$\ast$\+\_\+$\ast$\+Optional Scenario$\ast$, example\+: Stress\+\_\+hip\+Memset\+\_\+\+Exhaust\+VRAM)\+: These tests are used to see the behavior of HIP APIs in edge scenarios, for example what happens when we have exhausted vram and do a hip\+Malloc or run many instances of same API in parallel.
+\item Multi Process tests (Prefix\+: Multi\+Proc\+\_\+$\ast$\+API$\ast$\+\_\+$\ast$\+Optional Scenario$\ast$, example\+: Multi\+Proc\+\_\+hip\+IPCMem\+Handle\+\_\+\+Get\+Data\+From\+Proc)\+: These tests are multi process tests and will only run on linux. They are used to test HIP APIs in multi process environment
+\item Performance tests(\+Prefix\+: Perf\+\_\+$\ast$\+Intent$\ast$\+\_\+$\ast$\+Optional Scenario$\ast$, example\+: Perf\+\_\+\+Dispatch\+Latenc  y)\+: Performance tests are used to get results of HIP APIs.
+\end{DoxyItemize}
+
+There is a special interface available for process isolation. {\ttfamily \mbox{\hyperlink{clasship_1_1_spawn_proc}{hip\+::\+Spawn\+Proc}}} in {\ttfamily \mbox{\hyperlink{hip__test__process_8hh_source}{hip\+\_\+test\+\_\+process.\+hh}}}. Using this interface test can spawn of process and place passing conditions on its return value or its output to stdout. This can be useful for testing printf tests. Sample Usage\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{clasship_1_1_spawn_proc}{hip::SpawnProc}} proc(<relative path of exe with test folder>, <optional \textcolor{keywordtype}{bool} value, \textcolor{keywordflow}{if} output is to be recorded>);}
+\DoxyCodeLine{REQUIRE(0 == proc.run()); \textcolor{comment}{// Test of return value of the proc}}
+\DoxyCodeLine{REQUIRE(exepctedOutput == proc.getOutput()); \textcolor{comment}{// Test on expected output of the process}}
+
+\end{DoxyCode}
+ The process can be a standalone exe (see tests/catch/unit/printf\+Exe for more information).
+
+General Guidelines\+:
+\begin{DoxyItemize}
+\item Do not use the catch2 tags. Tags wont be used for filtering
+\item Add as many INFO() as you can in tests which prints state of the t est, this will help the debugger when the test fails (INFO macro only prints when the test fails)
+\item Check return of each HIP API and fail whenever there is a misma tch with hip\+Success or hiprtc\+Success.
+\item Each Category of test will hav e its own exe and catch\+\_\+discover\+\_\+test macro will be called on it to discover its tests
+\item Optional Scenario in test names are optional. For example you can test all Scenarios of hip\+Malloc API in one file, you can name the file Unit\+\_\+hip\+Malloc, if you are having a file just for negative scenarios you can name it as Unit\+\_\+hip\+Malloc\+\_\+\+Negative. 
+\end{DoxyItemize}

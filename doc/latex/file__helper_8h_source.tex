@@ -1,0 +1,158 @@
+\hypertarget{file__helper_8h_source}{}\doxysection{file\+\_\+helper.\+h}
+\label{file__helper_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/file\_helper.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/file\_helper.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{// Helper class for file sinks.}}
+\DoxyCodeLine{9 \textcolor{comment}{// When failing to open a file, retry several times(5) with a delay interval(10 ms).}}
+\DoxyCodeLine{10 \textcolor{comment}{// Throw spdlog\_ex exception on errors.}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}spdlog/details/log\_msg.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}spdlog/details/os.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <cerrno>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <cstdio>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <tuple>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }details \{}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{file\_helper}}}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{public}:}
+\DoxyCodeLine{29     \textcolor{keyword}{const} \textcolor{keywordtype}{int} open\_tries = 5;}
+\DoxyCodeLine{30     \textcolor{keyword}{const} \textcolor{keywordtype}{int} open\_interval = 10;}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{file\_helper}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{file\_helper}}(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{file\_helper}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{35     \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{file\_helper}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{file\_helper}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{\string~file\_helper}}()}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         close();}
+\DoxyCodeLine{40     \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} open(\textcolor{keyword}{const} filename\_t \&fname, \textcolor{keywordtype}{bool} truncate = \textcolor{keyword}{false})}
+\DoxyCodeLine{43     \{}
+\DoxyCodeLine{44         close();}
+\DoxyCodeLine{45         \textcolor{keyword}{auto} *mode = truncate ? SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}wb"{}}) : SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}ab"{}});}
+\DoxyCodeLine{46         \_filename = fname;}
+\DoxyCodeLine{47         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} tries = 0; tries < open\_tries; ++tries)}
+\DoxyCodeLine{48         \{}
+\DoxyCodeLine{49             \textcolor{keywordflow}{if} (!os::fopen\_s(\&fd\_, fname, mode))}
+\DoxyCodeLine{50             \{}
+\DoxyCodeLine{51                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{52             \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54             details::os::sleep\_for\_millis(open\_interval);}
+\DoxyCodeLine{55         \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classspdlog_1_1spdlog__ex}{spdlog\_ex}}(\textcolor{stringliteral}{"{}Failed opening file "{}} + os::filename\_to\_str(\_filename) + \textcolor{stringliteral}{"{} for writing"{}}, errno);}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} reopen(\textcolor{keywordtype}{bool} truncate)}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         \textcolor{keywordflow}{if} (\_filename.empty())}
+\DoxyCodeLine{63         \{}
+\DoxyCodeLine{64             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classspdlog_1_1spdlog__ex}{spdlog\_ex}}(\textcolor{stringliteral}{"{}Failed re opening file -\/ was not opened before"{}});}
+\DoxyCodeLine{65         \}}
+\DoxyCodeLine{66         open(\_filename, truncate);}
+\DoxyCodeLine{67     \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keywordtype}{void} flush()}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71         std::fflush(fd\_);}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} close()}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76         \textcolor{keywordflow}{if} (fd\_ != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{77         \{}
+\DoxyCodeLine{78             std::fclose(fd\_);}
+\DoxyCodeLine{79             fd\_ = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} write(\textcolor{keyword}{const} fmt::memory\_buffer \&buf)}
+\DoxyCodeLine{84     \{}
+\DoxyCodeLine{85         \textcolor{keywordtype}{size\_t} msg\_size = buf.size();}
+\DoxyCodeLine{86         \textcolor{keyword}{auto} data = buf.data();}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (std::fwrite(data, 1, msg\_size, fd\_) != msg\_size)}
+\DoxyCodeLine{88         \{}
+\DoxyCodeLine{89             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classspdlog_1_1spdlog__ex}{spdlog\_ex}}(\textcolor{stringliteral}{"{}Failed writing to file "{}} + os::filename\_to\_str(\_filename), errno);}
+\DoxyCodeLine{90         \}}
+\DoxyCodeLine{91     \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{size\_t} size()\textcolor{keyword}{ const}}
+\DoxyCodeLine{94 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{95         \textcolor{keywordflow}{if} (fd\_ == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{96         \{}
+\DoxyCodeLine{97             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classspdlog_1_1spdlog__ex}{spdlog\_ex}}(\textcolor{stringliteral}{"{}Cannot use size() on closed file "{}} + os::filename\_to\_str(\_filename));}
+\DoxyCodeLine{98         \}}
+\DoxyCodeLine{99         \textcolor{keywordflow}{return} os::filesize(fd\_);}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     \textcolor{keyword}{const} filename\_t \&filename()\textcolor{keyword}{ const}}
+\DoxyCodeLine{103 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{104         \textcolor{keywordflow}{return} \_filename;}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} file\_exists(\textcolor{keyword}{const} filename\_t \&fname)}
+\DoxyCodeLine{108     \{}
+\DoxyCodeLine{109         \textcolor{keywordflow}{return} os::file\_exists(fname);}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{comment}{//}}
+\DoxyCodeLine{113     \textcolor{comment}{// return file path and its extension:}}
+\DoxyCodeLine{114     \textcolor{comment}{//}}
+\DoxyCodeLine{115     \textcolor{comment}{// "{}mylog.txt"{} => ("{}mylog"{}, "{}.txt"{})}}
+\DoxyCodeLine{116     \textcolor{comment}{// "{}mylog"{} => ("{}mylog"{}, "{}"{})}}
+\DoxyCodeLine{117     \textcolor{comment}{// "{}mylog."{} => ("{}mylog."{}, "{}"{})}}
+\DoxyCodeLine{118     \textcolor{comment}{// "{}/dir1/dir2/mylog.txt"{} => ("{}/dir1/dir2/mylog"{}, "{}.txt"{})}}
+\DoxyCodeLine{119     \textcolor{comment}{//}}
+\DoxyCodeLine{120     \textcolor{comment}{// the starting dot in filenames is ignored (hidden files):}}
+\DoxyCodeLine{121     \textcolor{comment}{//}}
+\DoxyCodeLine{122     \textcolor{comment}{// "{}.mylog"{} => ("{}.mylog"{}. "{}"{})}}
+\DoxyCodeLine{123     \textcolor{comment}{// "{}my\_folder/.mylog"{} => ("{}my\_folder/.mylog"{}, "{}"{})}}
+\DoxyCodeLine{124     \textcolor{comment}{// "{}my\_folder/.mylog.txt"{} => ("{}my\_folder/.mylog"{}, "{}.txt"{})}}
+\DoxyCodeLine{125     \textcolor{keyword}{static} std::tuple<filename\_t, filename\_t> split\_by\_extenstion(\textcolor{keyword}{const} spdlog::filename\_t \&fname)}
+\DoxyCodeLine{126     \{}
+\DoxyCodeLine{127         \textcolor{keyword}{auto} ext\_index = fname.rfind(\textcolor{charliteral}{'.'});}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129         \textcolor{comment}{// no valid extension found -\/ return whole path and empty string as}}
+\DoxyCodeLine{130         \textcolor{comment}{// extension}}
+\DoxyCodeLine{131         \textcolor{keywordflow}{if} (ext\_index == filename\_t::npos || ext\_index == 0 || ext\_index == fname.size() -\/ 1)}
+\DoxyCodeLine{132         \{}
+\DoxyCodeLine{133             \textcolor{keywordflow}{return} std::make\_tuple(fname, spdlog::filename\_t());}
+\DoxyCodeLine{134         \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136         \textcolor{comment}{// treat casese like "{}/etc/rc.d/somelogfile or "{}/abc/.hiddenfile"{}}}
+\DoxyCodeLine{137         \textcolor{keyword}{auto} folder\_index = fname.rfind(details::os::folder\_sep);}
+\DoxyCodeLine{138         \textcolor{keywordflow}{if} (folder\_index != filename\_t::npos \&\& folder\_index >= ext\_index -\/ 1)}
+\DoxyCodeLine{139         \{}
+\DoxyCodeLine{140             \textcolor{keywordflow}{return} std::make\_tuple(fname, spdlog::filename\_t());}
+\DoxyCodeLine{141         \}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143         \textcolor{comment}{// finally -\/ return a valid base and extension tuple}}
+\DoxyCodeLine{144         \textcolor{keywordflow}{return} std::make\_tuple(fname.substr(0, ext\_index), fname.substr(ext\_index));}
+\DoxyCodeLine{145     \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \textcolor{keyword}{private}:}
+\DoxyCodeLine{148     std::FILE *fd\_\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{149     filename\_t \_filename;}
+\DoxyCodeLine{150 \};}
+\DoxyCodeLine{151 \} \textcolor{comment}{// namespace details}}
+\DoxyCodeLine{152 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

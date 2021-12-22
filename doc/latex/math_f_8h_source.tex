@@ -1,0 +1,137 @@
+\hypertarget{math_f_8h_source}{}\doxysection{math\+F.\+h}
+\label{math_f_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/bitcode/OCML/mathF.h@{/Users/pvelesko/local/CHIP-\/SPV/bitcode/OCML/mathF.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*===-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{ *                   ROCm Device Libraries}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * This file is distributed under the University of Illinois Open Source}}
+\DoxyCodeLine{5 \textcolor{comment}{ * License. See LICENSE.TXT for details.}}
+\DoxyCodeLine{6 \textcolor{comment}{ *===-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{// OCML prototypes}}
+\DoxyCodeLine{9 \textcolor{comment}{//\#include "{}ocml.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{comment}{// Tables}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}tables.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{// Builtins}}
+\DoxyCodeLine{15 \textcolor{comment}{//\#include "{}builtins.h"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{comment}{// Mangling}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define MATH\_MANGLE(N) N}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define MATH\_PRIVATE(N) \_\_priv\#\#N}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{comment}{// mine}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define MATH\_MAD(x, y, z) mad(x, y, z)}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define FINITE\_ONLY\_OPT() 0}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define BUILTIN\_FMA\_F32(x, y, z) fma(x, y, z)}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define MATH\_SQRT(x) sqrt(x)}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define MATH\_RCP(x) native\_recip(x)}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define AS\_FLOAT(x) as\_float(x)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define AS\_INT(x) as\_int(x)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define AS\_UINT(x) as\_uint(x)}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define BUILTIN\_ABS\_F32(x) fabs(x)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define BUILTIN\_COPYSIGN\_F32(x, y) copysign(x, y)}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define HAVE\_FAST\_FMA32() 1}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define BUILTIN\_RSQRT\_F32(x) native\_rsqrt(x)}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define MATH\_FAST\_RCP(x) native\_recip(x)}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define MATH\_FAST\_DIV(x, y) ((x) / (y))}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define MATH\_FAST\_SQRT(x) native\_sqrt(x)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define MATH\_DIV(x, y) ((x) / (y))}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define BUILTIN\_CLAMP\_F32(x, y, z) clamp(x, y, z)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define BUILTIN\_MAX\_U32(x, y) max(x, y)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define BUILTIN\_MIN\_U32(x, y) min(x, y)}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define BUILTIN\_ISINF\_F32(x) isinf(x)}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define BUILTIN\_ISNAN\_F32(x) isnan(x)}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define BUILTIN\_LOG2\_F32(x) native\_log2(x)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define BUILTIN\_EXP2\_F32(x) native\_exp2(x)}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define BUILTIN\_RINT\_F32(x) rint(x)}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} frexp\_exp(\textcolor{keywordtype}{float} x) \{}
+\DoxyCodeLine{52   \textcolor{keywordtype}{int} e;}
+\DoxyCodeLine{53   \textcolor{keywordtype}{float} mant = frexp(x, \&e);}
+\DoxyCodeLine{54   \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{55 \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define BUILTIN\_FREXP\_EXP\_F32(x) frexp\_exp(x)}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define BUILTIN\_FLDEXP\_F32(x, k) ldexp(x, k)}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{comment}{// Optimization Controls}}
+\DoxyCodeLine{62 \textcolor{comment}{//\#include "{}opts.h"{}}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{comment}{// Attributes}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define PUREATTR \_\_attribute\_\_((pure)) \_\_attribute\_\_((overloadable))}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define CONSTATTR \_\_attribute\_\_((const)) \_\_attribute\_\_((overloadable))}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{comment}{// Math controls}}
+\DoxyCodeLine{69 \textcolor{comment}{//\#include "{}privF.h"{}}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{comment}{// Floating point patterns}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define SIGNBIT\_SP32      (int)0x80000000}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define EXSIGNBIT\_SP32    0x7fffffff}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define EXPBITS\_SP32      0x7f800000}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define MANTBITS\_SP32     0x007fffff}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define ONEEXPBITS\_SP32   0x3f800000}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define TWOEXPBITS\_SP32   0x40000000}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define HALFEXPBITS\_SP32  0x3f000000}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define IMPBIT\_SP32       0x00800000}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define QNANBITPATT\_SP32  0x7fc00000}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define PINFBITPATT\_SP32  0x7f800000}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define NINFBITPATT\_SP32  (int)0xff800000}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#define EXPBIAS\_SP32      127}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#define EXPSHIFTBITS\_SP32 23}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define BIASEDEMIN\_SP32   1}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define EMIN\_SP32         -\/126}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define BIASEDEMAX\_SP32   254}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define EMAX\_SP32         127}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define MANTLENGTH\_SP32   24}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define BASEDIGITS\_SP32   7}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define CLASS\_PINF 2}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define CLASS\_NINF 4}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define CLASS\_QNAN 8}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define CLASS\_SNAN 16}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define CLASS\_PSUB 32}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define CLASS\_NSUB 64}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define CLASS\_PZER 128}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define CLASS\_NZER 256}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} CONSTATTR BUILTIN\_CLASS\_F32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{int} klass)}
+\DoxyCodeLine{103 \{}
+\DoxyCodeLine{104   \textcolor{keywordflow}{if} ((klass \& CLASS\_PINF) \&\& (as\_int(x) == PINFBITPATT\_SP32))}
+\DoxyCodeLine{105     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{106   \textcolor{keywordflow}{if} ((klass \& CLASS\_NINF) \&\& (as\_int(x) == NINFBITPATT\_SP32))}
+\DoxyCodeLine{107     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109   \textcolor{keywordflow}{if} ((klass \& (CLASS\_QNAN|CLASS\_SNAN)) \&\& (as\_int(x) \& QNANBITPATT\_SP32))}
+\DoxyCodeLine{110     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112   \textcolor{keywordflow}{if} ((klass \& (CLASS\_NZER|CLASS\_PZER)) \&\& ((as\_int(x) \& (\string~SIGNBIT\_SP32)) == 0) )}
+\DoxyCodeLine{113     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115   \textcolor{keywordflow}{if} (}
+\DoxyCodeLine{116         (klass \& (CLASS\_NSUB|CLASS\_PSUB)) \&\&}
+\DoxyCodeLine{117         (}
+\DoxyCodeLine{118             ((as\_int(x) \& EXPBITS\_SP32) == 0) \&\& ((as\_int(x) \& MANTBITS\_SP32) != 0)}
+\DoxyCodeLine{119         )}
+\DoxyCodeLine{120      )}
+\DoxyCodeLine{121     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{124 \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 \textcolor{comment}{// declarations}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 PUREATTR \textcolor{keywordtype}{float} j1(\textcolor{keywordtype}{float} x);}
+\DoxyCodeLine{129 PUREATTR \textcolor{keywordtype}{float} j0(\textcolor{keywordtype}{float} x);}
+\DoxyCodeLine{130 CONSTATTR \textcolor{keywordtype}{float} erfinv(\textcolor{keywordtype}{float} x);}
+\DoxyCodeLine{131 CONSTATTR \textcolor{keywordtype}{float} erfcinv(\textcolor{keywordtype}{float} x);}
+
+\end{DoxyCode}

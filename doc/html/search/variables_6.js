@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['initialized_0',['initialized',['../_c_h_i_p_driver_8hh.html#a27fe04307130a8043d19828381435ebb',1,'initialized():&#160;CHIPDriver.cc'],['../_c_h_i_p_driver_8cc.html#a27fe04307130a8043d19828381435ebb',1,'initialized():&#160;CHIPDriver.cc']]]
+  ['lastevent_0',['LastEvent',['../class_c_h_i_p_queue.html#a27dd9f3c768ae545f02fb13df697faa4',1,'CHIPQueue']]]
 ];

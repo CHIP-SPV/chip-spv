@@ -1,0 +1,70 @@
+\hypertarget{classbasic__fixed__buffer}{}\doxysection{basic\+\_\+fixed\+\_\+buffer\texorpdfstring{$<$}{<} Char \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classbasic__fixed__buffer}\index{basic\_fixed\_buffer$<$ Char $>$@{basic\_fixed\_buffer$<$ Char $>$}}
+
+
+{\ttfamily \#include $<$format.\+h$>$}
+
+Inheritance diagram for basic\+\_\+fixed\+\_\+buffer\texorpdfstring{$<$}{<} Char \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbasic__fixed__buffer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbasic__fixed__buffer_a3a1531bcd858f978604e6db6833ce19a}{basic\+\_\+fixed\+\_\+buffer}} (Char $\ast$array, std\+::size\+\_\+t \mbox{\hyperlink{classinternal_1_1basic__buffer_abc95713c3873c5820f10105fe7c7af93}{size}})
+\item 
+{\footnotesize template$<$std\+::size\+\_\+t SIZE$>$ }\\\mbox{\hyperlink{classbasic__fixed__buffer_a57df34f81b84c41bc0888e0174ad59b0}{basic\+\_\+fixed\+\_\+buffer}} (Char(\&array)\mbox{[}SIZE\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+FMT\+\_\+\+API void \mbox{\hyperlink{classbasic__fixed__buffer_aa806637adc0d00c33902eba220961f9b}{grow}} (std\+::size\+\_\+t \mbox{\hyperlink{classinternal_1_1basic__buffer_abc95713c3873c5820f10105fe7c7af93}{size}}) FMT\+\_\+\+OVERRIDE
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Char$>$\newline
+class basic\+\_\+fixed\+\_\+buffer$<$ Char $>$}
+\textbackslash{}rst \mbox{\hyperlink{class_a}{A}} fixed-\/size memory buffer. For a dynamically growing buffer use \+:class\+:{\ttfamily fmt\+::basic\+\_\+memory\+\_\+buffer}.
+
+Trying to increase the buffer size past the initial capacity will throw {\ttfamily std\+::runtime\+\_\+error}. \textbackslash{}endrst 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbasic__fixed__buffer_a3a1531bcd858f978604e6db6833ce19a}\label{classbasic__fixed__buffer_a3a1531bcd858f978604e6db6833ce19a}} 
+\index{basic\_fixed\_buffer$<$ Char $>$@{basic\_fixed\_buffer$<$ Char $>$}!basic\_fixed\_buffer@{basic\_fixed\_buffer}}
+\index{basic\_fixed\_buffer@{basic\_fixed\_buffer}!basic\_fixed\_buffer$<$ Char $>$@{basic\_fixed\_buffer$<$ Char $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_fixed\_buffer()}{basic\_fixed\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Char $>$ \\
+\mbox{\hyperlink{classbasic__fixed__buffer}{basic\+\_\+fixed\+\_\+buffer}}$<$ Char $>$\+::\mbox{\hyperlink{classbasic__fixed__buffer}{basic\+\_\+fixed\+\_\+buffer}} (\begin{DoxyParamCaption}\item[{Char $\ast$}]{array,  }\item[{std\+::size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst Constructs a \+:class\+:{\ttfamily fmt\+::basic\+\_\+fixed\+\_\+buffer} object for {\itshape array} of the given size. \textbackslash{}endrst \mbox{\Hypertarget{classbasic__fixed__buffer_a57df34f81b84c41bc0888e0174ad59b0}\label{classbasic__fixed__buffer_a57df34f81b84c41bc0888e0174ad59b0}} 
+\index{basic\_fixed\_buffer$<$ Char $>$@{basic\_fixed\_buffer$<$ Char $>$}!basic\_fixed\_buffer@{basic\_fixed\_buffer}}
+\index{basic\_fixed\_buffer@{basic\_fixed\_buffer}!basic\_fixed\_buffer$<$ Char $>$@{basic\_fixed\_buffer$<$ Char $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_fixed\_buffer()}{basic\_fixed\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Char $>$ \\
+template$<$std\+::size\+\_\+t SIZE$>$ \\
+\mbox{\hyperlink{classbasic__fixed__buffer}{basic\+\_\+fixed\+\_\+buffer}}$<$ Char $>$\+::\mbox{\hyperlink{classbasic__fixed__buffer}{basic\+\_\+fixed\+\_\+buffer}} (\begin{DoxyParamCaption}\item[{Char(\&)}]{array\mbox{[}\+SIZE\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\textbackslash{}rst Constructs a \+:class\+:{\ttfamily fmt\+::basic\+\_\+fixed\+\_\+buffer} object for {\itshape array} of the size known at compile time. \textbackslash{}endrst 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbasic__fixed__buffer_aa806637adc0d00c33902eba220961f9b}\label{classbasic__fixed__buffer_aa806637adc0d00c33902eba220961f9b}} 
+\index{basic\_fixed\_buffer$<$ Char $>$@{basic\_fixed\_buffer$<$ Char $>$}!grow@{grow}}
+\index{grow@{grow}!basic\_fixed\_buffer$<$ Char $>$@{basic\_fixed\_buffer$<$ Char $>$}}
+\doxysubsubsection{\texorpdfstring{grow()}{grow()}}
+{\footnotesize\ttfamily template$<$typename Char $>$ \\
+void \mbox{\hyperlink{classbasic__fixed__buffer}{basic\+\_\+fixed\+\_\+buffer}}$<$ Char $>$\+::grow (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{capacity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Increases the buffer capacity to hold at least {\itshape capacity} elements. 
+
+Implements \mbox{\hyperlink{classinternal_1_1basic__buffer_a01fbeed379e2af2c79baf5c9b5dc92e8}{internal\+::basic\+\_\+buffer$<$ Char $>$}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/format.\+h\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/format-\/inl.\+h\end{DoxyCompactItemize}

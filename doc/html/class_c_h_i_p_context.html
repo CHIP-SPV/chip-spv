@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -96,9 +96,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPContext</b> ()</td></tr>
 <tr class="memdesc:ac2ba6ad31278cb28ec9a48f848dfcffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_context.html" title="Context class Contexts contain execution queues and are created on top of a single or multiple device...">CHIPContext</a> object. <br /></td></tr>
 <tr class="separator:ac2ba6ad31278cb28ec9a48f848dfcffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab9f64f142801289bdb91afbbc4ed990"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aab9f64f142801289bdb91afbbc4ed990">addDevice</a> (<a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *dev)</td></tr>
-<tr class="memdesc:aab9f64f142801289bdb91afbbc4ed990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a device to this context.  <a href="class_c_h_i_p_context.html#aab9f64f142801289bdb91afbbc4ed990">More...</a><br /></td></tr>
-<tr class="separator:aab9f64f142801289bdb91afbbc4ed990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a539403301fcc9a5ebff80a4791ec54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a0a539403301fcc9a5ebff80a4791ec54">addDevice</a> (<a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *dev)</td></tr>
+<tr class="memdesc:a0a539403301fcc9a5ebff80a4791ec54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a device to this context.  <a href="class_c_h_i_p_context.html#a0a539403301fcc9a5ebff80a4791ec54">More...</a><br /></td></tr>
+<tr class="separator:a0a539403301fcc9a5ebff80a4791ec54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8cbc5f609c668c6fd8ed2161b8f5b4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aa8cbc5f609c668c6fd8ed2161b8f5b4f">addQueue</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *q)</td></tr>
 <tr class="memdesc:aa8cbc5f609c668c6fd8ed2161b8f5b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a queue to this context.  <a href="class_c_h_i_p_context.html#aa8cbc5f609c668c6fd8ed2161b8f5b4f">More...</a><br /></td></tr>
 <tr class="separator:aa8cbc5f609c668c6fd8ed2161b8f5b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,9 +129,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aff2c9209a0ff52dd241188065a1f489a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aff2c9209a0ff52dd241188065a1f489a">free_</a> (void *ptr)=0</td></tr>
 <tr class="memdesc:aff2c9209a0ff52dd241188065a1f489a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free memory To be overriden by the backend.  <a href="class_c_h_i_p_context.html#aff2c9209a0ff52dd241188065a1f489a">More...</a><br /></td></tr>
 <tr class="separator:aff2c9209a0ff52dd241188065a1f489a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2541d2c5d3f61cf96263a59a41554ea"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aa2541d2c5d3f61cf96263a59a41554ea">memCopy</a> (void *dst, const void *src, size_t size, hipStream_t stream)=0</td></tr>
-<tr class="memdesc:aa2541d2c5d3f61cf96263a59a41554ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy memory.  <a href="class_c_h_i_p_context.html#aa2541d2c5d3f61cf96263a59a41554ea">More...</a><br /></td></tr>
-<tr class="separator:aa2541d2c5d3f61cf96263a59a41554ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fc1f032f9742d6348121870cc5be04c"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a0fc1f032f9742d6348121870cc5be04c">memCopy</a> (void *dst, const void *src, size_t size, hipStream_t stream)</td></tr>
+<tr class="memdesc:a0fc1f032f9742d6348121870cc5be04c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy memory.  <a href="class_c_h_i_p_context.html#a0fc1f032f9742d6348121870cc5be04c">More...</a><br /></td></tr>
+<tr class="separator:a0fc1f032f9742d6348121870cc5be04c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d79308f3a70a9293923835122da23c"><td class="memItemLeft" align="right" valign="top"><a id="a31d79308f3a70a9293923835122da23c" name="a31d79308f3a70a9293923835122da23c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>finishAll</b> ()</td></tr>
 <tr class="memdesc:a31d79308f3a70a9293923835122da23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finish all the queues in this context. <br /></td></tr>
@@ -147,17 +147,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>finishAll</b> ()</td>
 <tr class="separator:a99583fe33f2dd9bf23b278e42fb168ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b0f248e3f69b73f42ef7ad787e2fd44"><td class="memItemLeft" align="right" valign="top"><a id="a4b0f248e3f69b73f42ef7ad787e2fd44" name="a4b0f248e3f69b73f42ef7ad787e2fd44"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
-<tr class="memdesc:a4b0f248e3f69b73f42ef7ad787e2fd44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset this context. TODO: what does it mean to reset a context? <br /></td></tr>
+<tr class="memdesc:a4b0f248e3f69b73f42ef7ad787e2fd44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset this context. <br /></td></tr>
 <tr class="separator:a4b0f248e3f69b73f42ef7ad787e2fd44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d03567273b7899b7d2e0df0e5f015cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a7d03567273b7899b7d2e0df0e5f015cf">retain</a> ()</td></tr>
 <tr class="memdesc:a7d03567273b7899b7d2e0df0e5f015cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retain this context. TODO: What does it mean to retain a context?  <a href="class_c_h_i_p_context.html#a7d03567273b7899b7d2e0df0e5f015cf">More...</a><br /></td></tr>
 <tr class="separator:a7d03567273b7899b7d2e0df0e5f015cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abff033626b0fa70dcd319a0d9406bfd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#abff033626b0fa70dcd319a0d9406bfd3">recordEvent</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *q, <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *event)</td></tr>
-<tr class="memdesc:abff033626b0fa70dcd319a0d9406bfd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record an event in a given queue.  <a href="class_c_h_i_p_context.html#abff033626b0fa70dcd319a0d9406bfd3">More...</a><br /></td></tr>
-<tr class="separator:abff033626b0fa70dcd319a0d9406bfd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90a36c0230e9aa63e381c679433f63f3"><td class="memItemLeft" align="right" valign="top">virtual CHIPTexture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a90a36c0230e9aa63e381c679433f63f3">createImage</a> (hipResourceDesc *resDesc, hipTextureDesc *texDesc)</td></tr>
-<tr class="memdesc:a90a36c0230e9aa63e381c679433f63f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Image objct.  <a href="class_c_h_i_p_context.html#a90a36c0230e9aa63e381c679433f63f3">More...</a><br /></td></tr>
-<tr class="separator:a90a36c0230e9aa63e381c679433f63f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4af79ee3405b648afb092ff3622577e6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a4af79ee3405b648afb092ff3622577e6">createEvent</a> (unsigned flags)=0</td></tr>
+<tr class="memdesc:a4af79ee3405b648afb092ff3622577e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Event object.  <a href="class_c_h_i_p_context.html#a4af79ee3405b648afb092ff3622577e6">More...</a><br /></td></tr>
+<tr class="separator:a4af79ee3405b648afb092ff3622577e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -170,18 +167,24 @@ std::vector&lt; <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * &g
 <tr class="memitem:a33626d8a7006c2c63dbb1760f47ac6ba"><td class="memItemLeft" align="right" valign="top"><a id="a33626d8a7006c2c63dbb1760f47ac6ba" name="a33626d8a7006c2c63dbb1760f47ac6ba"></a>
 std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
 <tr class="separator:a33626d8a7006c2c63dbb1760f47ac6ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab175053d15520cb4011750f2e34ba840"><td class="memItemLeft" align="right" valign="top"><a id="ab175053d15520cb4011750f2e34ba840" name="ab175053d15520cb4011750f2e34ba840"></a>
+std::vector&lt; void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>allocated_ptrs</b></td></tr>
+<tr class="separator:ab175053d15520cb4011750f2e34ba840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac93e4738059538da2d50b92ef74b01a"><td class="memItemLeft" align="right" valign="top"><a id="aac93e4738059538da2d50b92ef74b01a" name="aac93e4738059538da2d50b92ef74b01a"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></td></tr>
+<tr class="separator:aac93e4738059538da2d50b92ef74b01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Context class Contexts contain execution queues and are created on top of a single or multiple devices. Provides for creation of additional queues, events, and interaction with devices. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aab9f64f142801289bdb91afbbc4ed990" name="aab9f64f142801289bdb91afbbc4ed990"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab9f64f142801289bdb91afbbc4ed990">&#9670;&nbsp;</a></span>addDevice()</h2>
+<a id="a0a539403301fcc9a5ebff80a4791ec54" name="a0a539403301fcc9a5ebff80a4791ec54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a539403301fcc9a5ebff80a4791ec54">&#9670;&nbsp;</a></span>addDevice()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool CHIPContext::addDevice </td>
+          <td class="memname">void CHIPContext::addDevice </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *&#160;</td>
           <td class="paramname"><em>dev</em></td><td>)</td>
@@ -394,8 +397,8 @@ false upon failure </dd></dl>
 
 </div>
 </div>
-<a id="a90a36c0230e9aa63e381c679433f63f3" name="a90a36c0230e9aa63e381c679433f63f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90a36c0230e9aa63e381c679433f63f3">&#9670;&nbsp;</a></span>createImage()</h2>
+<a id="a4af79ee3405b648afb092ff3622577e6" name="a4af79ee3405b648afb092ff3622577e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af79ee3405b648afb092ff3622577e6">&#9670;&nbsp;</a></span>createEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,39 +407,30 @@ false upon failure </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">CHIPTexture * CHIPContext::createImage </td>
+          <td class="memname">virtual <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> * CHIPContext::createEvent </td>
           <td>(</td>
-          <td class="paramtype">hipResourceDesc *&#160;</td>
-          <td class="paramname"><em>resDesc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>flags</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">hipTextureDesc *&#160;</td>
-          <td class="paramname"><em>texDesc</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Create a Image objct. </p>
+<p>Create a Event object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resDesc</td><td></td></tr>
-    <tr><td class="paramname">texDesc</td><td></td></tr>
+    <tr><td class="paramname">flags</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>CHIPTexture* </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CHIPEvent* </dd></dl>
+
+<p>Implemented in <a class="el" href="class_c_h_i_p_context_level0.html#a75728e1abd0713132085d18b3cf15b7f">CHIPContextLevel0</a>, and <a class="el" href="class_c_h_i_p_context_open_c_l.html#a62abcf865241a49b79b9051d63b03ed6">CHIPContextOpenCL</a>.</p>
 
 </div>
 </div>
@@ -648,8 +642,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="aa2541d2c5d3f61cf96263a59a41554ea" name="aa2541d2c5d3f61cf96263a59a41554ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2541d2c5d3f61cf96263a59a41554ea">&#9670;&nbsp;</a></span>memCopy()</h2>
+<a id="a0fc1f032f9742d6348121870cc5be04c" name="a0fc1f032f9742d6348121870cc5be04c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fc1f032f9742d6348121870cc5be04c">&#9670;&nbsp;</a></span>memCopy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -689,7 +683,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -706,44 +700,7 @@ false </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
 
-<p>Implemented in <a class="el" href="class_c_h_i_p_context_level0.html#a6f4fdbfd88439837f44536b2df3dab19">CHIPContextLevel0</a>, and <a class="el" href="class_c_h_i_p_context_open_c_l.html#ad0c20ea340fac85c33d3ac63e0e4ac9b">CHIPContextOpenCL</a>.</p>
-
-</div>
-</div>
-<a id="abff033626b0fa70dcd319a0d9406bfd3" name="abff033626b0fa70dcd319a0d9406bfd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abff033626b0fa70dcd319a0d9406bfd3">&#9670;&nbsp;</a></span>recordEvent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CHIPContext::recordEvent </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td>
-          <td class="paramname"><em>q</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td>
-          <td class="paramname"><em>event</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Record an event in a given queue. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">q</td><td>queue into which to insert the event </td></tr>
-    <tr><td class="paramname">event</td><td>event to be inserted </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Reimplemented in <a class="el" href="class_c_h_i_p_context_open_c_l.html#ad0c20ea340fac85c33d3ac63e0e4ac9b">CHIPContextOpenCL</a>.</p>
 
 </div>
 </div>
@@ -794,8 +751,8 @@ false </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,0 +1,305 @@
+\hypertarget{classcl_1_1_program}{}\doxysection{cl\+::Program Class Reference}
+\label{classcl_1_1_program}\index{cl::Program@{cl::Program}}
+
+
+\mbox{\hyperlink{classcl_1_1_program}{Program}} interface that implements cl\+\_\+program.  
+
+
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Program\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcl_1_1_program}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a4c9e74c7f663ded16092bd5ad68aca7a}\label{classcl_1_1_program_a4c9e74c7f663ded16092bd5ad68aca7a}} 
+typedef VECTOR\+\_\+\+CLASS$<$ std\+::pair$<$ const void $\ast$, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} $>$ $>$ {\bfseries Binaries}
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a5a9894f09322a68303c9de8729ae722d}\label{classcl_1_1_program_a5a9894f09322a68303c9de8729ae722d}} 
+typedef VECTOR\+\_\+\+CLASS$<$ std\+::pair$<$ const char $\ast$, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} $>$ $>$ {\bfseries Sources}
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a012a70fc915a06671e1d6c05ba7804df}\label{classcl_1_1_program_a012a70fc915a06671e1d6c05ba7804df}} 
+typedef vector$<$ vector$<$ unsigned char $>$ $>$ {\bfseries Binaries}
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_ad260abbeb288ec0cc18d5184bf07b14a}\label{classcl_1_1_program_ad260abbeb288ec0cc18d5184bf07b14a}} 
+typedef vector$<$ string $>$ {\bfseries Sources}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a610c22ad7c95f90121725f6d5da78232}\label{classcl_1_1_program_a610c22ad7c95f90121725f6d5da78232}} 
+{\bfseries Program} (const \mbox{\hyperlink{namespacecl_ad3ff55c5fe80ec84842876af323559c7}{STRING\+\_\+\+CLASS}} \&source, bool build=false, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a1781efd209b2d0ec348e583986327c6f}\label{classcl_1_1_program_a1781efd209b2d0ec348e583986327c6f}} 
+{\bfseries Program} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const \mbox{\hyperlink{namespacecl_ad3ff55c5fe80ec84842876af323559c7}{STRING\+\_\+\+CLASS}} \&source, bool build=false, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a400d1a7de104d98f1d3c2aa7dccc21ba}\label{classcl_1_1_program_a400d1a7de104d98f1d3c2aa7dccc21ba}} 
+{\bfseries Program} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const Sources \&sources, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_a7c0ce0f4d9bf00088aa0db0abdf264d8}{Program}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&devices, const Binaries \&binaries, VECTOR\+\_\+\+CLASS$<$ cl\+\_\+int $>$ $\ast$binary\+Status=NULL, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_ad2001d6737f827cd8ecccce998ee849e}\label{classcl_1_1_program_ad2001d6737f827cd8ecccce998ee849e}} 
+\+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS {\bfseries Program} (const cl\+\_\+program \&program)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a692702daa18137b4155a2a833b4c6aac}\label{classcl_1_1_program_a692702daa18137b4155a2a833b4c6aac}} 
+\mbox{\hyperlink{classcl_1_1_program}{Program}} \& {\bfseries operator=} (const cl\+\_\+program \&rhs)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a0ec5552449e9fefc46e7bcd399d15f51}\label{classcl_1_1_program_a0ec5552449e9fefc46e7bcd399d15f51}} 
+{\bfseries Program} (const \mbox{\hyperlink{classcl_1_1_program}{Program}} \&program)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a7bd4452820d5b500c79aba740574d860}\label{classcl_1_1_program_a7bd4452820d5b500c79aba740574d860}} 
+\mbox{\hyperlink{classcl_1_1_program}{Program}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_program}{Program}} \&program)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a7279e5ec14fb083e8202e8068cdcd408}\label{classcl_1_1_program_a7279e5ec14fb083e8202e8068cdcd408}} 
+cl\+\_\+int {\bfseries build} (const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&devices, const char $\ast$options=NULL, void(CL\+\_\+\+CALLBACK $\ast$notify\+Fptr)(cl\+\_\+program, void $\ast$)=NULL, void $\ast$data=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a7014db5c87a6c0f4877ad506dae47a8b}\label{classcl_1_1_program_a7014db5c87a6c0f4877ad506dae47a8b}} 
+cl\+\_\+int {\bfseries build} (const char $\ast$options=NULL, void(CL\+\_\+\+CALLBACK $\ast$notify\+Fptr)(cl\+\_\+program, void $\ast$)=NULL, void $\ast$data=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a9028e9b85aa9110a8dcc67e34f15956a}\label{classcl_1_1_program_a9028e9b85aa9110a8dcc67e34f15956a}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+program\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a3af5538e33e4d11fdc0f926a2fc759a6}\label{classcl_1_1_program_a3af5538e33e4d11fdc0f926a2fc759a6}} 
+{\footnotesize template$<$cl\+\_\+int name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+program\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a6178a63538bdbb3b9730225a59ff465f}\label{classcl_1_1_program_a6178a63538bdbb3b9730225a59ff465f}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Build\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+program\+\_\+build\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_afdc8dabccdde3e60670722d493b4ea9f}\label{classcl_1_1_program_afdc8dabccdde3e60670722d493b4ea9f}} 
+{\footnotesize template$<$cl\+\_\+int name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+program\+\_\+build\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Build\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a5c0c4dd39bd2a1757b0741880c7d243c}\label{classcl_1_1_program_a5c0c4dd39bd2a1757b0741880c7d243c}} 
+cl\+\_\+int {\bfseries create\+Kernels} (VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} $>$ $\ast$kernels)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_afc8d71b6035a8084636c9b9f3ed568b2}\label{classcl_1_1_program_afc8d71b6035a8084636c9b9f3ed568b2}} 
+{\bfseries Program} (const string \&source, bool build=false, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a22c68c40400ddb75c0e8013629e632be}\label{classcl_1_1_program_a22c68c40400ddb75c0e8013629e632be}} 
+{\bfseries Program} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const string \&source, bool build=false, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_a367cf581b43d8ad021806a4714753437}{Program}} (const Sources \&sources, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_a400d1a7de104d98f1d3c2aa7dccc21ba}{Program}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const Sources \&sources, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_a4f03f90dcd6c7b48687af389cf8b25ca}{Program}} (const vector$<$ char $>$ \&IL, bool build=false, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_afeec80b90b56f6407b138b9e8f10e8bc}{Program}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const vector$<$ char $>$ \&IL, bool build=false, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_af804a4cb0e2dc844c0be0b0b76dbd25a}{Program}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const vector$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&devices, const Binaries \&binaries, vector$<$ cl\+\_\+int $>$ $\ast$binary\+Status=NULL, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_a9223820e8ac1901a84e1a1a02a97954b}{Program}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const vector$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&devices, const string \&kernel\+Names, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_program_aaac370eec783f85a00945d701d6a7e19}{Program}} (const cl\+\_\+program \&program, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+program -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a692702daa18137b4155a2a833b4c6aac}\label{classcl_1_1_program_a692702daa18137b4155a2a833b4c6aac}} 
+\mbox{\hyperlink{classcl_1_1_program}{Program}} \& {\bfseries operator=} (const cl\+\_\+program \&rhs)
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a0ec5552449e9fefc46e7bcd399d15f51}\label{classcl_1_1_program_a0ec5552449e9fefc46e7bcd399d15f51}} 
+{\bfseries Program} (const \mbox{\hyperlink{classcl_1_1_program}{Program}} \&program)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a7bd4452820d5b500c79aba740574d860}\label{classcl_1_1_program_a7bd4452820d5b500c79aba740574d860}} 
+\mbox{\hyperlink{classcl_1_1_program}{Program}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_program}{Program}} \&program)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a1666a02c393b46730b24a76f79302b15}\label{classcl_1_1_program_a1666a02c393b46730b24a76f79302b15}} 
+{\bfseries Program} (\mbox{\hyperlink{classcl_1_1_program}{Program}} \&\&program) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\begin{DoxyCompactList}\small\item\em Move constructor to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a2291de601ea1be9dd6fbb00441b66f11}\label{classcl_1_1_program_a2291de601ea1be9dd6fbb00441b66f11}} 
+\mbox{\hyperlink{classcl_1_1_program}{Program}} \& {\bfseries operator=} (\mbox{\hyperlink{classcl_1_1_program}{Program}} \&\&program)
+\begin{DoxyCompactList}\small\item\em Move assignment to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a262b43d736d6c1ab26619dfe8e322182}\label{classcl_1_1_program_a262b43d736d6c1ab26619dfe8e322182}} 
+cl\+\_\+int {\bfseries build} (const vector$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&devices, const char $\ast$options=NULL, void(CL\+\_\+\+CALLBACK $\ast$notify\+Fptr)(cl\+\_\+program, void $\ast$)=NULL, void $\ast$data=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a760e27de80026469215445c9774bd104}\label{classcl_1_1_program_a760e27de80026469215445c9774bd104}} 
+cl\+\_\+int {\bfseries build} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, const char $\ast$options=NULL, void(CL\+\_\+\+CALLBACK $\ast$notify\+Fptr)(cl\+\_\+program, void $\ast$)=NULL, void $\ast$data=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a7014db5c87a6c0f4877ad506dae47a8b}\label{classcl_1_1_program_a7014db5c87a6c0f4877ad506dae47a8b}} 
+cl\+\_\+int {\bfseries build} (const char $\ast$options=NULL, void(CL\+\_\+\+CALLBACK $\ast$notify\+Fptr)(cl\+\_\+program, void $\ast$)=NULL, void $\ast$data=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a8e6af9b0c8b2a01d4d8ad04deca61244}\label{classcl_1_1_program_a8e6af9b0c8b2a01d4d8ad04deca61244}} 
+cl\+\_\+int {\bfseries compile} (const char $\ast$options=NULL, void(CL\+\_\+\+CALLBACK $\ast$notify\+Fptr)(cl\+\_\+program, void $\ast$)=NULL, void $\ast$data=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a9028e9b85aa9110a8dcc67e34f15956a}\label{classcl_1_1_program_a9028e9b85aa9110a8dcc67e34f15956a}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+program\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a3af5538e33e4d11fdc0f926a2fc759a6}\label{classcl_1_1_program_a3af5538e33e4d11fdc0f926a2fc759a6}} 
+{\footnotesize template$<$cl\+\_\+program\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+program\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a6178a63538bdbb3b9730225a59ff465f}\label{classcl_1_1_program_a6178a63538bdbb3b9730225a59ff465f}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Build\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+program\+\_\+build\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_afdc8dabccdde3e60670722d493b4ea9f}\label{classcl_1_1_program_afdc8dabccdde3e60670722d493b4ea9f}} 
+{\footnotesize template$<$cl\+\_\+program\+\_\+build\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+program\+\_\+build\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Build\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+int $\ast$err=NULL) const
+\item 
+{\footnotesize template$<$cl\+\_\+program\+\_\+build\+\_\+info name$>$ }\\vector$<$ std\+::pair$<$ \mbox{\hyperlink{classcl_1_1_device}{cl\+::\+Device}}, typename \mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+program\+\_\+build\+\_\+info, name $>$\+::param\+\_\+type $>$ $>$ \mbox{\hyperlink{classcl_1_1_program_aab03a729b8b192ec11c18cb02856299f}{get\+Build\+Info}} (cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a8251f8a862bdfd82caf10a949b2bd884}\label{classcl_1_1_program_a8251f8a862bdfd82caf10a949b2bd884}} 
+cl\+\_\+int {\bfseries create\+Kernels} (vector$<$ \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} $>$ $\ast$kernels)
+\item 
+CL\+\_\+\+EXT\+\_\+\+PREFIX\+\_\+\+\_\+\+VERSION\+\_\+2\+\_\+2\+\_\+\+DEPRECATED cl\+\_\+int \mbox{\hyperlink{classcl_1_1_program_ab111c1b65a2ffc86f5defbc0a3c94501}{set\+Release\+Callback}} (void(CL\+\_\+\+CALLBACK $\ast$pfn\+\_\+notify)(cl\+\_\+program program, void $\ast$user\+\_\+data), void $\ast$user\+\_\+data=NULL) CL\+\_\+\+EXT\+\_\+\+SUFFIX\+\_\+\+\_\+\+VERSION\+\_\+2\+\_\+2\+\_\+\+DEPRECATED
+\begin{DoxyCompactList}\small\item\em Registers a callback function to be called when destructors for program scope global variables are complete and before the program is released. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::enable\+\_\+if$<$!std\+::is\+\_\+pointer$<$ T $>$\+::value, cl\+\_\+int $>$\+::type \mbox{\hyperlink{classcl_1_1_program_aca8d65a532ffd042fa45f88addcb9c88}{set\+Specialization\+Constant}} (cl\+\_\+uint index, const T \&value)
+\begin{DoxyCompactList}\small\item\em Sets a SPIR-\/V specialization constant. \end{DoxyCompactList}\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_program_a9fefc53ce623dd7180260d83fc991ca4}{set\+Specialization\+Constant}} (cl\+\_\+uint index, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const void $\ast$value)
+\begin{DoxyCompactList}\small\item\em Sets a SPIR-\/V specialization constant. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_program_a6cbd7b1f44d93845cc85b1d827d573e4}\label{classcl_1_1_program_a6cbd7b1f44d93845cc85b1d827d573e4}} 
+template$<$$>$ VECTOR\+\_\+\+CLASS$<$ char $\ast$ $>$ {\bfseries get\+Info} (cl\+\_\+int $\ast$err) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_aef4b97439f129fa8fa28d21e17c715dc}\label{classcl_1_1_program_aef4b97439f129fa8fa28d21e17c715dc}} 
+template$<$$>$ cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+program\+\_\+info name, vector$<$ vector$<$ unsigned char $>$ $>$ $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_ac9dae6eba46905b7dbeca02bb1c60612}\label{classcl_1_1_program_ac9dae6eba46905b7dbeca02bb1c60612}} 
+template$<$$>$ vector$<$ vector$<$ unsigned char $>$ $>$ {\bfseries get\+Info} (cl\+\_\+int $\ast$err) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_program_a7b4512d8c730cbb4bf80e7d24f6b90b7}\label{classcl_1_1_program_a7b4512d8c730cbb4bf80e7d24f6b90b7}} 
+template$<$$>$ cl\+\_\+int {\bfseries set\+Specialization\+Constant} (cl\+\_\+uint index, const bool \&value)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classcl_1_1_program}{Program}} interface that implements cl\+\_\+program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_program_a7c0ce0f4d9bf00088aa0db0abdf264d8}\label{classcl_1_1_program_a7c0ce0f4d9bf00088aa0db0abdf264d8}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&}]{devices,  }\item[{const Binaries \&}]{binaries,  }\item[{VECTOR\+\_\+\+CLASS$<$ cl\+\_\+int $>$ $\ast$}]{binary\+Status = {\ttfamily NULL},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construct a program object from a list of devices and a per-\/device list of binaries. 
+\begin{DoxyParams}{Parameters}
+{\em context} & \mbox{\hyperlink{class_a}{A}} valid Open\+CL context in which to construct the program. \\
+\hline
+{\em devices} & \mbox{\hyperlink{class_a}{A}} vector of Open\+CL device objects for which the program will be created. \\
+\hline
+{\em binaries} & \mbox{\hyperlink{class_a}{A}} vector of pairs of a pointer to a binary object and its length. \\
+\hline
+{\em binary\+Status} & An optional vector that on completion will be resized to match the size of binaries and filled with values to specify if each binary was successfully loaded. Set to CL\+\_\+\+SUCCESS if the binary was successfully loaded. Set to CL\+\_\+\+INVALID\+\_\+\+VALUE if the length is 0 or the binary pointer is NULL. Set to CL\+\_\+\+INVALID\+\_\+\+BINARY if the binary provided is not valid for the matching device. \\
+\hline
+{\em err} & if non-\/\+NULL will be set to CL\+\_\+\+SUCCESS on successful operation or one of the following errors\+: CL\+\_\+\+INVALID\+\_\+\+CONTEXT if context is not a valid context. CL\+\_\+\+INVALID\+\_\+\+VALUE if the length of devices is zero; or if the length of binaries does not match the length of devices; or if any entry in binaries is NULL or has length 0. CL\+\_\+\+INVALID\+\_\+\+DEVICE if Open\+CL devices listed in devices are not in the list of devices associated with context. CL\+\_\+\+INVALID\+\_\+\+BINARY if an invalid program binary was encountered for any device. binary\+Status will return specific status for each device. CL\+\_\+\+OUT\+\_\+\+OF\+\_\+\+HOST\+\_\+\+MEMORY if there is a failure to allocate resources required by the Open\+CL implementation on the host. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_program_a367cf581b43d8ad021806a4714753437}\label{classcl_1_1_program_a367cf581b43d8ad021806a4714753437}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const Sources \&}]{sources,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Create a program from a vector of source strings and the default context. Does not compile or link the program. \mbox{\Hypertarget{classcl_1_1_program_a400d1a7de104d98f1d3c2aa7dccc21ba}\label{classcl_1_1_program_a400d1a7de104d98f1d3c2aa7dccc21ba}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{const Sources \&}]{sources,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Create a program from a vector of source strings and a provided context. Does not compile or link the program. \mbox{\Hypertarget{classcl_1_1_program_a4f03f90dcd6c7b48687af389cf8b25ca}\label{classcl_1_1_program_a4f03f90dcd6c7b48687af389cf8b25ca}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const vector$<$ char $>$ \&}]{IL,  }\item[{bool}]{build = {\ttfamily false},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{classcl_1_1_program}{Program}} constructor to allow construction of program from SPIR-\/V or another IL. Valid for either Open\+CL \texorpdfstring{$>$}{>}= 2.\+1 or when CL\+\_\+\+HPP\+\_\+\+USE\+\_\+\+IL\+\_\+\+KHR is defined. \mbox{\Hypertarget{classcl_1_1_program_afeec80b90b56f6407b138b9e8f10e8bc}\label{classcl_1_1_program_afeec80b90b56f6407b138b9e8f10e8bc}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{const vector$<$ char $>$ \&}]{IL,  }\item[{bool}]{build = {\ttfamily false},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{classcl_1_1_program}{Program}} constructor to allow construction of program from SPIR-\/V or another IL for a specific context. Valid for either Open\+CL \texorpdfstring{$>$}{>}= 2.\+1 or when CL\+\_\+\+HPP\+\_\+\+USE\+\_\+\+IL\+\_\+\+KHR is defined. \mbox{\Hypertarget{classcl_1_1_program_af804a4cb0e2dc844c0be0b0b76dbd25a}\label{classcl_1_1_program_af804a4cb0e2dc844c0be0b0b76dbd25a}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&}]{devices,  }\item[{const Binaries \&}]{binaries,  }\item[{vector$<$ cl\+\_\+int $>$ $\ast$}]{binary\+Status = {\ttfamily NULL},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construct a program object from a list of devices and a per-\/device list of binaries. 
+\begin{DoxyParams}{Parameters}
+{\em context} & \mbox{\hyperlink{class_a}{A}} valid Open\+CL context in which to construct the program. \\
+\hline
+{\em devices} & \mbox{\hyperlink{class_a}{A}} vector of Open\+CL device objects for which the program will be created. \\
+\hline
+{\em binaries} & \mbox{\hyperlink{class_a}{A}} vector of pairs of a pointer to a binary object and its length. \\
+\hline
+{\em binary\+Status} & An optional vector that on completion will be resized to match the size of binaries and filled with values to specify if each binary was successfully loaded. Set to CL\+\_\+\+SUCCESS if the binary was successfully loaded. Set to CL\+\_\+\+INVALID\+\_\+\+VALUE if the length is 0 or the binary pointer is NULL. Set to CL\+\_\+\+INVALID\+\_\+\+BINARY if the binary provided is not valid for the matching device. \\
+\hline
+{\em err} & if non-\/\+NULL will be set to CL\+\_\+\+SUCCESS on successful operation or one of the following errors\+: CL\+\_\+\+INVALID\+\_\+\+CONTEXT if context is not a valid context. CL\+\_\+\+INVALID\+\_\+\+VALUE if the length of devices is zero; or if the length of binaries does not match the length of devices; or if any entry in binaries is NULL or has length 0. CL\+\_\+\+INVALID\+\_\+\+DEVICE if Open\+CL devices listed in devices are not in the list of devices associated with context. CL\+\_\+\+INVALID\+\_\+\+BINARY if an invalid program binary was encountered for any device. binary\+Status will return specific status for each device. CL\+\_\+\+OUT\+\_\+\+OF\+\_\+\+HOST\+\_\+\+MEMORY if there is a failure to allocate resources required by the Open\+CL implementation on the host. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_program_a9223820e8ac1901a84e1a1a02a97954b}\label{classcl_1_1_program_a9223820e8ac1901a84e1a1a02a97954b}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_device}{Device}} $>$ \&}]{devices,  }\item[{const string \&}]{kernel\+Names,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Create program using builtin kernels. 
+\begin{DoxyParams}{Parameters}
+{\em kernel\+Names} & Semi-\/colon separated list of builtin kernel names \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_program_aaac370eec783f85a00945d701d6a7e19}\label{classcl_1_1_program_aaac370eec783f85a00945d701d6a7e19}} 
+\index{cl::Program@{cl::Program}!Program@{Program}}
+\index{Program@{Program}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{Program()}{Program()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily cl\+::\+Program\+::\+Program (\begin{DoxyParamCaption}\item[{const cl\+\_\+program \&}]{program,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+program -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_program_aab03a729b8b192ec11c18cb02856299f}\label{classcl_1_1_program_aab03a729b8b192ec11c18cb02856299f}} 
+\index{cl::Program@{cl::Program}!getBuildInfo@{getBuildInfo}}
+\index{getBuildInfo@{getBuildInfo}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{getBuildInfo()}{getBuildInfo()}}
+{\footnotesize\ttfamily template$<$cl\+\_\+program\+\_\+build\+\_\+info name$>$ \\
+vector$<$ std\+::pair$<$ \mbox{\hyperlink{classcl_1_1_device}{cl\+::\+Device}}, typename \mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+program\+\_\+build\+\_\+info, name $>$\+::param\+\_\+type $>$ $>$ cl\+::\+Program\+::get\+Build\+Info (\begin{DoxyParamCaption}\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Build info function that returns a vector of device/info pairs for the specified info type and for all devices in the program. On an error reading the info for any device, an empty vector of info will be returned. \mbox{\Hypertarget{classcl_1_1_program_ab111c1b65a2ffc86f5defbc0a3c94501}\label{classcl_1_1_program_ab111c1b65a2ffc86f5defbc0a3c94501}} 
+\index{cl::Program@{cl::Program}!setReleaseCallback@{setReleaseCallback}}
+\index{setReleaseCallback@{setReleaseCallback}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{setReleaseCallback()}{setReleaseCallback()}}
+{\footnotesize\ttfamily CL\+\_\+\+EXT\+\_\+\+PREFIX\+\_\+\+\_\+\+VERSION\+\_\+2\+\_\+2\+\_\+\+DEPRECATED cl\+\_\+int cl\+::\+Program\+::set\+Release\+Callback (\begin{DoxyParamCaption}\item[{void(CL\+\_\+\+CALLBACK $\ast$pfn\+\_\+notify)(cl\+\_\+program program, void $\ast$user\+\_\+data)}]{,  }\item[{void $\ast$}]{user\+\_\+data = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Registers a callback function to be called when destructors for program scope global variables are complete and before the program is released. 
+
+Wraps cl\+Set\+Program\+Release\+Callback().
+
+Each call to this function registers the specified user callback function on a callback stack associated with program. The registered user callback functions are called in the reverse order in which they were registered. \mbox{\Hypertarget{classcl_1_1_program_aca8d65a532ffd042fa45f88addcb9c88}\label{classcl_1_1_program_aca8d65a532ffd042fa45f88addcb9c88}} 
+\index{cl::Program@{cl::Program}!setSpecializationConstant@{setSpecializationConstant}}
+\index{setSpecializationConstant@{setSpecializationConstant}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{setSpecializationConstant()}{setSpecializationConstant()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::enable\+\_\+if$<$!std\+::is\+\_\+pointer$<$ T $>$\+::value, cl\+\_\+int $>$\+::type cl\+::\+Program\+::set\+Specialization\+Constant (\begin{DoxyParamCaption}\item[{cl\+\_\+uint}]{index,  }\item[{const T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets a SPIR-\/V specialization constant. 
+
+Wraps cl\+Set\+Program\+Specialization\+Constant(). \mbox{\Hypertarget{classcl_1_1_program_a9fefc53ce623dd7180260d83fc991ca4}\label{classcl_1_1_program_a9fefc53ce623dd7180260d83fc991ca4}} 
+\index{cl::Program@{cl::Program}!setSpecializationConstant@{setSpecializationConstant}}
+\index{setSpecializationConstant@{setSpecializationConstant}!cl::Program@{cl::Program}}
+\doxysubsubsection{\texorpdfstring{setSpecializationConstant()}{setSpecializationConstant()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Program\+::set\+Specialization\+Constant (\begin{DoxyParamCaption}\item[{cl\+\_\+uint}]{index,  }\item[{\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}}]{size,  }\item[{const void $\ast$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets a SPIR-\/V specialization constant. 
+
+Wraps cl\+Set\+Program\+Specialization\+Constant(). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

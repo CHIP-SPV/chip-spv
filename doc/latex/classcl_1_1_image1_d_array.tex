@@ -1,0 +1,67 @@
+\hypertarget{classcl_1_1_image1_d_array}{}\doxysection{cl\+::Image1\+DArray Class Reference}
+\label{classcl_1_1_image1_d_array}\index{cl::Image1DArray@{cl::Image1DArray}}
+
+
+\mbox{\hyperlink{classcl_1_1_image}{Image}} interface for arrays of 1D images.  
+
+
+
+
+{\ttfamily \#include $<$opencl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Image1\+DArray\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.994652cm]{classcl_1_1_image1_d_array}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_image1_d_array_a65b99c003dc49b5818be68c74067ecf1}\label{classcl_1_1_image1_d_array_a65b99c003dc49b5818be68c74067ecf1}} 
+{\bfseries Image1\+DArray} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+mem\+\_\+flags flags, \mbox{\hyperlink{structcl_1_1_image_format}{Image\+Format}} format, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} array\+Size, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} width, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} row\+Pitch, void $\ast$host\+\_\+ptr=NULL, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_image1_d_array_ae8738615a72593ca2ec82c20d736da03}{Image1\+DArray}} (const cl\+\_\+mem \&image\+Array, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+mem -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image1_d_array_af31148ba6f488fa4462276eba66a8119}\label{classcl_1_1_image1_d_array_af31148ba6f488fa4462276eba66a8119}} 
+\mbox{\hyperlink{classcl_1_1_image1_d_array}{Image1\+DArray}} \& {\bfseries operator=} (const cl\+\_\+mem \&rhs)
+\item 
+\mbox{\Hypertarget{classcl_1_1_image1_d_array_a36f96dc737c5e69505b6c1b4c3b6e10b}\label{classcl_1_1_image1_d_array_a36f96dc737c5e69505b6c1b4c3b6e10b}} 
+{\bfseries Image1\+DArray} (const \mbox{\hyperlink{classcl_1_1_image1_d_array}{Image1\+DArray}} \&img)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image1_d_array_a2eee79a5a9b6500c3dc3720af1dfbf22}\label{classcl_1_1_image1_d_array_a2eee79a5a9b6500c3dc3720af1dfbf22}} 
+\mbox{\hyperlink{classcl_1_1_image1_d_array}{Image1\+DArray}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_image1_d_array}{Image1\+DArray}} \&img)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image1_d_array_a5392bebeab2ce9ae4da971c5e8f8a895}\label{classcl_1_1_image1_d_array_a5392bebeab2ce9ae4da971c5e8f8a895}} 
+{\bfseries Image1\+DArray} (\mbox{\hyperlink{classcl_1_1_image1_d_array}{Image1\+DArray}} \&\&img) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\begin{DoxyCompactList}\small\item\em Move constructor to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image1_d_array_af8c3fa034e4ddffbb86b6cf3a05baece}\label{classcl_1_1_image1_d_array_af8c3fa034e4ddffbb86b6cf3a05baece}} 
+\mbox{\hyperlink{classcl_1_1_image1_d_array}{Image1\+DArray}} \& {\bfseries operator=} (\mbox{\hyperlink{classcl_1_1_image1_d_array}{Image1\+DArray}} \&\&img)
+\begin{DoxyCompactList}\small\item\em Move assignment to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classcl_1_1_image}{Image}} interface for arrays of 1D images. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_image1_d_array_ae8738615a72593ca2ec82c20d736da03}\label{classcl_1_1_image1_d_array_ae8738615a72593ca2ec82c20d736da03}} 
+\index{cl::Image1DArray@{cl::Image1DArray}!Image1DArray@{Image1DArray}}
+\index{Image1DArray@{Image1DArray}!cl::Image1DArray@{cl::Image1DArray}}
+\doxysubsubsection{\texorpdfstring{Image1DArray()}{Image1DArray()}}
+{\footnotesize\ttfamily cl\+::\+Image1\+DArray\+::\+Image1\+DArray (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{image\+Array,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+mem -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions. See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,219 @@
+
+\begin{DoxyItemize}
+\item \href{\#what-apis-and-features-does-hip-support}{\texttt{ What APIs and features does HIP support?}}
+\item \href{\#what-is-not-supported}{\texttt{ What is not supported?}}
+\begin{DoxyItemize}
+\item \href{\#runtimedriver-api-features}{\texttt{ Runtime/\+Driver API features}}
+\item \href{\#kernel-language-features}{\texttt{ Kernel language features}}
+\end{DoxyItemize}
+\item \href{\#is-hip-a-drop-in-replacement-for-cuda}{\texttt{ Is HIP a drop-\/in replacement for CUDA?}}
+\item \href{\#what-specific-version-of-cuda-does-hip-support}{\texttt{ What specific version of CUDA does HIP support?}}
+\item \href{\#what-libraries-does-hip-support}{\texttt{ What libraries does HIP support?}}
+\item \href{\#how-does-hip-compare-with-opencl}{\texttt{ How does HIP compare with Open\+CL?}}
+\item \href{\#how-does-porting-cuda-to-hip-compare-to-porting-cuda-to-opencl}{\texttt{ How does porting CUDA to HIP compare to porting CUDA to Open\+CL?}}
+\item \href{\#what-hardware-does-hip-support}{\texttt{ What hardware does HIP support?}}
+\item \href{\#do-hipify-tools-automatically-convert-all-source-code}{\texttt{ Do HIPIFY tools automatically convert all source code?}}
+\item \href{\#what-is-nvcc}{\texttt{ What is NVCC?}}
+\item \href{\#what-is-hip-clang}{\texttt{ What is HIP-\/\+Clang?}}
+\item \href{\#why-use-hip-rather-than-supporting-cuda-directly}{\texttt{ Why use HIP rather than supporting CUDA directly?}}
+\item \href{\#can-i-develop-hip-code-on-an-nvidia-cuda-platform}{\texttt{ Can I develop HIP code on an Nvidia CUDA platform?}}
+\item \href{\#can-i-develop-hip-code-on-an-amd-hip-clang-platform}{\texttt{ Can I develop HIP code on an AMD HIP-\/\+Clang platform?}}
+\item \href{\#what-is-rocclr}{\texttt{ What is ROCclr?}}
+\item \href{\#what-is-hipamd}{\texttt{ What is hipamd?}}
+\item \href{\#can-a-hip-binary-run-on-both-amd-and-nvidia-platforms}{\texttt{ Can a HIP binary run on both AMD and Nvidia platforms?}}
+\item \href{\#on-HIP-Clang-can-i-link-hip-code-with-host-code-compiled-with-another-compiler-such-as-gcc-icc-or-clang-}{\texttt{ On HIP-\/\+Clang, can I link HIP code with host code compiled with another compiler such as gcc, icc, or clang?}}
+\item \href{\#hip-detected-my-platform-hip-clang-vs-nvcc-incorrectly---what-should-i-do}{\texttt{ HIP detected my platform (hip-\/clang vs nvcc) incorrectly -\/ what should I do?}}
+\item \href{\#can-i-install-both-cuda-sdk-and-hip-clang-on-same-machine}{\texttt{ Can I install both CUDA SDK and HIP-\/clang on same machine?}}
+\item \href{\#on-cuda-can-i-mix-cuda-code-with-hip-code}{\texttt{ On CUDA, can I mix CUDA code with HIP code?}}
+\item \href{\#how-do-i-trace-hip-application-flow}{\texttt{ How do I trace HIP application flow?}}
+\item \href{\#what-if-hip-generates-error-of-symbol-multiply-defined-only-on-amd-machine}{\texttt{ What if HIP generates an error of \char`\"{}symbol multiply defined!\char`\"{} only on AMD machine?}}
+\item \href{\#what-is-maximum-limit-of-generic-kernel-launching-parameter}{\texttt{ What is maximum limit of Generic kernel launching parameter?}}
+\item \href{\#are-_shfl_*_sync-functions-supported-on-hip-platform}{\texttt{ Are {\itshape shfl}$\ast$\+\_\+sync functions supported on HIP platform?}}
+\item \href{\#how-to-create-a-guard-for-code-that-is-specific-to-the-host-or-the-gpu}{\texttt{ How to create a guard for code that is specific to the host or the GPU?}}
+\item \href{\#why-_openmp-is-undefined-when-compiling-with--fopenmp}{\texttt{ Why \+\_\+\+Open\+MP is undefined when compiling with -\/fopenmp?}}
+\item \href{\#does-the-hip-clang-compiler-support-extern-shared-declarations}{\texttt{ Does the HIP-\/\+Clang compiler support extern shared declarations?}}
+\item \href{\#i-have-multiple-hip-enabled-devices-and-i-am-getting-an-error-message-hipErrorNoBinaryForGpu-unable-to-find-code-object-for-all-current-devices}{\texttt{ I have multiple HIP enabled devices and I am getting an error message hip\+Error\+No\+Binary\+For\+Gpu\+: Unable to find code object for all current devices?}}
+\item \href{\#how-can-I-know-the-version-of-hip}{\texttt{ How can I know the version of HIP?}}
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md605}{}\doxysubsection{What APIs and features does HIP support?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md605}
+HIP provides the following\+:
+\begin{DoxyItemize}
+\item Devices (hip\+Set\+Device(), hip\+Get\+Device\+Properties(), etc.)
+\item Memory management (hip\+Malloc(), hip\+Memcpy(), hip\+Free(), etc.)
+\item Streams (hip\+Stream\+Create(),hip\+Stream\+Synchronize(), hip\+Stream\+Wait\+Event(), etc.)
+\item Events (hip\+Event\+Record(), hip\+Event\+Elapsed\+Time(), etc.)
+\item Kernel launching (hip\+Launch\+Kernel is a standard C/\+C++ function that replaces \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>})
+\item HIP Module API to control when adn how code is loaded.
+\item CUDA-\/style kernel coordinate functions (thread\+Idx, block\+Idx, block\+Dim, grid\+Dim)
+\item Cross-\/lane instructions including shfl, ballot, any, all
+\item Most device-\/side math built-\/ins
+\item Error reporting (hip\+Get\+Last\+Error(), hip\+Get\+Error\+String())
+\end{DoxyItemize}
+
+The HIP API documentation describes each API and its limitations, if any, compared with the equivalent CUDA API.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md606}{}\doxysubsection{What is not supported?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md606}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md607}{}\doxysubsubsection{Runtime/\+Driver API features}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md607}
+At a high-\/level, the following features are not supported\+:
+\begin{DoxyItemize}
+\item Textures (partial support available)
+\item Dynamic parallelism (CUDA 5.\+0)
+\item Managed memory (CUDA 6.\+5)
+\item Graphics interoperability with Open\+GL or Direct3D
+\item CUDA IPC Functions (Under Development)
+\item CUDA array, mipmapped\+Array and pitched memory
+\item Queue priority controls
+\end{DoxyItemize}
+
+See the \mbox{\hyperlink{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown__c_u_d_a__runtime__a_p_i_functions_supported_by__h_i_p}{API Support Table}} for more detailed information.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md608}{}\doxysubsubsection{Kernel language features}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md608}
+
+\begin{DoxyItemize}
+\item C++-\/style device-\/side dynamic memory allocations (free, new, delete) (CUDA 4.\+0)
+\item Virtual functions, indirect functions and try/catch (CUDA 4.\+0)
+\item {\ttfamily \+\_\+\+\_\+prof\+\_\+trigger}
+\item PTX assembly (CUDA 4.\+0). HIP-\/\+Clang supports inline GCN assembly.
+\item Several kernel features are under development. See the \mbox{\hyperlink{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language}{HIP Kernel Language}} for more information. These include\+:
+\begin{DoxyItemize}
+\item printf
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md609}{}\doxysubsection{Is HIP a drop-\/in replacement for CUDA?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md609}
+No. HIP provides porting tools which do most of the work to convert CUDA code into portable C++ code that uses the HIP APIs. Most developers will port their code from CUDA to HIP and then maintain the HIP version. HIP code provides the same performance as native CUDA code, plus the benefits of running on AMD platforms.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md610}{}\doxysubsection{What specific version of CUDA does HIP support?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md610}
+HIP APIs and features do not map to a specific CUDA version. HIP provides a strong subset of the functionality provided in CUDA, and the hipify tools can scan code to identify any unsupported CUDA functions -\/ this is useful for identifying the specific features required by a given application.
+
+However, we can provide a rough summary of the features included in each CUDA SDK and the support level in HIP. Each bullet below lists the major new language features in each CUDA release and then indicate which are supported/not supported in HIP\+:
+
+
+\begin{DoxyItemize}
+\item CUDA 4.\+0 and earlier \+:
+\begin{DoxyItemize}
+\item HIP supports CUDA 4.\+0 except for the limitations described above.
+\end{DoxyItemize}
+\item CUDA 5.\+0 \+:
+\begin{DoxyItemize}
+\item Dynamic Parallelism (not supported)
+\item cu\+Ipc functions (under development).
+\end{DoxyItemize}
+\item CUDA 5.\+5 \+:
+\begin{DoxyItemize}
+\item CUPTI (not directly supported, \href{http://developer.amd.com/tools-and-sdks/graphics-development/gpuperfapi/}{\texttt{ AMD GPUPerf\+API}} can be used as an alternative in some cases)
+\end{DoxyItemize}
+\item CUDA 6.\+0 \+:
+\begin{DoxyItemize}
+\item Managed memory (under development)
+\end{DoxyItemize}
+\item CUDA 6.\+5 \+:
+\begin{DoxyItemize}
+\item \+\_\+\+\_\+shfl intriniscs (supported)
+\end{DoxyItemize}
+\item CUDA 7.\+0 \+:
+\begin{DoxyItemize}
+\item Per-\/thread-\/streams (under development)
+\item C++11 (Hip-\/\+Clang supports all of C++11, all of C++14 and some C++17 features)
+\end{DoxyItemize}
+\item CUDA 7.\+5 \+:
+\begin{DoxyItemize}
+\item float16 (supported)
+\end{DoxyItemize}
+\item CUDA 8.\+0 \+:
+\begin{DoxyItemize}
+\item Page Migration including cuda\+Mem\+Advise, cuda\+Mem\+Prefetch, other cuda\+Mem$\ast$ APIs(not supported)
+\end{DoxyItemize}
+\item CUDA 9.\+0 \+:
+\begin{DoxyItemize}
+\item Cooperative Launch, Surface Object Management, Version Management
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md611}{}\doxysubsection{What libraries does HIP support?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md611}
+HIP includes growing support for the four key math libraries using hc\+Blas, hc\+Fft, hcrng and hcsparse, as well as MIOpen for machine intelligence applications. These offer pointer-\/based memory interfaces (as opposed to opaque buffers) and can be easily interfaced with other HIP applications. The hip interfaces support both ROCm and CUDA paths, with familiar library interfaces.
+
+
+\begin{DoxyItemize}
+\item \href{https://github.com/ROCmSoftwarePlatform/hipBLAS}{\texttt{ hip\+Blas}}, which utilizes \href{https://github.com/ROCmSoftwarePlatform/rocBLAS}{\texttt{ roc\+Blas}}.
+\item \href{https://github.com/ROCmSoftwarePlatform/hcFFT}{\texttt{ hipfft}}
+\item \href{https://github.com/ROCmSoftwarePlatform/hcSPARSE}{\texttt{ hipsparse}}
+\item \href{https://github.com/ROCmSoftwarePlatform/hcrng}{\texttt{ hiprng}}
+\end{DoxyItemize}
+
+Additionally, some of the cublas routines are automatically converted to hipblas equivalents by the HIPIFY tools. These APIs use cublas or hcblas depending on the platform and replace the need to use conditional compilation.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md612}{}\doxysubsection{How does HIP compare with Open\+CL?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md612}
+Both AMD and Nvidia support Open\+CL 1.\+2 on their devices so that developers can write portable code. HIP offers several benefits over Open\+CL\+:
+\begin{DoxyItemize}
+\item Developers can code in C++ as well as mix host and device C++ code in their source files. HIP C++ code can use templates, lambdas, classes and so on.
+\item The HIP API is less verbose than Open\+CL and is familiar to CUDA developers.
+\item Because both CUDA and HIP are C++ languages, porting from CUDA to HIP is significantly easier than porting from CUDA to Open\+CL.
+\item HIP uses the best available development tools on each platform\+: on Nvidia GPUs, HIP code compiles using NVCC and can employ the n\+Sight profiler and debugger (unlike Open\+CL on Nvidia GPUs).
+\item HIP provides pointers and host-\/side pointer arithmetic.
+\item HIP provides device-\/level control over memory allocation and placement.
+\item HIP offers an offline compilation model.
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md613}{}\doxysubsection{How does porting CUDA to HIP compare to porting CUDA to Open\+CL?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md613}
+Both HIP and CUDA are dialects of C++, and thus porting between them is relatively straightforward. Both dialects support templates, classes, lambdas, and other C++ constructs. As one example, the hipify-\/perl tool was originally a Perl script that used simple text conversions from CUDA to HIP. HIP and CUDA provide similar math library calls as well. In summary, the HIP philosophy was to make the HIP language close enough to CUDA that the porting effort is relatively simple. This reduces the potential for error, and also makes it easy to automate the translation. HIP\textquotesingle{}s goal is to quickly get the ported program running on both platforms with little manual intervention, so that the programmer can focus on performance optimizations.
+
+There have been several tools that have attempted to convert CUDA into Open\+CL, such as CU2\+CL. Open\+CL is a C99-\/based kernel language (rather than C++) and also does not support single-\/source compilation. As a result, the Open\+CL syntax is different from CUDA, and the porting tools have to perform some heroic transformations to bridge this gap. The tools also struggle with more complex CUDA applications, in particular, those that use templates, classes, or other C++ features inside the kernel.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md614}{}\doxysubsection{What hardware does HIP support?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md614}
+
+\begin{DoxyItemize}
+\item For AMD platforms, see the \href{https://github.com/RadeonOpenCompute/ROCm\#supported-gpus}{\texttt{ ROCm documentation}} for the list of supported platforms.
+\item For Nvidia platforms, HIP requires Unified Memory and should run on any device supporting CUDA SDK 6.\+0 or newer. We have tested the Nvidia Titan and Tesla K40.
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md615}{}\doxysubsection{Do HIPIFY tools automatically convert all source code?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md615}
+Typically, HIPIFY tools can automatically convert almost all run-\/time code, and the coordinate indexing device code ( thread\+Idx.\+x -\/\texorpdfstring{$>$}{>} hip\+Thread\+Idx\+\_\+x ). Most device code needs no additional conversion since HIP and CUDA have similar names for math and built-\/in functions. The hipify-\/clang tool will automatically modify the kernel signature as needed (automating a step that used to be done manually). Additional porting may be required to deal with architecture feature queries or with CUDA capabilities that HIP doesn\textquotesingle{}t support. In general, developers should always expect to perform some platform-\/specific tuning and optimization.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md616}{}\doxysubsection{What is NVCC?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md616}
+NVCC is Nvidia\textquotesingle{}s compiler driver for compiling \char`\"{}\+CUDA C++\char`\"{} code into PTX or device code for Nvidia GPUs. It\textquotesingle{}s a closed-\/source binary compiler that is provided by the CUDA SDK.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md617}{}\doxysubsection{What is HIP-\/\+Clang?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md617}
+HIP-\/\+Clang is a Clang/\+LLVM based compiler to compile HIP programs which can run on AMD platform.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md618}{}\doxysubsection{Why use HIP rather than supporting CUDA directly?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md618}
+While HIP is a strong subset of the CUDA, it is a subset. The HIP layer allows that subset to be clearly defined and documented. Developers who code to the HIP API can be assured their code will remain portable across Nvidia and AMD platforms. In addition, HIP defines portable mechanisms to query architectural features and supports a larger 64-\/bit wavesize which expands the return type for cross-\/lane functions like ballot and shuffle from 32-\/bit ints to 64-\/bit ints.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md619}{}\doxysubsection{Can I develop HIP code on an Nvidia CUDA platform?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md619}
+Yes. HIP\textquotesingle{}s CUDA path only exposes the APIs and functionality that work on both NVCC and AMDGPU back-\/ends. \char`\"{}\+Extra\char`\"{} APIs, parameters, and features which exist in CUDA but not in HIP-\/\+Clang will typically result in compile-\/time or run-\/time errors. Developers need to use the HIP API for most accelerator code and bracket any CUDA-\/specific code with preprocessor conditionals. Developers concerned about portability should, of course, run on both platforms, and should expect to tune for performance. In some cases, CUDA has a richer set of modes for some APIs, and some C++ capabilities such as virtual functions -\/ see the HIP @\+API documentation for more details.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md620}{}\doxysubsection{Can I develop HIP code on an AMD HIP-\/\+Clang platform?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md620}
+Yes. HIP\textquotesingle{}s HIP-\/\+Clang path only exposes the APIs and functions that work on AMD runtime back ends. \char`\"{}\+Extra\char`\"{} APIs, parameters and features that appear in HIP-\/\+Clang but not CUDA will typically cause compile-\/ or run-\/time errors. Developers must use the HIP API for most accelerator code and bracket any HIP-\/\+Clang specific code with preprocessor conditionals. Those concerned about portability should, of course, test their code on both platforms and should tune it for performance. Typically, HIP-\/\+Clang supports a more modern set of C++11/\+C++14/\+C++17 features, so HIP developers who want portability should be careful when using advanced C++ features on the HIP-\/\+Clang path.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md621}{}\doxysubsection{How to use HIP-\/\+Clang to build HIP programs?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md621}
+The environment variable can be used to set compiler path\+:
+\begin{DoxyItemize}
+\item HIP\+\_\+\+CLANG\+\_\+\+PATH\+: path to hip-\/clang. When set, this variable let hipcc to use hip-\/clang for compilation/linking.
+\end{DoxyItemize}
+
+There is an alternative environment variable to set compiler path\+:
+\begin{DoxyItemize}
+\item HIP\+\_\+\+ROCCLR\+\_\+\+HOME\+: path to root directory of the HIP-\/\+ROCclr runtime. When set, this variable let hipcc use hip-\/clang from the ROCclr distribution. NOTE\+: If HIP\+\_\+\+ROCCLR\+\_\+\+HOME is set, there is no need to set HIP\+\_\+\+CLANG\+\_\+\+PATH since hipcc will deduce them from HIP\+\_\+\+ROCCLR\+\_\+\+HOME.
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md622}{}\doxysubsection{What is ROCclr?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md622}
+ROCclr (Radeon Open Compute Common Language Runtime) is a virtual device interface that compute runtimes interact with backends such as ROCr on Linux, as well as PAL on Windows.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md623}{}\doxysubsection{What is HIPAMD?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md623}
+HIPAMD is a repository branched out from HIP, mainly the implementation for AMD GPU.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md624}{}\doxysubsection{Can a HIP binary run on both AMD and Nvidia platforms?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md624}
+HIP is a source-\/portable language that can be compiled to run on either AMD or NVIDIA platform. HIP tools don\textquotesingle{}t create a \char`\"{}fat binary\char`\"{} that can run on either platform, however.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md625}{}\doxysubsection{On HIP-\/\+Clang, can I link HIP code with host code compiled with another compiler such as gcc, icc, or clang ?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md625}
+Yes. HIP generates the object code which conforms to the GCC ABI, and also links with libstdc++. This means you can compile host code with the compiler of your choice and link the generated object code with GPU code compiled with HIP. Larger projects often contain a mixture of accelerator code (initially written in CUDA with nvcc) and host code (compiled with gcc, icc, or clang). These projects can convert the accelerator code to HIP, compile that code with hipcc, and link with object code from their preferred compiler.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md626}{}\doxysubsection{Can I install both CUDA SDK and HIP-\/\+Clang on the same machine?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md626}
+Yes. You can use HIP\+\_\+\+PLATFORM to choose which path hipcc targets. This configuration can be useful when using HIP to develop an application which is portable to both AMD and NVIDIA.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md627}{}\doxysubsection{HIP detected my platform (\+HIP-\/\+Clang vs nvcc) incorrectly -\/ what should I do?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md627}
+HIP will set the platform to AMD and use HIP-\/\+Clang as compiler if it sees that the AMD graphics driver is installed and has detected an AMD GPU. Sometimes this isn\textquotesingle{}t what you want -\/ you can force HIP to recognize the platform by setting the following, 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export HIP\_PLATFORM=amd}
+
+\end{DoxyCode}
+ HIP then set and use correct AMD compiler and runtime, HIP\+\_\+\+COMPILER=clang HIP\+\_\+\+RUNTIME=rocclr
+
+To choose NVIDIA platform, you can set, 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export HIP\_PLATFORM=nvidia}
+
+\end{DoxyCode}
+ In this case, HIP will set and use the following, HIP\+\_\+\+COMPILER=cuda HIP\+\_\+\+RUNTIME=nvcc
+
+One symptom of this problem is the message \char`\"{}error\+: \textquotesingle{}unknown error\textquotesingle{}(11) at square.\+hipref.\+cpp\+:56\char`\"{}. This can occur if you have a CUDA installation on an AMD platform, and HIP incorrectly detects the platform as nvcc. HIP may be able to compile the application using the nvcc tool-\/chain but will generate this error at runtime since the platform does not have a CUDA device.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md628}{}\doxysubsection{On CUDA, can I mix CUDA code with HIP code?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md628}
+Yes. Most HIP data structures (hip\+Stream\+\_\+t, hip\+Event\+\_\+t) are typedefs to CUDA equivalents and can be intermixed. Both CUDA and HIP use integer device ids. One notable exception is that hip\+Error\+\_\+t is a new type, and cannot be used where a cuda\+Error\+\_\+t is expected. In these cases, refactor the code to remove the expectation. Alternatively, \mbox{\hyperlink{hip__runtime__api_8h}{hip\+\_\+runtime\+\_\+api.\+h}} defines functions which convert between the error code spaces\+:
+
+hip\+Error\+To\+Cuda\+Error hip\+CUDAError\+Tohip\+Error hip\+CUResult\+Tohip\+Error
+
+If platform portability is important, use \#ifdef {\bfseries{HIP\+\_\+\+PLATFORM\+\_\+\+NVIDIA}} to guard the CUDA-\/specific code.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md629}{}\doxysubsection{How do I trace HIP application flow?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md629}
+See the \mbox{\hyperlink{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_logging}{HIP Logging}} for more information.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md630}{}\doxysubsection{What is maximum limit of kernel launching parameter?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md630}
+Product of block.\+x, block.\+y, and block.\+z should be less than 1024.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md631}{}\doxysubsection{Are \+\_\+\+\_\+shfl\+\_\+$\ast$\+\_\+sync functions supported on HIP platform?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md631}
+\+\_\+\+\_\+shfl\+\_\+$\ast$\+\_\+sync is not supported on HIP but for nvcc path CUDA 9.\+0 and above all shuffle calls get redirected to it\textquotesingle{}s sync version.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md632}{}\doxysubsection{How to create a guard for code that is specific to the host or the GPU?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md632}
+The compiler defines the {\ttfamily \+\_\+\+\_\+\+HIP\+\_\+\+DEVICE\+\_\+\+COMPILE\+\_\+\+\_\+} macro only when compiling the code for the GPU. It could be used to guard code that is specific to the host or the GPU.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md633}{}\doxysubsection{Why \+\_\+\+Open\+MP is undefined when compiling with -\/fopenmp?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md633}
+When compiling an Open\+MP source file with {\ttfamily hipcc -\/fopenmp}, the compiler may generate error if there is a reference to the {\ttfamily \+\_\+\+OPENMP} macro. This is due to a limitation in hipcc that treats any source file type (e.\+g., {\ttfamily .cpp}) as an HIP translation unit leading to some conflicts with the Open\+MP language switch. If the Open\+MP source file doesn\textquotesingle{}t contain any HIP language construct, you could workaround this issue by adding the {\ttfamily -\/x c++} switch to force the compiler to treat the file as regular C++. Another approach would be to guard the Open\+MP code with {\ttfamily \#ifdef \+\_\+\+OPENMP} so that the code block is disabled when compiling for the GPU. The {\ttfamily \+\_\+\+\_\+\+HIP\+\_\+\+DEVICE\+\_\+\+COMPILE\+\_\+\+\_\+} macro defined by the HIP compiler when compiling GPU code could also be used for guarding code paths specific to the host or the GPU.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md634}{}\doxysubsection{Does the HIP-\/\+Clang compiler support extern shared declarations?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md634}
+Previously, it was essential to declare dynamic shared memory using the HIP\+\_\+\+DYNAMIC\+\_\+\+SHARED macro for accuracy, as using static shared memory in the same kernel could result in overlapping memory ranges and data-\/races.
+
+Now, the HIP-\/\+Clang compiler provides support for extern shared declarations, and the HIP\+\_\+\+DYNAMIC\+\_\+\+SHARED option is no longer required. You may use the standard extern definition\+: extern {\bfseries{shared}} type var\mbox{[}\mbox{]};\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md635}{}\doxysubsection{I have multiple HIP enabled devices and I am getting an error message hip\+Error\+No\+Binary\+For\+Gpu Unable to find code object for all current devices?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md635}
+This error message is seen due to the fact that you do not have valid code object for all of your devices.
+
+If you have compiled the application yourself, make sure you have given the correct device name(s) and its features via\+: {\ttfamily -\/-\/offload-\/arch}. If you are not mentioning the {\ttfamily -\/-\/offload-\/arch}, make sure that {\ttfamily hipcc} is using the correct offload arch by verifying the hipcc output generated by setting the environment variable {\ttfamily HIPCC\+\_\+\+VERBOSE=1}.
+
+If you have a precompiled application/library (like rocblas, tensorflow etc) which gives you such error, there are one of two possibilities.
+
+
+\begin{DoxyItemize}
+\item The application/library does not ship code object bundles for {\itshape all} of your device(s)\+: in this case you need to recompile the application/library yourself with correct {\ttfamily -\/-\/offload-\/arch}.
+\item The application/library does not ship code object bundles for {\itshape some} of your device(s), for example you have a system with an APU + GPU and the library does not ship code objects for your APU. For this you can set the environment variable {\ttfamily HIP\+\_\+\+VISIBLE\+\_\+\+DEVICES} to only enable GPUs for which code object is available. This will limit the GPUs visible to your application and allow it to run.
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md636}{}\doxysubsection{How can I know the version of HIP?}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_faq_autotoc_md636}
+HIP version definition has been updated since ROCm 4.\+2 release as the following\+:
+
+HIP\+\_\+\+VERSION=HIP\+\_\+\+VERSION\+\_\+\+MAJOR $\ast$ 10000000 + HIP\+\_\+\+VERSION\+\_\+\+MINOR $\ast$ 100000 + HIP\+\_\+\+VERSION\+\_\+\+PATCH)
+
+HIP version can be queried from HIP API call, hip\+Runtime\+Get\+Version(\&runtime\+Version);
+
+The version returned will always be greater than the versions in previous ROCm releases.
+
+Note\+: The version definition of HIP runtime is different from CUDA. On AMD platform, the function returns HIP runtime version, while on NVIDIA platform, it returns CUDA runtime version. And there is no mapping/correlation between HIP version and CUDA version. 

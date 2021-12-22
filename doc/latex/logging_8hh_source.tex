@@ -1,5 +1,5 @@
 \hypertarget{logging_8hh_source}{}\doxysection{logging.\+hh}
-\label{logging_8hh_source}\index{/Users/pvelesko/local/HIPxx/src/logging.hh@{/Users/pvelesko/local/HIPxx/src/logging.hh}}
+\label{logging_8hh_source}\index{/Users/pvelesko/local/CHIP-\/SPV/src/logging.hh@{/Users/pvelesko/local/CHIP-\/SPV/src/logging.hh}}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef LOGGING\_H}}
@@ -23,7 +23,7 @@
 \DoxyCodeLine{19   spdlog::trace(fmt, std::forward<const Args>(args)...);}
 \DoxyCodeLine{20 \}}
 \DoxyCodeLine{21 \textcolor{preprocessor}{\#else}}
-\DoxyCodeLine{22 \textcolor{preprocessor}{\#define logDebug(...) void(0)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define logTrace(...) void(0)}}
 \DoxyCodeLine{23 \textcolor{preprocessor}{\#endif}}
 \DoxyCodeLine{24 }
 \DoxyCodeLine{25 \textcolor{preprocessor}{\#if SPDLOG\_ACTIVE\_LEVEL <= SPDLOG\_LEVEL\_DEBUG}}

@@ -1,0 +1,151 @@
+\hypertarget{class_floyd_warshall}{}\doxysection{Floyd\+Warshall Class Reference}
+\label{class_floyd_warshall}\index{FloydWarshall@{FloydWarshall}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_floyd_warshall_a389140068c03fe74d3e8b01721a1681b}{Floyd\+Warshall}} ()
+\item 
+\mbox{\Hypertarget{class_floyd_warshall_a0dfa0a8c0314a300301c41dd9d765a47}\label{class_floyd_warshall_a0dfa0a8c0314a300301c41dd9d765a47}} 
+long long {\bfseries get\+\_\+time} ()
+\item 
+int \mbox{\hyperlink{class_floyd_warshall_a12ea19d6a3ae5dced694999a0a18bd20}{setup\+Floyd\+Warshall}} ()
+\item 
+\mbox{\Hypertarget{class_floyd_warshall_a800246464ac57310ff5ebb5b87bd7345}\label{class_floyd_warshall_a800246464ac57310ff5ebb5b87bd7345}} 
+int {\bfseries setup\+HIP} ()
+\item 
+\mbox{\Hypertarget{class_floyd_warshall_abd30678c524a4a3de57bf8e66647f5f7}\label{class_floyd_warshall_abd30678c524a4a3de57bf8e66647f5f7}} 
+int {\bfseries run\+Kernels} ()
+\item 
+unsigned int \mbox{\hyperlink{class_floyd_warshall_a71b3f41f6829ebba59e459beee199191}{minimum}} (unsigned int a, unsigned int b)
+\item 
+void \mbox{\hyperlink{class_floyd_warshall_a3943c9f8d7f123dd4fdd8ea5108bcc03}{floyd\+Warshall\+CPUReference}} (unsigned int $\ast$path\+Distance\+Matrix, unsigned int $\ast$path\+Matrix, unsigned int num\+Nodes)
+\item 
+void \mbox{\hyperlink{class_floyd_warshall_aa3dd5c1315a2c4976643b54e6783fc86}{print\+Stats}} ()
+\item 
+int \mbox{\hyperlink{class_floyd_warshall_aa0c45ed91c06914ed03bc2e9baf41375}{initialize}} ()
+\item 
+int \mbox{\hyperlink{class_floyd_warshall_a739d627e9be8dd2bbe3f498a88685360}{setup}} ()
+\item 
+int \mbox{\hyperlink{class_floyd_warshall_a4ab0f5c72740a1a3257c01cd179e69fd}{run}} ()
+\item 
+int \mbox{\hyperlink{class_floyd_warshall_aa08971be64bf2001b38acaa22c95247f}{cleanup}} ()
+\item 
+int \mbox{\hyperlink{class_floyd_warshall_a5b2abe06c9e024886d0b69e23d217238}{verify\+Results}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}} $\ast$ \mbox{\hyperlink{class_floyd_warshall_aab43f15e82aaff7cb9de1c5049fd5f8e}{sample\+Args}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_floyd_warshall_a389140068c03fe74d3e8b01721a1681b}\label{class_floyd_warshall_a389140068c03fe74d3e8b01721a1681b}} 
+\index{FloydWarshall@{FloydWarshall}!FloydWarshall@{FloydWarshall}}
+\index{FloydWarshall@{FloydWarshall}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{FloydWarshall()}{FloydWarshall()}}
+{\footnotesize\ttfamily Floyd\+Warshall\+::\+Floyd\+Warshall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor Initialize member variables 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of sample (string) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_floyd_warshall_aa08971be64bf2001b38acaa22c95247f}\label{class_floyd_warshall_aa08971be64bf2001b38acaa22c95247f}} 
+\index{FloydWarshall@{FloydWarshall}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily int Floyd\+Warshall\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Cleanup memory allocations \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_floyd_warshall_a3943c9f8d7f123dd4fdd8ea5108bcc03}\label{class_floyd_warshall_a3943c9f8d7f123dd4fdd8ea5108bcc03}} 
+\index{FloydWarshall@{FloydWarshall}!floydWarshallCPUReference@{floydWarshallCPUReference}}
+\index{floydWarshallCPUReference@{floydWarshallCPUReference}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{floydWarshallCPUReference()}{floydWarshallCPUReference()}}
+{\footnotesize\ttfamily void Floyd\+Warshall\+::floyd\+Warshall\+CPUReference (\begin{DoxyParamCaption}\item[{unsigned int $\ast$}]{path\+Distance\+Matrix,  }\item[{unsigned int $\ast$}]{path\+Matrix,  }\item[{unsigned int}]{num\+Nodes }\end{DoxyParamCaption})}
+
+Reference CPU implementation of \mbox{\hyperlink{class_floyd_warshall}{Floyd\+Warshall}} Path\+Finding for performance comparison 
+\begin{DoxyParams}{Parameters}
+{\em path\+Distance\+Matrix} & Distance between nodes of a graph \\
+\hline
+{\em intermediate} & node between two nodes of a graph \\
+\hline
+{\em number} & of nodes in the graph \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_floyd_warshall_aa0c45ed91c06914ed03bc2e9baf41375}\label{class_floyd_warshall_aa0c45ed91c06914ed03bc2e9baf41375}} 
+\index{FloydWarshall@{FloydWarshall}!initialize@{initialize}}
+\index{initialize@{initialize}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily int Floyd\+Warshall\+::initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Initialize command line parser, add custom options \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_floyd_warshall_a71b3f41f6829ebba59e459beee199191}\label{class_floyd_warshall_a71b3f41f6829ebba59e459beee199191}} 
+\index{FloydWarshall@{FloydWarshall}!minimum@{minimum}}
+\index{minimum@{minimum}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{minimum()}{minimum()}}
+{\footnotesize\ttfamily unsigned int Floyd\+Warshall\+::minimum (\begin{DoxyParamCaption}\item[{unsigned int}]{a,  }\item[{unsigned int}]{b }\end{DoxyParamCaption})}
+
+Returns the lesser of the two unsigned integers a and b \mbox{\Hypertarget{class_floyd_warshall_aa3dd5c1315a2c4976643b54e6783fc86}\label{class_floyd_warshall_aa3dd5c1315a2c4976643b54e6783fc86}} 
+\index{FloydWarshall@{FloydWarshall}!printStats@{printStats}}
+\index{printStats@{printStats}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{printStats()}{printStats()}}
+{\footnotesize\ttfamily void Floyd\+Warshall\+::print\+Stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Print sample stats. \mbox{\Hypertarget{class_floyd_warshall_a4ab0f5c72740a1a3257c01cd179e69fd}\label{class_floyd_warshall_a4ab0f5c72740a1a3257c01cd179e69fd}} 
+\index{FloydWarshall@{FloydWarshall}!run@{run}}
+\index{run@{run}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int Floyd\+Warshall\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Run Open\+Floyd\+Warshall Path finding \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_floyd_warshall_a739d627e9be8dd2bbe3f498a88685360}\label{class_floyd_warshall_a739d627e9be8dd2bbe3f498a88685360}} 
+\index{FloydWarshall@{FloydWarshall}!setup@{setup}}
+\index{setup@{setup}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily int Floyd\+Warshall\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample, adjust width and height of execution domain, perform all sample setup \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_floyd_warshall_a12ea19d6a3ae5dced694999a0a18bd20}\label{class_floyd_warshall_a12ea19d6a3ae5dced694999a0a18bd20}} 
+\index{FloydWarshall@{FloydWarshall}!setupFloydWarshall@{setupFloydWarshall}}
+\index{setupFloydWarshall@{setupFloydWarshall}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{setupFloydWarshall()}{setupFloydWarshall()}}
+{\footnotesize\ttfamily int Floyd\+Warshall\+::setup\+Floyd\+Warshall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allocate and initialize host memory array with random values \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_floyd_warshall_a5b2abe06c9e024886d0b69e23d217238}\label{class_floyd_warshall_a5b2abe06c9e024886d0b69e23d217238}} 
+\index{FloydWarshall@{FloydWarshall}!verifyResults@{verifyResults}}
+\index{verifyResults@{verifyResults}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{verifyResults()}{verifyResults()}}
+{\footnotesize\ttfamily int Floyd\+Warshall\+::verify\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Verify against reference implementation \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_floyd_warshall_aab43f15e82aaff7cb9de1c5049fd5f8e}\label{class_floyd_warshall_aab43f15e82aaff7cb9de1c5049fd5f8e}} 
+\index{FloydWarshall@{FloydWarshall}!sampleArgs@{sampleArgs}}
+\index{sampleArgs@{sampleArgs}!FloydWarshall@{FloydWarshall}}
+\doxysubsubsection{\texorpdfstring{sampleArgs}{sampleArgs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}}$\ast$ Floyd\+Warshall\+::sample\+Args}
+
+HIPCommand argument class 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/\+Floyd\+Warshall/Floyd\+Warshall.\+cpp\end{DoxyCompactItemize}

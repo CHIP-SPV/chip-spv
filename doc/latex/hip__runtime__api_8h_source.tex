@@ -1,0 +1,1733 @@
+\hypertarget{hip__runtime__api_8h_source}{}\doxysection{hip\+\_\+runtime\+\_\+api.\+h}
+\label{hip__runtime__api_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_runtime\_api.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_runtime\_api.h}}
+\mbox{\hyperlink{hip__runtime__api_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_HIP\_RUNTIME\_API\_H}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_HIP\_RUNTIME\_API\_H}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <string.h>}  \textcolor{comment}{// for getDeviceProp}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include <hip/hip\_version.h>}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#include <hip/hip\_common.h>}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{39   HIP\_SUCCESS = 0,}
+\DoxyCodeLine{40   HIP\_ERROR\_INVALID\_VALUE,}
+\DoxyCodeLine{41   HIP\_ERROR\_NOT\_INITIALIZED,}
+\DoxyCodeLine{42   HIP\_ERROR\_LAUNCH\_OUT\_OF\_RESOURCES}
+\DoxyCodeLine{43 \};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{46   \textcolor{comment}{// 32-\/bit Atomics}}
+\DoxyCodeLine{47   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a8d00c3ab98869b602c714fe7abe68e93}{hasGlobalInt32Atomics}} : 1;     }
+\DoxyCodeLine{48   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a8f213ae9a4729dff1c636ac5de0e2fa2}{hasGlobalFloatAtomicExch}} : 1;  }
+\DoxyCodeLine{49   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a1596330b1cb9cc73f142aee11b2ab853}{hasSharedInt32Atomics}} : 1;     }
+\DoxyCodeLine{50   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_aff005558b4edabd27b27f286ac5b2f2b}{hasSharedFloatAtomicExch}} : 1;  }
+\DoxyCodeLine{51   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a2321d6ef74aac91c044f3289d25b2d41}{hasFloatAtomicAdd}} : 1;         }
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53   \textcolor{comment}{// 64-\/bit Atomics}}
+\DoxyCodeLine{54   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_ad5aa54dbab22dbcd8cf98f57a96c6636}{hasGlobalInt64Atomics}} : 1;  }
+\DoxyCodeLine{55   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a00c2b930fcdcad9ea7b54b449db13966}{hasSharedInt64Atomics}} : 1;  }
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57   \textcolor{comment}{// Doubles}}
+\DoxyCodeLine{58   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a2d624e3d85e615b71d1182f8912893b4}{hasDoubles}} : 1;  }
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60   \textcolor{comment}{// Warp cross-\/lane operations}}
+\DoxyCodeLine{61   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a35bde017352eca1d4e0eceb3bf79f274}{hasWarpVote}} : 1;     }
+\DoxyCodeLine{62   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_af1e934a8a5106995bcc256287585564c}{hasWarpBallot}} : 1;   }
+\DoxyCodeLine{63   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a3d922e8fc97ca1e8ecc39600b138fa2d}{hasWarpShuffle}} : 1;  }
+\DoxyCodeLine{64   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_aaec4f2d983d4602858fae8e9ddeee3ff}{hasFunnelShift}} : 1;  }
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66   \textcolor{comment}{// Sync}}
+\DoxyCodeLine{67   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_ac2818e3b91cba8beb36741e9867bb887}{hasThreadFenceSystem}} : 1;  }
+\DoxyCodeLine{68   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_ade6a3b21ad5f344dcd92c52102c274ba}{hasSyncThreadsExt}} : 1;     }
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   \textcolor{comment}{// Misc}}
+\DoxyCodeLine{71   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a9eb2462148686d4c048b69b6e09f835e}{hasSurfaceFuncs}} : 1;        }
+\DoxyCodeLine{72   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_aa5e22d295cce0d9a34ee6e7e7e378c26}{has3dGrid}} : 1;              }
+\DoxyCodeLine{73   \textcolor{keywordtype}{unsigned} \mbox{\hyperlink{structhip_device_arch__t_a9114bfc718bf0648b54ff9a319a36b35}{hasDynamicParallelism}} : 1;  }
+\DoxyCodeLine{74 \} \mbox{\hyperlink{structhip_device_arch__t}{hipDeviceArch\_t}};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{comment}{//-\/-\/-\/}}
+\DoxyCodeLine{78 \textcolor{comment}{// Common headers for SPIRV, NVCC and HCC paths:}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{84 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structhip_device_prop__t}{hipDeviceProp\_t}} \{}
+\DoxyCodeLine{85   \textcolor{keywordtype}{char} \mbox{\hyperlink{structhip_device_prop__t_a5b44bf8fa46faefcde989942b1d11a5e}{name}}[256];            }
+\DoxyCodeLine{86   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structhip_device_prop__t_acedd6a2d23423441e4bf51c4a1b719f9}{totalGlobalMem}};     }
+\DoxyCodeLine{87   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structhip_device_prop__t_a3b9138678a0795c2677eddcfb1c67156}{sharedMemPerBlock}};  }
+\DoxyCodeLine{88   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a73c1c21648a901799ff6bef83c11135b}{regsPerBlock}};          }
+\DoxyCodeLine{89   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_af3357d33c004608bf05bc21a352be81b}{warpSize}};              }
+\DoxyCodeLine{90   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_af971cf1ca3ec1f68ad09036c0cc672e0}{maxThreadsPerBlock}};    }
+\DoxyCodeLine{91   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a8ebba6fc12f80c9a9cf9b9193f0da465}{maxThreadsDim}}[3];      }
+\DoxyCodeLine{92   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ae529c23929f592120081fed31d877a55}{maxGridSize}}[3];        }
+\DoxyCodeLine{93   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a1dd15bee43692b8649dfbdc1adbaaf96}{clockRate}};             }
+\DoxyCodeLine{94   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a6db0ab8e7e8cc13c84d7bb7f70226d5e}{memoryClockRate}};       }
+\DoxyCodeLine{95   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a1d710ce8bd34daf66f892a66a2273132}{memoryBusWidth}};        }
+\DoxyCodeLine{96   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structhip_device_prop__t_a29880232c56120be3455ce00d5379665}{totalConstMem}};      }
+\DoxyCodeLine{97   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_aec9e4173c2e34cc232300c415dbd5e4f}{major}};  }
+\DoxyCodeLine{100   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_abb51208e2509a7a1d107f0da69108938}{minor}};  }
+\DoxyCodeLine{103   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_add8d9d2ad52aece9fd1dbe25c18d9d57}{multiProcessorCount}};          }
+\DoxyCodeLine{104   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a24404decccc16833973c803ced6f3a51}{l2CacheSize}};                  }
+\DoxyCodeLine{105   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a23a39f4fd795addb3b125e9c3f6295ea}{maxThreadsPerMultiProcessor}};  }
+\DoxyCodeLine{106   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ae7d9216f8583a703359d0b9373823f5d}{computeMode}};                  }
+\DoxyCodeLine{107   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a6fbf3b08a1a08ae700f1a06265f6666b}{clockInstructionRate}};  }
+\DoxyCodeLine{109   \mbox{\hyperlink{structhip_device_arch__t}{hipDeviceArch\_t}} \mbox{\hyperlink{structhip_device_prop__t_afc58158e44bef6ad26f2be401434b049}{arch}};      }
+\DoxyCodeLine{110   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ad8461a28caf9c38c58cf358583b5bee3}{concurrentKernels}};     }
+\DoxyCodeLine{111   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_aa0f598c0196ff1f429290a43c1fa4038}{pciDomainID}};           }
+\DoxyCodeLine{112   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a1350f64d49b717ed3a06458f7549ccb0}{pciBusID}};              }
+\DoxyCodeLine{113   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ae6aa845dc2d540f85098ea30be35f4eb}{pciDeviceID}};           }
+\DoxyCodeLine{114   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structhip_device_prop__t_aa1a32a7f387f6da845db7b228711fce8}{maxSharedMemoryPerMultiProcessor}};  }
+\DoxyCodeLine{115   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a9bb19b2b0cdee8977ed63964532d639d}{isMultiGpuBoard}};                      }
+\DoxyCodeLine{116   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ac2143f5448607d1a02a9e8783fcf06a1}{canMapHostMemory}};                     }
+\DoxyCodeLine{117   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_adc5950a3d5bbe00cf59d413d8aeeee18}{gcnArch}};                              }
+\DoxyCodeLine{118   \textcolor{keywordtype}{char} \mbox{\hyperlink{structhip_device_prop__t_abbafcdb62b4e72669e884353eb7c05ad}{gcnArchName}}[256];                    }
+\DoxyCodeLine{119   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ac0350a226dc71cc01fb3708b523b0061}{integrated}};                           }
+\DoxyCodeLine{120   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a7e99d56223ca8e08a3b0281a8dc07a46}{cooperativeLaunch}};                    }
+\DoxyCodeLine{121   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a4d4e0cfcd887d072f28e5f37643fe239}{cooperativeMultiDeviceLaunch}};  }
+\DoxyCodeLine{122   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a07b4c6c7630a11395a6464b4bcd96b1e}{maxTexture1DLinear}};            }
+\DoxyCodeLine{123   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a161c254b517f73b86e93afd32927b65c}{maxTexture1D}};                  }
+\DoxyCodeLine{124   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a7cb65d133ff517300a435455958f3536}{maxTexture2D}}[2];  }
+\DoxyCodeLine{125   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a7ed8e2bae8d1305076182c0820e357e2}{maxTexture3D}}[3];  }
+\DoxyCodeLine{127   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* \mbox{\hyperlink{structhip_device_prop__t_abf37e4355158da6706597f2dd22130bd}{hdpMemFlushCntl}};  }
+\DoxyCodeLine{128   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* \mbox{\hyperlink{structhip_device_prop__t_a8ce1eb90232146fbf1d6c6c23d19aa1d}{hdpRegFlushCntl}};  }
+\DoxyCodeLine{129   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structhip_device_prop__t_a3115492f35b726d4e950c1bc6c684cbe}{memPitch}};                }
+\DoxyCodeLine{130   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structhip_device_prop__t_a5c55ab4144841d785ac31de0eb823060}{textureAlignment}};        }
+\DoxyCodeLine{131   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structhip_device_prop__t_affa72db90f0a5edf35f942b786366afc}{texturePitchAlignment}};   }
+\DoxyCodeLine{133   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_abdc2c1af9bf2b27f7faf892bb18d34f1}{kernelExecTimeoutEnabled}};   }
+\DoxyCodeLine{134   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a01f0342bfad1eb0e532d94f6d24510c0}{ECCEnabled}};                 }
+\DoxyCodeLine{135   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_af38ab98291566293bd4dad46314e0d9f}{tccDriver}};                  }
+\DoxyCodeLine{136   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a86d443a18ed2cec5feaf8eb90663dc18}{cooperativeMultiDeviceUnmatchedFunc}};  }
+\DoxyCodeLine{138   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ab7a3dc3bca3f77802a1c3b2fbcfe0a3c}{cooperativeMultiDeviceUnmatchedGridDim}};    }
+\DoxyCodeLine{141   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ad003e2b692a63718f9bd2c2f308823be}{cooperativeMultiDeviceUnmatchedBlockDim}};   }
+\DoxyCodeLine{144   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_af6cf8af49466ef5239ff61ba080bc1e7}{cooperativeMultiDeviceUnmatchedSharedMem}};  }
+\DoxyCodeLine{147   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_ad9aa31dd7bd61c84c5fd92d20d0f8b29}{isLargeBar}};                                }
+\DoxyCodeLine{148   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_acb42f0c173a515933c2102ea7cdba598}{asicRevision}};                              }
+\DoxyCodeLine{149   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_afefd229244bbe5bb4b0109522790cf96}{managedMemory}};                   }
+\DoxyCodeLine{150   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a7fc70af54dc16a21f598db3ff5905c25}{directManagedMemAccessFromHost}};  }
+\DoxyCodeLine{152   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_abfea758a5672cb7803ac467543c11b67}{concurrentManagedAccess}};  }
+\DoxyCodeLine{154   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a5ad240a7f39a7878340106ab06326f2c}{pageableMemoryAccess}};     }
+\DoxyCodeLine{156   \textcolor{keywordtype}{int} \mbox{\hyperlink{structhip_device_prop__t_a89e293e4c37cb9358d84e3831516afa3}{pageableMemoryAccessUsesHostPageTables}};  }
+\DoxyCodeLine{158 \} \mbox{\hyperlink{hip__runtime__api_8h_a5a309fe9c7d118b2a628085119233f6b}{hipDeviceProp\_t}};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 }
+\DoxyCodeLine{164 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hipMemoryType}} \{}
+\DoxyCodeLine{165   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a5c5c99ed85b2599362089aa089cdad77}{hipMemoryTypeHost}},    }
+\DoxyCodeLine{166   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a0e5f84f5565ba2a011ef3a9df2584a7a}{hipMemoryTypeDevice}},  }
+\DoxyCodeLine{168   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3abbd7b93a87068c9dbb8d841ff0f3a366}{hipMemoryTypeArray}},   }
+\DoxyCodeLine{170   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3aceb68d38418e0a54dd9f7c8e113a4ec4}{hipMemoryTypeUnified}}  }
+\DoxyCodeLine{171 \} \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hipMemoryType}};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 }
+\DoxyCodeLine{177 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structhip_pointer_attribute__t}{hipPointerAttribute\_t}} \{}
+\DoxyCodeLine{178   \textcolor{keyword}{enum} \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hipMemoryType}} memoryType;}
+\DoxyCodeLine{179   \textcolor{keywordtype}{int} device;}
+\DoxyCodeLine{180   \textcolor{keywordtype}{void}* devicePointer;}
+\DoxyCodeLine{181   \textcolor{keywordtype}{void}* hostPointer;}
+\DoxyCodeLine{182   \textcolor{keywordtype}{int} isManaged;}
+\DoxyCodeLine{183   \textcolor{keywordtype}{unsigned} allocationFlags; \textcolor{comment}{/* flags specified when memory was allocated*/}}
+\DoxyCodeLine{184                             \textcolor{comment}{/* peers? */}}
+\DoxyCodeLine{185 \} \mbox{\hyperlink{hip__runtime__api_8h_af19e38458817cae41c20d4224fbe61a3}{hipPointerAttribute\_t}};}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{comment}{// hack to get these to show up in Doxygen:}}
+\DoxyCodeLine{195 \textcolor{comment}{}\textcolor{comment}{// Ignoring error-\/code return values from hip APIs is discouraged. On C++17,}}
+\DoxyCodeLine{196 \textcolor{comment}{// we can make that yield a warning}}
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#if \_\_cplusplus >= 201703L}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#define \_\_HIP\_NODISCARD [[nodiscard]]}}
+\DoxyCodeLine{199 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#define \_\_HIP\_NODISCARD}}
+\DoxyCodeLine{201 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 \textcolor{comment}{/*}}
+\DoxyCodeLine{204 \textcolor{comment}{ * @brief hipError\_t}}
+\DoxyCodeLine{205 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{206 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{207 \textcolor{comment}{ */}}
+\DoxyCodeLine{208 \textcolor{comment}{// Developer note -\/ when updating these, update the hipErrorName and hipErrorString functions in}}
+\DoxyCodeLine{209 \textcolor{comment}{// NVCC and HCC paths Also update the hipCUDAErrorTohipError function in NVCC path.}}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \_\_HIP\_NODISCARD hipError\_t \{}
+\DoxyCodeLine{212   \mbox{\hyperlink{hip__runtime__api_8h_ae4a28dbad173b548a3ac2a2092994d6b}{hipSuccess}} = 0,            }
+\DoxyCodeLine{213   \mbox{\hyperlink{hip__runtime__api_8h_a657deda9809cdddcbfcd336a29894635}{hipErrorInvalidValue}} = 1,  }
+\DoxyCodeLine{215   hipErrorOutOfMemory = 2,}
+\DoxyCodeLine{216   \textcolor{comment}{// Deprecated}}
+\DoxyCodeLine{217   \mbox{\hyperlink{hip__runtime__api_8h_a05eeeb24bcbaf9bce1e70c96406e11d3}{hipErrorMemoryAllocation}} = 2,  }
+\DoxyCodeLine{218   hipErrorNotInitialized = 3,}
+\DoxyCodeLine{219   \textcolor{comment}{// Deprecated}}
+\DoxyCodeLine{220   hipErrorInitializationError = 3,}
+\DoxyCodeLine{221   hipErrorDeinitialized = 4,}
+\DoxyCodeLine{222   hipErrorProfilerDisabled = 5,}
+\DoxyCodeLine{223   hipErrorProfilerNotInitialized = 6,}
+\DoxyCodeLine{224   hipErrorProfilerAlreadyStarted = 7,}
+\DoxyCodeLine{225   hipErrorProfilerAlreadyStopped = 8,}
+\DoxyCodeLine{226   hipErrorInvalidConfiguration = 9,}
+\DoxyCodeLine{227   hipErrorInvalidPitchValue = 12,}
+\DoxyCodeLine{228   hipErrorInvalidSymbol = 13,}
+\DoxyCodeLine{229   \mbox{\hyperlink{hip__runtime__api_8h_a12c0c3939a86d4cf25df0e00abca9a6b}{hipErrorInvalidDevicePointer}} = 17,    }
+\DoxyCodeLine{230   \mbox{\hyperlink{hip__runtime__api_8h_afaf16f46f53d8dc4b42ddcf896f40c14}{hipErrorInvalidMemcpyDirection}} = 21,  }
+\DoxyCodeLine{231   hipErrorInsufficientDriver = 35,}
+\DoxyCodeLine{232   hipErrorMissingConfiguration = 52,}
+\DoxyCodeLine{233   hipErrorPriorLaunchFailure = 53,}
+\DoxyCodeLine{234   hipErrorInvalidDeviceFunction = 98,}
+\DoxyCodeLine{235   \mbox{\hyperlink{hip__runtime__api_8h_abaff13a1ce1dd40f0578115c56d9dc8d}{hipErrorNoDevice}} = 100,       }
+\DoxyCodeLine{236   \mbox{\hyperlink{hip__runtime__api_8h_a6f9140865b70074d26b28b72b5b832b5}{hipErrorInvalidDevice}} = 101,  }
+\DoxyCodeLine{237   hipErrorInvalidImage = 200,}
+\DoxyCodeLine{238   \mbox{\hyperlink{hip__runtime__api_8h_a50d78024cb74c593bb51563027f78e97}{hipErrorInvalidContext}} = 201,  }
+\DoxyCodeLine{239   hipErrorContextAlreadyCurrent = 202,}
+\DoxyCodeLine{240   hipErrorMapFailed = 205,}
+\DoxyCodeLine{241   \textcolor{comment}{// Deprecated}}
+\DoxyCodeLine{242   \mbox{\hyperlink{hip__runtime__api_8h_a7022728813a843e61609a33e6c227a5c}{hipErrorMapBufferObjectFailed}} = 205,  }
+\DoxyCodeLine{243   hipErrorUnmapFailed = 206,}
+\DoxyCodeLine{244   hipErrorArrayIsMapped = 207,}
+\DoxyCodeLine{245   hipErrorAlreadyMapped = 208,}
+\DoxyCodeLine{246   hipErrorNoBinaryForGpu = 209,}
+\DoxyCodeLine{247   hipErrorAlreadyAcquired = 210,}
+\DoxyCodeLine{248   hipErrorNotMapped = 211,}
+\DoxyCodeLine{249   hipErrorNotMappedAsArray = 212,}
+\DoxyCodeLine{250   hipErrorNotMappedAsPointer = 213,}
+\DoxyCodeLine{251   hipErrorECCNotCorrectable = 214,}
+\DoxyCodeLine{252   hipErrorUnsupportedLimit = 215,}
+\DoxyCodeLine{253   hipErrorContextAlreadyInUse = 216,}
+\DoxyCodeLine{254   hipErrorPeerAccessUnsupported = 217,}
+\DoxyCodeLine{255   \mbox{\hyperlink{hip__runtime__api_8h_a278559b9c4a689af93f24217658c2522}{hipErrorInvalidKernelFile}} = 218,  }
+\DoxyCodeLine{256   hipErrorInvalidGraphicsContext = 219,}
+\DoxyCodeLine{257   hipErrorInvalidSource = 300,}
+\DoxyCodeLine{258   hipErrorFileNotFound = 301,}
+\DoxyCodeLine{259   hipErrorSharedObjectSymbolNotFound = 302,}
+\DoxyCodeLine{260   hipErrorSharedObjectInitFailed = 303,}
+\DoxyCodeLine{261   hipErrorOperatingSystem = 304,}
+\DoxyCodeLine{262   hipErrorInvalidHandle = 400,}
+\DoxyCodeLine{263   \textcolor{comment}{// Deprecated}}
+\DoxyCodeLine{264   \mbox{\hyperlink{hip__runtime__api_8h_a3d3fd8119e311ec4c028e74225d5edc2}{hipErrorInvalidResourceHandle}} = 400,  }
+\DoxyCodeLine{265   \mbox{\hyperlink{hip__runtime__api_8h_adbc9063863e0cb8f70021622133161b7}{hipErrorIllegalState}} = 401,  }
+\DoxyCodeLine{266   hipErrorNotFound = 500,}
+\DoxyCodeLine{267   \mbox{\hyperlink{hip__runtime__api_8h_a8e981181b750f34a4c9532cbba73ba76}{hipErrorNotReady}} = 600,  }
+\DoxyCodeLine{271   hipErrorIllegalAddress = 700,}
+\DoxyCodeLine{272   \mbox{\hyperlink{hip__runtime__api_8h_a9aefc3e9d1456dcfd6e9344b87cdd90a}{hipErrorLaunchOutOfResources}} = 701,  }
+\DoxyCodeLine{273   hipErrorLaunchTimeOut = 702,}
+\DoxyCodeLine{274   \mbox{\hyperlink{hip__runtime__api_8h_acf78b2ed8f41d21e8f23eaa084c75349}{hipErrorPeerAccessAlreadyEnabled}} =}
+\DoxyCodeLine{275       704,                             }
+\DoxyCodeLine{276   \mbox{\hyperlink{hip__runtime__api_8h_a5605bce676c6a2b37d04a21971f0d596}{hipErrorPeerAccessNotEnabled}} = 705,  }
+\DoxyCodeLine{277   hipErrorSetOnActiveProcess = 708,}
+\DoxyCodeLine{278   hipErrorContextIsDestroyed = 709,}
+\DoxyCodeLine{279   \mbox{\hyperlink{hip__runtime__api_8h_a88730674de63a86cfbd71cadb65a178d}{hipErrorAssert}} = 710,  }
+\DoxyCodeLine{280   \mbox{\hyperlink{hip__runtime__api_8h_a72d149b0136daea226380c5132e8fb41}{hipErrorHostMemoryAlreadyRegistered}} =}
+\DoxyCodeLine{281       712,  }
+\DoxyCodeLine{282   \mbox{\hyperlink{hip__runtime__api_8h_af00e5e06824b43d1a91fc1f66cee8abe}{hipErrorHostMemoryNotRegistered}} =}
+\DoxyCodeLine{283       713,                      }
+\DoxyCodeLine{284   \mbox{\hyperlink{hip__runtime__api_8h_a6f1f32a3741b37e03030cfbc08852f6a}{hipErrorLaunchFailure}} = 719,  }
+\DoxyCodeLine{285   \mbox{\hyperlink{hip__runtime__api_8h_aa935871ec793bddb05a16585eb6e7610}{hipErrorCooperativeLaunchTooLarge}} =}
+\DoxyCodeLine{286       720,  }
+\DoxyCodeLine{289   \mbox{\hyperlink{hip__runtime__api_8h_ad037fb0b0de6155067a1a561070008cc}{hipErrorNotSupported}} = 801,  }
+\DoxyCodeLine{290   \mbox{\hyperlink{hip__runtime__api_8h_a559492d5a940523210be9bfd5e9bd21c}{hipErrorStreamCaptureUnsupported}} = 900,  }
+\DoxyCodeLine{292   \mbox{\hyperlink{hip__runtime__api_8h_ac602971341075208eaf7337df7bdbc53}{hipErrorStreamCaptureInvalidated}} = 901,  }
+\DoxyCodeLine{294   \mbox{\hyperlink{hip__runtime__api_8h_ad75417ed16a1ca2012810232e57c28ea}{hipErrorStreamCaptureMerge}} = 902,        }
+\DoxyCodeLine{296   \mbox{\hyperlink{hip__runtime__api_8h_aeb40419dba42abb29596ed33d14ba37d}{hipErrorStreamCaptureUnmatched}} = 903,    }
+\DoxyCodeLine{297   \mbox{\hyperlink{hip__runtime__api_8h_a59e9d63626bb3362201edfd42b59414e}{hipErrorStreamCaptureUnjoined}} = 904,     }
+\DoxyCodeLine{299   \mbox{\hyperlink{hip__runtime__api_8h_a258f25d58416bc8b797976ad94021fa1}{hipErrorStreamCaptureIsolation}} = 905,    }
+\DoxyCodeLine{303   \mbox{\hyperlink{hip__runtime__api_8h_ad6fee0d337b88d486f9eda8608275334}{hipErrorStreamCaptureImplicit}} = 906,     }
+\DoxyCodeLine{306   \mbox{\hyperlink{hip__runtime__api_8h_aebc72bda905596209d4b40bc8d93d63a}{hipErrorCapturedEvent}} = 907,  }
+\DoxyCodeLine{308   \mbox{\hyperlink{hip__runtime__api_8h_a8408604c91ff5be40b1136be96ee997d}{hipErrorStreamCaptureWrongThread}} = 908,  }
+\DoxyCodeLine{312   \mbox{\hyperlink{hip__runtime__api_8h_a3aa157043af8a1579eb0d89c05ff5aa1}{hipErrorGraphExecUpdateFailure}} = 910,    }
+\DoxyCodeLine{316   hipErrorUnknown = 999,                   \textcolor{comment}{//< Unknown error.}}
+\DoxyCodeLine{317   \textcolor{comment}{// HSA Runtime Error Codes start here.}}
+\DoxyCodeLine{318   \mbox{\hyperlink{hip__runtime__api_8h_a18438eee895bcf9832fbc2d1c27776d8}{hipErrorRuntimeMemory}} = 1052,  }
+\DoxyCodeLine{320   \mbox{\hyperlink{hip__runtime__api_8h_af727a2bf27aa44da418f8c53a183850a}{hipErrorRuntimeOther}} = 1053,   }
+\DoxyCodeLine{322   hipErrorTbd                    }
+\DoxyCodeLine{323 \} hipError\_t;}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#undef \_\_HIP\_NODISCARD}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327 \textcolor{comment}{/*}}
+\DoxyCodeLine{328 \textcolor{comment}{ * @brief hipDeviceAttribute\_t}}
+\DoxyCodeLine{329 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{330 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{331 \textcolor{comment}{ */}}
+\DoxyCodeLine{332 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \mbox{\hyperlink{group___global_defs_gacc0acd7b9bda126c6bb3dfd6e2796d7c}{hipDeviceAttribute\_t}} \{}
+\DoxyCodeLine{333   hipDeviceAttributeCudaCompatibleBegin = 0,}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca52fa8868e3d06d6ceed35072946c4500}{hipDeviceAttributeEccEnabled}} =}
+\DoxyCodeLine{336       hipDeviceAttributeCudaCompatibleBegin,    }
+\DoxyCodeLine{337   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca3453c7d157ca16c6a94c312205c3ae86}{hipDeviceAttributeAccessPolicyMaxWindowSize}},  }
+\DoxyCodeLine{339   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca773d2f74a90f647fcfec39ba19aa7b9e}{hipDeviceAttributeAsyncEngineCount}},           }
+\DoxyCodeLine{340   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca9753ae75a27d737cb02c3ef762275106}{hipDeviceAttributeCanMapHostMemory}},  }
+\DoxyCodeLine{342   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca56a8b8ee9b1165461ea6c1ee7d56e90d}{hipDeviceAttributeCanUseHostPointerForRegisteredMem}},  }
+\DoxyCodeLine{345   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca2300e077e020e7967592065561373b00}{hipDeviceAttributeClockRate}},                          }
+\DoxyCodeLine{346   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca4d0369a6ef7bd7890fdcabc16ed3385d}{hipDeviceAttributeComputeMode}},                 }
+\DoxyCodeLine{347   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8af4079129030527721246176198f75d}{hipDeviceAttributeComputePreemptionSupported}},  }
+\DoxyCodeLine{348   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cad9f45254d0d048677f560032532d5504}{hipDeviceAttributeConcurrentKernels}},           }
+\DoxyCodeLine{350   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca9e5af4761458152e645d2e1312767514}{hipDeviceAttributeConcurrentManagedAccess}},     }
+\DoxyCodeLine{352   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6ffb0a3933411c136ea1f9d154fab5cc}{hipDeviceAttributeCooperativeLaunch}},           }
+\DoxyCodeLine{353   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5169c438b4ba17f8588d744bf56d87e4}{hipDeviceAttributeCooperativeMultiDeviceLaunch}},  }
+\DoxyCodeLine{355   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca41202a4affefb5cf099beb8c8bf70bbf}{hipDeviceAttributeDeviceOverlap}},  }
+\DoxyCodeLine{357   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca0037b357264179e4093c551a80a2a21c}{hipDeviceAttributeDirectManagedMemAccessFromHost}},  }
+\DoxyCodeLine{359   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca28029ba35569753cbdbd777b21eab37b}{hipDeviceAttributeGlobalL1CacheSupported}},  }
+\DoxyCodeLine{360   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca1421bb450fe736fda9605a607be69836}{hipDeviceAttributeHostNativeAtomicSupported}},  }
+\DoxyCodeLine{362   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa384485d5fe1ac26746d817af1aa669b}{hipDeviceAttributeIntegrated}},                 }
+\DoxyCodeLine{363   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6129311200a17dcc5fa8d2256874ae3d}{hipDeviceAttributeIsMultiGpuBoard}},            }
+\DoxyCodeLine{364   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca58434135137ef3af09567698829810f1}{hipDeviceAttributeKernelExecTimeout}},  }
+\DoxyCodeLine{365   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca582ae5a26a7148504878890028e4b64c}{hipDeviceAttributeL2CacheSize}},  }
+\DoxyCodeLine{367   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7d251fb7e063e4703489eddbc41a440d}{hipDeviceAttributeLocalL1CacheSupported}},  }
+\DoxyCodeLine{368   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cada0ca948530460469095f6a63729219a}{hipDeviceAttributeLuid}},  }
+\DoxyCodeLine{370   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caea6c84c14d2539fc9abcdfb0f940acbe}{hipDeviceAttributeLuidDeviceNodeMask}},  }
+\DoxyCodeLine{372   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca2735739cf977b7d303266f6781131e8d}{hipDeviceAttributeComputeCapabilityMajor}},  }
+\DoxyCodeLine{373   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa1a9b27307b3dda43201bfaead8458c5}{hipDeviceAttributeManagedMemory}},  }
+\DoxyCodeLine{374   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caae53485511cc012addc523e602ef9b98}{hipDeviceAttributeMaxBlocksPerMultiProcessor}},  }
+\DoxyCodeLine{375   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac1e4ac589db0d8adbbc241e3d0fcd594}{hipDeviceAttributeMaxBlockDimX}},                }
+\DoxyCodeLine{376   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca187dbffe12db09a56c0f75c340d879c9}{hipDeviceAttributeMaxBlockDimY}},                }
+\DoxyCodeLine{377   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caf811f51e03d1ffb025d80ac1da088675}{hipDeviceAttributeMaxBlockDimZ}},                }
+\DoxyCodeLine{378   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca03db8df0e7a9fbdaae683d97e8ac9c87}{hipDeviceAttributeMaxGridDimX}},                 }
+\DoxyCodeLine{379   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5b5cc49972679c5ccf62b79425ee99df}{hipDeviceAttributeMaxGridDimY}},                 }
+\DoxyCodeLine{380   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6c206ac083999caf4640e5d91dae24f7}{hipDeviceAttributeMaxGridDimZ}},                 }
+\DoxyCodeLine{381   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8d9538aecd5fa764b6b13dd9ae05a1cf}{hipDeviceAttributeMaxSurface1D}},                }
+\DoxyCodeLine{382   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca48c9f35454f5c329718bec08b54e8928}{hipDeviceAttributeMaxSurface1DLayered}},  }
+\DoxyCodeLine{383   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca45e5f8d0e1b6b8ba58cf4b0f00b793b0}{hipDeviceAttributeMaxSurface2D}},         }
+\DoxyCodeLine{384   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca63f784bd3a09ed4b9c1feb3628410bbe}{hipDeviceAttributeMaxSurface2DLayered}},  }
+\DoxyCodeLine{385   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca09c1178054d1e7eda20fd5bd5dd17175}{hipDeviceAttributeMaxSurface3D}},       }
+\DoxyCodeLine{386   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca1a76a9768fb8e98c4f437e3f7962027f}{hipDeviceAttributeMaxSurfaceCubemap}},  }
+\DoxyCodeLine{387   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca08a044c95db3574e2c89ca856adcf4df}{hipDeviceAttributeMaxSurfaceCubemapLayered}},  }
+\DoxyCodeLine{389   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca9ca92f0db9775c913bc681d87449bf1a}{hipDeviceAttributeMaxTexture1DWidth}},         }
+\DoxyCodeLine{390   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cacc59d7cf69f95371c8e8d7fbccf13e73}{hipDeviceAttributeMaxTexture1DLayered}},  }
+\DoxyCodeLine{391   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca929925869c0fee0db630b4fd08f87b3a}{hipDeviceAttributeMaxTexture1DLinear}},   }
+\DoxyCodeLine{394   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca2428066c6ecb425d5b61c7532042bedf}{hipDeviceAttributeMaxTexture1DMipmap}},   }
+\DoxyCodeLine{395   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caba995e4cf2e8e3cf99dbca7c5adf4342}{hipDeviceAttributeMaxTexture2DWidth}},    }
+\DoxyCodeLine{396   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca523ab7684ddf2fd7ad7e7b9123e49163}{hipDeviceAttributeMaxTexture2DHeight}},   }
+\DoxyCodeLine{397   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca92b064e8b236f1d06b528056ce6fddae}{hipDeviceAttributeMaxTexture2DGather}},   }
+\DoxyCodeLine{399   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa4d2c06274d024a40fc0e4b797a5a3a2}{hipDeviceAttributeMaxTexture2DLayered}},  }
+\DoxyCodeLine{400   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca45b44857785bff4085506a56022fbf0f}{hipDeviceAttributeMaxTexture2DLinear}},   }
+\DoxyCodeLine{402   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caf1b78e548e4cd729f0e0be4ab7736c62}{hipDeviceAttributeMaxTexture2DMipmap}},  }
+\DoxyCodeLine{403   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac38a9aec2fba4d56ad90a0bd76c26380}{hipDeviceAttributeMaxTexture3DWidth}},   }
+\DoxyCodeLine{404   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca36a3b206969474f65c0d5ad4831c1ba8}{hipDeviceAttributeMaxTexture3DHeight}},  }
+\DoxyCodeLine{405   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa7be0131e8f44109c377ca1b7d634ce7}{hipDeviceAttributeMaxTexture3DDepth}},   }
+\DoxyCodeLine{406   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca90020ecaeb108308c5b13a335d5c9130}{hipDeviceAttributeMaxTexture3DAlt}},     }
+\DoxyCodeLine{407   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca3b576766317055e3bf321761fe5d84fd}{hipDeviceAttributeMaxTextureCubemap}},   }
+\DoxyCodeLine{408   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caeab620ddac9e5520e0411fda9f6a5fb1}{hipDeviceAttributeMaxTextureCubemapLayered}},  }
+\DoxyCodeLine{410   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5a4d13aaac8710b1d078306125f24e25}{hipDeviceAttributeMaxThreadsDim}},             }
+\DoxyCodeLine{411   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8327aa23782d9c994bdef33a6d62e02e}{hipDeviceAttributeMaxThreadsPerBlock}},        }
+\DoxyCodeLine{412   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caddc08922b491eb1f6a583833cbf4e2f0}{hipDeviceAttributeMaxThreadsPerMultiProcessor}},  }
+\DoxyCodeLine{413   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca0b3f58899744df724961b664061afd54}{hipDeviceAttributeMaxPitch}},                }
+\DoxyCodeLine{414   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca848c1396fab6f20463c6aefb828b0870}{hipDeviceAttributeMemoryBusWidth}},          }
+\DoxyCodeLine{415   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6b68deafd65f036b30dc8051573eb000}{hipDeviceAttributeMemoryClockRate}},         }
+\DoxyCodeLine{416   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca38edc4fcae456e47160d349da3249b85}{hipDeviceAttributeComputeCapabilityMinor}},  }
+\DoxyCodeLine{417   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7770672185967b47674798253cb7f47d}{hipDeviceAttributeMultiGpuBoardGroupID}},    }
+\DoxyCodeLine{419   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5c1519870733ccf0b83f722678240e5f}{hipDeviceAttributeMultiprocessorCount}},     }
+\DoxyCodeLine{420   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca1eebd317c912b422a1d66323e8605448}{hipDeviceAttributeName}},                    }
+\DoxyCodeLine{421   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca21e422662a09d4894c8ebc60473384ff}{hipDeviceAttributePageableMemoryAccess}},  }
+\DoxyCodeLine{423   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca14dff2a1b8c0ba131b06a6685bb052f3}{hipDeviceAttributePageableMemoryAccessUsesHostPageTables}},  }
+\DoxyCodeLine{425   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca572b29c44f1322aa7657fdd784832f88}{hipDeviceAttributePciBusId}},                                }
+\DoxyCodeLine{426   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca955d90286e87be9e3528f0b817ab32ff}{hipDeviceAttributePciDeviceId}},                             }
+\DoxyCodeLine{427   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cadb8cdb8c1f1e140ae5340cf9fbe8aa8e}{hipDeviceAttributePciDomainID}},                             }
+\DoxyCodeLine{428   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca52d3c74a3d94c02ebfda31b32a0cd75a}{hipDeviceAttributePersistingL2CacheMaxSize}},  }
+\DoxyCodeLine{430   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca82289b170192b6ea742be0efc6f95107}{hipDeviceAttributeMaxRegistersPerBlock}},  }
+\DoxyCodeLine{433   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5f366458f31c0dc0f3faa0a11446ada4}{hipDeviceAttributeMaxRegistersPerMultiprocessor}},  }
+\DoxyCodeLine{434   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cad612849d153747b7be03b0e697a2aead}{hipDeviceAttributeReservedSharedMemPerBlock}},      }
+\DoxyCodeLine{436   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7bca3aa18b26d40eba043ae93e15c7e5}{hipDeviceAttributeMaxSharedMemoryPerBlock}},  }
+\DoxyCodeLine{438   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6299fb9b996d154c456d1622d447fe47}{hipDeviceAttributeSharedMemPerBlockOptin}},   }
+\DoxyCodeLine{440   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cae88a51d68a16de43c9036bd1c555e0c9}{hipDeviceAttributeSharedMemPerMultiprocessor}},        }
+\DoxyCodeLine{442   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5aa88c2c66ab8d71bb5b3177da16eecd}{hipDeviceAttributeSingleToDoublePrecisionPerfRatio}},  }
+\DoxyCodeLine{444   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7ace06929e3bb30616db62f966ad50db}{hipDeviceAttributeStreamPrioritiesSupported}},         }
+\DoxyCodeLine{446   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca02af979ebb5db7921872c8eff4d667bd}{hipDeviceAttributeSurfaceAlignment}},  }
+\DoxyCodeLine{447   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca0eb1b68cd4148e015736be9dc965caa4}{hipDeviceAttributeTccDriver}},  }
+\DoxyCodeLine{448   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac72b2427df2ba58dbbee2e1399b3e135}{hipDeviceAttributeTextureAlignment}},       }
+\DoxyCodeLine{449   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cae044c1754ea66c8f9f7b420a2f14671e}{hipDeviceAttributeTexturePitchAlignment}},  }
+\DoxyCodeLine{451   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac6089ac3a0f9c77cc382fb0eaa73ae9c}{hipDeviceAttributeTotalConstantMemory}},    }
+\DoxyCodeLine{452   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caad0e1bd8d5bb28ae8e0c710fd70bea29}{hipDeviceAttributeTotalGlobalMem}},         }
+\DoxyCodeLine{453   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca72a250028cf4eac11a83410a86de83a4}{hipDeviceAttributeUnifiedAddressing}},      }
+\DoxyCodeLine{455   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5d2d51c79c898f3b7714882e5c18fd1d}{hipDeviceAttributeUuid}},                   }
+\DoxyCodeLine{456   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caffd94133e823247a6f1215343232f6ec}{hipDeviceAttributeWarpSize}},               }
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458   hipDeviceAttributeCudaCompatibleEnd = 9999,}
+\DoxyCodeLine{459   hipDeviceAttributeAmdSpecificBegin = 10000,}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caefd7213ecdc587ca7e74822d2ca97309}{hipDeviceAttributeClockInstructionRate}} =}
+\DoxyCodeLine{462       hipDeviceAttributeAmdSpecificBegin,  }
+\DoxyCodeLine{464   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa07ec54921a1bf8c0b454da21fedfa9d}{hipDeviceAttributeArch}},                  }
+\DoxyCodeLine{465   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cad3e7f3d01533b32e12211172fcf410ba}{hipDeviceAttributeMaxSharedMemoryPerMultiprocessor}},  }
+\DoxyCodeLine{466   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6be0d12d53e9f39ceba14df0a6720742}{hipDeviceAttributeGcnArch}},                           }
+\DoxyCodeLine{467   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5faea582f3f7b9663b9ecc7ef1bbae42}{hipDeviceAttributeGcnArchName}},                       }
+\DoxyCodeLine{468   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6c9f83e4239d19aa000dd13cbcfc00dd}{hipDeviceAttributeHdpMemFlushCntl}},  }
+\DoxyCodeLine{469   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca49f4f8395025ba1ebe1a0a7eff0f24ed}{hipDeviceAttributeHdpRegFlushCntl}},  }
+\DoxyCodeLine{470   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca4d791a8a67ad0c89d413a67ce184be5d}{hipDeviceAttributeCooperativeMultiDeviceUnmatchedFunc}},       }
+\DoxyCodeLine{473   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa5679987f35a74bfcbb1d3ac36db73cb}{hipDeviceAttributeCooperativeMultiDeviceUnmatchedGridDim}},    }
+\DoxyCodeLine{476   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caeb7c0c783e1f88a0675726bf2da6424b}{hipDeviceAttributeCooperativeMultiDeviceUnmatchedBlockDim}},   }
+\DoxyCodeLine{479   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca3295f0728fc8152a98556d89ba81216f}{hipDeviceAttributeCooperativeMultiDeviceUnmatchedSharedMem}},  }
+\DoxyCodeLine{482   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cab980fc82595b70b6338b9dd2b913ec26}{hipDeviceAttributeIsLargeBar}},                                }
+\DoxyCodeLine{483   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca4e443d1d515e56a1f8cee4a9f3a7a546}{hipDeviceAttributeAsicRevision}},           }
+\DoxyCodeLine{484   \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8179e5c1507831eaeb4690513e618913}{hipDeviceAttributeCanUseStreamWaitValue}},  }
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487   hipDeviceAttributeAmdSpecificEnd = 19999,}
+\DoxyCodeLine{488   hipDeviceAttributeVendorSpecificBegin = 20000,}
+\DoxyCodeLine{489   \textcolor{comment}{// Extended attributes for vendors}}
+\DoxyCodeLine{490 \} \mbox{\hyperlink{group___global_defs_gacc0acd7b9bda126c6bb3dfd6e2796d7c}{hipDeviceAttribute\_t}};}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{492 \textcolor{keyword}{enum} hipComputeMode \{}
+\DoxyCodeLine{493   hipComputeModeDefault = 0,}
+\DoxyCodeLine{494   hipComputeModeExclusive = 1,}
+\DoxyCodeLine{495   hipComputeModeProhibited = 2,}
+\DoxyCodeLine{496   hipComputeModeExclusiveProcess = 3}
+\DoxyCodeLine{497 \};}
+\DoxyCodeLine{498 }
+\DoxyCodeLine{503 \textcolor{preprocessor}{\#if (defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                            \(\backslash\)}}
+\DoxyCodeLine{504 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                       \(\backslash\)}}
+\DoxyCodeLine{505 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{506 \textcolor{preprocessor}{\#define \_USE\_HIPCOMMON\_RUNTIME\_API\_}}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{509 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{510 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{511 \textcolor{preprocessor}{\#include "{}hip/nvidia\_detail/nvidia\_hip\_runtime\_api.h"{}}}
+\DoxyCodeLine{512 }
+\DoxyCodeLine{513 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{514 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{515 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_))}}
+\DoxyCodeLine{516 \textcolor{preprocessor}{\#define \_USE\_HIPCOMMON\_RUNTIME\_API\_}}
+\DoxyCodeLine{517 \textcolor{preprocessor}{\#include "{}hip/hip\_to\_chip.hh"{}}}
+\DoxyCodeLine{518 }
+\DoxyCodeLine{519 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{520 \textcolor{preprocessor}{\#error("{}Must define exactly one of \_\_HIP\_PLATFORM\_AMD\_\_, \_\_HIP\_PLATFORM\_NVIDIA\_\_ or \_\_HIP\_PLATFORM\_SPIRV\_\_"{}});}
+\DoxyCodeLine{521 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{523 \textcolor{preprocessor}{\#ifdef \_USE\_HIPCOMMON\_RUNTIME\_API\_}}
+\DoxyCodeLine{524 }
+\DoxyCodeLine{525 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{526 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{527 \textcolor{preprocessor}{\#ifndef GENERIC\_GRID\_LAUNCH}}
+\DoxyCodeLine{528 \textcolor{preprocessor}{\#define GENERIC\_GRID\_LAUNCH 1}}
+\DoxyCodeLine{529 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{530 \textcolor{comment}{//\#include <hip/amd\_detail/host\_defines.h>}}
+\DoxyCodeLine{531 \textcolor{comment}{/****/}}
+\DoxyCodeLine{532 \textcolor{comment}{// Add guard to Generic Grid Launch method}}
+\DoxyCodeLine{533 \textcolor{preprocessor}{\#ifndef GENERIC\_GRID\_LAUNCH}}
+\DoxyCodeLine{534 \textcolor{preprocessor}{\#define GENERIC\_GRID\_LAUNCH 1}}
+\DoxyCodeLine{535 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537 \textcolor{preprocessor}{\#if defined(\_\_clang\_\_) \&\& defined(\_\_HIP\_\_)}}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539 \textcolor{preprocessor}{\#if !\_\_CLANG\_HIP\_RUNTIME\_WRAPPER\_INCLUDED\_\_}}
+\DoxyCodeLine{540 \textcolor{preprocessor}{\#define \_\_host\_\_ \_\_attribute\_\_((host))}}
+\DoxyCodeLine{541 \textcolor{preprocessor}{\#define \_\_device\_\_ \_\_attribute\_\_((device))}}
+\DoxyCodeLine{542 \textcolor{preprocessor}{\#define \_\_global\_\_ \_\_attribute\_\_((global))}}
+\DoxyCodeLine{543 \textcolor{preprocessor}{\#define \_\_shared\_\_ \_\_attribute\_\_((shared))}}
+\DoxyCodeLine{544 \textcolor{preprocessor}{\#define \_\_constant\_\_ \_\_attribute\_\_((constant))}}
+\DoxyCodeLine{545 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !\_\_CLANG\_HIP\_RUNTIME\_WRAPPER\_INCLUDED\_\_}}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547 \textcolor{preprocessor}{\#define \_\_noinline\_\_ \_\_attribute\_\_((noinline))}}
+\DoxyCodeLine{548 \textcolor{preprocessor}{\#define \_\_forceinline\_\_ inline \_\_attribute\_\_((always\_inline))}}
+\DoxyCodeLine{549 }
+\DoxyCodeLine{550 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{551 }
+\DoxyCodeLine{552 \textcolor{comment}{// Non-\/HCC compiler}}
+\DoxyCodeLine{556 \textcolor{comment}{}\textcolor{preprocessor}{\#define \_\_host\_\_}}
+\DoxyCodeLine{557 \textcolor{preprocessor}{\#define \_\_device\_\_}}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559 \textcolor{preprocessor}{\#define \_\_global\_\_}}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561 \textcolor{preprocessor}{\#define \_\_noinline\_\_}}
+\DoxyCodeLine{562 \textcolor{preprocessor}{\#define \_\_forceinline\_\_ inline}}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564 \textcolor{preprocessor}{\#define \_\_shared\_\_}}
+\DoxyCodeLine{565 \textcolor{preprocessor}{\#define \_\_constant\_\_}}
+\DoxyCodeLine{566 }
+\DoxyCodeLine{567 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{568 \textcolor{comment}{/********/}}
+\DoxyCodeLine{569 \textcolor{preprocessor}{\#include <hip/driver\_types.h>}}
+\DoxyCodeLine{570 \textcolor{preprocessor}{\#include <hip/texture\_types.h>}}
+\DoxyCodeLine{571 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{surface__types_8h}{hip/surface\_types.h}}>}}
+\DoxyCodeLine{572 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{573 \textcolor{preprocessor}{\#define DEPRECATED(msg) \_\_declspec(deprecated(msg))}}
+\DoxyCodeLine{574 \textcolor{preprocessor}{\#else  }\textcolor{comment}{// !defined(\_MSC\_VER)}}
+\DoxyCodeLine{575 \textcolor{preprocessor}{\#define DEPRECATED(msg) \_\_attribute\_\_((deprecated(msg)))}}
+\DoxyCodeLine{576 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_MSC\_VER)}}
+\DoxyCodeLine{577 \textcolor{preprocessor}{\#define DEPRECATED\_MSG                                                                             \(\backslash\)}}
+\DoxyCodeLine{578 \textcolor{preprocessor}{  "{}This API is marked as deprecated and may not be supported in future releases. For more "{}}        \(\backslash\)}
+\DoxyCodeLine{579   "{}details please refer "{}                                                                          \(\backslash\)}
+\DoxyCodeLine{580   "{}https://github.com/ROCm-\/Developer-\/Tools/HIP/blob/master/docs/markdown/"{}                         \(\backslash\)}
+\DoxyCodeLine{581   "{}hip\_deprecated\_api\_list.md"{}}
+\DoxyCodeLine{582 \textcolor{preprocessor}{\#define HIP\_LAUNCH\_PARAM\_BUFFER\_POINTER ((void*)0x01)}}
+\DoxyCodeLine{583 \textcolor{preprocessor}{\#define HIP\_LAUNCH\_PARAM\_BUFFER\_SIZE ((void*)0x02)}}
+\DoxyCodeLine{584 \textcolor{preprocessor}{\#define HIP\_LAUNCH\_PARAM\_END ((void*)0x03)}}
+\DoxyCodeLine{585 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{586 \textcolor{preprocessor}{\#define \_\_dparm(x) = x}}
+\DoxyCodeLine{587 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{588 \textcolor{preprocessor}{\#define \_\_dparm(x)}}
+\DoxyCodeLine{589 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{590 \textcolor{preprocessor}{\#ifdef \_\_GNUC\_\_}}
+\DoxyCodeLine{591 \textcolor{preprocessor}{\#pragma GCC visibility push(default)}}
+\DoxyCodeLine{592 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{593 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{594 \textcolor{keyword}{namespace }hip\_impl \{}
+\DoxyCodeLine{595 hipError\_t hip\_init();}
+\DoxyCodeLine{596 \}  \textcolor{comment}{// namespace hip\_impl}}
+\DoxyCodeLine{597 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{598 \textcolor{comment}{// Structure definitions:}}
+\DoxyCodeLine{599 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{600 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{601 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{602 \textcolor{comment}{//-\/-\/-\/}}
+\DoxyCodeLine{603 \textcolor{comment}{// API-\/visible structures}}
+\DoxyCodeLine{604 \textcolor{comment}{// Note many APIs also use integer deviceIds as an alternative to the device pointer:}}
+\DoxyCodeLine{605 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipDeviceP2PAttr \{}
+\DoxyCodeLine{606   hipDevP2PAttrPerformanceRank = 0,}
+\DoxyCodeLine{607   hipDevP2PAttrAccessSupported,}
+\DoxyCodeLine{608   hipDevP2PAttrNativeAtomicSupported,}
+\DoxyCodeLine{609   hipDevP2PAttrHipArrayAccessSupported}
+\DoxyCodeLine{610 \} hipDeviceP2PAttr;}
+\DoxyCodeLine{611 \textcolor{preprocessor}{\#define hipIpcMemLazyEnablePeerAccess 0}}
+\DoxyCodeLine{612 \textcolor{preprocessor}{\#define HIP\_IPC\_HANDLE\_SIZE 64}}
+\DoxyCodeLine{613 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipIpcMemHandle\_st \{}
+\DoxyCodeLine{614   \textcolor{keywordtype}{char} reserved[HIP\_IPC\_HANDLE\_SIZE];}
+\DoxyCodeLine{615 \} hipIpcMemHandle\_t;}
+\DoxyCodeLine{616 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipIpcEventHandle\_st \{}
+\DoxyCodeLine{617   \textcolor{keywordtype}{char} reserved[HIP\_IPC\_HANDLE\_SIZE];}
+\DoxyCodeLine{618 \} hipIpcEventHandle\_t;}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{620 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipFuncAttributes \{}
+\DoxyCodeLine{621   \textcolor{keywordtype}{int} binaryVersion;}
+\DoxyCodeLine{622   \textcolor{keywordtype}{int} cacheModeCA;}
+\DoxyCodeLine{623   \textcolor{keywordtype}{size\_t} constSizeBytes;}
+\DoxyCodeLine{624   \textcolor{keywordtype}{size\_t} localSizeBytes;}
+\DoxyCodeLine{625   \textcolor{keywordtype}{int} maxDynamicSharedSizeBytes;}
+\DoxyCodeLine{626   \textcolor{keywordtype}{int} maxThreadsPerBlock;}
+\DoxyCodeLine{627   \textcolor{keywordtype}{int} numRegs;}
+\DoxyCodeLine{628   \textcolor{keywordtype}{int} preferredShmemCarveout;}
+\DoxyCodeLine{629   \textcolor{keywordtype}{int} ptxVersion;}
+\DoxyCodeLine{630   \textcolor{keywordtype}{size\_t} sharedSizeBytes;}
+\DoxyCodeLine{631 \} hipFuncAttributes;}
+\DoxyCodeLine{632 \textcolor{keyword}{enum} hipLimit\_t \{}
+\DoxyCodeLine{633   hipLimitPrintfFifoSize = 0x01,}
+\DoxyCodeLine{634   hipLimitMallocHeapSize = 0x02,}
+\DoxyCodeLine{635 \};}
+\DoxyCodeLine{636 }
+\DoxyCodeLine{637 \textcolor{preprocessor}{\#ifndef \_\_HIP\_PLATFORM\_SPIRV\_\_}}
+\DoxyCodeLine{638 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }ihipEvent\_t* \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}};}
+\DoxyCodeLine{639 \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} hipDevice\_t;}
+\DoxyCodeLine{640 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }ihipCtx\_t* \mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}};}
+\DoxyCodeLine{641 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }ihipStream\_t* \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}};}
+\DoxyCodeLine{642 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }ihipModule\_t* \mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}};}
+\DoxyCodeLine{643 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }ihipModuleSymbol\_t* \mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}};}
+\DoxyCodeLine{644 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{645 }
+\DoxyCodeLine{651 \textcolor{preprocessor}{\#define hipStreamDefault                                                                           \(\backslash\)}}
+\DoxyCodeLine{652 \textcolor{preprocessor}{  0x00  }}
+\DoxyCodeLine{653 \textcolor{preprocessor}{\#define hipStreamNonBlocking 0x01  }}
+\DoxyCodeLine{655 \textcolor{preprocessor}{\#define hipEventDefault 0x0  }}
+\DoxyCodeLine{656 \textcolor{preprocessor}{\#define hipEventBlockingSync                                                                       \(\backslash\)}}
+\DoxyCodeLine{657 \textcolor{preprocessor}{  0x1  }}
+\DoxyCodeLine{658 \textcolor{preprocessor}{\#define hipEventDisableTiming                                                                      \(\backslash\)}}
+\DoxyCodeLine{659 \textcolor{preprocessor}{  0x2  }}
+\DoxyCodeLine{660 \textcolor{preprocessor}{\#define hipEventInterprocess 0x4  }}
+\DoxyCodeLine{661 \textcolor{preprocessor}{\#define hipEventReleaseToDevice                                                                    \(\backslash\)}}
+\DoxyCodeLine{662 \textcolor{preprocessor}{  0x40000000  }}
+\DoxyCodeLine{665 \textcolor{preprocessor}{\#define hipEventReleaseToSystem                                                                    \(\backslash\)}}
+\DoxyCodeLine{666 \textcolor{preprocessor}{  0x80000000  }}
+\DoxyCodeLine{670 \textcolor{preprocessor}{\#define hipHostMallocDefault 0x0}}
+\DoxyCodeLine{671 \textcolor{preprocessor}{\#define hipHostMallocPortable 0x1  }}
+\DoxyCodeLine{672 \textcolor{preprocessor}{\#define hipHostMallocMapped                                                                        \(\backslash\)}}
+\DoxyCodeLine{673 \textcolor{preprocessor}{  0x2  }}
+\DoxyCodeLine{675 \textcolor{preprocessor}{\#define hipHostMallocWriteCombined 0x4}}
+\DoxyCodeLine{676 \textcolor{preprocessor}{\#define hipHostMallocNumaUser                                                                      \(\backslash\)}}
+\DoxyCodeLine{677 \textcolor{preprocessor}{  0x20000000  }}
+\DoxyCodeLine{678 \textcolor{preprocessor}{\#define hipHostMallocCoherent                                                                      \(\backslash\)}}
+\DoxyCodeLine{679 \textcolor{preprocessor}{  0x40000000  }}
+\DoxyCodeLine{681 \textcolor{preprocessor}{\#define hipHostMallocNonCoherent                                                                   \(\backslash\)}}
+\DoxyCodeLine{682 \textcolor{preprocessor}{  0x80000000  }}
+\DoxyCodeLine{684 \textcolor{preprocessor}{\#define hipMemAttachGlobal 0x01  }}
+\DoxyCodeLine{685 \textcolor{preprocessor}{\#define hipMemAttachHost 0x02    }}
+\DoxyCodeLine{686 \textcolor{preprocessor}{\#define hipMemAttachSingle                                                                         \(\backslash\)}}
+\DoxyCodeLine{687 \textcolor{preprocessor}{  0x04  }}
+\DoxyCodeLine{689 \textcolor{preprocessor}{\#define hipDeviceMallocDefault 0x0}}
+\DoxyCodeLine{690 \textcolor{preprocessor}{\#define hipDeviceMallocFinegrained 0x1  }}
+\DoxyCodeLine{691 \textcolor{preprocessor}{\#define hipMallocSignalMemory 0x2       }}
+\DoxyCodeLine{693 \textcolor{preprocessor}{\#define hipHostRegisterDefault 0x0   }}
+\DoxyCodeLine{694 \textcolor{preprocessor}{\#define hipHostRegisterPortable 0x1  }}
+\DoxyCodeLine{695 \textcolor{preprocessor}{\#define hipHostRegisterMapped                                                                      \(\backslash\)}}
+\DoxyCodeLine{696 \textcolor{preprocessor}{  0x2  }}
+\DoxyCodeLine{698 \textcolor{preprocessor}{\#define hipHostRegisterIoMemory 0x4          }}
+\DoxyCodeLine{699 \textcolor{preprocessor}{\#define hipExtHostRegisterCoarseGrained 0x8  }}
+\DoxyCodeLine{700 \textcolor{preprocessor}{\#define hipDeviceScheduleAuto 0x0            }}
+\DoxyCodeLine{701 \textcolor{preprocessor}{\#define hipDeviceScheduleSpin                                                                      \(\backslash\)}}
+\DoxyCodeLine{702 \textcolor{preprocessor}{  0x1  }}
+\DoxyCodeLine{704 \textcolor{preprocessor}{\#define hipDeviceScheduleYield                                                                     \(\backslash\)}}
+\DoxyCodeLine{705 \textcolor{preprocessor}{  0x2  }}
+\DoxyCodeLine{707 \textcolor{preprocessor}{\#define hipDeviceScheduleBlockingSync 0x4}}
+\DoxyCodeLine{708 \textcolor{preprocessor}{\#define hipDeviceScheduleMask 0x7}}
+\DoxyCodeLine{709 \textcolor{preprocessor}{\#define hipDeviceMapHost 0x8}}
+\DoxyCodeLine{710 \textcolor{preprocessor}{\#define hipDeviceLmemResizeToMax 0x16}}
+\DoxyCodeLine{711 \textcolor{preprocessor}{\#define hipArrayDefault 0x00  }}
+\DoxyCodeLine{712 \textcolor{preprocessor}{\#define hipArrayLayered 0x01}}
+\DoxyCodeLine{713 \textcolor{preprocessor}{\#define hipArraySurfaceLoadStore 0x02}}
+\DoxyCodeLine{714 \textcolor{preprocessor}{\#define hipArrayCubemap 0x04}}
+\DoxyCodeLine{715 \textcolor{preprocessor}{\#define hipArrayTextureGather 0x08}}
+\DoxyCodeLine{716 \textcolor{preprocessor}{\#define hipOccupancyDefault 0x00}}
+\DoxyCodeLine{717 \textcolor{preprocessor}{\#define hipCooperativeLaunchMultiDeviceNoPreSync 0x01}}
+\DoxyCodeLine{718 \textcolor{preprocessor}{\#define hipCooperativeLaunchMultiDeviceNoPostSync 0x02}}
+\DoxyCodeLine{719 \textcolor{preprocessor}{\#define hipCpuDeviceId ((int)-\/1)}}
+\DoxyCodeLine{720 \textcolor{preprocessor}{\#define hipInvalidDeviceId ((int)-\/2)}}
+\DoxyCodeLine{721 \textcolor{comment}{// Flags that can be used with hipExtLaunch Set of APIs}}
+\DoxyCodeLine{722 \textcolor{preprocessor}{\#define hipExtAnyOrderLaunch 0x01  }}
+\DoxyCodeLine{723 \textcolor{comment}{// Flags to be used with hipStreamWaitValue32 and hipStreamWaitValue64}}
+\DoxyCodeLine{724 \textcolor{preprocessor}{\#define hipStreamWaitValueGte 0x0}}
+\DoxyCodeLine{725 \textcolor{preprocessor}{\#define hipStreamWaitValueEq 0x1}}
+\DoxyCodeLine{726 \textcolor{preprocessor}{\#define hipStreamWaitValueAnd 0x2}}
+\DoxyCodeLine{727 \textcolor{preprocessor}{\#define hipStreamWaitValueNor 0x3}}
+\DoxyCodeLine{728 \textcolor{comment}{// Stream per thread}}
+\DoxyCodeLine{729 \textcolor{preprocessor}{\#define hipStreamPerThread ((hipStream\_t)2)  }}
+\DoxyCodeLine{730 \textcolor{comment}{/*}}
+\DoxyCodeLine{731 \textcolor{comment}{ * @brief HIP Memory Advise values}}
+\DoxyCodeLine{732 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{733 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{734 \textcolor{comment}{ */}}
+\DoxyCodeLine{735 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipMemoryAdvise \{}
+\DoxyCodeLine{736   hipMemAdviseSetReadMostly = 1,           }
+\DoxyCodeLine{738   hipMemAdviseUnsetReadMostly = 2,         }
+\DoxyCodeLine{739   hipMemAdviseSetPreferredLocation = 3,    }
+\DoxyCodeLine{741   hipMemAdviseUnsetPreferredLocation = 4,  }
+\DoxyCodeLine{742   hipMemAdviseSetAccessedBy = 5,           }
+\DoxyCodeLine{744   hipMemAdviseUnsetAccessedBy = 6,         }
+\DoxyCodeLine{746   hipMemAdviseSetCoarseGrain = 100,        }
+\DoxyCodeLine{751   hipMemAdviseUnsetCoarseGrain = 101       }
+\DoxyCodeLine{752 \} hipMemoryAdvise;}
+\DoxyCodeLine{753 \textcolor{comment}{/*}}
+\DoxyCodeLine{754 \textcolor{comment}{ * @brief HIP Coherency Mode}}
+\DoxyCodeLine{755 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{756 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{757 \textcolor{comment}{ */}}
+\DoxyCodeLine{758 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipMemRangeCoherencyMode \{}
+\DoxyCodeLine{759   hipMemRangeCoherencyModeFineGrain = 0,     }
+\DoxyCodeLine{761   hipMemRangeCoherencyModeCoarseGrain = 1,   }
+\DoxyCodeLine{763   hipMemRangeCoherencyModeIndeterminate = 2  }
+\DoxyCodeLine{766 \} hipMemRangeCoherencyMode;}
+\DoxyCodeLine{767 \textcolor{comment}{/*}}
+\DoxyCodeLine{768 \textcolor{comment}{ * @brief HIP range attributes}}
+\DoxyCodeLine{769 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{770 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{771 \textcolor{comment}{ */}}
+\DoxyCodeLine{772 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipMemRangeAttribute \{}
+\DoxyCodeLine{773   hipMemRangeAttributeReadMostly = 1,            }
+\DoxyCodeLine{775   hipMemRangeAttributePreferredLocation = 2,     }
+\DoxyCodeLine{776   hipMemRangeAttributeAccessedBy = 3,            }
+\DoxyCodeLine{778   hipMemRangeAttributeLastPrefetchLocation = 4,  }
+\DoxyCodeLine{780   hipMemRangeAttributeCoherencyMode = 100,       }
+\DoxyCodeLine{782 \} hipMemRangeAttribute;}
+\DoxyCodeLine{783 \textcolor{comment}{/*}}
+\DoxyCodeLine{784 \textcolor{comment}{ * @brief hipJitOption}}
+\DoxyCodeLine{785 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{786 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{787 \textcolor{comment}{ */}}
+\DoxyCodeLine{788 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipJitOption \{}
+\DoxyCodeLine{789   hipJitOptionMaxRegisters = 0,}
+\DoxyCodeLine{790   hipJitOptionThreadsPerBlock,}
+\DoxyCodeLine{791   hipJitOptionWallTime,}
+\DoxyCodeLine{792   hipJitOptionInfoLogBuffer,}
+\DoxyCodeLine{793   hipJitOptionInfoLogBufferSizeBytes,}
+\DoxyCodeLine{794   hipJitOptionErrorLogBuffer,}
+\DoxyCodeLine{795   hipJitOptionErrorLogBufferSizeBytes,}
+\DoxyCodeLine{796   hipJitOptionOptimizationLevel,}
+\DoxyCodeLine{797   hipJitOptionTargetFromContext,}
+\DoxyCodeLine{798   hipJitOptionTarget,}
+\DoxyCodeLine{799   hipJitOptionFallbackStrategy,}
+\DoxyCodeLine{800   hipJitOptionGenerateDebugInfo,}
+\DoxyCodeLine{801   hipJitOptionLogVerbose,}
+\DoxyCodeLine{802   hipJitOptionGenerateLineInfo,}
+\DoxyCodeLine{803   hipJitOptionCacheMode,}
+\DoxyCodeLine{804   hipJitOptionSm3xOpt,}
+\DoxyCodeLine{805   hipJitOptionFastCompile,}
+\DoxyCodeLine{806   hipJitOptionNumOptions}
+\DoxyCodeLine{807 \} hipJitOption;}
+\DoxyCodeLine{811 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipFuncAttribute \{}
+\DoxyCodeLine{812   hipFuncAttributeMaxDynamicSharedMemorySize = 8,}
+\DoxyCodeLine{813   hipFuncAttributePreferredSharedMemoryCarveout = 9,}
+\DoxyCodeLine{814   hipFuncAttributeMax}
+\DoxyCodeLine{815 \} hipFuncAttribute;}
+\DoxyCodeLine{819 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipFuncCache\_t \{}
+\DoxyCodeLine{820   hipFuncCachePreferNone,    }
+\DoxyCodeLine{821   hipFuncCachePreferShared,  }
+\DoxyCodeLine{822   hipFuncCachePreferL1,      }
+\DoxyCodeLine{823   hipFuncCachePreferEqual,   }
+\DoxyCodeLine{824 \} hipFuncCache\_t;}
+\DoxyCodeLine{828 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipSharedMemConfig \{}
+\DoxyCodeLine{829   hipSharedMemBankSizeDefault,   }
+\DoxyCodeLine{830   hipSharedMemBankSizeFourByte,  }
+\DoxyCodeLine{832   hipSharedMemBankSizeEightByte  }
+\DoxyCodeLine{834 \} hipSharedMemConfig;}
+\DoxyCodeLine{839 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }dim3 \{}
+\DoxyCodeLine{840   uint32\_t x;  }
+\DoxyCodeLine{841   uint32\_t y;  }
+\DoxyCodeLine{842   uint32\_t z;  }
+\DoxyCodeLine{843 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{844   \textcolor{keyword}{constexpr} \_\_host\_\_ \_\_device\_\_ dim3(uint32\_t \_x = 1, uint32\_t \_y = 1, uint32\_t \_z = 1)}
+\DoxyCodeLine{845       : x(\_x), y(\_y), z(\_z)\{\};}
+\DoxyCodeLine{846 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{847 \} dim3;}
+\DoxyCodeLine{848 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipLaunchParams\_t \{}
+\DoxyCodeLine{849   \textcolor{keywordtype}{void}* func;          }
+\DoxyCodeLine{850   dim3 gridDim;        }
+\DoxyCodeLine{851   dim3 blockDim;       }
+\DoxyCodeLine{852   \textcolor{keywordtype}{void}** args;         }
+\DoxyCodeLine{853   \textcolor{keywordtype}{size\_t} sharedMem;    }
+\DoxyCodeLine{854   \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream;  }
+\DoxyCodeLine{855 \} hipLaunchParams;}
+\DoxyCodeLine{856 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipExternalMemoryHandleType\_enum \{}
+\DoxyCodeLine{857   hipExternalMemoryHandleTypeOpaqueFd = 1,}
+\DoxyCodeLine{858   hipExternalMemoryHandleTypeOpaqueWin32 = 2,}
+\DoxyCodeLine{859   hipExternalMemoryHandleTypeOpaqueWin32Kmt = 3,}
+\DoxyCodeLine{860   hipExternalMemoryHandleTypeD3D12Heap = 4,}
+\DoxyCodeLine{861   hipExternalMemoryHandleTypeD3D12Resource = 5,}
+\DoxyCodeLine{862   hipExternalMemoryHandleTypeD3D11Resource = 6,}
+\DoxyCodeLine{863   hipExternalMemoryHandleTypeD3D11ResourceKmt = 7,}
+\DoxyCodeLine{864 \} hipExternalMemoryHandleType;}
+\DoxyCodeLine{865 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipExternalMemoryHandleDesc\_st \{}
+\DoxyCodeLine{866   hipExternalMemoryHandleType type;}
+\DoxyCodeLine{867   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{868     \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{869     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{870       \textcolor{keywordtype}{void}* handle;}
+\DoxyCodeLine{871       \textcolor{keyword}{const} \textcolor{keywordtype}{void}* name;}
+\DoxyCodeLine{872     \} win32;}
+\DoxyCodeLine{873   \} handle;}
+\DoxyCodeLine{874   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} size;}
+\DoxyCodeLine{875   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{876 \} hipExternalMemoryHandleDesc;}
+\DoxyCodeLine{877 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipExternalMemoryBufferDesc\_st \{}
+\DoxyCodeLine{878   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} offset;}
+\DoxyCodeLine{879   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} size;}
+\DoxyCodeLine{880   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{881 \} hipExternalMemoryBufferDesc;}
+\DoxyCodeLine{882 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* hipExternalMemory\_t;}
+\DoxyCodeLine{883 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipExternalSemaphoreHandleType\_enum \{}
+\DoxyCodeLine{884   hipExternalSemaphoreHandleTypeOpaqueFd = 1,}
+\DoxyCodeLine{885   hipExternalSemaphoreHandleTypeOpaqueWin32 = 2,}
+\DoxyCodeLine{886   hipExternalSemaphoreHandleTypeOpaqueWin32Kmt = 3,}
+\DoxyCodeLine{887   hipExternalSemaphoreHandleTypeD3D12Fence = 4}
+\DoxyCodeLine{888 \} hipExternalSemaphoreHandleType;}
+\DoxyCodeLine{889 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipExternalSemaphoreHandleDesc\_st \{}
+\DoxyCodeLine{890   hipExternalSemaphoreHandleType type;}
+\DoxyCodeLine{891   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{892     \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{893     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{894       \textcolor{keywordtype}{void}* handle;}
+\DoxyCodeLine{895       \textcolor{keyword}{const} \textcolor{keywordtype}{void}* name;}
+\DoxyCodeLine{896     \} win32;}
+\DoxyCodeLine{897   \} handle;}
+\DoxyCodeLine{898   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{899 \} hipExternalSemaphoreHandleDesc;}
+\DoxyCodeLine{900 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* hipExternalSemaphore\_t;}
+\DoxyCodeLine{901 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipExternalSemaphoreSignalParams\_st \{}
+\DoxyCodeLine{902   \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{903     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{904       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} value;}
+\DoxyCodeLine{905     \} fence;}
+\DoxyCodeLine{906     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{907       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} key;}
+\DoxyCodeLine{908     \} keyedMutex;}
+\DoxyCodeLine{909     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} reserved[12];}
+\DoxyCodeLine{910   \} params;}
+\DoxyCodeLine{911   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{912   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} reserved[16];}
+\DoxyCodeLine{913 \} hipExternalSemaphoreSignalParams;}
+\DoxyCodeLine{917 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipExternalSemaphoreWaitParams\_st \{}
+\DoxyCodeLine{918   \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{919     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{920       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} value;}
+\DoxyCodeLine{921     \} fence;}
+\DoxyCodeLine{922     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{923       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} key;}
+\DoxyCodeLine{924       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} timeoutMs;}
+\DoxyCodeLine{925     \} keyedMutex;}
+\DoxyCodeLine{926     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} reserved[10];}
+\DoxyCodeLine{927   \} params;}
+\DoxyCodeLine{928   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{929   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} reserved[16];}
+\DoxyCodeLine{930 \} hipExternalSemaphoreWaitParams;}
+\DoxyCodeLine{931 }
+\DoxyCodeLine{932 \textcolor{preprocessor}{\#if \_\_HIP\_HAS\_GET\_PCH}}
+\DoxyCodeLine{938 \textcolor{keywordtype}{void} \_\_hipGetPCH(\textcolor{keyword}{const} \textcolor{keywordtype}{char}** pch, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* size);}
+\DoxyCodeLine{939 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{940 }
+\DoxyCodeLine{941 \textcolor{comment}{/*}}
+\DoxyCodeLine{942 \textcolor{comment}{ * @brief HIP Devices used by current OpenGL Context.}}
+\DoxyCodeLine{943 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{944 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{945 \textcolor{comment}{ */}}
+\DoxyCodeLine{946 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipGLDeviceList \{}
+\DoxyCodeLine{947   hipGLDeviceListAll = 1,           }
+\DoxyCodeLine{948   hipGLDeviceListCurrentFrame = 2,  }
+\DoxyCodeLine{950   hipGLDeviceListNextFrame = 3      }
+\DoxyCodeLine{952 \} hipGLDeviceList;}
+\DoxyCodeLine{953 }
+\DoxyCodeLine{954 \textcolor{comment}{/*}}
+\DoxyCodeLine{955 \textcolor{comment}{ * @brief HIP Access falgs for Interop resources.}}
+\DoxyCodeLine{956 \textcolor{comment}{ * @enum}}
+\DoxyCodeLine{957 \textcolor{comment}{ * @ingroup Enumerations}}
+\DoxyCodeLine{958 \textcolor{comment}{ */}}
+\DoxyCodeLine{959 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipGraphicsRegisterFlags \{}
+\DoxyCodeLine{960   hipGraphicsRegisterFlagsNone = 0,}
+\DoxyCodeLine{961   hipGraphicsRegisterFlagsReadOnly = 1,  }
+\DoxyCodeLine{962   hipGraphicsRegisterFlagsWriteDiscard =}
+\DoxyCodeLine{963       2,  }
+\DoxyCodeLine{964   hipGraphicsRegisterFlagsSurfaceLoadStore = 4,  }
+\DoxyCodeLine{965   hipGraphicsRegisterFlagsTextureGather =}
+\DoxyCodeLine{966       8  }
+\DoxyCodeLine{967 \} hipGraphicsRegisterFlags;}
+\DoxyCodeLine{968 }
+\DoxyCodeLine{969 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\_hipGraphicsResource hipGraphicsResource;}
+\DoxyCodeLine{970 }
+\DoxyCodeLine{971 \textcolor{keyword}{typedef} hipGraphicsResource* hipGraphicsResource\_t;}
+\DoxyCodeLine{972 }
+\DoxyCodeLine{973 \textcolor{comment}{// Doxygen end group GlobalDefs}}
+\DoxyCodeLine{975 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{976 \textcolor{comment}{// The handle allows the async commands to use the stream even if the parent hipStream\_t goes}}
+\DoxyCodeLine{977 \textcolor{comment}{// out-\/of-\/scope.}}
+\DoxyCodeLine{978 \textcolor{comment}{// typedef class ihipStream\_t * hipStream\_t;}}
+\DoxyCodeLine{979 \textcolor{comment}{/*}}
+\DoxyCodeLine{980 \textcolor{comment}{ * Opaque structure allows the true event (pointed at by the handle) to remain "{}live"{} even if the}}
+\DoxyCodeLine{981 \textcolor{comment}{ * surrounding hipEvent\_t goes out-\/of-\/scope. This is handy for cases where the hipEvent\_t goes}}
+\DoxyCodeLine{982 \textcolor{comment}{ * out-\/of-\/scope but the true event is being written by some async queue or device */}}
+\DoxyCodeLine{983 \textcolor{comment}{// typedef struct hipEvent\_t \{}}
+\DoxyCodeLine{984 \textcolor{comment}{//    struct ihipEvent\_t *\_handle;}}
+\DoxyCodeLine{985 \textcolor{comment}{//\} hipEvent\_t;}}
+\DoxyCodeLine{1004 \textcolor{comment}{}\textcolor{comment}{// TODO-\/ctx -\/ more description on error codes.}}
+\DoxyCodeLine{1005 hipError\_t hipInit(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1006 }
+\DoxyCodeLine{1007 \textcolor{comment}{// TODO docstring}}
+\DoxyCodeLine{1008 hipError\_t hipStreamGetBackendHandles(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}* nativeInfo, \textcolor{keywordtype}{int}* size);}
+\DoxyCodeLine{1009 }
+\DoxyCodeLine{1025 hipError\_t hipDriverGetVersion(\textcolor{keywordtype}{int}* driverVersion);}
+\DoxyCodeLine{1040 hipError\_t hipRuntimeGetVersion(\textcolor{keywordtype}{int}* runtimeVersion);}
+\DoxyCodeLine{1048 hipError\_t hipDeviceGet(hipDevice\_t* device, \textcolor{keywordtype}{int} ordinal);}
+\DoxyCodeLine{1057 hipError\_t hipDeviceComputeCapability(\textcolor{keywordtype}{int}* major, \textcolor{keywordtype}{int}* minor, hipDevice\_t device);}
+\DoxyCodeLine{1066 hipError\_t hipDeviceGetName(\textcolor{keywordtype}{char}* name, \textcolor{keywordtype}{int} len, hipDevice\_t device);}
+\DoxyCodeLine{1076 hipError\_t hipDeviceGetP2PAttribute(\textcolor{keywordtype}{int}* value, hipDeviceP2PAttr attr, \textcolor{keywordtype}{int} srcDevice,}
+\DoxyCodeLine{1077                                     \textcolor{keywordtype}{int} dstDevice);}
+\DoxyCodeLine{1086 hipError\_t hipDeviceGetPCIBusId(\textcolor{keywordtype}{char}* pciBusId, \textcolor{keywordtype}{int} len, \textcolor{keywordtype}{int} device);}
+\DoxyCodeLine{1094 hipError\_t hipDeviceGetByPCIBusId(\textcolor{keywordtype}{int}* device, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* pciBusId);}
+\DoxyCodeLine{1102 hipError\_t hipDeviceTotalMem(\textcolor{keywordtype}{size\_t}* bytes, hipDevice\_t device);}
+\DoxyCodeLine{1103 \textcolor{comment}{// doxygen end initialization}}
+\DoxyCodeLine{1122 \textcolor{comment}{}hipError\_t hipDeviceSynchronize(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1134 hipError\_t hipDeviceReset(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1166 hipError\_t hipSetDevice(\textcolor{keywordtype}{int} deviceId);}
+\DoxyCodeLine{1180 hipError\_t hipGetDevice(\textcolor{keywordtype}{int}* deviceId);}
+\DoxyCodeLine{1193 hipError\_t hipGetDeviceCount(\textcolor{keywordtype}{int}* count);}
+\DoxyCodeLine{1203 hipError\_t hipDeviceGetAttribute(\textcolor{keywordtype}{int}* pi, \mbox{\hyperlink{group___global_defs_gacc0acd7b9bda126c6bb3dfd6e2796d7c}{hipDeviceAttribute\_t}} attr, \textcolor{keywordtype}{int} deviceId);}
+\DoxyCodeLine{1217 hipError\_t hipGetDeviceProperties(\mbox{\hyperlink{structhip_device_prop__t}{hipDeviceProp\_t}}* prop, \textcolor{keywordtype}{int} deviceId);}
+\DoxyCodeLine{1228 hipError\_t hipDeviceSetCacheConfig(hipFuncCache\_t cacheConfig);}
+\DoxyCodeLine{1239 hipError\_t hipDeviceGetCacheConfig(hipFuncCache\_t* cacheConfig);}
+\DoxyCodeLine{1250 hipError\_t hipDeviceGetLimit(\textcolor{keywordtype}{size\_t}* pValue, \textcolor{keyword}{enum} hipLimit\_t limit);}
+\DoxyCodeLine{1262 hipError\_t hipDeviceGetSharedMemConfig(hipSharedMemConfig* pConfig);}
+\DoxyCodeLine{1270 hipError\_t hipGetDeviceFlags(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* flags);}
+\DoxyCodeLine{1282 hipError\_t hipDeviceSetSharedMemConfig(hipSharedMemConfig config);}
+\DoxyCodeLine{1307 hipError\_t hipSetDeviceFlags(\textcolor{keywordtype}{unsigned} flags);}
+\DoxyCodeLine{1316 hipError\_t hipChooseDevice(\textcolor{keywordtype}{int}* device, \textcolor{keyword}{const} \mbox{\hyperlink{structhip_device_prop__t}{hipDeviceProp\_t}}* prop);}
+\DoxyCodeLine{1330 hipError\_t hipExtGetLinkTypeAndHopCount(\textcolor{keywordtype}{int} device1, \textcolor{keywordtype}{int} device2, uint32\_t* linktype,}
+\DoxyCodeLine{1331                                         uint32\_t* hopcount);}
+\DoxyCodeLine{1332 \textcolor{comment}{// TODO: implement IPC apis}}
+\DoxyCodeLine{1358 \textcolor{comment}{}hipError\_t hipIpcGetMemHandle(hipIpcMemHandle\_t* handle, \textcolor{keywordtype}{void}* devPtr);}
+\DoxyCodeLine{1395 hipError\_t hipIpcOpenMemHandle(\textcolor{keywordtype}{void}** devPtr, hipIpcMemHandle\_t handle, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1414 hipError\_t hipIpcCloseMemHandle(\textcolor{keywordtype}{void}* devPtr);}
+\DoxyCodeLine{1415 }
+\DoxyCodeLine{1430 hipError\_t hipIpcGetEventHandle(hipIpcEventHandle\_t* handle, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{1431 }
+\DoxyCodeLine{1448 hipError\_t hipIpcOpenEventHandle(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}}* event, hipIpcEventHandle\_t handle);}
+\DoxyCodeLine{1449 }
+\DoxyCodeLine{1450 \textcolor{comment}{// end doxygen Device}}
+\DoxyCodeLine{1474 \textcolor{comment}{}hipError\_t hipFuncSetAttribute(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* func, hipFuncAttribute attr, \textcolor{keywordtype}{int} value);}
+\DoxyCodeLine{1485 hipError\_t hipFuncSetCacheConfig(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* func, hipFuncCache\_t config);}
+\DoxyCodeLine{1498 hipError\_t hipFuncSetSharedMemConfig(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* func, hipSharedMemConfig config);}
+\DoxyCodeLine{1499 \textcolor{comment}{// doxygen end execution}}
+\DoxyCodeLine{1521 \textcolor{comment}{}hipError\_t hipGetLastError(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1532 hipError\_t hipPeekAtLastError(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1541 \textcolor{keyword}{const} \textcolor{keywordtype}{char}* hipGetErrorName(hipError\_t hip\_error);}
+\DoxyCodeLine{1552 \textcolor{keyword}{const} \textcolor{keywordtype}{char}* hipGetErrorString(hipError\_t hipError);}
+\DoxyCodeLine{1553 \textcolor{comment}{// end doxygen Error}}
+\DoxyCodeLine{1584 \textcolor{comment}{}hipError\_t hipStreamCreate(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}}* stream);}
+\DoxyCodeLine{1602 hipError\_t hipStreamCreateWithFlags(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}}* stream, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1620 hipError\_t hipStreamCreateWithPriority(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}}* stream, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{int} priority);}
+\DoxyCodeLine{1635 hipError\_t hipDeviceGetStreamPriorityRange(\textcolor{keywordtype}{int}* leastPriority, \textcolor{keywordtype}{int}* greatestPriority);}
+\DoxyCodeLine{1654 hipError\_t hipStreamDestroy(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{1670 hipError\_t hipStreamQuery(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{1691 hipError\_t hipStreamSynchronize(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{1712 hipError\_t hipStreamWaitEvent(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1726 hipError\_t hipStreamGetFlags(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* flags);}
+\DoxyCodeLine{1740 hipError\_t hipStreamGetPriority(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{int}* priority);}
+\DoxyCodeLine{1760 hipError\_t hipExtStreamCreateWithCUMask(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}}* stream, uint32\_t cuMaskSize,}
+\DoxyCodeLine{1761                                         \textcolor{keyword}{const} uint32\_t* cuMask);}
+\DoxyCodeLine{1774 hipError\_t hipExtStreamGetCUMask(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, uint32\_t cuMaskSize, uint32\_t* cuMask);}
+\DoxyCodeLine{1778 \textcolor{keyword}{typedef} void (*hipStreamCallback\_t)(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipError\_t status, \textcolor{keywordtype}{void}* userData);}
+\DoxyCodeLine{1794 hipError\_t hipStreamAddCallback(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipStreamCallback\_t callback, \textcolor{keywordtype}{void}* userData,}
+\DoxyCodeLine{1795                                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1796 \textcolor{comment}{// end doxygen Stream}}
+\DoxyCodeLine{1839 \textcolor{comment}{}hipError\_t hipStreamWaitValue32(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{void}* ptr, uint32\_t value, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags,}
+\DoxyCodeLine{1840                                 uint32\_t mask \_\_dparm(0xFFFFFFFF));}
+\DoxyCodeLine{1873 hipError\_t hipStreamWaitValue64(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{void}* ptr, uint64\_t value, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags,}
+\DoxyCodeLine{1874                                 uint64\_t mask \_\_dparm(0xFFFFFFFFFFFFFFFF));}
+\DoxyCodeLine{1894 hipError\_t hipStreamWriteValue32(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{void}* ptr, uint32\_t value, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1914 hipError\_t hipStreamWriteValue64(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{void}* ptr, uint64\_t value, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1915 \textcolor{comment}{// end doxygen Stream Memory Operations}}
+\DoxyCodeLine{1948 \textcolor{comment}{}hipError\_t hipEventCreateWithFlags(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}}* event, \textcolor{keywordtype}{unsigned} flags);}
+\DoxyCodeLine{1960 hipError\_t hipEventCreate(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}}* event);}
+\DoxyCodeLine{1988 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{1989 hipError\_t hipEventRecord(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream = NULL);}
+\DoxyCodeLine{1990 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{1991 hipError\_t hipEventRecord(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{1992 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{2009 hipError\_t hipEventDestroy(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{2027 hipError\_t hipEventSynchronize(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{2063 hipError\_t hipEventElapsedTime(\textcolor{keywordtype}{float}* ms, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} start, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} stop);}
+\DoxyCodeLine{2079 hipError\_t hipEventQuery(\mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{2080 \textcolor{comment}{// end doxygen Events}}
+\DoxyCodeLine{2107 \textcolor{comment}{}hipError\_t hipPointerGetAttributes(\mbox{\hyperlink{structhip_pointer_attribute__t}{hipPointerAttribute\_t}}* attributes, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{2108 }
+\DoxyCodeLine{2119 hipError\_t hipImportExternalSemaphore(hipExternalSemaphore\_t* extSem\_out,}
+\DoxyCodeLine{2120                                       \textcolor{keyword}{const} hipExternalSemaphoreHandleDesc* semHandleDesc);}
+\DoxyCodeLine{2133 hipError\_t hipSignalExternalSemaphoresAsync(\textcolor{keyword}{const} hipExternalSemaphore\_t* extSemArray,}
+\DoxyCodeLine{2134                                             \textcolor{keyword}{const} hipExternalSemaphoreSignalParams* paramsArray,}
+\DoxyCodeLine{2135                                             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numExtSems, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{2148 hipError\_t hipWaitExternalSemaphoresAsync(\textcolor{keyword}{const} hipExternalSemaphore\_t* extSemArray,}
+\DoxyCodeLine{2149                                           \textcolor{keyword}{const} hipExternalSemaphoreWaitParams* paramsArray,}
+\DoxyCodeLine{2150                                           \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numExtSems, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{2161 hipError\_t hipDestroyExternalSemaphore(hipExternalSemaphore\_t extSem);}
+\DoxyCodeLine{2162 }
+\DoxyCodeLine{2173 hipError\_t hipImportExternalMemory(hipExternalMemory\_t* extMem\_out,}
+\DoxyCodeLine{2174                                    \textcolor{keyword}{const} hipExternalMemoryHandleDesc* memHandleDesc);}
+\DoxyCodeLine{2186 hipError\_t hipExternalMemoryGetMappedBuffer(\textcolor{keywordtype}{void}** devPtr, hipExternalMemory\_t extMem,}
+\DoxyCodeLine{2187                                             \textcolor{keyword}{const} hipExternalMemoryBufferDesc* bufferDesc);}
+\DoxyCodeLine{2197 hipError\_t hipDestroyExternalMemory(hipExternalMemory\_t extMem);}
+\DoxyCodeLine{2211 hipError\_t hipMalloc(\textcolor{keywordtype}{void}** ptr, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{2226 hipError\_t hipExtMallocWithFlags(\textcolor{keywordtype}{void}** ptr, \textcolor{keywordtype}{size\_t} sizeBytes, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{2239 DEPRECATED(\textcolor{stringliteral}{"{}use hipHostMalloc instead"{}})}
+\DoxyCodeLine{2240 hipError\_t hipMallocHost(\textcolor{keywordtype}{void}** ptr, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{2253 DEPRECATED("{}use hipHostMalloc instead"{})}
+\DoxyCodeLine{2254 hipError\_t hipMemAllocHost(\textcolor{keywordtype}{void}** ptr, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{2268 hipError\_t hipHostMalloc(\textcolor{keywordtype}{void}** ptr, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{2288 hipError\_t hipMallocManaged(\textcolor{keywordtype}{void}** dev\_ptr, \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{2289                             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags \_\_dparm(hipMemAttachGlobal));}
+\DoxyCodeLine{2300 hipError\_t hipMemPrefetchAsync(const \textcolor{keywordtype}{void}* dev\_ptr, \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{int} device,}
+\DoxyCodeLine{2301                                \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2312 hipError\_t hipMemAdvise(const \textcolor{keywordtype}{void}* dev\_ptr, \textcolor{keywordtype}{size\_t} count, hipMemoryAdvise advice, \textcolor{keywordtype}{int} device);}
+\DoxyCodeLine{2325 hipError\_t hipMemRangeGetAttribute(\textcolor{keywordtype}{void}* data, \textcolor{keywordtype}{size\_t} data\_size, hipMemRangeAttribute attribute,}
+\DoxyCodeLine{2326                                    const \textcolor{keywordtype}{void}* dev\_ptr, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{2341 hipError\_t hipMemRangeGetAttributes(\textcolor{keywordtype}{void}** data, \textcolor{keywordtype}{size\_t}* data\_sizes,}
+\DoxyCodeLine{2342                                     hipMemRangeAttribute* attributes, \textcolor{keywordtype}{size\_t} num\_attributes,}
+\DoxyCodeLine{2343                                     const \textcolor{keywordtype}{void}* dev\_ptr, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{2356 hipError\_t hipStreamAttachMemAsync(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, \textcolor{keywordtype}{void}* dev\_ptr, \textcolor{keywordtype}{size\_t} length \_\_dparm(0),}
+\DoxyCodeLine{2357                                    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags \_\_dparm(hipMemAttachSingle));}
+\DoxyCodeLine{2358 \textcolor{comment}{// end doxygen Managed Memory}}
+\DoxyCodeLine{2375 \textcolor{comment}{}DEPRECATED("{}use hipHostMalloc instead"{})}
+\DoxyCodeLine{2376 hipError\_t hipHostAlloc(\textcolor{keywordtype}{void}** ptr, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{2388 hipError\_t hipHostGetDevicePointer(\textcolor{keywordtype}{void}** devPtr, \textcolor{keywordtype}{void}* hstPtr, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{2398 hipError\_t hipHostGetFlags(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* flagsPtr, \textcolor{keywordtype}{void}* hostPtr);}
+\DoxyCodeLine{2435 hipError\_t hipHostRegister(\textcolor{keywordtype}{void}* hostPtr, \textcolor{keywordtype}{size\_t} sizeBytes, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{2444 hipError\_t hipHostUnregister(\textcolor{keywordtype}{void}* hostPtr);}
+\DoxyCodeLine{2463 hipError\_t hipMallocPitch(\textcolor{keywordtype}{void}** ptr, \textcolor{keywordtype}{size\_t}* pitch, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height);}
+\DoxyCodeLine{2485 hipError\_t hipMemAllocPitch(hipDeviceptr\_t* dptr, \textcolor{keywordtype}{size\_t}* pitch, \textcolor{keywordtype}{size\_t} widthInBytes, \textcolor{keywordtype}{size\_t} height,}
+\DoxyCodeLine{2486                             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} elementSizeBytes);}
+\DoxyCodeLine{2500 hipError\_t hipFree(\textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{2510 DEPRECATED("{}use hipHostFree instead"{})}
+\DoxyCodeLine{2511 hipError\_t hipFreeHost(\textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{2525 hipError\_t hipHostFree(\textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{2555 hipError\_t hipMemcpy(\textcolor{keywordtype}{void}* dst, const \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes, hipMemcpyKind kind);}
+\DoxyCodeLine{2556 \textcolor{comment}{// TODO: Add description}}
+\DoxyCodeLine{2557 hipError\_t hipMemcpyWithStream(\textcolor{keywordtype}{void}* dst, const \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes, hipMemcpyKind kind,}
+\DoxyCodeLine{2558                                \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{2576 hipError\_t hipMemcpyHtoD(hipDeviceptr\_t dst, \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes);}
+\DoxyCodeLine{2594 hipError\_t hipMemcpyDtoH(\textcolor{keywordtype}{void}* dst, hipDeviceptr\_t src, \textcolor{keywordtype}{size\_t} sizeBytes);}
+\DoxyCodeLine{2612 hipError\_t hipMemcpyDtoD(hipDeviceptr\_t dst, hipDeviceptr\_t src, \textcolor{keywordtype}{size\_t} sizeBytes);}
+\DoxyCodeLine{2630 hipError\_t hipMemcpyHtoDAsync(hipDeviceptr\_t dst, \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{2648 hipError\_t hipMemcpyDtoHAsync(\textcolor{keywordtype}{void}* dst, hipDeviceptr\_t src, \textcolor{keywordtype}{size\_t} sizeBytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{2666 hipError\_t hipMemcpyDtoDAsync(hipDeviceptr\_t dst, hipDeviceptr\_t src, \textcolor{keywordtype}{size\_t} sizeBytes,}
+\DoxyCodeLine{2667                               \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{2668 }
+\DoxyCodeLine{2683 hipError\_t hipModuleGetGlobal(hipDeviceptr\_t* dptr, \textcolor{keywordtype}{size\_t}* bytes, \mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}} hmod,}
+\DoxyCodeLine{2684                               const \textcolor{keywordtype}{char}* name);}
+\DoxyCodeLine{2685 hipError\_t hipGetSymbolAddress(\textcolor{keywordtype}{void}** devPtr, const \textcolor{keywordtype}{void}* symbol);}
+\DoxyCodeLine{2686 hipError\_t hipGetSymbolSize(\textcolor{keywordtype}{size\_t}* size, const \textcolor{keywordtype}{void}* symbol);}
+\DoxyCodeLine{2687 hipError\_t hipMemcpyToSymbol(const \textcolor{keywordtype}{void}* symbol, const \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes,}
+\DoxyCodeLine{2688                              \textcolor{keywordtype}{size\_t} offset \_\_dparm(0),}
+\DoxyCodeLine{2689                              hipMemcpyKind kind \_\_dparm(hipMemcpyHostToDevice));}
+\DoxyCodeLine{2690 hipError\_t hipMemcpyToSymbolAsync(const \textcolor{keywordtype}{void}* symbol, const \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes,}
+\DoxyCodeLine{2691                                   \textcolor{keywordtype}{size\_t} offset, hipMemcpyKind kind, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2692 hipError\_t hipMemcpyFromSymbol(\textcolor{keywordtype}{void}* dst, const \textcolor{keywordtype}{void}* symbol, \textcolor{keywordtype}{size\_t} sizeBytes,}
+\DoxyCodeLine{2693                                \textcolor{keywordtype}{size\_t} offset \_\_dparm(0),}
+\DoxyCodeLine{2694                                hipMemcpyKind kind \_\_dparm(hipMemcpyDeviceToHost));}
+\DoxyCodeLine{2695 hipError\_t hipMemcpyFromSymbolAsync(\textcolor{keywordtype}{void}* dst, const \textcolor{keywordtype}{void}* symbol, \textcolor{keywordtype}{size\_t} sizeBytes, \textcolor{keywordtype}{size\_t} offset,}
+\DoxyCodeLine{2696                                     hipMemcpyKind kind, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2725 hipError\_t hipMemcpyAsync(\textcolor{keywordtype}{void}* dst, const \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes, hipMemcpyKind kind,}
+\DoxyCodeLine{2726                           \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2736 hipError\_t hipMemset(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{int} value, \textcolor{keywordtype}{size\_t} sizeBytes);}
+\DoxyCodeLine{2746 hipError\_t hipMemsetD8(hipDeviceptr\_t dest, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} value, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{2762 hipError\_t hipMemsetD8Async(hipDeviceptr\_t dest, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} value, \textcolor{keywordtype}{size\_t} count,}
+\DoxyCodeLine{2763                             \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2773 hipError\_t hipMemsetD16(hipDeviceptr\_t dest, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} value, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{2789 hipError\_t hipMemsetD16Async(hipDeviceptr\_t dest, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} value, \textcolor{keywordtype}{size\_t} count,}
+\DoxyCodeLine{2790                              \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2800 hipError\_t hipMemsetD32(hipDeviceptr\_t dest, \textcolor{keywordtype}{int} value, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{2816 hipError\_t hipMemsetAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{int} value, \textcolor{keywordtype}{size\_t} sizeBytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2832 hipError\_t hipMemsetD32Async(hipDeviceptr\_t dst, \textcolor{keywordtype}{int} value, \textcolor{keywordtype}{size\_t} count,}
+\DoxyCodeLine{2833                              \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2844 hipError\_t hipMemset2D(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} pitch, \textcolor{keywordtype}{int} value, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height);}
+\DoxyCodeLine{2856 hipError\_t hipMemset2DAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} pitch, \textcolor{keywordtype}{int} value, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height,}
+\DoxyCodeLine{2857                             \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2866 hipError\_t hipMemset3D(hipPitchedPtr pitchedDevPtr, \textcolor{keywordtype}{int} value, hipExtent extent);}
+\DoxyCodeLine{2876 hipError\_t hipMemset3DAsync(hipPitchedPtr pitchedDevPtr, \textcolor{keywordtype}{int} value, hipExtent extent,}
+\DoxyCodeLine{2877                             \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{2887 hipError\_t hipMemGetInfo(\textcolor{keywordtype}{size\_t}* free, \textcolor{keywordtype}{size\_t}* total);}
+\DoxyCodeLine{2888 hipError\_t hipMemPtrGetInfo(\textcolor{keywordtype}{void}* ptr, \textcolor{keywordtype}{size\_t}* size);}
+\DoxyCodeLine{2901 hipError\_t hipMallocArray(hipArray** array, const hipChannelFormatDesc* desc, \textcolor{keywordtype}{size\_t} width,}
+\DoxyCodeLine{2902                           \textcolor{keywordtype}{size\_t} height \_\_dparm(0), \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags \_\_dparm(hipArrayDefault));}
+\DoxyCodeLine{2903 hipError\_t hipArrayCreate(hipArray** pHandle, const HIP\_ARRAY\_DESCRIPTOR* pAllocateArray);}
+\DoxyCodeLine{2904 hipError\_t hipArrayDestroy(hipArray* array);}
+\DoxyCodeLine{2905 hipError\_t hipArray3DCreate(hipArray** array, const HIP\_ARRAY3D\_DESCRIPTOR* pAllocateArray);}
+\DoxyCodeLine{2906 hipError\_t hipMalloc3D(hipPitchedPtr* pitchedDevPtr, hipExtent extent);}
+\DoxyCodeLine{2915 hipError\_t hipFreeArray(hipArray* array);}
+\DoxyCodeLine{2923 hipError\_t hipFreeMipmappedArray(hipMipmappedArray\_t mipmappedArray);}
+\DoxyCodeLine{2935 hipError\_t hipMalloc3DArray(hipArray** array, const struct hipChannelFormatDesc* desc,}
+\DoxyCodeLine{2936                             struct hipExtent extent, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{2948 hipError\_t hipMallocMipmappedArray(hipMipmappedArray\_t* mipmappedArray,}
+\DoxyCodeLine{2949                                    const struct hipChannelFormatDesc* desc, struct hipExtent extent,}
+\DoxyCodeLine{2950                                    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numLevels, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags \_\_dparm(0));}
+\DoxyCodeLine{2960 hipError\_t hipGetMipmappedArrayLevel(hipArray\_t* levelArray,}
+\DoxyCodeLine{2961                                      hipMipmappedArray\_const\_t mipmappedArray, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} level);}
+\DoxyCodeLine{2978 hipError\_t hipMemcpy2D(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, const \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} width,}
+\DoxyCodeLine{2979                        \textcolor{keywordtype}{size\_t} height, hipMemcpyKind kind);}
+\DoxyCodeLine{2989 hipError\_t hipMemcpyParam2D(const hip\_Memcpy2D* pCopy);}
+\DoxyCodeLine{3000 hipError\_t hipMemcpyParam2DAsync(const hip\_Memcpy2D* pCopy, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3018 hipError\_t hipMemcpy2DAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, const \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} width,}
+\DoxyCodeLine{3019                             \textcolor{keywordtype}{size\_t} height, hipMemcpyKind kind, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3037 hipError\_t hipMemcpy2DToArray(hipArray* dst, \textcolor{keywordtype}{size\_t} wOffset, \textcolor{keywordtype}{size\_t} hOffset, const \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{3038                               \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height, hipMemcpyKind kind);}
+\DoxyCodeLine{3057 hipError\_t hipMemcpy2DToArrayAsync(hipArray* dst, \textcolor{keywordtype}{size\_t} wOffset, \textcolor{keywordtype}{size\_t} hOffset, const \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{3058                                    \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height, hipMemcpyKind kind,}
+\DoxyCodeLine{3059                                    \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3075 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3076 hipError\_t hipMemcpyToArray(hipArray* dst, \textcolor{keywordtype}{size\_t} wOffset, \textcolor{keywordtype}{size\_t} hOffset, const \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{3077                             \textcolor{keywordtype}{size\_t} count, hipMemcpyKind kind);}
+\DoxyCodeLine{3093 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3094 hipError\_t hipMemcpyFromArray(\textcolor{keywordtype}{void}* dst, hipArray\_const\_t srcArray, \textcolor{keywordtype}{size\_t} wOffset, \textcolor{keywordtype}{size\_t} hOffset,}
+\DoxyCodeLine{3095                               \textcolor{keywordtype}{size\_t} count, hipMemcpyKind kind);}
+\DoxyCodeLine{3113 hipError\_t hipMemcpy2DFromArray(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, hipArray\_const\_t src, \textcolor{keywordtype}{size\_t} wOffset,}
+\DoxyCodeLine{3114                                 \textcolor{keywordtype}{size\_t} hOffset, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height, hipMemcpyKind kind);}
+\DoxyCodeLine{3133 hipError\_t hipMemcpy2DFromArrayAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, hipArray\_const\_t src, \textcolor{keywordtype}{size\_t} wOffset,}
+\DoxyCodeLine{3134                                      \textcolor{keywordtype}{size\_t} hOffset, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height,}
+\DoxyCodeLine{3135                                      hipMemcpyKind kind, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3149 hipError\_t hipMemcpyAtoH(\textcolor{keywordtype}{void}* dst, hipArray* srcArray, \textcolor{keywordtype}{size\_t} srcOffset, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{3163 hipError\_t hipMemcpyHtoA(hipArray* dstArray, \textcolor{keywordtype}{size\_t} dstOffset, const \textcolor{keywordtype}{void}* srcHost, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{3174 hipError\_t hipMemcpy3D(const struct hipMemcpy3DParms* p);}
+\DoxyCodeLine{3186 hipError\_t hipMemcpy3DAsync(const struct hipMemcpy3DParms* p, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3197 hipError\_t hipDrvMemcpy3D(const HIP\_MEMCPY3D* pCopy);}
+\DoxyCodeLine{3209 hipError\_t hipDrvMemcpy3DAsync(const HIP\_MEMCPY3D* pCopy, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{3210 \textcolor{comment}{// doxygen end Memory}}
+\DoxyCodeLine{3238 \textcolor{comment}{}hipError\_t hipDeviceCanAccessPeer(\textcolor{keywordtype}{int}* canAccessPeer, \textcolor{keywordtype}{int} deviceId, \textcolor{keywordtype}{int} peerDeviceId);}
+\DoxyCodeLine{3255 hipError\_t hipDeviceEnablePeerAccess(\textcolor{keywordtype}{int} peerDeviceId, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{3267 hipError\_t hipDeviceDisablePeerAccess(\textcolor{keywordtype}{int} peerDeviceId);}
+\DoxyCodeLine{3280 hipError\_t hipMemGetAddressRange(hipDeviceptr\_t* pbase, \textcolor{keywordtype}{size\_t}* psize, hipDeviceptr\_t dptr);}
+\DoxyCodeLine{3281 \textcolor{preprocessor}{\#ifndef USE\_PEER\_NON\_UNIFIED}}
+\DoxyCodeLine{3282 \textcolor{preprocessor}{\#define USE\_PEER\_NON\_UNIFIED 1}}
+\DoxyCodeLine{3283 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{3284 \textcolor{preprocessor}{\#if USE\_PEER\_NON\_UNIFIED == 1}}
+\DoxyCodeLine{3296 hipError\_t hipMemcpyPeer(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{int} dstDeviceId, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{int} srcDeviceId,}
+\DoxyCodeLine{3297                          \textcolor{keywordtype}{size\_t} sizeBytes);}
+\DoxyCodeLine{3310 hipError\_t hipMemcpyPeerAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{int} dstDeviceId, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{int} srcDevice,}
+\DoxyCodeLine{3311                               \textcolor{keywordtype}{size\_t} sizeBytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3312 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{3313 \textcolor{comment}{// doxygen end PeerToPeer}}
+\DoxyCodeLine{3343 \textcolor{comment}{}DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3344 hipError\_t hipCtxCreate(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}}* ctx, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags, hipDevice\_t device);}
+\DoxyCodeLine{3355 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3356 hipError\_t hipCtxDestroy(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}} ctx);}
+\DoxyCodeLine{3367 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3368 hipError\_t hipCtxPopCurrent(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}}* ctx);}
+\DoxyCodeLine{3379 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3380 hipError\_t hipCtxPushCurrent(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}} ctx);}
+\DoxyCodeLine{3391 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3392 hipError\_t hipCtxSetCurrent(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}} ctx);}
+\DoxyCodeLine{3403 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3404 hipError\_t hipCtxGetCurrent(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}}* ctx);}
+\DoxyCodeLine{3415 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3416 hipError\_t hipCtxGetDevice(hipDevice\_t* device);}
+\DoxyCodeLine{3434 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3435 hipError\_t hipCtxGetApiVersion(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}} ctx, \textcolor{keywordtype}{int}* apiVersion);}
+\DoxyCodeLine{3449 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3450 hipError\_t hipCtxGetCacheConfig(hipFuncCache\_t* cacheConfig);}
+\DoxyCodeLine{3464 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3465 hipError\_t hipCtxSetCacheConfig(hipFuncCache\_t cacheConfig);}
+\DoxyCodeLine{3479 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3480 hipError\_t hipCtxSetSharedMemConfig(hipSharedMemConfig config);}
+\DoxyCodeLine{3494 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3495 hipError\_t hipCtxGetSharedMemConfig(hipSharedMemConfig* pConfig);}
+\DoxyCodeLine{3507 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3508 hipError\_t hipCtxSynchronize(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{3519 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3520 hipError\_t hipCtxGetFlags(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* flags);}
+\DoxyCodeLine{3540 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3541 hipError\_t hipCtxEnablePeerAccess(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}} peerCtx, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{3558 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{3559 hipError\_t hipCtxDisablePeerAccess(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}} peerCtx);}
+\DoxyCodeLine{3560 \textcolor{comment}{// doxygen end Context deprecated}}
+\DoxyCodeLine{3576 \textcolor{comment}{}hipError\_t hipDevicePrimaryCtxGetState(hipDevice\_t dev, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* flags, \textcolor{keywordtype}{int}* active);}
+\DoxyCodeLine{3589 hipError\_t hipDevicePrimaryCtxRelease(hipDevice\_t dev);}
+\DoxyCodeLine{3601 hipError\_t hipDevicePrimaryCtxRetain(\mbox{\hyperlink{class_c_h_i_p_context}{hipCtx\_t}}* pctx, hipDevice\_t dev);}
+\DoxyCodeLine{3612 hipError\_t hipDevicePrimaryCtxReset(hipDevice\_t dev);}
+\DoxyCodeLine{3624 hipError\_t hipDevicePrimaryCtxSetFlags(hipDevice\_t dev, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{3625 \textcolor{comment}{// doxygen end Context Management}}
+\DoxyCodeLine{3647 \textcolor{comment}{}hipError\_t hipModuleLoad(\mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}}* module, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* fname);}
+\DoxyCodeLine{3657 hipError\_t hipModuleUnload(\mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}} module);}
+\DoxyCodeLine{3668 hipError\_t hipModuleGetFunction(\mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}}* \textcolor{keyword}{function}, \mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}} module, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* kname);}
+\DoxyCodeLine{3677 hipError\_t hipFuncGetAttributes(\textcolor{keyword}{struct} hipFuncAttributes* attr, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* func);}
+\DoxyCodeLine{3687 hipError\_t hipFuncGetAttribute(\textcolor{keywordtype}{int}* value, hipFunction\_attribute attrib, \mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}} hfunc);}
+\DoxyCodeLine{3697 hipError\_t hipModuleGetTexRef(textureReference** texRef, \mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}} hmod, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* name);}
+\DoxyCodeLine{3707 hipError\_t hipModuleLoadData(\mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}}* module, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* image);}
+\DoxyCodeLine{3720 hipError\_t hipModuleLoadDataEx(\mbox{\hyperlink{class_c_h_i_p_module}{hipModule\_t}}* module, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* image, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numOptions,}
+\DoxyCodeLine{3721                                hipJitOption* options, \textcolor{keywordtype}{void}** optionValues);}
+\DoxyCodeLine{3746 hipError\_t hipModuleLaunchKernel(\mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}} f, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} gridDimX, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} gridDimY,}
+\DoxyCodeLine{3747                                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} gridDimZ, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} blockDimX,}
+\DoxyCodeLine{3748                                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} blockDimY, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} blockDimZ,}
+\DoxyCodeLine{3749                                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream,}
+\DoxyCodeLine{3750                                  \textcolor{keywordtype}{void}** kernelParams, \textcolor{keywordtype}{void}** extra);}
+\DoxyCodeLine{3767 hipError\_t hipLaunchCooperativeKernel(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* f, dim3 gridDim, dim3 blockDimX,}
+\DoxyCodeLine{3768                                       \textcolor{keywordtype}{void}** kernelParams, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes,}
+\DoxyCodeLine{3769                                       \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{3781 hipError\_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, \textcolor{keywordtype}{int} numDevices,}
+\DoxyCodeLine{3782                                                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{3795 hipError\_t hipExtLaunchMultiKernelMultiDevice(hipLaunchParams* launchParamsList, \textcolor{keywordtype}{int} numDevices,}
+\DoxyCodeLine{3796                                               \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{3797 \textcolor{comment}{// doxygen end Module}}
+\DoxyCodeLine{3819 \textcolor{comment}{}\textcolor{comment}{// TODO -\/ Match CUoccupancyB2DSize}}
+\DoxyCodeLine{3820 hipError\_t hipModuleOccupancyMaxPotentialBlockSize(\textcolor{keywordtype}{int}* gridSize, \textcolor{keywordtype}{int}* blockSize, \mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}} f,}
+\DoxyCodeLine{3821                                                    \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk, \textcolor{keywordtype}{int} blockSizeLimit);}
+\DoxyCodeLine{3834 \textcolor{comment}{// TODO -\/ Match CUoccupancyB2DSize}}
+\DoxyCodeLine{3835 hipError\_t hipModuleOccupancyMaxPotentialBlockSizeWithFlags(\textcolor{keywordtype}{int}* gridSize, \textcolor{keywordtype}{int}* blockSize,}
+\DoxyCodeLine{3836                                                             \mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}} f,}
+\DoxyCodeLine{3837                                                             \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk,}
+\DoxyCodeLine{3838                                                             \textcolor{keywordtype}{int} blockSizeLimit, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{3847 hipError\_t hipModuleOccupancyMaxActiveBlocksPerMultiprocessor(\textcolor{keywordtype}{int}* numBlocks, \mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}} f,}
+\DoxyCodeLine{3848                                                               \textcolor{keywordtype}{int} blockSize,}
+\DoxyCodeLine{3849                                                               \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk);}
+\DoxyCodeLine{3859 hipError\_t hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(}
+\DoxyCodeLine{3860     \textcolor{keywordtype}{int}* numBlocks, \mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}} f, \textcolor{keywordtype}{int} blockSize, \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{3869 hipError\_t hipOccupancyMaxActiveBlocksPerMultiprocessor(\textcolor{keywordtype}{int}* numBlocks, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* f,}
+\DoxyCodeLine{3870                                                         \textcolor{keywordtype}{int} blockSize, \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk);}
+\DoxyCodeLine{3880 hipError\_t hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(}
+\DoxyCodeLine{3881     \textcolor{keywordtype}{int}* numBlocks, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* f, \textcolor{keywordtype}{int} blockSize, \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk,}
+\DoxyCodeLine{3882     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags \_\_dparm(hipOccupancyDefault));}
+\DoxyCodeLine{3894 hipError\_t hipOccupancyMaxPotentialBlockSize(\textcolor{keywordtype}{int}* gridSize, \textcolor{keywordtype}{int}* blockSize, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* f,}
+\DoxyCodeLine{3895                                              \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk, \textcolor{keywordtype}{int} blockSizeLimit);}
+\DoxyCodeLine{3896 \textcolor{comment}{// doxygen end Occupancy}}
+\DoxyCodeLine{3910 \textcolor{comment}{}\textcolor{comment}{// TODO -\/ expand descriptions:}}
+\DoxyCodeLine{3916 \textcolor{comment}{}DEPRECATED(\textcolor{stringliteral}{"{}use roctracer/rocTX instead"{}})}
+\DoxyCodeLine{3917 hipError\_t hipProfilerStart();}
+\DoxyCodeLine{3923 DEPRECATED("{}use roctracer/rocTX instead"{})}
+\DoxyCodeLine{3924 hipError\_t hipProfilerStop();}
+\DoxyCodeLine{3925 \textcolor{comment}{// doxygen end profiler}}
+\DoxyCodeLine{3949 \textcolor{comment}{}hipError\_t hipConfigureCall(dim3 gridDim, dim3 blockDim, \textcolor{keywordtype}{size\_t} sharedMem \_\_dparm(0),}
+\DoxyCodeLine{3950                             \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3961 hipError\_t hipSetupArgument(const \textcolor{keywordtype}{void}* arg, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} offset);}
+\DoxyCodeLine{3970 hipError\_t hipLaunchByPtr(const \textcolor{keywordtype}{void}* func);}
+\DoxyCodeLine{3984 hipError\_t \_\_hipPushCallConfiguration(dim3 gridDim, dim3 blockDim, \textcolor{keywordtype}{size\_t} sharedMem \_\_dparm(0),}
+\DoxyCodeLine{3985                                       \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{3999 hipError\_t \_\_hipPopCallConfiguration(dim3* gridDim, dim3* blockDim, \textcolor{keywordtype}{size\_t}* sharedMem,}
+\DoxyCodeLine{4000                                      \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}}* stream);}
+\DoxyCodeLine{4016 hipError\_t hipLaunchKernel(const \textcolor{keywordtype}{void}* function\_address, dim3 numBlocks, dim3 dimBlocks,}
+\DoxyCodeLine{4017                            \textcolor{keywordtype}{void}** args, \textcolor{keywordtype}{size\_t} sharedMemBytes \_\_dparm(0),}
+\DoxyCodeLine{4018                            \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{4026 hipError\_t hipDrvMemcpy2DUnaligned(const hip\_Memcpy2D* pCopy);}
+\DoxyCodeLine{4027 \textcolor{comment}{// TODO: Move this to hip\_ext.h}}
+\DoxyCodeLine{4028 hipError\_t hipExtLaunchKernel(const \textcolor{keywordtype}{void}* function\_address, dim3 numBlocks, dim3 dimBlocks,}
+\DoxyCodeLine{4029                               \textcolor{keywordtype}{void}** args, \textcolor{keywordtype}{size\_t} sharedMemBytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream,}
+\DoxyCodeLine{4030                               \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} startEvent, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} stopEvent, \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{4031 \textcolor{comment}{// doxygen end Clang launch}}
+\DoxyCodeLine{4049 \textcolor{comment}{}DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4050 hipError\_t hipBindTexture(\textcolor{keywordtype}{size\_t}* offset, const textureReference* tex, const \textcolor{keywordtype}{void}* devPtr,}
+\DoxyCodeLine{4051                           const hipChannelFormatDesc* desc, \textcolor{keywordtype}{size\_t} size \_\_dparm(UINT\_MAX));}
+\DoxyCodeLine{4052 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4053 hipError\_t hipBindTexture2D(\textcolor{keywordtype}{size\_t}* offset, const textureReference* tex, const \textcolor{keywordtype}{void}* devPtr,}
+\DoxyCodeLine{4054                             const hipChannelFormatDesc* desc, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height,}
+\DoxyCodeLine{4055                             \textcolor{keywordtype}{size\_t} pitch);}
+\DoxyCodeLine{4056 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4057 hipError\_t hipBindTextureToArray(const textureReference* tex, hipArray\_const\_t array,}
+\DoxyCodeLine{4058                                  const hipChannelFormatDesc* desc);}
+\DoxyCodeLine{4059 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4060 hipError\_t hipGetTextureAlignmentOffset(\textcolor{keywordtype}{size\_t}* offset, const textureReference* texref);}
+\DoxyCodeLine{4061 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4062 hipError\_t hipUnbindTexture(const textureReference* tex);}
+\DoxyCodeLine{4063 \textcolor{comment}{// doxygen end deprecated texture management}}
+\DoxyCodeLine{4067 \textcolor{comment}{}hipError\_t hipBindTextureToMipmappedArray(const textureReference* tex,}
+\DoxyCodeLine{4068                                           hipMipmappedArray\_const\_t mipmappedArray,}
+\DoxyCodeLine{4069                                           const hipChannelFormatDesc* desc);}
+\DoxyCodeLine{4070 hipError\_t hipGetTextureReference(const textureReference** texref, const \textcolor{keywordtype}{void}* symbol);}
+\DoxyCodeLine{4071 hipError\_t hipCreateTextureObject(hipTextureObject\_t* pTexObject, const hipResourceDesc* pResDesc,}
+\DoxyCodeLine{4072                                   const hipTextureDesc* pTexDesc,}
+\DoxyCodeLine{4073                                   const struct hipResourceViewDesc* pResViewDesc);}
+\DoxyCodeLine{4074 hipError\_t hipDestroyTextureObject(hipTextureObject\_t textureObject);}
+\DoxyCodeLine{4075 hipError\_t hipGetChannelDesc(hipChannelFormatDesc* desc, hipArray\_const\_t array);}
+\DoxyCodeLine{4076 hipError\_t hipGetTextureObjectResourceDesc(hipResourceDesc* pResDesc,}
+\DoxyCodeLine{4077                                            hipTextureObject\_t textureObject);}
+\DoxyCodeLine{4078 hipError\_t hipGetTextureObjectResourceViewDesc(struct hipResourceViewDesc* pResViewDesc,}
+\DoxyCodeLine{4079                                                hipTextureObject\_t textureObject);}
+\DoxyCodeLine{4080 hipError\_t hipGetTextureObjectTextureDesc(hipTextureDesc* pTexDesc,}
+\DoxyCodeLine{4081                                           hipTextureObject\_t textureObject);}
+\DoxyCodeLine{4082 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4083 hipError\_t hipTexRefGetAddress(hipDeviceptr\_t* dev\_ptr, const textureReference* texRef);}
+\DoxyCodeLine{4084 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4085 hipError\_t hipTexRefGetAddressMode(enum hipTextureAddressMode* pam, const textureReference* texRef,}
+\DoxyCodeLine{4086                                    \textcolor{keywordtype}{int} dim);}
+\DoxyCodeLine{4087 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4088 hipError\_t hipTexRefGetFilterMode(enum hipTextureFilterMode* pfm, const textureReference* texRef);}
+\DoxyCodeLine{4089 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4090 hipError\_t hipTexRefGetFlags(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* pFlags, const textureReference* texRef);}
+\DoxyCodeLine{4091 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4092 hipError\_t hipTexRefGetFormat(hipArray\_Format* pFormat, \textcolor{keywordtype}{int}* pNumChannels,}
+\DoxyCodeLine{4093                               const textureReference* texRef);}
+\DoxyCodeLine{4094 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4095 hipError\_t hipTexRefGetMaxAnisotropy(\textcolor{keywordtype}{int}* pmaxAnsio, const textureReference* texRef);}
+\DoxyCodeLine{4096 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4097 hipError\_t hipTexRefGetMipmapFilterMode(enum hipTextureFilterMode* pfm,}
+\DoxyCodeLine{4098                                         const textureReference* texRef);}
+\DoxyCodeLine{4099 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4100 hipError\_t hipTexRefGetMipmapLevelBias(\textcolor{keywordtype}{float}* pbias, const textureReference* texRef);}
+\DoxyCodeLine{4101 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4102 hipError\_t hipTexRefGetMipmapLevelClamp(\textcolor{keywordtype}{float}* pminMipmapLevelClamp, \textcolor{keywordtype}{float}* pmaxMipmapLevelClamp,}
+\DoxyCodeLine{4103                                         const textureReference* texRef);}
+\DoxyCodeLine{4104 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4105 hipError\_t hipTexRefGetMipMappedArray(hipMipmappedArray\_t* pArray, const textureReference* texRef);}
+\DoxyCodeLine{4106 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4107 hipError\_t hipTexRefSetAddress(\textcolor{keywordtype}{size\_t}* ByteOffset, textureReference* texRef, hipDeviceptr\_t dptr,}
+\DoxyCodeLine{4108                                \textcolor{keywordtype}{size\_t} bytes);}
+\DoxyCodeLine{4109 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4110 hipError\_t hipTexRefSetAddress2D(textureReference* texRef, const HIP\_ARRAY\_DESCRIPTOR* desc,}
+\DoxyCodeLine{4111                                  hipDeviceptr\_t dptr, \textcolor{keywordtype}{size\_t} Pitch);}
+\DoxyCodeLine{4112 hipError\_t hipTexRefSetAddressMode(textureReference* texRef, \textcolor{keywordtype}{int} dim,}
+\DoxyCodeLine{4113                                    enum hipTextureAddressMode am);}
+\DoxyCodeLine{4114 hipError\_t hipTexRefSetArray(textureReference* tex, hipArray\_const\_t array, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{4115 hipError\_t hipTexRefSetFilterMode(textureReference* texRef, enum hipTextureFilterMode fm);}
+\DoxyCodeLine{4116 hipError\_t hipTexRefSetFlags(textureReference* texRef, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} Flags);}
+\DoxyCodeLine{4117 hipError\_t hipTexRefSetFormat(textureReference* texRef, hipArray\_Format fmt,}
+\DoxyCodeLine{4118                               \textcolor{keywordtype}{int} NumPackedComponents);}
+\DoxyCodeLine{4119 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4120 hipError\_t hipTexRefSetMaxAnisotropy(textureReference* texRef, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} maxAniso);}
+\DoxyCodeLine{4121 hipError\_t hipTexObjectCreate(hipTextureObject\_t* pTexObject, const HIP\_RESOURCE\_DESC* pResDesc,}
+\DoxyCodeLine{4122                               const HIP\_TEXTURE\_DESC* pTexDesc,}
+\DoxyCodeLine{4123                               const HIP\_RESOURCE\_VIEW\_DESC* pResViewDesc);}
+\DoxyCodeLine{4124 hipError\_t hipTexObjectDestroy(hipTextureObject\_t texObject);}
+\DoxyCodeLine{4125 hipError\_t hipTexObjectGetResourceDesc(HIP\_RESOURCE\_DESC* pResDesc, hipTextureObject\_t texObject);}
+\DoxyCodeLine{4126 hipError\_t hipTexObjectGetResourceViewDesc(HIP\_RESOURCE\_VIEW\_DESC* pResViewDesc,}
+\DoxyCodeLine{4127                                            hipTextureObject\_t texObject);}
+\DoxyCodeLine{4128 hipError\_t hipTexObjectGetTextureDesc(HIP\_TEXTURE\_DESC* pTexDesc, hipTextureObject\_t texObject);}
+\DoxyCodeLine{4129 \textcolor{comment}{// doxygen end Texture management}}
+\DoxyCodeLine{4133 \textcolor{comment}{}\textcolor{comment}{// The following are not supported.}}
+\DoxyCodeLine{4134 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{4135 hipError\_t hipTexRefSetBorderColor(textureReference* texRef, \textcolor{keywordtype}{float}* pBorderColor);}
+\DoxyCodeLine{4136 hipError\_t hipTexRefSetMipmapFilterMode(textureReference* texRef, enum hipTextureFilterMode fm);}
+\DoxyCodeLine{4137 hipError\_t hipTexRefSetMipmapLevelBias(textureReference* texRef, \textcolor{keywordtype}{float} bias);}
+\DoxyCodeLine{4138 hipError\_t hipTexRefSetMipmapLevelClamp(textureReference* texRef, \textcolor{keywordtype}{float} minMipMapLevelClamp,}
+\DoxyCodeLine{4139                                         \textcolor{keywordtype}{float} maxMipMapLevelClamp);}
+\DoxyCodeLine{4140 hipError\_t hipTexRefSetMipmappedArray(textureReference* texRef,}
+\DoxyCodeLine{4141                                       struct hipMipmappedArray* mipmappedArray, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} Flags);}
+\DoxyCodeLine{4142 hipError\_t hipMipmappedArrayCreate(hipMipmappedArray\_t* pHandle,}
+\DoxyCodeLine{4143                                    HIP\_ARRAY3D\_DESCRIPTOR* pMipmappedArrayDesc,}
+\DoxyCodeLine{4144                                    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numMipmapLevels);}
+\DoxyCodeLine{4145 hipError\_t hipMipmappedArrayDestroy(hipMipmappedArray\_t hMipmappedArray);}
+\DoxyCodeLine{4146 hipError\_t hipMipmappedArrayGetLevel(hipArray\_t* pLevelArray, hipMipmappedArray\_t hMipMappedArray,}
+\DoxyCodeLine{4147                                      \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} level);}
+\DoxyCodeLine{4156 \textcolor{comment}{// This group is for HIPrtc}}
+\DoxyCodeLine{4157 }
+\DoxyCodeLine{4158 \textcolor{comment}{// doxygen end Runtime}}
+\DoxyCodeLine{4166 \textcolor{comment}{}hipError\_t hipRegisterApiCallback(uint32\_t \textcolor{keywordtype}{id}, \textcolor{keywordtype}{void}* fun, \textcolor{keywordtype}{void}* arg);}
+\DoxyCodeLine{4167 hipError\_t hipRemoveApiCallback(uint32\_t \textcolor{keywordtype}{id});}
+\DoxyCodeLine{4168 hipError\_t hipRegisterActivityCallback(uint32\_t \textcolor{keywordtype}{id}, \textcolor{keywordtype}{void}* fun, \textcolor{keywordtype}{void}* arg);}
+\DoxyCodeLine{4169 hipError\_t hipRemoveActivityCallback(uint32\_t \textcolor{keywordtype}{id});}
+\DoxyCodeLine{4170 const \textcolor{keywordtype}{char}* hipApiName(uint32\_t \textcolor{keywordtype}{id});}
+\DoxyCodeLine{4171 const \textcolor{keywordtype}{char}* hipKernelNameRef(const \mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}} f);}
+\DoxyCodeLine{4172 const \textcolor{keywordtype}{char}* hipKernelNameRefByPtr(const \textcolor{keywordtype}{void}* hostFunction, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{4173 \textcolor{keywordtype}{int} hipGetStreamDeviceId(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{4174 }
+\DoxyCodeLine{4186 typedef struct ihipGraph* hipGraph\_t;}
+\DoxyCodeLine{4190 typedef struct hipGraphNode* hipGraphNode\_t;}
+\DoxyCodeLine{4194 typedef struct hipGraphExec* hipGraphExec\_t;}
+\DoxyCodeLine{4195 }
+\DoxyCodeLine{4201 typedef enum hipGraphNodeType \{}
+\DoxyCodeLine{4202   hipGraphNodeTypeKernel = 1,             }
+\DoxyCodeLine{4203   hipGraphNodeTypeMemcpy = 2,             }
+\DoxyCodeLine{4204   hipGraphNodeTypeMemset = 3,             }
+\DoxyCodeLine{4205   hipGraphNodeTypeHost = 4,               }
+\DoxyCodeLine{4206   hipGraphNodeTypeGraph = 5,              }
+\DoxyCodeLine{4207   hipGraphNodeTypeEmpty = 6,              }
+\DoxyCodeLine{4208   hipGraphNodeTypeWaitEvent = 7,          }
+\DoxyCodeLine{4209   hipGraphNodeTypeEventRecord = 8,        }
+\DoxyCodeLine{4210   hipGraphNodeTypeMemcpy1D = 9,           }
+\DoxyCodeLine{4211   hipGraphNodeTypeMemcpyFromSymbol = 10,  }
+\DoxyCodeLine{4212   hipGraphNodeTypeMemcpyToSymbol = 11,    }
+\DoxyCodeLine{4213   hipGraphNodeTypeCount}
+\DoxyCodeLine{4214 \} hipGraphNodeType;}
+\DoxyCodeLine{4215 }
+\DoxyCodeLine{4216 \textcolor{keyword}{typedef} void (*hipHostFn\_t)(\textcolor{keywordtype}{void}* userData);}
+\DoxyCodeLine{4217 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipHostNodeParams \{}
+\DoxyCodeLine{4218   hipHostFn\_t fn;}
+\DoxyCodeLine{4219   \textcolor{keywordtype}{void}* userData;}
+\DoxyCodeLine{4220 \} hipHostNodeParams;}
+\DoxyCodeLine{4221 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipKernelNodeParams \{}
+\DoxyCodeLine{4222   dim3 blockDim;}
+\DoxyCodeLine{4223   \textcolor{keywordtype}{void}** extra;}
+\DoxyCodeLine{4224   \textcolor{keywordtype}{void}* func;}
+\DoxyCodeLine{4225   dim3 gridDim;}
+\DoxyCodeLine{4226   \textcolor{keywordtype}{void}** kernelParams;}
+\DoxyCodeLine{4227   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes;}
+\DoxyCodeLine{4228 \} hipKernelNodeParams;}
+\DoxyCodeLine{4229 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipMemsetParams \{}
+\DoxyCodeLine{4230   \textcolor{keywordtype}{void}* dst;}
+\DoxyCodeLine{4231   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} elementSize;}
+\DoxyCodeLine{4232   \textcolor{keywordtype}{size\_t} height;}
+\DoxyCodeLine{4233   \textcolor{keywordtype}{size\_t} pitch;}
+\DoxyCodeLine{4234   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} value;}
+\DoxyCodeLine{4235   \textcolor{keywordtype}{size\_t} width;}
+\DoxyCodeLine{4236 \} hipMemsetParams;}
+\DoxyCodeLine{4237 }
+\DoxyCodeLine{4243 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipGraphExecUpdateResult \{}
+\DoxyCodeLine{4244   hipGraphExecUpdateSuccess = 0x0,  }
+\DoxyCodeLine{4245   hipGraphExecUpdateError = 0x1,  }
+\DoxyCodeLine{4247   hipGraphExecUpdateErrorTopologyChanged = 0x2,  }
+\DoxyCodeLine{4248   hipGraphExecUpdateErrorNodeTypeChanged = 0x3,  }
+\DoxyCodeLine{4249   hipGraphExecUpdateErrorFunctionChanged =}
+\DoxyCodeLine{4250       0x4,  }
+\DoxyCodeLine{4251   hipGraphExecUpdateErrorParametersChanged =}
+\DoxyCodeLine{4252       0x5,  }
+\DoxyCodeLine{4253   hipGraphExecUpdateErrorNotSupported =}
+\DoxyCodeLine{4254       0x6,  }
+\DoxyCodeLine{4255   hipGraphExecUpdateErrorUnsupportedFunctionChange = 0x7}
+\DoxyCodeLine{4256 \} hipGraphExecUpdateResult;}
+\DoxyCodeLine{4257 }
+\DoxyCodeLine{4258 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipStreamCaptureMode \{}
+\DoxyCodeLine{4259   hipStreamCaptureModeGlobal = 0,}
+\DoxyCodeLine{4260   hipStreamCaptureModeThreadLocal,}
+\DoxyCodeLine{4261   hipStreamCaptureModeRelaxed}
+\DoxyCodeLine{4262 \} hipStreamCaptureMode;}
+\DoxyCodeLine{4263 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipStreamCaptureStatus \{}
+\DoxyCodeLine{4264   hipStreamCaptureStatusNone = 0,    }
+\DoxyCodeLine{4265   hipStreamCaptureStatusActive,      }
+\DoxyCodeLine{4266   hipStreamCaptureStatusInvalidated  }
+\DoxyCodeLine{4268 \} hipStreamCaptureStatus;}
+\DoxyCodeLine{4269 }
+\DoxyCodeLine{4270 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipStreamUpdateCaptureDependenciesFlags \{}
+\DoxyCodeLine{4271   hipStreamAddCaptureDependencies = 0,  }
+\DoxyCodeLine{4272   hipStreamSetCaptureDependencies,      }
+\DoxyCodeLine{4273 \} hipStreamUpdateCaptureDependenciesFlags;}
+\DoxyCodeLine{4274 }
+\DoxyCodeLine{4288 hipError\_t hipStreamBeginCapture(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipStreamCaptureMode mode);}
+\DoxyCodeLine{4289 }
+\DoxyCodeLine{4302 hipError\_t hipStreamEndCapture(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipGraph\_t* pGraph);}
+\DoxyCodeLine{4303 }
+\DoxyCodeLine{4317 hipError\_t hipStreamGetCaptureInfo(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipStreamCaptureStatus* pCaptureStatus,}
+\DoxyCodeLine{4318                                    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long}* pId);}
+\DoxyCodeLine{4319 }
+\DoxyCodeLine{4336 hipError\_t hipStreamGetCaptureInfo\_v2(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipStreamCaptureStatus* captureStatus\_out,}
+\DoxyCodeLine{4337                                       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long}* id\_out \_\_dparm(0),}
+\DoxyCodeLine{4338                                       hipGraph\_t* graph\_out \_\_dparm(0),}
+\DoxyCodeLine{4339                                       \textcolor{keyword}{const} hipGraphNode\_t** dependencies\_out \_\_dparm(0),}
+\DoxyCodeLine{4340                                       \textcolor{keywordtype}{size\_t}* numDependencies\_out \_\_dparm(0));}
+\DoxyCodeLine{4341 }
+\DoxyCodeLine{4354 hipError\_t hipStreamIsCapturing(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipStreamCaptureStatus* pCaptureStatus);}
+\DoxyCodeLine{4355 }
+\DoxyCodeLine{4368 hipError\_t hipStreamUpdateCaptureDependencies(\mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream, hipGraphNode\_t* dependencies,}
+\DoxyCodeLine{4369                                               \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{4370                                               \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags \_\_dparm(0));}
+\DoxyCodeLine{4371 }
+\DoxyCodeLine{4384 hipError\_t hipGraphCreate(hipGraph\_t* pGraph, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{4385 }
+\DoxyCodeLine{4397 hipError\_t hipGraphDestroy(hipGraph\_t graph);}
+\DoxyCodeLine{4398 }
+\DoxyCodeLine{4412 hipError\_t hipGraphAddDependencies(hipGraph\_t graph, \textcolor{keyword}{const} hipGraphNode\_t* from,}
+\DoxyCodeLine{4413                                    \textcolor{keyword}{const} hipGraphNode\_t* to, \textcolor{keywordtype}{size\_t} numDependencies);}
+\DoxyCodeLine{4414 }
+\DoxyCodeLine{4428 hipError\_t hipGraphRemoveDependencies(hipGraph\_t graph, \textcolor{keyword}{const} hipGraphNode\_t* from,}
+\DoxyCodeLine{4429                                       \textcolor{keyword}{const} hipGraphNode\_t* to, \textcolor{keywordtype}{size\_t} numDependencies);}
+\DoxyCodeLine{4430 }
+\DoxyCodeLine{4448 hipError\_t hipGraphGetEdges(hipGraph\_t graph, hipGraphNode\_t* from, hipGraphNode\_t* to,}
+\DoxyCodeLine{4449                             \textcolor{keywordtype}{size\_t}* numEdges);}
+\DoxyCodeLine{4450 }
+\DoxyCodeLine{4467 hipError\_t hipGraphGetNodes(hipGraph\_t graph, hipGraphNode\_t* nodes, \textcolor{keywordtype}{size\_t}* numNodes);}
+\DoxyCodeLine{4468 }
+\DoxyCodeLine{4485 hipError\_t hipGraphGetRootNodes(hipGraph\_t graph, hipGraphNode\_t* pRootNodes,}
+\DoxyCodeLine{4486                                 \textcolor{keywordtype}{size\_t}* pNumRootNodes);}
+\DoxyCodeLine{4487 }
+\DoxyCodeLine{4504 hipError\_t hipGraphNodeGetDependencies(hipGraphNode\_t node, hipGraphNode\_t* pDependencies,}
+\DoxyCodeLine{4505                                        \textcolor{keywordtype}{size\_t}* pNumDependencies);}
+\DoxyCodeLine{4506 }
+\DoxyCodeLine{4524 hipError\_t hipGraphNodeGetDependentNodes(hipGraphNode\_t node, hipGraphNode\_t* pDependentNodes,}
+\DoxyCodeLine{4525                                          \textcolor{keywordtype}{size\_t}* pNumDependentNodes);}
+\DoxyCodeLine{4526 }
+\DoxyCodeLine{4538 hipError\_t hipGraphNodeGetType(hipGraphNode\_t node, hipGraphNodeType* pType);}
+\DoxyCodeLine{4539 }
+\DoxyCodeLine{4550 hipError\_t hipGraphDestroyNode(hipGraphNode\_t node);}
+\DoxyCodeLine{4551 }
+\DoxyCodeLine{4563 hipError\_t hipGraphClone(hipGraph\_t* pGraphClone, hipGraph\_t originalGraph);}
+\DoxyCodeLine{4564 }
+\DoxyCodeLine{4577 hipError\_t hipGraphNodeFindInClone(hipGraphNode\_t* pNode, hipGraphNode\_t originalNode,}
+\DoxyCodeLine{4578                                    hipGraph\_t clonedGraph);}
+\DoxyCodeLine{4579 }
+\DoxyCodeLine{4596 hipError\_t hipGraphInstantiate(hipGraphExec\_t* pGraphExec, hipGraph\_t graph,}
+\DoxyCodeLine{4597                                hipGraphNode\_t* pErrorNode, \textcolor{keywordtype}{char}* pLogBuffer, \textcolor{keywordtype}{size\_t} bufferSize);}
+\DoxyCodeLine{4598 }
+\DoxyCodeLine{4611 hipError\_t hipGraphInstantiateWithFlags(hipGraphExec\_t* pGraphExec, hipGraph\_t graph,}
+\DoxyCodeLine{4612                                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} flags);}
+\DoxyCodeLine{4613 }
+\DoxyCodeLine{4624 hipError\_t hipGraphLaunch(hipGraphExec\_t graphExec, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream);}
+\DoxyCodeLine{4625 }
+\DoxyCodeLine{4636 hipError\_t hipGraphExecDestroy(hipGraphExec\_t graphExec);}
+\DoxyCodeLine{4637 }
+\DoxyCodeLine{4638 \textcolor{comment}{// Check whether an executable graph can be updated with a graph and perform the update if possible.}}
+\DoxyCodeLine{4652 \textcolor{comment}{}hipError\_t hipGraphExecUpdate(hipGraphExec\_t hGraphExec, hipGraph\_t hGraph,}
+\DoxyCodeLine{4653                               hipGraphNode\_t* hErrorNode\_out,}
+\DoxyCodeLine{4654                               hipGraphExecUpdateResult* updateResult\_out);}
+\DoxyCodeLine{4655 }
+\DoxyCodeLine{4668 hipError\_t hipGraphAddKernelNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{4669                                  \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{4670                                  \textcolor{keyword}{const} hipKernelNodeParams* pNodeParams);}
+\DoxyCodeLine{4671 }
+\DoxyCodeLine{4681 hipError\_t hipGraphKernelNodeGetParams(hipGraphNode\_t node, hipKernelNodeParams* pNodeParams);}
+\DoxyCodeLine{4682 }
+\DoxyCodeLine{4692 hipError\_t hipGraphKernelNodeSetParams(hipGraphNode\_t node, \textcolor{keyword}{const} hipKernelNodeParams* pNodeParams);}
+\DoxyCodeLine{4693 }
+\DoxyCodeLine{4704 hipError\_t hipGraphExecKernelNodeSetParams(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{4705                                            \textcolor{keyword}{const} hipKernelNodeParams* pNodeParams);}
+\DoxyCodeLine{4706 }
+\DoxyCodeLine{4719 hipError\_t hipGraphAddMemcpyNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{4720                                  \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{4721                                  \textcolor{keyword}{const} hipMemcpy3DParms* pCopyParams);}
+\DoxyCodeLine{4731 hipError\_t hipGraphMemcpyNodeGetParams(hipGraphNode\_t node, hipMemcpy3DParms* pNodeParams);}
+\DoxyCodeLine{4732 }
+\DoxyCodeLine{4742 hipError\_t hipGraphMemcpyNodeSetParams(hipGraphNode\_t node, \textcolor{keyword}{const} hipMemcpy3DParms* pNodeParams);}
+\DoxyCodeLine{4743 }
+\DoxyCodeLine{4754 hipError\_t hipGraphExecMemcpyNodeSetParams(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{4755                                            hipMemcpy3DParms* pNodeParams);}
+\DoxyCodeLine{4756 }
+\DoxyCodeLine{4772 hipError\_t hipGraphAddMemcpyNode1D(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{4773                                    \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{4774                                    \textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} count, hipMemcpyKind kind);}
+\DoxyCodeLine{4775 }
+\DoxyCodeLine{4788 hipError\_t hipGraphMemcpyNodeSetParams1D(hipGraphNode\_t node, \textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{4789                                          \textcolor{keywordtype}{size\_t} count, hipMemcpyKind kind);}
+\DoxyCodeLine{4790 }
+\DoxyCodeLine{4805 hipError\_t hipGraphExecMemcpyNodeSetParams1D(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{4806                                              \textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} count,}
+\DoxyCodeLine{4807                                              hipMemcpyKind kind);}
+\DoxyCodeLine{4808 }
+\DoxyCodeLine{4825 hipError\_t hipGraphAddMemcpyNodeFromSymbol(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{4826                                            \textcolor{keyword}{const} hipGraphNode\_t* pDependencies,}
+\DoxyCodeLine{4827                                            \textcolor{keywordtype}{size\_t} numDependencies, \textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* symbol,}
+\DoxyCodeLine{4828                                            \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{size\_t} offset, hipMemcpyKind kind);}
+\DoxyCodeLine{4829 }
+\DoxyCodeLine{4843 hipError\_t hipGraphMemcpyNodeSetParamsFromSymbol(hipGraphNode\_t node, \textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* symbol,}
+\DoxyCodeLine{4844                                                  \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{size\_t} offset, hipMemcpyKind kind);}
+\DoxyCodeLine{4845 }
+\DoxyCodeLine{4861 hipError\_t hipGraphExecMemcpyNodeSetParamsFromSymbol(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{4862                                                      \textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* symbol, \textcolor{keywordtype}{size\_t} count,}
+\DoxyCodeLine{4863                                                      \textcolor{keywordtype}{size\_t} offset, hipMemcpyKind kind);}
+\DoxyCodeLine{4864 }
+\DoxyCodeLine{4881 hipError\_t hipGraphAddMemcpyNodeToSymbol(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{4882                                          \textcolor{keyword}{const} hipGraphNode\_t* pDependencies,}
+\DoxyCodeLine{4883                                          \textcolor{keywordtype}{size\_t} numDependencies, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* symbol,}
+\DoxyCodeLine{4884                                          \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{size\_t} offset,}
+\DoxyCodeLine{4885                                          hipMemcpyKind kind);}
+\DoxyCodeLine{4886 }
+\DoxyCodeLine{4900 hipError\_t hipGraphMemcpyNodeSetParamsToSymbol(hipGraphNode\_t node, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* symbol,}
+\DoxyCodeLine{4901                                                \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{size\_t} offset,}
+\DoxyCodeLine{4902                                                hipMemcpyKind kind);}
+\DoxyCodeLine{4903 }
+\DoxyCodeLine{4904 }
+\DoxyCodeLine{4919 hipError\_t hipGraphExecMemcpyNodeSetParamsToSymbol(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{4920                                                    \textcolor{keyword}{const} \textcolor{keywordtype}{void}* symbol, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{4921                                                    \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{size\_t} offset, hipMemcpyKind kind);}
+\DoxyCodeLine{4922 }
+\DoxyCodeLine{4935 hipError\_t hipGraphAddMemsetNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{4936                                  \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{4937                                  \textcolor{keyword}{const} hipMemsetParams* pMemsetParams);}
+\DoxyCodeLine{4938 }
+\DoxyCodeLine{4948 hipError\_t hipGraphMemsetNodeGetParams(hipGraphNode\_t node, hipMemsetParams* pNodeParams);}
+\DoxyCodeLine{4949 }
+\DoxyCodeLine{4959 hipError\_t hipGraphMemsetNodeSetParams(hipGraphNode\_t node, \textcolor{keyword}{const} hipMemsetParams* pNodeParams);}
+\DoxyCodeLine{4960 }
+\DoxyCodeLine{4971 hipError\_t hipGraphExecMemsetNodeSetParams(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{4972                                            \textcolor{keyword}{const} hipMemsetParams* pNodeParams);}
+\DoxyCodeLine{4973 }
+\DoxyCodeLine{4986 hipError\_t hipGraphAddHostNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{4987                                \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{4988                                \textcolor{keyword}{const} hipHostNodeParams* pNodeParams);}
+\DoxyCodeLine{4989 }
+\DoxyCodeLine{4999 hipError\_t hipGraphHostNodeGetParams(hipGraphNode\_t node, hipHostNodeParams* pNodeParams);}
+\DoxyCodeLine{5000 }
+\DoxyCodeLine{5010 hipError\_t hipGraphHostNodeSetParams(hipGraphNode\_t node, \textcolor{keyword}{const} hipHostNodeParams* pNodeParams);}
+\DoxyCodeLine{5011 }
+\DoxyCodeLine{5022 hipError\_t hipGraphExecHostNodeSetParams(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{5023                                          \textcolor{keyword}{const} hipHostNodeParams* pNodeParams);}
+\DoxyCodeLine{5024 }
+\DoxyCodeLine{5037 hipError\_t hipGraphAddChildGraphNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{5038                                      \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{5039                                      hipGraph\_t childGraph);}
+\DoxyCodeLine{5040 }
+\DoxyCodeLine{5050 hipError\_t hipGraphChildGraphNodeGetGraph(hipGraphNode\_t node, hipGraph\_t* pGraph);}
+\DoxyCodeLine{5051 }
+\DoxyCodeLine{5062 hipError\_t hipGraphExecChildGraphNodeSetParams(hipGraphExec\_t hGraphExec, hipGraphNode\_t node,}
+\DoxyCodeLine{5063                                                hipGraph\_t childGraph);}
+\DoxyCodeLine{5064 }
+\DoxyCodeLine{5076 hipError\_t hipGraphAddEmptyNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{5077                                 \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies);}
+\DoxyCodeLine{5078 }
+\DoxyCodeLine{5079 }
+\DoxyCodeLine{5092 hipError\_t hipGraphAddEventRecordNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{5093                                       \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{5094                                       \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{5095 }
+\DoxyCodeLine{5105 hipError\_t hipGraphEventRecordNodeGetEvent(hipGraphNode\_t node, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}}* event\_out);}
+\DoxyCodeLine{5106 }
+\DoxyCodeLine{5116 hipError\_t hipGraphEventRecordNodeSetEvent(hipGraphNode\_t node, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{5117 }
+\DoxyCodeLine{5128 hipError\_t hipGraphExecEventRecordNodeSetEvent(hipGraphExec\_t hGraphExec, hipGraphNode\_t hNode,}
+\DoxyCodeLine{5129                                                \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{5130 }
+\DoxyCodeLine{5143 hipError\_t hipGraphAddEventWaitNode(hipGraphNode\_t* pGraphNode, hipGraph\_t graph,}
+\DoxyCodeLine{5144                                     \textcolor{keyword}{const} hipGraphNode\_t* pDependencies, \textcolor{keywordtype}{size\_t} numDependencies,}
+\DoxyCodeLine{5145                                     \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{5146 }
+\DoxyCodeLine{5147 }
+\DoxyCodeLine{5157 hipError\_t hipGraphEventWaitNodeGetEvent(hipGraphNode\_t node, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}}* event\_out);}
+\DoxyCodeLine{5158 }
+\DoxyCodeLine{5168 hipError\_t hipGraphEventWaitNodeSetEvent(hipGraphNode\_t node, \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{5169 }
+\DoxyCodeLine{5180 hipError\_t hipGraphExecEventWaitNodeSetEvent(hipGraphExec\_t hGraphExec, hipGraphNode\_t hNode,}
+\DoxyCodeLine{5181                                              \mbox{\hyperlink{class_c_h_i_p_event}{hipEvent\_t}} event);}
+\DoxyCodeLine{5182 }
+\DoxyCodeLine{5183 \textcolor{comment}{// doxygen end graph API}}
+\DoxyCodeLine{5188 \textcolor{comment}{}\textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{5189 \} \textcolor{comment}{/* extern "{}c"{} */}}
+\DoxyCodeLine{5190 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{5191 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{5192 \textcolor{preprocessor}{\#if defined(\_\_clang\_\_) \&\& defined(\_\_HIP\_\_)}}
+\DoxyCodeLine{5193 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{5194 \textcolor{keyword}{static} hipError\_t \_\_host\_\_ \textcolor{keyword}{inline} hipOccupancyMaxPotentialBlockSize(\textcolor{keywordtype}{int}* gridSize, \textcolor{keywordtype}{int}* blockSize,}
+\DoxyCodeLine{5195                                                                     T f,}
+\DoxyCodeLine{5196                                                                     \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk = 0,}
+\DoxyCodeLine{5197                                                                     \textcolor{keywordtype}{int} blockSizeLimit = 0) \{}
+\DoxyCodeLine{5198   \textcolor{keywordflow}{return} hipOccupancyMaxPotentialBlockSize(gridSize, blockSize, \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(f),}
+\DoxyCodeLine{5199                                            dynSharedMemPerBlk, blockSizeLimit);}
+\DoxyCodeLine{5200 \}}
+\DoxyCodeLine{5201 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{5202 \textcolor{keyword}{static} hipError\_t \_\_host\_\_ \textcolor{keyword}{inline} hipOccupancyMaxPotentialBlockSizeWithFlags(}
+\DoxyCodeLine{5203     \textcolor{keywordtype}{int}* gridSize, \textcolor{keywordtype}{int}* blockSize, T f, \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk = 0, \textcolor{keywordtype}{int} blockSizeLimit = 0,}
+\DoxyCodeLine{5204     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags = 0) \{}
+\DoxyCodeLine{5205   \textcolor{keywordflow}{return} hipOccupancyMaxPotentialBlockSize(gridSize, blockSize, \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(f),}
+\DoxyCodeLine{5206                                            dynSharedMemPerBlk, blockSizeLimit);}
+\DoxyCodeLine{5207 \}}
+\DoxyCodeLine{5208 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// defined(\_\_clang\_\_) \&\& defined(\_\_HIP\_\_)}}
+\DoxyCodeLine{5209 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> hipError\_t hipGetSymbolAddress(\textcolor{keywordtype}{void}** devPtr, \textcolor{keyword}{const} T\& symbol) \{}
+\DoxyCodeLine{5210   return ::hipGetSymbolAddress(devPtr, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*)\&symbol);}
+\DoxyCodeLine{5211 \}}
+\DoxyCodeLine{5212 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> hipError\_t hipGetSymbolSize(\textcolor{keywordtype}{size\_t}* size, \textcolor{keyword}{const} T\& symbol) \{}
+\DoxyCodeLine{5213   return ::hipGetSymbolSize(size, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*)\&symbol);}
+\DoxyCodeLine{5214 \}}
+\DoxyCodeLine{5215 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{5216 hipError\_t hipMemcpyToSymbol(\textcolor{keyword}{const} T\& symbol, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes,}
+\DoxyCodeLine{5217                              \textcolor{keywordtype}{size\_t} offset \_\_dparm(0),}
+\DoxyCodeLine{5218                              hipMemcpyKind kind \_\_dparm(hipMemcpyHostToDevice)) \{}
+\DoxyCodeLine{5219   return ::hipMemcpyToSymbol((\textcolor{keyword}{const} \textcolor{keywordtype}{void}*)\&symbol, src, sizeBytes, offset, kind);}
+\DoxyCodeLine{5220 \}}
+\DoxyCodeLine{5221 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{5222 hipError\_t hipMemcpyToSymbolAsync(\textcolor{keyword}{const} T\& symbol, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} sizeBytes, \textcolor{keywordtype}{size\_t} offset,}
+\DoxyCodeLine{5223                                   hipMemcpyKind kind, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0)) \{}
+\DoxyCodeLine{5224   return ::hipMemcpyToSymbolAsync((\textcolor{keyword}{const} \textcolor{keywordtype}{void}*)\&symbol, src, sizeBytes, offset, kind, stream);}
+\DoxyCodeLine{5225 \}}
+\DoxyCodeLine{5226 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{5227 hipError\_t hipMemcpyFromSymbol(\textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} T\& symbol, \textcolor{keywordtype}{size\_t} sizeBytes,}
+\DoxyCodeLine{5228                                \textcolor{keywordtype}{size\_t} offset \_\_dparm(0),}
+\DoxyCodeLine{5229                                hipMemcpyKind kind \_\_dparm(hipMemcpyDeviceToHost)) \{}
+\DoxyCodeLine{5230   return ::hipMemcpyFromSymbol(dst, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*)\&symbol, sizeBytes, offset, kind);}
+\DoxyCodeLine{5231 \}}
+\DoxyCodeLine{5232 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{5233 hipError\_t hipMemcpyFromSymbolAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} T\& symbol, \textcolor{keywordtype}{size\_t} sizeBytes, \textcolor{keywordtype}{size\_t} offset,}
+\DoxyCodeLine{5234                                     hipMemcpyKind kind, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0)) \{}
+\DoxyCodeLine{5235   return ::hipMemcpyFromSymbolAsync(dst, (\textcolor{keyword}{const} \textcolor{keywordtype}{void}*)\&symbol, sizeBytes, offset, kind, stream);}
+\DoxyCodeLine{5236 \}}
+\DoxyCodeLine{5237 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{5238 \textcolor{keyword}{inline} hipError\_t hipOccupancyMaxActiveBlocksPerMultiprocessor(\textcolor{keywordtype}{int}* numBlocks, T f, \textcolor{keywordtype}{int} blockSize,}
+\DoxyCodeLine{5239                                                                \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk) \{}
+\DoxyCodeLine{5240   \textcolor{keywordflow}{return} hipOccupancyMaxActiveBlocksPerMultiprocessor(numBlocks, \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(f),}
+\DoxyCodeLine{5241                                                       blockSize, dynSharedMemPerBlk);}
+\DoxyCodeLine{5242 \}}
+\DoxyCodeLine{5243 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{5244 \textcolor{keyword}{inline} hipError\_t hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(\textcolor{keywordtype}{int}* numBlocks, T f,}
+\DoxyCodeLine{5245                                                                         \textcolor{keywordtype}{int} blockSize,}
+\DoxyCodeLine{5246                                                                         \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk,}
+\DoxyCodeLine{5247                                                                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags) \{}
+\DoxyCodeLine{5248   \textcolor{keywordflow}{return} hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(}
+\DoxyCodeLine{5249       numBlocks, \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(f), blockSize, dynSharedMemPerBlk, flags);}
+\DoxyCodeLine{5250 \}}
+\DoxyCodeLine{5251 \textcolor{keyword}{template} <\textcolor{keyword}{typename} F>}
+\DoxyCodeLine{5252 \textcolor{keyword}{inline} hipError\_t hipOccupancyMaxPotentialBlockSize(\textcolor{keywordtype}{int}* gridSize, \textcolor{keywordtype}{int}* blockSize, F kernel,}
+\DoxyCodeLine{5253                                                     \textcolor{keywordtype}{size\_t} dynSharedMemPerBlk,}
+\DoxyCodeLine{5254                                                     uint32\_t blockSizeLimit) \{}
+\DoxyCodeLine{5255   \textcolor{keywordflow}{return} hipOccupancyMaxPotentialBlockSize(gridSize, blockSize, (\mbox{\hyperlink{class_c_h_i_p_kernel}{hipFunction\_t}})kernel,}
+\DoxyCodeLine{5256                                            dynSharedMemPerBlk, blockSizeLimit);}
+\DoxyCodeLine{5257 \}}
+\DoxyCodeLine{5258 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{5259 \textcolor{keyword}{inline} hipError\_t hipLaunchCooperativeKernel(T f, dim3 gridDim, dim3 blockDim, \textcolor{keywordtype}{void}** kernelParams,}
+\DoxyCodeLine{5260                                              \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream) \{}
+\DoxyCodeLine{5261   \textcolor{keywordflow}{return} hipLaunchCooperativeKernel(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(f), gridDim, blockDim,}
+\DoxyCodeLine{5262                                     kernelParams, sharedMemBytes, stream);}
+\DoxyCodeLine{5263 \}}
+\DoxyCodeLine{5264 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{5265 \textcolor{keyword}{inline} hipError\_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList,}
+\DoxyCodeLine{5266                                                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numDevices,}
+\DoxyCodeLine{5267                                                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags = 0) \{}
+\DoxyCodeLine{5268   \textcolor{keywordflow}{return} hipLaunchCooperativeKernelMultiDevice(launchParamsList, numDevices, flags);}
+\DoxyCodeLine{5269 \}}
+\DoxyCodeLine{5270 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{5271 \textcolor{keyword}{inline} hipError\_t hipExtLaunchMultiKernelMultiDevice(hipLaunchParams* launchParamsList,}
+\DoxyCodeLine{5272                                                      \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numDevices,}
+\DoxyCodeLine{5273                                                      \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags = 0) \{}
+\DoxyCodeLine{5274   \textcolor{keywordflow}{return} hipExtLaunchMultiKernelMultiDevice(launchParamsList, numDevices, flags);}
+\DoxyCodeLine{5275 \}}
+\DoxyCodeLine{5276 hipError\_t hipCreateSurfaceObject(\mbox{\hyperlink{surface__types_8h_a8e399424af12e04be293a525f1159857}{hipSurfaceObject\_t}}* pSurfObject, \textcolor{keyword}{const} hipResourceDesc* pResDesc);}
+\DoxyCodeLine{5277 hipError\_t hipDestroySurfaceObject(\mbox{\hyperlink{surface__types_8h_a8e399424af12e04be293a525f1159857}{hipSurfaceObject\_t}} surfaceObject);}
+\DoxyCodeLine{5278 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5279 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{5280 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t hipBindTexture(\textcolor{keywordtype}{size\_t}* offset, \textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex,}
+\DoxyCodeLine{5281                                         \textcolor{keyword}{const} \textcolor{keywordtype}{void}* devPtr, \textcolor{keywordtype}{size\_t} size = UINT\_MAX) \{}
+\DoxyCodeLine{5282   \textcolor{keywordflow}{return} hipBindTexture(offset, \&tex, devPtr, \&tex.channelDesc, size);}
+\DoxyCodeLine{5283 \}}
+\DoxyCodeLine{5284 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5285 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{5286 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t}
+\DoxyCodeLine{5287     hipBindTexture(\textcolor{keywordtype}{size\_t}* offset, \textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* devPtr,}
+\DoxyCodeLine{5288                    \textcolor{keyword}{const} \textcolor{keyword}{struct} hipChannelFormatDesc\& desc, \textcolor{keywordtype}{size\_t} size = UINT\_MAX) \{}
+\DoxyCodeLine{5289   \textcolor{keywordflow}{return} hipBindTexture(offset, \&tex, devPtr, \&desc, size);}
+\DoxyCodeLine{5290 \}}
+\DoxyCodeLine{5291 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5292 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{5293 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t}
+\DoxyCodeLine{5294     hipBindTexture2D(\textcolor{keywordtype}{size\_t}* offset, \textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex,}
+\DoxyCodeLine{5295                      \textcolor{keyword}{const} \textcolor{keywordtype}{void}* devPtr, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height, \textcolor{keywordtype}{size\_t} pitch) \{}
+\DoxyCodeLine{5296   \textcolor{keywordflow}{return} hipBindTexture2D(offset, \&tex, devPtr, \&tex.channelDesc, width, height, pitch);}
+\DoxyCodeLine{5297 \}}
+\DoxyCodeLine{5298 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5299 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{5300 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t}
+\DoxyCodeLine{5301     hipBindTexture2D(\textcolor{keywordtype}{size\_t}* offset, \textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex,}
+\DoxyCodeLine{5302                      \textcolor{keyword}{const} \textcolor{keywordtype}{void}* devPtr, \textcolor{keyword}{const} \textcolor{keyword}{struct} hipChannelFormatDesc\& desc, \textcolor{keywordtype}{size\_t} width,}
+\DoxyCodeLine{5303                      \textcolor{keywordtype}{size\_t} height, \textcolor{keywordtype}{size\_t} pitch) \{}
+\DoxyCodeLine{5304   \textcolor{keywordflow}{return} hipBindTexture2D(offset, \&tex, devPtr, \&desc, width, height, pitch);}
+\DoxyCodeLine{5305 \}}
+\DoxyCodeLine{5306 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5307 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{5308 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t}
+\DoxyCodeLine{5309     hipBindTextureToArray(\textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex, hipArray\_const\_t array) \{}
+\DoxyCodeLine{5310   \textcolor{keyword}{struct }hipChannelFormatDesc desc;}
+\DoxyCodeLine{5311   hipError\_t err = hipGetChannelDesc(\&desc, array);}
+\DoxyCodeLine{5312   \textcolor{keywordflow}{return} (err == \mbox{\hyperlink{hip__runtime__api_8h_ae4a28dbad173b548a3ac2a2092994d6b}{hipSuccess}}) ? hipBindTextureToArray(\&tex, array, \&desc) : err;}
+\DoxyCodeLine{5313 \}}
+\DoxyCodeLine{5314 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5315 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{5316 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t}
+\DoxyCodeLine{5317     hipBindTextureToArray(\textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex, hipArray\_const\_t array,}
+\DoxyCodeLine{5318                           \textcolor{keyword}{const} \textcolor{keyword}{struct} hipChannelFormatDesc\& desc) \{}
+\DoxyCodeLine{5319   \textcolor{keywordflow}{return} hipBindTextureToArray(\&tex, array, \&desc);}
+\DoxyCodeLine{5320 \}}
+\DoxyCodeLine{5321 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5322 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t hipBindTextureToMipmappedArray(\textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex,}
+\DoxyCodeLine{5323                                                         hipMipmappedArray\_const\_t mipmappedArray) \{}
+\DoxyCodeLine{5324   \textcolor{keyword}{struct }hipChannelFormatDesc desc;}
+\DoxyCodeLine{5325   hipArray\_t levelArray;}
+\DoxyCodeLine{5326   hipError\_t err = hipGetMipmappedArrayLevel(\&levelArray, mipmappedArray, 0);}
+\DoxyCodeLine{5327   \textcolor{keywordflow}{if} (err != \mbox{\hyperlink{hip__runtime__api_8h_ae4a28dbad173b548a3ac2a2092994d6b}{hipSuccess}}) \{}
+\DoxyCodeLine{5328     \textcolor{keywordflow}{return} err;}
+\DoxyCodeLine{5329   \}}
+\DoxyCodeLine{5330   err = hipGetChannelDesc(\&desc, levelArray);}
+\DoxyCodeLine{5331   \textcolor{keywordflow}{return} (err == \mbox{\hyperlink{hip__runtime__api_8h_ae4a28dbad173b548a3ac2a2092994d6b}{hipSuccess}}) ? hipBindTextureToMipmappedArray(\&tex, mipmappedArray, \&desc) : err;}
+\DoxyCodeLine{5332 \}}
+\DoxyCodeLine{5333 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5334 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t hipBindTextureToMipmappedArray(\textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex,}
+\DoxyCodeLine{5335                                                         hipMipmappedArray\_const\_t mipmappedArray,}
+\DoxyCodeLine{5336                                                         \textcolor{keyword}{const} \textcolor{keyword}{struct} hipChannelFormatDesc\& desc) \{}
+\DoxyCodeLine{5337   \textcolor{keywordflow}{return} hipBindTextureToMipmappedArray(\&tex, mipmappedArray, \&desc);}
+\DoxyCodeLine{5338 \}}
+\DoxyCodeLine{5339 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keywordtype}{int} dim, enum hipTextureReadMode readMode>}
+\DoxyCodeLine{5340 DEPRECATED(DEPRECATED\_MSG)}
+\DoxyCodeLine{5341 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t hipUnbindTexture(\textcolor{keyword}{const} \textcolor{keyword}{struct} texture<T, dim, readMode>\& tex) \{}
+\DoxyCodeLine{5342   \textcolor{keywordflow}{return} hipUnbindTexture(\&tex);}
+\DoxyCodeLine{5343 \}}
+\DoxyCodeLine{5344 }
+\DoxyCodeLine{5345 }
+\DoxyCodeLine{5346 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_\_cplusplus}}
+\DoxyCodeLine{5347 }
+\DoxyCodeLine{5355 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} GLuint;}
+\DoxyCodeLine{5356 }
+\DoxyCodeLine{5357 \textcolor{comment}{// Queries devices associated with GL Context.}}
+\DoxyCodeLine{5358 hipError\_t hipGLGetDevices(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* pHipDeviceCount, \textcolor{keywordtype}{int}* pHipDevices,}
+\DoxyCodeLine{5359                            \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} hipDeviceCount, hipGLDeviceList deviceList);}
+\DoxyCodeLine{5360 \textcolor{comment}{// Registers a GL Buffer for interop and returns corresponding graphics resource.}}
+\DoxyCodeLine{5361 hipError\_t hipGraphicsGLRegisterBuffer(hipGraphicsResource** resource, GLuint buffer,}
+\DoxyCodeLine{5362                                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{5363 \textcolor{comment}{// Maps a graphics resource for hip access.}}
+\DoxyCodeLine{5364 hipError\_t hipGraphicsMapResources(\textcolor{keywordtype}{int} count, hipGraphicsResource\_t* resources,}
+\DoxyCodeLine{5365                                    \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{5366 \textcolor{comment}{// Gets device accessible address of a graphics resource.}}
+\DoxyCodeLine{5367 hipError\_t hipGraphicsResourceGetMappedPointer(\textcolor{keywordtype}{void}** devPtr, \textcolor{keywordtype}{size\_t}* size,}
+\DoxyCodeLine{5368                                                hipGraphicsResource\_t resource);}
+\DoxyCodeLine{5369 \textcolor{comment}{// Unmaps a graphics resource for hip access.}}
+\DoxyCodeLine{5370 hipError\_t hipGraphicsUnmapResources(\textcolor{keywordtype}{int} count, hipGraphicsResource\_t* resources,}
+\DoxyCodeLine{5371                                      \mbox{\hyperlink{class_c_h_i_p_queue}{hipStream\_t}} stream \_\_dparm(0));}
+\DoxyCodeLine{5372 \textcolor{comment}{// Unregisters a graphics resource.}}
+\DoxyCodeLine{5373 hipError\_t hipGraphicsUnregisterResource(hipGraphicsResource\_t resource);}
+\DoxyCodeLine{5374 \textcolor{comment}{// doxygen end GL Interop}}
+\DoxyCodeLine{5379 \textcolor{comment}{}\textcolor{preprocessor}{\#ifdef \_\_GNUC\_\_}}
+\DoxyCodeLine{5380 \textcolor{preprocessor}{\#pragma GCC visibility pop}}
+\DoxyCodeLine{5381 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{5382 \textcolor{comment}{// doxygen end HIP API}}
+\DoxyCodeLine{5388 \textcolor{comment}{}\textcolor{preprocessor}{\#endif  }\textcolor{comment}{//\_USE\_HIPCOMMON\_RUNTIME\_API\_}}
+\DoxyCodeLine{5389 }
+\DoxyCodeLine{5401 \textcolor{preprocessor}{\#if defined(\_\_cplusplus) \&\& !defined(\_\_HIP\_DISABLE\_CPP\_FUNCTIONS\_\_)}}
+\DoxyCodeLine{5402 \textcolor{keyword}{template} <\textcolor{keyword}{class} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t hipMalloc(T** devPtr, \textcolor{keywordtype}{size\_t} size) \{}
+\DoxyCodeLine{5403   \textcolor{keywordflow}{return} hipMalloc((\textcolor{keywordtype}{void}**)devPtr, size);}
+\DoxyCodeLine{5404 \}}
+\DoxyCodeLine{5405 }
+\DoxyCodeLine{5406 \textcolor{comment}{// Provide an override to automatically typecast the pointer type from void**, and also provide a}}
+\DoxyCodeLine{5407 \textcolor{comment}{// default for the flags.}}
+\DoxyCodeLine{5408 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{5409 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t hipHostMalloc(T** ptr, \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{5410                                        \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags = hipHostMallocDefault) \{}
+\DoxyCodeLine{5411   \textcolor{keywordflow}{return} hipHostMalloc((\textcolor{keywordtype}{void}**)ptr, size, flags);}
+\DoxyCodeLine{5412 \}}
+\DoxyCodeLine{5413 }
+\DoxyCodeLine{5414 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{5415 \textcolor{keyword}{static} \textcolor{keyword}{inline} hipError\_t hipMallocManaged(T** devPtr, \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{5416                                           \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags = hipMemAttachGlobal) \{}
+\DoxyCodeLine{5417   \textcolor{keywordflow}{return} hipMallocManaged((\textcolor{keywordtype}{void}**)devPtr, size, flags);}
+\DoxyCodeLine{5418 \}}
+\DoxyCodeLine{5419 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{5420 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{5421 }
+\DoxyCodeLine{5422 \textcolor{preprocessor}{\#if USE\_PROF\_API}}
+\DoxyCodeLine{5423 \textcolor{preprocessor}{\#include <hip/amd\_detail/hip\_prof\_str.h>}}
+\DoxyCodeLine{5424 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

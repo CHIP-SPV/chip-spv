@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -82,12 +82,12 @@ Inheritance diagram for CHIPContextLevel0:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa1cc7f9b70bad5683de176d358f14aeb"><td class="memItemLeft" align="right" valign="top"><a id="aa1cc7f9b70bad5683de176d358f14aeb" name="aa1cc7f9b70bad5683de176d358f14aeb"></a>
-ze_command_list_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_cmd_list</b> ()</td></tr>
-<tr class="separator:aa1cc7f9b70bad5683de176d358f14aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5eb8d61a9a4c237f90e5d3ef695d6fc"><td class="memItemLeft" align="right" valign="top"><a id="aa5eb8d61a9a4c237f90e5d3ef695d6fc" name="aa5eb8d61a9a4c237f90e5d3ef695d6fc"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPContextLevel0</b> (ze_context_handle_t &amp;&amp;_ze_ctx)</td></tr>
-<tr class="separator:aa5eb8d61a9a4c237f90e5d3ef695d6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fe65aad5ae6b7e9a841827509ca2452"><td class="memItemLeft" align="right" valign="top"><a id="a2fe65aad5ae6b7e9a841827509ca2452" name="a2fe65aad5ae6b7e9a841827509ca2452"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPContextLevel0</b> (ze_driver_handle_t ze_driver_, ze_context_handle_t &amp;&amp;_ze_ctx)</td></tr>
+<tr class="separator:a2fe65aad5ae6b7e9a841827509ca2452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade048c7f9bf4e769d74b1e92cce40f35"><td class="memItemLeft" align="right" valign="top"><a id="ade048c7f9bf4e769d74b1e92cce40f35" name="ade048c7f9bf4e769d74b1e92cce40f35"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPContextLevel0</b> (ze_driver_handle_t ze_driver_, ze_context_handle_t _ze_ctx)</td></tr>
+<tr class="separator:ade048c7f9bf4e769d74b1e92cce40f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15b8f5766763255a7dbd0d770e430283"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context_level0.html#a15b8f5766763255a7dbd0d770e430283">allocate_</a> (size_t size, size_t alignment, CHIPMemoryType memTy) override</td></tr>
 <tr class="memdesc:a15b8f5766763255a7dbd0d770e430283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate data. Pure virtual function - to be overriden by each backend. This member function is the one that's called by all the publically visible <a class="el" href="class_c_h_i_p_context.html#a1f405ec128310904efe82e680e417ead" title="Allocate data. Calls reserveMem() to keep track memory used on the device. Calls CHIPContext::allocat...">CHIPContext::allocate()</a> variants.  <a href="class_c_h_i_p_context_level0.html#a15b8f5766763255a7dbd0d770e430283">More...</a><br /></td></tr>
 <tr class="separator:a15b8f5766763255a7dbd0d770e430283"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,9 +97,9 @@ ze_command_list_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>g
 <tr class="memitem:aec811ee5f28d053d39dcc709142fdabe"><td class="memItemLeft" align="right" valign="top"><a id="aec811ee5f28d053d39dcc709142fdabe" name="aec811ee5f28d053d39dcc709142fdabe"></a>
 ze_context_handle_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()</td></tr>
 <tr class="separator:aec811ee5f28d053d39dcc709142fdabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f4fdbfd88439837f44536b2df3dab19"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context_level0.html#a6f4fdbfd88439837f44536b2df3dab19">memCopy</a> (void *dst, const void *src, size_t size, hipStream_t stream) override</td></tr>
-<tr class="memdesc:a6f4fdbfd88439837f44536b2df3dab19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy memory.  <a href="class_c_h_i_p_context_level0.html#a6f4fdbfd88439837f44536b2df3dab19">More...</a><br /></td></tr>
-<tr class="separator:a6f4fdbfd88439837f44536b2df3dab19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75728e1abd0713132085d18b3cf15b7f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context_level0.html#a75728e1abd0713132085d18b3cf15b7f">createEvent</a> (unsigned flags) override</td></tr>
+<tr class="memdesc:a75728e1abd0713132085d18b3cf15b7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Event object.  <a href="class_c_h_i_p_context_level0.html#a75728e1abd0713132085d18b3cf15b7f">More...</a><br /></td></tr>
+<tr class="separator:a75728e1abd0713132085d18b3cf15b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_c_h_i_p_context"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_c_h_i_p_context')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_c_h_i_p_context.html">CHIPContext</a></td></tr>
 <tr class="memitem:a271cd26573639cba0f3952c1a864b2b0 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="a271cd26573639cba0f3952c1a864b2b0" name="a271cd26573639cba0f3952c1a864b2b0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CHIPContext</b> ()</td></tr>
@@ -109,9 +109,9 @@ ze_context_handle_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPContext</b> ()</td></tr>
 <tr class="memdesc:ac2ba6ad31278cb28ec9a48f848dfcffa inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_context.html" title="Context class Contexts contain execution queues and are created on top of a single or multiple device...">CHIPContext</a> object. <br /></td></tr>
 <tr class="separator:ac2ba6ad31278cb28ec9a48f848dfcffa inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab9f64f142801289bdb91afbbc4ed990 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aab9f64f142801289bdb91afbbc4ed990">addDevice</a> (<a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *dev)</td></tr>
-<tr class="memdesc:aab9f64f142801289bdb91afbbc4ed990 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a device to this context.  <a href="class_c_h_i_p_context.html#aab9f64f142801289bdb91afbbc4ed990">More...</a><br /></td></tr>
-<tr class="separator:aab9f64f142801289bdb91afbbc4ed990 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a539403301fcc9a5ebff80a4791ec54 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a0a539403301fcc9a5ebff80a4791ec54">addDevice</a> (<a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *dev)</td></tr>
+<tr class="memdesc:a0a539403301fcc9a5ebff80a4791ec54 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a device to this context.  <a href="class_c_h_i_p_context.html#a0a539403301fcc9a5ebff80a4791ec54">More...</a><br /></td></tr>
+<tr class="separator:a0a539403301fcc9a5ebff80a4791ec54 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8cbc5f609c668c6fd8ed2161b8f5b4f inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aa8cbc5f609c668c6fd8ed2161b8f5b4f">addQueue</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *q)</td></tr>
 <tr class="memdesc:aa8cbc5f609c668c6fd8ed2161b8f5b4f inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a queue to this context.  <a href="class_c_h_i_p_context.html#aa8cbc5f609c668c6fd8ed2161b8f5b4f">More...</a><br /></td></tr>
 <tr class="separator:aa8cbc5f609c668c6fd8ed2161b8f5b4f inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,6 +136,9 @@ ze_context_handle_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a65074e4320308218e6af6ab97413da5c inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a65074e4320308218e6af6ab97413da5c">free</a> (void *ptr)</td></tr>
 <tr class="memdesc:a65074e4320308218e6af6ab97413da5c inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free memory.  <a href="class_c_h_i_p_context.html#a65074e4320308218e6af6ab97413da5c">More...</a><br /></td></tr>
 <tr class="separator:a65074e4320308218e6af6ab97413da5c inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fc1f032f9742d6348121870cc5be04c inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a0fc1f032f9742d6348121870cc5be04c">memCopy</a> (void *dst, const void *src, size_t size, hipStream_t stream)</td></tr>
+<tr class="memdesc:a0fc1f032f9742d6348121870cc5be04c inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy memory.  <a href="class_c_h_i_p_context.html#a0fc1f032f9742d6348121870cc5be04c">More...</a><br /></td></tr>
+<tr class="separator:a0fc1f032f9742d6348121870cc5be04c inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d79308f3a70a9293923835122da23c inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="a31d79308f3a70a9293923835122da23c" name="a31d79308f3a70a9293923835122da23c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>finishAll</b> ()</td></tr>
 <tr class="memdesc:a31d79308f3a70a9293923835122da23c inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finish all the queues in this context. <br /></td></tr>
@@ -151,23 +154,20 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>finishAll</b> ()</td>
 <tr class="separator:a99583fe33f2dd9bf23b278e42fb168ec inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="a4b0f248e3f69b73f42ef7ad787e2fd44" name="a4b0f248e3f69b73f42ef7ad787e2fd44"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
-<tr class="memdesc:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset this context. TODO: what does it mean to reset a context? <br /></td></tr>
+<tr class="memdesc:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset this context. <br /></td></tr>
 <tr class="separator:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d03567273b7899b7d2e0df0e5f015cf inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a7d03567273b7899b7d2e0df0e5f015cf">retain</a> ()</td></tr>
 <tr class="memdesc:a7d03567273b7899b7d2e0df0e5f015cf inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retain this context. TODO: What does it mean to retain a context?  <a href="class_c_h_i_p_context.html#a7d03567273b7899b7d2e0df0e5f015cf">More...</a><br /></td></tr>
 <tr class="separator:a7d03567273b7899b7d2e0df0e5f015cf inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abff033626b0fa70dcd319a0d9406bfd3 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#abff033626b0fa70dcd319a0d9406bfd3">recordEvent</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *q, <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *event)</td></tr>
-<tr class="memdesc:abff033626b0fa70dcd319a0d9406bfd3 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record an event in a given queue.  <a href="class_c_h_i_p_context.html#abff033626b0fa70dcd319a0d9406bfd3">More...</a><br /></td></tr>
-<tr class="separator:abff033626b0fa70dcd319a0d9406bfd3 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90a36c0230e9aa63e381c679433f63f3 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">virtual CHIPTexture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a90a36c0230e9aa63e381c679433f63f3">createImage</a> (hipResourceDesc *resDesc, hipTextureDesc *texDesc)</td></tr>
-<tr class="memdesc:a90a36c0230e9aa63e381c679433f63f3 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Image objct.  <a href="class_c_h_i_p_context.html#a90a36c0230e9aa63e381c679433f63f3">More...</a><br /></td></tr>
-<tr class="separator:a90a36c0230e9aa63e381c679433f63f3 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a683c0fa64c40b5ea55367587ecd43706"><td class="memItemLeft" align="right" valign="top"><a id="a683c0fa64c40b5ea55367587ecd43706" name="a683c0fa64c40b5ea55367587ecd43706"></a>
-ze_command_list_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>ze_cmd_list</b></td></tr>
-<tr class="separator:a683c0fa64c40b5ea55367587ecd43706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ca222ee69bf6fc158c3eff6466bb26"><td class="memItemLeft" align="right" valign="top"><a id="af1ca222ee69bf6fc158c3eff6466bb26" name="af1ca222ee69bf6fc158c3eff6466bb26"></a>
+ze_context_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>ze_ctx</b></td></tr>
+<tr class="separator:af1ca222ee69bf6fc158c3eff6466bb26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8034747f06dababc98e4a790b808b70f"><td class="memItemLeft" align="right" valign="top"><a id="a8034747f06dababc98e4a790b808b70f" name="a8034747f06dababc98e4a790b808b70f"></a>
+ze_driver_handle_t&#160;</td><td class="memItemRight" valign="bottom"><b>ze_driver</b></td></tr>
+<tr class="separator:a8034747f06dababc98e4a790b808b70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -181,6 +181,12 @@ std::vector&lt; <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * &g
 <tr class="memitem:a33626d8a7006c2c63dbb1760f47ac6ba inherit pro_attribs_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="a33626d8a7006c2c63dbb1760f47ac6ba" name="a33626d8a7006c2c63dbb1760f47ac6ba"></a>
 std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
 <tr class="separator:a33626d8a7006c2c63dbb1760f47ac6ba inherit pro_attribs_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab175053d15520cb4011750f2e34ba840 inherit pro_attribs_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="ab175053d15520cb4011750f2e34ba840" name="ab175053d15520cb4011750f2e34ba840"></a>
+std::vector&lt; void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>allocated_ptrs</b></td></tr>
+<tr class="separator:ab175053d15520cb4011750f2e34ba840 inherit pro_attribs_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac93e4738059538da2d50b92ef74b01a inherit pro_attribs_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="aac93e4738059538da2d50b92ef74b01a" name="aac93e4738059538da2d50b92ef74b01a"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></td></tr>
+<tr class="separator:aac93e4738059538da2d50b92ef74b01a inherit pro_attribs_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a15b8f5766763255a7dbd0d770e430283" name="a15b8f5766763255a7dbd0d770e430283"></a>
@@ -218,7 +224,7 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -235,6 +241,43 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
 <dl class="section return"><dt>Returns</dt><dd>void* </dd></dl>
 
 <p>Implements <a class="el" href="class_c_h_i_p_context.html#a3ad920ded6df2e7a66396ed77ab442b2">CHIPContext</a>.</p>
+
+</div>
+</div>
+<a id="a75728e1abd0713132085d18b3cf15b7f" name="a75728e1abd0713132085d18b3cf15b7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75728e1abd0713132085d18b3cf15b7f">&#9670;&nbsp;</a></span>createEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> * CHIPContextLevel0::createEvent </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>flags</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a Event object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flags</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CHIPEvent* </dd></dl>
+
+<p>Implements <a class="el" href="class_c_h_i_p_context.html#a4af79ee3405b648afb092ff3622577e6">CHIPContext</a>.</p>
 
 </div>
 </div>
@@ -277,71 +320,9 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a6f4fdbfd88439837f44536b2df3dab19" name="a6f4fdbfd88439837f44536b2df3dab19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f4fdbfd88439837f44536b2df3dab19">&#9670;&nbsp;</a></span>memCopy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">hipError_t CHIPContextLevel0::memCopy </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">hipStream_t&#160;</td>
-          <td class="paramname"><em>stream</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copy memory. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">dst</td><td>destination </td></tr>
-    <tr><td class="paramname">src</td><td>source </td></tr>
-    <tr><td class="paramname">size</td><td>size of the copy </td></tr>
-    <tr><td class="paramname">stream</td><td>queue to which this copy should be submitted to </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
-
-<p>Implements <a class="el" href="class_c_h_i_p_context.html#aa2541d2c5d3f61cf96263a59a41554ea">CHIPContext</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/backend/Level0/<a class="el" href="_level0_backend_8hh_source.html">Level0Backend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/backend/Level0/Level0Backend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/Level0/<a class="el" href="_level0_backend_8hh_source.html">Level0Backend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/Level0/Level0Backend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

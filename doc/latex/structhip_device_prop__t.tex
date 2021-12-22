@@ -1,0 +1,250 @@
+\hypertarget{structhip_device_prop__t}{}\doxysection{hip\+Device\+Prop\+\_\+t Struct Reference}
+\label{structhip_device_prop__t}\index{hipDeviceProp\_t@{hipDeviceProp\_t}}
+
+
+{\ttfamily \#include $<$hip\+\_\+runtime\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a5b44bf8fa46faefcde989942b1d11a5e}\label{structhip_device_prop__t_a5b44bf8fa46faefcde989942b1d11a5e}} 
+char {\bfseries name} \mbox{[}256\mbox{]}
+\begin{DoxyCompactList}\small\item\em Device name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_acedd6a2d23423441e4bf51c4a1b719f9}\label{structhip_device_prop__t_acedd6a2d23423441e4bf51c4a1b719f9}} 
+size\+\_\+t {\bfseries total\+Global\+Mem}
+\begin{DoxyCompactList}\small\item\em Size of global memory region (in bytes). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a3b9138678a0795c2677eddcfb1c67156}\label{structhip_device_prop__t_a3b9138678a0795c2677eddcfb1c67156}} 
+size\+\_\+t {\bfseries shared\+Mem\+Per\+Block}
+\begin{DoxyCompactList}\small\item\em Size of shared memory region (in bytes). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a73c1c21648a901799ff6bef83c11135b}\label{structhip_device_prop__t_a73c1c21648a901799ff6bef83c11135b}} 
+int {\bfseries regs\+Per\+Block}
+\begin{DoxyCompactList}\small\item\em Registers per block. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_af3357d33c004608bf05bc21a352be81b}\label{structhip_device_prop__t_af3357d33c004608bf05bc21a352be81b}} 
+int {\bfseries warp\+Size}
+\begin{DoxyCompactList}\small\item\em Warp size. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_af971cf1ca3ec1f68ad09036c0cc672e0}\label{structhip_device_prop__t_af971cf1ca3ec1f68ad09036c0cc672e0}} 
+int {\bfseries max\+Threads\+Per\+Block}
+\begin{DoxyCompactList}\small\item\em Max work items per work group or workgroup max size. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a8ebba6fc12f80c9a9cf9b9193f0da465}\label{structhip_device_prop__t_a8ebba6fc12f80c9a9cf9b9193f0da465}} 
+int {\bfseries max\+Threads\+Dim} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Max number of threads in each dimension (XYZ) of a block. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_ae529c23929f592120081fed31d877a55}\label{structhip_device_prop__t_ae529c23929f592120081fed31d877a55}} 
+int {\bfseries max\+Grid\+Size} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Max grid dimensions (XYZ). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a1dd15bee43692b8649dfbdc1adbaaf96}\label{structhip_device_prop__t_a1dd15bee43692b8649dfbdc1adbaaf96}} 
+int {\bfseries clock\+Rate}
+\begin{DoxyCompactList}\small\item\em Max clock frequency of the multi\+Processors in khz. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a6db0ab8e7e8cc13c84d7bb7f70226d5e}\label{structhip_device_prop__t_a6db0ab8e7e8cc13c84d7bb7f70226d5e}} 
+int {\bfseries memory\+Clock\+Rate}
+\begin{DoxyCompactList}\small\item\em Max global memory clock frequency in khz. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a1d710ce8bd34daf66f892a66a2273132}\label{structhip_device_prop__t_a1d710ce8bd34daf66f892a66a2273132}} 
+int {\bfseries memory\+Bus\+Width}
+\begin{DoxyCompactList}\small\item\em Global memory bus width in bits. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a29880232c56120be3455ce00d5379665}\label{structhip_device_prop__t_a29880232c56120be3455ce00d5379665}} 
+size\+\_\+t {\bfseries total\+Const\+Mem}
+\begin{DoxyCompactList}\small\item\em Size of shared memory region (in bytes). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structhip_device_prop__t_aec9e4173c2e34cc232300c415dbd5e4f}{major}}
+\item 
+int \mbox{\hyperlink{structhip_device_prop__t_abb51208e2509a7a1d107f0da69108938}{minor}}
+\item 
+\mbox{\Hypertarget{structhip_device_prop__t_add8d9d2ad52aece9fd1dbe25c18d9d57}\label{structhip_device_prop__t_add8d9d2ad52aece9fd1dbe25c18d9d57}} 
+int {\bfseries multi\+Processor\+Count}
+\begin{DoxyCompactList}\small\item\em Number of multi-\/processors (compute units). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a24404decccc16833973c803ced6f3a51}\label{structhip_device_prop__t_a24404decccc16833973c803ced6f3a51}} 
+int {\bfseries l2\+Cache\+Size}
+\begin{DoxyCompactList}\small\item\em L2 cache size. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a23a39f4fd795addb3b125e9c3f6295ea}\label{structhip_device_prop__t_a23a39f4fd795addb3b125e9c3f6295ea}} 
+int {\bfseries max\+Threads\+Per\+Multi\+Processor}
+\begin{DoxyCompactList}\small\item\em Maximum resident threads per multi-\/processor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_ae7d9216f8583a703359d0b9373823f5d}\label{structhip_device_prop__t_ae7d9216f8583a703359d0b9373823f5d}} 
+int {\bfseries compute\+Mode}
+\begin{DoxyCompactList}\small\item\em Compute mode. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structhip_device_prop__t_a6fbf3b08a1a08ae700f1a06265f6666b}{clock\+Instruction\+Rate}}
+\item 
+\mbox{\Hypertarget{structhip_device_prop__t_afc58158e44bef6ad26f2be401434b049}\label{structhip_device_prop__t_afc58158e44bef6ad26f2be401434b049}} 
+\mbox{\hyperlink{structhip_device_arch__t}{hip\+Device\+Arch\+\_\+t}} {\bfseries arch}
+\begin{DoxyCompactList}\small\item\em Architectural feature flags. New for HIP. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_ad8461a28caf9c38c58cf358583b5bee3}\label{structhip_device_prop__t_ad8461a28caf9c38c58cf358583b5bee3}} 
+int {\bfseries concurrent\+Kernels}
+\begin{DoxyCompactList}\small\item\em Device can possibly execute multiple kernels concurrently. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_aa0f598c0196ff1f429290a43c1fa4038}\label{structhip_device_prop__t_aa0f598c0196ff1f429290a43c1fa4038}} 
+int {\bfseries pci\+Domain\+ID}
+\begin{DoxyCompactList}\small\item\em PCI Domain ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a1350f64d49b717ed3a06458f7549ccb0}\label{structhip_device_prop__t_a1350f64d49b717ed3a06458f7549ccb0}} 
+int {\bfseries pci\+Bus\+ID}
+\begin{DoxyCompactList}\small\item\em PCI Bus ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_ae6aa845dc2d540f85098ea30be35f4eb}\label{structhip_device_prop__t_ae6aa845dc2d540f85098ea30be35f4eb}} 
+int {\bfseries pci\+Device\+ID}
+\begin{DoxyCompactList}\small\item\em PCI Device ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_aa1a32a7f387f6da845db7b228711fce8}\label{structhip_device_prop__t_aa1a32a7f387f6da845db7b228711fce8}} 
+size\+\_\+t {\bfseries max\+Shared\+Memory\+Per\+Multi\+Processor}
+\begin{DoxyCompactList}\small\item\em Maximum Shared Memory Per Multiprocessor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a9bb19b2b0cdee8977ed63964532d639d}\label{structhip_device_prop__t_a9bb19b2b0cdee8977ed63964532d639d}} 
+int {\bfseries is\+Multi\+Gpu\+Board}
+\begin{DoxyCompactList}\small\item\em 1 if device is on a multi-\/\+GPU board, 0 if not. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_ac2143f5448607d1a02a9e8783fcf06a1}\label{structhip_device_prop__t_ac2143f5448607d1a02a9e8783fcf06a1}} 
+int {\bfseries can\+Map\+Host\+Memory}
+\begin{DoxyCompactList}\small\item\em Check whether HIP can map host memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_adc5950a3d5bbe00cf59d413d8aeeee18}\label{structhip_device_prop__t_adc5950a3d5bbe00cf59d413d8aeeee18}} 
+int {\bfseries gcn\+Arch}
+\begin{DoxyCompactList}\small\item\em DEPRECATED\+: use gcn\+Arch\+Name instead. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_abbafcdb62b4e72669e884353eb7c05ad}\label{structhip_device_prop__t_abbafcdb62b4e72669e884353eb7c05ad}} 
+char {\bfseries gcn\+Arch\+Name} \mbox{[}256\mbox{]}
+\begin{DoxyCompactList}\small\item\em AMD GCN Arch Name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_ac0350a226dc71cc01fb3708b523b0061}\label{structhip_device_prop__t_ac0350a226dc71cc01fb3708b523b0061}} 
+int {\bfseries integrated}
+\begin{DoxyCompactList}\small\item\em APU vs d\+GPU. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a7e99d56223ca8e08a3b0281a8dc07a46}\label{structhip_device_prop__t_a7e99d56223ca8e08a3b0281a8dc07a46}} 
+int {\bfseries cooperative\+Launch}
+\begin{DoxyCompactList}\small\item\em HIP device supports cooperative launch. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a4d4e0cfcd887d072f28e5f37643fe239}\label{structhip_device_prop__t_a4d4e0cfcd887d072f28e5f37643fe239}} 
+int {\bfseries cooperative\+Multi\+Device\+Launch}
+\begin{DoxyCompactList}\small\item\em HIP device supports cooperative launch on multiple devices. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a07b4c6c7630a11395a6464b4bcd96b1e}\label{structhip_device_prop__t_a07b4c6c7630a11395a6464b4bcd96b1e}} 
+int {\bfseries max\+Texture1\+DLinear}
+\begin{DoxyCompactList}\small\item\em Maximum size for 1D textures bound to linear memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a161c254b517f73b86e93afd32927b65c}\label{structhip_device_prop__t_a161c254b517f73b86e93afd32927b65c}} 
+int {\bfseries max\+Texture1D}
+\begin{DoxyCompactList}\small\item\em Maximum number of elements in 1D images. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a7cb65d133ff517300a435455958f3536}\label{structhip_device_prop__t_a7cb65d133ff517300a435455958f3536}} 
+int {\bfseries max\+Texture2D} \mbox{[}2\mbox{]}
+\begin{DoxyCompactList}\small\item\em Maximum dimensions (width, height) of 2D images, in image elements. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structhip_device_prop__t_a7ed8e2bae8d1305076182c0820e357e2}{max\+Texture3D}} \mbox{[}3\mbox{]}
+\item 
+\mbox{\Hypertarget{structhip_device_prop__t_abf37e4355158da6706597f2dd22130bd}\label{structhip_device_prop__t_abf37e4355158da6706597f2dd22130bd}} 
+unsigned int $\ast$ {\bfseries hdp\+Mem\+Flush\+Cntl}
+\begin{DoxyCompactList}\small\item\em Addres of HDP\+\_\+\+MEM\+\_\+\+COHERENCY\+\_\+\+FLUSH\+\_\+\+CNTL register. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a8ce1eb90232146fbf1d6c6c23d19aa1d}\label{structhip_device_prop__t_a8ce1eb90232146fbf1d6c6c23d19aa1d}} 
+unsigned int $\ast$ {\bfseries hdp\+Reg\+Flush\+Cntl}
+\begin{DoxyCompactList}\small\item\em Addres of HDP\+\_\+\+REG\+\_\+\+COHERENCY\+\_\+\+FLUSH\+\_\+\+CNTL register. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a3115492f35b726d4e950c1bc6c684cbe}\label{structhip_device_prop__t_a3115492f35b726d4e950c1bc6c684cbe}} 
+size\+\_\+t {\bfseries mem\+Pitch}
+\begin{DoxyCompactList}\small\item\em Maximum pitch in bytes allowed by memory copies. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a5c55ab4144841d785ac31de0eb823060}\label{structhip_device_prop__t_a5c55ab4144841d785ac31de0eb823060}} 
+size\+\_\+t {\bfseries texture\+Alignment}
+\begin{DoxyCompactList}\small\item\em Alignment requirement for textures. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{structhip_device_prop__t_affa72db90f0a5edf35f942b786366afc}{texture\+Pitch\+Alignment}}
+\item 
+\mbox{\Hypertarget{structhip_device_prop__t_abdc2c1af9bf2b27f7faf892bb18d34f1}\label{structhip_device_prop__t_abdc2c1af9bf2b27f7faf892bb18d34f1}} 
+int {\bfseries kernel\+Exec\+Timeout\+Enabled}
+\begin{DoxyCompactList}\small\item\em Run time limit for kernels executed on the device. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_a01f0342bfad1eb0e532d94f6d24510c0}\label{structhip_device_prop__t_a01f0342bfad1eb0e532d94f6d24510c0}} 
+int {\bfseries ECCEnabled}
+\begin{DoxyCompactList}\small\item\em Device has ECC support enabled. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_af38ab98291566293bd4dad46314e0d9f}\label{structhip_device_prop__t_af38ab98291566293bd4dad46314e0d9f}} 
+int {\bfseries tcc\+Driver}
+\begin{DoxyCompactList}\small\item\em 1\+:If device is Tesla device using TCC driver, else 0 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structhip_device_prop__t_a86d443a18ed2cec5feaf8eb90663dc18}{cooperative\+Multi\+Device\+Unmatched\+Func}}
+\item 
+int \mbox{\hyperlink{structhip_device_prop__t_ab7a3dc3bca3f77802a1c3b2fbcfe0a3c}{cooperative\+Multi\+Device\+Unmatched\+Grid\+Dim}}
+\item 
+int \mbox{\hyperlink{structhip_device_prop__t_ad003e2b692a63718f9bd2c2f308823be}{cooperative\+Multi\+Device\+Unmatched\+Block\+Dim}}
+\item 
+int \mbox{\hyperlink{structhip_device_prop__t_af6cf8af49466ef5239ff61ba080bc1e7}{cooperative\+Multi\+Device\+Unmatched\+Shared\+Mem}}
+\item 
+\mbox{\Hypertarget{structhip_device_prop__t_ad9aa31dd7bd61c84c5fd92d20d0f8b29}\label{structhip_device_prop__t_ad9aa31dd7bd61c84c5fd92d20d0f8b29}} 
+int {\bfseries is\+Large\+Bar}
+\begin{DoxyCompactList}\small\item\em 1\+: if it is a large PCI bar device, else 0 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_acb42f0c173a515933c2102ea7cdba598}\label{structhip_device_prop__t_acb42f0c173a515933c2102ea7cdba598}} 
+int {\bfseries asic\+Revision}
+\begin{DoxyCompactList}\small\item\em Revision of the GPU in this device. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhip_device_prop__t_afefd229244bbe5bb4b0109522790cf96}\label{structhip_device_prop__t_afefd229244bbe5bb4b0109522790cf96}} 
+int {\bfseries managed\+Memory}
+\begin{DoxyCompactList}\small\item\em Device supports allocating managed memory on this system. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{structhip_device_prop__t_a7fc70af54dc16a21f598db3ff5905c25}{direct\+Managed\+Mem\+Access\+From\+Host}}
+\item 
+int \mbox{\hyperlink{structhip_device_prop__t_abfea758a5672cb7803ac467543c11b67}{concurrent\+Managed\+Access}}
+\item 
+int \mbox{\hyperlink{structhip_device_prop__t_a5ad240a7f39a7878340106ab06326f2c}{pageable\+Memory\+Access}}
+\item 
+int \mbox{\hyperlink{structhip_device_prop__t_a89e293e4c37cb9358d84e3831516afa3}{pageable\+Memory\+Access\+Uses\+Host\+Page\+Tables}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+hip\+Device\+Prop 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structhip_device_prop__t_a6fbf3b08a1a08ae700f1a06265f6666b}\label{structhip_device_prop__t_a6fbf3b08a1a08ae700f1a06265f6666b}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!clockInstructionRate@{clockInstructionRate}}
+\index{clockInstructionRate@{clockInstructionRate}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{clockInstructionRate}{clockInstructionRate}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::clock\+Instruction\+Rate}
+
+Frequency in khz of the timer used by the device-\/side \char`\"{}clock$\ast$\char`\"{} instructions. New for HIP. \mbox{\Hypertarget{structhip_device_prop__t_abfea758a5672cb7803ac467543c11b67}\label{structhip_device_prop__t_abfea758a5672cb7803ac467543c11b67}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!concurrentManagedAccess@{concurrentManagedAccess}}
+\index{concurrentManagedAccess@{concurrentManagedAccess}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{concurrentManagedAccess}{concurrentManagedAccess}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::concurrent\+Managed\+Access}
+
+Device can coherently access managed memory concurrently with the CPU \mbox{\Hypertarget{structhip_device_prop__t_ad003e2b692a63718f9bd2c2f308823be}\label{structhip_device_prop__t_ad003e2b692a63718f9bd2c2f308823be}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!cooperativeMultiDeviceUnmatchedBlockDim@{cooperativeMultiDeviceUnmatchedBlockDim}}
+\index{cooperativeMultiDeviceUnmatchedBlockDim@{cooperativeMultiDeviceUnmatchedBlockDim}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{cooperativeMultiDeviceUnmatchedBlockDim}{cooperativeMultiDeviceUnmatchedBlockDim}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::cooperative\+Multi\+Device\+Unmatched\+Block\+Dim}
+
+HIP device supports cooperative launch on multiple devices with unmatched block dimensions \mbox{\Hypertarget{structhip_device_prop__t_a86d443a18ed2cec5feaf8eb90663dc18}\label{structhip_device_prop__t_a86d443a18ed2cec5feaf8eb90663dc18}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!cooperativeMultiDeviceUnmatchedFunc@{cooperativeMultiDeviceUnmatchedFunc}}
+\index{cooperativeMultiDeviceUnmatchedFunc@{cooperativeMultiDeviceUnmatchedFunc}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{cooperativeMultiDeviceUnmatchedFunc}{cooperativeMultiDeviceUnmatchedFunc}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::cooperative\+Multi\+Device\+Unmatched\+Func}
+
+HIP device supports cooperative launch on multiple devices with unmatched functions \mbox{\Hypertarget{structhip_device_prop__t_ab7a3dc3bca3f77802a1c3b2fbcfe0a3c}\label{structhip_device_prop__t_ab7a3dc3bca3f77802a1c3b2fbcfe0a3c}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!cooperativeMultiDeviceUnmatchedGridDim@{cooperativeMultiDeviceUnmatchedGridDim}}
+\index{cooperativeMultiDeviceUnmatchedGridDim@{cooperativeMultiDeviceUnmatchedGridDim}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{cooperativeMultiDeviceUnmatchedGridDim}{cooperativeMultiDeviceUnmatchedGridDim}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::cooperative\+Multi\+Device\+Unmatched\+Grid\+Dim}
+
+HIP device supports cooperative launch on multiple devices with unmatched grid dimensions \mbox{\Hypertarget{structhip_device_prop__t_af6cf8af49466ef5239ff61ba080bc1e7}\label{structhip_device_prop__t_af6cf8af49466ef5239ff61ba080bc1e7}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!cooperativeMultiDeviceUnmatchedSharedMem@{cooperativeMultiDeviceUnmatchedSharedMem}}
+\index{cooperativeMultiDeviceUnmatchedSharedMem@{cooperativeMultiDeviceUnmatchedSharedMem}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{cooperativeMultiDeviceUnmatchedSharedMem}{cooperativeMultiDeviceUnmatchedSharedMem}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::cooperative\+Multi\+Device\+Unmatched\+Shared\+Mem}
+
+HIP device supports cooperative launch on multiple devices with unmatched shared memories \mbox{\Hypertarget{structhip_device_prop__t_a7fc70af54dc16a21f598db3ff5905c25}\label{structhip_device_prop__t_a7fc70af54dc16a21f598db3ff5905c25}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!directManagedMemAccessFromHost@{directManagedMemAccessFromHost}}
+\index{directManagedMemAccessFromHost@{directManagedMemAccessFromHost}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{directManagedMemAccessFromHost}{directManagedMemAccessFromHost}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::direct\+Managed\+Mem\+Access\+From\+Host}
+
+Host can directly access managed memory on the device without migration \mbox{\Hypertarget{structhip_device_prop__t_aec9e4173c2e34cc232300c415dbd5e4f}\label{structhip_device_prop__t_aec9e4173c2e34cc232300c415dbd5e4f}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!major@{major}}
+\index{major@{major}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{major}{major}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::major}
+
+Major compute capability. On HCC, this is an approximation and features may differ from CUDA CC. See the arch feature flags for portable ways to query feature caps. \mbox{\Hypertarget{structhip_device_prop__t_a7ed8e2bae8d1305076182c0820e357e2}\label{structhip_device_prop__t_a7ed8e2bae8d1305076182c0820e357e2}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!maxTexture3D@{maxTexture3D}}
+\index{maxTexture3D@{maxTexture3D}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{maxTexture3D}{maxTexture3D}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::max\+Texture3D\mbox{[}3\mbox{]}}
+
+Maximum dimensions (width, height, depth) of 3D images, in image elements \mbox{\Hypertarget{structhip_device_prop__t_abb51208e2509a7a1d107f0da69108938}\label{structhip_device_prop__t_abb51208e2509a7a1d107f0da69108938}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!minor@{minor}}
+\index{minor@{minor}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{minor}{minor}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::minor}
+
+Minor compute capability. On HCC, this is an approximation and features may differ from CUDA CC. See the arch feature flags for portable ways to query feature caps. \mbox{\Hypertarget{structhip_device_prop__t_a5ad240a7f39a7878340106ab06326f2c}\label{structhip_device_prop__t_a5ad240a7f39a7878340106ab06326f2c}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!pageableMemoryAccess@{pageableMemoryAccess}}
+\index{pageableMemoryAccess@{pageableMemoryAccess}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{pageableMemoryAccess}{pageableMemoryAccess}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::pageable\+Memory\+Access}
+
+Device supports coherently accessing pageable memory without calling hip\+Host\+Register on it \mbox{\Hypertarget{structhip_device_prop__t_a89e293e4c37cb9358d84e3831516afa3}\label{structhip_device_prop__t_a89e293e4c37cb9358d84e3831516afa3}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!pageableMemoryAccessUsesHostPageTables@{pageableMemoryAccessUsesHostPageTables}}
+\index{pageableMemoryAccessUsesHostPageTables@{pageableMemoryAccessUsesHostPageTables}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{pageableMemoryAccessUsesHostPageTables}{pageableMemoryAccessUsesHostPageTables}}
+{\footnotesize\ttfamily int hip\+Device\+Prop\+\_\+t\+::pageable\+Memory\+Access\+Uses\+Host\+Page\+Tables}
+
+Device accesses pageable memory via the host\textquotesingle{}s page tables \mbox{\Hypertarget{structhip_device_prop__t_affa72db90f0a5edf35f942b786366afc}\label{structhip_device_prop__t_affa72db90f0a5edf35f942b786366afc}} 
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!texturePitchAlignment@{texturePitchAlignment}}
+\index{texturePitchAlignment@{texturePitchAlignment}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\doxysubsubsection{\texorpdfstring{texturePitchAlignment}{texturePitchAlignment}}
+{\footnotesize\ttfamily size\+\_\+t hip\+Device\+Prop\+\_\+t\+::texture\+Pitch\+Alignment}
+
+Pitch alignment requirement for texture references bound to pitched memory 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/include/hip/\mbox{\hyperlink{hip__runtime__api_8h}{hip\+\_\+runtime\+\_\+api.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,71 @@
+\hypertarget{class_catch_1_1_string_ref}{}\doxysection{Catch\+::String\+Ref Class Reference}
+\label{class_catch_1_1_string_ref}\index{Catch::StringRef@{Catch::StringRef}}
+
+
+{\ttfamily \#include $<$catch.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}\label{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}} 
+using {\bfseries size\+\_\+type} = std\+::size\+\_\+t
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_ac3aa3d16f48b5429a480f823c504f93c}\label{class_catch_1_1_string_ref_ac3aa3d16f48b5429a480f823c504f93c}} 
+using {\bfseries const\+\_\+iterator} = const char $\ast$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_aea45f5089c53adac362bff6bd7c40943}\label{class_catch_1_1_string_ref_aea45f5089c53adac362bff6bd7c40943}} 
+{\bfseries String\+Ref} (char const $\ast$raw\+Chars) noexcept
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a36df94807491c0ad84184fb8e44e1a7c}\label{class_catch_1_1_string_ref_a36df94807491c0ad84184fb8e44e1a7c}} 
+constexpr {\bfseries String\+Ref} (char const $\ast$raw\+Chars, size\+\_\+type size) noexcept
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a7fe41469048f906e9a847798cd335f23}\label{class_catch_1_1_string_ref_a7fe41469048f906e9a847798cd335f23}} 
+{\bfseries String\+Ref} (std\+::string const \&std\+String) noexcept
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_ad9fde21785affacc32d7da7a70d74e93}\label{class_catch_1_1_string_ref_ad9fde21785affacc32d7da7a70d74e93}} 
+{\bfseries operator std\+::string} () const
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_aabb30149ab961187e4b3ff3394bf6e73}\label{class_catch_1_1_string_ref_aabb30149ab961187e4b3ff3394bf6e73}} 
+auto {\bfseries operator==} (\mbox{\hyperlink{class_catch_1_1_string_ref}{String\+Ref}} const \&other) const noexcept -\/$>$ bool
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_aaa6c8bf61c4628034c19763d1c8ad215}\label{class_catch_1_1_string_ref_aaa6c8bf61c4628034c19763d1c8ad215}} 
+auto {\bfseries operator!=} (\mbox{\hyperlink{class_catch_1_1_string_ref}{String\+Ref}} const \&other) const noexcept -\/$>$ bool
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a4ba2e01eec1f0f56c257d213c796ab3b}\label{class_catch_1_1_string_ref_a4ba2e01eec1f0f56c257d213c796ab3b}} 
+auto {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+type index) const noexcept -\/$>$ char
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a0b4841c28cbb14ba07296964a0187023}\label{class_catch_1_1_string_ref_a0b4841c28cbb14ba07296964a0187023}} 
+constexpr auto {\bfseries empty} () const noexcept -\/$>$ bool
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_acb22719801de2b64361b4c283080d4e5}\label{class_catch_1_1_string_ref_acb22719801de2b64361b4c283080d4e5}} 
+constexpr auto {\bfseries size} () const noexcept -\/$>$ size\+\_\+type
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a1669cb2765e820ca258159676cbd82a5}\label{class_catch_1_1_string_ref_a1669cb2765e820ca258159676cbd82a5}} 
+auto {\bfseries c\+\_\+str} () const -\/$>$ char const $\ast$
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a594bc3e10ffad77df92f7d1a4c99d7ff}\label{class_catch_1_1_string_ref_a594bc3e10ffad77df92f7d1a4c99d7ff}} 
+auto {\bfseries substr} (size\+\_\+type start, size\+\_\+type length) const noexcept -\/$>$ \mbox{\hyperlink{class_catch_1_1_string_ref}{String\+Ref}}
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_ab0f85edde9f97153fc758fac3bb14507}\label{class_catch_1_1_string_ref_ab0f85edde9f97153fc758fac3bb14507}} 
+auto {\bfseries data} () const noexcept -\/$>$ char const $\ast$
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a646e58f5f4e1f5e82cfba06d9fd5d016}\label{class_catch_1_1_string_ref_a646e58f5f4e1f5e82cfba06d9fd5d016}} 
+constexpr auto {\bfseries is\+Null\+Terminated} () const noexcept -\/$>$ bool
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_ab0adc7198d60867c2842b998ae456795}\label{class_catch_1_1_string_ref_ab0adc7198d60867c2842b998ae456795}} 
+constexpr const\+\_\+iterator {\bfseries begin} () const
+\item 
+\mbox{\Hypertarget{class_catch_1_1_string_ref_a3ce9afc711b559d6cc59666898fc0828}\label{class_catch_1_1_string_ref_a3ce9afc711b559d6cc59666898fc0828}} 
+constexpr const\+\_\+iterator {\bfseries end} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_a}{A}} non-\/owning string class (similar to the forthcoming std\+::string\+\_\+view) Note that, because a \mbox{\hyperlink{class_catch_1_1_string_ref}{String\+Ref}} may be a substring of another string, it may not be null terminated. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/catch/external/\+Catch2/catch.\+hpp\end{DoxyCompactItemize}

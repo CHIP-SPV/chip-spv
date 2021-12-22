@@ -1,0 +1,215 @@
+\hypertarget{is__callable__test_8hpp_source}{}\doxysection{is\+\_\+callable\+\_\+test.\+hpp}
+\label{is__callable__test_8hpp_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/cppstd/is\_callable\_test.hpp@{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/cppstd/is\_callable\_test.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2017 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <hip/amd\_detail/helpers.hpp>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{using} hip\_impl::is\_callable;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{template}<\textcolor{keywordtype}{int} N>}
+\DoxyCodeLine{29 \textcolor{keyword}{struct }\mbox{\hyperlink{structcallable__rank}{callable\_rank}} : \mbox{\hyperlink{structcallable__rank}{callable\_rank}}<N-\/1>}
+\DoxyCodeLine{30 \{\};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{template}<>}
+\DoxyCodeLine{33 \textcolor{keyword}{struct }\mbox{\hyperlink{structcallable__rank}{callable\_rank}}<0>}
+\DoxyCodeLine{34 \{\};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest1}{test1}}}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38     \textcolor{keyword}{struct }\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         \textcolor{keywordtype}{void} operator()(\textcolor{keywordtype}{int})\textcolor{keyword}{ const}}
+\DoxyCodeLine{41 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{42         \}}
+\DoxyCodeLine{43     \};}
+\DoxyCodeLine{44     \textcolor{keyword}{struct }\mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}} \{\};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keywordtype}{void} is\_callable\_function(\textcolor{keywordtype}{int})}
+\DoxyCodeLine{47     \{}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keyword}{struct }\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}}
+\DoxyCodeLine{51     \{}
+\DoxyCodeLine{52         \textcolor{keywordtype}{void} operator()(\textcolor{keywordtype}{int}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{53 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{54         \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         \textcolor{keywordtype}{void} operator()(\textcolor{keywordtype}{int}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{57 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{58         \}}
+\DoxyCodeLine{59     \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{62     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\textcolor{keywordtype}{long})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{63     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\textcolor{keywordtype}{double})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{64     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\&)>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{65     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{long}\&)>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{66     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\&)>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{67     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{68     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}()>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{69     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__class}{is\_callable\_class}}(\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keyword}{typedef} void (*is\_callable\_function\_pointer)(int);}
+\DoxyCodeLine{72     \textcolor{keyword}{static\_assert}(is\_callable<is\_callable\_function\_pointer(\textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{73     \textcolor{keyword}{static\_assert}(is\_callable<is\_callable\_function\_pointer(\textcolor{keywordtype}{long})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{74     \textcolor{keyword}{static\_assert}(is\_callable<is\_callable\_function\_pointer(\textcolor{keywordtype}{double})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{75     \textcolor{keyword}{static\_assert}(is\_callable<is\_callable\_function\_pointer(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\&)>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{76     \textcolor{keyword}{static\_assert}(is\_callable<is\_callable\_function\_pointer(\textcolor{keyword}{const} \textcolor{keywordtype}{long}\&)>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{77     \textcolor{keyword}{static\_assert}(is\_callable<is\_callable\_function\_pointer(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\&)>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{78     \textcolor{keyword}{static\_assert}(not is\_callable<is\_callable\_function\_pointer(\mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{79     \textcolor{keyword}{static\_assert}(not is\_callable<is\_callable\_function\_pointer()>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{80     \textcolor{keyword}{static\_assert}(not is\_callable<is\_callable\_function\_pointer(\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{83     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{long}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{84     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{double}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{85     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{86     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{long}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{87     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{90     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{long}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{91     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{double}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{92     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{93     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{long}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{94     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<5>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{97     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{long}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<5>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{98     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{double}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<5>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{99     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<5>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{100     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{long}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<5>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{101     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<5>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<6>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{104     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{long}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<6>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{105     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{double}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<6>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{106     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<6>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{107     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{long}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<6>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{108     \textcolor{keyword}{static\_assert}(is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<6>}})>::value, \textcolor{stringliteral}{"{}Not callable"{}});}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{int}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{111     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{long}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{112     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{double}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{113     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{114     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{long}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{115     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double}\&, \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}}, \mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{118     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}}, \mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{119     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}}, \mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{120     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<3>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{121     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\mbox{\hyperlink{structtest1_1_1callable__test__param}{callable\_test\_param}}, \mbox{\hyperlink{structcallable__rank}{callable\_rank<4>}})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{122     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}()>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{123     \textcolor{keyword}{static\_assert}(not is\_callable<\mbox{\hyperlink{structtest1_1_1is__callable__rank__class}{is\_callable\_rank\_class}}(\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}callable failed"{}});}
+\DoxyCodeLine{124 \};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest2}{test2}}}
+\DoxyCodeLine{127 \{}
+\DoxyCodeLine{128     \textcolor{keyword}{typedef} int(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}::*fn)(int);}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{131     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{132     \textcolor{keyword}{static\_assert}(not is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{133     \textcolor{keyword}{static\_assert}(not is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}} \textcolor{keyword}{const}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{134 \};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest3}{test3}}}
+\DoxyCodeLine{137 \{}
+\DoxyCodeLine{138     \textcolor{keyword}{typedef} int(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}::*fn)(int);}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keyword}{typedef} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}* \mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}};}
+\DoxyCodeLine{141     \textcolor{keyword}{typedef} \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}}* \mbox{\hyperlink{structcallable__rank}{DT}};}
+\DoxyCodeLine{142     \textcolor{keyword}{typedef} \textcolor{keyword}{const} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}* \mbox{\hyperlink{structcallable__rank_3_010_01_4}{CT}};}
+\DoxyCodeLine{143     \textcolor{keyword}{typedef} std::unique\_ptr<callable\_rank<0>> ST;}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{146     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank}{DT}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{147     \textcolor{keyword}{static\_assert}(is\_callable<fn(\textcolor{keyword}{const} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{148     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}}\&\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{149     \textcolor{keyword}{static\_assert}(is\_callable<fn(ST, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{150     \textcolor{keyword}{static\_assert}(not is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{CT}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest4}{test4}}}
+\DoxyCodeLine{155 \{}
+\DoxyCodeLine{156     \textcolor{keyword}{typedef} int(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}::*fn);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158     \textcolor{keyword}{static\_assert}(not is\_callable<fn()>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{159 \};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest5}{test5}}}
+\DoxyCodeLine{162 \{}
+\DoxyCodeLine{163     \textcolor{keyword}{typedef} int(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}::*fn);}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{166     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{167     \textcolor{keyword}{static\_assert}(is\_callable<fn(\textcolor{keyword}{const} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{168     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{169 \};}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest6}{test6}}}
+\DoxyCodeLine{172 \{}
+\DoxyCodeLine{173     \textcolor{keyword}{typedef} int(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}::*fn);}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     \textcolor{keyword}{typedef} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}* \mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}};}
+\DoxyCodeLine{176     \textcolor{keyword}{typedef} \mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}}* \mbox{\hyperlink{structcallable__rank}{DT}};}
+\DoxyCodeLine{177     \textcolor{keyword}{typedef} \textcolor{keyword}{const} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}* \mbox{\hyperlink{structcallable__rank_3_010_01_4}{CT}};}
+\DoxyCodeLine{178     \textcolor{keyword}{typedef} std::unique\_ptr<callable\_rank<0>> ST;}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{181     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank}{DT}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{182     \textcolor{keyword}{static\_assert}(is\_callable<fn(\textcolor{keyword}{const} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{183     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{T}}\&\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{184     \textcolor{keyword}{static\_assert}(is\_callable<fn(ST)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{185     \textcolor{keyword}{static\_assert}(is\_callable<fn(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{CT}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187 \};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest7}{test7}}}
+\DoxyCodeLine{190 \{}
+\DoxyCodeLine{191     \textcolor{keyword}{typedef} void(*fp)(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&, int);}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     \textcolor{keyword}{static\_assert}(is\_callable<fp(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{194     \textcolor{keyword}{static\_assert}(is\_callable<fp(\mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{195     \textcolor{keyword}{static\_assert}(not is\_callable<fp(\textcolor{keyword}{const} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{196     \textcolor{keyword}{static\_assert}(not is\_callable<fp()>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{197     \textcolor{keyword}{static\_assert}(not is\_callable<fp(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{198 \};}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200 \textcolor{keyword}{struct }\mbox{\hyperlink{structtest8}{test8}}}
+\DoxyCodeLine{201 \{}
+\DoxyCodeLine{202     \textcolor{keyword}{typedef} void(\&fp)(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&, int);}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     \textcolor{keyword}{static\_assert}(is\_callable<fp(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{205     \textcolor{keyword}{static\_assert}(is\_callable<fp(\mbox{\hyperlink{structcallable__rank}{callable\_rank<1>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{206     \textcolor{keyword}{static\_assert}(not is\_callable<fp(\textcolor{keyword}{const} \mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&, \textcolor{keywordtype}{int})>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{207     \textcolor{keyword}{static\_assert}(not is\_callable<fp()>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{208     \textcolor{keyword}{static\_assert}(not is\_callable<fp(\mbox{\hyperlink{structcallable__rank_3_010_01_4}{callable\_rank<0>}}\&)>::value, \textcolor{stringliteral}{"{}Failed"{}});}
+\DoxyCodeLine{209 \};}
+
+\end{DoxyCode}

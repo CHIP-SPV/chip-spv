@@ -1,0 +1,40 @@
+\hypertarget{class_c_h_i_p_module_level0}{}\doxysection{CHIPModule\+Level0 Class Reference}
+\label{class_c_h_i_p_module_level0}\index{CHIPModuleLevel0@{CHIPModuleLevel0}}
+Inheritance diagram for CHIPModule\+Level0\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_c_h_i_p_module_level0}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_module_level0_a10424348bddb9a2c7b6d14cf3da884bc}\label{class_c_h_i_p_module_level0_a10424348bddb9a2c7b6d14cf3da884bc}} 
+{\bfseries CHIPModule\+Level0} (std\+::string $\ast$module\+\_\+str)
+\item 
+virtual void \mbox{\hyperlink{class_c_h_i_p_module_level0_a179feac2e0336518ccf55016ccc10513}{compile}} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$chip\+\_\+dev) override
+\begin{DoxyCompactList}\small\item\em Kernel JIT compilation can be lazy. This is configured via Cmake LAZY\+\_\+\+JIT option. If LAZY\+\_\+\+JIT is set to true then this module won\textquotesingle{}t be compiled until the first call to one of its kernels. If LAZY\+\_\+\+JIT is set to false(default) then this method should be called in the constructor;. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_h_i_p_module_level0_a179feac2e0336518ccf55016ccc10513}\label{class_c_h_i_p_module_level0_a179feac2e0336518ccf55016ccc10513}} 
+\index{CHIPModuleLevel0@{CHIPModuleLevel0}!compile@{compile}}
+\index{compile@{compile}!CHIPModuleLevel0@{CHIPModuleLevel0}}
+\doxysubsubsection{\texorpdfstring{compile()}{compile()}}
+{\footnotesize\ttfamily void CHIPModule\+Level0\+::compile (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$}]{chip\+\_\+dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Kernel JIT compilation can be lazy. This is configured via Cmake LAZY\+\_\+\+JIT option. If LAZY\+\_\+\+JIT is set to true then this module won\textquotesingle{}t be compiled until the first call to one of its kernels. If LAZY\+\_\+\+JIT is set to false(default) then this method should be called in the constructor;. 
+
+This method should populate this modules chip\+\_\+kernels vector. These kernels would have a name extracted from the kernel but no associated host function pointers. 
+
+Implements \mbox{\hyperlink{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}{CHIPModule}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/backend/\+Level0/Level0\+Backend.\+hh\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/backend/\+Level0/Level0\+Backend.\+cc\end{DoxyCompactItemize}

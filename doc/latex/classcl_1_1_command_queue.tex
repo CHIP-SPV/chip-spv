@@ -1,0 +1,481 @@
+\hypertarget{classcl_1_1_command_queue}{}\doxysection{cl\+::Command\+Queue Class Reference}
+\label{classcl_1_1_command_queue}\index{cl::CommandQueue@{cl::CommandQueue}}
+
+
+\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} interface for cl\+\_\+command\+\_\+queue.  
+
+
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Command\+Queue\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcl_1_1_command_queue}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a8462de408ebfaf6332429a92b7938490}\label{classcl_1_1_command_queue_a8462de408ebfaf6332429a92b7938490}} 
+{\bfseries Command\+Queue} (cl\+\_\+command\+\_\+queue\+\_\+properties properties, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_adcb116a4e1a53417dad3d3850c33d42f}\label{classcl_1_1_command_queue_adcb116a4e1a53417dad3d3850c33d42f}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+command\+\_\+queue\+\_\+properties properties=0, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} for an implementation defined device in the given context. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a887826e515b03224aec87b33ac59f327}\label{classcl_1_1_command_queue_a887826e515b03224aec87b33ac59f327}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+command\+\_\+queue\+\_\+properties properties=0, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ae2ce434c5100e5b467ea8c6561e1f11e}\label{classcl_1_1_command_queue_ae2ce434c5100e5b467ea8c6561e1f11e}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&queue)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_adcc310b23c19aefa6e129ade1cdfbebb}\label{classcl_1_1_command_queue_adcc310b23c19aefa6e129ade1cdfbebb}} 
+\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&queue)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a5e10c9b69745d22107da40e4c3511884}\label{classcl_1_1_command_queue_a5e10c9b69745d22107da40e4c3511884}} 
+\+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS {\bfseries Command\+Queue} (const cl\+\_\+command\+\_\+queue \&command\+Queue)
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_abb39cfb0887f0b06ba96657fce73f10a}\label{classcl_1_1_command_queue_abb39cfb0887f0b06ba96657fce73f10a}} 
+\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \& {\bfseries operator=} (const cl\+\_\+command\+\_\+queue \&rhs)
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a24ba91cef5c88b386b5ecad998501503}\label{classcl_1_1_command_queue_a24ba91cef5c88b386b5ecad998501503}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+command\+\_\+queue\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a534566b65dae3f2a60034fe2bdac9258}\label{classcl_1_1_command_queue_a534566b65dae3f2a60034fe2bdac9258}} 
+{\footnotesize template$<$cl\+\_\+int name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+command\+\_\+queue\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a3bb669c90c6401c97fd8ea2a517c8530}\label{classcl_1_1_command_queue_a3bb669c90c6401c97fd8ea2a517c8530}} 
+cl\+\_\+int {\bfseries enqueue\+Read\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} offset, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} size, void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a6bf3a8168953cabd884d2edd5daba475}\label{classcl_1_1_command_queue_a6bf3a8168953cabd884d2edd5daba475}} 
+cl\+\_\+int {\bfseries enqueue\+Write\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} offset, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} size, const void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a84dcba0fb4fa539bc49df0f315d8ea34}\label{classcl_1_1_command_queue_a84dcba0fb4fa539bc49df0f315d8ea34}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&src, const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&dst, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} src\+\_\+offset, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} dst\+\_\+offset, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} size, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a17906d86ff37d96b170c063576cd89a1}\label{classcl_1_1_command_queue_a17906d86ff37d96b170c063576cd89a1}} 
+cl\+\_\+int {\bfseries enqueue\+Read\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&image, cl\+\_\+bool blocking, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&origin, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&region, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} row\+\_\+pitch, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} slice\+\_\+pitch, void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ac7d38a67846800f96eccbd61c8148969}\label{classcl_1_1_command_queue_ac7d38a67846800f96eccbd61c8148969}} 
+cl\+\_\+int {\bfseries enqueue\+Write\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&image, cl\+\_\+bool blocking, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&origin, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&region, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} row\+\_\+pitch, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} slice\+\_\+pitch, const void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_aec22426d08ac1b1f660eb6642bfdfa9e}\label{classcl_1_1_command_queue_aec22426d08ac1b1f660eb6642bfdfa9e}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&src, const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&dst, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&src\+\_\+origin, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&dst\+\_\+origin, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&region, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ae1eb5c89523128ac01687a03f2e4cd88}\label{classcl_1_1_command_queue_ae1eb5c89523128ac01687a03f2e4cd88}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Image\+To\+Buffer} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&src, const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&dst, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&src\+\_\+origin, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&region, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} dst\+\_\+offset, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ae9026c21b63963fbe803d351640c6ed1}\label{classcl_1_1_command_queue_ae9026c21b63963fbe803d351640c6ed1}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Buffer\+To\+Image} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&src, const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&dst, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} src\+\_\+offset, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&dst\+\_\+origin, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&region, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a9ce8313a1d76ba737b954c143a4f3d62}\label{classcl_1_1_command_queue_a9ce8313a1d76ba737b954c143a4f3d62}} 
+void $\ast$ {\bfseries enqueue\+Map\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} offset, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} size, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a78b6f9e3f65e14b87b64e59ab38258f4}\label{classcl_1_1_command_queue_a78b6f9e3f65e14b87b64e59ab38258f4}} 
+void $\ast$ {\bfseries enqueue\+Map\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&buffer, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&origin, const \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}$<$ 3 $>$ \&region, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} $\ast$row\+\_\+pitch, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} $\ast$slice\+\_\+pitch, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_adbe83c05e5e3164cab113a17ef78428a}\label{classcl_1_1_command_queue_adbe83c05e5e3164cab113a17ef78428a}} 
+cl\+\_\+int {\bfseries enqueue\+Unmap\+Mem\+Object} (const \mbox{\hyperlink{classcl_1_1_memory}{Memory}} \&memory, void $\ast$mapped\+\_\+ptr, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ad5202fefbf8783e3626808ac2e95e18e}\label{classcl_1_1_command_queue_ad5202fefbf8783e3626808ac2e95e18e}} 
+cl\+\_\+int {\bfseries enqueue\+NDRange\+Kernel} (const \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&kernel, const \mbox{\hyperlink{classcl_1_1_n_d_range}{NDRange}} \&offset, const \mbox{\hyperlink{classcl_1_1_n_d_range}{NDRange}} \&global, const \mbox{\hyperlink{classcl_1_1_n_d_range}{NDRange}} \&local=Null\+Range, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ad4d183e8a1a021f0da6b2bbf1d1cda36}\label{classcl_1_1_command_queue_ad4d183e8a1a021f0da6b2bbf1d1cda36}} 
+cl\+\_\+int {\bfseries enqueue\+Task} (const \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&kernel, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a21bdff1b49e27cf0ff29de5fc7156cf2}\label{classcl_1_1_command_queue_a21bdff1b49e27cf0ff29de5fc7156cf2}} 
+cl\+\_\+int {\bfseries enqueue\+Native\+Kernel} (void(CL\+\_\+\+CALLBACK $\ast$user\+Fptr)(void $\ast$), std\+::pair$<$ void $\ast$, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} $>$ args, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$mem\+\_\+objects=NULL, const VECTOR\+\_\+\+CLASS$<$ const void $\ast$ $>$ $\ast$mem\+\_\+locs=NULL, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_ab987adc2e00f12c74b554ee708ed5b3f}{enqueue\+Acquire\+GLObjects}} (const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$mem\+\_\+objects=NULL, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a690e590ad8f3f70a5f916cf30ca1436d}\label{classcl_1_1_command_queue_a690e590ad8f3f70a5f916cf30ca1436d}} 
+cl\+\_\+int {\bfseries enqueue\+Release\+GLObjects} (const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$mem\+\_\+objects=NULL, const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a3cba88b51715610d76b0956140be9655}{flush}} () const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a511d461b0f5fabc8d737f4f29a4f346e}\label{classcl_1_1_command_queue_a511d461b0f5fabc8d737f4f29a4f346e}} 
+cl\+\_\+int {\bfseries finish} () const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a8462de408ebfaf6332429a92b7938490}\label{classcl_1_1_command_queue_a8462de408ebfaf6332429a92b7938490}} 
+{\bfseries Command\+Queue} (cl\+\_\+command\+\_\+queue\+\_\+properties properties, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} based on passed properties. Will return an CL\+\_\+\+INVALID\+\_\+\+QUEUE\+\_\+\+PROPERTIES error if CL\+\_\+\+QUEUE\+\_\+\+ON\+\_\+\+DEVICE is specified. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a05ae8e9e44e9b28fc755937490535550}\label{classcl_1_1_command_queue_a05ae8e9e44e9b28fc755937490535550}} 
+{\bfseries Command\+Queue} (Queue\+Properties properties, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} based on passed properties. Will return an CL\+\_\+\+INVALID\+\_\+\+QUEUE\+\_\+\+PROPERTIES error if CL\+\_\+\+QUEUE\+\_\+\+ON\+\_\+\+DEVICE is specified. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_adcb116a4e1a53417dad3d3850c33d42f}\label{classcl_1_1_command_queue_adcb116a4e1a53417dad3d3850c33d42f}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+command\+\_\+queue\+\_\+properties properties=0, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} for an implementation defined device in the given context Will return an CL\+\_\+\+INVALID\+\_\+\+QUEUE\+\_\+\+PROPERTIES error if CL\+\_\+\+QUEUE\+\_\+\+ON\+\_\+\+DEVICE is specified. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a975c3dce399cb77a5c6b0e294e4778fe}\label{classcl_1_1_command_queue_a975c3dce399cb77a5c6b0e294e4778fe}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, Queue\+Properties properties, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} for an implementation defined device in the given context Will return an CL\+\_\+\+INVALID\+\_\+\+QUEUE\+\_\+\+PROPERTIES error if CL\+\_\+\+QUEUE\+\_\+\+ON\+\_\+\+DEVICE is specified. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a887826e515b03224aec87b33ac59f327}\label{classcl_1_1_command_queue_a887826e515b03224aec87b33ac59f327}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+command\+\_\+queue\+\_\+properties properties=0, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} for a passed device and context Will return an CL\+\_\+\+INVALID\+\_\+\+QUEUE\+\_\+\+PROPERTIES error if CL\+\_\+\+QUEUE\+\_\+\+ON\+\_\+\+DEVICE is specified. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a8dd467bd94839921b7318cb30f92b5a4}\label{classcl_1_1_command_queue_a8dd467bd94839921b7318cb30f92b5a4}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, Queue\+Properties properties, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} for a passed device and context Will return an CL\+\_\+\+INVALID\+\_\+\+QUEUE\+\_\+\+PROPERTIES error if CL\+\_\+\+QUEUE\+\_\+\+ON\+\_\+\+DEVICE is specified. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_command_queue_a09be675998c51f36aa7744b47eabebd3}{Command\+Queue}} (const cl\+\_\+command\+\_\+queue \&command\+Queue, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+command\+\_\+queue -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_abb39cfb0887f0b06ba96657fce73f10a}\label{classcl_1_1_command_queue_abb39cfb0887f0b06ba96657fce73f10a}} 
+\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \& {\bfseries operator=} (const cl\+\_\+command\+\_\+queue \&rhs)
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ae2ce434c5100e5b467ea8c6561e1f11e}\label{classcl_1_1_command_queue_ae2ce434c5100e5b467ea8c6561e1f11e}} 
+{\bfseries Command\+Queue} (const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&queue)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_adcc310b23c19aefa6e129ade1cdfbebb}\label{classcl_1_1_command_queue_adcc310b23c19aefa6e129ade1cdfbebb}} 
+\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&queue)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a1c5830678be567e34dccbb0065c89b21}\label{classcl_1_1_command_queue_a1c5830678be567e34dccbb0065c89b21}} 
+{\bfseries Command\+Queue} (\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&\&queue) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\begin{DoxyCompactList}\small\item\em Move constructor to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a678df8cbf6547ae2c772cd6d2d96f96f}\label{classcl_1_1_command_queue_a678df8cbf6547ae2c772cd6d2d96f96f}} 
+\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \& {\bfseries operator=} (\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&\&queue)
+\begin{DoxyCompactList}\small\item\em Move assignment to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a24ba91cef5c88b386b5ecad998501503}\label{classcl_1_1_command_queue_a24ba91cef5c88b386b5ecad998501503}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+command\+\_\+queue\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a534566b65dae3f2a60034fe2bdac9258}\label{classcl_1_1_command_queue_a534566b65dae3f2a60034fe2bdac9258}} 
+{\footnotesize template$<$cl\+\_\+command\+\_\+queue\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+command\+\_\+queue\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a81f78df7eadfd5202e1e670aacb16014}\label{classcl_1_1_command_queue_a81f78df7eadfd5202e1e670aacb16014}} 
+cl\+\_\+int {\bfseries enqueue\+Read\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} offset, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, void $\ast$ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_acee8965ec3b645fd416d6448516b346c}\label{classcl_1_1_command_queue_acee8965ec3b645fd416d6448516b346c}} 
+cl\+\_\+int {\bfseries enqueue\+Write\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} offset, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const void $\ast$ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a5708cb52ca4ef7dd61d774e7aad2ef95}\label{classcl_1_1_command_queue_a5708cb52ca4ef7dd61d774e7aad2ef95}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&src, const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&dst, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} src\+\_\+offset, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} dst\+\_\+offset, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_ae8b7b02623f13b393a79e3ff9916d270}\label{classcl_1_1_command_queue_ae8b7b02623f13b393a79e3ff9916d270}} 
+cl\+\_\+int {\bfseries enqueue\+Read\+Buffer\+Rect} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&buffer\+\_\+offset, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&host\+\_\+offset, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} buffer\+\_\+row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} buffer\+\_\+slice\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} host\+\_\+row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} host\+\_\+slice\+\_\+pitch, void $\ast$ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a84669123946c99690f32c08276b9512a}\label{classcl_1_1_command_queue_a84669123946c99690f32c08276b9512a}} 
+cl\+\_\+int {\bfseries enqueue\+Write\+Buffer\+Rect} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&buffer\+\_\+offset, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&host\+\_\+offset, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} buffer\+\_\+row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} buffer\+\_\+slice\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} host\+\_\+row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} host\+\_\+slice\+\_\+pitch, const void $\ast$ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a83096c6bf792527c8c606a653d6b308b}\label{classcl_1_1_command_queue_a83096c6bf792527c8c606a653d6b308b}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Buffer\+Rect} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&src, const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&dst, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&src\+\_\+origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&dst\+\_\+origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} src\+\_\+row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} src\+\_\+slice\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} dst\+\_\+row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} dst\+\_\+slice\+\_\+pitch, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename Pattern\+Type $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a09f546d77b717ce26606c462c0ca9d1c}{enqueue\+Fill\+Buffer}} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, Pattern\+Type pattern, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} offset, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_abcd7ead0f68caafafffae2cb7be75c0b}\label{classcl_1_1_command_queue_abcd7ead0f68caafafffae2cb7be75c0b}} 
+cl\+\_\+int {\bfseries enqueue\+Read\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&image, cl\+\_\+bool blocking, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} slice\+\_\+pitch, void $\ast$ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a88e335f69c0e65b624c670e0dfe10e59}\label{classcl_1_1_command_queue_a88e335f69c0e65b624c670e0dfe10e59}} 
+cl\+\_\+int {\bfseries enqueue\+Write\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&image, cl\+\_\+bool blocking, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} slice\+\_\+pitch, const void $\ast$ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a97e4e3e6c2183aa6254901dc62ed1e0e}\label{classcl_1_1_command_queue_a97e4e3e6c2183aa6254901dc62ed1e0e}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&src, const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&dst, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&src\+\_\+origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&dst\+\_\+origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a9c3230b644ad638973be7199e0451e46}{enqueue\+Fill\+Image}} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&image, \mbox{\hyperlink{unioncl__float4}{cl\+\_\+float4}} fill\+Color, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_acb2c278ef4f177c5d01035c008a5cb3e}{enqueue\+Fill\+Image}} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&image, \mbox{\hyperlink{unioncl__int4}{cl\+\_\+int4}} fill\+Color, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a3081328f7b10be88e87eb719d3ad6307}{enqueue\+Fill\+Image}} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&image, \mbox{\hyperlink{unioncl__uint4}{cl\+\_\+uint4}} fill\+Color, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_acaaa991a224cae832f2fe743e66b3773}\label{classcl_1_1_command_queue_acaaa991a224cae832f2fe743e66b3773}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Image\+To\+Buffer} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&src, const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&dst, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&src\+\_\+origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} dst\+\_\+offset, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a4bf243bc86af453851faa779d5aa3c9e}\label{classcl_1_1_command_queue_a4bf243bc86af453851faa779d5aa3c9e}} 
+cl\+\_\+int {\bfseries enqueue\+Copy\+Buffer\+To\+Image} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&src, const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&dst, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} src\+\_\+offset, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&dst\+\_\+origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a4b20f90a3e6aeafebc63940975bdc22d}\label{classcl_1_1_command_queue_a4b20f90a3e6aeafebc63940975bdc22d}} 
+void $\ast$ {\bfseries enqueue\+Map\+Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buffer, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} offset, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a67a0fda156ff746bd684c698b7851f67}\label{classcl_1_1_command_queue_a67a0fda156ff746bd684c698b7851f67}} 
+void $\ast$ {\bfseries enqueue\+Map\+Image} (const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&buffer, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&origin, const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&region, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $\ast$row\+\_\+pitch, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $\ast$slice\+\_\+pitch, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL, cl\+\_\+int $\ast$err=NULL) const
+\item 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_aec8211d19eb2ffbb8adc7f565fe61c3c}{enqueue\+Map\+SVM}} (T $\ast$ptr, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class D $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a58d16044448bcb2797f490a33e450bde}{enqueue\+Map\+SVM}} (cl\+::pointer$<$ T, D $>$ \&ptr, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class Alloc $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a30fcb95415b760f23b2abba6e0842125}{enqueue\+Map\+SVM}} (cl\+::vector$<$ T, Alloc $>$ \&container, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_abf59626241152db7c2c986198ad32bba}\label{classcl_1_1_command_queue_abf59626241152db7c2c986198ad32bba}} 
+cl\+\_\+int {\bfseries enqueue\+Unmap\+Mem\+Object} (const \mbox{\hyperlink{classcl_1_1_memory}{Memory}} \&memory, void $\ast$mapped\+\_\+ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_affae2ea7a86c23e01c11fbdcdc149300}{enqueue\+Unmap\+SVM}} (T $\ast$ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class D $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a8818c06a2f28a319d5259be7374c93fc}{enqueue\+Unmap\+SVM}} (cl\+::pointer$<$ T, D $>$ \&ptr, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class Alloc $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_af7e83f7dec93b2700b8ce4380d81bfcb}{enqueue\+Unmap\+SVM}} (cl\+::vector$<$ T, Alloc $>$ \&container, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a76a3f83c5546fbfa71a38f4ea02e264d}{enqueue\+Marker\+With\+Wait\+List}} (const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=0, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=0) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_acf92038ba0d015824a7488091fc8f5a1}{enqueue\+Barrier\+With\+Wait\+List}} (const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=0, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=0) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a3a9a4f084dc7634d3c73f5bf7f680b65}{enqueue\+Migrate\+Mem\+Objects}} (const vector$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ \&mem\+Objects, cl\+\_\+mem\+\_\+migration\+\_\+flags flags, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a8470ceddefdc40c796d83a41ace25442}{enqueue\+Migrate\+SVM}} (const cl\+::vector$<$ T $\ast$ $>$ \&svm\+Raw\+Pointers, const cl\+::vector$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $>$ \&sizes, cl\+\_\+mem\+\_\+migration\+\_\+flags flags=0, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a7349f54501b3967c55337635f22e01fc}{enqueue\+Migrate\+SVM}} (const cl\+::vector$<$ T $\ast$ $>$ \&svm\+Raw\+Pointers, cl\+\_\+mem\+\_\+migration\+\_\+flags flags=0, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class D $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a489734f6158231262d0b79553192af5a}{enqueue\+Migrate\+SVM}} (const cl\+::vector$<$ cl\+::pointer$<$ T, D $>$ $>$ \&svm\+Pointers, const cl\+::vector$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $>$ \&sizes, cl\+\_\+mem\+\_\+migration\+\_\+flags flags=0, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class D $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a2b7d9e7c851eb31e9b4be0955e9d6e0a}{enqueue\+Migrate\+SVM}} (const cl\+::vector$<$ cl\+::pointer$<$ T, D $>$ $>$ \&svm\+Pointers, cl\+\_\+mem\+\_\+migration\+\_\+flags flags=0, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class Alloc $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a21737d533444623d0f299fb6d6406785}{enqueue\+Migrate\+SVM}} (const cl\+::vector$<$ cl\+::vector$<$ T, Alloc $>$ $>$ \&svm\+Containers, const cl\+::vector$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $>$ \&sizes, cl\+\_\+mem\+\_\+migration\+\_\+flags flags=0, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+{\footnotesize template$<$typename T , class Alloc $>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a79d49a784a2d7021f5c8df2dbbab9d8c}{enqueue\+Migrate\+SVM}} (const cl\+::vector$<$ cl\+::vector$<$ T, Alloc $>$ $>$ \&svm\+Containers, cl\+\_\+mem\+\_\+migration\+\_\+flags flags=0, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a0e6d2ed1031239edaf9134a15ad1a816}\label{classcl_1_1_command_queue_a0e6d2ed1031239edaf9134a15ad1a816}} 
+cl\+\_\+int {\bfseries enqueue\+NDRange\+Kernel} (const \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&kernel, const \mbox{\hyperlink{classcl_1_1_n_d_range}{NDRange}} \&offset, const \mbox{\hyperlink{classcl_1_1_n_d_range}{NDRange}} \&global, const \mbox{\hyperlink{classcl_1_1_n_d_range}{NDRange}} \&local=Null\+Range, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a53ff05e345b2160cceae073b0e56f7ab}\label{classcl_1_1_command_queue_a53ff05e345b2160cceae073b0e56f7ab}} 
+cl\+\_\+int {\bfseries enqueue\+Native\+Kernel} (void(CL\+\_\+\+CALLBACK $\ast$user\+Fptr)(void $\ast$), std\+::pair$<$ void $\ast$, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $>$ args, const vector$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$mem\+\_\+objects=NULL, const vector$<$ const void $\ast$ $>$ $\ast$mem\+\_\+locs=NULL, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_ae9b8fbe11859b0d9b2ad317fcfdcaced}{enqueue\+Acquire\+GLObjects}} (const vector$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$mem\+\_\+objects=NULL, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_aea30fd364c0ba14f3fd9f260b8a9ad1f}\label{classcl_1_1_command_queue_aea30fd364c0ba14f3fd9f260b8a9ad1f}} 
+cl\+\_\+int {\bfseries enqueue\+Release\+GLObjects} (const vector$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$mem\+\_\+objects=NULL, const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$events=NULL, \mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$event=NULL) const
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_command_queue_a3cba88b51715610d76b0956140be9655}{flush}} () const
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a511d461b0f5fabc8d737f4f29a4f346e}\label{classcl_1_1_command_queue_a511d461b0f5fabc8d737f4f29a4f346e}} 
+cl\+\_\+int {\bfseries finish} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a24444b0dbd7cc0eb2bce126c9ccbac4c}\label{classcl_1_1_command_queue_a24444b0dbd7cc0eb2bce126c9ccbac4c}} 
+static \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} {\bfseries get\+Default} (cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_command_queue_a24444b0dbd7cc0eb2bce126c9ccbac4c}\label{classcl_1_1_command_queue_a24444b0dbd7cc0eb2bce126c9ccbac4c}} 
+static \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} {\bfseries get\+Default} (cl\+\_\+int $\ast$err=NULL)
+\item 
+static \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \mbox{\hyperlink{classcl_1_1_command_queue_a736a138dd72e39056e8a9aa3dec5d132}{set\+Default}} (const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&default\+\_\+queue)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} interface for cl\+\_\+command\+\_\+queue. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_command_queue_a09be675998c51f36aa7744b47eabebd3}\label{classcl_1_1_command_queue_a09be675998c51f36aa7744b47eabebd3}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!CommandQueue@{CommandQueue}}
+\index{CommandQueue@{CommandQueue}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{CommandQueue()}{CommandQueue()}}
+{\footnotesize\ttfamily cl\+::\+Command\+Queue\+::\+Command\+Queue (\begin{DoxyParamCaption}\item[{const cl\+\_\+command\+\_\+queue \&}]{command\+Queue,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+command\+\_\+queue -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_command_queue_ae9b8fbe11859b0d9b2ad317fcfdcaced}\label{classcl_1_1_command_queue_ae9b8fbe11859b0d9b2ad317fcfdcaced}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueAcquireGLObjects@{enqueueAcquireGLObjects}}
+\index{enqueueAcquireGLObjects@{enqueueAcquireGLObjects}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueAcquireGLObjects()}{enqueueAcquireGLObjects()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Acquire\+GLObjects (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$}]{mem\+\_\+objects = {\ttfamily NULL},  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Deprecated APIs for 1.\+2 \mbox{\Hypertarget{classcl_1_1_command_queue_ab987adc2e00f12c74b554ee708ed5b3f}\label{classcl_1_1_command_queue_ab987adc2e00f12c74b554ee708ed5b3f}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueAcquireGLObjects@{enqueueAcquireGLObjects}}
+\index{enqueueAcquireGLObjects@{enqueueAcquireGLObjects}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueAcquireGLObjects()}{enqueueAcquireGLObjects()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Acquire\+GLObjects (\begin{DoxyParamCaption}\item[{const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ $\ast$}]{mem\+\_\+objects = {\ttfamily NULL},  }\item[{const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Deprecated APIs for 1.\+2 \mbox{\Hypertarget{classcl_1_1_command_queue_acf92038ba0d015824a7488091fc8f5a1}\label{classcl_1_1_command_queue_acf92038ba0d015824a7488091fc8f5a1}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueBarrierWithWaitList@{enqueueBarrierWithWaitList}}
+\index{enqueueBarrierWithWaitList@{enqueueBarrierWithWaitList}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueBarrierWithWaitList()}{enqueueBarrierWithWaitList()}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Barrier\+With\+Wait\+List (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{class_a}{A}} synchronization point that enqueues a barrier operation.
+
+Enqueues a barrier command which waits for either a list of events to complete, or if the list is empty it waits for all commands previously enqueued in command\+\_\+queue to complete before it completes. This command blocks command execution, that is, any following commands enqueued after it do not execute until it completes. This command returns an event which can be waited on, i.\+e. this event can be waited on to insure that all events either in the event\+\_\+wait\+\_\+list or all previously enqueued commands, queued before this command to command\+\_\+queue, have completed. \mbox{\Hypertarget{classcl_1_1_command_queue_a09f546d77b717ce26606c462c0ca9d1c}\label{classcl_1_1_command_queue_a09f546d77b717ce26606c462c0ca9d1c}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueFillBuffer@{enqueueFillBuffer}}
+\index{enqueueFillBuffer@{enqueueFillBuffer}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueFillBuffer()}{enqueueFillBuffer()}}
+{\footnotesize\ttfamily template$<$typename Pattern\+Type $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Fill\+Buffer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&}]{buffer,  }\item[{Pattern\+Type}]{pattern,  }\item[{\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}}]{offset,  }\item[{\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}}]{size,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{struct_enqueue}{Enqueue}} a command to fill a buffer object with a pattern of a given size. The pattern is specified as a vector type. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Pattern\+Type} & The datatype of the pattern field. The pattern type must be an accepted Open\+CL data type. \\
+\hline
+{\em offset} & Is the offset in bytes into the buffer at which to start filling. This must be a multiple of the pattern size. \\
+\hline
+{\em size} & Is the size in bytes of the region to fill. This must be a multiple of the pattern size. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{classcl_1_1_command_queue_a9c3230b644ad638973be7199e0451e46}\label{classcl_1_1_command_queue_a9c3230b644ad638973be7199e0451e46}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueFillImage@{enqueueFillImage}}
+\index{enqueueFillImage@{enqueueFillImage}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueFillImage()}{enqueueFillImage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Fill\+Image (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&}]{image,  }\item[{\mbox{\hyperlink{unioncl__float4}{cl\+\_\+float4}}}]{fill\+Color,  }\item[{const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&}]{origin,  }\item[{const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&}]{region,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{struct_enqueue}{Enqueue}} a command to fill an image object with a specified color. 
+\begin{DoxyParams}{Parameters}
+{\em fill\+Color} & is the color to use to fill the image. This is a four component RGBA floating-\/point color value if the image channel data type is not an unnormalized signed or unsigned data type. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_command_queue_acb2c278ef4f177c5d01035c008a5cb3e}\label{classcl_1_1_command_queue_acb2c278ef4f177c5d01035c008a5cb3e}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueFillImage@{enqueueFillImage}}
+\index{enqueueFillImage@{enqueueFillImage}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueFillImage()}{enqueueFillImage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Fill\+Image (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&}]{image,  }\item[{\mbox{\hyperlink{unioncl__int4}{cl\+\_\+int4}}}]{fill\+Color,  }\item[{const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&}]{origin,  }\item[{const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&}]{region,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{struct_enqueue}{Enqueue}} a command to fill an image object with a specified color. 
+\begin{DoxyParams}{Parameters}
+{\em fill\+Color} & is the color to use to fill the image. This is a four component RGBA signed integer color value if the image channel data type is an unnormalized signed integer type. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_command_queue_a3081328f7b10be88e87eb719d3ad6307}\label{classcl_1_1_command_queue_a3081328f7b10be88e87eb719d3ad6307}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueFillImage@{enqueueFillImage}}
+\index{enqueueFillImage@{enqueueFillImage}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueFillImage()}{enqueueFillImage()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Fill\+Image (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_image}{Image}} \&}]{image,  }\item[{\mbox{\hyperlink{unioncl__uint4}{cl\+\_\+uint4}}}]{fill\+Color,  }\item[{const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&}]{origin,  }\item[{const array$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}, 3 $>$ \&}]{region,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{struct_enqueue}{Enqueue}} a command to fill an image object with a specified color. 
+\begin{DoxyParams}{Parameters}
+{\em fill\+Color} & is the color to use to fill the image. This is a four component RGBA unsigned integer color value if the image channel data type is an unnormalized unsigned integer type. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_command_queue_a58d16044448bcb2797f490a33e450bde}\label{classcl_1_1_command_queue_a58d16044448bcb2797f490a33e450bde}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMapSVM@{enqueueMapSVM}}
+\index{enqueueMapSVM@{enqueueMapSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMapSVM()}{enqueueMapSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T , class D $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Map\+SVM (\begin{DoxyParamCaption}\item[{cl\+::pointer$<$ T, D $>$ \&}]{ptr,  }\item[{cl\+\_\+bool}]{blocking,  }\item[{cl\+\_\+map\+\_\+flags}]{flags,  }\item[{\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}}]{size,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host to update a region of a coarse-\/grained SVM buffer. This variant takes a cl\+::pointer instance. \mbox{\Hypertarget{classcl_1_1_command_queue_a30fcb95415b760f23b2abba6e0842125}\label{classcl_1_1_command_queue_a30fcb95415b760f23b2abba6e0842125}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMapSVM@{enqueueMapSVM}}
+\index{enqueueMapSVM@{enqueueMapSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMapSVM()}{enqueueMapSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T , class Alloc $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Map\+SVM (\begin{DoxyParamCaption}\item[{cl\+::vector$<$ T, Alloc $>$ \&}]{container,  }\item[{cl\+\_\+bool}]{blocking,  }\item[{cl\+\_\+map\+\_\+flags}]{flags,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host to update a region of a coarse-\/grained SVM buffer. This variant takes a cl\+::vector instance. \mbox{\Hypertarget{classcl_1_1_command_queue_aec8211d19eb2ffbb8adc7f565fe61c3c}\label{classcl_1_1_command_queue_aec8211d19eb2ffbb8adc7f565fe61c3c}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMapSVM@{enqueueMapSVM}}
+\index{enqueueMapSVM@{enqueueMapSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMapSVM()}{enqueueMapSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Map\+SVM (\begin{DoxyParamCaption}\item[{T $\ast$}]{ptr,  }\item[{cl\+\_\+bool}]{blocking,  }\item[{cl\+\_\+map\+\_\+flags}]{flags,  }\item[{\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}}]{size,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host to update a region of a coarse-\/grained SVM buffer. This variant takes a raw SVM pointer. \mbox{\Hypertarget{classcl_1_1_command_queue_a76a3f83c5546fbfa71a38f4ea02e264d}\label{classcl_1_1_command_queue_a76a3f83c5546fbfa71a38f4ea02e264d}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMarkerWithWaitList@{enqueueMarkerWithWaitList}}
+\index{enqueueMarkerWithWaitList@{enqueueMarkerWithWaitList}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMarkerWithWaitList()}{enqueueMarkerWithWaitList()}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Marker\+With\+Wait\+List (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily 0},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a marker command which waits for either a list of events to complete, or all previously enqueued commands to complete.
+
+Enqueues a marker command which waits for either a list of events to complete, or if the list is empty it waits for all commands previously enqueued in command\+\_\+queue to complete before it completes. This command returns an event which can be waited on, i.\+e. this event can be waited on to insure that all events either in the event\+\_\+wait\+\_\+list or all previously enqueued commands, queued before this command to command\+\_\+queue, have completed. \mbox{\Hypertarget{classcl_1_1_command_queue_a3a9a4f084dc7634d3c73f5bf7f680b65}\label{classcl_1_1_command_queue_a3a9a4f084dc7634d3c73f5bf7f680b65}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMigrateMemObjects@{enqueueMigrateMemObjects}}
+\index{enqueueMigrateMemObjects@{enqueueMigrateMemObjects}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMigrateMemObjects()}{enqueueMigrateMemObjects()}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Migrate\+Mem\+Objects (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_memory}{Memory}} $>$ \&}]{mem\+Objects,  }\item[{cl\+\_\+mem\+\_\+migration\+\_\+flags}]{flags,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command to indicate with which device a set of memory objects should be associated. \mbox{\Hypertarget{classcl_1_1_command_queue_a2b7d9e7c851eb31e9b4be0955e9d6e0a}\label{classcl_1_1_command_queue_a2b7d9e7c851eb31e9b4be0955e9d6e0a}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMigrateSVM@{enqueueMigrateSVM}}
+\index{enqueueMigrateSVM@{enqueueMigrateSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMigrateSVM()}{enqueueMigrateSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$typename T , class D $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Migrate\+SVM (\begin{DoxyParamCaption}\item[{const cl\+::vector$<$ cl\+::pointer$<$ T, D $>$ $>$ \&}]{svm\+Pointers,  }\item[{cl\+\_\+mem\+\_\+migration\+\_\+flags}]{flags = {\ttfamily 0},  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host associate a set of SVM allocations with a device. \mbox{\Hypertarget{classcl_1_1_command_queue_a489734f6158231262d0b79553192af5a}\label{classcl_1_1_command_queue_a489734f6158231262d0b79553192af5a}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMigrateSVM@{enqueueMigrateSVM}}
+\index{enqueueMigrateSVM@{enqueueMigrateSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMigrateSVM()}{enqueueMigrateSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$typename T , class D $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Migrate\+SVM (\begin{DoxyParamCaption}\item[{const cl\+::vector$<$ cl\+::pointer$<$ T, D $>$ $>$ \&}]{svm\+Pointers,  }\item[{const cl\+::vector$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $>$ \&}]{sizes,  }\item[{cl\+\_\+mem\+\_\+migration\+\_\+flags}]{flags = {\ttfamily 0},  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host associate ranges within a set of SVM allocations with a device. 
+\begin{DoxyParams}{Parameters}
+{\em sizes} & -\/ The length from each pointer to migrate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_command_queue_a79d49a784a2d7021f5c8df2dbbab9d8c}\label{classcl_1_1_command_queue_a79d49a784a2d7021f5c8df2dbbab9d8c}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMigrateSVM@{enqueueMigrateSVM}}
+\index{enqueueMigrateSVM@{enqueueMigrateSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMigrateSVM()}{enqueueMigrateSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$typename T , class Alloc $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Migrate\+SVM (\begin{DoxyParamCaption}\item[{const cl\+::vector$<$ cl\+::vector$<$ T, Alloc $>$ $>$ \&}]{svm\+Containers,  }\item[{cl\+\_\+mem\+\_\+migration\+\_\+flags}]{flags = {\ttfamily 0},  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host associate a set of SVM allocations with a device. \mbox{\Hypertarget{classcl_1_1_command_queue_a21737d533444623d0f299fb6d6406785}\label{classcl_1_1_command_queue_a21737d533444623d0f299fb6d6406785}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMigrateSVM@{enqueueMigrateSVM}}
+\index{enqueueMigrateSVM@{enqueueMigrateSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMigrateSVM()}{enqueueMigrateSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$typename T , class Alloc $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Migrate\+SVM (\begin{DoxyParamCaption}\item[{const cl\+::vector$<$ cl\+::vector$<$ T, Alloc $>$ $>$ \&}]{svm\+Containers,  }\item[{const cl\+::vector$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $>$ \&}]{sizes,  }\item[{cl\+\_\+mem\+\_\+migration\+\_\+flags}]{flags = {\ttfamily 0},  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host associate ranges within a set of SVM allocations with a device. 
+\begin{DoxyParams}{Parameters}
+{\em sizes} & -\/ The length from the beginning of each container to migrate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_command_queue_a7349f54501b3967c55337635f22e01fc}\label{classcl_1_1_command_queue_a7349f54501b3967c55337635f22e01fc}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMigrateSVM@{enqueueMigrateSVM}}
+\index{enqueueMigrateSVM@{enqueueMigrateSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMigrateSVM()}{enqueueMigrateSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Migrate\+SVM (\begin{DoxyParamCaption}\item[{const cl\+::vector$<$ T $\ast$ $>$ \&}]{svm\+Raw\+Pointers,  }\item[{cl\+\_\+mem\+\_\+migration\+\_\+flags}]{flags = {\ttfamily 0},  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host associate a set of SVM allocations with a device. \mbox{\Hypertarget{classcl_1_1_command_queue_a8470ceddefdc40c796d83a41ace25442}\label{classcl_1_1_command_queue_a8470ceddefdc40c796d83a41ace25442}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueMigrateSVM@{enqueueMigrateSVM}}
+\index{enqueueMigrateSVM@{enqueueMigrateSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueMigrateSVM()}{enqueueMigrateSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Migrate\+SVM (\begin{DoxyParamCaption}\item[{const cl\+::vector$<$ T $\ast$ $>$ \&}]{svm\+Raw\+Pointers,  }\item[{const cl\+::vector$<$ \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $>$ \&}]{sizes,  }\item[{cl\+\_\+mem\+\_\+migration\+\_\+flags}]{flags = {\ttfamily 0},  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will allow the host associate ranges within a set of SVM allocations with a device. 
+\begin{DoxyParams}{Parameters}
+{\em sizes} & -\/ The length from each pointer to migrate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_command_queue_a8818c06a2f28a319d5259be7374c93fc}\label{classcl_1_1_command_queue_a8818c06a2f28a319d5259be7374c93fc}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueUnmapSVM@{enqueueUnmapSVM}}
+\index{enqueueUnmapSVM@{enqueueUnmapSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueUnmapSVM()}{enqueueUnmapSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T , class D $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Unmap\+SVM (\begin{DoxyParamCaption}\item[{cl\+::pointer$<$ T, D $>$ \&}]{ptr,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will release a coarse-\/grained SVM buffer back to the Open\+CL runtime. This variant takes a cl\+::pointer instance. \mbox{\Hypertarget{classcl_1_1_command_queue_af7e83f7dec93b2700b8ce4380d81bfcb}\label{classcl_1_1_command_queue_af7e83f7dec93b2700b8ce4380d81bfcb}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueUnmapSVM@{enqueueUnmapSVM}}
+\index{enqueueUnmapSVM@{enqueueUnmapSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueUnmapSVM()}{enqueueUnmapSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T , class Alloc $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Unmap\+SVM (\begin{DoxyParamCaption}\item[{cl\+::vector$<$ T, Alloc $>$ \&}]{container,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will release a coarse-\/grained SVM buffer back to the Open\+CL runtime. This variant takes a cl\+::vector instance. \mbox{\Hypertarget{classcl_1_1_command_queue_affae2ea7a86c23e01c11fbdcdc149300}\label{classcl_1_1_command_queue_affae2ea7a86c23e01c11fbdcdc149300}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!enqueueUnmapSVM@{enqueueUnmapSVM}}
+\index{enqueueUnmapSVM@{enqueueUnmapSVM}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueUnmapSVM()}{enqueueUnmapSVM()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+cl\+\_\+int cl\+::\+Command\+Queue\+::enqueue\+Unmap\+SVM (\begin{DoxyParamCaption}\item[{T $\ast$}]{ptr,  }\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ $\ast$}]{events = {\ttfamily NULL},  }\item[{\mbox{\hyperlink{classcl_1_1_event}{Event}} $\ast$}]{event = {\ttfamily NULL} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Enqueues a command that will release a coarse-\/grained SVM buffer back to the Open\+CL runtime. This variant takes a raw SVM pointer. \mbox{\Hypertarget{classcl_1_1_command_queue_a3cba88b51715610d76b0956140be9655}\label{classcl_1_1_command_queue_a3cba88b51715610d76b0956140be9655}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!flush@{flush}}
+\index{flush@{flush}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{flush()}{flush()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Deprecated APIs for 1.\+2 \mbox{\Hypertarget{classcl_1_1_command_queue_a3cba88b51715610d76b0956140be9655}\label{classcl_1_1_command_queue_a3cba88b51715610d76b0956140be9655}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!flush@{flush}}
+\index{flush@{flush}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{flush()}{flush()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Command\+Queue\+::flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Deprecated APIs for 1.\+2 \mbox{\Hypertarget{classcl_1_1_command_queue_a736a138dd72e39056e8a9aa3dec5d132}\label{classcl_1_1_command_queue_a736a138dd72e39056e8a9aa3dec5d132}} 
+\index{cl::CommandQueue@{cl::CommandQueue}!setDefault@{setDefault}}
+\index{setDefault@{setDefault}!cl::CommandQueue@{cl::CommandQueue}}
+\doxysubsubsection{\texorpdfstring{setDefault()}{setDefault()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} cl\+::\+Command\+Queue\+::set\+Default (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&}]{default\+\_\+queue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Modify the default command queue to be used by subsequent operations. Will only set the default if no default was previously created. \begin{DoxyReturn}{Returns}
+updated default command queue. Should be compared to the passed value to ensure that it was updated. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

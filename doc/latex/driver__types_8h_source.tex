@@ -1,0 +1,432 @@
+\hypertarget{driver__types_8h_source}{}\doxysection{driver\+\_\+types.\+h}
+\label{driver__types_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/driver\_types.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/driver\_types.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_DRIVER\_TYPES\_H}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_DRIVER\_TYPES\_H}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <hip/hip\_common.h>}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#if (defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                            \(\backslash\)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                       \(\backslash\)}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define \_USE\_HIPCOMMON\_DRIVER\_TYPES\_}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#include "{}driver\_types.h"{}}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_))}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define \_USE\_HIPCOMMON\_DRIVER\_TYPES\_}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#error("{}Must define exactly one of \_\_HIP\_PLATFORM\_AMD\_\_, \_\_HIP\_PLATFORM\_NVIDIA\_\_ or \_\_HIP\_PLATFORM\_SPIRV\_\_"{}});}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifdef \_USE\_HIPCOMMON\_DRIVER\_TYPES\_}}
+\DoxyCodeLine{48 \textcolor{comment}{// The follow macro should be removed after upstream updation.}}
+\DoxyCodeLine{49 \textcolor{comment}{// It's defined here for workarround of rocThrust building failure.}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_HCC\_DETAIL\_DRIVER\_TYPES\_H}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#if !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#ifndef \_\_cplusplus}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{56 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* hipDeviceptr\_t;}
+\DoxyCodeLine{57 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipChannelFormatKind \{}
+\DoxyCodeLine{58   hipChannelFormatKindSigned = 0,}
+\DoxyCodeLine{59   hipChannelFormatKindUnsigned = 1,}
+\DoxyCodeLine{60   hipChannelFormatKindFloat = 2,}
+\DoxyCodeLine{61   hipChannelFormatKindNone = 3}
+\DoxyCodeLine{62 \} hipChannelFormatKind;}
+\DoxyCodeLine{63 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipChannelFormatDesc \{}
+\DoxyCodeLine{64   \textcolor{keywordtype}{int} x;}
+\DoxyCodeLine{65   \textcolor{keywordtype}{int} y;}
+\DoxyCodeLine{66   \textcolor{keywordtype}{int} z;}
+\DoxyCodeLine{67   \textcolor{keywordtype}{int} w;}
+\DoxyCodeLine{68   \textcolor{keyword}{enum} hipChannelFormatKind f;}
+\DoxyCodeLine{69 \} hipChannelFormatDesc;}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define HIP\_TRSA\_OVERRIDE\_FORMAT 0x01}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define HIP\_TRSF\_READ\_AS\_INTEGER 0x01}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define HIP\_TRSF\_NORMALIZED\_COORDINATES 0x02}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define HIP\_TRSF\_SRGB 0x10}}
+\DoxyCodeLine{74 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipArray\_Format \{}
+\DoxyCodeLine{75   HIP\_AD\_FORMAT\_UNSIGNED\_INT8 = 0x01,}
+\DoxyCodeLine{76   HIP\_AD\_FORMAT\_UNSIGNED\_INT16 = 0x02,}
+\DoxyCodeLine{77   HIP\_AD\_FORMAT\_UNSIGNED\_INT32 = 0x03,}
+\DoxyCodeLine{78   HIP\_AD\_FORMAT\_SIGNED\_INT8 = 0x08,}
+\DoxyCodeLine{79   HIP\_AD\_FORMAT\_SIGNED\_INT16 = 0x09,}
+\DoxyCodeLine{80   HIP\_AD\_FORMAT\_SIGNED\_INT32 = 0x0a,}
+\DoxyCodeLine{81   HIP\_AD\_FORMAT\_HALF = 0x10,}
+\DoxyCodeLine{82   HIP\_AD\_FORMAT\_FLOAT = 0x20}
+\DoxyCodeLine{83 \} hipArray\_Format;}
+\DoxyCodeLine{84 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }HIP\_ARRAY\_DESCRIPTOR \{}
+\DoxyCodeLine{85   \textcolor{keywordtype}{size\_t} Width;}
+\DoxyCodeLine{86   \textcolor{keywordtype}{size\_t} Height;}
+\DoxyCodeLine{87   \textcolor{keyword}{enum} hipArray\_Format Format;}
+\DoxyCodeLine{88   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} NumChannels;}
+\DoxyCodeLine{89 \} HIP\_ARRAY\_DESCRIPTOR;}
+\DoxyCodeLine{90 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }HIP\_ARRAY3D\_DESCRIPTOR \{}
+\DoxyCodeLine{91   \textcolor{keywordtype}{size\_t} Width;}
+\DoxyCodeLine{92   \textcolor{keywordtype}{size\_t} Height;}
+\DoxyCodeLine{93   \textcolor{keywordtype}{size\_t} Depth;}
+\DoxyCodeLine{94   \textcolor{keyword}{enum} hipArray\_Format Format;}
+\DoxyCodeLine{95   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} NumChannels;}
+\DoxyCodeLine{96   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} Flags;}
+\DoxyCodeLine{97 \} HIP\_ARRAY3D\_DESCRIPTOR;}
+\DoxyCodeLine{98 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipArray \{}
+\DoxyCodeLine{99   \textcolor{keywordtype}{void}* data;  \textcolor{comment}{// FIXME: generalize this}}
+\DoxyCodeLine{100   \textcolor{keyword}{struct }hipChannelFormatDesc desc;}
+\DoxyCodeLine{101   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} type;}
+\DoxyCodeLine{102   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width;}
+\DoxyCodeLine{103   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} height;}
+\DoxyCodeLine{104   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} depth;}
+\DoxyCodeLine{105   \textcolor{keyword}{enum} hipArray\_Format Format;}
+\DoxyCodeLine{106   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} NumChannels;}
+\DoxyCodeLine{107   \textcolor{keywordtype}{bool} isDrv;}
+\DoxyCodeLine{108   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} textureType;}
+\DoxyCodeLine{109 \} hipArray;}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#if !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{111 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hip\_Memcpy2D \{}
+\DoxyCodeLine{112   \textcolor{keywordtype}{size\_t} srcXInBytes;}
+\DoxyCodeLine{113   \textcolor{keywordtype}{size\_t} srcY;}
+\DoxyCodeLine{114   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hipMemoryType}} srcMemoryType;}
+\DoxyCodeLine{115   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* srcHost;}
+\DoxyCodeLine{116   hipDeviceptr\_t srcDevice;}
+\DoxyCodeLine{117   hipArray* srcArray;}
+\DoxyCodeLine{118   \textcolor{keywordtype}{size\_t} srcPitch;}
+\DoxyCodeLine{119   \textcolor{keywordtype}{size\_t} dstXInBytes;}
+\DoxyCodeLine{120   \textcolor{keywordtype}{size\_t} dstY;}
+\DoxyCodeLine{121   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hipMemoryType}} dstMemoryType;}
+\DoxyCodeLine{122   \textcolor{keywordtype}{void}* dstHost;}
+\DoxyCodeLine{123   hipDeviceptr\_t dstDevice;}
+\DoxyCodeLine{124   hipArray* dstArray;}
+\DoxyCodeLine{125   \textcolor{keywordtype}{size\_t} dstPitch;}
+\DoxyCodeLine{126   \textcolor{keywordtype}{size\_t} WidthInBytes;}
+\DoxyCodeLine{127   \textcolor{keywordtype}{size\_t} Height;}
+\DoxyCodeLine{128 \} hip\_Memcpy2D;}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{130 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipArray* hipArray\_t;}
+\DoxyCodeLine{131 \textcolor{keyword}{typedef} hipArray\_t hiparray;}
+\DoxyCodeLine{132 \textcolor{keyword}{typedef} \textcolor{keyword}{const} \textcolor{keyword}{struct }hipArray* hipArray\_const\_t;}
+\DoxyCodeLine{133 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipMipmappedArray \{}
+\DoxyCodeLine{134   \textcolor{keywordtype}{void}* data;}
+\DoxyCodeLine{135   \textcolor{keyword}{struct }hipChannelFormatDesc desc;}
+\DoxyCodeLine{136   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} type;}
+\DoxyCodeLine{137   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width;}
+\DoxyCodeLine{138   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} height;}
+\DoxyCodeLine{139   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} depth;}
+\DoxyCodeLine{140   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} min\_mipmap\_level;}
+\DoxyCodeLine{141   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} max\_mipmap\_level;}
+\DoxyCodeLine{142   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{143   \textcolor{keyword}{enum} hipArray\_Format format;}
+\DoxyCodeLine{144 \} hipMipmappedArray;}
+\DoxyCodeLine{145 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipMipmappedArray* hipMipmappedArray\_t;}
+\DoxyCodeLine{146 \textcolor{keyword}{typedef} \textcolor{keyword}{const} \textcolor{keyword}{struct }hipMipmappedArray* hipMipmappedArray\_const\_t;}
+\DoxyCodeLine{150 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipResourceType \{}
+\DoxyCodeLine{151   hipResourceTypeArray = 0x00,}
+\DoxyCodeLine{152   hipResourceTypeMipmappedArray = 0x01,}
+\DoxyCodeLine{153   hipResourceTypeLinear = 0x02,}
+\DoxyCodeLine{154   hipResourceTypePitch2D = 0x03}
+\DoxyCodeLine{155 \} hipResourceType;}
+\DoxyCodeLine{156 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} HIPresourcetype\_enum \{}
+\DoxyCodeLine{157   HIP\_RESOURCE\_TYPE\_ARRAY = 0x00,           }
+\DoxyCodeLine{158   HIP\_RESOURCE\_TYPE\_MIPMAPPED\_ARRAY = 0x01, }
+\DoxyCodeLine{159   HIP\_RESOURCE\_TYPE\_LINEAR = 0x02,          }
+\DoxyCodeLine{160   HIP\_RESOURCE\_TYPE\_PITCH2D = 0x03          }
+\DoxyCodeLine{161 \} HIPresourcetype;}
+\DoxyCodeLine{165 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} HIPaddress\_mode\_enum \{}
+\DoxyCodeLine{166   HIP\_TR\_ADDRESS\_MODE\_WRAP = 0,}
+\DoxyCodeLine{167   HIP\_TR\_ADDRESS\_MODE\_CLAMP = 1,}
+\DoxyCodeLine{168   HIP\_TR\_ADDRESS\_MODE\_MIRROR = 2,}
+\DoxyCodeLine{169   HIP\_TR\_ADDRESS\_MODE\_BORDER = 3}
+\DoxyCodeLine{170 \} HIPaddress\_mode;}
+\DoxyCodeLine{174 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} HIPfilter\_mode\_enum \{}
+\DoxyCodeLine{175   HIP\_TR\_FILTER\_MODE\_POINT = 0,}
+\DoxyCodeLine{176   HIP\_TR\_FILTER\_MODE\_LINEAR = 1}
+\DoxyCodeLine{177 \} HIPfilter\_mode;}
+\DoxyCodeLine{181 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }HIP\_TEXTURE\_DESC\_st \{}
+\DoxyCodeLine{182   HIPaddress\_mode addressMode[3];  }
+\DoxyCodeLine{183   HIPfilter\_mode filterMode;       }
+\DoxyCodeLine{184   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;              }
+\DoxyCodeLine{185   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} maxAnisotropy;      }
+\DoxyCodeLine{186   HIPfilter\_mode mipmapFilterMode; }
+\DoxyCodeLine{187   \textcolor{keywordtype}{float} mipmapLevelBias;           }
+\DoxyCodeLine{188   \textcolor{keywordtype}{float} minMipmapLevelClamp;       }
+\DoxyCodeLine{189   \textcolor{keywordtype}{float} maxMipmapLevelClamp;       }
+\DoxyCodeLine{190   \textcolor{keywordtype}{float} borderColor[4];            }
+\DoxyCodeLine{191   \textcolor{keywordtype}{int} reserved[12];}
+\DoxyCodeLine{192 \} HIP\_TEXTURE\_DESC;}
+\DoxyCodeLine{196 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipResourceViewFormat \{}
+\DoxyCodeLine{197   hipResViewFormatNone = 0x00,}
+\DoxyCodeLine{198   hipResViewFormatUnsignedChar1 = 0x01,}
+\DoxyCodeLine{199   hipResViewFormatUnsignedChar2 = 0x02,}
+\DoxyCodeLine{200   hipResViewFormatUnsignedChar4 = 0x03,}
+\DoxyCodeLine{201   hipResViewFormatSignedChar1 = 0x04,}
+\DoxyCodeLine{202   hipResViewFormatSignedChar2 = 0x05,}
+\DoxyCodeLine{203   hipResViewFormatSignedChar4 = 0x06,}
+\DoxyCodeLine{204   hipResViewFormatUnsignedShort1 = 0x07,}
+\DoxyCodeLine{205   hipResViewFormatUnsignedShort2 = 0x08,}
+\DoxyCodeLine{206   hipResViewFormatUnsignedShort4 = 0x09,}
+\DoxyCodeLine{207   hipResViewFormatSignedShort1 = 0x0a,}
+\DoxyCodeLine{208   hipResViewFormatSignedShort2 = 0x0b,}
+\DoxyCodeLine{209   hipResViewFormatSignedShort4 = 0x0c,}
+\DoxyCodeLine{210   hipResViewFormatUnsignedInt1 = 0x0d,}
+\DoxyCodeLine{211   hipResViewFormatUnsignedInt2 = 0x0e,}
+\DoxyCodeLine{212   hipResViewFormatUnsignedInt4 = 0x0f,}
+\DoxyCodeLine{213   hipResViewFormatSignedInt1 = 0x10,}
+\DoxyCodeLine{214   hipResViewFormatSignedInt2 = 0x11,}
+\DoxyCodeLine{215   hipResViewFormatSignedInt4 = 0x12,}
+\DoxyCodeLine{216   hipResViewFormatHalf1 = 0x13,}
+\DoxyCodeLine{217   hipResViewFormatHalf2 = 0x14,}
+\DoxyCodeLine{218   hipResViewFormatHalf4 = 0x15,}
+\DoxyCodeLine{219   hipResViewFormatFloat1 = 0x16,}
+\DoxyCodeLine{220   hipResViewFormatFloat2 = 0x17,}
+\DoxyCodeLine{221   hipResViewFormatFloat4 = 0x18,}
+\DoxyCodeLine{222   hipResViewFormatUnsignedBlockCompressed1 = 0x19,}
+\DoxyCodeLine{223   hipResViewFormatUnsignedBlockCompressed2 = 0x1a,}
+\DoxyCodeLine{224   hipResViewFormatUnsignedBlockCompressed3 = 0x1b,}
+\DoxyCodeLine{225   hipResViewFormatUnsignedBlockCompressed4 = 0x1c,}
+\DoxyCodeLine{226   hipResViewFormatSignedBlockCompressed4 = 0x1d,}
+\DoxyCodeLine{227   hipResViewFormatUnsignedBlockCompressed5 = 0x1e,}
+\DoxyCodeLine{228   hipResViewFormatSignedBlockCompressed5 = 0x1f,}
+\DoxyCodeLine{229   hipResViewFormatUnsignedBlockCompressed6H = 0x20,}
+\DoxyCodeLine{230   hipResViewFormatSignedBlockCompressed6H = 0x21,}
+\DoxyCodeLine{231   hipResViewFormatUnsignedBlockCompressed7 = 0x22}
+\DoxyCodeLine{232 \} hipResourceViewFormat;}
+\DoxyCodeLine{233 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} HIPresourceViewFormat\_enum \{}
+\DoxyCodeLine{234   HIP\_RES\_VIEW\_FORMAT\_NONE = 0x00, }
+\DoxyCodeLine{235   HIP\_RES\_VIEW\_FORMAT\_UINT\_1X8 = 0x01,      }
+\DoxyCodeLine{236   HIP\_RES\_VIEW\_FORMAT\_UINT\_2X8 = 0x02,      }
+\DoxyCodeLine{237   HIP\_RES\_VIEW\_FORMAT\_UINT\_4X8 = 0x03,      }
+\DoxyCodeLine{238   HIP\_RES\_VIEW\_FORMAT\_SINT\_1X8 = 0x04,      }
+\DoxyCodeLine{239   HIP\_RES\_VIEW\_FORMAT\_SINT\_2X8 = 0x05,      }
+\DoxyCodeLine{240   HIP\_RES\_VIEW\_FORMAT\_SINT\_4X8 = 0x06,      }
+\DoxyCodeLine{241   HIP\_RES\_VIEW\_FORMAT\_UINT\_1X16 = 0x07,     }
+\DoxyCodeLine{242   HIP\_RES\_VIEW\_FORMAT\_UINT\_2X16 = 0x08,     }
+\DoxyCodeLine{243   HIP\_RES\_VIEW\_FORMAT\_UINT\_4X16 = 0x09,     }
+\DoxyCodeLine{244   HIP\_RES\_VIEW\_FORMAT\_SINT\_1X16 = 0x0a,     }
+\DoxyCodeLine{245   HIP\_RES\_VIEW\_FORMAT\_SINT\_2X16 = 0x0b,     }
+\DoxyCodeLine{246   HIP\_RES\_VIEW\_FORMAT\_SINT\_4X16 = 0x0c,     }
+\DoxyCodeLine{247   HIP\_RES\_VIEW\_FORMAT\_UINT\_1X32 = 0x0d,     }
+\DoxyCodeLine{248   HIP\_RES\_VIEW\_FORMAT\_UINT\_2X32 = 0x0e,     }
+\DoxyCodeLine{249   HIP\_RES\_VIEW\_FORMAT\_UINT\_4X32 = 0x0f,     }
+\DoxyCodeLine{250   HIP\_RES\_VIEW\_FORMAT\_SINT\_1X32 = 0x10,     }
+\DoxyCodeLine{251   HIP\_RES\_VIEW\_FORMAT\_SINT\_2X32 = 0x11,     }
+\DoxyCodeLine{252   HIP\_RES\_VIEW\_FORMAT\_SINT\_4X32 = 0x12,     }
+\DoxyCodeLine{253   HIP\_RES\_VIEW\_FORMAT\_FLOAT\_1X16 = 0x13,    }
+\DoxyCodeLine{254   HIP\_RES\_VIEW\_FORMAT\_FLOAT\_2X16 = 0x14,    }
+\DoxyCodeLine{255   HIP\_RES\_VIEW\_FORMAT\_FLOAT\_4X16 = 0x15,    }
+\DoxyCodeLine{256   HIP\_RES\_VIEW\_FORMAT\_FLOAT\_1X32 = 0x16,    }
+\DoxyCodeLine{257   HIP\_RES\_VIEW\_FORMAT\_FLOAT\_2X32 = 0x17,    }
+\DoxyCodeLine{258   HIP\_RES\_VIEW\_FORMAT\_FLOAT\_4X32 = 0x18,    }
+\DoxyCodeLine{259   HIP\_RES\_VIEW\_FORMAT\_UNSIGNED\_BC1 = 0x19,  }
+\DoxyCodeLine{260   HIP\_RES\_VIEW\_FORMAT\_UNSIGNED\_BC2 = 0x1a,  }
+\DoxyCodeLine{261   HIP\_RES\_VIEW\_FORMAT\_UNSIGNED\_BC3 = 0x1b,  }
+\DoxyCodeLine{262   HIP\_RES\_VIEW\_FORMAT\_UNSIGNED\_BC4 = 0x1c,  }
+\DoxyCodeLine{263   HIP\_RES\_VIEW\_FORMAT\_SIGNED\_BC4 = 0x1d,    }
+\DoxyCodeLine{264   HIP\_RES\_VIEW\_FORMAT\_UNSIGNED\_BC5 = 0x1e,  }
+\DoxyCodeLine{265   HIP\_RES\_VIEW\_FORMAT\_SIGNED\_BC5 = 0x1f,    }
+\DoxyCodeLine{266   HIP\_RES\_VIEW\_FORMAT\_UNSIGNED\_BC6H = 0x20, }
+\DoxyCodeLine{267   HIP\_RES\_VIEW\_FORMAT\_SIGNED\_BC6H = 0x21,   }
+\DoxyCodeLine{268   HIP\_RES\_VIEW\_FORMAT\_UNSIGNED\_BC7 = 0x22   }
+\DoxyCodeLine{269 \} HIPresourceViewFormat;}
+\DoxyCodeLine{273 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipResourceDesc \{}
+\DoxyCodeLine{274   \textcolor{keyword}{enum} hipResourceType resType;}
+\DoxyCodeLine{275   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{276     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{277       hipArray\_t array;}
+\DoxyCodeLine{278     \} array;}
+\DoxyCodeLine{279     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{280       hipMipmappedArray\_t mipmap;}
+\DoxyCodeLine{281     \} mipmap;}
+\DoxyCodeLine{282     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{283       \textcolor{keywordtype}{void}* devPtr;}
+\DoxyCodeLine{284       \textcolor{keyword}{struct }hipChannelFormatDesc desc;}
+\DoxyCodeLine{285       \textcolor{keywordtype}{size\_t} sizeInBytes;}
+\DoxyCodeLine{286     \} linear;}
+\DoxyCodeLine{287     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{288       \textcolor{keywordtype}{void}* devPtr;}
+\DoxyCodeLine{289       \textcolor{keyword}{struct }hipChannelFormatDesc desc;}
+\DoxyCodeLine{290       \textcolor{keywordtype}{size\_t} width;}
+\DoxyCodeLine{291       \textcolor{keywordtype}{size\_t} height;}
+\DoxyCodeLine{292       \textcolor{keywordtype}{size\_t} pitchInBytes;}
+\DoxyCodeLine{293     \} pitch2D;}
+\DoxyCodeLine{294   \} res;}
+\DoxyCodeLine{295 \} hipResourceDesc;}
+\DoxyCodeLine{296 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }HIP\_RESOURCE\_DESC\_st \{}
+\DoxyCodeLine{297   HIPresourcetype resType; }
+\DoxyCodeLine{298   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{299     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{300       hipArray\_t hArray; }
+\DoxyCodeLine{301     \} array;}
+\DoxyCodeLine{302     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{303       hipMipmappedArray\_t hMipmappedArray; }
+\DoxyCodeLine{304     \} mipmap;}
+\DoxyCodeLine{305     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{306       hipDeviceptr\_t devPtr;    }
+\DoxyCodeLine{307       hipArray\_Format format;   }
+\DoxyCodeLine{308       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numChannels; }
+\DoxyCodeLine{309       \textcolor{keywordtype}{size\_t} sizeInBytes;       }
+\DoxyCodeLine{310     \} linear;}
+\DoxyCodeLine{311     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{312       hipDeviceptr\_t devPtr;    }
+\DoxyCodeLine{313       hipArray\_Format format;   }
+\DoxyCodeLine{314       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} numChannels; }
+\DoxyCodeLine{315       \textcolor{keywordtype}{size\_t} width;             }
+\DoxyCodeLine{316       \textcolor{keywordtype}{size\_t} height;            }
+\DoxyCodeLine{317       \textcolor{keywordtype}{size\_t} pitchInBytes;      }
+\DoxyCodeLine{318     \} pitch2D;}
+\DoxyCodeLine{319     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{320       \textcolor{keywordtype}{int} reserved[32];}
+\DoxyCodeLine{321     \} reserved;}
+\DoxyCodeLine{322   \} res;}
+\DoxyCodeLine{323   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags; }
+\DoxyCodeLine{324 \} HIP\_RESOURCE\_DESC;}
+\DoxyCodeLine{328 \textcolor{keyword}{struct }hipResourceViewDesc \{}
+\DoxyCodeLine{329   \textcolor{keyword}{enum} hipResourceViewFormat format;}
+\DoxyCodeLine{330   \textcolor{keywordtype}{size\_t} width;}
+\DoxyCodeLine{331   \textcolor{keywordtype}{size\_t} height;}
+\DoxyCodeLine{332   \textcolor{keywordtype}{size\_t} depth;}
+\DoxyCodeLine{333   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} firstMipmapLevel;}
+\DoxyCodeLine{334   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lastMipmapLevel;}
+\DoxyCodeLine{335   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} firstLayer;}
+\DoxyCodeLine{336   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lastLayer;}
+\DoxyCodeLine{337 \};}
+\DoxyCodeLine{341 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }HIP\_RESOURCE\_VIEW\_DESC\_st \{}
+\DoxyCodeLine{342   HIPresourceViewFormat format;  }
+\DoxyCodeLine{343   \textcolor{keywordtype}{size\_t} width;                  }
+\DoxyCodeLine{344   \textcolor{keywordtype}{size\_t} height;                 }
+\DoxyCodeLine{345   \textcolor{keywordtype}{size\_t} depth;                  }
+\DoxyCodeLine{346   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} firstMipmapLevel; }
+\DoxyCodeLine{347   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lastMipmapLevel;  }
+\DoxyCodeLine{348   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} firstLayer;       }
+\DoxyCodeLine{349   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lastLayer;        }
+\DoxyCodeLine{350   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} reserved[16];}
+\DoxyCodeLine{351 \} HIP\_RESOURCE\_VIEW\_DESC;}
+\DoxyCodeLine{356 \textcolor{preprocessor}{\#if !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{357 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipMemcpyKind \{}
+\DoxyCodeLine{358   hipMemcpyHostToHost = 0,      }
+\DoxyCodeLine{359   hipMemcpyHostToDevice = 1,    }
+\DoxyCodeLine{360   hipMemcpyDeviceToHost = 2,    }
+\DoxyCodeLine{361   hipMemcpyDeviceToDevice = 3,  }
+\DoxyCodeLine{362   hipMemcpyDefault =}
+\DoxyCodeLine{363       4  }
+\DoxyCodeLine{364 \} hipMemcpyKind;}
+\DoxyCodeLine{365 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipPitchedPtr \{}
+\DoxyCodeLine{366   \textcolor{keywordtype}{void}* ptr;}
+\DoxyCodeLine{367   \textcolor{keywordtype}{size\_t} pitch;}
+\DoxyCodeLine{368   \textcolor{keywordtype}{size\_t} xsize;}
+\DoxyCodeLine{369   \textcolor{keywordtype}{size\_t} ysize;}
+\DoxyCodeLine{370 \} hipPitchedPtr;}
+\DoxyCodeLine{371 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipExtent \{}
+\DoxyCodeLine{372   \textcolor{keywordtype}{size\_t} width;  \textcolor{comment}{// Width in elements when referring to array memory, in bytes when referring to}}
+\DoxyCodeLine{373                  \textcolor{comment}{// linear memory}}
+\DoxyCodeLine{374   \textcolor{keywordtype}{size\_t} height;}
+\DoxyCodeLine{375   \textcolor{keywordtype}{size\_t} depth;}
+\DoxyCodeLine{376 \} hipExtent;}
+\DoxyCodeLine{377 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipPos \{}
+\DoxyCodeLine{378   \textcolor{keywordtype}{size\_t} x;}
+\DoxyCodeLine{379   \textcolor{keywordtype}{size\_t} y;}
+\DoxyCodeLine{380   \textcolor{keywordtype}{size\_t} z;}
+\DoxyCodeLine{381 \} hipPos;}
+\DoxyCodeLine{382 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }hipMemcpy3DParms \{}
+\DoxyCodeLine{383   hipArray\_t srcArray;}
+\DoxyCodeLine{384   \textcolor{keyword}{struct }hipPos srcPos;}
+\DoxyCodeLine{385   \textcolor{keyword}{struct }hipPitchedPtr srcPtr;}
+\DoxyCodeLine{386   hipArray\_t dstArray;}
+\DoxyCodeLine{387   \textcolor{keyword}{struct }hipPos dstPos;}
+\DoxyCodeLine{388   \textcolor{keyword}{struct }hipPitchedPtr dstPtr;}
+\DoxyCodeLine{389   \textcolor{keyword}{struct }hipExtent extent;}
+\DoxyCodeLine{390   \textcolor{keyword}{enum} hipMemcpyKind kind;}
+\DoxyCodeLine{391 \} hipMemcpy3DParms;}
+\DoxyCodeLine{392 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }HIP\_MEMCPY3D \{}
+\DoxyCodeLine{393   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} srcXInBytes;}
+\DoxyCodeLine{394   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} srcY;}
+\DoxyCodeLine{395   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} srcZ;}
+\DoxyCodeLine{396   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} srcLOD;}
+\DoxyCodeLine{397   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hipMemoryType}} srcMemoryType;}
+\DoxyCodeLine{398   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* srcHost;}
+\DoxyCodeLine{399   hipDeviceptr\_t srcDevice;}
+\DoxyCodeLine{400   hipArray\_t srcArray;}
+\DoxyCodeLine{401   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} srcPitch;}
+\DoxyCodeLine{402   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} srcHeight;}
+\DoxyCodeLine{403   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} dstXInBytes;}
+\DoxyCodeLine{404   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} dstY;}
+\DoxyCodeLine{405   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} dstZ;}
+\DoxyCodeLine{406   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} dstLOD;}
+\DoxyCodeLine{407   \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hipMemoryType}} dstMemoryType;}
+\DoxyCodeLine{408   \textcolor{keywordtype}{void}* dstHost;}
+\DoxyCodeLine{409   hipDeviceptr\_t dstDevice;}
+\DoxyCodeLine{410   hipArray\_t dstArray;}
+\DoxyCodeLine{411   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} dstPitch;}
+\DoxyCodeLine{412   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} dstHeight;}
+\DoxyCodeLine{413   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} WidthInBytes;}
+\DoxyCodeLine{414   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} Height;}
+\DoxyCodeLine{415   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} Depth;}
+\DoxyCodeLine{416 \} HIP\_MEMCPY3D;}
+\DoxyCodeLine{417 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{struct }hipPitchedPtr make\_hipPitchedPtr(void* d, \textcolor{keywordtype}{size\_t} p, \textcolor{keywordtype}{size\_t} xsz, \textcolor{keywordtype}{size\_t} ysz) \{}
+\DoxyCodeLine{418   \textcolor{keyword}{struct }hipPitchedPtr s;}
+\DoxyCodeLine{419   s.ptr = d;}
+\DoxyCodeLine{420   s.pitch = p;}
+\DoxyCodeLine{421   s.xsize = xsz;}
+\DoxyCodeLine{422   s.ysize = ysz;}
+\DoxyCodeLine{423   \textcolor{keywordflow}{return} s;}
+\DoxyCodeLine{424 \}}
+\DoxyCodeLine{425 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{struct }hipPos make\_hipPos(size\_t x, size\_t y, size\_t z) \{}
+\DoxyCodeLine{426   \textcolor{keyword}{struct }hipPos p;}
+\DoxyCodeLine{427   p.x = x;}
+\DoxyCodeLine{428   p.y = y;}
+\DoxyCodeLine{429   p.z = z;}
+\DoxyCodeLine{430   \textcolor{keywordflow}{return} p;}
+\DoxyCodeLine{431 \}}
+\DoxyCodeLine{432 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{struct }hipExtent make\_hipExtent(size\_t w, size\_t h, size\_t d) \{}
+\DoxyCodeLine{433   \textcolor{keyword}{struct }hipExtent e;}
+\DoxyCodeLine{434   e.width = w;}
+\DoxyCodeLine{435   e.height = h;}
+\DoxyCodeLine{436   e.depth = d;}
+\DoxyCodeLine{437   \textcolor{keywordflow}{return} e;}
+\DoxyCodeLine{438 \}}
+\DoxyCodeLine{439 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} hipFunction\_attribute \{}
+\DoxyCodeLine{440   HIP\_FUNC\_ATTRIBUTE\_MAX\_THREADS\_PER\_BLOCK,}
+\DoxyCodeLine{441   HIP\_FUNC\_ATTRIBUTE\_SHARED\_SIZE\_BYTES,}
+\DoxyCodeLine{442   HIP\_FUNC\_ATTRIBUTE\_CONST\_SIZE\_BYTES,}
+\DoxyCodeLine{443   HIP\_FUNC\_ATTRIBUTE\_LOCAL\_SIZE\_BYTES,}
+\DoxyCodeLine{444   HIP\_FUNC\_ATTRIBUTE\_NUM\_REGS,}
+\DoxyCodeLine{445   HIP\_FUNC\_ATTRIBUTE\_PTX\_VERSION,}
+\DoxyCodeLine{446   HIP\_FUNC\_ATTRIBUTE\_BINARY\_VERSION,}
+\DoxyCodeLine{447   HIP\_FUNC\_ATTRIBUTE\_CACHE\_MODE\_CA,}
+\DoxyCodeLine{448   HIP\_FUNC\_ATTRIBUTE\_MAX\_DYNAMIC\_SHARED\_SIZE\_BYTES,}
+\DoxyCodeLine{449   HIP\_FUNC\_ATTRIBUTE\_PREFERRED\_SHARED\_MEMORY\_CARVEOUT,}
+\DoxyCodeLine{450   HIP\_FUNC\_ATTRIBUTE\_MAX}
+\DoxyCodeLine{451 \} hipFunction\_attribute;}
+\DoxyCodeLine{452 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{453 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_USE\_HIPCOMMON\_DRIVER\_TYPES\_}}
+\DoxyCodeLine{454 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

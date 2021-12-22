@@ -1,0 +1,62 @@
+\hypertarget{stdout__color__sinks_8h_source}{}\doxysection{stdout\+\_\+color\+\_\+sinks.\+h}
+\label{stdout__color__sinks_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/stdout\_color\_sinks.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/stdout\_color\_sinks.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2018 spdlog}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef SPDLOG\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#error "{}spdlog.h must be included before this file."{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}spdlog/sinks/wincolor\_sink.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}spdlog/sinks/ansicolor\_sink.h"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{19 \textcolor{keyword}{namespace }sinks \{}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{21 \textcolor{keyword}{using} stdout\_color\_sink\_mt = wincolor\_stdout\_sink\_mt;}
+\DoxyCodeLine{22 \textcolor{keyword}{using} stdout\_color\_sink\_st = wincolor\_stdout\_sink\_st;}
+\DoxyCodeLine{23 \textcolor{keyword}{using} stderr\_color\_sink\_mt = wincolor\_stderr\_sink\_mt;}
+\DoxyCodeLine{24 \textcolor{keyword}{using} stderr\_color\_sink\_st = wincolor\_stderr\_sink\_st;}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{26 \textcolor{keyword}{using} stdout\_color\_sink\_mt = ansicolor\_stdout\_sink\_mt;}
+\DoxyCodeLine{27 \textcolor{keyword}{using} stdout\_color\_sink\_st = ansicolor\_stdout\_sink\_st;}
+\DoxyCodeLine{28 \textcolor{keyword}{using} stderr\_color\_sink\_mt = ansicolor\_stderr\_sink\_mt;}
+\DoxyCodeLine{29 \textcolor{keyword}{using} stderr\_color\_sink\_st = ansicolor\_stderr\_sink\_st;}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{31 \} \textcolor{comment}{// namespace sinks}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{34 \textcolor{keyword}{inline} std::shared\_ptr<logger> stdout\_color\_mt(\textcolor{keyword}{const} std::string \&logger\_name)}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36     \textcolor{keywordflow}{return} Factory::template create<sinks::stdout\_color\_sink\_mt>(logger\_name);}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{40 \textcolor{keyword}{inline} std::shared\_ptr<logger> stdout\_color\_st(\textcolor{keyword}{const} std::string \&logger\_name)}
+\DoxyCodeLine{41 \{}
+\DoxyCodeLine{42     \textcolor{keywordflow}{return} Factory::template create<sinks::stdout\_color\_sink\_st>(logger\_name);}
+\DoxyCodeLine{43 \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{46 \textcolor{keyword}{inline} std::shared\_ptr<logger> stderr\_color\_mt(\textcolor{keyword}{const} std::string \&logger\_name)}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48     \textcolor{keywordflow}{return} Factory::template create<sinks::stderr\_color\_sink\_mt>(logger\_name);}
+\DoxyCodeLine{49 \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{52 \textcolor{keyword}{inline} std::shared\_ptr<logger> stderr\_color\_st(\textcolor{keyword}{const} std::string \&logger\_name)}
+\DoxyCodeLine{53 \{}
+\DoxyCodeLine{54     \textcolor{keywordflow}{return} Factory::template create<sinks::stderr\_color\_sink\_mt>(logger\_name);}
+\DoxyCodeLine{55 \}}
+\DoxyCodeLine{56 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

@@ -1,0 +1,45 @@
+\hypertarget{struct__ze__external__memory__export__desc__t}{}\doxysection{\+\_\+ze\+\_\+external\+\_\+memory\+\_\+export\+\_\+desc\+\_\+t Struct Reference}
+\label{struct__ze__external__memory__export__desc__t}\index{\_ze\_external\_memory\_export\_desc\_t@{\_ze\_external\_memory\_export\_desc\_t}}
+
+
+Additional allocation descriptor for exporting external memory.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__external__memory__export__desc__t_a310eecc8bb266fde1caf5436de649b2e}\label{struct__ze__external__memory__export__desc__t_a310eecc8bb266fde1caf5436de649b2e}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__external__memory__export__desc__t_a6c0db153e5c7c8d50514a2c2bd804a49}\label{struct__ze__external__memory__export__desc__t_a6c0db153e5c7c8d50514a2c2bd804a49}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__external__memory__export__desc__t_ae1f3c9e923471508ce81667f7d89909d}{flags}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Additional allocation descriptor for exporting external memory. 
+
+
+\begin{DoxyItemize}
+\item This structure may be passed to \+::ze\+Mem\+Alloc\+Device, via the {\ttfamily p\+Next} member of \+::ze\+\_\+device\+\_\+mem\+\_\+alloc\+\_\+desc\+\_\+t, to indicate an exportable memory allocation.
+\item This structure may be passed to \+::ze\+Image\+Create, via the {\ttfamily p\+Next} member of \+::ze\+\_\+image\+\_\+desc\+\_\+t, to indicate an exportable image. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__external__memory__export__desc__t_ae1f3c9e923471508ce81667f7d89909d}\label{struct__ze__external__memory__export__desc__t_ae1f3c9e923471508ce81667f7d89909d}} 
+\index{\_ze\_external\_memory\_export\_desc\_t@{\_ze\_external\_memory\_export\_desc\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_external\_memory\_export\_desc\_t@{\_ze\_external\_memory\_export\_desc\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \+\_\+ze\+\_\+external\+\_\+memory\+\_\+export\+\_\+desc\+\_\+t\+::flags}
+
+\mbox{[}in\mbox{]} flags specifying memory export types for this allocation. must be 0 (default) or a valid combination of \+::ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

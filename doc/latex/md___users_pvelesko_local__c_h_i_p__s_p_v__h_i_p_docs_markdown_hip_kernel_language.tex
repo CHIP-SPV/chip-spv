@@ -1,0 +1,1099 @@
+
+\begin{DoxyItemize}
+\item \href{\#introduction}{\texttt{ Introduction}}
+\item \href{\#function-type-qualifiers}{\texttt{ Function-\/\+Type Qualifiers}}
+\begin{DoxyItemize}
+\item \href{\#__device__}{\texttt{ {\ttfamily \+\_\+\+\_\+device\+\_\+\+\_\+}}}
+\item \href{\#__global__}{\texttt{ {\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+}}}
+\item \href{\#__host__}{\texttt{ {\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+}}}
+\end{DoxyItemize}
+\item \href{\#calling-__global__-functions}{\texttt{ Calling {\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+} Functions}}
+\item \href{\#kernel-launch-example}{\texttt{ Kernel-\/\+Launch Example}}
+\item \href{\#variable-type-qualifiers}{\texttt{ Variable-\/\+Type Qualifiers}}
+\begin{DoxyItemize}
+\item \href{\#__constant__}{\texttt{ {\ttfamily \+\_\+\+\_\+constant\+\_\+\+\_\+}}}
+\item \href{\#__shared__}{\texttt{ {\ttfamily \+\_\+\+\_\+shared\+\_\+\+\_\+}}}
+\item \href{\#__managed__}{\texttt{ {\ttfamily \+\_\+\+\_\+managed\+\_\+\+\_\+}}}
+\item \href{\#__restrict__}{\texttt{ {\ttfamily \+\_\+\+\_\+restrict\+\_\+\+\_\+}}}
+\end{DoxyItemize}
+\item \href{\#built-in-variables}{\texttt{ Built-\/\+In Variables}}
+\begin{DoxyItemize}
+\item \href{\#coordinate-built-ins}{\texttt{ Coordinate Built-\/\+Ins}}
+\item \href{\#warpsize}{\texttt{ warp\+Size}}
+\end{DoxyItemize}
+\item \href{\#vector-types}{\texttt{ Vector Types}}
+\begin{DoxyItemize}
+\item \href{\#short-vector-types}{\texttt{ Short Vector Types}}
+\item \href{\#dim3}{\texttt{ dim3}}
+\end{DoxyItemize}
+\item \href{\#memory-fence-instructions}{\texttt{ Memory-\/\+Fence Instructions}}
+\item \href{\#synchronization-functions}{\texttt{ Synchronization Functions}}
+\item \href{\#math-functions}{\texttt{ Math Functions}}
+\begin{DoxyItemize}
+\item \href{\#single-precision-mathematical-functions}{\texttt{ Single Precision Mathematical Functions}}
+\item \href{\#double-precision-mathematical-functions}{\texttt{ Double Precision Mathematical Functions}}
+\item \href{\#integer-intrinsics}{\texttt{ Integer Intrinsics}}
+\item \href{\#floating-point-intrinsics}{\texttt{ Floating-\/point Intrinsics}}
+\end{DoxyItemize}
+\item \href{\#texture-functions}{\texttt{ Texture Functions}}
+\item \href{\#surface-functions}{\texttt{ Surface Functions}}
+\item \href{\#timer-functions}{\texttt{ Timer Functions}}
+\item \href{\#atomic-functions}{\texttt{ Atomic Functions}}
+\begin{DoxyItemize}
+\item \href{\#caveats-and-features-under-development}{\texttt{ Caveats and Features Under-\/\+Development\+:}}
+\end{DoxyItemize}
+\item \href{\#warp-cross-lane-functions}{\texttt{ Warp Cross-\/\+Lane Functions}}
+\begin{DoxyItemize}
+\item \href{\#warp-vote-and-ballot-functions}{\texttt{ Warp Vote and Ballot Functions}}
+\item \href{\#warp-shuffle-functions}{\texttt{ Warp Shuffle Functions}}
+\end{DoxyItemize}
+\item \href{\#cooperative-groups-functions}{\texttt{ Cooperative Groups Functions}}
+\item \href{\#warp-matrix-functions}{\texttt{ Warp Matrix Functions}}
+\item \href{\#independent-thread-scheduling}{\texttt{ Independent Thread Scheduling}}
+\item \href{\#profiler-counter-function}{\texttt{ Profiler Counter Function}}
+\item \href{\#assert}{\texttt{ Assert}}
+\item \href{\#printf}{\texttt{ Printf}}
+\item \href{\#device-side-dynamic-global-memory-allocation}{\texttt{ Device-\/\+Side Dynamic Global Memory Allocation}}
+\item \href{\#__launch_bounds__}{\texttt{ {\ttfamily \+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+}}}
+\begin{DoxyItemize}
+\item \href{\#compiler-impact}{\texttt{ Compiler Impact}}
+\item \href{\#cu-and-eu-definitions}{\texttt{ CU and EU Definitions}}
+\item \href{\#porting-from-cuda-__launch_bounds}{\texttt{ Porting from CUDA \+\_\+\+\_\+launch\+\_\+bounds}}
+\item \href{\#maxregcount}{\texttt{ maxregcount}}
+\end{DoxyItemize}
+\item \href{\#register-keyword}{\texttt{ Register Keyword}}
+\item \href{\#pragma-unroll}{\texttt{ Pragma Unroll}}
+\item \href{\#in-line-assembly}{\texttt{ In-\/\+Line Assembly}}
+\item \href{\#c-support}{\texttt{ C++ Support}}
+\item \href{\#kernel-compilation}{\texttt{ Kernel Compilation}}
+\item \href{\#gfx-arch-specific-kernel}{\texttt{ GFX Arch specific kernel}}
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md638}{}\doxysection{Introduction}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md638}
+HIP provides a C++ syntax that is suitable for compiling most code that commonly appears in compute kernels, including classes, namespaces, operator overloading, templates and more. Additionally, it defines other language features designed specifically to target accelerators, such as the following\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{class_a}{A}} kernel-\/launch syntax that uses standard C++, resembles a function call and is portable to all HIP targets
+\item Short-\/vector headers that can serve on a host or a device
+\item Math functions resembling those in the \char`\"{}math.\+h\char`\"{} header included with standard C++ compilers
+\item Built-\/in functions for accessing specific GPU hardware capabilities
+\end{DoxyItemize}
+
+This section describes the built-\/in variables and functions accessible from the HIP kernel. It’s intended for readers who are familiar with Cuda kernel syntax and want to understand how HIP is different.
+
+Features are marked with one of the following keywords\+:
+\begin{DoxyItemize}
+\item {\bfseries{Supported}}---HIP supports the feature with a Cuda-\/equivalent function
+\item {\bfseries{Not supported}}---HIP does not support the feature
+\item {\bfseries{Under development}}---the feature is under development but not yet available
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md639}{}\doxysection{Function-\/\+Type Qualifiers}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md639}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md640}{}\doxysubsection{$<$tt$>$\+\_\+\+\_\+device\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md640}
+Supported {\ttfamily \+\_\+\+\_\+device\+\_\+\+\_\+} functions are
+\begin{DoxyItemize}
+\item Executed on the device
+\item Called from the device only
+\end{DoxyItemize}
+
+The {\ttfamily \+\_\+\+\_\+device\+\_\+\+\_\+} keyword can combine with the host keyword (see \href{\#host}{\texttt{ {\bfseries{host}}}}).\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md641}{}\doxysubsection{$<$tt$>$\+\_\+\+\_\+global\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md641}
+Supported {\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+} functions are
+\begin{DoxyItemize}
+\item Executed on the device
+\item Called (\char`\"{}launched\char`\"{}) from the host
+\end{DoxyItemize}
+
+HIP {\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+} functions must have a {\ttfamily void} return type, and the first parameter to a HIP {\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+} function must have the type {\ttfamily hip\+Launch\+Parm}. See \href{\#kernel-launch-example}{\texttt{ Kernel-\/\+Launch Example}}.
+
+HIP lacks dynamic-\/parallelism support, so {\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+} functions cannot be called from the device.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md642}{}\doxysubsection{$<$tt$>$\+\_\+\+\_\+host\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md642}
+Supported {\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+} functions are
+\begin{DoxyItemize}
+\item Executed on the host
+\item Called from the host
+\end{DoxyItemize}
+
+{\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+} can combine with {\ttfamily \+\_\+\+\_\+device\+\_\+\+\_\+}, in which case the function compiles for both the host and device. These functions cannot use the HIP grid coordinate functions (for example, \char`\"{}thread\+Idx.\+x\char`\"{}). \mbox{\hyperlink{class_a}{A}} possible workaround is to pass the necessary coordinate info as an argument to the function.
+
+{\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+} cannot combine with {\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+}.
+
+HIP parses the {\ttfamily \+\_\+\+\_\+noinline\+\_\+\+\_\+} and {\ttfamily \+\_\+\+\_\+forceinline\+\_\+\+\_\+} keywords and converts them to the appropriate Clang attributes.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md643}{}\doxysection{Calling $<$tt$>$\+\_\+\+\_\+global\+\_\+\+\_\+$<$/tt$>$ Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md643}
+{\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+} functions are often referred to as {\itshape kernels,} and calling one is termed {\itshape launching the kernel.} These functions require the caller to specify an \char`\"{}execution configuration\char`\"{} that includes the grid and block dimensions. The execution configuration can also include other information for the launch, such as the amount of additional shared memory to allocate and the stream where the kernel should execute. HIP introduces a standard C++ calling convention to pass the execution configuration to the kernel in addition to the Cuda \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} syntax. In HIP,
+\begin{DoxyItemize}
+\item Kernels launch with either \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} syntax or the \char`\"{}hip\+Launch\+Kernel\char`\"{} function
+\item The first five parameters to hip\+Launch\+Kernel are the following\+:
+\begin{DoxyItemize}
+\item {\bfseries{symbol kernel\+Name}}\+: the name of the kernel to launch. To support template kernels which contains \char`\"{},\char`\"{} use the HIP\+\_\+\+KERNEL\+\_\+\+NAME macro. The hipify tools insert this automatically.
+\item {\bfseries{dim3 grid\+Dim}}\+: 3D-\/grid dimensions specifying the number of blocks to launch.
+\item {\bfseries{dim3 block\+Dim}}\+: 3D-\/block dimensions specifying the number of threads in each block.
+\item {\bfseries{size\+\_\+t dynamic\+Shared}}\+: amount of additional shared memory to allocate when launching the kernel (see \href{\#__shared__}{\texttt{ {\bfseries{shared}}}})
+\item {\bfseries{hip\+Stream\+\_\+t}}\+: stream where the kernel should execute. \mbox{\hyperlink{class_a}{A}} value of 0 corresponds to the NULL stream (see \href{\#synchronization-functions}{\texttt{ Synchronization Functions}}).
+\end{DoxyItemize}
+\item Kernel arguments follow these first five parameters
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{// Example pseudo code introducing hipLaunchKernel:}
+\DoxyCodeLine{\_\_global\_\_ MyKernel(hipLaunchParm lp, float *A, float *B, float *C, size\_t N)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{...}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{MyKernel<<<dim3(gridDim), dim3(groupDim), 0, 0>>> (a,b,c,n);}
+\DoxyCodeLine{// Alternatively, kernel can be launched by}
+\DoxyCodeLine{// hipLaunchKernel(MyKernel, dim3(gridDim), dim3(groupDim), 0/*dynamicShared*/, 0/*stream), a, b, c, n);}
+
+\end{DoxyCode}
+
+
+The hip\+Launch\+Kernel macro always starts with the five parameters specified above, followed by the kernel arguments. HIPIFY tools optionally convert Cuda launch syntax to hip\+Launch\+Kernel, including conversion of optional arguments in \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} to the five required hip\+Launch\+Kernel parameters. The dim3 constructor accepts zero to three arguments and will by default initialize unspecified dimensions to 1. See \href{\#dim3}{\texttt{ dim3}}. The kernel uses the coordinate built-\/ins (thread$\ast$, block$\ast$, grid$\ast$) to determine coordinate index and coordinate bounds of the work item that’s currently executing. See \href{\#coordinate-builtins}{\texttt{ Coordinate Built-\/\+Ins}}.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md644}{}\doxysection{Kernel-\/\+Launch Example}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md644}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{// Example showing device function, \_\_device\_\_ \_\_host\_\_}
+\DoxyCodeLine{// <-\/ compile for both device and host}
+\DoxyCodeLine{float PlusOne(float x)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    return x + 1.0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\_\_global\_\_}
+\DoxyCodeLine{void}
+\DoxyCodeLine{MyKernel (hipLaunchParm lp, /*lp parm for execution configuration */}
+\DoxyCodeLine{          const float *a, const float *b, float *c, unsigned N)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    unsigned gid = threadIdx.x; // <-\/ coordinate index function}
+\DoxyCodeLine{    if (gid < N) \{}
+\DoxyCodeLine{        c[gid] = a[gid] + PlusOne(b[gid]);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{void callMyKernel()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    float *a, *b, *c; // initialization not shown...}
+\DoxyCodeLine{    unsigned N = 1000000;}
+\DoxyCodeLine{    const unsigned blockSize = 256;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    MyKernel<<<dim3(gridDim), dim3(groupDim), 0, 0>>> (a,b,c,n);}
+\DoxyCodeLine{    // Alternatively, kernel can be launched by}
+\DoxyCodeLine{    // hipLaunchKernel(MyKernel, dim3(N/blockSize), dim3(blockSize), 0, 0,  a,b,c,N);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md645}{}\doxysection{Variable-\/\+Type Qualifiers}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md645}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md646}{}\doxysubsection{$<$tt$>$\+\_\+\+\_\+constant\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md646}
+The {\ttfamily \+\_\+\+\_\+constant\+\_\+\+\_\+} keyword is supported. The host writes constant memory before launching the kernel; from the GPU, this memory is read-\/only during kernel execution. The functions for accessing constant memory (hip\+Get\+Symbol\+Address(), hip\+Get\+Symbol\+Size(), hip\+Memcpy\+To\+Symbol(), hip\+Memcpy\+To\+Symbol\+Async(), hip\+Memcpy\+From\+Symbol(), hip\+Memcpy\+From\+Symbol\+Async()) are available.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md647}{}\doxysubsection{$<$tt$>$\+\_\+\+\_\+shared\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md647}
+The {\ttfamily \+\_\+\+\_\+shared\+\_\+\+\_\+} keyword is supported.
+
+{\ttfamily extern \+\_\+\+\_\+shared\+\_\+\+\_\+} allows the host to dynamically allocate shared memory and is specified as a launch parameter. Previously, it was essential to declare dynamic shared memory using the HIP\+\_\+\+DYNAMIC\+\_\+\+SHARED macro for accuracy, as using static shared memory in the same kernel could result in overlapping memory ranges and data-\/races.
+
+Now, the HIP-\/\+Clang compiler provides support for extern shared declarations, and the HIP\+\_\+\+DYNAMIC\+\_\+\+SHARED option is no longer required..\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md648}{}\doxysubsection{$<$tt$>$\+\_\+\+\_\+managed\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md648}
+Managed memory, except the {\ttfamily \+\_\+\+\_\+managed\+\_\+\+\_\+} keyword, are supported in HIP combined host/device compilation. Support of {\ttfamily \+\_\+\+\_\+managed\+\_\+\+\_\+} keyword is under development.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md649}{}\doxysubsection{$<$tt$>$\+\_\+\+\_\+restrict\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md649}
+The {\ttfamily \+\_\+\+\_\+restrict\+\_\+\+\_\+} keyword tells the compiler that the associated memory pointer will not alias with any other pointer in the kernel or function. This feature can help the compiler generate better code. In most cases, all pointer arguments must use this keyword to realize the benefit.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md650}{}\doxysection{Built-\/\+In Variables}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md650}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md651}{}\doxysubsection{Coordinate Built-\/\+Ins}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md651}
+These built-\/ins determine the coordinate of the active work item in the execution grid. They are defined in \mbox{\hyperlink{hip__runtime_8h_source}{hip\+\_\+runtime.\+h}} (rather than being implicitly defined by the compiler).
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{HIP Syntax}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Cuda Syntax}}    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{HIP Syntax}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Cuda Syntax}}    }\\\cline{1-2}
+\endhead
+thread\+Idx.\+x   &thread\+Idx.\+x    \\\cline{1-2}
+thread\+Idx.\+y   &thread\+Idx.\+y    \\\cline{1-2}
+thread\+Idx.\+z   &thread\+Idx.\+z    \\\cline{1-2}
+&\\\cline{1-2}
+block\+Idx.\+x   &block\+Idx.\+x    \\\cline{1-2}
+block\+Idx.\+y   &block\+Idx.\+y    \\\cline{1-2}
+block\+Idx.\+z   &block\+Idx.\+z    \\\cline{1-2}
+&\\\cline{1-2}
+block\+Dim.\+x   &block\+Dim.\+x    \\\cline{1-2}
+block\+Dim.\+y   &block\+Dim.\+y    \\\cline{1-2}
+block\+Dim.\+z   &block\+Dim.\+z    \\\cline{1-2}
+&\\\cline{1-2}
+grid\+Dim.\+x   &grid\+Dim.\+x    \\\cline{1-2}
+grid\+Dim.\+y   &grid\+Dim.\+y    \\\cline{1-2}
+grid\+Dim.\+z   &grid\+Dim.\+z   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md652}{}\doxysubsection{warp\+Size}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md652}
+The warp\+Size variable is of type int and contains the warp size (in threads) for the target device. Note that all current Nvidia devices return 32 for this variable, and all current AMD devices return 64. Device code should use the warp\+Size built-\/in to develop portable wave-\/aware code.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md653}{}\doxysection{Vector Types}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md653}
+Note that these types are defined in \mbox{\hyperlink{hip__runtime_8h_source}{hip\+\_\+runtime.\+h}} and are not automatically provided by the compiler.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md654}{}\doxysubsection{Short Vector Types}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md654}
+Short vector types derive from the basic integer and floating-\/point types. They are structures defined in \mbox{\hyperlink{hip__vector__types_8h_source}{hip\+\_\+vector\+\_\+types.\+h}}. The first, second, third and fourth components of the vector are accessible through the {\ttfamily x}, {\ttfamily y}, {\ttfamily z} and {\ttfamily w} fields, respectively. All the short vector types support a constructor function of the form {\ttfamily make\+\_\+\texorpdfstring{$<$}{<}type\+\_\+name\texorpdfstring{$>$}{>}()}. For example, {\ttfamily float4 make\+\_\+float4(float x, float y, float z, float w)} creates a vector of type {\ttfamily float4} and value {\ttfamily (x,y,z,w)}.
+
+HIP supports the following short vector formats\+:
+\begin{DoxyItemize}
+\item Signed Integers\+:
+\begin{DoxyItemize}
+\item char1, char2, char3, char4
+\item short1, short2, short3, short4
+\item int1, int2, int3, int4
+\item long1, long2, long3, long4
+\item longlong1, longlong2, longlong3, longlong4
+\end{DoxyItemize}
+\item Unsigned Integers\+:
+\begin{DoxyItemize}
+\item uchar1, uchar2, uchar3, uchar4
+\item ushort1, ushort2, ushort3, ushort4
+\item uint1, uint2, uint3, uint4
+\item ulong1, ulong2, ulong3, ulong4
+\item ulonglong1, ulonglong2, ulonglong3, ulonglong4
+\end{DoxyItemize}
+\item Floating Points
+\begin{DoxyItemize}
+\item float1, float2, float3, float4
+\item double1, double2, double3, double4
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md655}{}\doxysubsection{dim3}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md655}
+dim3 is a three-\/dimensional integer vector type commonly used to specify grid and group dimensions. Unspecified dimensions are initialized to 1. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{typedef struct dim3 \{}
+\DoxyCodeLine{  uint32\_t x; }
+\DoxyCodeLine{  uint32\_t y; }
+\DoxyCodeLine{  uint32\_t z; }
+\DoxyCodeLine{}
+\DoxyCodeLine{  dim3(uint32\_t \_x=1, uint32\_t \_y=1, uint32\_t \_z=1) : x(\_x), y(\_y), z(\_z) \{\};}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md656}{}\doxysection{Memory-\/\+Fence Instructions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md656}
+HIP supports \+\_\+\+\_\+threadfence() and \+\_\+\+\_\+threadfence\+\_\+block().
+
+HIP provides workaround for threadfence\+\_\+system() under the HIP-\/\+Clang path. To enable the workaround, HIP should be built with environment variable HIP\+\_\+\+COHERENT\+\_\+\+HOST\+\_\+\+ALLOC enabled. In addition,the kernels that use \+\_\+\+\_\+threadfence\+\_\+system() should be modified as follows\+:
+\begin{DoxyItemize}
+\item The kernel should only operate on finegrained system memory; which should be allocated with hip\+Host\+Malloc().
+\item Remove all memcpy for those allocated finegrained system memory regions.
+\end{DoxyItemize}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md657}{}\doxysection{Synchronization Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md657}
+The \+\_\+\+\_\+syncthreads() built-\/in function is supported in HIP. The \+\_\+\+\_\+syncthreads\+\_\+count(int), \+\_\+\+\_\+syncthreads\+\_\+and(int) and \+\_\+\+\_\+syncthreads\+\_\+or(int) functions are under development. ~\newline
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md658}{}\doxysection{Math Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md658}
+HIP-\/\+Clang supports a set of math operations callable from the device.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md659}{}\doxysubsection{Single Precision Mathematical Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md659}
+Following is the list of supported single precision mathematical functions.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Host}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Device}}    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Host}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Device}}    }\\\cline{1-3}
+\endhead
+float acosf ( float x ) ~\newline
+\textsubscript{Calculate the arc cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float acoshf ( float x ) ~\newline
+\textsubscript{Calculate the nonnegative arc hyperbolic cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float asinf ( float x ) ~\newline
+\textsubscript{Calculate the arc sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float asinhf ( float x ) ~\newline
+\textsubscript{Calculate the arc hyperbolic sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float atan2f ( float y, float x ) ~\newline
+\textsubscript{Calculate the arc tangent of the ratio of first and second input arguments.}   &✓   &✓    \\\cline{1-3}
+float atanf ( float x ) ~\newline
+\textsubscript{Calculate the arc tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+float atanhf ( float x ) ~\newline
+\textsubscript{Calculate the arc hyperbolic tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+float cbrtf ( float x ) ~\newline
+\textsubscript{Calculate the cube root of the input argument.}   &✓   &✓    \\\cline{1-3}
+float ceilf ( float x ) ~\newline
+\textsubscript{Calculate ceiling of the input argument.}   &✓   &✓    \\\cline{1-3}
+float copysignf ( float x, float y ) ~\newline
+\textsubscript{Create value with given magnitude, copying sign of second value.}   &✓   &✓    \\\cline{1-3}
+float cosf ( float x ) ~\newline
+\textsubscript{Calculate the cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float coshf ( float x ) ~\newline
+\textsubscript{Calculate the hyperbolic cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float erfcf ( float x ) ~\newline
+\textsubscript{Calculate the complementary error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+float erff ( float x ) ~\newline
+\textsubscript{Calculate the error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+float exp10f ( float x ) ~\newline
+\textsubscript{Calculate the base 10 exponential of the input argument.}   &✓   &✓    \\\cline{1-3}
+float exp2f ( float x ) ~\newline
+\textsubscript{Calculate the base 2 exponential of the input argument.}   &✓   &✓    \\\cline{1-3}
+float expf ( float x ) ~\newline
+\textsubscript{Calculate the base e exponential of the input argument.}   &✓   &✓    \\\cline{1-3}
+float expm1f ( float x ) ~\newline
+\textsubscript{Calculate the base e exponential of the input argument, minus 1.}   &✓   &✓    \\\cline{1-3}
+float fabsf ( float x ) ~\newline
+\textsubscript{Calculate the absolute value of its argument.}   &✓   &✓    \\\cline{1-3}
+float fdimf ( float x, float y ) ~\newline
+\textsubscript{Compute the positive difference between {\ttfamily x} and {\ttfamily y}.}   &✓   &✓    \\\cline{1-3}
+float floorf ( float x ) ~\newline
+\textsubscript{Calculate the largest integer less than or equal to {\ttfamily x}.}   &✓   &✓    \\\cline{1-3}
+float fmaf ( float x, float y, float z ) ~\newline
+\textsubscript{Compute {\ttfamily x × y + z} as a single operation.}   &✓   &✓    \\\cline{1-3}
+float fmaxf ( float x, float y ) ~\newline
+\textsubscript{Determine the maximum numeric value of the arguments.}   &✓   &✓    \\\cline{1-3}
+float fminf ( float x, float y ) ~\newline
+\textsubscript{Determine the minimum numeric value of the arguments.}   &✓   &✓    \\\cline{1-3}
+float fmodf ( float x, float y ) ~\newline
+\textsubscript{Calculate the floating-\/point remainder of {\ttfamily x / y}.}   &✓   &✓    \\\cline{1-3}
+float frexpf ( float x, int$\ast$ nptr ) ~\newline
+\textsubscript{Extract mantissa and exponent of a floating-\/point value.}   &✓   &✗    \\\cline{1-3}
+float hypotf ( float x, float y ) ~\newline
+\textsubscript{Calculate the square root of the sum of squares of two arguments.}   &✓   &✓    \\\cline{1-3}
+int ilogbf ( float x ) ~\newline
+\textsubscript{Compute the unbiased integer exponent of the argument.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f1}{\texttt{ 1}}} isfinite ( float a ) ~\newline
+\textsubscript{Determine whether argument is finite.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f1}{\texttt{ 1}}} isinf ( float a ) ~\newline
+\textsubscript{Determine whether argument is infinite.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f1}{\texttt{ 1}}} isnan ( float a ) ~\newline
+\textsubscript{Determine whether argument is a NaN.}   &✓   &✓    \\\cline{1-3}
+float ldexpf ( float x, int exp ) ~\newline
+\textsubscript{Calculate the value of x ⋅ 2\textsuperscript{exp}.}   &✓   &✓    \\\cline{1-3}
+float log10f ( float x ) ~\newline
+\textsubscript{Calculate the base 10 logarithm of the input argument.}   &✓   &✓    \\\cline{1-3}
+float log1pf ( float x ) ~\newline
+\textsubscript{Calculate the value of log\textsubscript{e}( 1 + x ).}   &✓   &✓    \\\cline{1-3}
+float logbf ( float x ) ~\newline
+\textsubscript{Calculate the floating point representation of the exponent of the input argument.}   &✓   &✓    \\\cline{1-3}
+float log2f ( float x ) ~\newline
+\textsubscript{Calculate the base 2 logarithm of the input argument.}   &✓   &✓    \\\cline{1-3}
+float logf ( float x ) ~\newline
+\textsubscript{Calculate the natural logarithm of the input argument.}   &✓   &✓    \\\cline{1-3}
+float modff ( float x, float$\ast$ iptr ) ~\newline
+\textsubscript{Break down the input argument into fractional and integral parts.}   &✓   &✗    \\\cline{1-3}
+float nanf ( const char$\ast$ tagp ) ~\newline
+\textsubscript{Returns \char`\"{}\+Not a Number\char`\"{} value.}   &✗   &✓    \\\cline{1-3}
+float nearbyintf ( float x ) ~\newline
+\textsubscript{Round the input argument to the nearest integer.}   &✓   &✓    \\\cline{1-3}
+float powf ( float x, float y ) ~\newline
+\textsubscript{Calculate the value of first argument to the power of second argument.}   &✓   &✓    \\\cline{1-3}
+float remainderf ( float x, float y ) ~\newline
+\textsubscript{Compute single-\/precision floating-\/point remainder.}   &✓   &✓    \\\cline{1-3}
+float remquof ( float x, float y, int$\ast$ quo ) ~\newline
+\textsubscript{Compute single-\/precision floating-\/point remainder and part of quotient.}   &✓   &✗    \\\cline{1-3}
+float roundf ( float x ) ~\newline
+\textsubscript{Round to nearest integer value in floating-\/point.}   &✓   &✓    \\\cline{1-3}
+float scalbnf ( float x, int n ) ~\newline
+\textsubscript{Scale floating-\/point input by integer power of two.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f1}{\texttt{ 1}}} signbit ( float a ) ~\newline
+\textsubscript{Return the sign bit of the input.}   &✓   &✓    \\\cline{1-3}
+void sincosf ( float x, float$\ast$ sptr, float$\ast$ cptr ) ~\newline
+\textsubscript{Calculate the sine and cosine of the first input argument.}   &✓   &✗    \\\cline{1-3}
+float sinf ( float x ) ~\newline
+\textsubscript{Calculate the sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float sinhf ( float x ) ~\newline
+\textsubscript{Calculate the hyperbolic sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+float sqrtf ( float x ) ~\newline
+\textsubscript{Calculate the square root of the input argument.}   &✓   &✓    \\\cline{1-3}
+float tanf ( float x ) ~\newline
+\textsubscript{Calculate the tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+float tanhf ( float x ) ~\newline
+\textsubscript{Calculate the hyperbolic tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+float truncf ( float x ) ~\newline
+\textsubscript{Truncate input argument to the integral part.}   &✓   &✓    \\\cline{1-3}
+float tgammaf ( float x ) ~\newline
+\textsubscript{Calculate the gamma function of the input argument.}   &✓   &✓    \\\cline{1-3}
+float erfcinvf ( float y ) ~\newline
+\textsubscript{Calculate the inverse complementary function of the input argument.}   &✓   &✓    \\\cline{1-3}
+float erfcxf ( float x ) ~\newline
+\textsubscript{Calculate the scaled complementary error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+float erfinvf ( float y ) ~\newline
+\textsubscript{Calculate the inverse error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+float fdividef ( float x, float y ) ~\newline
+\textsubscript{Divide two floating point values.}   &✓   &✓    \\\cline{1-3}
+float frexpf ( float x, int $\ast$nptr ) ~\newline
+\textsubscript{Extract mantissa and exponent of a floating-\/point value.}   &✓   &✓    \\\cline{1-3}
+float j0f ( float x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the first kind of order 0 for the input argument.}   &✓   &✓    \\\cline{1-3}
+float j1f ( float x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the first kind of order 1 for the input argument.}   &✓   &✓    \\\cline{1-3}
+float jnf ( int n, float x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the first kind of order n for the input argument.}   &✓   &✓    \\\cline{1-3}
+float lgammaf ( float x ) ~\newline
+\textsubscript{Calculate the natural logarithm of the absolute value of the gamma function of the input argument.}   &✓   &✓    \\\cline{1-3}
+long long int llrintf ( float x ) ~\newline
+\textsubscript{Round input to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+long long int llroundf ( float x ) ~\newline
+\textsubscript{Round to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+long int lrintf ( float x ) ~\newline
+\textsubscript{Round input to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+long int lroundf ( float x ) ~\newline
+\textsubscript{Round to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+float modff ( float x, float $\ast$iptr ) ~\newline
+\textsubscript{Break down the input argument into fractional and integral parts.}   &✓   &✓    \\\cline{1-3}
+float nextafterf ( float x, float y ) ~\newline
+\textsubscript{Returns next representable single-\/precision floating-\/point value after argument.}   &✓   &✓    \\\cline{1-3}
+float norm3df ( float a, float b, float c ) ~\newline
+\textsubscript{Calculate the square root of the sum of squares of three coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+float norm4df ( float a, float b, float c, float d ) ~\newline
+\textsubscript{Calculate the square root of the sum of squares of four coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+float normcdff ( float y ) ~\newline
+\textsubscript{Calculate the standard normal cumulative distribution function.}   &✓   &✓    \\\cline{1-3}
+float normcdfinvf ( float y ) ~\newline
+\textsubscript{Calculate the inverse of the standard normal cumulative distribution function.}   &✓   &✓    \\\cline{1-3}
+float normf ( int dim, const float $\ast$a ) ~\newline
+\textsubscript{Calculate the square root of the sum of squares of any number of coordinates.}   &✓   &✓    \\\cline{1-3}
+float rcbrtf ( float x ) ~\newline
+\textsubscript{Calculate the reciprocal cube root function.}   &✓   &✓    \\\cline{1-3}
+float remquof ( float x, float y, int $\ast$quo ) ~\newline
+\textsubscript{Compute single-\/precision floating-\/point remainder and part of quotient.}   &✓   &✓    \\\cline{1-3}
+float rhypotf ( float x, float y ) ~\newline
+\textsubscript{Calculate one over the square root of the sum of squares of two arguments.}   &✓   &✓    \\\cline{1-3}
+float rintf ( float x ) ~\newline
+\textsubscript{Round input to nearest integer value in floating-\/point.}   &✓   &✓    \\\cline{1-3}
+float rnorm3df ( float a, float b, float c ) ~\newline
+\textsubscript{Calculate one over the square root of the sum of squares of three coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+float rnorm4df ( float a, float b, float c, float d ) ~\newline
+\textsubscript{Calculate one over the square root of the sum of squares of four coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+float rnormf ( int dim, const float $\ast$a ) ~\newline
+\textsubscript{Calculate the reciprocal of square root of the sum of squares of any number of coordinates.}   &✓   &✓    \\\cline{1-3}
+float scalblnf ( float x, long int n ) ~\newline
+\textsubscript{Scale floating-\/point input by integer power of two.}   &✓   &✓    \\\cline{1-3}
+void sincosf ( float x, float $\ast$sptr, float $\ast$cptr ) ~\newline
+\textsubscript{Calculate the sine and cosine of the first input argument.}   &✓   &✓    \\\cline{1-3}
+void sincospif ( float x, float $\ast$sptr, float $\ast$cptr ) ~\newline
+\textsubscript{Calculate the sine and cosine of the first input argument multiplied by PI.}   &✓   &✓    \\\cline{1-3}
+float y0f ( float x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the second kind of order 0 for the input argument.}   &✓   &✓    \\\cline{1-3}
+float y1f ( float x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the second kind of order 1 for the input argument.}   &✓   &✓    \\\cline{1-3}
+float ynf ( int n, float x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the second kind of order n for the input argument.}   &✓   &✓   \\\cline{1-3}
+\end{longtabu}
+
+
+\textsubscript{{\bfseries{\textsuperscript{\mbox{[}1\mbox{]}}}} \+\_\+\+\_\+\+RETURN\+\_\+\+TYPE is dependent on compiler. It is usually \textquotesingle{}int\textquotesingle{} for C compilers and \textquotesingle{}bool\textquotesingle{} for C++ compilers.} \href{\#a1}{\texttt{ ↩}}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md660}{}\doxysubsection{Double Precision Mathematical Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md660}
+Following is the list of supported double precision mathematical functions.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Host}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Device}}    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Host}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported on Device}}    }\\\cline{1-3}
+\endhead
+double acos ( double x ) ~\newline
+\textsubscript{Calculate the arc cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+double acosh ( double x ) ~\newline
+\textsubscript{Calculate the nonnegative arc hyperbolic cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+double asin ( double x ) ~\newline
+\textsubscript{Calculate the arc sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+double asinh ( double x ) ~\newline
+\textsubscript{ Calculate the arc hyperbolic sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+double atan ( double x ) ~\newline
+\textsubscript{Calculate the arc tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+double atan2 ( double y, double x ) ~\newline
+\textsubscript{Calculate the arc tangent of the ratio of first and second input arguments.}   &✓   &✓    \\\cline{1-3}
+double atanh ( double x ) ~\newline
+\textsubscript{Calculate the arc hyperbolic tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+double cbrt ( double x ) ~\newline
+\textsubscript{Calculate the cube root of the input argument.}   &✓   &✓    \\\cline{1-3}
+double ceil ( double x ) ~\newline
+\textsubscript{Calculate ceiling of the input argument.}   &✓   &✓    \\\cline{1-3}
+double copysign ( double x, double y ) ~\newline
+\textsubscript{Create value with given magnitude, copying sign of second value.}   &✓   &✓    \\\cline{1-3}
+double cos ( double x ) ~\newline
+\textsubscript{Calculate the cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+double cosh ( double x ) ~\newline
+\textsubscript{Calculate the hyperbolic cosine of the input argument.}   &✓   &✓    \\\cline{1-3}
+double erf ( double x ) ~\newline
+\textsubscript{Calculate the error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+double erfc ( double x ) ~\newline
+\textsubscript{Calculate the complementary error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+double exp ( double x ) ~\newline
+\textsubscript{Calculate the base e exponential of the input argument.}   &✓   &✓    \\\cline{1-3}
+double exp10 ( double x ) ~\newline
+\textsubscript{Calculate the base 10 exponential of the input argument.}   &✓   &✓    \\\cline{1-3}
+double exp2 ( double x ) ~\newline
+\textsubscript{Calculate the base 2 exponential of the input argument.}   &✓   &✓    \\\cline{1-3}
+double expm1 ( double x ) ~\newline
+\textsubscript{Calculate the base e exponential of the input argument, minus 1.}   &✓   &✓    \\\cline{1-3}
+double fabs ( double x ) ~\newline
+\textsubscript{Calculate the absolute value of the input argument.}   &✓   &✓    \\\cline{1-3}
+double fdim ( double x, double y ) ~\newline
+\textsubscript{Compute the positive difference between {\ttfamily x} and {\ttfamily y}.}   &✓   &✓    \\\cline{1-3}
+double floor ( double x ) ~\newline
+\textsubscript{Calculate the largest integer less than or equal to {\ttfamily x}.}   &✓   &✓    \\\cline{1-3}
+double fma ( double x, double y, double z ) ~\newline
+\textsubscript{Compute {\ttfamily x × y + z} as a single operation.}   &✓   &✓    \\\cline{1-3}
+double fmax ( double , double ) ~\newline
+\textsubscript{Determine the maximum numeric value of the arguments.}   &✓   &✓    \\\cline{1-3}
+double fmin ( double x, double y ) ~\newline
+\textsubscript{Determine the minimum numeric value of the arguments.}   &✓   &✓    \\\cline{1-3}
+double fmod ( double x, double y ) ~\newline
+\textsubscript{Calculate the floating-\/point remainder of {\ttfamily x / y}.}   &✓   &✓    \\\cline{1-3}
+double frexp ( double x, int$\ast$ nptr ) ~\newline
+\textsubscript{Extract mantissa and exponent of a floating-\/point value.}   &✓   &✗    \\\cline{1-3}
+double hypot ( double x, double y ) ~\newline
+\textsubscript{Calculate the square root of the sum of squares of two arguments.}   &✓   &✓    \\\cline{1-3}
+int ilogb ( double x ) ~\newline
+\textsubscript{Compute the unbiased integer exponent of the argument.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f2}{\texttt{ 1}}} isfinite ( double a ) ~\newline
+\textsubscript{Determine whether argument is finite.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f2}{\texttt{ 1}}} isinf ( double a ) ~\newline
+\textsubscript{Determine whether argument is infinite.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f2}{\texttt{ 1}}} isnan ( double a ) ~\newline
+\textsubscript{Determine whether argument is a NaN.}   &✓   &✓    \\\cline{1-3}
+double ldexp ( double x, int exp ) ~\newline
+\textsubscript{Calculate the value of x ⋅ 2\textsuperscript{exp}.}   &✓   &✓    \\\cline{1-3}
+double log ( double x ) ~\newline
+\textsubscript{Calculate the base e logarithm of the input argument.}   &✓   &✓    \\\cline{1-3}
+double log10 ( double x ) ~\newline
+\textsubscript{Calculate the base 10 logarithm of the input argument.}   &✓   &✓    \\\cline{1-3}
+double log1p ( double x ) ~\newline
+\textsubscript{Calculate the value of log\textsubscript{e}( 1 + x ).}   &✓   &✓    \\\cline{1-3}
+double log2 ( double x ) ~\newline
+\textsubscript{Calculate the base 2 logarithm of the input argument.}   &✓   &✓    \\\cline{1-3}
+double logb ( double x ) ~\newline
+\textsubscript{Calculate the floating point representation of the exponent of the input argument.}   &✓   &✓    \\\cline{1-3}
+double modf ( double x, double$\ast$ iptr ) ~\newline
+\textsubscript{Break down the input argument into fractional and integral parts.}   &✓   &✗    \\\cline{1-3}
+double nan ( const char$\ast$ tagp ) ~\newline
+\textsubscript{Returns \char`\"{}\+Not a Number\char`\"{} value.}   &✗   &✓    \\\cline{1-3}
+double nearbyint ( double x ) ~\newline
+\textsubscript{Round the input argument to the nearest integer.}   &✓   &✓    \\\cline{1-3}
+double pow ( double x, double y ) ~\newline
+\textsubscript{Calculate the value of first argument to the power of second argument.}   &✓   &✓    \\\cline{1-3}
+double remainder ( double x, double y ) ~\newline
+\textsubscript{Compute double-\/precision floating-\/point remainder.}   &✓   &✓    \\\cline{1-3}
+double remquo ( double x, double y, int$\ast$ quo ) ~\newline
+\textsubscript{Compute double-\/precision floating-\/point remainder and part of quotient.}   &✓   &✗    \\\cline{1-3}
+double round ( double x ) ~\newline
+\textsubscript{Round to nearest integer value in floating-\/point.}   &✓   &✓    \\\cline{1-3}
+double scalbn ( double x, int n ) ~\newline
+\textsubscript{Scale floating-\/point input by integer power of two.}   &✓   &✓    \\\cline{1-3}
+\+\_\+\+\_\+\+RETURN\+\_\+\+TYPE\textsuperscript{\href{\#f2}{\texttt{ 1}}} signbit ( double a ) ~\newline
+\textsubscript{Return the sign bit of the input.}   &✓   &✓    \\\cline{1-3}
+double sin ( double x ) ~\newline
+\textsubscript{Calculate the sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+void sincos ( double x, double$\ast$ sptr, double$\ast$ cptr ) ~\newline
+\textsubscript{Calculate the sine and cosine of the first input argument.}   &✓   &✗    \\\cline{1-3}
+double sinh ( double x ) ~\newline
+\textsubscript{Calculate the hyperbolic sine of the input argument.}   &✓   &✓    \\\cline{1-3}
+double sqrt ( double x ) ~\newline
+\textsubscript{Calculate the square root of the input argument.}   &✓   &✓    \\\cline{1-3}
+double tan ( double x ) ~\newline
+\textsubscript{Calculate the tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+double tanh ( double x ) ~\newline
+\textsubscript{Calculate the hyperbolic tangent of the input argument.}   &✓   &✓    \\\cline{1-3}
+double tgamma ( double x ) ~\newline
+\textsubscript{Calculate the gamma function of the input argument.}   &✓   &✓    \\\cline{1-3}
+double trunc ( double x ) ~\newline
+\textsubscript{Truncate input argument to the integral part.}   &✓   &✓    \\\cline{1-3}
+double erfcinv ( double y ) ~\newline
+\textsubscript{Calculate the inverse complementary function of the input argument.}   &✓   &✓    \\\cline{1-3}
+double erfcx ( double x ) ~\newline
+\textsubscript{Calculate the scaled complementary error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+double erfinv ( double y ) ~\newline
+\textsubscript{Calculate the inverse error function of the input argument.}   &✓   &✓    \\\cline{1-3}
+double frexp ( float x, int $\ast$nptr ) ~\newline
+\textsubscript{Extract mantissa and exponent of a floating-\/point value.}   &✓   &✓    \\\cline{1-3}
+double j0 ( double x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the first kind of order 0 for the input argument.}   &✓   &✓    \\\cline{1-3}
+double j1 ( double x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the first kind of order 1 for the input argument.}   &✓   &✓    \\\cline{1-3}
+double jn ( int n, double x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the first kind of order n for the input argument.}   &✓   &✓    \\\cline{1-3}
+double lgamma ( double x ) ~\newline
+\textsubscript{Calculate the natural logarithm of the absolute value of the gamma function of the input argument.}   &✓   &✓    \\\cline{1-3}
+long long int llrint ( double x ) ~\newline
+\textsubscript{Round input to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+long long int llround ( double x ) ~\newline
+\textsubscript{Round to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+long int lrint ( double x ) ~\newline
+\textsubscript{Round input to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+long int lround ( double x ) ~\newline
+\textsubscript{Round to nearest integer value.}   &✓   &✓    \\\cline{1-3}
+double modf ( double x, double $\ast$iptr ) ~\newline
+\textsubscript{Break down the input argument into fractional and integral parts.}   &✓   &✓    \\\cline{1-3}
+double nextafter ( double x, double y ) ~\newline
+\textsubscript{Returns next representable single-\/precision floating-\/point value after argument.}   &✓   &✓    \\\cline{1-3}
+double norm3d ( double a, double b, double c ) ~\newline
+\textsubscript{Calculate the square root of the sum of squares of three coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+float norm4d ( double a, double b, double c, double d ) ~\newline
+\textsubscript{Calculate the square root of the sum of squares of four coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+double normcdf ( double y ) ~\newline
+\textsubscript{Calculate the standard normal cumulative distribution function.}   &✓   &✓    \\\cline{1-3}
+double normcdfinv ( double y ) ~\newline
+\textsubscript{Calculate the inverse of the standard normal cumulative distribution function.}   &✓   &✓    \\\cline{1-3}
+double rcbrt ( double x ) ~\newline
+\textsubscript{Calculate the reciprocal cube root function.}   &✓   &✓    \\\cline{1-3}
+double remquo ( double x, double y, int $\ast$quo ) ~\newline
+\textsubscript{Compute single-\/precision floating-\/point remainder and part of quotient.}   &✓   &✓    \\\cline{1-3}
+double rhypot ( double x, double y ) ~\newline
+\textsubscript{Calculate one over the square root of the sum of squares of two arguments.}   &✓   &✓    \\\cline{1-3}
+double rint ( double x ) ~\newline
+\textsubscript{Round input to nearest integer value in floating-\/point.}   &✓   &✓    \\\cline{1-3}
+double rnorm3d ( double a, double b, double c ) ~\newline
+\textsubscript{Calculate one over the square root of the sum of squares of three coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+double rnorm4d ( double a, double b, double c, double d ) ~\newline
+\textsubscript{Calculate one over the square root of the sum of squares of four coordinates of the argument.}   &✓   &✓    \\\cline{1-3}
+double rnorm ( int dim, const double $\ast$a ) ~\newline
+\textsubscript{Calculate the reciprocal of square root of the sum of squares of any number of coordinates.}   &✓   &✓    \\\cline{1-3}
+double scalbln ( double x, long int n ) ~\newline
+\textsubscript{Scale floating-\/point input by integer power of two.}   &✓   &✓    \\\cline{1-3}
+void sincos ( double x, double $\ast$sptr, double $\ast$cptr ) ~\newline
+\textsubscript{Calculate the sine and cosine of the first input argument.}   &✓   &✓    \\\cline{1-3}
+void sincospi ( double x, double $\ast$sptr, double $\ast$cptr ) ~\newline
+\textsubscript{Calculate the sine and cosine of the first input argument multiplied by PI.}   &✓   &✓    \\\cline{1-3}
+double y0f ( double x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the second kind of order 0 for the input argument.}   &✓   &✓    \\\cline{1-3}
+double y1 ( double x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the second kind of order 1 for the input argument.}   &✓   &✓    \\\cline{1-3}
+double yn ( int n, double x ) ~\newline
+\textsubscript{Calculate the value of the Bessel function of the second kind of order n for the input argument.}   &✓   &✓   \\\cline{1-3}
+\end{longtabu}
+
+
+\textsubscript{{\bfseries{\textsuperscript{\mbox{[}1\mbox{]}}}} \+\_\+\+\_\+\+RETURN\+\_\+\+TYPE is dependent on compiler. It is usually \textquotesingle{}int\textquotesingle{} for C compilers and \textquotesingle{}bool\textquotesingle{} for C++ compilers.} \href{\#a2}{\texttt{ ↩}}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md661}{}\doxysubsection{Integer Intrinsics}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md661}
+Following is the list of supported integer intrinsics. Note that intrinsics are supported on device only.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}    }\\\cline{1-1}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}    }\\\cline{1-1}
+\endhead
+unsigned int \+\_\+\+\_\+brev ( unsigned int x ) ~\newline
+\textsubscript{Reverse the bit order of a 32 bit unsigned integer.}    \\\cline{1-1}
+unsigned long long int \+\_\+\+\_\+brevll ( unsigned long long int x ) ~\newline
+\textsubscript{Reverse the bit order of a 64 bit unsigned integer. }    \\\cline{1-1}
+int \+\_\+\+\_\+clz ( int x ) ~\newline
+\textsubscript{Return the number of consecutive high-\/order zero bits in a 32 bit integer.}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+clz(unsigned int x) ~\newline
+\textsubscript{Return the number of consecutive high-\/order zero bits in 32 bit unsigned integer.}    \\\cline{1-1}
+int \+\_\+\+\_\+clzll ( long long int x ) ~\newline
+\textsubscript{Count the number of consecutive high-\/order zero bits in a 64 bit integer.}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+clzll(long long int x) ~\newline
+\textsubscript{Return the number of consecutive high-\/order zero bits in 64 bit signed integer.}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+ffs(unsigned int x) ~\newline
+\textsubscript{Find the position of least signigicant bit set to 1 in a 32 bit unsigned integer.\textsuperscript{\href{\#f3}{\texttt{ 1}}}}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+ffs(int x) ~\newline
+\textsubscript{Find the position of least signigicant bit set to 1 in a 32 bit signed integer.}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+ffsll(unsigned long long int x) ~\newline
+\textsubscript{Find the position of least signigicant bit set to 1 in a 64 bit unsigned integer.\textsuperscript{\href{\#f3}{\texttt{ 1}}}}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+ffsll(long long int x) ~\newline
+\textsubscript{Find the position of least signigicant bit set to 1 in a 64 bit signed integer.}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+popc ( unsigned int x ) ~\newline
+\textsubscript{Count the number of bits that are set to 1 in a 32 bit integer.}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+popcll ( unsigned long long int x )~\newline
+\textsubscript{Count the number of bits that are set to 1 in a 64 bit integer.}    \\\cline{1-1}
+int \+\_\+\+\_\+mul24 ( int x, int y )~\newline
+\textsubscript{Multiply two 24bit integers.}    \\\cline{1-1}
+unsigned int \+\_\+\+\_\+umul24 ( unsigned int x, unsigned int y )~\newline
+\textsubscript{Multiply two 24bit unsigned integers.}   \\\cline{1-1}
+\end{longtabu}
+\textsubscript{{\bfseries{\textsuperscript{\mbox{[}1\mbox{]}}}} The HIP-\/\+Clang implementation of \+\_\+\+\_\+ffs() and \+\_\+\+\_\+ffsll() contains code to add a constant +1 to produce the ffs result format. For the cases where this overhead is not acceptable and programmer is willing to specialize for the platform, HIP-\/\+Clang provides \+\_\+\+\_\+lastbit\+\_\+u32\+\_\+u32(unsigned int input) and \+\_\+\+\_\+lastbit\+\_\+u32\+\_\+u64(unsigned long long int input). The index returned by \+\_\+\+\_\+lastbit\+\_\+ instructions starts at -\/1, while for ffs the index starts at 0.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md662}{}\doxysubsection{Floating-\/point Intrinsics}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md662}
+\textsubscript{Following is the list of supported floating-\/point intrinsics. Note that intrinsics are supported on device only.}
+
+\textsubscript{\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{1}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}    }\\\cline{1-1}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}    }\\\cline{1-1}
+\endhead
+float \+\_\+\+\_\+cosf ( float x ) ~\newline
+\textsubscript{Calculate the fast approximate cosine of the input argument.}    \\\cline{1-1}
+float \+\_\+\+\_\+expf ( float x ) ~\newline
+\textsubscript{Calculate the fast approximate base e exponential of the input argument.}    \\\cline{1-1}
+float \+\_\+\+\_\+frsqrt\+\_\+rn ( float x ) ~\newline
+\textsubscript{Compute {\ttfamily 1 / √x} in round-\/to-\/nearest-\/even mode.}    \\\cline{1-1}
+float \+\_\+\+\_\+fsqrt\+\_\+rn ( float x ) ~\newline
+\textsubscript{Compute {\ttfamily √x} in round-\/to-\/nearest-\/even mode.}    \\\cline{1-1}
+float \+\_\+\+\_\+log10f ( float x ) ~\newline
+\textsubscript{Calculate the fast approximate base 10 logarithm of the input argument.}    \\\cline{1-1}
+float \+\_\+\+\_\+log2f ( float x ) ~\newline
+\textsubscript{Calculate the fast approximate base 2 logarithm of the input argument.}    \\\cline{1-1}
+float \+\_\+\+\_\+logf ( float x ) ~\newline
+\textsubscript{Calculate the fast approximate base e logarithm of the input argument.}    \\\cline{1-1}
+float \+\_\+\+\_\+powf ( float x, float y ) ~\newline
+\textsubscript{Calculate the fast approximate of x\textsuperscript{y}.}    \\\cline{1-1}
+float \+\_\+\+\_\+sinf ( float x ) ~\newline
+\textsubscript{Calculate the fast approximate sine of the input argument.}    \\\cline{1-1}
+float \+\_\+\+\_\+tanf ( float x ) ~\newline
+\textsubscript{Calculate the fast approximate tangent of the input argument.}    \\\cline{1-1}
+double \+\_\+\+\_\+dsqrt\+\_\+rn ( double x ) ~\newline
+\textsubscript{Compute {\ttfamily √x} in round-\/to-\/nearest-\/even mode.}   \\\cline{1-1}
+\end{longtabu}
+}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md663}{}\doxysection{Texture Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md663}
+\textsubscript{The supported Texture functions are listed in header files \char`\"{}texture\+\_\+functions.\+h\char`\"{}(\href{https://github.com/ROCm-Developer-Tools/HIP/blob/main/include/hip/hcc_detail/texture_functions.h}{\texttt{ https\+://github.\+com/\+ROCm-\/\+Developer-\/\+Tools/\+HIP/blob/main/include/hip/hcc\+\_\+detail/texture\+\_\+functions.\+h}}) and\char`\"{}texture\+\_\+indirect\+\_\+functions.\+h\char`\"{} (\href{https://github.com/ROCm-Developer-Tools/HIP/blob/main/include/hip/hcc_detail/texture_indirect_functions.h}{\texttt{ https\+://github.\+com/\+ROCm-\/\+Developer-\/\+Tools/\+HIP/blob/main/include/hip/hcc\+\_\+detail/texture\+\_\+indirect\+\_\+functions.\+h}}).}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md664}{}\doxysection{Surface Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md664}
+\textsubscript{Surface functions are not supported.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md665}{}\doxysection{Timer Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md665}
+\textsubscript{HIP provides the following built-\/in functions for reading a high-\/resolution timer from the device. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{clock\_t clock()}
+\DoxyCodeLine{long long int clock64()}
+
+\end{DoxyCode}
+ Returns the value of counter that is incremented every clock cycle on device. Difference in values returned provides the cycles used.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md666}{}\doxysection{Atomic Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md666}
+\textsubscript{ Atomic functions execute as read-\/modify-\/write operations residing in global or shared memory. No other device or thread can observe or modify the memory location during an atomic operation. If multiple instructions from different devices or threads target the same memory location, the instructions are serialized in an undefined order.}
+
+\textsubscript{HIP adds new APIs with \+\_\+system as suffix to support system scope atomic operations. For example, atomic\+And atomic is dedicated to the GPU device, atomic\+And\+\_\+system will allow developers to extend the atomic operation to system scope, from the GPU device to other CPUs and GPU devices in the system. ~\newline
+}
+
+\textsubscript{HIP supports the following atomic operations.}
+
+\textsubscript{\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in HIP}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in CUDA}}    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in HIP}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in CUDA}}    }\\\cline{1-3}
+\endhead
+int atomic\+Add(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Add\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Add(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Add\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Add(unsigned long long$\ast$ address,unsigned long long val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Add\+\_\+system(unsigned long long$\ast$ address, unsigned long long val)   &✓   &✓    \\\cline{1-3}
+float atomic\+Add(float$\ast$ address, float val)   &✓   &✓    \\\cline{1-3}
+float atomic\+Add\+\_\+system(float$\ast$ address, float val)   &✓   &✓    \\\cline{1-3}
+double atomic\+Add(double$\ast$ address, double val)   &✓   &✓    \\\cline{1-3}
+double atomic\+Add\+\_\+system(double$\ast$ address, double val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Sub(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Sub\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Sub(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Sub\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Exch(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Exch\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Exch(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Exch\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Exch(unsigned long long int$\ast$ address,unsigned long long int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Exch\+\_\+system(unsigned long long$\ast$ address, unsigned long long val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Exch\+\_\+system(unsigned long long$\ast$ address, unsigned long long val)   &✓   &✓    \\\cline{1-3}
+float atomic\+Exch(float$\ast$ address, float val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Min(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Min\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Min(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Min\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Min(unsigned long long$\ast$ address,unsigned long long val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Max(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Max\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Max(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Max\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Max(unsigned long long$\ast$ address,unsigned long long val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Inc(unsigned int$\ast$ address)   &✗   &✓    \\\cline{1-3}
+unsigned int atomic\+Dec(unsigned int$\ast$ address)   &✗   &✓    \\\cline{1-3}
+int atomic\+CAS(int$\ast$ address, int compare, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+CAS\+\_\+system(int$\ast$ address, int compare, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+CAS(unsigned int$\ast$ address,unsigned int compare,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+CAS\+\_\+system(unsigned int$\ast$ address, unsigned int compare, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+CAS(unsigned long long$\ast$ address,unsigned long long compare,unsigned long long val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+CAS\+\_\+system(unsigned long long$\ast$ address, unsigned long long compare, unsigned long long val)   &✓   &✓    \\\cline{1-3}
+int atomic\+And(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+And\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+And(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+And\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+And(unsigned long long$\ast$ address,unsigned long long val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+And\+\_\+system(unsigned long long$\ast$ address, unsigned long long val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Or(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Or\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Or(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Or\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Or\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Or(unsigned long long int$\ast$ address,unsigned long long val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Or\+\_\+system(unsigned long long$\ast$ address, unsigned long long val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Xor(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+int atomic\+Xor\+\_\+system(int$\ast$ address, int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Xor(unsigned int$\ast$ address,unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned int atomic\+Xor\+\_\+system(unsigned int$\ast$ address, unsigned int val)   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Xor(unsigned long long$\ast$ address,unsigned long long val))   &✓   &✓    \\\cline{1-3}
+unsigned long long atomic\+Xor\+\_\+system(unsigned long long$\ast$ address, unsigned long long val)   &✓   &✓   \\\cline{1-3}
+\end{longtabu}
+}
+
+\textsubscript{Note, in order to keep backwards compitability in float/double atomic\+Add functions, in ROCm4.\+4 release, we introduce a new compilation flag as an option in CMake file, \+\_\+\+\_\+\+HIP\+\_\+\+USE\+\_\+\+CMPXCHG\+\_\+\+FOR\+\_\+\+FP\+\_\+\+ATOMICS}
+
+\textsubscript{By default, this compilation flag is not set(\char`\"{}0\char`\"{}), so hip runtime will use current float/double atomic\+Add functions. If this compilation flag is set to \char`\"{}1\char`\"{}, that is, with the cmake option \char`\"{}-\/\+D\+\_\+\+\_\+\+HIP\+\_\+\+USE\+\_\+\+CMPXCHG\+\_\+\+FOR\+\_\+\+FP\+\_\+\+ATOMICS=1\char`\"{}, the old float/double atomic\+Add functions will be used instead, for compatibility with compilers not supporting floating point atomics. For details steps how to build hip runtime, please refer to the section \char`\"{}build HIPAMD\char`\"{} (\href{https://github.com/ROCm-Developer-Tools/hipamd/blob/develop/INSTALL.md}{\texttt{ https\+://github.\+com/\+ROCm-\/\+Developer-\/\+Tools/hipamd/blob/develop/\+INSTALL.\+md}}).}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md667}{}\doxysubsection{Caveats and Features Under-\/\+Development\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md667}
+\textsubscript{
+\begin{DoxyItemize}
+\item HIP enables atomic operations on 32-\/bit integers. Additionally, it supports an atomic float add. AMD hardware, however, implements the float add using a CAS loop, so this function may not perform efficiently.
+\end{DoxyItemize}}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md668}{}\doxysection{Warp Cross-\/\+Lane Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md668}
+\textsubscript{ Warp cross-\/lane functions operate across all lanes in a warp. The hardware guarantees that all warp lanes will execute in lockstep, so additional synchronization is unnecessary, and the instructions use no shared memory.}
+
+\textsubscript{Note that Nvidia and AMD devices have different warp sizes, so portable code should use the warp\+Size built-\/ins to query the warp size. Hipified code from the Cuda path requires careful review to ensure it doesn’t assume a wave\+Size of 32. \char`\"{}\+Wave-\/aware\char`\"{} code that assumes a wave\+Size of 32 will run on a wave-\/64 machine, but it will utilize only half of the machine resources. Warp\+Size built-\/ins should only be used in device functions and its value depends on GPU arch. Users should not assume warp\+Size to be a compile-\/time constant. Host functions should use hip\+Get\+Device\+Properties to get the default warp size of a GPU device\+:}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cudaDeviceProp props;}
+\DoxyCodeLine{cudaGetDeviceProperties(\&props, deviceID);}
+\DoxyCodeLine{int w = props.warpSize;}
+\DoxyCodeLine{// implement portable algorithm based on w (rather than assume 32 or 64)}
+
+\end{DoxyCode}
+}
+
+\textsubscript{Note that assembly kernels may be built for a warp size which is different than the default warp size.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md669}{}\doxysubsection{Warp Vote and Ballot Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md669}
+\textsubscript{ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{int \_\_all(int predicate)}
+\DoxyCodeLine{int \_\_any(int predicate)}
+\DoxyCodeLine{uint64\_t \_\_ballot(int predicate)}
+
+\end{DoxyCode}
+}
+
+\textsubscript{Threads in a warp are referred to as {\itshape lanes} and are numbered from 0 to warp\+Size -- 1. For these functions, each warp lane contributes 1 -- the bit value (the predicate), which is efficiently broadcast to all lanes in the warp. The 32-\/bit int predicate from each lane reduces to a 1-\/bit value\+: 0 (predicate = 0) or 1 (predicate != 0). {\ttfamily \+\_\+\+\_\+any} and {\ttfamily \+\_\+\+\_\+all} provide a summary view of the predicates that the other warp lanes contribute\+:}
+
+\textsubscript{
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+\+\_\+any()} returns 1 if any warp lane contributes a nonzero predicate, or 0 otherwise
+\item {\ttfamily \+\_\+\+\_\+all()} returns 1 if all other warp lanes contribute nonzero predicates, or 0 otherwise
+\end{DoxyItemize}}
+
+\textsubscript{Applications can test whether the target platform supports the any/all instruction using the {\ttfamily has\+Warp\+Vote} device property or the HIP\+\_\+\+ARCH\+\_\+\+HAS\+\_\+\+WARP\+\_\+\+VOTE compiler define.}
+
+\textsubscript{{\ttfamily \+\_\+\+\_\+ballot} provides a bit mask containing the 1-\/bit predicate value from each lane. The nth bit of the result contains the 1 bit contributed by the nth warp lane. Note that HIP\textquotesingle{}s {\ttfamily \+\_\+\+\_\+ballot} function supports a 64-\/bit return value (compared with Cuda’s 32 bits). Code ported from Cuda should support the larger warp sizes that the HIP version of this instruction supports. Applications can test whether the target platform supports the ballot instruction using the {\ttfamily has\+Warp\+Ballot} device property or the HIP\+\_\+\+ARCH\+\_\+\+HAS\+\_\+\+WARP\+\_\+\+BALLOT compiler define.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md670}{}\doxysubsection{Warp Shuffle Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md670}
+\textsubscript{ Half-\/float shuffles are not supported. The default width is warp\+Size---see \href{\#warp-cross-lane-functions}{\texttt{ Warp Cross-\/\+Lane Functions}}. Applications should not assume the warp\+Size is 32 or 64.}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{int   \_\_shfl      (int var,   int srcLane, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl      (float var, int srcLane, int width=warpSize);}
+\DoxyCodeLine{int   \_\_shfl\_up   (int var,   unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl\_up   (float var, unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{int   \_\_shfl\_down (int var,   unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl\_down (float var, unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{int   \_\_shfl\_xor  (int var,   int laneMask, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl\_xor  (float var, int laneMask, int width=warpSize);}
+
+\end{DoxyCode}
+}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md671}{}\doxysection{Cooperative Groups Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md671}
+\textsubscript{ Cooperative groups is a mechanism for forming and communicating between groups of threads at a granularity different than the block. This feature was introduced in Cuda 9.}
+
+\textsubscript{HIP supports the following kernel language cooperative groups types or functions.}
+
+\textsubscript{\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in HIP}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in CUDA}}    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in HIP}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in CUDA}}    }\\\cline{1-3}
+\endhead
+{\ttfamily void thread\+\_\+group.\+sync();}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned thread\+\_\+group.\+size();}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned thread\+\_\+group.\+thread\+\_\+rank()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily bool thread\+\_\+group.\+is\+\_\+valid();}   &✓   &✓    \\\cline{1-3}
+{\ttfamily grid\+\_\+group this\+\_\+grid()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily void grid\+\_\+group.\+sync()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned grid\+\_\+group.\+size()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned grid\+\_\+group.\+thread\+\_\+rank()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily bool grid\+\_\+group.\+is\+\_\+valid()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily multi\+\_\+grid\+\_\+group this\+\_\+multi\+\_\+grid()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily void multi\+\_\+grid\+\_\+group.\+sync()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned multi\+\_\+grid\+\_\+group.\+size()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned multi\+\_\+grid\+\_\+group.\+thread\+\_\+rank()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily bool multi\+\_\+grid\+\_\+group.\+is\+\_\+valid()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned multi\+\_\+grid\+\_\+group.\+num\+\_\+grids()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned multi\+\_\+grid\+\_\+group.\+grid\+\_\+rank()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily thread\+\_\+block this\+\_\+thread\+\_\+block()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily multi\+\_\+grid\+\_\+group this\+\_\+multi\+\_\+grid()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily void multi\+\_\+grid\+\_\+group.\+sync()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily void thread\+\_\+block.\+sync()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned thread\+\_\+block.\+size()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily unsigned thread\+\_\+block.\+thread\+\_\+rank()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily bool thread\+\_\+block.\+is\+\_\+valid()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily dim3 thread\+\_\+block.\+group\+\_\+index()}   &✓   &✓    \\\cline{1-3}
+{\ttfamily dim3 thread\+\_\+block.\+thread\+\_\+index()}   &✓   &✓   \\\cline{1-3}
+\end{longtabu}
+}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md672}{}\doxysection{Warp Matrix Functions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md672}
+\textsubscript{ Warp matrix functions allow a warp to cooperatively operate on small matrices whose elements are spread over the lanes in an unspecified manner. This feature was introduced in Cuda 9.}
+
+\textsubscript{HIP does not support any of the kernel language warp matrix types or functions.}
+
+\textsubscript{\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in HIP}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in CUDA}}    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Function}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in HIP}}   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ {\bfseries{Supported in CUDA}}    }\\\cline{1-3}
+\endhead
+{\ttfamily void load\+\_\+matrix\+\_\+sync(fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&a, const T$\ast$ mptr, unsigned lda)}   &&✓    \\\cline{1-3}
+{\ttfamily void load\+\_\+matrix\+\_\+sync(fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&a, const T$\ast$ mptr, unsigned lda, layout\+\_\+t layout)}   &&✓    \\\cline{1-3}
+{\ttfamily void store\+\_\+matrix\+\_\+sync(T$\ast$ mptr, fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&a, unsigned lda, layout\+\_\+t layout)}   &&✓    \\\cline{1-3}
+{\ttfamily void fill\+\_\+fragment(fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&a, const T \&value)}   &&✓    \\\cline{1-3}
+{\ttfamily void mma\+\_\+sync(fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&d, const fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&a, const fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&b, const fragment\texorpdfstring{$<$}{<}...\texorpdfstring{$>$}{>} \&c , bool sat)}   &&✓   \\\cline{1-3}
+\end{longtabu}
+}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md673}{}\doxysection{Independent Thread Scheduling}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md673}
+\textsubscript{ The hardware support for independent thread scheduling introduced in certain architectures supporting Cuda allows threads to progress independently of each other and enables intra-\/warp synchronizations that were previously not allowed.}
+
+\textsubscript{HIP does not support this type of scheduling.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md674}{}\doxysection{Profiler Counter Function}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md674}
+\textsubscript{ The Cuda {\ttfamily \+\_\+\+\_\+prof\+\_\+trigger()} instruction is not supported.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md675}{}\doxysection{Assert}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md675}
+\textsubscript{ The assert function is under development. HIP does support an \char`\"{}abort\char`\"{} call which will terminate the process execution from inside the kernel.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md676}{}\doxysection{Printf}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md676}
+\textsubscript{ The printf function is under development.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md677}{}\doxysection{Device-\/\+Side Dynamic Global Memory Allocation}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md677}
+\textsubscript{ Device-\/side dynamic global memory allocation is under development. HIP now includes a preliminary implementation of malloc and free that can be called from device functions.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md678}{}\doxysection{$<$tt$>$\+\_\+\+\_\+launch\+\_\+bounds\+\_\+\+\_\+$<$/tt$>$}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md678}
+\textsubscript{}
+
+\textsubscript{GPU multiprocessors have a fixed pool of resources (primarily registers and shared memory) which are shared by the actively running warps. Using more resources can increase IPC of the kernel but reduces the resources available for other warps and limits the number of warps that can be simulaneously running. Thus GPUs have a complex relationship between resource usage and performance.}
+
+\textsubscript{{\bfseries{launch\+\_\+bounds}} allows the application to provide usage hints that influence the resources (primarily registers) used by the generated code. It is a function attribute that must be attached to a {\bfseries{global}} function\+:}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_\_global\_\_ void `\_\_launch\_bounds\_\_`(MAX\_THREADS\_PER\_BLOCK, MIN\_WARPS\_PER\_EU) MyKernel(...) ...}
+\DoxyCodeLine{MyKernel(hipGridLaunch lp, ...)}
+\DoxyCodeLine{...}
+
+\end{DoxyCode}
+}
+
+\textsubscript{{\bfseries{launch\+\_\+bounds}} supports two parameters\+:
+\begin{DoxyItemize}
+\item MAX\+\_\+\+THREADS\+\_\+\+PER\+\_\+\+BLOCK -\/ The programmers guarantees that kernel will be launched with threads less than MAX\+\_\+\+THREADS\+\_\+\+PER\+\_\+\+BLOCK. (On NVCC this maps to the .maxntid PTX directive). If no launch\+\_\+bounds is specified, MAX\+\_\+\+THREADS\+\_\+\+PER\+\_\+\+BLOCK is the maximum block size supported by the device (typically 1024 or larger). Specifying MAX\+\_\+\+THREADS\+\_\+\+PER\+\_\+\+BLOCK less than the maximum effectively allows the compiler to use more resources than a default unconstrained compilation that supports all possible block sizes at launch time. The threads-\/per-\/block is the product of (hip\+Block\+Dim\+\_\+x $\ast$ hip\+Block\+Dim\+\_\+y $\ast$ hip\+Block\+Dim\+\_\+z).
+\item MIN\+\_\+\+WARPS\+\_\+\+PER\+\_\+\+EU -\/ directs the compiler to minimize resource usage so that the requested number of warps can be simultaneously active on a multi-\/processor. Since active warps compete for the same fixed pool of resources, the compiler must reduce resources required by each warp(primarily registers). MIN\+\_\+\+WARPS\+\_\+\+PER\+\_\+\+EU is optional and defaults to 1 if not specified. Specifying a MIN\+\_\+\+WARPS\+\_\+\+PER\+\_\+\+EU greater than the default 1 effectively constrains the compiler\textquotesingle{}s resource usage.
+\end{DoxyItemize}}
+
+\textsubscript{When launch kernel with HIP APIs, for example, hip\+Module\+Launch\+Kernel(), HIP will do validation to make sure input kernel dimension size is not larger than specified launch\+\_\+bounds. In case exceeded, HIP would return launch failure, if AMD\+\_\+\+LOG\+\_\+\+LEVEL is set with proper value (for details, please refer to docs/markdown/hip\+\_\+logging.\+md), detail information will be shown in the error log message, including launch parameters of kernel dim size, launch bounds, and the name of the faulting kernel. It\textquotesingle{}s helpful to figure out which is the faulting kernel, besides, the kernel dim size and launch bounds values will also assist in debugging such failures.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md679}{}\doxysubsection{Compiler Impact}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md679}
+\textsubscript{The compiler uses these parameters as follows\+:
+\begin{DoxyItemize}
+\item The compiler uses the hints only to manage register usage, and does not automatically reduce shared memory or other resources.
+\item Compilation fails if compiler cannot generate a kernel which meets the requirements of the specified launch bounds.
+\item From MAX\+\_\+\+THREADS\+\_\+\+PER\+\_\+\+BLOCK, the compiler derives the maximum number of warps/block that can be used at launch time. Values of MAX\+\_\+\+THREADS\+\_\+\+PER\+\_\+\+BLOCK less than the default allows the compiler to use a larger pool of registers \+: each warp uses registers, and this hint constains the launch to a warps/block size which is less than maximum.
+\item From MIN\+\_\+\+WARPS\+\_\+\+PER\+\_\+\+EU, the compiler derives a maximum number of registers that can be used by the kernel (to meet the required \#simultaneous active blocks). If MIN\+\_\+\+WARPS\+\_\+\+PER\+\_\+\+EU is 1, then the kernel can use all registers supported by the multiprocessor.
+\item The compiler ensures that the registers used in the kernel is less than both allowed maximums, typically by spilling registers (to shared or global memory), or by using more instructions.
+\item The compiler may use hueristics to increase register usage, or may simply be able to avoid spilling. The MAX\+\_\+\+THREADS\+\_\+\+PER\+\_\+\+BLOCK is particularly useful in this cases, since it allows the compiler to use more registers and avoid situations where the compiler constrains the register usage (potentially spilling) to meet the requirements of a large block size that is never used at launch time.
+\end{DoxyItemize}}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md680}{}\doxysubsection{CU and EU Definitions}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md680}
+\textsubscript{\mbox{\hyperlink{class_a}{A}} compute unit (CU) is responsible for executing the waves of a work-\/group. It is composed of one or more execution units (EU) which are responsible for executing waves. An EU can have enough resources to maintain the state of more than one executing wave. This allows an EU to hide latency by switching between waves in a similar way to symmetric multithreading on a CPU. In order to allow the state for multiple waves to fit on an EU, the resources used by a single wave have to be limited. Limiting such resources can allow greater latency hiding, but can result in having to spill some register state to memory. This attribute allows an advanced developer to tune the number of waves that are capable of fitting within the resources of an EU. It can be used to ensure at least a certain number will fit to help hide latency, and can also be used to ensure no more than a certain number will fit to limit cache thrashing.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md681}{}\doxysubsection{Porting from CUDA \+\_\+\+\_\+launch\+\_\+bounds}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md681}
+\textsubscript{CUDA defines a \+\_\+\+\_\+launch\+\_\+bounds which is also designed to control occupancy\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\_\_launch\_bounds(MAX\_THREADS\_PER\_BLOCK, MIN\_BLOCKS\_PER\_MULTIPROCESSOR)}
+
+\end{DoxyCode}
+}
+
+\textsubscript{
+\begin{DoxyItemize}
+\item The second parameter \+\_\+\+\_\+launch\+\_\+bounds parameters must be converted to the format used \+\_\+\+\_\+hip\+\_\+launch\+\_\+bounds, which uses warps and execution-\/units rather than blocks and multi-\/processors (this conversion is performed automatically by hipify tools). 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{MIN\_WARPS\_PER\_EXECUTION\_UNIT = (MIN\_BLOCKS\_PER\_MULTIPROCESSOR * MAX\_THREADS\_PER\_BLOCK) / 32}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}}
+
+\textsubscript{The key differences in the interface are\+:
+\begin{DoxyItemize}
+\item Warps (rather than blocks)\+: The developer is trying to tell the compiler to control resource utilization to guarantee some amount of active Warps/\+EU for latency hiding. Specifying active warps in terms of blocks appears to hide the micro-\/architectural details of the warp size, but makes the interface more confusing since the developer ultimately needs to compute the number of warps to obtain the desired level of control.
+\item Execution Units (rather than multi\+Processor)\+: The use of execution units rather than multiprocessors provides support for architectures with multiple execution units/multi-\/processor. For example, the AMD GCN architecture has 4 execution units per multi\+Processor. The hip\+Device\+Props has a field execution\+Units\+Per\+Multiprocessor. Platform-\/specific coding techniques such as \#ifdef can be used to specify different launch\+\_\+bounds for NVCC and HIP-\/\+Clang platforms, if desired.
+\end{DoxyItemize}}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md682}{}\doxysubsection{maxregcount}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md682}
+\textsubscript{Unlike nvcc, HIP-\/\+Clang does not support the \char`\"{}-\/-\/maxregcount\char`\"{} option. Instead, users are encouraged to use the hip\+\_\+launch\+\_\+bounds directive since the parameters are more intuitive and portable than micro-\/architecture details like registers, and also the directive allows per-\/kernel control rather than an entire file. hip\+\_\+launch\+\_\+bounds works on both HIP-\/\+Clang and nvcc targets.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md683}{}\doxysection{Register Keyword}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md683}
+\textsubscript{The register keyword is deprecated in C++, and is silently ignored by both nvcc and HIP-\/\+Clang. You can pass the option {\ttfamily -\/Wdeprecated-\/register} the compiler warning message.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md684}{}\doxysection{Pragma Unroll}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md684}
+\textsubscript{ Unroll with a bounds that is known at compile-\/time is supported. For example\+:}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#pragma unroll 16 /* hint to compiler to unroll next loop by 16 */}
+\DoxyCodeLine{for (int i=0; i<16; i++) ...}
+
+\end{DoxyCode}
+}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#pragma unroll 1  /* tell compiler to never unroll the loop */}
+\DoxyCodeLine{for (int i=0; i<16; i++) ...}
+
+\end{DoxyCode}
+}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#pragma unroll /* hint to compiler to completely unroll next loop. */}
+\DoxyCodeLine{for (int i=0; i<16; i++) ...}
+
+\end{DoxyCode}
+}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md685}{}\doxysection{In-\/\+Line Assembly}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md685}
+\textsubscript{ GCN ISA In-\/line assembly, is supported. For example\+:}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{asm volatile ("{}v\_mac\_f32\_e32 \%0, \%2, \%3"{} : "{}=v"{} (out[i]) : "{}0"{}(out[i]), "{}v"{} (a), "{}v"{} (in[i]));}
+
+\end{DoxyCode}
+}
+
+\textsubscript{We insert the GCN isa into the kernel using {\ttfamily asm()} Assembler statement. {\ttfamily volatile} keyword is used so that the optimizers must not change the number of volatile operations or change their order of execution relative to other volatile operations. {\ttfamily v\+\_\+mac\+\_\+f32\+\_\+e32} is the GCN instruction, for more information please refer -\/ \href{http://gpuopen.com/compute-product/amd-gcn3-isa-architecture-manual/}{\texttt{ AMD GCN3 ISA architecture manual}} Index for the respective operand in the ordered fashion is provided by {\ttfamily \%} followed by position in the list of operands {\ttfamily \char`\"{}v\char`\"{}} is the constraint code (for target-\/specific AMDGPU) for 32-\/bit VGPR register, for more info please refer -\/ \href{https://llvm.org/docs/LangRef.html\#supported-constraint-code-list}{\texttt{ Supported Constraint Code List for AMDGPU}} Output Constraints are specified by an {\ttfamily \char`\"{}=\char`\"{}} prefix as shown above (\char`\"{}=v\char`\"{}). This indicate that assemby will write to this operand, and the operand will then be made available as a return value of the asm expression. Input constraints do not have a prefix -\/ just the constraint code. The constraint string of {\ttfamily \char`\"{}0\char`\"{}} says to use the assigned register for output as an input as well (it being the 0\textquotesingle{}th constraint).}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md686}{}\doxysection{C++ Support}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md686}
+\textsubscript{The following C++ features are not supported\+:
+\begin{DoxyItemize}
+\item Run-\/time-\/type information (RTTI)
+\item Virtual functions
+\item Try/catch
+\end{DoxyItemize}}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md687}{}\doxysection{Kernel Compilation}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md687}
+\textsubscript{hipcc now supports compiling C++/\+HIP kernels to binary code objects. The file format for binary is {\ttfamily .co} which means Code Object. The following command builds the code object using {\ttfamily hipcc}.}
+
+\textsubscript{{\ttfamily hipcc -\/-\/genco -\/-\/offload-\/arch=\mbox{[}TARGET GPU\mbox{]} \mbox{[}INPUT FILE\mbox{]} -\/o \mbox{[}OUTPUT FILE\mbox{]}}}
+
+\textsubscript{
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[TARGET GPU] = GPU architecture}
+\DoxyCodeLine{[INPUT FILE] = Name of the file containing kernels}
+\DoxyCodeLine{[OUTPUT FILE] = Name of the generated code object file}
+
+\end{DoxyCode}
+}
+
+\textsubscript{Note\+: When using binary code objects is that the number of arguments to the kernel is different on HIP-\/\+Clang and NVCC path. Refer to the sample in samples/0\+\_\+\+Intro/module\+\_\+api for differences in the arguments to be passed to the kernel.}
+
+\textsubscript{}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md688}{}\doxysection{gfx-\/arch-\/specific-\/kernel}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_docs_markdown_hip_kernel_language_autotoc_md688}
+\textsubscript{Clang defined \textquotesingle{}{\bfseries{gfx$\ast$}}\textquotesingle{} macros can be used to execute gfx arch specific codes inside the kernel. Refer to the sample 14\+\_\+gpu\+\_\+arch in samples/2\+\_\+\+Cookbook. }

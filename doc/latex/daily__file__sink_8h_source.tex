@@ -1,0 +1,142 @@
+\hypertarget{daily__file__sink_8h_source}{}\doxysection{daily\+\_\+file\+\_\+sink.\+h}
+\label{daily__file__sink_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/daily\_file\_sink.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/daily\_file\_sink.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef SPDLOG\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#error "{}spdlog.h must be included before this file."{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}spdlog/details/file\_helper.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}spdlog/details/null\_mutex.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}spdlog/fmt/fmt.h"{}}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}spdlog/sinks/base\_sink.h"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <cstdio>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }sinks \{}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{/*}}
+\DoxyCodeLine{27 \textcolor{comment}{ * Generator of daily log file names in format basename.YYYY-\/MM-\/DD.ext}}
+\DoxyCodeLine{28 \textcolor{comment}{ */}}
+\DoxyCodeLine{29 \textcolor{keyword}{struct }\mbox{\hyperlink{structspdlog_1_1sinks_1_1daily__filename__calculator}{daily\_filename\_calculator}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31     \textcolor{comment}{// Create filename for the form basename.YYYY-\/MM-\/DD}}
+\DoxyCodeLine{32     \textcolor{keyword}{static} filename\_t calc\_filename(\textcolor{keyword}{const} filename\_t \&filename, \textcolor{keyword}{const} tm \&now\_tm)}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         filename\_t basename, ext;}
+\DoxyCodeLine{35         std::tie(basename, ext) = details::file\_helper::split\_by\_extenstion(filename);}
+\DoxyCodeLine{36         std::conditional<std::is\_same<filename\_t::value\_type, char>::value, fmt::memory\_buffer, fmt::wmemory\_buffer>::type w;}
+\DoxyCodeLine{37         fmt::format\_to(}
+\DoxyCodeLine{38             w, SPDLOG\_FILENAME\_T(\textcolor{stringliteral}{"{}\{\}\_\{:04d\}-\/\{:02d\}-\/\{:02d\}\{\}"{}}), basename, now\_tm.tm\_year + 1900, now\_tm.tm\_mon + 1, now\_tm.tm\_mday, ext);}
+\DoxyCodeLine{39         \textcolor{keywordflow}{return} fmt::to\_string(w);}
+\DoxyCodeLine{40     \}}
+\DoxyCodeLine{41 \};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{comment}{/*}}
+\DoxyCodeLine{44 \textcolor{comment}{ * Rotating file sink based on date. rotates at midnight}}
+\DoxyCodeLine{45 \textcolor{comment}{ */}}
+\DoxyCodeLine{46 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Mutex, \textcolor{keyword}{typename} FileNameCalc = daily\_filename\_calculator>}
+\DoxyCodeLine{47 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1sinks_1_1daily__file__sink}{daily\_file\_sink}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink}}<Mutex>}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49 \textcolor{keyword}{public}:}
+\DoxyCodeLine{50     \textcolor{comment}{// create daily file sink which rotates on given time}}
+\DoxyCodeLine{51     \mbox{\hyperlink{classspdlog_1_1sinks_1_1daily__file__sink}{daily\_file\_sink}}(filename\_t base\_filename, \textcolor{keywordtype}{int} rotation\_hour, \textcolor{keywordtype}{int} rotation\_minute, \textcolor{keywordtype}{bool} truncate = \textcolor{keyword}{false})}
+\DoxyCodeLine{52         : base\_filename\_(std::move(base\_filename))}
+\DoxyCodeLine{53         , rotation\_h\_(rotation\_hour)}
+\DoxyCodeLine{54         , rotation\_m\_(rotation\_minute)}
+\DoxyCodeLine{55         , truncate\_(truncate)}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57         \textcolor{keywordflow}{if} (rotation\_hour < 0 || rotation\_hour > 23 || rotation\_minute < 0 || rotation\_minute > 59)}
+\DoxyCodeLine{58         \{}
+\DoxyCodeLine{59             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classspdlog_1_1spdlog__ex}{spdlog\_ex}}(\textcolor{stringliteral}{"{}daily\_file\_sink: Invalid rotation time in ctor"{}});}
+\DoxyCodeLine{60         \}}
+\DoxyCodeLine{61         \textcolor{keyword}{auto} now = log\_clock::now();}
+\DoxyCodeLine{62         file\_helper\_.open(FileNameCalc::calc\_filename(base\_filename\_, now\_tm(now)), truncate\_);}
+\DoxyCodeLine{63         rotation\_tp\_ = next\_rotation\_tp\_();}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} sink\_it\_(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg)\textcolor{keyword}{ override}}
+\DoxyCodeLine{68 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         \textcolor{keywordflow}{if} (msg.time >= rotation\_tp\_)}
+\DoxyCodeLine{71         \{}
+\DoxyCodeLine{72             file\_helper\_.open(FileNameCalc::calc\_filename(base\_filename\_, now\_tm(msg.time)), truncate\_);}
+\DoxyCodeLine{73             rotation\_tp\_ = next\_rotation\_tp\_();}
+\DoxyCodeLine{74         \}}
+\DoxyCodeLine{75         fmt::memory\_buffer formatted;}
+\DoxyCodeLine{76         sink::formatter\_-\/>format(msg, formatted);}
+\DoxyCodeLine{77         file\_helper\_.write(formatted);}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} flush\_()\textcolor{keyword}{ override}}
+\DoxyCodeLine{81 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{82         file\_helper\_.flush();}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{keyword}{private}:}
+\DoxyCodeLine{86     tm now\_tm(log\_clock::time\_point tp)}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88         time\_t tnow = log\_clock::to\_time\_t(tp);}
+\DoxyCodeLine{89         \textcolor{keywordflow}{return} spdlog::details::os::localtime(tnow);}
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     log\_clock::time\_point next\_rotation\_tp\_()}
+\DoxyCodeLine{93     \{}
+\DoxyCodeLine{94         \textcolor{keyword}{auto} now = log\_clock::now();}
+\DoxyCodeLine{95         tm date = now\_tm(now);}
+\DoxyCodeLine{96         date.tm\_hour = rotation\_h\_;}
+\DoxyCodeLine{97         date.tm\_min = rotation\_m\_;}
+\DoxyCodeLine{98         date.tm\_sec = 0;}
+\DoxyCodeLine{99         \textcolor{keyword}{auto} rotation\_time = log\_clock::from\_time\_t(std::mktime(\&date));}
+\DoxyCodeLine{100         \textcolor{keywordflow}{if} (rotation\_time > now)}
+\DoxyCodeLine{101         \{}
+\DoxyCodeLine{102             \textcolor{keywordflow}{return} rotation\_time;}
+\DoxyCodeLine{103         \}}
+\DoxyCodeLine{104         \textcolor{keywordflow}{return} \{rotation\_time + std::chrono::hours(24)\};}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     filename\_t base\_filename\_;}
+\DoxyCodeLine{108     \textcolor{keywordtype}{int} rotation\_h\_;}
+\DoxyCodeLine{109     \textcolor{keywordtype}{int} rotation\_m\_;}
+\DoxyCodeLine{110     log\_clock::time\_point rotation\_tp\_;}
+\DoxyCodeLine{111     \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{details::file\_helper}} file\_helper\_;}
+\DoxyCodeLine{112     \textcolor{keywordtype}{bool} truncate\_;}
+\DoxyCodeLine{113 \};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{keyword}{using} \mbox{\hyperlink{classspdlog_1_1sinks_1_1daily__file__sink}{daily\_file\_sink\_mt}} = \mbox{\hyperlink{classspdlog_1_1sinks_1_1daily__file__sink}{daily\_file\_sink<std::mutex>}};}
+\DoxyCodeLine{116 \textcolor{keyword}{using} \mbox{\hyperlink{classspdlog_1_1sinks_1_1daily__file__sink}{daily\_file\_sink\_st}} = \mbox{\hyperlink{classspdlog_1_1sinks_1_1daily__file__sink}{daily\_file\_sink<details::null\_mutex>}};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \} \textcolor{comment}{// namespace sinks}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{comment}{//}}
+\DoxyCodeLine{121 \textcolor{comment}{// factory functions}}
+\DoxyCodeLine{122 \textcolor{comment}{//}}
+\DoxyCodeLine{123 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{124 \textcolor{keyword}{inline} std::shared\_ptr<logger> daily\_logger\_mt(}
+\DoxyCodeLine{125     \textcolor{keyword}{const} std::string \&logger\_name, \textcolor{keyword}{const} filename\_t \&filename, \textcolor{keywordtype}{int} hour = 0, \textcolor{keywordtype}{int} minute = 0, \textcolor{keywordtype}{bool} truncate = \textcolor{keyword}{false})}
+\DoxyCodeLine{126 \{}
+\DoxyCodeLine{127     \textcolor{keywordflow}{return} Factory::template create<sinks::daily\_file\_sink\_mt>(logger\_name, filename, hour, minute, truncate);}
+\DoxyCodeLine{128 \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{131 \textcolor{keyword}{inline} std::shared\_ptr<logger> daily\_logger\_st(}
+\DoxyCodeLine{132     \textcolor{keyword}{const} std::string \&logger\_name, \textcolor{keyword}{const} filename\_t \&filename, \textcolor{keywordtype}{int} hour = 0, \textcolor{keywordtype}{int} minute = 0, \textcolor{keywordtype}{bool} truncate = \textcolor{keyword}{false})}
+\DoxyCodeLine{133 \{}
+\DoxyCodeLine{134     \textcolor{keywordflow}{return} Factory::template create<sinks::daily\_file\_sink\_st>(logger\_name, filename, hour, minute, truncate);}
+\DoxyCodeLine{135 \}}
+\DoxyCodeLine{136 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

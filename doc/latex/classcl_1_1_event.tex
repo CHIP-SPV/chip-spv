@@ -1,0 +1,190 @@
+\hypertarget{classcl_1_1_event}{}\doxysection{cl\+::Event Class Reference}
+\label{classcl_1_1_event}\index{cl::Event@{cl::Event}}
+
+
+Class interface for cl\+\_\+event.  
+
+
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classcl_1_1_event}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_event_a90e01689f7b394fc003d66c48a7f6f95}\label{classcl_1_1_event_a90e01689f7b394fc003d66c48a7f6f95}} 
+{\bfseries Event} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS \mbox{\hyperlink{classcl_1_1_event_ae0f6ce1b52cb9832128fd3e6c1ec9547}{Event}} (const cl\+\_\+event \&event)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+event -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_event}{Event}} \& \mbox{\hyperlink{classcl_1_1_event_abb50980a18eae852375f7d328d46d3cd}{operator=}} (const cl\+\_\+event \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment operator from cl\+\_\+event -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a4ad1d3040fcb24188f1ac2cd73591252}\label{classcl_1_1_event_a4ad1d3040fcb24188f1ac2cd73591252}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+event\+\_\+info name, T $\ast$param) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Info(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a78c94797afab6aa2f21bf3c2a476804d}\label{classcl_1_1_event_a78c94797afab6aa2f21bf3c2a476804d}} 
+{\footnotesize template$<$cl\+\_\+int name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+event\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Info() that returns by value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a3f5ef317602809c4a99d6f244f758b5f}\label{classcl_1_1_event_a3f5ef317602809c4a99d6f244f758b5f}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Profiling\+Info} (cl\+\_\+profiling\+\_\+info name, T $\ast$param) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Profiling\+Info(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a8eacc834b594c290ed019b32bdd73938}\label{classcl_1_1_event_a8eacc834b594c290ed019b32bdd73938}} 
+{\footnotesize template$<$cl\+\_\+int name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+profiling\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Profiling\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Profiling\+Info() that returns by value. \end{DoxyCompactList}\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_event_a51f83064c2024df649667071e81fb847}{wait}} () const
+\begin{DoxyCompactList}\small\item\em Blocks the calling thread until this event completes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a90e01689f7b394fc003d66c48a7f6f95}\label{classcl_1_1_event_a90e01689f7b394fc003d66c48a7f6f95}} 
+{\bfseries Event} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_event_a3b035b8ff20d92d0b42f2f0dc8657621}{Event}} (const cl\+\_\+event \&event, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+event -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_event}{Event}} \& \mbox{\hyperlink{classcl_1_1_event_abb50980a18eae852375f7d328d46d3cd}{operator=}} (const cl\+\_\+event \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment operator from cl\+\_\+event -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a4ad1d3040fcb24188f1ac2cd73591252}\label{classcl_1_1_event_a4ad1d3040fcb24188f1ac2cd73591252}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+event\+\_\+info name, T $\ast$param) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Info(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a78c94797afab6aa2f21bf3c2a476804d}\label{classcl_1_1_event_a78c94797afab6aa2f21bf3c2a476804d}} 
+{\footnotesize template$<$cl\+\_\+event\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+event\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Info() that returns by value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a3f5ef317602809c4a99d6f244f758b5f}\label{classcl_1_1_event_a3f5ef317602809c4a99d6f244f758b5f}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Profiling\+Info} (cl\+\_\+profiling\+\_\+info name, T $\ast$param) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Profiling\+Info(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_event_a8eacc834b594c290ed019b32bdd73938}\label{classcl_1_1_event_a8eacc834b594c290ed019b32bdd73938}} 
+{\footnotesize template$<$cl\+\_\+profiling\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+profiling\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Profiling\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\begin{DoxyCompactList}\small\item\em Wrapper for cl\+Get\+Event\+Profiling\+Info() that returns by value. \end{DoxyCompactList}\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_event_a51f83064c2024df649667071e81fb847}{wait}} () const
+\begin{DoxyCompactList}\small\item\em Blocks the calling thread until this event completes. \end{DoxyCompactList}\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_event_a4730c3b113e65efcf88aea0c9da13f52}{set\+Callback}} (cl\+\_\+int type, void(CL\+\_\+\+CALLBACK $\ast$pfn\+\_\+notify)(cl\+\_\+event, cl\+\_\+int, void $\ast$), void $\ast$user\+\_\+data=NULL)
+\begin{DoxyCompactList}\small\item\em Registers a user callback function for a specific command execution status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static cl\+\_\+int \mbox{\hyperlink{classcl_1_1_event_ac28c9c7bec902c477913945f7dcecf42}{wait\+For\+Events}} (const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ \&events)
+\begin{DoxyCompactList}\small\item\em Blocks the calling thread until every event specified is complete. \end{DoxyCompactList}\item 
+static cl\+\_\+int \mbox{\hyperlink{classcl_1_1_event_ae84b90e930f72c1019435dd7cefa2fbd}{wait\+For\+Events}} (const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ \&events)
+\begin{DoxyCompactList}\small\item\em Blocks the calling thread until every event specified is complete. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class interface for cl\+\_\+event. 
+
+\begin{DoxyNote}{Note}
+Copies of these objects are shallow, meaning that the copy will refer to the same underlying cl\+\_\+event as the original. For details, see cl\+Retain\+Event() and cl\+Release\+Event().
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+cl\+\_\+event 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_event_ae0f6ce1b52cb9832128fd3e6c1ec9547}\label{classcl_1_1_event_ae0f6ce1b52cb9832128fd3e6c1ec9547}} 
+\index{cl::Event@{cl::Event}!Event@{Event}}
+\index{Event@{Event}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS cl\+::\+Event\+::\+Event (\begin{DoxyParamCaption}\item[{const cl\+\_\+event \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor from cl\+\_\+event -\/ takes ownership. 
+
+This effectively transfers ownership of a refcount on the cl\+\_\+event into the new \mbox{\hyperlink{classcl_1_1_event}{Event}} object. \mbox{\Hypertarget{classcl_1_1_event_a3b035b8ff20d92d0b42f2f0dc8657621}\label{classcl_1_1_event_a3b035b8ff20d92d0b42f2f0dc8657621}} 
+\index{cl::Event@{cl::Event}!Event@{Event}}
+\index{Event@{Event}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cl\+::\+Event\+::\+Event (\begin{DoxyParamCaption}\item[{const cl\+\_\+event \&}]{event,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+event -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions. This effectively transfers ownership of a refcount on the cl\+\_\+event into the new \mbox{\hyperlink{classcl_1_1_event}{Event}} object. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_event_abb50980a18eae852375f7d328d46d3cd}\label{classcl_1_1_event_abb50980a18eae852375f7d328d46d3cd}} 
+\index{cl::Event@{cl::Event}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_event}{Event}} \& cl\+::\+Event\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+event \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment operator from cl\+\_\+event -\/ takes ownership. 
+
+This effectively transfers ownership of a refcount on the rhs and calls cl\+Release\+Event() on the value previously held by this instance. \mbox{\Hypertarget{classcl_1_1_event_abb50980a18eae852375f7d328d46d3cd}\label{classcl_1_1_event_abb50980a18eae852375f7d328d46d3cd}} 
+\index{cl::Event@{cl::Event}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_event}{Event}} \& cl\+::\+Event\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+event \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment operator from cl\+\_\+event -\/ takes ownership. 
+
+This effectively transfers ownership of a refcount on the rhs and calls cl\+Release\+Event() on the value previously held by this instance. \mbox{\Hypertarget{classcl_1_1_event_a4730c3b113e65efcf88aea0c9da13f52}\label{classcl_1_1_event_a4730c3b113e65efcf88aea0c9da13f52}} 
+\index{cl::Event@{cl::Event}!setCallback@{setCallback}}
+\index{setCallback@{setCallback}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{setCallback()}{setCallback()}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Event\+::set\+Callback (\begin{DoxyParamCaption}\item[{cl\+\_\+int}]{type,  }\item[{void(CL\+\_\+\+CALLBACK $\ast$pfn\+\_\+notify)(cl\+\_\+event, cl\+\_\+int, void $\ast$)}]{,  }\item[{void $\ast$}]{user\+\_\+data = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Registers a user callback function for a specific command execution status. 
+
+Wraps cl\+Set\+Event\+Callback(). \mbox{\Hypertarget{classcl_1_1_event_a51f83064c2024df649667071e81fb847}\label{classcl_1_1_event_a51f83064c2024df649667071e81fb847}} 
+\index{cl::Event@{cl::Event}!wait@{wait}}
+\index{wait@{wait}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{wait()}{wait()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Event\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Blocks the calling thread until this event completes. 
+
+Wraps cl\+Wait\+For\+Events(). \mbox{\Hypertarget{classcl_1_1_event_a51f83064c2024df649667071e81fb847}\label{classcl_1_1_event_a51f83064c2024df649667071e81fb847}} 
+\index{cl::Event@{cl::Event}!wait@{wait}}
+\index{wait@{wait}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{wait()}{wait()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Event\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Blocks the calling thread until this event completes. 
+
+Wraps cl\+Wait\+For\+Events(). \mbox{\Hypertarget{classcl_1_1_event_ae84b90e930f72c1019435dd7cefa2fbd}\label{classcl_1_1_event_ae84b90e930f72c1019435dd7cefa2fbd}} 
+\index{cl::Event@{cl::Event}!waitForEvents@{waitForEvents}}
+\index{waitForEvents@{waitForEvents}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{waitForEvents()}{waitForEvents()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static cl\+\_\+int cl\+::\+Event\+::wait\+For\+Events (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ \&}]{events }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Blocks the calling thread until every event specified is complete. 
+
+Wraps cl\+Wait\+For\+Events(). \mbox{\Hypertarget{classcl_1_1_event_ac28c9c7bec902c477913945f7dcecf42}\label{classcl_1_1_event_ac28c9c7bec902c477913945f7dcecf42}} 
+\index{cl::Event@{cl::Event}!waitForEvents@{waitForEvents}}
+\index{waitForEvents@{waitForEvents}!cl::Event@{cl::Event}}
+\doxysubsubsection{\texorpdfstring{waitForEvents()}{waitForEvents()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static cl\+\_\+int cl\+::\+Event\+::wait\+For\+Events (\begin{DoxyParamCaption}\item[{const VECTOR\+\_\+\+CLASS$<$ \mbox{\hyperlink{classcl_1_1_event}{Event}} $>$ \&}]{events }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Blocks the calling thread until every event specified is complete. 
+
+Wraps cl\+Wait\+For\+Events(). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

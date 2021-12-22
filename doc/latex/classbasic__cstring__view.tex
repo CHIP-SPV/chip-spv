@@ -1,0 +1,62 @@
+\hypertarget{classbasic__cstring__view}{}\doxysection{basic\+\_\+cstring\+\_\+view\texorpdfstring{$<$}{<} Char \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classbasic__cstring__view}\index{basic\_cstring\_view$<$ Char $>$@{basic\_cstring\_view$<$ Char $>$}}
+
+
+{\ttfamily \#include $<$posix.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbasic__cstring__view_ab464b2378652892cec4716d3e3d475c7}{basic\+\_\+cstring\+\_\+view}} (const Char $\ast$s)
+\item 
+\mbox{\hyperlink{classbasic__cstring__view_a10b92cc0e3e67789601984099b9ed339}{basic\+\_\+cstring\+\_\+view}} (const std\+::basic\+\_\+string$<$ Char $>$ \&s)
+\item 
+const Char $\ast$ \mbox{\hyperlink{classbasic__cstring__view_ae2cd254a4686dd81753751193af179a8}{c\+\_\+str}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Char$>$\newline
+class basic\+\_\+cstring\+\_\+view$<$ Char $>$}
+\textbackslash{}rst \mbox{\hyperlink{class_a}{A}} reference to a null-\/terminated string. It can be constructed from a C string or {\ttfamily std\+::string}.
+
+You can use one of the following typedefs for common character types\+:
+
++-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+ $\vert$ Type $\vert$ Definition $\vert$ +===============+=============================+ $\vert$ cstring\+\_\+view $\vert$ basic\+\_\+cstring\+\_\+view$<$char$>$ $\vert$ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+ $\vert$ wcstring\+\_\+view $\vert$ basic\+\_\+cstring\+\_\+view$<$wchar\+\_\+t$>$ $\vert$ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+
+
+This class is most useful as a parameter type to allow passing different types of strings to a function, for example\+:\+:
+
+template \texorpdfstring{$<$}{<}typename... Args\texorpdfstring{$>$}{>} std\+::string format(cstring\+\_\+view format\+\_\+str, const Args \& ... args);
+
+format(\char`\"{}\{\}\char`\"{}, 42); format(std\+::string(\char`\"{}\{\}\char`\"{}), 42); \textbackslash{}endrst 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbasic__cstring__view_ab464b2378652892cec4716d3e3d475c7}\label{classbasic__cstring__view_ab464b2378652892cec4716d3e3d475c7}} 
+\index{basic\_cstring\_view$<$ Char $>$@{basic\_cstring\_view$<$ Char $>$}!basic\_cstring\_view@{basic\_cstring\_view}}
+\index{basic\_cstring\_view@{basic\_cstring\_view}!basic\_cstring\_view$<$ Char $>$@{basic\_cstring\_view$<$ Char $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_cstring\_view()}{basic\_cstring\_view()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Char $>$ \\
+\mbox{\hyperlink{classbasic__cstring__view}{basic\+\_\+cstring\+\_\+view}}$<$ Char $>$\+::\mbox{\hyperlink{classbasic__cstring__view}{basic\+\_\+cstring\+\_\+view}} (\begin{DoxyParamCaption}\item[{const Char $\ast$}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructs a string reference object from a C string. \mbox{\Hypertarget{classbasic__cstring__view_a10b92cc0e3e67789601984099b9ed339}\label{classbasic__cstring__view_a10b92cc0e3e67789601984099b9ed339}} 
+\index{basic\_cstring\_view$<$ Char $>$@{basic\_cstring\_view$<$ Char $>$}!basic\_cstring\_view@{basic\_cstring\_view}}
+\index{basic\_cstring\_view@{basic\_cstring\_view}!basic\_cstring\_view$<$ Char $>$@{basic\_cstring\_view$<$ Char $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_cstring\_view()}{basic\_cstring\_view()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Char $>$ \\
+\mbox{\hyperlink{classbasic__cstring__view}{basic\+\_\+cstring\+\_\+view}}$<$ Char $>$\+::\mbox{\hyperlink{classbasic__cstring__view}{basic\+\_\+cstring\+\_\+view}} (\begin{DoxyParamCaption}\item[{const std\+::basic\+\_\+string$<$ Char $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst Constructs a string reference from an {\ttfamily std\+::string} object. \textbackslash{}endrst 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbasic__cstring__view_ae2cd254a4686dd81753751193af179a8}\label{classbasic__cstring__view_ae2cd254a4686dd81753751193af179a8}} 
+\index{basic\_cstring\_view$<$ Char $>$@{basic\_cstring\_view$<$ Char $>$}!c\_str@{c\_str}}
+\index{c\_str@{c\_str}!basic\_cstring\_view$<$ Char $>$@{basic\_cstring\_view$<$ Char $>$}}
+\doxysubsubsection{\texorpdfstring{c\_str()}{c\_str()}}
+{\footnotesize\ttfamily template$<$typename Char $>$ \\
+const Char $\ast$ \mbox{\hyperlink{classbasic__cstring__view}{basic\+\_\+cstring\+\_\+view}}$<$ Char $>$\+::c\+\_\+str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the pointer to a C string. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/posix.\+h\end{DoxyCompactItemize}

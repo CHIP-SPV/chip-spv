@@ -1,0 +1,77 @@
+\hypertarget{periodic__worker_8h_source}{}\doxysection{periodic\+\_\+worker.\+h}
+\label{periodic__worker_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/periodic\_worker.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/periodic\_worker.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{// Copyright(c) 2018 Gabi Melman.}}
+\DoxyCodeLine{4 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{comment}{// periodic worker thread -\/ periodically executes the given callback function.}}
+\DoxyCodeLine{10 \textcolor{comment}{//}}
+\DoxyCodeLine{11 \textcolor{comment}{// RAII over the owned thread:}}
+\DoxyCodeLine{12 \textcolor{comment}{//    creates the thread on construction.}}
+\DoxyCodeLine{13 \textcolor{comment}{//    stops and joins the thread on destruction (if the thread is executing a callback, wait for it to finish first).}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <condition\_variable>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{20 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{21 \textcolor{keyword}{namespace }details \{}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1periodic__worker}{periodic\_worker}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26     \mbox{\hyperlink{classspdlog_1_1details_1_1periodic__worker}{periodic\_worker}}(\textcolor{keyword}{const} std::function<\textcolor{keywordtype}{void}()> \&callback\_fun, std::chrono::seconds interval)}
+\DoxyCodeLine{27     \{}
+\DoxyCodeLine{28         active\_ = (interval > std::chrono::seconds::zero());}
+\DoxyCodeLine{29         \textcolor{keywordflow}{if} (!active\_)}
+\DoxyCodeLine{30         \{}
+\DoxyCodeLine{31             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{32         \}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         worker\_thread\_ = std::thread([\textcolor{keyword}{this}, callback\_fun, interval]() \{}
+\DoxyCodeLine{35             \textcolor{keywordflow}{for} (;;)}
+\DoxyCodeLine{36             \{}
+\DoxyCodeLine{37                 std::unique\_lock<std::mutex> lock(this-\/>mutex\_);}
+\DoxyCodeLine{38                 \textcolor{keywordflow}{if} (this-\/>cv\_.wait\_for(lock, interval, [\textcolor{keyword}{this}] \{ return !this-\/>active\_; \}))}
+\DoxyCodeLine{39                 \{}
+\DoxyCodeLine{40                     \textcolor{keywordflow}{return}; \textcolor{comment}{// active\_ == false, so exit this thread}}
+\DoxyCodeLine{41                 \}}
+\DoxyCodeLine{42                 callback\_fun();}
+\DoxyCodeLine{43             \}}
+\DoxyCodeLine{44         \});}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \mbox{\hyperlink{classspdlog_1_1details_1_1periodic__worker}{periodic\_worker}}(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1details_1_1periodic__worker}{periodic\_worker}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{48     \mbox{\hyperlink{classspdlog_1_1details_1_1periodic__worker}{periodic\_worker}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1details_1_1periodic__worker}{periodic\_worker}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{comment}{// stop the worker thread and join it}}
+\DoxyCodeLine{51     \mbox{\hyperlink{classspdlog_1_1details_1_1periodic__worker}{\string~periodic\_worker}}()}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         \textcolor{keywordflow}{if} (worker\_thread\_.joinable())}
+\DoxyCodeLine{54         \{}
+\DoxyCodeLine{55             \{}
+\DoxyCodeLine{56                 std::lock\_guard<std::mutex> lock(mutex\_);}
+\DoxyCodeLine{57                 active\_ = \textcolor{keyword}{false};}
+\DoxyCodeLine{58             \}}
+\DoxyCodeLine{59             cv\_.notify\_one();}
+\DoxyCodeLine{60             worker\_thread\_.join();}
+\DoxyCodeLine{61         \}}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{private}:}
+\DoxyCodeLine{65     \textcolor{keywordtype}{bool} active\_;}
+\DoxyCodeLine{66     std::thread worker\_thread\_;}
+\DoxyCodeLine{67     std::mutex mutex\_;}
+\DoxyCodeLine{68     std::condition\_variable cv\_;}
+\DoxyCodeLine{69 \};}
+\DoxyCodeLine{70 \} \textcolor{comment}{// namespace details}}
+\DoxyCodeLine{71 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

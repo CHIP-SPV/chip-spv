@@ -1,0 +1,82 @@
+\hypertarget{classspdlog_1_1details_1_1registry}{}\doxysection{spdlog\+::details\+::registry Class Reference}
+\label{classspdlog_1_1details_1_1registry}\index{spdlog::details::registry@{spdlog::details::registry}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_ab5c1a2f7b8e2e9eec4e0fa75d9167f3b}\label{classspdlog_1_1details_1_1registry_ab5c1a2f7b8e2e9eec4e0fa75d9167f3b}} 
+{\bfseries registry} (const \mbox{\hyperlink{classspdlog_1_1details_1_1registry}{registry}} \&)=delete
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_aa310dd416185100392d00af8fb67cafb}\label{classspdlog_1_1details_1_1registry_aa310dd416185100392d00af8fb67cafb}} 
+\mbox{\hyperlink{classspdlog_1_1details_1_1registry}{registry}} \& {\bfseries operator=} (const \mbox{\hyperlink{classspdlog_1_1details_1_1registry}{registry}} \&)=delete
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_ab77fb7513b2e3e6442a83f037543e391}\label{classspdlog_1_1details_1_1registry_ab77fb7513b2e3e6442a83f037543e391}} 
+void {\bfseries register\+\_\+logger} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1logger}{logger}} $>$ new\+\_\+logger)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a7e015c41e9c32c9f1e8e7f9adc578cee}\label{classspdlog_1_1details_1_1registry_a7e015c41e9c32c9f1e8e7f9adc578cee}} 
+void {\bfseries initialize\+\_\+logger} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1logger}{logger}} $>$ new\+\_\+logger)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_abb2d888efce9d02a8161894e623b34eb}\label{classspdlog_1_1details_1_1registry_abb2d888efce9d02a8161894e623b34eb}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1logger}{logger}} $>$ {\bfseries get} (const std\+::string \&logger\+\_\+name)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_aaf8c926e1b4e1596a4dad91c079e40bd}\label{classspdlog_1_1details_1_1registry_aaf8c926e1b4e1596a4dad91c079e40bd}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1logger}{logger}} $>$ {\bfseries default\+\_\+logger} ()
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a701421f003f421c17a63a3ffe3f2a624}\label{classspdlog_1_1details_1_1registry_a701421f003f421c17a63a3ffe3f2a624}} 
+\mbox{\hyperlink{classspdlog_1_1logger}{logger}} $\ast$ {\bfseries get\+\_\+default\+\_\+raw} ()
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_ae2a45628046a1d0cd3f8de81a5556acb}\label{classspdlog_1_1details_1_1registry_ae2a45628046a1d0cd3f8de81a5556acb}} 
+void {\bfseries set\+\_\+default\+\_\+logger} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1logger}{logger}} $>$ new\+\_\+default\+\_\+logger)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_aa5503db04a70a06f97e7c1218aa8cbe2}\label{classspdlog_1_1details_1_1registry_aa5503db04a70a06f97e7c1218aa8cbe2}} 
+void {\bfseries set\+\_\+tp} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1details_1_1thread__pool}{thread\+\_\+pool}} $>$ tp)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a213dde317aac58a3592eeb50d7c0527d}\label{classspdlog_1_1details_1_1registry_a213dde317aac58a3592eeb50d7c0527d}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1details_1_1thread__pool}{thread\+\_\+pool}} $>$ {\bfseries get\+\_\+tp} ()
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a8f8dcb7f6b7987716cfbcb92bbe96517}\label{classspdlog_1_1details_1_1registry_a8f8dcb7f6b7987716cfbcb92bbe96517}} 
+void {\bfseries set\+\_\+formatter} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1formatter}{formatter}} $>$ \mbox{\hyperlink{classspdlog_1_1formatter}{formatter}})
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a4b8494e781ed3151586b307cca63edb7}\label{classspdlog_1_1details_1_1registry_a4b8494e781ed3151586b307cca63edb7}} 
+void {\bfseries set\+\_\+level} (level\+::level\+\_\+enum log\+\_\+level)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a34841160632afca0f2063f1d55629d73}\label{classspdlog_1_1details_1_1registry_a34841160632afca0f2063f1d55629d73}} 
+void {\bfseries flush\+\_\+on} (level\+::level\+\_\+enum log\+\_\+level)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a78eb75a31640c0bb204d7f2123ba825c}\label{classspdlog_1_1details_1_1registry_a78eb75a31640c0bb204d7f2123ba825c}} 
+void {\bfseries flush\+\_\+every} (std\+::chrono\+::seconds interval)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a47543b9b7ebe0dc3664cfd5f3e385905}\label{classspdlog_1_1details_1_1registry_a47543b9b7ebe0dc3664cfd5f3e385905}} 
+void {\bfseries set\+\_\+error\+\_\+handler} (log\+\_\+err\+\_\+handler handler)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a781454ea62603cfaebddf14ec2ec9985}\label{classspdlog_1_1details_1_1registry_a781454ea62603cfaebddf14ec2ec9985}} 
+void {\bfseries apply\+\_\+all} (const std\+::function$<$ void(const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1logger}{logger}} $>$)$>$ \&fun)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a3abe5826eebb056d51dd0dd75beed42d}\label{classspdlog_1_1details_1_1registry_a3abe5826eebb056d51dd0dd75beed42d}} 
+void {\bfseries flush\+\_\+all} ()
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a21f513aa5a7da6a21fe35a5077b2db74}\label{classspdlog_1_1details_1_1registry_a21f513aa5a7da6a21fe35a5077b2db74}} 
+void {\bfseries drop} (const std\+::string \&logger\+\_\+name)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a127ccc3786f6ddef57f16d354ba4db91}\label{classspdlog_1_1details_1_1registry_a127ccc3786f6ddef57f16d354ba4db91}} 
+void {\bfseries drop\+\_\+all} ()
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_ac93f888f316b0488414771ad6533b6a9}\label{classspdlog_1_1details_1_1registry_ac93f888f316b0488414771ad6533b6a9}} 
+void {\bfseries shutdown} ()
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_ab93b1eb13c7ce5119ba8b1e508a366ae}\label{classspdlog_1_1details_1_1registry_ab93b1eb13c7ce5119ba8b1e508a366ae}} 
+std\+::recursive\+\_\+mutex \& {\bfseries tp\+\_\+mutex} ()
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a0cfc3780c18f5331ad31ea1d40248952}\label{classspdlog_1_1details_1_1registry_a0cfc3780c18f5331ad31ea1d40248952}} 
+void {\bfseries set\+\_\+automatic\+\_\+registration} (bool automatic\+\_\+regsistration)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classspdlog_1_1details_1_1registry_a77b56e8250ec85401fd07c6c31edb914}\label{classspdlog_1_1details_1_1registry_a77b56e8250ec85401fd07c6c31edb914}} 
+static \mbox{\hyperlink{classspdlog_1_1details_1_1registry}{registry}} \& {\bfseries instance} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/details/registry.\+h\end{DoxyCompactItemize}

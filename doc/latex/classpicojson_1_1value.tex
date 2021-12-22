@@ -1,0 +1,111 @@
+\hypertarget{classpicojson_1_1value}{}\doxysection{picojson\+::value Class Reference}
+\label{classpicojson_1_1value}\index{picojson::value@{picojson::value}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{unionpicojson_1_1value_1_1__storage}{\+\_\+storage}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_adeff4fdf7ee5675eeb7686bb89233c43}\label{classpicojson_1_1value_adeff4fdf7ee5675eeb7686bb89233c43}} 
+typedef std\+::vector$<$ \mbox{\hyperlink{classpicojson_1_1value}{value}} $>$ {\bfseries array}
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a7d7da11d54d7b983a902d28367bda9c1}\label{classpicojson_1_1value_a7d7da11d54d7b983a902d28367bda9c1}} 
+typedef std\+::map$<$ std\+::string, \mbox{\hyperlink{classpicojson_1_1value}{value}} $>$ {\bfseries object}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_acd1d55ac7333a3e482e469b3d99fdf6e}\label{classpicojson_1_1value_acd1d55ac7333a3e482e469b3d99fdf6e}} 
+{\bfseries value} (int type, bool)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a43d8a33c3dbea0c5853bef4577a0d10e}\label{classpicojson_1_1value_a43d8a33c3dbea0c5853bef4577a0d10e}} 
+{\bfseries value} (bool b)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_af19f6d5889d90e77e76af05aacaba321}\label{classpicojson_1_1value_af19f6d5889d90e77e76af05aacaba321}} 
+{\bfseries value} (double n)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_aa4841f2dd8deeaffca7a225075b88da9}\label{classpicojson_1_1value_aa4841f2dd8deeaffca7a225075b88da9}} 
+{\bfseries value} (const std\+::string \&s)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a729e8f01d9bb4686daac82d0d3295afe}\label{classpicojson_1_1value_a729e8f01d9bb4686daac82d0d3295afe}} 
+{\bfseries value} (const array \&a)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a2b6beb88edf85e213893b805b354c87e}\label{classpicojson_1_1value_a2b6beb88edf85e213893b805b354c87e}} 
+{\bfseries value} (const object \&o)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a94f324d88fd16c1338fc9a228ec3dc3c}\label{classpicojson_1_1value_a94f324d88fd16c1338fc9a228ec3dc3c}} 
+{\bfseries value} (const char $\ast$s)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_ae56da06e2b438f4425300a218150398d}\label{classpicojson_1_1value_ae56da06e2b438f4425300a218150398d}} 
+{\bfseries value} (const char $\ast$s, size\+\_\+t len)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a89a827eee72398d3678509cdd65c777d}\label{classpicojson_1_1value_a89a827eee72398d3678509cdd65c777d}} 
+{\bfseries value} (const \mbox{\hyperlink{classpicojson_1_1value}{value}} \&x)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_acc5e4506e6a793af5132983573f9da6a}\label{classpicojson_1_1value_acc5e4506e6a793af5132983573f9da6a}} 
+\mbox{\hyperlink{classpicojson_1_1value}{value}} \& {\bfseries operator=} (const \mbox{\hyperlink{classpicojson_1_1value}{value}} \&x)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a6c948adb3a5c55091bfd16a84437199c}\label{classpicojson_1_1value_a6c948adb3a5c55091bfd16a84437199c}} 
+void {\bfseries swap} (\mbox{\hyperlink{classpicojson_1_1value}{value}} \&x) PICOJSON\+\_\+\+NOEXCEPT
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_afd038ffc8a714c5d2f4b59adaaaca4ce}\label{classpicojson_1_1value_afd038ffc8a714c5d2f4b59adaaaca4ce}} 
+{\footnotesize template$<$typename T $>$ }\\bool {\bfseries is} () const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a13bd312245da5d28a8ae13b3df3d7301}\label{classpicojson_1_1value_a13bd312245da5d28a8ae13b3df3d7301}} 
+{\footnotesize template$<$typename T $>$ }\\const T \& {\bfseries get} () const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_adc48acc9aac7200d2cb448df9a719b20}\label{classpicojson_1_1value_adc48acc9aac7200d2cb448df9a719b20}} 
+{\footnotesize template$<$typename T $>$ }\\T \& {\bfseries get} ()
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a5349fff183e52146f2835d7fa0a10358}\label{classpicojson_1_1value_a5349fff183e52146f2835d7fa0a10358}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries set} (const T \&)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a389873791af4898a52edc12b967a543f}\label{classpicojson_1_1value_a389873791af4898a52edc12b967a543f}} 
+bool {\bfseries evaluate\+\_\+as\+\_\+boolean} () const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_acc8ae9933e893337b3b3613827939942}\label{classpicojson_1_1value_acc8ae9933e893337b3b3613827939942}} 
+const \mbox{\hyperlink{classpicojson_1_1value}{value}} \& {\bfseries get} (const size\+\_\+t idx) const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_aafe8fe780ae3b149bb7bd353e39d6f29}\label{classpicojson_1_1value_aafe8fe780ae3b149bb7bd353e39d6f29}} 
+const \mbox{\hyperlink{classpicojson_1_1value}{value}} \& {\bfseries get} (const std\+::string \&key) const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a9e1fe86e19d297846f9ea11ec097bd96}\label{classpicojson_1_1value_a9e1fe86e19d297846f9ea11ec097bd96}} 
+\mbox{\hyperlink{classpicojson_1_1value}{value}} \& {\bfseries get} (const size\+\_\+t idx)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a72f3216a2536e4e088e70b0f1617fc11}\label{classpicojson_1_1value_a72f3216a2536e4e088e70b0f1617fc11}} 
+\mbox{\hyperlink{classpicojson_1_1value}{value}} \& {\bfseries get} (const std\+::string \&key)
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_ab158ecb69f714bbc2741fd5f99ba9b25}\label{classpicojson_1_1value_ab158ecb69f714bbc2741fd5f99ba9b25}} 
+bool {\bfseries contains} (const size\+\_\+t idx) const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a67fed7e1effed5c14fdb7f912f933842}\label{classpicojson_1_1value_a67fed7e1effed5c14fdb7f912f933842}} 
+bool {\bfseries contains} (const std\+::string \&key) const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a005099b2865752cf31b7ced33bd85f59}\label{classpicojson_1_1value_a005099b2865752cf31b7ced33bd85f59}} 
+std\+::string {\bfseries to\+\_\+str} () const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a23664084ed4a8ecbfda901484de34bbc}\label{classpicojson_1_1value_a23664084ed4a8ecbfda901484de34bbc}} 
+{\footnotesize template$<$typename Iter $>$ }\\void {\bfseries serialize} (Iter os, bool prettify=false) const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_ad5fa91c040826e85855678db9258238d}\label{classpicojson_1_1value_ad5fa91c040826e85855678db9258238d}} 
+std\+::string {\bfseries serialize} (bool prettify=false) const
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_a0b3fb432ea49151f8787026e8f8c0801}\label{classpicojson_1_1value_a0b3fb432ea49151f8787026e8f8c0801}} 
+template$<$$>$ bool {\bfseries is} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_af77ae4525a20f6fce6ea9ff1c4709312}\label{classpicojson_1_1value_af77ae4525a20f6fce6ea9ff1c4709312}} 
+int {\bfseries type\+\_\+}
+\item 
+\mbox{\Hypertarget{classpicojson_1_1value_aa7948fe10fcbc19ab9c8dee5e5099f77}\label{classpicojson_1_1value_aa7948fe10fcbc19ab9c8dee5e5099f77}} 
+\mbox{\hyperlink{unionpicojson_1_1value_1_1__storage}{\+\_\+storage}} {\bfseries u\+\_\+}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/catch/external/picojson/picojson.\+h\end{DoxyCompactItemize}

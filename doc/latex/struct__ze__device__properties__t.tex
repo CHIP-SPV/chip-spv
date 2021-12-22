@@ -1,0 +1,108 @@
+\hypertarget{struct__ze__device__properties__t}{}\doxysection{\+\_\+ze\+\_\+device\+\_\+properties\+\_\+t Struct Reference}
+\label{struct__ze__device__properties__t}\index{\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}}
+
+
+Device properties queried using \+::ze\+Device\+Get\+Properties.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a8132066c931d2494a2467fcea29121c1}\label{struct__ze__device__properties__t_a8132066c931d2494a2467fcea29121c1}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a038afb249e8f15ff066da885e7681c99}\label{struct__ze__device__properties__t_a038afb249e8f15ff066da885e7681c99}} 
+void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in,out\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_aa9ef5cd76107030e6e077208a601e67d}\label{struct__ze__device__properties__t_aa9ef5cd76107030e6e077208a601e67d}} 
+ze\+\_\+device\+\_\+type\+\_\+t {\bfseries type}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} generic device type \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_aee8e6083479e753a914ee756271c003b}\label{struct__ze__device__properties__t_aee8e6083479e753a914ee756271c003b}} 
+uint32\+\_\+t {\bfseries vendor\+Id}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} vendor id from PCI configuration \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a6e63e58f2de271edf52cc73de76fd836}\label{struct__ze__device__properties__t_a6e63e58f2de271edf52cc73de76fd836}} 
+uint32\+\_\+t {\bfseries device\+Id}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} device id from PCI configuration \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a97160bc6f47000396d0795323beb6e71}\label{struct__ze__device__properties__t_a97160bc6f47000396d0795323beb6e71}} 
+ze\+\_\+device\+\_\+property\+\_\+flags\+\_\+t {\bfseries flags}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} 0 (none) or a valid combination of \+::ze\+\_\+device\+\_\+property\+\_\+flag\+\_\+t \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{struct__ze__device__properties__t_a203af92f199ed34f359984a67154aa0d}{subdevice\+Id}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a1a4ba59bb1eeada4900ca939549f815a}\label{struct__ze__device__properties__t_a1a4ba59bb1eeada4900ca939549f815a}} 
+uint32\+\_\+t {\bfseries core\+Clock\+Rate}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Clock rate for device core. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a38f7003e44a51763d937df48bffa19f2}\label{struct__ze__device__properties__t_a38f7003e44a51763d937df48bffa19f2}} 
+uint64\+\_\+t {\bfseries max\+Mem\+Alloc\+Size}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum memory allocation size. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a95518602f9654d1b931c4f16008dce6a}\label{struct__ze__device__properties__t_a95518602f9654d1b931c4f16008dce6a}} 
+uint32\+\_\+t {\bfseries max\+Hardware\+Contexts}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum number of logical hardware contexts. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{struct__ze__device__properties__t_ae5a0438071df9df12c417bb0592ea1a7}{max\+Command\+Queue\+Priority}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a3383812f1fa260f76763047d96e6e125}\label{struct__ze__device__properties__t_a3383812f1fa260f76763047d96e6e125}} 
+uint32\+\_\+t {\bfseries num\+Threads\+Per\+EU}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Number of threads per EU. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_ae50207c601c32c25a32166e3ed2dac1f}\label{struct__ze__device__properties__t_ae50207c601c32c25a32166e3ed2dac1f}} 
+uint32\+\_\+t {\bfseries physical\+EUSimd\+Width}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} The physical EU simd width. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a218020ebd027653d6b8f9e08ecebcaf1}\label{struct__ze__device__properties__t_a218020ebd027653d6b8f9e08ecebcaf1}} 
+uint32\+\_\+t {\bfseries num\+EUs\+Per\+Subslice}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Number of EUs per sub-\/slice. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_aab33fd1b6dab7f48e21741e6d962921d}\label{struct__ze__device__properties__t_aab33fd1b6dab7f48e21741e6d962921d}} 
+uint32\+\_\+t {\bfseries num\+Subslices\+Per\+Slice}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Number of sub-\/slices per slice. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a02ef932ef2e20cd68301f49695fd8b10}\label{struct__ze__device__properties__t_a02ef932ef2e20cd68301f49695fd8b10}} 
+uint32\+\_\+t {\bfseries num\+Slices}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Number of slices. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{struct__ze__device__properties__t_abeb6bed613ba62a095da4346960f7943}{timer\+Resolution}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_ab72f9a5091fec87c0a3dd9ed737e4027}\label{struct__ze__device__properties__t_ab72f9a5091fec87c0a3dd9ed737e4027}} 
+uint32\+\_\+t {\bfseries timestamp\+Valid\+Bits}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Returns the number of valid bits in the timestamp value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a27de0dabe2b4b362b7532449506693b0}\label{struct__ze__device__properties__t_a27de0dabe2b4b362b7532449506693b0}} 
+uint32\+\_\+t {\bfseries kernel\+Timestamp\+Valid\+Bits}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Returns the number of valid bits in the kernel timestamp values \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__ze__device__uuid__t}{ze\+\_\+device\+\_\+uuid\+\_\+t}} \mbox{\hyperlink{struct__ze__device__properties__t_a90d281f2763fead699bd9ecfc98ed696}{uuid}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__properties__t_a909d7677153ebddaf2fc89e6d178074f}\label{struct__ze__device__properties__t_a909d7677153ebddaf2fc89e6d178074f}} 
+char {\bfseries name} \mbox{[}ZE\+\_\+\+MAX\+\_\+\+DEVICE\+\_\+\+NAME\mbox{]}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Device name \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Device properties queried using \+::ze\+Device\+Get\+Properties. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__device__properties__t_ae5a0438071df9df12c417bb0592ea1a7}\label{struct__ze__device__properties__t_ae5a0438071df9df12c417bb0592ea1a7}} 
+\index{\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}!maxCommandQueuePriority@{maxCommandQueuePriority}}
+\index{maxCommandQueuePriority@{maxCommandQueuePriority}!\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{maxCommandQueuePriority}{maxCommandQueuePriority}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+ze\+\_\+device\+\_\+properties\+\_\+t\+::max\+Command\+Queue\+Priority}
+
+\mbox{[}out\mbox{]} Maximum priority for command queues. Higher value is higher priority. \mbox{\Hypertarget{struct__ze__device__properties__t_a203af92f199ed34f359984a67154aa0d}\label{struct__ze__device__properties__t_a203af92f199ed34f359984a67154aa0d}} 
+\index{\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}!subdeviceId@{subdeviceId}}
+\index{subdeviceId@{subdeviceId}!\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{subdeviceId}{subdeviceId}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+ze\+\_\+device\+\_\+properties\+\_\+t\+::subdevice\+Id}
+
+\mbox{[}out\mbox{]} sub-\/device id. Only valid if \+::\+ZE\+\_\+\+DEVICE\+\_\+\+PROPERTY\+\_\+\+FLAG\+\_\+\+SUBDEVICE is set. \mbox{\Hypertarget{struct__ze__device__properties__t_abeb6bed613ba62a095da4346960f7943}\label{struct__ze__device__properties__t_abeb6bed613ba62a095da4346960f7943}} 
+\index{\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}!timerResolution@{timerResolution}}
+\index{timerResolution@{timerResolution}!\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{timerResolution}{timerResolution}}
+{\footnotesize\ttfamily uint64\+\_\+t \+\_\+ze\+\_\+device\+\_\+properties\+\_\+t\+::timer\+Resolution}
+
+\mbox{[}out\mbox{]} Returns the resolution of device timer used for profiling, timestamps, etc. When stype==\+::\+ZE\+\_\+\+STRUCTURE\+\_\+\+TYPE\+\_\+\+DEVICE\+\_\+\+PROPERTIES the units are in nanoseconds. When stype==\+::\+ZE\+\_\+\+STRUCTURE\+\_\+\+TYPE\+\_\+\+DEVICE\+\_\+\+PROPERTIES\+\_\+1\+\_\+2 units are in cycles/sec \mbox{\Hypertarget{struct__ze__device__properties__t_a90d281f2763fead699bd9ecfc98ed696}\label{struct__ze__device__properties__t_a90d281f2763fead699bd9ecfc98ed696}} 
+\index{\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}!uuid@{uuid}}
+\index{uuid@{uuid}!\_ze\_device\_properties\_t@{\_ze\_device\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{uuid}{uuid}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__ze__device__uuid__t}{ze\+\_\+device\+\_\+uuid\+\_\+t}} \+\_\+ze\+\_\+device\+\_\+properties\+\_\+t\+::uuid}
+
+\mbox{[}out\mbox{]} universal unique identifier. Note\+: Subdevices will have their own uuid. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

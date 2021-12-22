@@ -1,0 +1,61 @@
+\hypertarget{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4}{}\doxysection{cl\+::detail\+::Reference\+Handler\texorpdfstring{$<$}{<} cl\+\_\+device\+\_\+id \texorpdfstring{$>$}{>} Struct Reference}
+\label{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4}\index{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$@{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$}}
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_ab7ff76b86c2be069c7fb63314e949053}\label{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_ab7ff76b86c2be069c7fb63314e949053}} 
+static cl\+\_\+int {\bfseries retain} (cl\+\_\+device\+\_\+id)
+\item 
+\mbox{\Hypertarget{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_a4eeb27c86e8e5624d5f82dbda001923c}\label{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_a4eeb27c86e8e5624d5f82dbda001923c}} 
+static cl\+\_\+int {\bfseries release} (cl\+\_\+device\+\_\+id)
+\item 
+static cl\+\_\+int \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_ae3392ce2c4055446680bde82e60c976c}{retain}} (cl\+\_\+device\+\_\+id device)
+\item 
+static cl\+\_\+int \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_a70614c8eeee136fb4887bae35216d620}{release}} (cl\+\_\+device\+\_\+id device)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Open\+CL 1.\+1 devices do not have retain/release.
+
+Open\+CL 1.\+2 devices do have retain/release. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_a70614c8eeee136fb4887bae35216d620}\label{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_a70614c8eeee136fb4887bae35216d620}} 
+\index{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$@{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$}!release@{release}}
+\index{release@{release}!cl::detail::ReferenceHandler$<$ cl\_device\_id $>$@{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$}}
+\doxysubsubsection{\texorpdfstring{release()}{release()}}
+{\footnotesize\ttfamily static cl\+\_\+int \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler}{cl\+::detail\+::\+Reference\+Handler}}$<$ cl\+\_\+device\+\_\+id $>$\+::release (\begin{DoxyParamCaption}\item[{cl\+\_\+device\+\_\+id}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Retain the device. 
+\begin{DoxyParams}{Parameters}
+{\em device} & \mbox{\hyperlink{class_a}{A}} valid device created using create\+Sub\+Devices \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+CL\+\_\+\+SUCCESS if the function executed successfully. CL\+\_\+\+INVALID\+\_\+\+DEVICE if device was not a valid subdevice CL\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RESOURCES CL\+\_\+\+OUT\+\_\+\+OF\+\_\+\+HOST\+\_\+\+MEMORY 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_ae3392ce2c4055446680bde82e60c976c}\label{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4_ae3392ce2c4055446680bde82e60c976c}} 
+\index{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$@{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$}!retain@{retain}}
+\index{retain@{retain}!cl::detail::ReferenceHandler$<$ cl\_device\_id $>$@{cl::detail::ReferenceHandler$<$ cl\_device\_id $>$}}
+\doxysubsubsection{\texorpdfstring{retain()}{retain()}}
+{\footnotesize\ttfamily static cl\+\_\+int \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler}{cl\+::detail\+::\+Reference\+Handler}}$<$ cl\+\_\+device\+\_\+id $>$\+::retain (\begin{DoxyParamCaption}\item[{cl\+\_\+device\+\_\+id}]{device }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Retain the device. 
+\begin{DoxyParams}{Parameters}
+{\em device} & \mbox{\hyperlink{class_a}{A}} valid device created using create\+Sub\+Devices \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+CL\+\_\+\+SUCCESS if the function executed successfully. CL\+\_\+\+INVALID\+\_\+\+DEVICE if device was not a valid subdevice CL\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RESOURCES CL\+\_\+\+OUT\+\_\+\+OF\+\_\+\+HOST\+\_\+\+MEMORY 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

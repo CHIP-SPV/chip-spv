@@ -1,0 +1,39 @@
+This tutorial is follow-\/up of the previous tutorial, where we learned how to use shfl ops. In this tutorial, we\textquotesingle{}ll explain how to scale similar kind of operations to multi-\/dimensional space by using previous tutorial source-\/code.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md925}{}\doxysection{Introduction\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md925}
+Let\textquotesingle{}s talk about Warp first. The kernel code is executed in groups of fixed number of threads known as Warp. For nvidia Warp\+Size is 32 while for AMD, 32 for Polaris architecture and 64 for rest. Threads in a warp are referred to as lanes and are numbered from 0 to warp\+Size -\/1. With the help of shfl ops, we can directly exchange values of variable between threads without using any memory ops within a warp. There are four types of shfl ops\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{int   \_\_shfl      (int var,   int srcLane, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl      (float var, int srcLane, int width=warpSize);}
+\DoxyCodeLine{int   \_\_shfl\_up   (int var,   unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl\_up   (float var, unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{int   \_\_shfl\_down (int var,   unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl\_down (float var, unsigned int delta, int width=warpSize);}
+\DoxyCodeLine{int   \_\_shfl\_xor  (int var,   int laneMask, int width=warpSize);}
+\DoxyCodeLine{float \_\_shfl\_xor  (float var, int laneMask, int width=warpSize);}
+
+\end{DoxyCode}
+\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md926}{}\doxysection{Requirement\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md926}
+For hardware requirement and software installation \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/INSTALL.md}{\texttt{ Installation}}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md927}{}\doxysection{prerequiste knowledge\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md927}
+Programmers familiar with CUDA, Open\+CL will be able to quickly learn and start coding with the HIP API. In case you are not, don\textquotesingle{}t worry. You choose to start with the best one. We\textquotesingle{}ll be explaining everything assuming you are completely new to gpgpu programming.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md928}{}\doxysection{Simple Matrix Transpose}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md928}
+We will be using the Simple Matrix Transpose application from the previous tutorial and modify it to learn how to use shared memory.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md929}{}\doxysection{\+\_\+\+\_\+shfl ops in 2D}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md929}
+In the same sourcecode, we used for Matrix\+Transpose. We\textquotesingle{}ll add the following\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{int y = hipBlockDim\_y * hipBlockIdx\_y + hipThreadIdx\_y;}
+\DoxyCodeLine{out[x*width + y] = \_\_shfl(val,y*width + x);}
+
+\end{DoxyCode}
+
+
+With the help of this application, we can say that kernel code can be converted into multi-\/dimensional threads with ease.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md930}{}\doxysection{How to build and run\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md930}
+Use the make command and execute it using ./exe Use hipcc to build the application, which is using hcc on AMD and nvcc on nvidia.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md931}{}\doxysection{requirement for nvidia}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md931}
+please make sure you have a 3.\+0 or higher compute capable device in order to use warp shfl operations and add {\ttfamily -\/gencode arch=compute=30, code=sm\+\_\+30} nvcc flag in the Makefile while using this application.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md932}{}\doxysection{More Info\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_5_2dshfl__readme_autotoc_md932}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_faq.md}{\texttt{ HIP FAQ}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_kernel_language.md}{\texttt{ HIP Kernel Language}}
+\item \href{http://rocm-developer-tools.github.io/HIP}{\texttt{ HIP Runtime API (Doxygen)}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_porting_guide.md}{\texttt{ HIP Porting Guide}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_terms.md}{\texttt{ HIP Terminology}} (including Rosetta Stone of GPU computing terms across CUDA/\+HIP/\+HC/\+AMP/\+OpenL)
+\item \href{https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/README.md}{\texttt{ HIPIFY}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/CONTRIBUTING.md}{\texttt{ Developer/\+CONTRIBUTING Info}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/RELEASE.md}{\texttt{ Release Notes}} 
+\end{DoxyItemize}

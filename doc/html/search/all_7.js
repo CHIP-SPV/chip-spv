@@ -8,5 +8,6 @@ var searchData=
   ['host_5ff_5fptr_5fto_5fmodule_5fstr_5fmap_5',['host_f_ptr_to_module_str_map',['../class_c_h_i_p_device.html#a202318bfc413c9707ee1fb1ef2b76fed',1,'CHIPDevice']]],
   ['host_5fptr_5fto_5fchipkernel_5fmap_6',['host_ptr_to_chipkernel_map',['../class_c_h_i_p_device.html#a10819a071232f19e24f851e821b4288e',1,'CHIPDevice']]],
   ['host_5fvar_5fptr_5fto_5fchipdevicevar_5fdyn_7',['host_var_ptr_to_chipdevicevar_dyn',['../class_c_h_i_p_device.html#a6ea939f900db1167fddcaab422459092',1,'CHIPDevice']]],
-  ['host_5fvar_5fptr_5fto_5fchipdevicevar_5fstat_8',['host_var_ptr_to_chipdevicevar_stat',['../class_c_h_i_p_device.html#aac39e7bdde8added5691357cd31a3d27',1,'CHIPDevice']]]
+  ['host_5fvar_5fptr_5fto_5fchipdevicevar_5fstat_8',['host_var_ptr_to_chipdevicevar_stat',['../class_c_h_i_p_device.html#aac39e7bdde8added5691357cd31a3d27',1,'CHIPDevice']]],
+  ['hostsignal_9',['hostSignal',['../class_c_h_i_p_event_level0.html#a948af6fb5cb5ace178db3effddde57ae',1,'CHIPEventLevel0::hostSignal()'],['../class_c_h_i_p_event.html#aafb096cc87dab294e41bc91ce849924b',1,'CHIPEvent::hostSignal()']]]
 ];

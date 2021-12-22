@@ -1,0 +1,352 @@
+\hypertarget{cl_8hpp}{}\doxysection{/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/cl.hpp File Reference}
+\label{cl_8hpp}\index{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl.hpp@{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl.hpp}}
+
+
+C++ bindings for Open\+CL 1.\+0 (rev 48), Open\+CL 1.\+1 (rev 33) and Open\+CL 1.\+2 (rev 15) ~\newline
+  
+
+
+{\ttfamily \#include $<$CL/opencl.\+h$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$iterator$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classcl_1_1size__t}{cl\+::size\+\_\+t$<$ N $>$}}
+\begin{DoxyCompactList}\small\item\em class used to interface between C++ and Open\+CL C calls that require arrays of \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} values, whose size is known statically. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{cl\+::detail\+::param\+\_\+traits$<$ enum\+\_\+type, Name $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_get_info_functor0}{cl\+::detail\+::\+Get\+Info\+Functor0$<$ Func, Arg0 $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_get_info_functor1}{cl\+::detail\+::\+Get\+Info\+Functor1$<$ Func, Arg0, Arg1 $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler}{cl\+::detail\+::\+Reference\+Handler$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__device__id_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+device\+\_\+id $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__platform__id_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+platform\+\_\+id $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__context_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+context $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__command__queue_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+command\+\_\+queue $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__mem_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+mem $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__sampler_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+sampler $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__program_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+program $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__kernel_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+kernel $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_reference_handler_3_01cl__event_01_4}{cl\+::detail\+::\+Reference\+Handler$<$ cl\+\_\+event $>$}}
+\item 
+class \mbox{\hyperlink{classcl_1_1detail_1_1_wrapper}{cl\+::detail\+::\+Wrapper$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classcl_1_1detail_1_1_wrapper_3_01cl__device__id_01_4}{cl\+::detail\+::\+Wrapper$<$ cl\+\_\+device\+\_\+id $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1_image_format}{cl\+::\+Image\+Format}}
+\begin{DoxyCompactList}\small\item\em Adds constructors and member functions for cl\+\_\+image\+\_\+format. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_device}{cl\+::\+Device}}
+\begin{DoxyCompactList}\small\item\em Class interface for cl\+\_\+device\+\_\+id. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_platform}{cl\+::\+Platform}}
+\begin{DoxyCompactList}\small\item\em Class interface for cl\+\_\+platform\+\_\+id. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_context}{cl\+::\+Context}}
+\begin{DoxyCompactList}\small\item\em Class interface for cl\+\_\+context. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_event}{cl\+::\+Event}}
+\begin{DoxyCompactList}\small\item\em Class interface for cl\+\_\+event. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_memory}{cl\+::\+Memory}}
+\begin{DoxyCompactList}\small\item\em Class interface for cl\+\_\+mem. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_buffer}{cl\+::\+Buffer}}
+\begin{DoxyCompactList}\small\item\em Class interface for \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} Objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_buffer_g_l}{cl\+::\+Buffer\+GL}}
+\begin{DoxyCompactList}\small\item\em Class interface for GL \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} Objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_image}{cl\+::\+Image}}
+\begin{DoxyCompactList}\small\item\em C++ base class for \mbox{\hyperlink{classcl_1_1_image}{Image}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_image2_d}{cl\+::\+Image2D}}
+\begin{DoxyCompactList}\small\item\em Class interface for 2D \mbox{\hyperlink{classcl_1_1_image}{Image}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_c_l___e_x_t___s_u_f_f_i_x_____v_e_r_s_i_o_n__1__1___d_e_p_r_e_c_a_t_e_d}{cl\+::\+CL\+\_\+\+EXT\+\_\+\+SUFFIX\+\_\+\+\_\+\+VERSION\+\_\+1\+\_\+1\+\_\+\+DEPRECATED}}
+\begin{DoxyCompactList}\small\item\em Class interface for GL 2D \mbox{\hyperlink{classcl_1_1_image}{Image}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_image3_d}{cl\+::\+Image3D}}
+\begin{DoxyCompactList}\small\item\em Class interface for 3D \mbox{\hyperlink{classcl_1_1_image}{Image}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_image3_d_g_l}{cl\+::\+Image3\+DGL}}
+\begin{DoxyCompactList}\small\item\em Class interface for GL 3D \mbox{\hyperlink{classcl_1_1_image}{Image}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_buffer_render_g_l}{cl\+::\+Buffer\+Render\+GL}}
+\begin{DoxyCompactList}\small\item\em Class interface for GL Render \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} Objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_sampler}{cl\+::\+Sampler}}
+\begin{DoxyCompactList}\small\item\em Class interface for cl\+\_\+sampler. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_n_d_range}{cl\+::\+NDRange}}
+\begin{DoxyCompactList}\small\item\em Class interface for specifying \mbox{\hyperlink{classcl_1_1_n_d_range}{NDRange}} values. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcl_1_1_local_space_arg}{cl\+::\+Local\+Space\+Arg}}
+\begin{DoxyCompactList}\small\item\em Local address wrapper for use with Kernel\+::set\+Arg. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_kernel_argument_handler}{cl\+::detail\+::\+Kernel\+Argument\+Handler$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_kernel_argument_handler_3_01_local_space_arg_01_4}{cl\+::detail\+::\+Kernel\+Argument\+Handler$<$ Local\+Space\+Arg $>$}}
+\item 
+class \mbox{\hyperlink{classcl_1_1_kernel}{cl\+::\+Kernel}}
+\begin{DoxyCompactList}\small\item\em Class interface for cl\+\_\+kernel. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_program}{cl\+::\+Program}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcl_1_1_program}{Program}} interface that implements cl\+\_\+program. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classcl_1_1_command_queue}{cl\+::\+Command\+Queue}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} interface for cl\+\_\+command\+\_\+queue. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{structcl_1_1_enqueue_args}{cl\+::\+Enqueue\+Args}}
+\item 
+class \mbox{\hyperlink{classcl_1_1detail_1_1_null_type}{cl\+::detail\+::\+Null\+Type}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_set_arg}{cl\+::detail\+::\+Set\+Arg$<$ index, T0 $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1_set_arg_3_01index_00_01_null_type_01_4}{cl\+::detail\+::\+Set\+Arg$<$ index, Null\+Type $>$}}
+\item 
+class \mbox{\hyperlink{classcl_1_1detail_1_1_kernel_functor_global}{cl\+::detail\+::\+Kernel\+Functor\+Global$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31 $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation__}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31 $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0c65074b0edbb49358e494dfca85f0c4d}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_016dc3ed96ba5604ff44fcbf4b70904a7}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_09ad22bbf5ec3ff70ca85c82a81e894f3}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0e1f9ed5f4bce0fed2eecd96819eff69e}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0c47d12039c820db328a1eb63adda7dc4}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0e699f6bc32f983b3dbb8601694ad8716}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0668421b95c44ac124458f5794d45ce5e}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0c335c66f80959dbf15472be3368b9f32}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_007aded1c077ceb6e7341ec85b07f2202}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_06ff88417591e76ae209bc743223d075b}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_00bc8656c3a21dfb23f2db05466d0084e}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_02e0397b86d637b2eb2a2a27639d3bd7d}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0c5bdccff2376c4e65dbf601be0a7d291}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0b692e5b42534b75f77dc62bd45d4471c}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0119b80031f65e66cb6a7049f63e61995}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0347a34949d711676b9580bc54b90fb9e}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_06b4e7d4700ed92d76c6033b21bb53426}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_07da793da861de6efda0c5ef013668aba}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0693a344374e1cc729d7d642c217c4797}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0952ecc33088879a029d823fdb28962a5}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_001b475499b44e3884ba4869520ff4a4f}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_049502b85b2c12b1b9e46020af86a2a36}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_0fe84ead02d0bcd4c779244e8a11c91be}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_058a052ff7523a323b0c36bc04be41ac1}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, T7, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_04e32c1313cc6d5853648e79e341a9b95}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, T6, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_07150edefd2e3c81ea19f3a59d5afeda0}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, T5, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_t4_00_02e2d91f43b17caee4c85e0cfe480cf6b}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, T4, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_t3_00_01_null_tye7e91080ec5381eb86b6dad1933db8ee}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, T3, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_t2_00_01_null_type_00_01_3c1dd53f417d820e8e7f79e0e6e43940}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, T2, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_t1_00_01_null_type_00_01_null_type976790afb6cd43a46b477dbaa6c37690}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, T1, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1detail_1_1function_implementation___3_01_t0_00_01_null_type_00_01_null_type_00_01_nuef9440cf872cfa49206345aec55f09ad}{cl\+::detail\+::function\+Implementation\+\_\+$<$ T0, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type, Null\+Type $>$}}
+\item 
+struct \mbox{\hyperlink{structcl_1_1make__kernel}{cl\+::make\+\_\+kernel$<$ T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31 $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacecl}{cl}}
+\begin{DoxyCompactList}\small\item\em The Open\+CL C++ bindings are defined within this namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cl_8hpp_a9a444a6626b732628bf232475b91452c}\label{cl_8hpp_a9a444a6626b732628bf232475b91452c}} 
+\#define {\bfseries CL\+\_\+\+HPP\+\_\+\+NOEXCEPT}
+\item 
+\mbox{\Hypertarget{cl_8hpp_a891b548a150521bcb596c565c617977d}\label{cl_8hpp_a891b548a150521bcb596c565c617977d}} 
+\#define {\bfseries \+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS}
+\item 
+\mbox{\Hypertarget{cl_8hpp_a728359ddaf60ae8d916bab10bf7ae7e7}\label{cl_8hpp_a728359ddaf60ae8d916bab10bf7ae7e7}} 
+\#define {\bfseries CL\+\_\+\+EXT\+\_\+\+PREFIX\+\_\+\+\_\+\+VERSION\+\_\+1\+\_\+1\+\_\+\+DEPRECATED}
+\item 
+\mbox{\Hypertarget{cl_8hpp_a6efde763d2d8686911e04372386b910a}\label{cl_8hpp_a6efde763d2d8686911e04372386b910a}} 
+\#define {\bfseries CL\+\_\+\+EXT\+\_\+\+SUFFIX\+\_\+\+\_\+\+VERSION\+\_\+1\+\_\+1\+\_\+\+DEPRECATED}
+\item 
+\mbox{\Hypertarget{cl_8hpp_a193b43da2ce23c54788f9b4d4f0f4740}\label{cl_8hpp_a193b43da2ce23c54788f9b4d4f0f4740}} 
+\#define {\bfseries CL\+\_\+\+CALLBACK}
+\item 
+\mbox{\Hypertarget{cl_8hpp_a521b3e27de4e5fb767bf08117f0e1a01}\label{cl_8hpp_a521b3e27de4e5fb767bf08117f0e1a01}} 
+\#define {\bfseries CL\+\_\+\+WEAK\+\_\+\+ATTRIB\+\_\+\+PREFIX}
+\item 
+\mbox{\Hypertarget{cl_8hpp_ac06d62c36d7432b0fea1145d47a95d52}\label{cl_8hpp_ac06d62c36d7432b0fea1145d47a95d52}} 
+\#define {\bfseries CL\+\_\+\+WEAK\+\_\+\+ATTRIB\+\_\+\+SUFFIX}~\+\_\+\+\_\+attribute\+\_\+\+\_\+((weak))
+\item 
+\mbox{\Hypertarget{cl_8hpp_abf26da0c7abac1bb1f7b1519a663ce90}\label{cl_8hpp_abf26da0c7abac1bb1f7b1519a663ce90}} 
+\#define {\bfseries \+\_\+\+\_\+\+ERR\+\_\+\+STR}(x)~NULL
+\item 
+\mbox{\Hypertarget{cl_8hpp_a15193d01246ba1dbf4b93e4066b1b28d}\label{cl_8hpp_a15193d01246ba1dbf4b93e4066b1b28d}} 
+\#define {\bfseries VECTOR\+\_\+\+CLASS}~std\+::vector
+\item 
+\mbox{\Hypertarget{cl_8hpp_abd822f3fd76b80e2f0ee89060f45e5f9}\label{cl_8hpp_abd822f3fd76b80e2f0ee89060f45e5f9}} 
+\#define {\bfseries \+\_\+\+\_\+\+DEFAULT\+\_\+\+NOT\+\_\+\+INITIALIZED}~1
+\item 
+\mbox{\Hypertarget{cl_8hpp_abde3e147be4a0272f583a3c0b7e35ee1}\label{cl_8hpp_abde3e147be4a0272f583a3c0b7e35ee1}} 
+\#define {\bfseries \+\_\+\+\_\+\+DEFAULT\+\_\+\+BEING\+\_\+\+INITIALIZED}~2
+\item 
+\mbox{\Hypertarget{cl_8hpp_a8f41aa0f7398f2f22a4cf5839c09220e}\label{cl_8hpp_a8f41aa0f7398f2f22a4cf5839c09220e}} 
+\#define {\bfseries \+\_\+\+\_\+\+DEFAULT\+\_\+\+INITIALIZED}~4
+\item 
+\mbox{\Hypertarget{cl_8hpp_ac0e9a5d4b98113796b98ab938aab3b47}\label{cl_8hpp_ac0e9a5d4b98113796b98ab938aab3b47}} 
+\#define {\bfseries \+\_\+\+\_\+\+PARAM\+\_\+\+NAME\+\_\+\+INFO\+\_\+1\+\_\+0}(F)
+\item 
+\#define \mbox{\hyperlink{cl_8hpp_a32e1039c50825f8b1a0d2179bab9e5f4}{\+\_\+\+\_\+\+CL\+\_\+\+DECLARE\+\_\+\+PARAM\+\_\+\+TRAITS}}(token,  param\+\_\+name,  T)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::string \mbox{\hyperlink{namespacecl_ad3ff55c5fe80ec84842876af323559c7}{cl\+::\+STRING\+\_\+\+CLASS}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cl_8hpp_a73567071e9d89067f89c0b20f65b6d85}\label{cl_8hpp_a73567071e9d89067f89c0b20f65b6d85}} 
+int {\bfseries cl\+::detail\+::compare\+\_\+exchange} (volatile int $\ast$dest, int exchange, int comparand)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a9b2cb5076342ab847896b34c95efb31e}\label{cl_8hpp_a9b2cb5076342ab847896b34c95efb31e}} 
+void {\bfseries cl\+::detail\+::fence} ()
+\item 
+\mbox{\Hypertarget{cl_8hpp_a5fa0595cfd70a34a662283c683f58bb1}\label{cl_8hpp_a5fa0595cfd70a34a662283c683f58bb1}} 
+{\footnotesize template$<$typename Functor , typename T $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info\+Helper} (Functor f, cl\+\_\+uint name, T $\ast$param, long)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a24dee3a7b9cf7eda61a275609ebff0a4}\label{cl_8hpp_a24dee3a7b9cf7eda61a275609ebff0a4}} 
+{\footnotesize template$<$typename Func , typename T $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info\+Helper} (Func f, cl\+\_\+uint name, VECTOR\+\_\+\+CLASS$<$ T $>$ $\ast$param, long)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a2c48548bbf2574f1b13830f68780ecfd}\label{cl_8hpp_a2c48548bbf2574f1b13830f68780ecfd}} 
+{\footnotesize template$<$typename Func , typename T $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info\+Helper} (Func f, cl\+\_\+uint name, VECTOR\+\_\+\+CLASS$<$ T $>$ $\ast$param, int, typename T\+::cl\+\_\+type=0)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a9ccb36065fd82620cb54bc26aeff2e73}\label{cl_8hpp_a9ccb36065fd82620cb54bc26aeff2e73}} 
+{\footnotesize template$<$typename Func $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info\+Helper} (Func f, cl\+\_\+uint name, VECTOR\+\_\+\+CLASS$<$ char $\ast$ $>$ $\ast$param, int)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a3f9e8b3d7e23f848bbba3d122a48c71e}\label{cl_8hpp_a3f9e8b3d7e23f848bbba3d122a48c71e}} 
+{\footnotesize template$<$typename Func $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info\+Helper} (Func f, cl\+\_\+uint name, STRING\+\_\+\+CLASS $\ast$param, long)
+\item 
+\mbox{\Hypertarget{cl_8hpp_af7a0f3bcad6fe6232cf770142ce24eb6}\label{cl_8hpp_af7a0f3bcad6fe6232cf770142ce24eb6}} 
+{\footnotesize template$<$typename Func , \+::size\+\_\+t N$>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info\+Helper} (Func f, cl\+\_\+uint name, size\+\_\+t$<$ N $>$ $\ast$param, long)
+\item 
+\mbox{\Hypertarget{cl_8hpp_abcfe70e7b9beebd31b874fc0e59ab147}\label{cl_8hpp_abcfe70e7b9beebd31b874fc0e59ab147}} 
+{\footnotesize template$<$typename Func , typename T $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info\+Helper} (Func f, cl\+\_\+uint name, T $\ast$param, int, typename T\+::cl\+\_\+type=0)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a5954b0e110a023571c1bed2be1efb480}\label{cl_8hpp_a5954b0e110a023571c1bed2be1efb480}} 
+{\footnotesize template$<$typename Func , typename T $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info} (Func f, cl\+\_\+uint name, T $\ast$param)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a7d4625d32a9763da801a3f1c2a75ab99}\label{cl_8hpp_a7d4625d32a9763da801a3f1c2a75ab99}} 
+{\footnotesize template$<$typename Func , typename Arg0 , typename T $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info} (Func f, const Arg0 \&arg0, cl\+\_\+uint name, T $\ast$param)
+\item 
+\mbox{\Hypertarget{cl_8hpp_a590a1c0214938e7466f69fae3312c342}\label{cl_8hpp_a590a1c0214938e7466f69fae3312c342}} 
+{\footnotesize template$<$typename Func , typename Arg0 , typename Arg1 , typename T $>$ }\\cl\+\_\+int {\bfseries cl\+::detail\+::get\+Info} (Func f, const Arg0 \&arg0, const Arg1 \&arg1, cl\+\_\+uint name, T $\ast$param)
+\item 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\cl\+\_\+int \mbox{\hyperlink{namespacecl_a1197a833cdd6664f206b079f2bebd2eb}{cl\+::copy}} (Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, \mbox{\hyperlink{classcl_1_1_buffer}{cl\+::\+Buffer}} \&buffer)
+\item 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\cl\+\_\+int \mbox{\hyperlink{namespacecl_a05791e9d5da23b21abd6e319fb262c9f}{cl\+::copy}} (const \mbox{\hyperlink{classcl_1_1_buffer}{cl\+::\+Buffer}} \&buffer, Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator)
+\item 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\cl\+\_\+int \mbox{\hyperlink{namespacecl_a2f71ed9a316daf59c03c0f3ba62f1bd3}{cl\+::copy}} (const Command\+Queue \&queue, Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, \mbox{\hyperlink{classcl_1_1_buffer}{cl\+::\+Buffer}} \&buffer)
+\item 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\cl\+\_\+int \mbox{\hyperlink{namespacecl_a02c4368c6ce7a1a99132eafd5dc96fa9}{cl\+::copy}} (const Command\+Queue \&queue, const \mbox{\hyperlink{classcl_1_1_buffer}{cl\+::\+Buffer}} \&buffer, Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator)
+\item 
+CL\+\_\+\+EXT\+\_\+\+PREFIX\+\_\+\+\_\+\+VERSION\+\_\+1\+\_\+1\+\_\+\+DEPRECATED Local\+Space\+Arg \mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{cl\+::\+\_\+\+\_\+local}} (\+::size\+\_\+t size) CL\+\_\+\+EXT\+\_\+\+SUFFIX\+\_\+\+\_\+\+VERSION\+\_\+1\+\_\+1\+\_\+\+DEPRECATED
+\begin{DoxyCompactList}\small\item\em Helper function for generating \mbox{\hyperlink{structcl_1_1_local_space_arg}{Local\+Space\+Arg}} objects. Deprecated. Replaced with Local. \end{DoxyCompactList}\item 
+Local\+Space\+Arg \mbox{\hyperlink{namespacecl_a861d36f255ea512d3aba2c40ce952e44}{cl\+::\+Local}} (\+::size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Helper function for generating \mbox{\hyperlink{structcl_1_1_local_space_arg}{Local\+Space\+Arg}} objects. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacecl_a5610ad7d382b6ab02d9063cfa413ae3c}\label{namespacecl_a5610ad7d382b6ab02d9063cfa413ae3c}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Read\+Buffer} (const Buffer \&buffer, cl\+\_\+bool blocking, \+::size\+\_\+t offset, \+::size\+\_\+t size, void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_a1c4a6c7dda08ae8c2aa18366f5fe5981}\label{namespacecl_a1c4a6c7dda08ae8c2aa18366f5fe5981}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Write\+Buffer} (const Buffer \&buffer, cl\+\_\+bool blocking, \+::size\+\_\+t offset, \+::size\+\_\+t size, const void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_a8f9e888c5887260997de0e3c6f49618b}\label{namespacecl_a8f9e888c5887260997de0e3c6f49618b}} 
+void $\ast$ {\bfseries cl\+::enqueue\+Map\+Buffer} (const Buffer \&buffer, cl\+\_\+bool blocking, cl\+\_\+map\+\_\+flags flags, \+::size\+\_\+t offset, \+::size\+\_\+t size, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_abb9786b5faa37a5124a9a8205e0703df}\label{namespacecl_abb9786b5faa37a5124a9a8205e0703df}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Unmap\+Mem\+Object} (const Memory \&memory, void $\ast$mapped\+\_\+ptr, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_ab4d3257868ecd7d2387cbb4166a76f95}\label{namespacecl_ab4d3257868ecd7d2387cbb4166a76f95}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Copy\+Buffer} (const Buffer \&src, const Buffer \&dst, \+::size\+\_\+t src\+\_\+offset, \+::size\+\_\+t dst\+\_\+offset, \+::size\+\_\+t size, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_a168ceb56f757f62477945d72baa5a26b}\label{namespacecl_a168ceb56f757f62477945d72baa5a26b}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Read\+Image} (const Image \&image, cl\+\_\+bool blocking, const size\+\_\+t$<$ 3 $>$ \&origin, const size\+\_\+t$<$ 3 $>$ \&region, \+::size\+\_\+t row\+\_\+pitch, \+::size\+\_\+t slice\+\_\+pitch, void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_a08c67720079e3d5b1f9a0a2d4a57fc66}\label{namespacecl_a08c67720079e3d5b1f9a0a2d4a57fc66}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Write\+Image} (const Image \&image, cl\+\_\+bool blocking, const size\+\_\+t$<$ 3 $>$ \&origin, const size\+\_\+t$<$ 3 $>$ \&region, \+::size\+\_\+t row\+\_\+pitch, \+::size\+\_\+t slice\+\_\+pitch, const void $\ast$ptr, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_a26f3b361603d543c0eee11ebd6c4d344}\label{namespacecl_a26f3b361603d543c0eee11ebd6c4d344}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Copy\+Image} (const Image \&src, const Image \&dst, const size\+\_\+t$<$ 3 $>$ \&src\+\_\+origin, const size\+\_\+t$<$ 3 $>$ \&dst\+\_\+origin, const size\+\_\+t$<$ 3 $>$ \&region, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_a824ccdd6e63275c821b0f0447398e2bb}\label{namespacecl_a824ccdd6e63275c821b0f0447398e2bb}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Copy\+Image\+To\+Buffer} (const Image \&src, const Buffer \&dst, const size\+\_\+t$<$ 3 $>$ \&src\+\_\+origin, const size\+\_\+t$<$ 3 $>$ \&region, \+::size\+\_\+t dst\+\_\+offset, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_a6d6df68bd2845b894702c2d21efd90a6}\label{namespacecl_a6d6df68bd2845b894702c2d21efd90a6}} 
+cl\+\_\+int {\bfseries cl\+::enqueue\+Copy\+Buffer\+To\+Image} (const Buffer \&src, const Image \&dst, \+::size\+\_\+t src\+\_\+offset, const size\+\_\+t$<$ 3 $>$ \&dst\+\_\+origin, const size\+\_\+t$<$ 3 $>$ \&region, const VECTOR\+\_\+\+CLASS$<$ Event $>$ $\ast$events=NULL, Event $\ast$event=NULL)
+\item 
+\mbox{\Hypertarget{namespacecl_aec3275453ec57a74dfa7a34653cfa194}\label{namespacecl_aec3275453ec57a74dfa7a34653cfa194}} 
+cl\+\_\+int {\bfseries cl\+::flush} (void)
+\item 
+\mbox{\Hypertarget{namespacecl_a10f66d5f5f17570f71d7cbf467c0930f}\label{namespacecl_a10f66d5f5f17570f71d7cbf467c0930f}} 
+cl\+\_\+int {\bfseries cl\+::finish} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+C++ bindings for Open\+CL 1.\+0 (rev 48), Open\+CL 1.\+1 (rev 33) and Open\+CL 1.\+2 (rev 15) ~\newline
+ 
+
+\begin{DoxyAuthor}{Author}
+Benedict R. Gaster, Laurent Morichetti and Lee Howes
+\end{DoxyAuthor}
+Additions and fixes from\+: Brian Cole, March 3rd 2010 and April 2012 Matt Gruenke, April 2012. Bruce Merry, February 2013. Tom Deakin and Simon Mc\+Intosh-\/\+Smith, July 2013
+
+\begin{DoxyVersion}{Version}
+1.\+2.\+9 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+December 2015
+\end{DoxyDate}
+Optional extension support \begin{DoxyVerb}  cl
+  cl_ext_device_fission
+       #define USE_CL_DEVICE_FISSION
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{cl_8hpp_a32e1039c50825f8b1a0d2179bab9e5f4}\label{cl_8hpp_a32e1039c50825f8b1a0d2179bab9e5f4}} 
+\index{cl.hpp@{cl.hpp}!\_\_CL\_DECLARE\_PARAM\_TRAITS@{\_\_CL\_DECLARE\_PARAM\_TRAITS}}
+\index{\_\_CL\_DECLARE\_PARAM\_TRAITS@{\_\_CL\_DECLARE\_PARAM\_TRAITS}!cl.hpp@{cl.hpp}}
+\doxysubsubsection{\texorpdfstring{\_\_CL\_DECLARE\_PARAM\_TRAITS}{\_\_CL\_DECLARE\_PARAM\_TRAITS}}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+CL\+\_\+\+DECLARE\+\_\+\+PARAM\+\_\+\+TRAITS(\begin{DoxyParamCaption}\item[{}]{token,  }\item[{}]{param\+\_\+name,  }\item[{}]{T }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct }token;                                        \(\backslash\)}
+\DoxyCodeLine{template<>                                           \(\backslash\)}
+\DoxyCodeLine{struct param\_traits<detail:: token,param\_name>       \(\backslash\)}
+\DoxyCodeLine{\{                                                    \(\backslash\)}
+\DoxyCodeLine{    enum \{ value = param\_name \};                     \(\backslash\)}
+\DoxyCodeLine{    typedef T param\_type;                            \(\backslash\)}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}

@@ -1,0 +1,172 @@
+\hypertarget{class_bitonic_sort}{}\doxysection{Bitonic\+Sort Class Reference}
+\label{class_bitonic_sort}\index{BitonicSort@{BitonicSort}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bitonic_sort_aebfaa8b0bc3367019ad7aff0ee283306}{Bitonic\+Sort}} ()
+\item 
+\mbox{\Hypertarget{class_bitonic_sort_a5a42558ee5f7a6750ea1a17a59c48e58}\label{class_bitonic_sort_a5a42558ee5f7a6750ea1a17a59c48e58}} 
+long long {\bfseries get\+\_\+time} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_a81ffb62c7519099edd205db816264036}{setup\+Bitonic\+Sort}} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_a2ff2ce2ca420fd9f2c401a78af1e0646}{setup\+HIP}} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_a5b30e1ec36b1d10796f4ecd489753ea1}{run\+Kernels}} ()
+\item 
+void \mbox{\hyperlink{class_bitonic_sort_a9d2bd805d4be1eaf68b973d4207cd0f7}{swap\+If\+First\+Is\+Greater}} (unsigned int $\ast$a, unsigned int $\ast$b)
+\item 
+void \mbox{\hyperlink{class_bitonic_sort_a330fe38078f94f8a483af7d526b3a7a9}{bitonic\+Sort\+CPUReference}} (unsigned int $\ast$input, const unsigned int length, const bool sort\+Increasing)
+\item 
+void \mbox{\hyperlink{class_bitonic_sort_a449d774c1bb9f64e47372587bc16600f}{print\+Stats}} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_a5f416e0b7afb6180a7a91c32cef37e35}{initialize}} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_a5937752ad4a37c5a763a0966a1cd0f39}{setup}} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_af4ed091dd2a03a6bf096826e0ecbe612}{run}} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_a2fba182b6b5d2aea7129ccbd2c44c34d}{cleanup}} ()
+\item 
+int \mbox{\hyperlink{class_bitonic_sort_ac7e24c8ffeb5db577ae72fafbfcba7a6}{verify\+Results}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}} $\ast$ \mbox{\hyperlink{class_bitonic_sort_a42be2067d6ad80d2a8bbc2bac0750dc2}{sample\+Args}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_bitonic_sort}{Bitonic\+Sort}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_bitonic_sort_aebfaa8b0bc3367019ad7aff0ee283306}\label{class_bitonic_sort_aebfaa8b0bc3367019ad7aff0ee283306}} 
+\index{BitonicSort@{BitonicSort}!BitonicSort@{BitonicSort}}
+\index{BitonicSort@{BitonicSort}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{BitonicSort()}{BitonicSort()}}
+{\footnotesize\ttfamily Bitonic\+Sort\+::\+Bitonic\+Sort (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor Initialize member variables 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bitonic_sort_a330fe38078f94f8a483af7d526b3a7a9}\label{class_bitonic_sort_a330fe38078f94f8a483af7d526b3a7a9}} 
+\index{BitonicSort@{BitonicSort}!bitonicSortCPUReference@{bitonicSortCPUReference}}
+\index{bitonicSortCPUReference@{bitonicSortCPUReference}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{bitonicSortCPUReference()}{bitonicSortCPUReference()}}
+{\footnotesize\ttfamily void Bitonic\+Sort\+::bitonic\+Sort\+CPUReference (\begin{DoxyParamCaption}\item[{unsigned int $\ast$}]{input,  }\item[{const unsigned int}]{length,  }\item[{const bool}]{sort\+Increasing }\end{DoxyParamCaption})}
+
+Reference CPU implementation of Bitonic Sort for performance comparison 
+\begin{DoxyParams}{Parameters}
+{\em input} & the input array \\
+\hline
+{\em length} & length of the array \\
+\hline
+{\em sort\+Increasing} & flag to indicate sorting order \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bitonic_sort_a2fba182b6b5d2aea7129ccbd2c44c34d}\label{class_bitonic_sort_a2fba182b6b5d2aea7129ccbd2c44c34d}} 
+\index{BitonicSort@{BitonicSort}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Cleanup memory allocations \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bitonic_sort_a5f416e0b7afb6180a7a91c32cef37e35}\label{class_bitonic_sort_a5f416e0b7afb6180a7a91c32cef37e35}} 
+\index{BitonicSort@{BitonicSort}!initialize@{initialize}}
+\index{initialize@{initialize}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Initialize command line parser, add custom options \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bitonic_sort_a449d774c1bb9f64e47372587bc16600f}\label{class_bitonic_sort_a449d774c1bb9f64e47372587bc16600f}} 
+\index{BitonicSort@{BitonicSort}!printStats@{printStats}}
+\index{printStats@{printStats}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{printStats()}{printStats()}}
+{\footnotesize\ttfamily void Bitonic\+Sort\+::print\+Stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Print sample stats. \mbox{\Hypertarget{class_bitonic_sort_af4ed091dd2a03a6bf096826e0ecbe612}\label{class_bitonic_sort_af4ed091dd2a03a6bf096826e0ecbe612}} 
+\index{BitonicSort@{BitonicSort}!run@{run}}
+\index{run@{run}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Run HIP Bitonic Sort \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bitonic_sort_a5b30e1ec36b1d10796f4ecd489753ea1}\label{class_bitonic_sort_a5b30e1ec36b1d10796f4ecd489753ea1}} 
+\index{BitonicSort@{BitonicSort}!runKernels@{runKernels}}
+\index{runKernels@{runKernels}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{runKernels()}{runKernels()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::run\+Kernels (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Set values for kernels\textquotesingle{} arguments, enqueue calls to the kernels on to the command queue, wait till end of kernel execution. Get kernel start and end time if timing is enabled \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bitonic_sort_a5937752ad4a37c5a763a0966a1cd0f39}\label{class_bitonic_sort_a5937752ad4a37c5a763a0966a1cd0f39}} 
+\index{BitonicSort@{BitonicSort}!setup@{setup}}
+\index{setup@{setup}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample, adjust width and height of execution domain, perform all sample setup \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bitonic_sort_a81ffb62c7519099edd205db816264036}\label{class_bitonic_sort_a81ffb62c7519099edd205db816264036}} 
+\index{BitonicSort@{BitonicSort}!setupBitonicSort@{setupBitonicSort}}
+\index{setupBitonicSort@{setupBitonicSort}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{setupBitonicSort()}{setupBitonicSort()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::setup\+Bitonic\+Sort (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allocate and initialize host memory array with random values \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bitonic_sort_a2ff2ce2ca420fd9f2c401a78af1e0646}\label{class_bitonic_sort_a2ff2ce2ca420fd9f2c401a78af1e0646}} 
+\index{BitonicSort@{BitonicSort}!setupHIP@{setupHIP}}
+\index{setupHIP@{setupHIP}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{setupHIP()}{setupHIP()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::setup\+HIP (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+HIP related initialisations. Set up Memory buffers \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bitonic_sort_a9d2bd805d4be1eaf68b973d4207cd0f7}\label{class_bitonic_sort_a9d2bd805d4be1eaf68b973d4207cd0f7}} 
+\index{BitonicSort@{BitonicSort}!swapIfFirstIsGreater@{swapIfFirstIsGreater}}
+\index{swapIfFirstIsGreater@{swapIfFirstIsGreater}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{swapIfFirstIsGreater()}{swapIfFirstIsGreater()}}
+{\footnotesize\ttfamily void Bitonic\+Sort\+::swap\+If\+First\+Is\+Greater (\begin{DoxyParamCaption}\item[{unsigned int $\ast$}]{a,  }\item[{unsigned int $\ast$}]{b }\end{DoxyParamCaption})}
+
+Helper to swap two values if first one is greater 
+\begin{DoxyParams}{Parameters}
+{\em a} & an unsigned int value \\
+\hline
+{\em b} & an unsigned int value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bitonic_sort_ac7e24c8ffeb5db577ae72fafbfcba7a6}\label{class_bitonic_sort_ac7e24c8ffeb5db577ae72fafbfcba7a6}} 
+\index{BitonicSort@{BitonicSort}!verifyResults@{verifyResults}}
+\index{verifyResults@{verifyResults}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{verifyResults()}{verifyResults()}}
+{\footnotesize\ttfamily int Bitonic\+Sort\+::verify\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Verify against reference implementation \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and nonzero on failure 
+\end{DoxyReturn}
+reference implementation it overwrites the input array with the output
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_bitonic_sort_a42be2067d6ad80d2a8bbc2bac0750dc2}\label{class_bitonic_sort_a42be2067d6ad80d2a8bbc2bac0750dc2}} 
+\index{BitonicSort@{BitonicSort}!sampleArgs@{sampleArgs}}
+\index{sampleArgs@{sampleArgs}!BitonicSort@{BitonicSort}}
+\doxysubsubsection{\texorpdfstring{sampleArgs}{sampleArgs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}}$\ast$ Bitonic\+Sort\+::sample\+Args}
+
+\mbox{\hyperlink{class_command}{Command}} argument class 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/\+Bitonic\+Sort/Bitonic\+Sort.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,679 @@
+\hypertarget{ocml_8h_source}{}\doxysection{ocml.\+h}
+\label{ocml_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/bitcode/OCML/ocml.h@{/Users/pvelesko/local/CHIP-\/SPV/bitcode/OCML/ocml.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*===-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{ *                   ROCm Device Libraries}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * This file is distributed under the University of Illinois Open Source}}
+\DoxyCodeLine{5 \textcolor{comment}{ * License. See LICENSE.TXT for details.}}
+\DoxyCodeLine{6 \textcolor{comment}{ *===-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef OCML\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define OCML\_H}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{comment}{// This C header declares the functions provided by the OCML library}}
+\DoxyCodeLine{12 \textcolor{comment}{// Aspects of this library's behavior can be controlled via the}}
+\DoxyCodeLine{13 \textcolor{comment}{// oclc library.  See the oclc header for further information}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{comment}{// Define here the return values from fpclassify}}
+\DoxyCodeLine{16 \textcolor{comment}{// These match most host definitions}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define FP\_NAN 0}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FP\_INFINITE 1}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define FP\_ZERO 2}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define FP\_SUBNORMAL 3}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define FP\_NORMAL 4}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define \_MANGLE3(P,N,S) P\#\#\_\#\#N\#\#\_\#\#S}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define MANGLE3(P,N,S) \_MANGLE3(P,N,S)}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define OCML\_MANGLE\_F32(N) MANGLE3(\_\_ocml, N, f32)}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define OCML\_MANGLE\_F64(N) MANGLE3(\_\_ocml, N, f64)}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define OCML\_MANGLE\_F16(N) MANGLE3(\_\_ocml, N, f16)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define OCML\_MANGLE\_2F16(N) MANGLE3(\_\_ocml, N, 2f16)}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define DECL\_OCML\_UNARY\_F32(N) extern float OCML\_MANGLE\_F32(N)(float);}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_UNARY\_F32(A,N) extern \_\_attribute\_\_((A)) float OCML\_MANGLE\_F32(N)(float);}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_UNARY\_F32(N) \_DECL\_X\_OCML\_UNARY\_F32(pure, N)}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARY\_F32(N) \_DECL\_X\_OCML\_UNARY\_F32(const, N)}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARYPRED\_F32(N) extern \_\_attribute\_\_((const)) int OCML\_MANGLE\_F32(N)(float);}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define DECL\_OCML\_BINARY\_F32(N) extern float OCML\_MANGLE\_F32(N)(float, float);}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_BINARY\_F32(A,N) extern \_\_attribute\_\_((A)) float OCML\_MANGLE\_F32(N)(float, float);}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_BINARY\_F32(N) \_DECL\_X\_OCML\_BINARY\_F32(pure, N)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARY\_F32(N) \_DECL\_X\_OCML\_BINARY\_F32(const, N)}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARYPRED\_F32(N) extern \_\_attribute\_\_((const)) int OCML\_MANGLE\_F32(N)(float, float);}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_TERNARY\_F32(A,N) extern \_\_attribute\_\_((A)) float OCML\_MANGLE\_F32(N)(float, float, float);}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_TERNARY\_F32(N) \_DECL\_X\_OCML\_TERNARY\_F32(pure, N)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_TERNARY\_F32(N) \_DECL\_X\_OCML\_TERNARY\_F32(const, N)}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define DECL\_OCML\_UNARY\_F64(N) extern double OCML\_MANGLE\_F64(N)(double);}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_UNARY\_F64(A,N) extern \_\_attribute\_\_((A)) double OCML\_MANGLE\_F64(N)(double);}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_UNARY\_F64(N) \_DECL\_X\_OCML\_UNARY\_F64(pure, N)}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARY\_F64(N) \_DECL\_X\_OCML\_UNARY\_F64(const, N)}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARYPRED\_F64(N) extern \_\_attribute\_\_((const)) int OCML\_MANGLE\_F64(N)(double);}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define DECL\_OCML\_BINARY\_F64(N) extern double OCML\_MANGLE\_F64(N)(double, double);}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_BINARY\_F64(A,N) extern \_\_attribute\_\_((A)) double OCML\_MANGLE\_F64(N)(double, double);}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_BINARY\_F64(N) \_DECL\_X\_OCML\_BINARY\_F64(pure, N)}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARY\_F64(N) \_DECL\_X\_OCML\_BINARY\_F64(const, N)}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARYPRED\_F64(N) extern \_\_attribute\_\_((const)) int OCML\_MANGLE\_F64(N)(double, double);}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_TERNARY\_F64(A,N) extern \_\_attribute\_\_((A)) double OCML\_MANGLE\_F64(N)(double, double, double);}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_TERNARY\_F64(N) \_DECL\_X\_OCML\_TERNARY\_F64(pure, N)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_TERNARY\_F64(N) \_DECL\_X\_OCML\_TERNARY\_F64(const, N)}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define DECL\_OCML\_UNARY\_F16(N) extern half OCML\_MANGLE\_F16(N)(half);}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_UNARY\_F16(A,N) extern \_\_attribute\_\_((A)) half OCML\_MANGLE\_F16(N)(half);}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_UNARY\_F16(N) \_DECL\_X\_OCML\_UNARY\_F16(pure, N)}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARY\_F16(N) \_DECL\_X\_OCML\_UNARY\_F16(const, N)}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARYPRED\_F16(N) extern \_\_attribute\_\_((const)) int OCML\_MANGLE\_F16(N)(half);}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define DECL\_OCML\_BINARY\_F16(N) extern half OCML\_MANGLE\_F16(N)(half, half);}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_BINARY\_F16(A,N) extern \_\_attribute\_\_((A)) half OCML\_MANGLE\_F16(N)(half, half);}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_BINARY\_F16(N) \_DECL\_X\_OCML\_BINARY\_F16(pure, N)}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARY\_F16(N) \_DECL\_X\_OCML\_BINARY\_F16(const, N)}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARYPRED\_F16(N) extern \_\_attribute\_\_((const)) int OCML\_MANGLE\_F16(N)(half, half);}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_TERNARY\_F16(A,N) extern \_\_attribute\_\_((A)) half OCML\_MANGLE\_F16(N)(half, half, half);}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_TERNARY\_F16(N) \_DECL\_X\_OCML\_TERNARY\_F16(pure, N)}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_TERNARY\_F16(N) \_DECL\_X\_OCML\_TERNARY\_F16(const, N)}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#define DECL\_OCML\_UNARY\_2F16(N) extern half2 OCML\_MANGLE\_2F16(N)(half2);}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_UNARY\_2F16(A,N) extern \_\_attribute\_\_((A)) half2 OCML\_MANGLE\_2F16(N)(half2);}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_UNARY\_2F16(N) \_DECL\_X\_OCML\_UNARY\_2F16(pure, N)}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARY\_2F16(N) \_DECL\_X\_OCML\_UNARY\_2F16(const, N)}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_UNARYPRED\_2F16(N) extern \_\_attribute\_\_((const)) short2 OCML\_MANGLE\_2F16(N)(half2);}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define DECL\_OCML\_BINARY\_2F16(N) extern half2 OCML\_MANGLE\_2F16(N)(half2, half2);}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_BINARY\_2F16(A,N) extern \_\_attribute\_\_((A)) half2 OCML\_MANGLE\_2F16(N)(half2, half2);}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_BINARY\_2F16(N) \_DECL\_X\_OCML\_BINARY\_2F16(pure, N)}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARY\_2F16(N) \_DECL\_X\_OCML\_BINARY\_2F16(const, N)}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_BINARYPRED\_2F16(N) extern \_\_attribute\_\_((const)) short2 OCML\_MANGLE\_2F16(N)(half2, half2);}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define \_DECL\_X\_OCML\_TERNARY\_2F16(A,N) extern \_\_attribute\_\_((A)) half2 OCML\_MANGLE\_2F16(N)(half2, half2, half2);}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define DECL\_PURE\_OCML\_TERNARY\_2F16(N) \_DECL\_X\_OCML\_TERNARY\_2F16(pure, N)}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define DECL\_CONST\_OCML\_TERNARY\_2F16(N) \_DECL\_X\_OCML\_TERNARY\_2F16(const, N)}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 DECL\_CONST\_OCML\_UNARY\_F32(acos)}
+\DoxyCodeLine{103 DECL\_CONST\_OCML\_UNARY\_F32(acospi)}
+\DoxyCodeLine{104 DECL\_CONST\_OCML\_UNARY\_F32(acosh)}
+\DoxyCodeLine{105 DECL\_CONST\_OCML\_UNARY\_F32(asin)}
+\DoxyCodeLine{106 DECL\_CONST\_OCML\_UNARY\_F32(asinpi)}
+\DoxyCodeLine{107 DECL\_CONST\_OCML\_UNARY\_F32(asinh)}
+\DoxyCodeLine{108 DECL\_CONST\_OCML\_BINARY\_F32(atan2)}
+\DoxyCodeLine{109 DECL\_CONST\_OCML\_BINARY\_F32(atan2pi)}
+\DoxyCodeLine{110 DECL\_CONST\_OCML\_UNARY\_F32(atan)}
+\DoxyCodeLine{111 DECL\_CONST\_OCML\_UNARY\_F32(atanh)}
+\DoxyCodeLine{112 DECL\_CONST\_OCML\_UNARY\_F32(atanpi)}
+\DoxyCodeLine{113 DECL\_CONST\_OCML\_UNARY\_F32(cbrt)}
+\DoxyCodeLine{114 DECL\_CONST\_OCML\_UNARY\_F32(ceil)}
+\DoxyCodeLine{115 DECL\_OCML\_UNARY\_F32(cos)}
+\DoxyCodeLine{116 DECL\_CONST\_OCML\_UNARY\_F32(cosh)}
+\DoxyCodeLine{117 DECL\_OCML\_UNARY\_F32(cospi)}
+\DoxyCodeLine{118 DECL\_CONST\_OCML\_BINARY\_F32(copysign)}
+\DoxyCodeLine{119 DECL\_CONST\_OCML\_UNARY\_F32(erf)}
+\DoxyCodeLine{120 DECL\_CONST\_OCML\_UNARY\_F32(erfc)}
+\DoxyCodeLine{121 DECL\_CONST\_OCML\_UNARY\_F32(erfinv)}
+\DoxyCodeLine{122 DECL\_CONST\_OCML\_UNARY\_F32(erfcinv)}
+\DoxyCodeLine{123 DECL\_CONST\_OCML\_UNARY\_F32(erfcx)}
+\DoxyCodeLine{124 DECL\_CONST\_OCML\_UNARY\_F32(exp)}
+\DoxyCodeLine{125 DECL\_CONST\_OCML\_UNARY\_F32(exp2)}
+\DoxyCodeLine{126 DECL\_CONST\_OCML\_UNARY\_F32(exp10)}
+\DoxyCodeLine{127 DECL\_CONST\_OCML\_UNARY\_F32(expm1)}
+\DoxyCodeLine{128 DECL\_CONST\_OCML\_UNARY\_F32(fabs)}
+\DoxyCodeLine{129 DECL\_CONST\_OCML\_BINARY\_F32(fdim)}
+\DoxyCodeLine{130 DECL\_CONST\_OCML\_UNARY\_F32(floor)}
+\DoxyCodeLine{131 DECL\_CONST\_OCML\_TERNARY\_F32(fma)}
+\DoxyCodeLine{132 DECL\_CONST\_OCML\_TERNARY\_F32(fmuladd)}
+\DoxyCodeLine{133 DECL\_CONST\_OCML\_BINARY\_F32(fmax)}
+\DoxyCodeLine{134 DECL\_CONST\_OCML\_BINARY\_F32(fmin)}
+\DoxyCodeLine{135 DECL\_CONST\_OCML\_BINARY\_F32(fmod)}
+\DoxyCodeLine{136 DECL\_CONST\_OCML\_UNARYPRED\_F32(fpclassify)}
+\DoxyCodeLine{137 \textcolor{keyword}{extern} \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(fract)(float, \_\_private \textcolor{keywordtype}{float} *);}
+\DoxyCodeLine{138 \textcolor{keyword}{extern} \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(frexp)(float, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{139 DECL\_CONST\_OCML\_BINARY\_F32(hypot)}
+\DoxyCodeLine{140 DECL\_CONST\_OCML\_UNARYPRED\_F32(ilogb)}
+\DoxyCodeLine{141 DECL\_CONST\_OCML\_UNARYPRED\_F32(isfinite)}
+\DoxyCodeLine{142 DECL\_CONST\_OCML\_UNARYPRED\_F32(isinf)}
+\DoxyCodeLine{143 DECL\_CONST\_OCML\_UNARYPRED\_F32(isnan)}
+\DoxyCodeLine{144 DECL\_CONST\_OCML\_UNARYPRED\_F32(isnormal)}
+\DoxyCodeLine{145 DECL\_CONST\_OCML\_UNARY\_F32(i0)}
+\DoxyCodeLine{146 DECL\_CONST\_OCML\_UNARY\_F32(i1)}
+\DoxyCodeLine{147 DECL\_CONST\_OCML\_UNARY\_F32(j0)}
+\DoxyCodeLine{148 DECL\_CONST\_OCML\_UNARY\_F32(j1)}
+\DoxyCodeLine{149 \textcolor{keyword}{extern} \_\_attribute\_\_((\textcolor{keyword}{const})) float OCML\_MANGLE\_F32(ldexp)(\textcolor{keywordtype}{float}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{150 DECL\_CONST\_OCML\_TERNARY\_F32(len3)}
+\DoxyCodeLine{151 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(len4)(\textcolor{keywordtype}{float}, \textcolor{keywordtype}{float}, \textcolor{keywordtype}{float}, \textcolor{keywordtype}{float});}
+\DoxyCodeLine{152 DECL\_CONST\_OCML\_TERNARY\_F32(fma)}
+\DoxyCodeLine{153 DECL\_CONST\_OCML\_UNARY\_F32(lgamma)}
+\DoxyCodeLine{154 extern \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(lgamma\_r)(\textcolor{keywordtype}{float}, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{155 DECL\_CONST\_OCML\_UNARY\_F32(log)}
+\DoxyCodeLine{156 DECL\_CONST\_OCML\_UNARY\_F32(log2)}
+\DoxyCodeLine{157 DECL\_CONST\_OCML\_UNARY\_F32(log10)}
+\DoxyCodeLine{158 DECL\_CONST\_OCML\_UNARY\_F32(log1p)}
+\DoxyCodeLine{159 DECL\_CONST\_OCML\_UNARY\_F32(logb)}
+\DoxyCodeLine{160 DECL\_CONST\_OCML\_TERNARY\_F32(mad)}
+\DoxyCodeLine{161 DECL\_CONST\_OCML\_BINARY\_F32(max)}
+\DoxyCodeLine{162 DECL\_CONST\_OCML\_BINARY\_F32(min)}
+\DoxyCodeLine{163 DECL\_CONST\_OCML\_BINARY\_F32(maxmag)}
+\DoxyCodeLine{164 DECL\_CONST\_OCML\_BINARY\_F32(minmag)}
+\DoxyCodeLine{165 extern \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(modf)(\textcolor{keywordtype}{float}, \_\_private \textcolor{keywordtype}{float} *);}
+\DoxyCodeLine{166 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(nan)(uint);}
+\DoxyCodeLine{167 DECL\_CONST\_OCML\_UNARY\_F32(ncdf)}
+\DoxyCodeLine{168 DECL\_CONST\_OCML\_UNARY\_F32(ncdfinv)}
+\DoxyCodeLine{169 DECL\_CONST\_OCML\_UNARY\_F32(nearbyint)}
+\DoxyCodeLine{170 DECL\_CONST\_OCML\_BINARY\_F32(nextafter)}
+\DoxyCodeLine{171 DECL\_CONST\_OCML\_BINARY\_F32(pow)}
+\DoxyCodeLine{172 DECL\_CONST\_OCML\_BINARY\_F32(powr)}
+\DoxyCodeLine{173 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(pown)(\textcolor{keywordtype}{float}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{174 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(rootn)(\textcolor{keywordtype}{float}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{175 DECL\_CONST\_OCML\_BINARY\_F32(remainder)}
+\DoxyCodeLine{176 extern \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(remquo)(\textcolor{keywordtype}{float}, \textcolor{keywordtype}{float}, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{177 DECL\_CONST\_OCML\_BINARY\_F32(rhypot)}
+\DoxyCodeLine{178 DECL\_CONST\_OCML\_UNARY\_F32(rint)}
+\DoxyCodeLine{179 DECL\_CONST\_OCML\_TERNARY\_F32(rlen3)}
+\DoxyCodeLine{180 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(rlen4)(\textcolor{keywordtype}{float}, \textcolor{keywordtype}{float}, \textcolor{keywordtype}{float}, \textcolor{keywordtype}{float});}
+\DoxyCodeLine{181 DECL\_CONST\_OCML\_UNARY\_F32(round)}
+\DoxyCodeLine{182 DECL\_CONST\_OCML\_UNARY\_F32(rcbrt)}
+\DoxyCodeLine{183 DECL\_CONST\_OCML\_UNARY\_F32(rsqrt)}
+\DoxyCodeLine{184 DECL\_CONST\_OCML\_BINARY\_F32(scalb)}
+\DoxyCodeLine{185 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(scalbn)(\textcolor{keywordtype}{float}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{186 DECL\_CONST\_OCML\_UNARYPRED\_F32(signbit)}
+\DoxyCodeLine{187 DECL\_CONST\_OCML\_UNARY\_F32(sin)}
+\DoxyCodeLine{188 DECL\_CONST\_OCML\_UNARY\_F32(sinh)}
+\DoxyCodeLine{189 DECL\_CONST\_OCML\_UNARY\_F32(sinpi)}
+\DoxyCodeLine{190 extern \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(sincos)(\textcolor{keywordtype}{float}, \_\_private \textcolor{keywordtype}{float} *);}
+\DoxyCodeLine{191 extern \textcolor{keywordtype}{float} OCML\_MANGLE\_F32(sincospi)(\textcolor{keywordtype}{float}, \_\_private \textcolor{keywordtype}{float} *);}
+\DoxyCodeLine{192 DECL\_CONST\_OCML\_UNARY\_F32(sqrt)}
+\DoxyCodeLine{193 DECL\_OCML\_UNARY\_F32(tan)}
+\DoxyCodeLine{194 DECL\_CONST\_OCML\_UNARY\_F32(tanpi)}
+\DoxyCodeLine{195 DECL\_CONST\_OCML\_UNARY\_F32(tanh)}
+\DoxyCodeLine{196 DECL\_CONST\_OCML\_UNARY\_F32(tgamma)}
+\DoxyCodeLine{197 DECL\_CONST\_OCML\_UNARY\_F32(trunc)}
+\DoxyCodeLine{198 DECL\_CONST\_OCML\_UNARY\_F32(y0)}
+\DoxyCodeLine{199 DECL\_CONST\_OCML\_UNARY\_F32(y1)}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201 DECL\_CONST\_OCML\_BINARY\_F32(add\_rte)}
+\DoxyCodeLine{202 DECL\_CONST\_OCML\_BINARY\_F32(add\_rtp)}
+\DoxyCodeLine{203 DECL\_CONST\_OCML\_BINARY\_F32(add\_rtn)}
+\DoxyCodeLine{204 DECL\_CONST\_OCML\_BINARY\_F32(add\_rtz)}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 DECL\_CONST\_OCML\_BINARY\_F32(div\_rte)}
+\DoxyCodeLine{207 DECL\_CONST\_OCML\_BINARY\_F32(div\_rtp)}
+\DoxyCodeLine{208 DECL\_CONST\_OCML\_BINARY\_F32(div\_rtn)}
+\DoxyCodeLine{209 DECL\_CONST\_OCML\_BINARY\_F32(div\_rtz)}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211 DECL\_CONST\_OCML\_TERNARY\_F32(fma\_rte)}
+\DoxyCodeLine{212 DECL\_CONST\_OCML\_TERNARY\_F32(fma\_rtp)}
+\DoxyCodeLine{213 DECL\_CONST\_OCML\_TERNARY\_F32(fma\_rtn)}
+\DoxyCodeLine{214 DECL\_CONST\_OCML\_TERNARY\_F32(fma\_rtz)}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 DECL\_CONST\_OCML\_BINARY\_F32(mul\_rte)}
+\DoxyCodeLine{217 DECL\_CONST\_OCML\_BINARY\_F32(mul\_rtp)}
+\DoxyCodeLine{218 DECL\_CONST\_OCML\_BINARY\_F32(mul\_rtn)}
+\DoxyCodeLine{219 DECL\_CONST\_OCML\_BINARY\_F32(mul\_rtz)}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221 DECL\_CONST\_OCML\_UNARY\_F32(sqrt\_rte)}
+\DoxyCodeLine{222 DECL\_CONST\_OCML\_UNARY\_F32(sqrt\_rtp)}
+\DoxyCodeLine{223 DECL\_CONST\_OCML\_UNARY\_F32(sqrt\_rtn)}
+\DoxyCodeLine{224 DECL\_CONST\_OCML\_UNARY\_F32(sqrt\_rtz)}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226 DECL\_CONST\_OCML\_BINARY\_F32(sub\_rte)}
+\DoxyCodeLine{227 DECL\_CONST\_OCML\_BINARY\_F32(sub\_rtp)}
+\DoxyCodeLine{228 DECL\_CONST\_OCML\_BINARY\_F32(sub\_rtn)}
+\DoxyCodeLine{229 DECL\_CONST\_OCML\_BINARY\_F32(sub\_rtz)}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232 DECL\_CONST\_OCML\_UNARY\_F64(acos)}
+\DoxyCodeLine{233 DECL\_CONST\_OCML\_UNARY\_F64(acosh)}
+\DoxyCodeLine{234 DECL\_CONST\_OCML\_UNARY\_F64(acospi)}
+\DoxyCodeLine{235 DECL\_CONST\_OCML\_UNARY\_F64(asin)}
+\DoxyCodeLine{236 DECL\_CONST\_OCML\_UNARY\_F64(asinh)}
+\DoxyCodeLine{237 DECL\_CONST\_OCML\_UNARY\_F64(asinpi)}
+\DoxyCodeLine{238 DECL\_CONST\_OCML\_UNARY\_F64(atan)}
+\DoxyCodeLine{239 DECL\_CONST\_OCML\_UNARY\_F64(atanh)}
+\DoxyCodeLine{240 DECL\_CONST\_OCML\_UNARY\_F64(atanpi)}
+\DoxyCodeLine{241 DECL\_CONST\_OCML\_BINARY\_F64(atan2)}
+\DoxyCodeLine{242 DECL\_CONST\_OCML\_BINARY\_F64(atan2pi)}
+\DoxyCodeLine{243 DECL\_CONST\_OCML\_UNARY\_F64(cbrt)}
+\DoxyCodeLine{244 DECL\_CONST\_OCML\_UNARY\_F64(ceil)}
+\DoxyCodeLine{245 DECL\_CONST\_OCML\_BINARY\_F64(copysign)}
+\DoxyCodeLine{246 DECL\_CONST\_OCML\_UNARY\_F64(cos)}
+\DoxyCodeLine{247 DECL\_CONST\_OCML\_UNARY\_F64(cosh)}
+\DoxyCodeLine{248 DECL\_CONST\_OCML\_UNARY\_F64(cospi)}
+\DoxyCodeLine{249 DECL\_CONST\_OCML\_UNARY\_F64(erf)}
+\DoxyCodeLine{250 DECL\_CONST\_OCML\_UNARY\_F64(erfc)}
+\DoxyCodeLine{251 DECL\_CONST\_OCML\_UNARY\_F64(erfinv)}
+\DoxyCodeLine{252 DECL\_CONST\_OCML\_UNARY\_F64(erfcinv)}
+\DoxyCodeLine{253 DECL\_CONST\_OCML\_UNARY\_F64(erfcx)}
+\DoxyCodeLine{254 DECL\_CONST\_OCML\_UNARY\_F64(exp)}
+\DoxyCodeLine{255 DECL\_CONST\_OCML\_UNARY\_F64(exp2)}
+\DoxyCodeLine{256 DECL\_CONST\_OCML\_UNARY\_F64(exp10)}
+\DoxyCodeLine{257 DECL\_CONST\_OCML\_UNARY\_F64(expm1)}
+\DoxyCodeLine{258 DECL\_CONST\_OCML\_UNARY\_F64(fabs)}
+\DoxyCodeLine{259 DECL\_CONST\_OCML\_BINARY\_F64(fdim)}
+\DoxyCodeLine{260 DECL\_CONST\_OCML\_UNARY\_F64(floor)}
+\DoxyCodeLine{261 DECL\_CONST\_OCML\_TERNARY\_F64(fma)}
+\DoxyCodeLine{262 DECL\_CONST\_OCML\_TERNARY\_F64(fmuladd)}
+\DoxyCodeLine{263 DECL\_CONST\_OCML\_BINARY\_F64(fmax)}
+\DoxyCodeLine{264 DECL\_CONST\_OCML\_BINARY\_F64(fmin)}
+\DoxyCodeLine{265 DECL\_CONST\_OCML\_BINARY\_F64(fmod)}
+\DoxyCodeLine{266 DECL\_CONST\_OCML\_UNARYPRED\_F64(fpclassify)}
+\DoxyCodeLine{267 extern \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(fract)(\textcolor{keywordtype}{double}, \_\_private \textcolor{keywordtype}{double} *);}
+\DoxyCodeLine{268 extern \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(frexp)(\textcolor{keywordtype}{double}, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{269 DECL\_CONST\_OCML\_BINARY\_F64(hypot)}
+\DoxyCodeLine{270 DECL\_CONST\_OCML\_UNARYPRED\_F64(ilogb)}
+\DoxyCodeLine{271 DECL\_CONST\_OCML\_UNARYPRED\_F64(isfinite)}
+\DoxyCodeLine{272 DECL\_CONST\_OCML\_UNARYPRED\_F64(isinf)}
+\DoxyCodeLine{273 DECL\_CONST\_OCML\_UNARYPRED\_F64(isnan)}
+\DoxyCodeLine{274 DECL\_CONST\_OCML\_UNARYPRED\_F64(isnormal)}
+\DoxyCodeLine{275 DECL\_CONST\_OCML\_UNARY\_F64(i0)}
+\DoxyCodeLine{276 DECL\_CONST\_OCML\_UNARY\_F64(i1)}
+\DoxyCodeLine{277 DECL\_CONST\_OCML\_UNARY\_F64(j0)}
+\DoxyCodeLine{278 DECL\_CONST\_OCML\_UNARY\_F64(j1)}
+\DoxyCodeLine{279 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(ldexp)(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{280 DECL\_CONST\_OCML\_TERNARY\_F64(len3)}
+\DoxyCodeLine{281 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(len4)(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, \textcolor{keywordtype}{double});}
+\DoxyCodeLine{282 DECL\_CONST\_OCML\_UNARY\_F64(lgamma)}
+\DoxyCodeLine{283 extern \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(lgamma\_r)(\textcolor{keywordtype}{double}, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{284 DECL\_CONST\_OCML\_UNARY\_F64(log)}
+\DoxyCodeLine{285 DECL\_CONST\_OCML\_UNARY\_F64(log2)}
+\DoxyCodeLine{286 DECL\_CONST\_OCML\_UNARY\_F64(log10)}
+\DoxyCodeLine{287 DECL\_CONST\_OCML\_UNARY\_F64(log1p)}
+\DoxyCodeLine{288 DECL\_CONST\_OCML\_UNARY\_F64(logb)}
+\DoxyCodeLine{289 DECL\_CONST\_OCML\_TERNARY\_F64(mad)}
+\DoxyCodeLine{290 DECL\_CONST\_OCML\_BINARY\_F64(max)}
+\DoxyCodeLine{291 DECL\_CONST\_OCML\_BINARY\_F64(min)}
+\DoxyCodeLine{292 DECL\_CONST\_OCML\_BINARY\_F64(maxmag)}
+\DoxyCodeLine{293 DECL\_CONST\_OCML\_BINARY\_F64(minmag)}
+\DoxyCodeLine{294 extern \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(modf)(\textcolor{keywordtype}{double}, \_\_private \textcolor{keywordtype}{double} *);}
+\DoxyCodeLine{295 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(nan)(ulong);}
+\DoxyCodeLine{296 DECL\_CONST\_OCML\_UNARY\_F64(ncdf)}
+\DoxyCodeLine{297 DECL\_CONST\_OCML\_UNARY\_F64(ncdfinv)}
+\DoxyCodeLine{298 DECL\_CONST\_OCML\_UNARY\_F64(nearbyint)}
+\DoxyCodeLine{299 DECL\_CONST\_OCML\_BINARY\_F64(nextafter)}
+\DoxyCodeLine{300 DECL\_CONST\_OCML\_BINARY\_F64(pow)}
+\DoxyCodeLine{301 DECL\_CONST\_OCML\_BINARY\_F64(powr)}
+\DoxyCodeLine{302 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(pown)(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{303 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(rootn)(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{304 DECL\_CONST\_OCML\_BINARY\_F64(remainder)}
+\DoxyCodeLine{305 extern \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(remquo)(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{306 DECL\_CONST\_OCML\_BINARY\_F64(rhypot)}
+\DoxyCodeLine{307 DECL\_CONST\_OCML\_UNARY\_F64(rint)}
+\DoxyCodeLine{308 DECL\_CONST\_OCML\_TERNARY\_F64(rlen3)}
+\DoxyCodeLine{309 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(rlen4)(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, \textcolor{keywordtype}{double}, \textcolor{keywordtype}{double});}
+\DoxyCodeLine{310 DECL\_CONST\_OCML\_UNARY\_F64(round)}
+\DoxyCodeLine{311 DECL\_CONST\_OCML\_UNARY\_F64(rcbrt)}
+\DoxyCodeLine{312 DECL\_CONST\_OCML\_UNARY\_F64(rsqrt)}
+\DoxyCodeLine{313 DECL\_CONST\_OCML\_BINARY\_F64(scalb)}
+\DoxyCodeLine{314 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(scalbn)(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{315 DECL\_CONST\_OCML\_UNARYPRED\_F64(signbit)}
+\DoxyCodeLine{316 DECL\_CONST\_OCML\_UNARY\_F64(sin)}
+\DoxyCodeLine{317 extern \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(sincos)(\textcolor{keywordtype}{double}, \_\_private \textcolor{keywordtype}{double} *);}
+\DoxyCodeLine{318 extern \textcolor{keywordtype}{double} OCML\_MANGLE\_F64(sincospi)(\textcolor{keywordtype}{double}, \_\_private \textcolor{keywordtype}{double} *);}
+\DoxyCodeLine{319 DECL\_CONST\_OCML\_UNARY\_F64(sinh)}
+\DoxyCodeLine{320 DECL\_CONST\_OCML\_UNARY\_F64(sinpi)}
+\DoxyCodeLine{321 DECL\_CONST\_OCML\_UNARY\_F64(sqrt)}
+\DoxyCodeLine{322 DECL\_CONST\_OCML\_UNARY\_F64(tan)}
+\DoxyCodeLine{323 DECL\_CONST\_OCML\_UNARY\_F64(tanh)}
+\DoxyCodeLine{324 DECL\_CONST\_OCML\_UNARY\_F64(tanpi)}
+\DoxyCodeLine{325 DECL\_CONST\_OCML\_UNARY\_F64(tgamma)}
+\DoxyCodeLine{326 DECL\_CONST\_OCML\_UNARY\_F64(trunc)}
+\DoxyCodeLine{327 DECL\_CONST\_OCML\_UNARY\_F64(y0)}
+\DoxyCodeLine{328 DECL\_CONST\_OCML\_UNARY\_F64(y1)}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330 DECL\_CONST\_OCML\_BINARY\_F64(add\_rte)}
+\DoxyCodeLine{331 DECL\_CONST\_OCML\_BINARY\_F64(add\_rtp)}
+\DoxyCodeLine{332 DECL\_CONST\_OCML\_BINARY\_F64(add\_rtn)}
+\DoxyCodeLine{333 DECL\_CONST\_OCML\_BINARY\_F64(add\_rtz)}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335 DECL\_CONST\_OCML\_BINARY\_F64(div\_rte)}
+\DoxyCodeLine{336 DECL\_CONST\_OCML\_BINARY\_F64(div\_rtp)}
+\DoxyCodeLine{337 DECL\_CONST\_OCML\_BINARY\_F64(div\_rtn)}
+\DoxyCodeLine{338 DECL\_CONST\_OCML\_BINARY\_F64(div\_rtz)}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340 DECL\_CONST\_OCML\_TERNARY\_F64(fma\_rte)}
+\DoxyCodeLine{341 DECL\_CONST\_OCML\_TERNARY\_F64(fma\_rtp)}
+\DoxyCodeLine{342 DECL\_CONST\_OCML\_TERNARY\_F64(fma\_rtn)}
+\DoxyCodeLine{343 DECL\_CONST\_OCML\_TERNARY\_F64(fma\_rtz)}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345 DECL\_CONST\_OCML\_BINARY\_F64(mul\_rte)}
+\DoxyCodeLine{346 DECL\_CONST\_OCML\_BINARY\_F64(mul\_rtp)}
+\DoxyCodeLine{347 DECL\_CONST\_OCML\_BINARY\_F64(mul\_rtn)}
+\DoxyCodeLine{348 DECL\_CONST\_OCML\_BINARY\_F64(mul\_rtz)}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350 DECL\_CONST\_OCML\_UNARY\_F64(sqrt\_rte)}
+\DoxyCodeLine{351 DECL\_CONST\_OCML\_UNARY\_F64(sqrt\_rtp)}
+\DoxyCodeLine{352 DECL\_CONST\_OCML\_UNARY\_F64(sqrt\_rtn)}
+\DoxyCodeLine{353 DECL\_CONST\_OCML\_UNARY\_F64(sqrt\_rtz)}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355 DECL\_CONST\_OCML\_BINARY\_F64(sub\_rte)}
+\DoxyCodeLine{356 DECL\_CONST\_OCML\_BINARY\_F64(sub\_rtp)}
+\DoxyCodeLine{357 DECL\_CONST\_OCML\_BINARY\_F64(sub\_rtn)}
+\DoxyCodeLine{358 DECL\_CONST\_OCML\_BINARY\_F64(sub\_rtz)}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361 DECL\_CONST\_OCML\_UNARY\_F32(native\_recip)}
+\DoxyCodeLine{362 DECL\_CONST\_OCML\_UNARY\_F64(native\_recip)}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364 DECL\_CONST\_OCML\_UNARY\_F32(native\_sqrt)}
+\DoxyCodeLine{365 DECL\_CONST\_OCML\_UNARY\_F64(native\_sqrt)}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367 DECL\_CONST\_OCML\_UNARY\_F32(native\_rsqrt)}
+\DoxyCodeLine{368 DECL\_CONST\_OCML\_UNARY\_F64(native\_rsqrt)}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 DECL\_CONST\_OCML\_UNARY\_F32(native\_sin)}
+\DoxyCodeLine{371 DECL\_CONST\_OCML\_UNARY\_F64(native\_sin)}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373 DECL\_CONST\_OCML\_UNARY\_F32(native\_cos)}
+\DoxyCodeLine{374 DECL\_CONST\_OCML\_UNARY\_F64(native\_cos)}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376 DECL\_CONST\_OCML\_UNARY\_F32(native\_exp)}
+\DoxyCodeLine{377 DECL\_CONST\_OCML\_UNARY\_F64(native\_exp)}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379 DECL\_CONST\_OCML\_UNARY\_F32(native\_exp2)}
+\DoxyCodeLine{380 DECL\_CONST\_OCML\_UNARY\_F64(native\_exp2)}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 DECL\_CONST\_OCML\_UNARY\_F32(native\_exp10)}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384 DECL\_CONST\_OCML\_UNARY\_F32(native\_log)}
+\DoxyCodeLine{385 DECL\_CONST\_OCML\_UNARY\_F64(native\_log)}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{387 DECL\_CONST\_OCML\_UNARY\_F32(native\_log2)}
+\DoxyCodeLine{388 DECL\_CONST\_OCML\_UNARY\_F64(native\_log2)}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{390 DECL\_CONST\_OCML\_UNARY\_F32(native\_log10)}
+\DoxyCodeLine{391 DECL\_CONST\_OCML\_UNARY\_F64(native\_log10)}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394 \textcolor{preprocessor}{\#pragma OPENCL EXTENSION cl\_khr\_fp16 : enable}}
+\DoxyCodeLine{395 DECL\_CONST\_OCML\_UNARY\_F16(acos)}
+\DoxyCodeLine{396 DECL\_CONST\_OCML\_UNARY\_F16(acosh)}
+\DoxyCodeLine{397 DECL\_CONST\_OCML\_UNARY\_F16(acospi)}
+\DoxyCodeLine{398 DECL\_CONST\_OCML\_UNARY\_F16(asin)}
+\DoxyCodeLine{399 DECL\_CONST\_OCML\_UNARY\_F16(asinh)}
+\DoxyCodeLine{400 DECL\_CONST\_OCML\_UNARY\_F16(asinpi)}
+\DoxyCodeLine{401 DECL\_CONST\_OCML\_UNARY\_F16(atan)}
+\DoxyCodeLine{402 DECL\_CONST\_OCML\_UNARY\_F16(atanh)}
+\DoxyCodeLine{403 DECL\_CONST\_OCML\_UNARY\_F16(atanpi)}
+\DoxyCodeLine{404 DECL\_CONST\_OCML\_BINARY\_F16(atan2)}
+\DoxyCodeLine{405 DECL\_CONST\_OCML\_BINARY\_F16(atan2pi)}
+\DoxyCodeLine{406 DECL\_CONST\_OCML\_UNARY\_F16(cbrt)}
+\DoxyCodeLine{407 DECL\_CONST\_OCML\_UNARY\_F16(ceil)}
+\DoxyCodeLine{408 DECL\_CONST\_OCML\_BINARY\_F16(copysign)}
+\DoxyCodeLine{409 DECL\_CONST\_OCML\_UNARY\_F16(cos)}
+\DoxyCodeLine{410 DECL\_CONST\_OCML\_UNARY\_F16(cosh)}
+\DoxyCodeLine{411 DECL\_CONST\_OCML\_UNARY\_F16(cospi)}
+\DoxyCodeLine{412 DECL\_CONST\_OCML\_UNARY\_F16(erf)}
+\DoxyCodeLine{413 DECL\_CONST\_OCML\_UNARY\_F16(erfc)}
+\DoxyCodeLine{414 DECL\_CONST\_OCML\_UNARY\_F16(erfinv)}
+\DoxyCodeLine{415 DECL\_CONST\_OCML\_UNARY\_F16(erfcinv)}
+\DoxyCodeLine{416 DECL\_CONST\_OCML\_UNARY\_F16(erfcx)}
+\DoxyCodeLine{417 DECL\_CONST\_OCML\_UNARY\_F16(exp)}
+\DoxyCodeLine{418 DECL\_CONST\_OCML\_UNARY\_F16(exp2)}
+\DoxyCodeLine{419 DECL\_CONST\_OCML\_UNARY\_F16(exp10)}
+\DoxyCodeLine{420 DECL\_CONST\_OCML\_UNARY\_F16(expm1)}
+\DoxyCodeLine{421 DECL\_CONST\_OCML\_UNARY\_F16(fabs)}
+\DoxyCodeLine{422 DECL\_CONST\_OCML\_BINARY\_F16(fdim)}
+\DoxyCodeLine{423 DECL\_CONST\_OCML\_UNARY\_F16(floor)}
+\DoxyCodeLine{424 DECL\_CONST\_OCML\_TERNARY\_F16(fma)}
+\DoxyCodeLine{425 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rte)}
+\DoxyCodeLine{426 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rtp)}
+\DoxyCodeLine{427 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rtn)}
+\DoxyCodeLine{428 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rtz)}
+\DoxyCodeLine{429 DECL\_CONST\_OCML\_BINARY\_F16(fmax)}
+\DoxyCodeLine{430 DECL\_CONST\_OCML\_BINARY\_F16(fmin)}
+\DoxyCodeLine{431 DECL\_CONST\_OCML\_BINARY\_F16(fmod)}
+\DoxyCodeLine{432 DECL\_CONST\_OCML\_UNARYPRED\_F16(fpclassify)}
+\DoxyCodeLine{433 \textcolor{keyword}{extern} half OCML\_MANGLE\_F16(fract)(half, \_\_private half *);}
+\DoxyCodeLine{434 \textcolor{keyword}{extern} half OCML\_MANGLE\_F16(frexp)(half, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{435 DECL\_CONST\_OCML\_BINARY\_F16(hypot)}
+\DoxyCodeLine{436 DECL\_CONST\_OCML\_UNARYPRED\_F16(ilogb)}
+\DoxyCodeLine{437 DECL\_CONST\_OCML\_UNARYPRED\_F16(isfinite)}
+\DoxyCodeLine{438 DECL\_CONST\_OCML\_UNARYPRED\_F16(isinf)}
+\DoxyCodeLine{439 DECL\_CONST\_OCML\_UNARYPRED\_F16(isnan)}
+\DoxyCodeLine{440 DECL\_CONST\_OCML\_UNARYPRED\_F16(isnormal)}
+\DoxyCodeLine{441 DECL\_CONST\_OCML\_UNARY\_F16(i0)}
+\DoxyCodeLine{442 DECL\_CONST\_OCML\_UNARY\_F16(i1)}
+\DoxyCodeLine{443 DECL\_CONST\_OCML\_UNARY\_F16(j0)}
+\DoxyCodeLine{444 DECL\_CONST\_OCML\_UNARY\_F16(j1)}
+\DoxyCodeLine{445 \textcolor{keyword}{extern} \_\_attribute\_\_((\textcolor{keyword}{const})) half OCML\_MANGLE\_F16(ldexp)(half, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{446 DECL\_CONST\_OCML\_TERNARY\_F16(len3)}
+\DoxyCodeLine{447 extern \_\_attribute\_\_((const)) half OCML\_MANGLE\_F16(len4)(half, half, half, half);}
+\DoxyCodeLine{448 DECL\_CONST\_OCML\_UNARY\_F16(lgamma)}
+\DoxyCodeLine{449 extern half OCML\_MANGLE\_F16(lgamma\_r)(half, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{450 DECL\_CONST\_OCML\_UNARY\_F16(log)}
+\DoxyCodeLine{451 DECL\_CONST\_OCML\_UNARY\_F16(logb)}
+\DoxyCodeLine{452 DECL\_CONST\_OCML\_UNARY\_F16(log2)}
+\DoxyCodeLine{453 DECL\_CONST\_OCML\_UNARY\_F16(log10)}
+\DoxyCodeLine{454 DECL\_CONST\_OCML\_UNARY\_F16(log1p)}
+\DoxyCodeLine{455 DECL\_CONST\_OCML\_TERNARY\_F16(mad)}
+\DoxyCodeLine{456 DECL\_CONST\_OCML\_BINARY\_F16(max)}
+\DoxyCodeLine{457 DECL\_CONST\_OCML\_BINARY\_F16(min)}
+\DoxyCodeLine{458 DECL\_CONST\_OCML\_BINARY\_F16(maxmag)}
+\DoxyCodeLine{459 DECL\_CONST\_OCML\_BINARY\_F16(minmag)}
+\DoxyCodeLine{460 extern half OCML\_MANGLE\_F16(modf)(half, \_\_private half *);}
+\DoxyCodeLine{461 extern \_\_attribute\_\_((const)) half OCML\_MANGLE\_F16(nan)(ushort);}
+\DoxyCodeLine{462 DECL\_CONST\_OCML\_UNARY\_F16(ncdf)}
+\DoxyCodeLine{463 DECL\_CONST\_OCML\_UNARY\_F16(ncdfinv)}
+\DoxyCodeLine{464 DECL\_CONST\_OCML\_UNARY\_F16(nearbyint)}
+\DoxyCodeLine{465 DECL\_CONST\_OCML\_BINARY\_F16(nextafter)}
+\DoxyCodeLine{466 DECL\_CONST\_OCML\_BINARY\_F16(pow)}
+\DoxyCodeLine{467 DECL\_CONST\_OCML\_BINARY\_F16(powr)}
+\DoxyCodeLine{468 extern \_\_attribute\_\_((pure)) half OCML\_MANGLE\_F16(pown)(half, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{469 extern \_\_attribute\_\_((pure)) half OCML\_MANGLE\_F16(rootn)(half, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{470 DECL\_CONST\_OCML\_UNARY\_F16(rcbrt)}
+\DoxyCodeLine{471 DECL\_CONST\_OCML\_BINARY\_F16(remainder)}
+\DoxyCodeLine{472 extern half OCML\_MANGLE\_F16(remquo)(half, half, \_\_private \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{473 DECL\_CONST\_OCML\_BINARY\_F16(rhypot)}
+\DoxyCodeLine{474 DECL\_CONST\_OCML\_UNARY\_F16(rint)}
+\DoxyCodeLine{475 DECL\_CONST\_OCML\_TERNARY\_F16(rlen3)}
+\DoxyCodeLine{476 extern \_\_attribute\_\_((const)) half OCML\_MANGLE\_F16(rlen4)(half, half, half, half);}
+\DoxyCodeLine{477 DECL\_CONST\_OCML\_UNARY\_F16(round)}
+\DoxyCodeLine{478 DECL\_CONST\_OCML\_UNARY\_F16(rsqrt)}
+\DoxyCodeLine{479 DECL\_CONST\_OCML\_BINARY\_F16(scalb)}
+\DoxyCodeLine{480 extern \_\_attribute\_\_((const)) half OCML\_MANGLE\_F16(scalbn)(half, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{481 DECL\_CONST\_OCML\_UNARYPRED\_F16(signbit)}
+\DoxyCodeLine{482 DECL\_CONST\_OCML\_UNARY\_F16(sin)}
+\DoxyCodeLine{483 DECL\_CONST\_OCML\_UNARY\_F16(sinh)}
+\DoxyCodeLine{484 DECL\_CONST\_OCML\_UNARY\_F16(sinpi)}
+\DoxyCodeLine{485 extern half OCML\_MANGLE\_F16(sincos)(half, \_\_private half *);}
+\DoxyCodeLine{486 extern half OCML\_MANGLE\_F16(sincospi)(half, \_\_private half *);}
+\DoxyCodeLine{487 DECL\_CONST\_OCML\_UNARY\_F16(sqrt)}
+\DoxyCodeLine{488 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rte)}
+\DoxyCodeLine{489 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rtp)}
+\DoxyCodeLine{490 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rtn)}
+\DoxyCodeLine{491 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rtz)}
+\DoxyCodeLine{492 DECL\_CONST\_OCML\_UNARY\_F16(tan)}
+\DoxyCodeLine{493 DECL\_CONST\_OCML\_UNARY\_F16(tanpi)}
+\DoxyCodeLine{494 DECL\_CONST\_OCML\_UNARY\_F16(tanh)}
+\DoxyCodeLine{495 DECL\_CONST\_OCML\_UNARY\_F16(tgamma)}
+\DoxyCodeLine{496 DECL\_CONST\_OCML\_UNARY\_F16(trunc)}
+\DoxyCodeLine{497 DECL\_CONST\_OCML\_UNARY\_F16(y0)}
+\DoxyCodeLine{498 DECL\_CONST\_OCML\_UNARY\_F16(y1)}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500 DECL\_CONST\_OCML\_BINARY\_F16(add\_rte)}
+\DoxyCodeLine{501 DECL\_CONST\_OCML\_BINARY\_F16(add\_rtp)}
+\DoxyCodeLine{502 DECL\_CONST\_OCML\_BINARY\_F16(add\_rtn)}
+\DoxyCodeLine{503 DECL\_CONST\_OCML\_BINARY\_F16(add\_rtz)}
+\DoxyCodeLine{504 }
+\DoxyCodeLine{505 DECL\_CONST\_OCML\_BINARY\_F16(div\_rte)}
+\DoxyCodeLine{506 DECL\_CONST\_OCML\_BINARY\_F16(div\_rtp)}
+\DoxyCodeLine{507 DECL\_CONST\_OCML\_BINARY\_F16(div\_rtn)}
+\DoxyCodeLine{508 DECL\_CONST\_OCML\_BINARY\_F16(div\_rtz)}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rte)}
+\DoxyCodeLine{511 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rtp)}
+\DoxyCodeLine{512 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rtn)}
+\DoxyCodeLine{513 DECL\_CONST\_OCML\_TERNARY\_F16(fma\_rtz)}
+\DoxyCodeLine{514 }
+\DoxyCodeLine{515 DECL\_CONST\_OCML\_BINARY\_F16(mul\_rte)}
+\DoxyCodeLine{516 DECL\_CONST\_OCML\_BINARY\_F16(mul\_rtp)}
+\DoxyCodeLine{517 DECL\_CONST\_OCML\_BINARY\_F16(mul\_rtn)}
+\DoxyCodeLine{518 DECL\_CONST\_OCML\_BINARY\_F16(mul\_rtz)}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rte)}
+\DoxyCodeLine{521 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rtp)}
+\DoxyCodeLine{522 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rtn)}
+\DoxyCodeLine{523 DECL\_CONST\_OCML\_UNARY\_F16(sqrt\_rtz)}
+\DoxyCodeLine{524 }
+\DoxyCodeLine{525 DECL\_CONST\_OCML\_BINARY\_F16(sub\_rte)}
+\DoxyCodeLine{526 DECL\_CONST\_OCML\_BINARY\_F16(sub\_rtp)}
+\DoxyCodeLine{527 DECL\_CONST\_OCML\_BINARY\_F16(sub\_rtn)}
+\DoxyCodeLine{528 DECL\_CONST\_OCML\_BINARY\_F16(sub\_rtz)}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530 \textcolor{comment}{// 2-\/vector functions}}
+\DoxyCodeLine{531 DECL\_CONST\_OCML\_UNARY\_2F16(acos)}
+\DoxyCodeLine{532 DECL\_CONST\_OCML\_UNARY\_2F16(acosh)}
+\DoxyCodeLine{533 DECL\_CONST\_OCML\_UNARY\_2F16(acospi)}
+\DoxyCodeLine{534 DECL\_CONST\_OCML\_UNARY\_2F16(asin)}
+\DoxyCodeLine{535 DECL\_CONST\_OCML\_UNARY\_2F16(asinh)}
+\DoxyCodeLine{536 DECL\_CONST\_OCML\_UNARY\_2F16(asinpi)}
+\DoxyCodeLine{537 DECL\_CONST\_OCML\_UNARY\_2F16(atan)}
+\DoxyCodeLine{538 DECL\_CONST\_OCML\_UNARY\_2F16(atanh)}
+\DoxyCodeLine{539 DECL\_CONST\_OCML\_UNARY\_2F16(atanpi)}
+\DoxyCodeLine{540 DECL\_CONST\_OCML\_BINARY\_2F16(atan2)}
+\DoxyCodeLine{541 DECL\_CONST\_OCML\_BINARY\_2F16(atan2pi)}
+\DoxyCodeLine{542 DECL\_CONST\_OCML\_UNARY\_2F16(cbrt)}
+\DoxyCodeLine{543 DECL\_CONST\_OCML\_UNARY\_2F16(ceil)}
+\DoxyCodeLine{544 DECL\_CONST\_OCML\_BINARY\_2F16(copysign)}
+\DoxyCodeLine{545 DECL\_CONST\_OCML\_UNARY\_2F16(cos)}
+\DoxyCodeLine{546 DECL\_CONST\_OCML\_UNARY\_2F16(cosh)}
+\DoxyCodeLine{547 DECL\_CONST\_OCML\_UNARY\_2F16(cospi)}
+\DoxyCodeLine{548 DECL\_CONST\_OCML\_UNARY\_2F16(erf)}
+\DoxyCodeLine{549 DECL\_CONST\_OCML\_UNARY\_2F16(erfc)}
+\DoxyCodeLine{550 DECL\_CONST\_OCML\_UNARY\_2F16(erfinv)}
+\DoxyCodeLine{551 DECL\_CONST\_OCML\_UNARY\_2F16(erfcinv)}
+\DoxyCodeLine{552 DECL\_CONST\_OCML\_UNARY\_2F16(erfcx)}
+\DoxyCodeLine{553 DECL\_CONST\_OCML\_UNARY\_2F16(exp)}
+\DoxyCodeLine{554 DECL\_CONST\_OCML\_UNARY\_2F16(exp2)}
+\DoxyCodeLine{555 DECL\_CONST\_OCML\_UNARY\_2F16(exp10)}
+\DoxyCodeLine{556 DECL\_CONST\_OCML\_UNARY\_2F16(expm1)}
+\DoxyCodeLine{557 DECL\_CONST\_OCML\_UNARY\_2F16(fabs)}
+\DoxyCodeLine{558 DECL\_CONST\_OCML\_BINARY\_2F16(fdim)}
+\DoxyCodeLine{559 DECL\_CONST\_OCML\_UNARY\_2F16(floor)}
+\DoxyCodeLine{560 DECL\_CONST\_OCML\_TERNARY\_2F16(fma)}
+\DoxyCodeLine{561 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rte)}
+\DoxyCodeLine{562 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rtp)}
+\DoxyCodeLine{563 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rtn)}
+\DoxyCodeLine{564 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rtz)}
+\DoxyCodeLine{565 DECL\_CONST\_OCML\_TERNARY\_2F16(fmuladd)}
+\DoxyCodeLine{566 DECL\_CONST\_OCML\_BINARY\_2F16(fmax)}
+\DoxyCodeLine{567 DECL\_CONST\_OCML\_BINARY\_2F16(fmin)}
+\DoxyCodeLine{568 DECL\_CONST\_OCML\_BINARY\_2F16(fmod)}
+\DoxyCodeLine{569 DECL\_CONST\_OCML\_UNARYPRED\_2F16(fpclassify)}
+\DoxyCodeLine{570 extern half2 OCML\_MANGLE\_2F16(fract)(half2, \_\_private half2 *);}
+\DoxyCodeLine{571 extern half2 OCML\_MANGLE\_2F16(frexp)(half2, \_\_private int2 *);}
+\DoxyCodeLine{572 DECL\_CONST\_OCML\_BINARY\_2F16(hypot)}
+\DoxyCodeLine{573 extern \_\_attribute\_\_((const)) int2 OCML\_MANGLE\_2F16(ilogb)(half2);}
+\DoxyCodeLine{574 DECL\_CONST\_OCML\_UNARYPRED\_2F16(isfinite)}
+\DoxyCodeLine{575 DECL\_CONST\_OCML\_UNARYPRED\_2F16(isinf)}
+\DoxyCodeLine{576 DECL\_CONST\_OCML\_UNARYPRED\_2F16(isnan)}
+\DoxyCodeLine{577 DECL\_CONST\_OCML\_UNARYPRED\_2F16(isnormal)}
+\DoxyCodeLine{578 DECL\_CONST\_OCML\_UNARY\_2F16(i0)}
+\DoxyCodeLine{579 DECL\_CONST\_OCML\_UNARY\_2F16(i1)}
+\DoxyCodeLine{580 DECL\_CONST\_OCML\_UNARY\_2F16(j0)}
+\DoxyCodeLine{581 DECL\_CONST\_OCML\_UNARY\_2F16(j1)}
+\DoxyCodeLine{582 extern \_\_attribute\_\_((const)) half2 OCML\_MANGLE\_2F16(ldexp)(half2, int2);}
+\DoxyCodeLine{583 DECL\_CONST\_OCML\_UNARY\_2F16(lgamma)}
+\DoxyCodeLine{584 extern half2 OCML\_MANGLE\_2F16(lgamma\_r)(half2, \_\_private int2 *);}
+\DoxyCodeLine{585 DECL\_CONST\_OCML\_UNARY\_2F16(log)}
+\DoxyCodeLine{586 DECL\_CONST\_OCML\_UNARY\_2F16(logb)}
+\DoxyCodeLine{587 DECL\_CONST\_OCML\_UNARY\_2F16(log2)}
+\DoxyCodeLine{588 DECL\_CONST\_OCML\_UNARY\_2F16(log10)}
+\DoxyCodeLine{589 DECL\_CONST\_OCML\_UNARY\_2F16(log1p)}
+\DoxyCodeLine{590 DECL\_CONST\_OCML\_TERNARY\_2F16(mad)}
+\DoxyCodeLine{591 DECL\_CONST\_OCML\_BINARY\_2F16(max)}
+\DoxyCodeLine{592 DECL\_CONST\_OCML\_BINARY\_2F16(min)}
+\DoxyCodeLine{593 DECL\_CONST\_OCML\_BINARY\_2F16(maxmag)}
+\DoxyCodeLine{594 DECL\_CONST\_OCML\_BINARY\_2F16(minmag)}
+\DoxyCodeLine{595 extern half2 OCML\_MANGLE\_2F16(modf)(half2, \_\_private half2 *);}
+\DoxyCodeLine{596 extern \_\_attribute\_\_((const)) half2 OCML\_MANGLE\_2F16(nan)(ushort2);}
+\DoxyCodeLine{597 DECL\_CONST\_OCML\_UNARY\_2F16(ncdf)}
+\DoxyCodeLine{598 DECL\_CONST\_OCML\_UNARY\_2F16(ncdfinv)}
+\DoxyCodeLine{599 DECL\_CONST\_OCML\_UNARY\_2F16(nearbyint)}
+\DoxyCodeLine{600 DECL\_CONST\_OCML\_BINARY\_2F16(nextafter)}
+\DoxyCodeLine{601 DECL\_CONST\_OCML\_BINARY\_2F16(pow)}
+\DoxyCodeLine{602 DECL\_CONST\_OCML\_BINARY\_2F16(powr)}
+\DoxyCodeLine{603 extern \_\_attribute\_\_((pure)) half2 OCML\_MANGLE\_2F16(pown)(half2, int2);}
+\DoxyCodeLine{604 extern \_\_attribute\_\_((pure)) half2 OCML\_MANGLE\_2F16(rootn)(half2, int2);}
+\DoxyCodeLine{605 DECL\_CONST\_OCML\_UNARY\_2F16(rcbrt)}
+\DoxyCodeLine{606 DECL\_CONST\_OCML\_BINARY\_2F16(remainder)}
+\DoxyCodeLine{607 extern half2 OCML\_MANGLE\_2F16(remquo)(half2, half2, \_\_private int2 *);}
+\DoxyCodeLine{608 DECL\_CONST\_OCML\_UNARY\_2F16(rint)}
+\DoxyCodeLine{609 DECL\_CONST\_OCML\_UNARY\_2F16(round)}
+\DoxyCodeLine{610 DECL\_CONST\_OCML\_UNARY\_2F16(rsqrt)}
+\DoxyCodeLine{611 DECL\_CONST\_OCML\_BINARY\_2F16(scalb)}
+\DoxyCodeLine{612 extern \_\_attribute\_\_((const)) half2 OCML\_MANGLE\_2F16(scalbn)(half2, int2);}
+\DoxyCodeLine{613 DECL\_CONST\_OCML\_UNARYPRED\_2F16(signbit)}
+\DoxyCodeLine{614 DECL\_CONST\_OCML\_UNARY\_2F16(sin)}
+\DoxyCodeLine{615 DECL\_CONST\_OCML\_UNARY\_2F16(sinh)}
+\DoxyCodeLine{616 DECL\_CONST\_OCML\_UNARY\_2F16(sinpi)}
+\DoxyCodeLine{617 extern half2 OCML\_MANGLE\_2F16(sincos)(half2, \_\_private half2 *);}
+\DoxyCodeLine{618 extern half2 OCML\_MANGLE\_2F16(sincospi)(half2, \_\_private half2 *);}
+\DoxyCodeLine{619 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt)}
+\DoxyCodeLine{620 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rte)}
+\DoxyCodeLine{621 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rtp)}
+\DoxyCodeLine{622 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rtn)}
+\DoxyCodeLine{623 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rtz)}
+\DoxyCodeLine{624 DECL\_CONST\_OCML\_UNARY\_2F16(tan)}
+\DoxyCodeLine{625 DECL\_CONST\_OCML\_UNARY\_2F16(tanpi)}
+\DoxyCodeLine{626 DECL\_CONST\_OCML\_UNARY\_2F16(tanh)}
+\DoxyCodeLine{627 DECL\_CONST\_OCML\_UNARY\_2F16(tgamma)}
+\DoxyCodeLine{628 DECL\_CONST\_OCML\_UNARY\_2F16(trunc)}
+\DoxyCodeLine{629 DECL\_CONST\_OCML\_UNARY\_2F16(y0)}
+\DoxyCodeLine{630 DECL\_CONST\_OCML\_UNARY\_2F16(y1)}
+\DoxyCodeLine{631 }
+\DoxyCodeLine{632 DECL\_CONST\_OCML\_BINARY\_2F16(add\_rte)}
+\DoxyCodeLine{633 DECL\_CONST\_OCML\_BINARY\_2F16(add\_rtp)}
+\DoxyCodeLine{634 DECL\_CONST\_OCML\_BINARY\_2F16(add\_rtn)}
+\DoxyCodeLine{635 DECL\_CONST\_OCML\_BINARY\_2F16(add\_rtz)}
+\DoxyCodeLine{636 }
+\DoxyCodeLine{637 DECL\_CONST\_OCML\_BINARY\_2F16(div\_rte)}
+\DoxyCodeLine{638 DECL\_CONST\_OCML\_BINARY\_2F16(div\_rtp)}
+\DoxyCodeLine{639 DECL\_CONST\_OCML\_BINARY\_2F16(div\_rtn)}
+\DoxyCodeLine{640 DECL\_CONST\_OCML\_BINARY\_2F16(div\_rtz)}
+\DoxyCodeLine{641 }
+\DoxyCodeLine{642 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rte)}
+\DoxyCodeLine{643 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rtp)}
+\DoxyCodeLine{644 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rtn)}
+\DoxyCodeLine{645 DECL\_CONST\_OCML\_TERNARY\_2F16(fma\_rtz)}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{647 DECL\_CONST\_OCML\_BINARY\_2F16(mul\_rte)}
+\DoxyCodeLine{648 DECL\_CONST\_OCML\_BINARY\_2F16(mul\_rtp)}
+\DoxyCodeLine{649 DECL\_CONST\_OCML\_BINARY\_2F16(mul\_rtn)}
+\DoxyCodeLine{650 DECL\_CONST\_OCML\_BINARY\_2F16(mul\_rtz)}
+\DoxyCodeLine{651 }
+\DoxyCodeLine{652 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rte)}
+\DoxyCodeLine{653 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rtp)}
+\DoxyCodeLine{654 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rtn)}
+\DoxyCodeLine{655 DECL\_CONST\_OCML\_UNARY\_2F16(sqrt\_rtz)}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657 DECL\_CONST\_OCML\_BINARY\_2F16(sub\_rte)}
+\DoxyCodeLine{658 DECL\_CONST\_OCML\_BINARY\_2F16(sub\_rtp)}
+\DoxyCodeLine{659 DECL\_CONST\_OCML\_BINARY\_2F16(sub\_rtn)}
+\DoxyCodeLine{660 DECL\_CONST\_OCML\_BINARY\_2F16(sub\_rtz)}
+\DoxyCodeLine{661 }
+\DoxyCodeLine{662 DECL\_CONST\_OCML\_UNARY\_F16(native\_recip)}
+\DoxyCodeLine{663 DECL\_CONST\_OCML\_UNARY\_F16(native\_sqrt)}
+\DoxyCodeLine{664 DECL\_CONST\_OCML\_UNARY\_F16(native\_rsqrt)}
+\DoxyCodeLine{665 DECL\_CONST\_OCML\_UNARY\_F16(native\_sin)}
+\DoxyCodeLine{666 DECL\_CONST\_OCML\_UNARY\_F16(native\_cos)}
+\DoxyCodeLine{667 DECL\_CONST\_OCML\_UNARY\_F16(native\_exp2)}
+\DoxyCodeLine{668 DECL\_CONST\_OCML\_UNARY\_F16(native\_log2)}
+\DoxyCodeLine{669 }
+\DoxyCodeLine{670 }
+\DoxyCodeLine{671 \textcolor{preprocessor}{\#pragma OPENCL EXTENSION cl\_khr\_fp16 : disable}}
+\DoxyCodeLine{672 }
+\DoxyCodeLine{673 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// OCML\_H}}
+
+\end{DoxyCode}

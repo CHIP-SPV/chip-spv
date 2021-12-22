@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -68,7 +68,7 @@ $(function() {
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_c_h_i_p_event-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">CHIPEvent Class Reference</div></div>
+  <div class="headertitle"><div class="title">CHIPEvent Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
@@ -77,7 +77,8 @@ Inheritance diagram for CHIPEvent:</div>
  <div class="center">
   <img src="class_c_h_i_p_event.png" usemap="#CHIPEvent_map" alt=""/>
   <map id="CHIPEvent_map" name="CHIPEvent_map">
-<area href="class_c_h_i_p_event_open_c_l.html" alt="CHIPEventOpenCL" shape="rect" coords="0,56,120,80"/>
+<area href="class_c_h_i_p_event_level0.html" alt="CHIPEventLevel0" shape="rect" coords="0,56,120,80"/>
+<area href="class_c_h_i_p_event_open_c_l.html" alt="CHIPEventOpenCL" shape="rect" coords="130,56,250,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -87,22 +88,28 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CHIPEvent</b> (<a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *ctx_, CHIPEventType flags_=CHIPEventType::Default)</td></tr>
 <tr class="memdesc:a52ed87a3aaf412f87a5875a60520d905"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> constructor. Must always be created with some context. <br /></td></tr>
 <tr class="separator:a52ed87a3aaf412f87a5875a60520d905"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69301b0e97ad2bf26e4931a636a5d3dd"><td class="memItemLeft" align="right" valign="top"><a id="a69301b0e97ad2bf26e4931a636a5d3dd" name="a69301b0e97ad2bf26e4931a636a5d3dd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPEvent</b> ()</td></tr>
-<tr class="memdesc:a69301b0e97ad2bf26e4931a636a5d3dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> object. <br /></td></tr>
-<tr class="separator:a69301b0e97ad2bf26e4931a636a5d3dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a148183c687547c6d992b1717a33c61e7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#a148183c687547c6d992b1717a33c61e7">recordStream</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *chip_queue_)</td></tr>
-<tr class="memdesc:a148183c687547c6d992b1717a33c61e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueue this event in a given <a class="el" href="class_c_h_i_p_queue.html" title="Queue class for submitting kernels to for execution.">CHIPQueue</a>.  <a href="class_c_h_i_p_event.html#a148183c687547c6d992b1717a33c61e7">More...</a><br /></td></tr>
-<tr class="separator:a148183c687547c6d992b1717a33c61e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bba2c6c5c13a27a7f948cc996065f29"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#a0bba2c6c5c13a27a7f948cc996065f29">wait</a> ()</td></tr>
-<tr class="memdesc:a0bba2c6c5c13a27a7f948cc996065f29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for this event to complete.  <a href="class_c_h_i_p_event.html#a0bba2c6c5c13a27a7f948cc996065f29">More...</a><br /></td></tr>
-<tr class="separator:a0bba2c6c5c13a27a7f948cc996065f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf3684773f64efa1ccb7aa75694dc07e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#adf3684773f64efa1ccb7aa75694dc07e">isFinished</a> ()</td></tr>
-<tr class="memdesc:adf3684773f64efa1ccb7aa75694dc07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the event to see if it completed.  <a href="class_c_h_i_p_event.html#adf3684773f64efa1ccb7aa75694dc07e">More...</a><br /></td></tr>
-<tr class="separator:adf3684773f64efa1ccb7aa75694dc07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a52a68bd23cfd3cf0f6466869b85a80"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#a0a52a68bd23cfd3cf0f6466869b85a80">getElapsedTime</a> (<a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *other)</td></tr>
-<tr class="memdesc:a0a52a68bd23cfd3cf0f6466869b85a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate absolute difference between completion timestamps of this event and other.  <a href="class_c_h_i_p_event.html#a0a52a68bd23cfd3cf0f6466869b85a80">More...</a><br /></td></tr>
-<tr class="separator:a0a52a68bd23cfd3cf0f6466869b85a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e2ac6d50f2823c66cc0df2049a3623d"><td class="memItemLeft" align="right" valign="top"><a id="a1e2ac6d50f2823c66cc0df2049a3623d" name="a1e2ac6d50f2823c66cc0df2049a3623d"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPEvent</b> ()=default</td></tr>
+<tr class="memdesc:a1e2ac6d50f2823c66cc0df2049a3623d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> object. <br /></td></tr>
+<tr class="separator:a1e2ac6d50f2823c66cc0df2049a3623d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a362bff72a0ab2faa563d16fdb85dc869"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#a362bff72a0ab2faa563d16fdb85dc869">recordStream</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *chip_queue_)=0</td></tr>
+<tr class="memdesc:a362bff72a0ab2faa563d16fdb85dc869"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enqueue this event in a given <a class="el" href="class_c_h_i_p_queue.html" title="Queue class for submitting kernels to for execution.">CHIPQueue</a>.  <a href="class_c_h_i_p_event.html#a362bff72a0ab2faa563d16fdb85dc869">More...</a><br /></td></tr>
+<tr class="separator:a362bff72a0ab2faa563d16fdb85dc869"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6b0d22539acd85209159e85f21807c8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#ab6b0d22539acd85209159e85f21807c8">wait</a> ()=0</td></tr>
+<tr class="memdesc:ab6b0d22539acd85209159e85f21807c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for this event to complete.  <a href="class_c_h_i_p_event.html#ab6b0d22539acd85209159e85f21807c8">More...</a><br /></td></tr>
+<tr class="separator:ab6b0d22539acd85209159e85f21807c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892b65012e770b660f5d364483067f05"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#a892b65012e770b660f5d364483067f05">isFinished</a> ()=0</td></tr>
+<tr class="memdesc:a892b65012e770b660f5d364483067f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the event to see if it completed.  <a href="class_c_h_i_p_event.html#a892b65012e770b660f5d364483067f05">More...</a><br /></td></tr>
+<tr class="separator:a892b65012e770b660f5d364483067f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ae00777df6af9b892ff03ccc221388a"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#a6ae00777df6af9b892ff03ccc221388a">getElapsedTime</a> (<a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *other)=0</td></tr>
+<tr class="memdesc:a6ae00777df6af9b892ff03ccc221388a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate absolute difference between completion timestamps of this event and other.  <a href="class_c_h_i_p_event.html#a6ae00777df6af9b892ff03ccc221388a">More...</a><br /></td></tr>
+<tr class="separator:a6ae00777df6af9b892ff03ccc221388a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb096cc87dab294e41bc91ce849924b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event.html#aafb096cc87dab294e41bc91ce849924b">hostSignal</a> ()=0</td></tr>
+<tr class="memdesc:aafb096cc87dab294e41bc91ce849924b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggle this event from the host.  <a href="class_c_h_i_p_event.html#aafb096cc87dab294e41bc91ce849924b">More...</a><br /></td></tr>
+<tr class="separator:aafb096cc87dab294e41bc91ce849924b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75fef7a81d6949e4552d2c6693119af3"><td class="memItemLeft" align="right" valign="top"><a id="a75fef7a81d6949e4552d2c6693119af3" name="a75fef7a81d6949e4552d2c6693119af3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>barrier</b> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *chip_queue_)=0</td></tr>
+<tr class="separator:a75fef7a81d6949e4552d2c6693119af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -113,12 +120,12 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a27cd9368a70b2b29d7b1d913a7e0d842"><td class="memItemLeft" align="right" valign="top"><a id="a27cd9368a70b2b29d7b1d913a7e0d842" name="a27cd9368a70b2b29d7b1d913a7e0d842"></a>
-std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mutex</b></td></tr>
-<tr class="separator:a27cd9368a70b2b29d7b1d913a7e0d842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af80237fcb6db951df8d8aeeaadf0d446"><td class="memItemLeft" align="right" valign="top"><a id="af80237fcb6db951df8d8aeeaadf0d446" name="af80237fcb6db951df8d8aeeaadf0d446"></a>
-event_status_e&#160;</td><td class="memItemRight" valign="bottom"><b>status</b></td></tr>
-<tr class="separator:af80237fcb6db951df8d8aeeaadf0d446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af75136ece5a26c6838d7ba9c0b77f05e"><td class="memItemLeft" align="right" valign="top"><a id="af75136ece5a26c6838d7ba9c0b77f05e" name="af75136ece5a26c6838d7ba9c0b77f05e"></a>
+std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
+<tr class="separator:af75136ece5a26c6838d7ba9c0b77f05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72561252dcfa0f9ca6cdfe5a96e266d8"><td class="memItemLeft" align="right" valign="top"><a id="a72561252dcfa0f9ca6cdfe5a96e266d8" name="a72561252dcfa0f9ca6cdfe5a96e266d8"></a>
+event_status_e&#160;</td><td class="memItemRight" valign="bottom"><b>event_status</b></td></tr>
+<tr class="separator:a72561252dcfa0f9ca6cdfe5a96e266d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd8262b4e41f0c5d87ba2fac14c44bce"><td class="memItemLeft" align="right" valign="top"><a id="acd8262b4e41f0c5d87ba2fac14c44bce" name="acd8262b4e41f0c5d87ba2fac14c44bce"></a>
 CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></td></tr>
 <tr class="memdesc:acd8262b4e41f0c5d87ba2fac14c44bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">event bahavior modifier - valid values are hipEventDefault, hipEventBlockingSync, hipEventDisableTiming, hipEventInterprocess <br /></td></tr>
@@ -129,8 +136,8 @@ CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></t
 <tr class="separator:a4321ad3fc8ba63180a803557a5d9c270"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0a52a68bd23cfd3cf0f6466869b85a80" name="a0a52a68bd23cfd3cf0f6466869b85a80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a52a68bd23cfd3cf0f6466869b85a80">&#9670;&nbsp;</a></span>getElapsedTime()</h2>
+<a id="a6ae00777df6af9b892ff03ccc221388a" name="a6ae00777df6af9b892ff03ccc221388a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ae00777df6af9b892ff03ccc221388a">&#9670;&nbsp;</a></span>getElapsedTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,7 +146,7 @@ CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float CHIPEvent::getElapsedTime </td>
+          <td class="memname">virtual float CHIPEvent::getElapsedTime </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -148,7 +155,7 @@ CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -162,10 +169,12 @@ CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></t
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>float </dd></dl>
 
+<p>Implemented in <a class="el" href="class_c_h_i_p_event_open_c_l.html#a632215a5919d6ca4cb1c82c55c72b296">CHIPEventOpenCL</a>, and <a class="el" href="class_c_h_i_p_event_level0.html#a3cc8367a7c1c9a333d65c97cbb7575de">CHIPEventLevel0</a>.</p>
+
 </div>
 </div>
-<a id="adf3684773f64efa1ccb7aa75694dc07e" name="adf3684773f64efa1ccb7aa75694dc07e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf3684773f64efa1ccb7aa75694dc07e">&#9670;&nbsp;</a></span>isFinished()</h2>
+<a id="aafb096cc87dab294e41bc91ce849924b" name="aafb096cc87dab294e41bc91ce849924b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafb096cc87dab294e41bc91ce849924b">&#9670;&nbsp;</a></span>hostSignal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +183,7 @@ CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool CHIPEvent::isFinished </td>
+          <td class="memname">virtual void CHIPEvent::hostSignal </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -182,7 +191,36 @@ CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></t
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Toggle this event from the host. </p>
+
+<p>Implemented in <a class="el" href="class_c_h_i_p_event_level0.html#a948af6fb5cb5ace178db3effddde57ae">CHIPEventLevel0</a>.</p>
+
+</div>
+</div>
+<a id="a892b65012e770b660f5d364483067f05" name="a892b65012e770b660f5d364483067f05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892b65012e770b660f5d364483067f05">&#9670;&nbsp;</a></span>isFinished()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool CHIPEvent::isFinished </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -192,10 +230,12 @@ CHIPEventType&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></t
 <dd>
 false </dd></dl>
 
+<p>Implemented in <a class="el" href="class_c_h_i_p_event_level0.html#a7fe03e1547cda68f051a73987f5a9003">CHIPEventLevel0</a>, and <a class="el" href="class_c_h_i_p_event_open_c_l.html#a894ed0e7f85c1249d261fd780fd2eb0a">CHIPEventOpenCL</a>.</p>
+
 </div>
 </div>
-<a id="a148183c687547c6d992b1717a33c61e7" name="a148183c687547c6d992b1717a33c61e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a148183c687547c6d992b1717a33c61e7">&#9670;&nbsp;</a></span>recordStream()</h2>
+<a id="a362bff72a0ab2faa563d16fdb85dc869" name="a362bff72a0ab2faa563d16fdb85dc869"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362bff72a0ab2faa563d16fdb85dc869">&#9670;&nbsp;</a></span>recordStream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,7 +244,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool CHIPEvent::recordStream </td>
+          <td class="memname">virtual void CHIPEvent::recordStream </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td>
           <td class="paramname"><em>chip_queue_</em></td><td>)</td>
@@ -213,7 +253,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -229,10 +269,12 @@ false </dd></dl>
 <dd>
 false </dd></dl>
 
+<p>Implemented in <a class="el" href="class_c_h_i_p_event_level0.html#a817541d4cb42dbb9315ccb9c6dab7a68">CHIPEventLevel0</a>, and <a class="el" href="class_c_h_i_p_event_open_c_l.html#ad02993de3b0041aecc766adc7c4bbe13">CHIPEventOpenCL</a>.</p>
+
 </div>
 </div>
-<a id="a0bba2c6c5c13a27a7f948cc996065f29" name="a0bba2c6c5c13a27a7f948cc996065f29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bba2c6c5c13a27a7f948cc996065f29">&#9670;&nbsp;</a></span>wait()</h2>
+<a id="ab6b0d22539acd85209159e85f21807c8" name="ab6b0d22539acd85209159e85f21807c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6b0d22539acd85209159e85f21807c8">&#9670;&nbsp;</a></span>wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -241,7 +283,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool CHIPEvent::wait </td>
+          <td class="memname">virtual bool CHIPEvent::wait </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -249,7 +291,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -259,11 +301,13 @@ false </dd></dl>
 <dd>
 false </dd></dl>
 
+<p>Implemented in <a class="el" href="class_c_h_i_p_event_level0.html#a4a7e44eaac96803672d44a490234f166">CHIPEventLevel0</a>, and <a class="el" href="class_c_h_i_p_event_open_c_l.html#a5003fb42d8c5d9c3deb723942c565960">CHIPEventOpenCL</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,0 +1,64 @@
+\hypertarget{spirv__hip__runtime_8h_source}{}\doxysection{spirv\+\_\+hip\+\_\+runtime.\+h}
+\label{spirv__hip__runtime_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip\_runtime.h@{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip\_runtime.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef SPIRV\_HIP\_RUNTIME\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#define SPIRV\_HIP\_RUNTIME\_H}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef \_\_HIP\_PLATFORM\_SPIRV\_\_}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define \_\_HIP\_PLATFORM\_SPIRV\_\_}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{hip__runtime__api_8h}{hip/hip\_runtime\_api.h}}>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <hip/spirv\_hip.hh>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <hip/spirv\_hip\_vector\_types.h>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <hip/spirv\_hip\_fp16.h>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <hip/spirv\_hip\_ldg.h>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <hip/spirv\_math\_fwd.h>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{comment}{// Feature tests:}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#if (defined(\_\_HCC\_ACCELERATOR\_\_) \&\& (\_\_HCC\_ACCELERATOR\_\_ != 0)) || \(\backslash\)}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{    \_\_HIP\_DEVICE\_COMPILE\_\_}}
+\DoxyCodeLine{25 \textcolor{comment}{// Device compile and not host compile:}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{// 32-\/bit Atomics:}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_GLOBAL\_INT32\_ATOMICS\_\_ (1)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_GLOBAL\_FLOAT\_ATOMIC\_EXCH\_\_ (1)}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_SHARED\_INT32\_ATOMICS\_\_ (1)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_SHARED\_FLOAT\_ATOMIC\_EXCH\_\_ (1)}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_FLOAT\_ATOMIC\_ADD\_\_ (1)}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{// 64-\/bit Atomics:}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_GLOBAL\_INT64\_ATOMICS\_\_ (1)}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_SHARED\_INT64\_ATOMICS\_\_ (1)}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{// Doubles}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_DOUBLES\_\_ (1)}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{comment}{// warp cross-\/lane operations:}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_WARP\_VOTE\_\_ (1)}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_WARP\_BALLOT\_\_ (1)}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_WARP\_SHUFFLE\_\_ (1)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_WARP\_FUNNEL\_SHIFT\_\_ (0)}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{comment}{// sync}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_THREAD\_FENCE\_SYSTEM\_\_ (1)}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_SYNC\_THREAD\_EXT\_\_ (0)}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{comment}{// misc}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_SURFACE\_FUNCS\_\_ (0)}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_3DGRID\_\_ (1)}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define \_\_HIP\_ARCH\_HAS\_DYNAMIC\_PARALLEL\_\_ (0)}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* Device feature flags */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -20,7 +20,9 @@ virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_context_open_c_l_ad0c20
 \begin{DoxyCompactList}\small\item\em Copy memory. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_context_open_c_l_a30c7198efa368b19cd2385e153ff2446}\label{class_c_h_i_p_context_open_c_l_a30c7198efa368b19cd2385e153ff2446}} 
 cl\+::\+Context $\ast$ {\bfseries get} ()
-\end{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_context_open_c_l_a62abcf865241a49b79b9051d63b03ed6}{create\+Event}} (unsigned flags) override
+\begin{DoxyCompactList}\small\item\em Create a Event object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -59,6 +61,28 @@ void$\ast$
 
 
 Implements \mbox{\hyperlink{class_c_h_i_p_context_a3ad920ded6df2e7a66396ed77ab442b2}{CHIPContext}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_context_open_c_l_a62abcf865241a49b79b9051d63b03ed6}\label{class_c_h_i_p_context_open_c_l_a62abcf865241a49b79b9051d63b03ed6}} 
+\index{CHIPContextOpenCL@{CHIPContextOpenCL}!createEvent@{createEvent}}
+\index{createEvent@{createEvent}!CHIPContextOpenCL@{CHIPContextOpenCL}}
+\doxysubsubsection{\texorpdfstring{createEvent()}{createEvent()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ CHIPContext\+Open\+CL\+::create\+Event (\begin{DoxyParamCaption}\item[{unsigned}]{flags }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Create a Event object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+CHIPEvent$\ast$ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_c_h_i_p_context_a4af79ee3405b648afb092ff3622577e6}{CHIPContext}}.
 
 \mbox{\Hypertarget{class_c_h_i_p_context_open_c_l_ab7de78a5e94d0bff220962cebd07596b}\label{class_c_h_i_p_context_open_c_l_ab7de78a5e94d0bff220962cebd07596b}} 
 \index{CHIPContextOpenCL@{CHIPContextOpenCL}!free\_@{free\_}}
@@ -110,11 +134,11 @@ hip\+Error\+\_\+t
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_c_h_i_p_context_aa2541d2c5d3f61cf96263a59a41554ea}{CHIPContext}}.
+Reimplemented from \mbox{\hyperlink{class_c_h_i_p_context_a0fc1f032f9742d6348121870cc5be04c}{CHIPContext}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+hh\item 
-/\+Users/pvelesko/local/\+HIPxx/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+hh\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+cc\end{DoxyCompactItemize}

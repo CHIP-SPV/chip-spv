@@ -1,0 +1,69 @@
+\hypertarget{classspdlog_1_1sinks_1_1syslog__sink}{}\doxysection{spdlog\+::sinks\+::syslog\+\_\+sink\texorpdfstring{$<$}{<} Mutex \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classspdlog_1_1sinks_1_1syslog__sink}\index{spdlog::sinks::syslog\_sink$<$ Mutex $>$@{spdlog::sinks::syslog\_sink$<$ Mutex $>$}}
+
+
+{\ttfamily \#include $<$syslog\+\_\+sink.\+h$>$}
+
+Inheritance diagram for spdlog\+::sinks\+::syslog\+\_\+sink\texorpdfstring{$<$}{<} Mutex \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classspdlog_1_1sinks_1_1syslog__sink}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1syslog__sink_acc60de632a07b329aeba41ee48ced4f6}\label{classspdlog_1_1sinks_1_1syslog__sink_acc60de632a07b329aeba41ee48ced4f6}} 
+{\bfseries syslog\+\_\+sink} (std\+::string ident=\char`\"{}\char`\"{}, int syslog\+\_\+option=0, int syslog\+\_\+facility=LOG\+\_\+\+USER)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1syslog__sink_a505adae200592eab1e093ab258ad0291}\label{classspdlog_1_1sinks_1_1syslog__sink_a505adae200592eab1e093ab258ad0291}} 
+{\bfseries syslog\+\_\+sink} (const \mbox{\hyperlink{classspdlog_1_1sinks_1_1syslog__sink}{syslog\+\_\+sink}} \&)=delete
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1syslog__sink_afc51231d21efac54cdf1d62dbfbbb9d7}\label{classspdlog_1_1sinks_1_1syslog__sink_afc51231d21efac54cdf1d62dbfbbb9d7}} 
+\mbox{\hyperlink{classspdlog_1_1sinks_1_1syslog__sink}{syslog\+\_\+sink}} \& {\bfseries operator=} (const \mbox{\hyperlink{classspdlog_1_1sinks_1_1syslog__sink}{syslog\+\_\+sink}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classspdlog_1_1sinks_1_1syslog__sink_a303bccf40cd03356510391c493078005}{sink\+\_\+it\+\_\+}} (const \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details\+::log\+\_\+msg}} \&msg) override
+\item 
+void \mbox{\hyperlink{classspdlog_1_1sinks_1_1syslog__sink_a6afb5ba7ef5e5f2950e624ec650fb562}{flush\+\_\+}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Mutex$>$\newline
+class spdlog\+::sinks\+::syslog\+\_\+sink$<$ Mutex $>$}
+Sink that write to syslog using the {\ttfamily syscall()} library call.
+
+Locking is not needed, as {\ttfamily syslog()} itself is thread-\/safe. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1syslog__sink_a6afb5ba7ef5e5f2950e624ec650fb562}\label{classspdlog_1_1sinks_1_1syslog__sink_a6afb5ba7ef5e5f2950e624ec650fb562}} 
+\index{spdlog::sinks::syslog\_sink$<$ Mutex $>$@{spdlog::sinks::syslog\_sink$<$ Mutex $>$}!flush\_@{flush\_}}
+\index{flush\_@{flush\_}!spdlog::sinks::syslog\_sink$<$ Mutex $>$@{spdlog::sinks::syslog\_sink$<$ Mutex $>$}}
+\doxysubsubsection{\texorpdfstring{flush\_()}{flush\_()}}
+{\footnotesize\ttfamily template$<$typename Mutex $>$ \\
+void \mbox{\hyperlink{classspdlog_1_1sinks_1_1syslog__sink}{spdlog\+::sinks\+::syslog\+\_\+sink}}$<$ Mutex $>$\+::flush\+\_\+ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{spdlog\+::sinks\+::base\+\_\+sink$<$ Mutex $>$}}.
+
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1syslog__sink_a303bccf40cd03356510391c493078005}\label{classspdlog_1_1sinks_1_1syslog__sink_a303bccf40cd03356510391c493078005}} 
+\index{spdlog::sinks::syslog\_sink$<$ Mutex $>$@{spdlog::sinks::syslog\_sink$<$ Mutex $>$}!sink\_it\_@{sink\_it\_}}
+\index{sink\_it\_@{sink\_it\_}!spdlog::sinks::syslog\_sink$<$ Mutex $>$@{spdlog::sinks::syslog\_sink$<$ Mutex $>$}}
+\doxysubsubsection{\texorpdfstring{sink\_it\_()}{sink\_it\_()}}
+{\footnotesize\ttfamily template$<$typename Mutex $>$ \\
+void \mbox{\hyperlink{classspdlog_1_1sinks_1_1syslog__sink}{spdlog\+::sinks\+::syslog\+\_\+sink}}$<$ Mutex $>$\+::sink\+\_\+it\+\_\+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details\+::log\+\_\+msg}} \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{spdlog\+::sinks\+::base\+\_\+sink$<$ Mutex $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/sinks/syslog\+\_\+sink.\+h\end{DoxyCompactItemize}

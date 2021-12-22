@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -97,6 +97,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a30c7198efa368b19cd2385e153ff2446"><td class="memItemLeft" align="right" valign="top"><a id="a30c7198efa368b19cd2385e153ff2446" name="a30c7198efa368b19cd2385e153ff2446"></a>
 cl::Context *&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()</td></tr>
 <tr class="separator:a30c7198efa368b19cd2385e153ff2446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62abcf865241a49b79b9051d63b03ed6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context_open_c_l.html#a62abcf865241a49b79b9051d63b03ed6">createEvent</a> (unsigned flags) override</td></tr>
+<tr class="memdesc:a62abcf865241a49b79b9051d63b03ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Event object.  <a href="class_c_h_i_p_context_open_c_l.html#a62abcf865241a49b79b9051d63b03ed6">More...</a><br /></td></tr>
+<tr class="separator:a62abcf865241a49b79b9051d63b03ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_c_h_i_p_context"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_c_h_i_p_context')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_c_h_i_p_context.html">CHIPContext</a></td></tr>
 <tr class="memitem:a271cd26573639cba0f3952c1a864b2b0 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="a271cd26573639cba0f3952c1a864b2b0" name="a271cd26573639cba0f3952c1a864b2b0"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CHIPContext</b> ()</td></tr>
@@ -106,9 +109,9 @@ cl::Context *&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()</
 &#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPContext</b> ()</td></tr>
 <tr class="memdesc:ac2ba6ad31278cb28ec9a48f848dfcffa inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_context.html" title="Context class Contexts contain execution queues and are created on top of a single or multiple device...">CHIPContext</a> object. <br /></td></tr>
 <tr class="separator:ac2ba6ad31278cb28ec9a48f848dfcffa inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab9f64f142801289bdb91afbbc4ed990 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aab9f64f142801289bdb91afbbc4ed990">addDevice</a> (<a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *dev)</td></tr>
-<tr class="memdesc:aab9f64f142801289bdb91afbbc4ed990 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a device to this context.  <a href="class_c_h_i_p_context.html#aab9f64f142801289bdb91afbbc4ed990">More...</a><br /></td></tr>
-<tr class="separator:aab9f64f142801289bdb91afbbc4ed990 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a539403301fcc9a5ebff80a4791ec54 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a0a539403301fcc9a5ebff80a4791ec54">addDevice</a> (<a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *dev)</td></tr>
+<tr class="memdesc:a0a539403301fcc9a5ebff80a4791ec54 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a device to this context.  <a href="class_c_h_i_p_context.html#a0a539403301fcc9a5ebff80a4791ec54">More...</a><br /></td></tr>
+<tr class="separator:a0a539403301fcc9a5ebff80a4791ec54 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8cbc5f609c668c6fd8ed2161b8f5b4f inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#aa8cbc5f609c668c6fd8ed2161b8f5b4f">addQueue</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *q)</td></tr>
 <tr class="memdesc:aa8cbc5f609c668c6fd8ed2161b8f5b4f inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a queue to this context.  <a href="class_c_h_i_p_context.html#aa8cbc5f609c668c6fd8ed2161b8f5b4f">More...</a><br /></td></tr>
 <tr class="separator:aa8cbc5f609c668c6fd8ed2161b8f5b4f inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,17 +151,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>finishAll</b> ()</td>
 <tr class="separator:a99583fe33f2dd9bf23b278e42fb168ec inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="a4b0f248e3f69b73f42ef7ad787e2fd44" name="a4b0f248e3f69b73f42ef7ad787e2fd44"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
-<tr class="memdesc:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset this context. TODO: what does it mean to reset a context? <br /></td></tr>
+<tr class="memdesc:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset this context. <br /></td></tr>
 <tr class="separator:a4b0f248e3f69b73f42ef7ad787e2fd44 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d03567273b7899b7d2e0df0e5f015cf inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a7d03567273b7899b7d2e0df0e5f015cf">retain</a> ()</td></tr>
 <tr class="memdesc:a7d03567273b7899b7d2e0df0e5f015cf inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retain this context. TODO: What does it mean to retain a context?  <a href="class_c_h_i_p_context.html#a7d03567273b7899b7d2e0df0e5f015cf">More...</a><br /></td></tr>
 <tr class="separator:a7d03567273b7899b7d2e0df0e5f015cf inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abff033626b0fa70dcd319a0d9406bfd3 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#abff033626b0fa70dcd319a0d9406bfd3">recordEvent</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *q, <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *event)</td></tr>
-<tr class="memdesc:abff033626b0fa70dcd319a0d9406bfd3 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record an event in a given queue.  <a href="class_c_h_i_p_context.html#abff033626b0fa70dcd319a0d9406bfd3">More...</a><br /></td></tr>
-<tr class="separator:abff033626b0fa70dcd319a0d9406bfd3 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90a36c0230e9aa63e381c679433f63f3 inherit pub_methods_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top">virtual CHIPTexture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_context.html#a90a36c0230e9aa63e381c679433f63f3">createImage</a> (hipResourceDesc *resDesc, hipTextureDesc *texDesc)</td></tr>
-<tr class="memdesc:a90a36c0230e9aa63e381c679433f63f3 inherit pub_methods_class_c_h_i_p_context"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Image objct.  <a href="class_c_h_i_p_context.html#a90a36c0230e9aa63e381c679433f63f3">More...</a><br /></td></tr>
-<tr class="separator:a90a36c0230e9aa63e381c679433f63f3 inherit pub_methods_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -181,6 +178,12 @@ std::vector&lt; <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * &g
 <tr class="memitem:a33626d8a7006c2c63dbb1760f47ac6ba inherit pro_attribs_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="a33626d8a7006c2c63dbb1760f47ac6ba" name="a33626d8a7006c2c63dbb1760f47ac6ba"></a>
 std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
 <tr class="separator:a33626d8a7006c2c63dbb1760f47ac6ba inherit pro_attribs_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab175053d15520cb4011750f2e34ba840 inherit pro_attribs_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="ab175053d15520cb4011750f2e34ba840" name="ab175053d15520cb4011750f2e34ba840"></a>
+std::vector&lt; void * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>allocated_ptrs</b></td></tr>
+<tr class="separator:ab175053d15520cb4011750f2e34ba840 inherit pro_attribs_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac93e4738059538da2d50b92ef74b01a inherit pro_attribs_class_c_h_i_p_context"><td class="memItemLeft" align="right" valign="top"><a id="aac93e4738059538da2d50b92ef74b01a" name="aac93e4738059538da2d50b92ef74b01a"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></td></tr>
+<tr class="separator:aac93e4738059538da2d50b92ef74b01a inherit pro_attribs_class_c_h_i_p_context"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a96df9d9e97324f90df1729ae8079ac95" name="a96df9d9e97324f90df1729ae8079ac95"></a>
@@ -235,6 +238,43 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
 <dl class="section return"><dt>Returns</dt><dd>void* </dd></dl>
 
 <p>Implements <a class="el" href="class_c_h_i_p_context.html#a3ad920ded6df2e7a66396ed77ab442b2">CHIPContext</a>.</p>
+
+</div>
+</div>
+<a id="a62abcf865241a49b79b9051d63b03ed6" name="a62abcf865241a49b79b9051d63b03ed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62abcf865241a49b79b9051d63b03ed6">&#9670;&nbsp;</a></span>createEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> * CHIPContextOpenCL::createEvent </td>
+          <td>(</td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>flags</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a Event object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flags</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CHIPEvent* </dd></dl>
+
+<p>Implements <a class="el" href="class_c_h_i_p_context.html#a4af79ee3405b648afb092ff3622577e6">CHIPContext</a>.</p>
 
 </div>
 </div>
@@ -335,13 +375,13 @@ false </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
 
-<p>Implements <a class="el" href="class_c_h_i_p_context.html#aa2541d2c5d3f61cf96263a59a41554ea">CHIPContext</a>.</p>
+<p>Reimplemented from <a class="el" href="class_c_h_i_p_context.html#a0fc1f032f9742d6348121870cc5be04c">CHIPContext</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/backend/OpenCL/<a class="el" href="_c_h_i_p_backend_open_c_l_8hh_source.html">CHIPBackendOpenCL.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/backend/OpenCL/CHIPBackendOpenCL.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/OpenCL/<a class="el" href="_c_h_i_p_backend_open_c_l_8hh_source.html">CHIPBackendOpenCL.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/OpenCL/CHIPBackendOpenCL.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,0 +1,124 @@
+\hypertarget{hip__runtime_8h_source}{}\doxysection{hip\+\_\+runtime.\+h}
+\label{hip__runtime_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_runtime.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_runtime.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{28 \textcolor{comment}{//}}
+\DoxyCodeLine{32 \textcolor{comment}{}\textcolor{comment}{//}}
+\DoxyCodeLine{36 \textcolor{comment}{}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_HIP\_RUNTIME\_H}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_HIP\_RUNTIME\_H}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#if (\_\_gfx1010\_\_ || \_\_gfx1011\_\_ || \_\_gfx1012\_\_ || \_\_gfx1030\_\_ || \_\_gfx1031\_\_) \&\&                   \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{    \_\_AMDGCN\_WAVEFRONT\_SIZE == 64}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#error HIP is not supported on GFX10 with wavefront size 64}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#if !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{46 \textcolor{comment}{// Some standard header files, these are included by hc.hpp and so want to make them avail on both}}
+\DoxyCodeLine{47 \textcolor{comment}{// paths to provide a consistent include env and avoid "{}missing symbol"{} errors that only appears}}
+\DoxyCodeLine{48 \textcolor{comment}{// on NVCC path:}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#if \_\_cplusplus > 199711L}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#include <hip/hip\_version.h>}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#include <hip/hip\_common.h>}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#if (defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                            \(\backslash\)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                       \(\backslash\)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#include <hip/amd\_detail/amd\_hip\_runtime.h>}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#include <hip/nvidia\_detail/nvidia\_hip\_runtime.h>}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_))}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#include "{}hip/spirv\_hip\_runtime.h"{}}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#error("{}Must define exactly one of \_\_HIP\_PLATFORM\_AMD\_\_, \_\_HIP\_PLATFORM\_NVIDIA\_\_ or \_\_HIP\_PLATFORM\_SPIRV\_\_"{}});}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{comment}{// The following are deprecation notices.}}
+\DoxyCodeLine{81 \textcolor{comment}{// They will be removed after upstream updation}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#if 0  }\textcolor{comment}{// Temporarily disable deprecation warning as it will fail rocgdb test}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#if defined(\_\_clang\_\_)}}
+\DoxyCodeLine{84 \textcolor{comment}{//The following work for clang rather than for gnu gcc/g++/c++}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#pragma GCC diagnostic push}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#pragma GCC diagnostic warning "{}-\/Wcpp"{}}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#ifdef \_\_HCC\_\_}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#warning("{}\_\_HCC\_\_ is deprecated, please don't use it"{}})}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#ifdef \_\_HIP\_ROCclr\_\_}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#warning("{}\_\_HIP\_ROCclr\_\_ is deprecated, please don't use it"{}})}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#ifdef \_\_HIP\_PLATFORM\_HCC\_\_}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#warning("{}\_\_HIP\_PLATFORM\_HCC\_\_ is deprecated, please use \_\_HIP\_PLATFORM\_AMD\_\_ instead"{}})}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#ifdef \_\_HIP\_PLATFORM\_NVCC\_}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#warning("{}\_\_HIP\_PLATFORM\_NVCC\_ is deprecated, please use \_\_HIP\_PLATFORM\_NVIDIA\_\_ instead"{}})}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#pragma GCC diagnostic pop}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#elif defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{104 \textcolor{comment}{//The following work for gnu gcc/g++/c++ rather than for clang}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#ifdef \_\_HCC\_\_}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#pragma message("{}\_\_HCC\_\_ is deprecated, please don't use it"{}})}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#ifdef \_\_HIP\_ROCclr\_\_}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#pragma message("{}\_\_HIP\_ROCclr\_\_ is deprecated, please don't use it"{}})}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#ifdef \_\_HIP\_PLATFORM\_HCC\_\_}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#pragma message("{}\_\_HIP\_PLATFORM\_HCC\_\_ is deprecated, please use \_\_HIP\_PLATFORM\_AMD\_\_ instead"{}})}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#ifdef \_\_HIP\_PLATFORM\_NVCC\_}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#pragma message("{}\_\_HIP\_PLATFORM\_NVCC\_ is deprecated, please use \_\_HIP\_PLATFORM\_NVIDIA\_\_ instead"{}})}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// defined(\_\_clang\_\_)}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#if !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{hip__runtime__api_8h}{hip/hip\_runtime\_api.h}}>}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#include <hip/library\_types.h>}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_\_HIPCC\_RTC\_\_)}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#include <hip/hip\_vector\_types.h>}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,50 @@
+\hypertarget{struct__ze__command__queue__group__properties__t}{}\doxysection{\+\_\+ze\+\_\+command\+\_\+queue\+\_\+group\+\_\+properties\+\_\+t Struct Reference}
+\label{struct__ze__command__queue__group__properties__t}\index{\_ze\_command\_queue\_group\_properties\_t@{\_ze\_command\_queue\_group\_properties\_t}}
+
+
+\mbox{\hyperlink{class_command}{Command}} queue group properties queried using \+::ze\+Device\+Get\+Command\+Queue\+Group\+Properties.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__command__queue__group__properties__t_a24cc3e57289275254777543f619329c1}\label{struct__ze__command__queue__group__properties__t_a24cc3e57289275254777543f619329c1}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__command__queue__group__properties__t_a9c29270c47574faf0740276288d9cbee}\label{struct__ze__command__queue__group__properties__t_a9c29270c47574faf0740276288d9cbee}} 
+void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in,out\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+command\+\_\+queue\+\_\+group\+\_\+property\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__command__queue__group__properties__t_a6f2c0cd26d754a30ac86d966c72301a2}{flags}}
+\item 
+size\+\_\+t \mbox{\hyperlink{struct__ze__command__queue__group__properties__t_a261c73a11dff65fdb209d84148bf31c3}{max\+Memory\+Fill\+Pattern\+Size}}
+\item 
+\mbox{\Hypertarget{struct__ze__command__queue__group__properties__t_a39f3150b7e8294494d8ea704ab326145}\label{struct__ze__command__queue__group__properties__t_a39f3150b7e8294494d8ea704ab326145}} 
+uint32\+\_\+t {\bfseries num\+Queues}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} the number of physical engines within the group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_command}{Command}} queue group properties queried using \+::ze\+Device\+Get\+Command\+Queue\+Group\+Properties. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__command__queue__group__properties__t_a6f2c0cd26d754a30ac86d966c72301a2}\label{struct__ze__command__queue__group__properties__t_a6f2c0cd26d754a30ac86d966c72301a2}} 
+\index{\_ze\_command\_queue\_group\_properties\_t@{\_ze\_command\_queue\_group\_properties\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_command\_queue\_group\_properties\_t@{\_ze\_command\_queue\_group\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+command\+\_\+queue\+\_\+group\+\_\+property\+\_\+flags\+\_\+t \+\_\+ze\+\_\+command\+\_\+queue\+\_\+group\+\_\+properties\+\_\+t\+::flags}
+
+\mbox{[}out\mbox{]} 0 (none) or a valid combination of \+::ze\+\_\+command\+\_\+queue\+\_\+group\+\_\+property\+\_\+flag\+\_\+t \mbox{\Hypertarget{struct__ze__command__queue__group__properties__t_a261c73a11dff65fdb209d84148bf31c3}\label{struct__ze__command__queue__group__properties__t_a261c73a11dff65fdb209d84148bf31c3}} 
+\index{\_ze\_command\_queue\_group\_properties\_t@{\_ze\_command\_queue\_group\_properties\_t}!maxMemoryFillPatternSize@{maxMemoryFillPatternSize}}
+\index{maxMemoryFillPatternSize@{maxMemoryFillPatternSize}!\_ze\_command\_queue\_group\_properties\_t@{\_ze\_command\_queue\_group\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{maxMemoryFillPatternSize}{maxMemoryFillPatternSize}}
+{\footnotesize\ttfamily size\+\_\+t \+\_\+ze\+\_\+command\+\_\+queue\+\_\+group\+\_\+properties\+\_\+t\+::max\+Memory\+Fill\+Pattern\+Size}
+
+\mbox{[}out\mbox{]} maximum {\ttfamily pattern\+\_\+size} supported by command queue group. See \+::ze\+Command\+List\+Append\+Memory\+Fill for more details. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

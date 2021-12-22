@@ -1,0 +1,65 @@
+\hypertarget{sink_8h_source}{}\doxysection{sink.\+h}
+\label{sink_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/sink.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/sink.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}spdlog/details/log\_msg.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}spdlog/details/pattern\_formatter.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}spdlog/formatter.h"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{13 \textcolor{keyword}{namespace }sinks \{}
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}()}
+\DoxyCodeLine{18         : level\_(level::trace)}
+\DoxyCodeLine{19         , formatter\_(\textcolor{keyword}{new} \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}}())}
+\DoxyCodeLine{20     \{}
+\DoxyCodeLine{21     \}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{sink}}(std::unique\_ptr<spdlog::pattern\_formatter> \mbox{\hyperlink{classspdlog_1_1formatter}{formatter}})}
+\DoxyCodeLine{24         : level\_(level::trace)}
+\DoxyCodeLine{25         , formatter\_(std::move(\mbox{\hyperlink{classspdlog_1_1formatter}{formatter}}))}
+\DoxyCodeLine{26     \{}
+\DoxyCodeLine{27     \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keyword}{virtual} \mbox{\hyperlink{classspdlog_1_1sinks_1_1sink}{\string~sink}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{30     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} log(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg) = 0;}
+\DoxyCodeLine{31     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} flush() = 0;}
+\DoxyCodeLine{32     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} set\_pattern(\textcolor{keyword}{const} std::string \&pattern) = 0;}
+\DoxyCodeLine{33     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} set\_formatter(std::unique\_ptr<spdlog::formatter> sink\_formatter) = 0;}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordtype}{bool} should\_log(level::level\_enum msg\_level)\textcolor{keyword}{ const}}
+\DoxyCodeLine{36 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{37         \textcolor{keywordflow}{return} msg\_level >= level\_.load(std::memory\_order\_relaxed);}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} set\_level(level::level\_enum log\_level)}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         level\_.store(log\_level);}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     level::level\_enum level()\textcolor{keyword}{ const}}
+\DoxyCodeLine{46 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{47         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}spdlog::level::level\_enum\textcolor{keyword}{>}(level\_.load(std::memory\_order\_relaxed));}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{51     \textcolor{comment}{// sink log level -\/ default is all}}
+\DoxyCodeLine{52     level\_t level\_;}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{comment}{// sink formatter -\/ default is full format}}
+\DoxyCodeLine{55     std::unique\_ptr<spdlog::formatter> formatter\_;}
+\DoxyCodeLine{56 \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \} \textcolor{comment}{// namespace sinks}}
+\DoxyCodeLine{59 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

@@ -1,0 +1,54 @@
+\hypertarget{struct__ze__external__memory__import__win32__handle__t}{}\doxysection{\+\_\+ze\+\_\+external\+\_\+memory\+\_\+import\+\_\+win32\+\_\+handle\+\_\+t Struct Reference}
+\label{struct__ze__external__memory__import__win32__handle__t}\index{\_ze\_external\_memory\_import\_win32\_handle\_t@{\_ze\_external\_memory\_import\_win32\_handle\_t}}
+
+
+Additional allocation descriptor for importing external memory as a Win32 handle.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__external__memory__import__win32__handle__t_aeb9adaa4e260024d0268f8e25766dce7}\label{struct__ze__external__memory__import__win32__handle__t_aeb9adaa4e260024d0268f8e25766dce7}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__external__memory__import__win32__handle__t_af775d0b5e344ed552452a96777d53ed5}\label{struct__ze__external__memory__import__win32__handle__t_af775d0b5e344ed552452a96777d53ed5}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__external__memory__import__win32__handle__t_a899849a249120ce51f4706eba4d0b959}{flags}}
+\item 
+\mbox{\Hypertarget{struct__ze__external__memory__import__win32__handle__t_a84061c6ae0094c8c90631fe7f8763d61}\label{struct__ze__external__memory__import__win32__handle__t_a84061c6ae0094c8c90631fe7f8763d61}} 
+void $\ast$ {\bfseries handle}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} the Win32 handle to import \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__external__memory__import__win32__handle__t_a7f89241cc42d31412616255e25b31879}\label{struct__ze__external__memory__import__win32__handle__t_a7f89241cc42d31412616255e25b31879}} 
+const void $\ast$ {\bfseries name}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} name of a memory object to import \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Additional allocation descriptor for importing external memory as a Win32 handle. 
+
+
+\begin{DoxyItemize}
+\item When {\ttfamily handle} is {\ttfamily nullptr}, {\ttfamily name} must not be {\ttfamily nullptr}.
+\item When {\ttfamily name} is {\ttfamily nullptr}, {\ttfamily handle} must not be {\ttfamily nullptr}.
+\item When {\ttfamily flags} is \+::\+ZE\+\_\+\+EXTERNAL\+\_\+\+MEMORY\+\_\+\+TYPE\+\_\+\+FLAG\+\_\+\+OPAQUE\+\_\+\+WIN32\+\_\+\+KMT, {\ttfamily name} must be {\ttfamily nullptr}.
+\item This structure may be passed to \+::ze\+Mem\+Alloc\+Device, via the {\ttfamily p\+Next} member of \+::ze\+\_\+device\+\_\+mem\+\_\+alloc\+\_\+desc\+\_\+t, to import memory from a Win32 handle.
+\item This structure may be passed to \+::ze\+Image\+Create, via the {\ttfamily p\+Next} member of \+::ze\+\_\+image\+\_\+desc\+\_\+t, to import memory from a Win32 handle. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__external__memory__import__win32__handle__t_a899849a249120ce51f4706eba4d0b959}\label{struct__ze__external__memory__import__win32__handle__t_a899849a249120ce51f4706eba4d0b959}} 
+\index{\_ze\_external\_memory\_import\_win32\_handle\_t@{\_ze\_external\_memory\_import\_win32\_handle\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_external\_memory\_import\_win32\_handle\_t@{\_ze\_external\_memory\_import\_win32\_handle\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \+\_\+ze\+\_\+external\+\_\+memory\+\_\+import\+\_\+win32\+\_\+handle\+\_\+t\+::flags}
+
+\mbox{[}in\mbox{]} flags specifying the memory import type for the Win32 handle. must be 0 (default) or a valid combination of \+::ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,62 @@
+\hypertarget{classbasic__format__context}{}\doxysection{basic\+\_\+format\+\_\+context\texorpdfstring{$<$}{<} Output\+It, Char \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classbasic__format__context}\index{basic\_format\_context$<$ OutputIt, Char $>$@{basic\_format\_context$<$ OutputIt, Char $>$}}
+Inheritance diagram for basic\+\_\+format\+\_\+context\texorpdfstring{$<$}{<} Output\+It, Char \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbasic__format__context}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structbasic__format__context_1_1formatter__type}{formatter\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef Char \mbox{\hyperlink{classbasic__format__context_ab6b3447e996c0b8117e4f6d98d4e1597}{char\+\_\+type}}
+\item 
+\mbox{\Hypertarget{classbasic__format__context_a6486e3c9656c10eb99a4731fb169e51b}\label{classbasic__format__context_a6486e3c9656c10eb99a4731fb169e51b}} 
+typedef Output\+It {\bfseries iterator}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbasic__format__context_a854f7ee2c3cffc5b650a4724578b935d}{basic\+\_\+format\+\_\+context}} (Output\+It out, \mbox{\hyperlink{classbasic__string__view}{basic\+\_\+string\+\_\+view}}$<$ \mbox{\hyperlink{classbasic__format__context_ab6b3447e996c0b8117e4f6d98d4e1597}{char\+\_\+type}} $>$ format\+\_\+str, \mbox{\hyperlink{classbasic__format__args}{basic\+\_\+format\+\_\+args}}$<$ \mbox{\hyperlink{classbasic__format__context}{basic\+\_\+format\+\_\+context}} $>$ ctx\+\_\+args)
+\item 
+\mbox{\Hypertarget{classbasic__format__context_a38f34ffad997ca2d16cefc33ab240f89}\label{classbasic__format__context_a38f34ffad997ca2d16cefc33ab240f89}} 
+\mbox{\hyperlink{classbasic__format__arg}{format\+\_\+arg}} {\bfseries next\+\_\+arg} ()
+\item 
+\mbox{\Hypertarget{classbasic__format__context_a556848fa995f593aeb9605dcbc62ec76}\label{classbasic__format__context_a556848fa995f593aeb9605dcbc62ec76}} 
+\mbox{\hyperlink{classbasic__format__arg}{format\+\_\+arg}} {\bfseries get\+\_\+arg} (unsigned arg\+\_\+id)
+\item 
+\mbox{\Hypertarget{classbasic__format__context_a251d1e5b73671a838b7937bac2dc6aff}\label{classbasic__format__context_a251d1e5b73671a838b7937bac2dc6aff}} 
+\mbox{\hyperlink{classbasic__format__arg}{format\+\_\+arg}} {\bfseries get\+\_\+arg} (\mbox{\hyperlink{classbasic__string__view}{basic\+\_\+string\+\_\+view}}$<$ \mbox{\hyperlink{classbasic__format__context_ab6b3447e996c0b8117e4f6d98d4e1597}{char\+\_\+type}} $>$ name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classbasic__format__context_ab6b3447e996c0b8117e4f6d98d4e1597}\label{classbasic__format__context_ab6b3447e996c0b8117e4f6d98d4e1597}} 
+\index{basic\_format\_context$<$ OutputIt, Char $>$@{basic\_format\_context$<$ OutputIt, Char $>$}!char\_type@{char\_type}}
+\index{char\_type@{char\_type}!basic\_format\_context$<$ OutputIt, Char $>$@{basic\_format\_context$<$ OutputIt, Char $>$}}
+\doxysubsubsection{\texorpdfstring{char\_type}{char\_type}}
+{\footnotesize\ttfamily template$<$typename Output\+It , typename Char $>$ \\
+typedef Char \mbox{\hyperlink{classbasic__format__context}{basic\+\_\+format\+\_\+context}}$<$ Output\+It, Char $>$\+::\mbox{\hyperlink{classbasic__format__context_ab6b3447e996c0b8117e4f6d98d4e1597}{char\+\_\+type}}}
+
+The character type for the output. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbasic__format__context_a854f7ee2c3cffc5b650a4724578b935d}\label{classbasic__format__context_a854f7ee2c3cffc5b650a4724578b935d}} 
+\index{basic\_format\_context$<$ OutputIt, Char $>$@{basic\_format\_context$<$ OutputIt, Char $>$}!basic\_format\_context@{basic\_format\_context}}
+\index{basic\_format\_context@{basic\_format\_context}!basic\_format\_context$<$ OutputIt, Char $>$@{basic\_format\_context$<$ OutputIt, Char $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_format\_context()}{basic\_format\_context()}}
+{\footnotesize\ttfamily template$<$typename Output\+It , typename Char $>$ \\
+\mbox{\hyperlink{classbasic__format__context}{basic\+\_\+format\+\_\+context}}$<$ Output\+It, Char $>$\+::\mbox{\hyperlink{classbasic__format__context}{basic\+\_\+format\+\_\+context}} (\begin{DoxyParamCaption}\item[{Output\+It}]{out,  }\item[{\mbox{\hyperlink{classbasic__string__view}{basic\+\_\+string\+\_\+view}}$<$ \mbox{\hyperlink{classbasic__format__context_ab6b3447e996c0b8117e4f6d98d4e1597}{char\+\_\+type}} $>$}]{format\+\_\+str,  }\item[{\mbox{\hyperlink{classbasic__format__args}{basic\+\_\+format\+\_\+args}}$<$ \mbox{\hyperlink{classbasic__format__context}{basic\+\_\+format\+\_\+context}}$<$ Output\+It, Char $>$ $>$}]{ctx\+\_\+args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructs a {\ttfamily \mbox{\hyperlink{classbasic__format__context}{basic\+\_\+format\+\_\+context}}} object. References to the arguments are stored in the object so make sure they have appropriate lifetimes. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/core.\+h\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/format.\+h\end{DoxyCompactItemize}

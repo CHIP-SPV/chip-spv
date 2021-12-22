@@ -1,0 +1,37 @@
+\hypertarget{struct__ze__cache__reservation__ext__desc__t}{}\doxysection{\+\_\+ze\+\_\+cache\+\_\+reservation\+\_\+ext\+\_\+desc\+\_\+t Struct Reference}
+\label{struct__ze__cache__reservation__ext__desc__t}\index{\_ze\_cache\_reservation\_ext\_desc\_t@{\_ze\_cache\_reservation\_ext\_desc\_t}}
+
+
+Cache\+Reservation structure.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__cache__reservation__ext__desc__t_a4f7b4104c755d0da54ef18ffed5dea85}\label{struct__ze__cache__reservation__ext__desc__t_a4f7b4104c755d0da54ef18ffed5dea85}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__cache__reservation__ext__desc__t_a8315c45dd27f971b2f02959b446a681f}\label{struct__ze__cache__reservation__ext__desc__t_a8315c45dd27f971b2f02959b446a681f}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__cache__reservation__ext__desc__t_addbcb084610d5ab2278504e5b3a4755e}\label{struct__ze__cache__reservation__ext__desc__t_addbcb084610d5ab2278504e5b3a4755e}} 
+size\+\_\+t {\bfseries max\+Cache\+Reservation\+Size}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} max cache reservation size \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Cache\+Reservation structure. 
+
+
+\begin{DoxyItemize}
+\item This structure must be passed to \+::ze\+Device\+Get\+Cache\+Properties via {\ttfamily p\+Next} member of \+::ze\+\_\+device\+\_\+cache\+\_\+properties\+\_\+t
+\item Used for determining the max cache reservation allowed on device. Size of zero means no reservation available. 
+\end{DoxyItemize}
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

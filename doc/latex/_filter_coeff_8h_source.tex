@@ -1,0 +1,77 @@
+\hypertarget{_filter_coeff_8h_source}{}\doxysection{Filter\+Coeff.\+h}
+\label{_filter_coeff_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/samples/hip-\/cuda/SimpleConvolution/FilterCoeff.h@{/Users/pvelesko/local/CHIP-\/SPV/samples/hip-\/cuda/SimpleConvolution/FilterCoeff.h}}
+\mbox{\hyperlink{_filter_coeff_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ Copyright ©2014 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{ Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{5 \textcolor{comment}{ modification, are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{ 1   Redistributions of source code must retain the above copyright notice,}}
+\DoxyCodeLine{8 \textcolor{comment}{ this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{9 \textcolor{comment}{ 2   Redistributions in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{10 \textcolor{comment}{ this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{11 \textcolor{comment}{ documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{12 \textcolor{comment}{}}
+\DoxyCodeLine{13 \textcolor{comment}{ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{}}}
+\DoxyCodeLine{14 \textcolor{comment}{ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE}}
+\DoxyCodeLine{15 \textcolor{comment}{ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE}}
+\DoxyCodeLine{16 \textcolor{comment}{ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE}}
+\DoxyCodeLine{17 \textcolor{comment}{ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR}}
+\DoxyCodeLine{18 \textcolor{comment}{ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{19 \textcolor{comment}{ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{20 \textcolor{comment}{ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN}}
+\DoxyCodeLine{21 \textcolor{comment}{ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)}}
+\DoxyCodeLine{22 \textcolor{comment}{ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF}}
+\DoxyCodeLine{23 \textcolor{comment}{ THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{24 \textcolor{comment}{ *******************************************************************************/}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#ifndef \_\_SEPFILTERCOEFF\_\_H}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define \_\_SEPFILTERCOEFF\_\_H}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{comment}{/********************************************************************************}}
+\DoxyCodeLine{38 \textcolor{comment}{ *}}
+\DoxyCodeLine{39 \textcolor{comment}{ * Sobel 3X3 filter:}}
+\DoxyCodeLine{40 \textcolor{comment}{ *                      1 0 -\/1}}
+\DoxyCodeLine{41 \textcolor{comment}{ *                      2 0 -\/2}}
+\DoxyCodeLine{42 \textcolor{comment}{ *                      1 0 -\/1}}
+\DoxyCodeLine{43 \textcolor{comment}{ *}}
+\DoxyCodeLine{44 \textcolor{comment}{ * This is a separable filter. The equivalent separable coefficients are:}}
+\DoxyCodeLine{45 \textcolor{comment}{ * v = \{1.0f, 0.0f, -\/1.0f\};}}
+\DoxyCodeLine{46 \textcolor{comment}{ * h = \{1.0f, 2.0f, 1.0f\};}}
+\DoxyCodeLine{47 \textcolor{comment}{ *********************************************************************************/}}
+\DoxyCodeLine{48 \textcolor{keywordtype}{float} SOBEL\_FILTER\_3x3[3*3] = }
+\DoxyCodeLine{49                             \{}
+\DoxyCodeLine{50                                  1.0f,  0.0f,  -\/1.0f,}
+\DoxyCodeLine{51                                  2.0f,  0.0f,  -\/2.0f,}
+\DoxyCodeLine{52                                  1.0f,  0.0f,  -\/1.0f}
+\DoxyCodeLine{53                             \};}
+\DoxyCodeLine{54 \textcolor{keywordtype}{float} SOBEL\_FILTER\_3x3\_pass1[3] = \{ 1.0f, 0.0f, -\/1.0f \};}
+\DoxyCodeLine{55 \textcolor{keywordtype}{float} SOBEL\_FILTER\_3x3\_pass2[3] = \{ 1.0f, 2.0f, 1.0f \};}
+\DoxyCodeLine{56 \textcolor{comment}{/********************************************************************************}}
+\DoxyCodeLine{57 \textcolor{comment}{ *}}
+\DoxyCodeLine{58 \textcolor{comment}{ * Sobel 5X5 filter:}}
+\DoxyCodeLine{59 \textcolor{comment}{ *                       1 2 0 -\/2 -\/1; }}
+\DoxyCodeLine{60 \textcolor{comment}{ *                       4 8 0 -\/8 -\/4;}}
+\DoxyCodeLine{61 \textcolor{comment}{ *                       6 12 0 -\/12 -\/6;}}
+\DoxyCodeLine{62 \textcolor{comment}{ *                       4 8 0 -\/8 -\/4;}}
+\DoxyCodeLine{63 \textcolor{comment}{ *                       1 2 0 -\/2 -\/1;}}
+\DoxyCodeLine{64 \textcolor{comment}{ *}}
+\DoxyCodeLine{65 \textcolor{comment}{ * This is a separable filter. The equivalent separable coefficients are:}}
+\DoxyCodeLine{66 \textcolor{comment}{ * v = \{1.0f,  2.0f,   0.0f,  -\/2.0f,  -\/1.0f \};}}
+\DoxyCodeLine{67 \textcolor{comment}{ * h = \{1.0f,  4.0f,   6.0f,   4.0f,   1.0f \};}}
+\DoxyCodeLine{68 \textcolor{comment}{ *********************************************************************************/}}
+\DoxyCodeLine{69 \textcolor{keywordtype}{float} SOBEL\_FILTER\_5x5[5*5] = }
+\DoxyCodeLine{70                             \{}
+\DoxyCodeLine{71                                  1.0f,  2.0f,   0.0f,  -\/2.0f,  -\/1.0f,}
+\DoxyCodeLine{72                                  4.0f,  8.0f,   0.0f,  -\/8.0f,  -\/4.0f,}
+\DoxyCodeLine{73                                  6.0f,  12.0f,  0.0f,  -\/12.0f, -\/6.0f,}
+\DoxyCodeLine{74                                  4.0f,  8.0f,   0.0f,  -\/8.0f,  -\/4.0f,}
+\DoxyCodeLine{75                                  1.0f,  2.0f,   0.0f,  -\/2.0f,  -\/1.0f}
+\DoxyCodeLine{76                             \};}
+\DoxyCodeLine{77 \textcolor{keywordtype}{float} SOBEL\_FILTER\_5x5\_pass1[5] = \{ 1.0f,  2.0f,   0.0f,  -\/2.0f,  -\/1.0f \};}
+\DoxyCodeLine{78 \textcolor{keywordtype}{float} SOBEL\_FILTER\_5x5\_pass2[5] = \{ 1.0f,  4.0f,   6.0f,  4.0f,  1.0f \};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

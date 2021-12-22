@@ -1,0 +1,97 @@
+\hypertarget{structclara_1_1detail_1_1_parser}{}\doxysection{clara\+::detail\+::Parser Struct Reference}
+\label{structclara_1_1detail_1_1_parser}\index{clara::detail::Parser@{clara::detail::Parser}}
+Inheritance diagram for clara\+::detail\+::Parser\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structclara_1_1detail_1_1_parser}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a277f00548d9be6ee912bd3598e884a57}\label{structclara_1_1detail_1_1_parser_a277f00548d9be6ee912bd3598e884a57}} 
+auto {\bfseries operator$\vert$=} (\mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{Exe\+Name}} const \&exe\+Name) -\/$>$ \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \&
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a53582d1e233cfd617030fda0f0f1a6f0}\label{structclara_1_1detail_1_1_parser_a53582d1e233cfd617030fda0f0f1a6f0}} 
+auto {\bfseries operator$\vert$=} (\mbox{\hyperlink{classclara_1_1detail_1_1_arg}{Arg}} const \&arg) -\/$>$ \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \&
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a8a61e19f236690a50a4a8362239c75a0}\label{structclara_1_1detail_1_1_parser_a8a61e19f236690a50a4a8362239c75a0}} 
+auto {\bfseries operator$\vert$=} (\mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}} const \&opt) -\/$>$ \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \&
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_ad88b62c1fc50d42e082764e1f35acef2}\label{structclara_1_1detail_1_1_parser_ad88b62c1fc50d42e082764e1f35acef2}} 
+auto {\bfseries operator$\vert$=} (\mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} const \&other) -\/$>$ \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \&
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a21c671e15a106036f3d35eac3ef62d87}\label{structclara_1_1detail_1_1_parser_a21c671e15a106036f3d35eac3ef62d87}} 
+{\footnotesize template$<$typename T $>$ }\\auto {\bfseries operator$\vert$} (T const \&other) const -\/$>$ \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}}
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_ac2f7b679060b1541c2d12a5da4f37ee4}\label{structclara_1_1detail_1_1_parser_ac2f7b679060b1541c2d12a5da4f37ee4}} 
+auto {\bfseries get\+Help\+Columns} () const -\/$>$ std\+::vector$<$ \mbox{\hyperlink{structclara_1_1detail_1_1_help_columns}{Help\+Columns}} $>$
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_ad5838414ec7c9be46913843d5846b1e4}\label{structclara_1_1detail_1_1_parser_ad5838414ec7c9be46913843d5846b1e4}} 
+void {\bfseries write\+To\+Stream} (std\+::ostream \&os) const
+\item 
+auto \mbox{\hyperlink{structclara_1_1detail_1_1_parser_ac58012621fe7c1bb045716adf88e8b90}{validate}} () const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}} override
+\item 
+auto \mbox{\hyperlink{structclara_1_1detail_1_1_parser_aec5426284cef80ba61c3cecc51668240}{parse}} (std\+::string const \&exe\+Name, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&tokens) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}} override
+\item 
+virtual auto \mbox{\hyperlink{structclara_1_1detail_1_1_parser_a4cdccf0242e2888192292adb900b16c1}{parse}} (std\+::string const \&exe\+Name, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&tokens) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}=0
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a0d8b760304e7f179b05ed2ee8cadf54c}\label{structclara_1_1detail_1_1_parser_a0d8b760304e7f179b05ed2ee8cadf54c}} 
+auto {\bfseries parse} (\mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}} const \&args) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_aef5e115be8e7009c80ff292415204188}\label{structclara_1_1detail_1_1_parser_aef5e115be8e7009c80ff292415204188}} 
+\mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{Exe\+Name}} {\bfseries m\+\_\+exe\+Name}
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_accf437513e1ab63abbf7a461667723e0}\label{structclara_1_1detail_1_1_parser_accf437513e1ab63abbf7a461667723e0}} 
+std\+::vector$<$ \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}} $>$ {\bfseries m\+\_\+options}
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a73161ea34c68eb563317c1efbaba6d72}\label{structclara_1_1detail_1_1_parser_a73161ea34c68eb563317c1efbaba6d72}} 
+std\+::vector$<$ \mbox{\hyperlink{classclara_1_1detail_1_1_arg}{Arg}} $>$ {\bfseries m\+\_\+args}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a4356adbe31ad7e63bde83df60d685fab}\label{structclara_1_1detail_1_1_parser_a4356adbe31ad7e63bde83df60d685fab}} 
+auto {\bfseries operator$<$$<$} (std\+::ostream \&os, \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} const \&parser) -\/$>$ std\+::ostream \&
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_aec5426284cef80ba61c3cecc51668240}\label{structclara_1_1detail_1_1_parser_aec5426284cef80ba61c3cecc51668240}} 
+\index{clara::detail::Parser@{clara::detail::Parser}!parse@{parse}}
+\index{parse@{parse}!clara::detail::Parser@{clara::detail::Parser}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto clara\+::detail\+::\+Parser\+::parse (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{exe\+Name,  }\item[{\mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&}]{tokens }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{clara\+::detail\+::\+Parser\+Base}}.
+
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_a4cdccf0242e2888192292adb900b16c1}\label{structclara_1_1detail_1_1_parser_a4cdccf0242e2888192292adb900b16c1}} 
+\index{clara::detail::Parser@{clara::detail::Parser}!parse@{parse}}
+\index{parse@{parse}!clara::detail::Parser@{clara::detail::Parser}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual auto clara\+::detail\+::\+Parser\+Base\+::parse (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{exe\+Name,  }\item[{\mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&}]{tokens }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{clara\+::detail\+::\+Parser\+Base}}.
+
+\mbox{\Hypertarget{structclara_1_1detail_1_1_parser_ac58012621fe7c1bb045716adf88e8b90}\label{structclara_1_1detail_1_1_parser_ac58012621fe7c1bb045716adf88e8b90}} 
+\index{clara::detail::Parser@{clara::detail::Parser}!validate@{validate}}
+\index{validate@{validate}!clara::detail::Parser@{clara::detail::Parser}}
+\doxysubsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily auto clara\+::detail\+::\+Parser\+::validate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{clara\+::detail\+::\+Parser\+Base}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/src/clara/clara.\+hpp\end{DoxyCompactItemize}

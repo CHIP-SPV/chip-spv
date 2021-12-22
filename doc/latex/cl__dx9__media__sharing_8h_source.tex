@@ -1,0 +1,124 @@
+\hypertarget{cl__dx9__media__sharing_8h_source}{}\doxysection{cl\+\_\+dx9\+\_\+media\+\_\+sharing.\+h}
+\label{cl__dx9__media__sharing_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_dx9\_media\_sharing.h@{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_dx9\_media\_sharing.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (c) 2008-\/2020 The Khronos Group Inc.}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *    http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ ******************************************************************************/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef \_\_OPENCL\_CL\_DX9\_MEDIA\_SHARING\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define \_\_OPENCL\_CL\_DX9\_MEDIA\_SHARING\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <CL/cl.h>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <CL/cl\_platform.h>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{24 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{28 \textcolor{comment}{/* cl\_khr\_dx9\_media\_sharing                                                   */}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define cl\_khr\_dx9\_media\_sharing 1}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{typedef} cl\_uint             cl\_dx9\_media\_adapter\_type\_khr;}
+\DoxyCodeLine{32 \textcolor{keyword}{typedef} cl\_uint             cl\_dx9\_media\_adapter\_set\_khr;}
+\DoxyCodeLine{33     }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include <d3d9.h>}}
+\DoxyCodeLine{36 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\_cl\_dx9\_surface\_info\_khr}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38     IDirect3DSurface9 *resource;}
+\DoxyCodeLine{39     HANDLE shared\_handle;}
+\DoxyCodeLine{40 \} cl\_dx9\_surface\_info\_khr;}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{/* Error Codes */}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#define CL\_INVALID\_DX9\_MEDIA\_ADAPTER\_KHR                -\/1010}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define CL\_INVALID\_DX9\_MEDIA\_SURFACE\_KHR                -\/1011}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define CL\_DX9\_MEDIA\_SURFACE\_ALREADY\_ACQUIRED\_KHR       -\/1012}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define CL\_DX9\_MEDIA\_SURFACE\_NOT\_ACQUIRED\_KHR           -\/1013}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{/* cl\_media\_adapter\_type\_khr */}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define CL\_ADAPTER\_D3D9\_KHR                              0x2020}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define CL\_ADAPTER\_D3D9EX\_KHR                            0x2021}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define CL\_ADAPTER\_DXVA\_KHR                              0x2022}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{comment}{/* cl\_media\_adapter\_set\_khr */}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define CL\_PREFERRED\_DEVICES\_FOR\_DX9\_MEDIA\_ADAPTER\_KHR   0x2023}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define CL\_ALL\_DEVICES\_FOR\_DX9\_MEDIA\_ADAPTER\_KHR         0x2024}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{comment}{/* cl\_context\_info */}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define CL\_CONTEXT\_ADAPTER\_D3D9\_KHR                      0x2025}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define CL\_CONTEXT\_ADAPTER\_D3D9EX\_KHR                    0x2026}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define CL\_CONTEXT\_ADAPTER\_DXVA\_KHR                      0x2027}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{comment}{/* cl\_mem\_info */}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#define CL\_MEM\_DX9\_MEDIA\_ADAPTER\_TYPE\_KHR                0x2028}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define CL\_MEM\_DX9\_MEDIA\_SURFACE\_INFO\_KHR                0x2029}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{comment}{/* cl\_image\_info */}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define CL\_IMAGE\_DX9\_MEDIA\_PLANE\_KHR                     0x202A}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{comment}{/* cl\_command\_type */}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define CL\_COMMAND\_ACQUIRE\_DX9\_MEDIA\_SURFACES\_KHR        0x202B}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define CL\_COMMAND\_RELEASE\_DX9\_MEDIA\_SURFACES\_KHR        0x202C}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clGetDeviceIDsFromDX9MediaAdapterKHR\_fn)(}
+\DoxyCodeLine{80     cl\_platform\_id                   platform,}
+\DoxyCodeLine{81     cl\_uint                          num\_media\_adapters,}
+\DoxyCodeLine{82     cl\_dx9\_media\_adapter\_type\_khr *  media\_adapter\_type,}
+\DoxyCodeLine{83     \textcolor{keywordtype}{void} *                           media\_adapters,}
+\DoxyCodeLine{84     cl\_dx9\_media\_adapter\_set\_khr     media\_adapter\_set,}
+\DoxyCodeLine{85     cl\_uint                          num\_entries,}
+\DoxyCodeLine{86     cl\_device\_id *                   devices,}
+\DoxyCodeLine{87     cl\_uint *                        num\_devices) CL\_API\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_mem (CL\_API\_CALL *clCreateFromDX9MediaSurfaceKHR\_fn)(}
+\DoxyCodeLine{90     cl\_context                    context,}
+\DoxyCodeLine{91     cl\_mem\_flags                  flags,}
+\DoxyCodeLine{92     cl\_dx9\_media\_adapter\_type\_khr adapter\_type,}
+\DoxyCodeLine{93     \textcolor{keywordtype}{void} *                        surface\_info,}
+\DoxyCodeLine{94     cl\_uint                       plane,                                                                          }
+\DoxyCodeLine{95     cl\_int *                      errcode\_ret) CL\_API\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clEnqueueAcquireDX9MediaSurfacesKHR\_fn)(}
+\DoxyCodeLine{98     cl\_command\_queue command\_queue,}
+\DoxyCodeLine{99     cl\_uint          num\_objects,}
+\DoxyCodeLine{100     \textcolor{keyword}{const} cl\_mem *   mem\_objects,}
+\DoxyCodeLine{101     cl\_uint          num\_events\_in\_wait\_list,}
+\DoxyCodeLine{102     \textcolor{keyword}{const} cl\_event * event\_wait\_list,}
+\DoxyCodeLine{103     cl\_event *       event) CL\_API\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clEnqueueReleaseDX9MediaSurfacesKHR\_fn)(}
+\DoxyCodeLine{106     cl\_command\_queue command\_queue,}
+\DoxyCodeLine{107     cl\_uint          num\_objects,}
+\DoxyCodeLine{108     \textcolor{keyword}{const} cl\_mem *   mem\_objects,}
+\DoxyCodeLine{109     cl\_uint          num\_events\_in\_wait\_list,}
+\DoxyCodeLine{110     \textcolor{keyword}{const} cl\_event * event\_wait\_list,}
+\DoxyCodeLine{111     cl\_event *       event) CL\_API\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{114 \}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{/* \_\_OPENCL\_CL\_DX9\_MEDIA\_SHARING\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{118 }
+
+\end{DoxyCode}

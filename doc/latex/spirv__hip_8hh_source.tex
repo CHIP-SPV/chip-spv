@@ -1,0 +1,151 @@
+\hypertarget{spirv__hip_8hh_source}{}\doxysection{spirv\+\_\+hip.\+hh}
+\label{spirv__hip_8hh_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip.hh@{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip.hh}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef HIP\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define HIP\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <hip/driver\_types.h>}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#if defined(\_\_clang\_\_) \&\& defined(\_\_HIP\_\_)}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#define \_\_host\_\_ \_\_attribute\_\_((host))}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define \_\_device\_\_ \_\_attribute\_\_((device))}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define \_\_global\_\_ \_\_attribute\_\_((global))}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define \_\_shared\_\_ \_\_attribute\_\_((shared))}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define \_\_constant\_\_ \_\_attribute\_\_((constant))}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define \_\_noinline\_\_ \_\_attribute\_\_((noinline))}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define \_\_forceinline\_\_ inline \_\_attribute\_\_((always\_inline))}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define \_\_host\_\_}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define \_\_device\_\_}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define \_\_global\_\_}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define \_\_shared\_\_}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define \_\_constant\_\_}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define \_\_noinline\_\_}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define \_\_forceinline\_\_ inline}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#if defined(\_\_clang\_\_) \&\& defined(\_\_HIP\_\_)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#include "{}spirv\_hip\_mathlib.hh"{}}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define uint uint32\_t}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define HIP\_KERNEL\_NAME(...) \_\_VA\_ARGS\_\_}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define HIP\_SYMBOL(X) \#X}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define HIP\_DYNAMIC\_SHARED(type, var) \_\_shared\_\_ type var[4294967295];}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define HIP\_DYNAMIC\_SHARED\_ATTRIBUTE}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} hipLaunchParm;}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define hipLaunchKernelGGLInternal(kernelName, numBlocks, numThreads,     \(\backslash\)}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{                                   memPerBlock, streamId, ...)            \(\backslash\)}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{  do \{                                                                    \(\backslash\)}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{    kernelName<<<(numBlocks), (numThreads), (memPerBlock), (streamId)>>>( \(\backslash\)}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{        \_\_VA\_ARGS\_\_);                                                     \(\backslash\)}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{  \} while (0)}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define hipLaunchKernelGGL(kernelName, ...) \(\backslash\)}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{  hipLaunchKernelGGLInternal((kernelName), \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#pragma push\_macro("{}\_\_DEVICE\_\_"{}})}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define \_\_DEVICE\_\_ static \_\_device\_\_ \_\_forceinline\_\_}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \_\_device\_\_ \textcolor{keywordtype}{size\_t} \_Z12get\_local\_idj(uint);}
+\DoxyCodeLine{63 \_\_DEVICE\_\_ uint \_\_hip\_get\_thread\_idx\_x() \{ \textcolor{keywordflow}{return} \_Z12get\_local\_idj(0); \}}
+\DoxyCodeLine{64 \_\_DEVICE\_\_ uint \_\_hip\_get\_thread\_idx\_y() \{ \textcolor{keywordflow}{return} \_Z12get\_local\_idj(1); \}}
+\DoxyCodeLine{65 \_\_DEVICE\_\_ uint \_\_hip\_get\_thread\_idx\_z() \{ \textcolor{keywordflow}{return} \_Z12get\_local\_idj(2); \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \_\_device\_\_ \textcolor{keywordtype}{size\_t} \_Z12get\_group\_idj(uint);}
+\DoxyCodeLine{68 \_\_DEVICE\_\_ uint \_\_hip\_get\_block\_idx\_x() \{ \textcolor{keywordflow}{return} \_Z12get\_group\_idj(0); \}}
+\DoxyCodeLine{69 \_\_DEVICE\_\_ uint \_\_hip\_get\_block\_idx\_y() \{ \textcolor{keywordflow}{return} \_Z12get\_group\_idj(1); \}}
+\DoxyCodeLine{70 \_\_DEVICE\_\_ uint \_\_hip\_get\_block\_idx\_z() \{ \textcolor{keywordflow}{return} \_Z12get\_group\_idj(2); \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \_\_device\_\_ \textcolor{keywordtype}{size\_t} \_Z14get\_local\_sizej(uint);}
+\DoxyCodeLine{73 \_\_DEVICE\_\_ uint \_\_hip\_get\_block\_dim\_x() \{ \textcolor{keywordflow}{return} \_Z14get\_local\_sizej(0); \}}
+\DoxyCodeLine{74 \_\_DEVICE\_\_ uint \_\_hip\_get\_block\_dim\_y() \{ \textcolor{keywordflow}{return} \_Z14get\_local\_sizej(1); \}}
+\DoxyCodeLine{75 \_\_DEVICE\_\_ uint \_\_hip\_get\_block\_dim\_z() \{ \textcolor{keywordflow}{return} \_Z14get\_local\_sizej(2); \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \_\_device\_\_ \textcolor{keywordtype}{size\_t} \_Z14get\_num\_groupsj(uint);}
+\DoxyCodeLine{78 \_\_DEVICE\_\_ uint \_\_hip\_get\_grid\_dim\_x() \{ \textcolor{keywordflow}{return} \_Z14get\_num\_groupsj(0); \}}
+\DoxyCodeLine{79 \_\_DEVICE\_\_ uint \_\_hip\_get\_grid\_dim\_y() \{ \textcolor{keywordflow}{return} \_Z14get\_num\_groupsj(1); \}}
+\DoxyCodeLine{80 \_\_DEVICE\_\_ uint \_\_hip\_get\_grid\_dim\_z() \{ \textcolor{keywordflow}{return} \_Z14get\_num\_groupsj(2); \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define \_\_HIP\_DEVICE\_BUILTIN(DIMENSION, FUNCTION)               \(\backslash\)}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{  \_\_declspec(property(get = \_\_get\_\#\#DIMENSION)) uint DIMENSION; \(\backslash\)}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{  \_\_DEVICE\_\_ uint \_\_get\_\#\#DIMENSION(void) \{ return FUNCTION; \}}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{struct }\_\_hip\_builtin\_threadIdx\_t \{}
+\DoxyCodeLine{87   \_\_HIP\_DEVICE\_BUILTIN(x, \_\_hip\_get\_thread\_idx\_x());}
+\DoxyCodeLine{88   \_\_HIP\_DEVICE\_BUILTIN(y, \_\_hip\_get\_thread\_idx\_y());}
+\DoxyCodeLine{89   \_\_HIP\_DEVICE\_BUILTIN(z, \_\_hip\_get\_thread\_idx\_z());}
+\DoxyCodeLine{90 \};}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{keyword}{struct }\_\_hip\_builtin\_blockIdx\_t \{}
+\DoxyCodeLine{93   \_\_HIP\_DEVICE\_BUILTIN(x, \_\_hip\_get\_block\_idx\_x());}
+\DoxyCodeLine{94   \_\_HIP\_DEVICE\_BUILTIN(y, \_\_hip\_get\_block\_idx\_y());}
+\DoxyCodeLine{95   \_\_HIP\_DEVICE\_BUILTIN(z, \_\_hip\_get\_block\_idx\_z());}
+\DoxyCodeLine{96 \};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{keyword}{struct }\_\_hip\_builtin\_blockDim\_t \{}
+\DoxyCodeLine{99   \_\_HIP\_DEVICE\_BUILTIN(x, \_\_hip\_get\_block\_dim\_x());}
+\DoxyCodeLine{100   \_\_HIP\_DEVICE\_BUILTIN(y, \_\_hip\_get\_block\_dim\_y());}
+\DoxyCodeLine{101   \_\_HIP\_DEVICE\_BUILTIN(z, \_\_hip\_get\_block\_dim\_z());}
+\DoxyCodeLine{102 \};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{struct }\_\_hip\_builtin\_gridDim\_t \{}
+\DoxyCodeLine{105   \_\_HIP\_DEVICE\_BUILTIN(x, \_\_hip\_get\_grid\_dim\_x());}
+\DoxyCodeLine{106   \_\_HIP\_DEVICE\_BUILTIN(y, \_\_hip\_get\_grid\_dim\_y());}
+\DoxyCodeLine{107   \_\_HIP\_DEVICE\_BUILTIN(z, \_\_hip\_get\_grid\_dim\_z());}
+\DoxyCodeLine{108 \};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#undef uint}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#undef \_\_HIP\_DEVICE\_BUILTIN}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#pragma pop\_macro("{}\_\_DEVICE\_\_"{}})}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114 \textcolor{keyword}{extern} \textcolor{keyword}{const} \_\_device\_\_ \_\_attribute\_\_((weak))}
+\DoxyCodeLine{115 \_\_hip\_builtin\_threadIdx\_t threadIdx;}
+\DoxyCodeLine{116 \textcolor{keyword}{extern} \textcolor{keyword}{const} \_\_device\_\_ \_\_attribute\_\_((weak)) \_\_hip\_builtin\_blockIdx\_t blockIdx;}
+\DoxyCodeLine{117 \textcolor{keyword}{extern} \textcolor{keyword}{const} \_\_device\_\_ \_\_attribute\_\_((weak)) \_\_hip\_builtin\_blockDim\_t blockDim;}
+\DoxyCodeLine{118 \textcolor{keyword}{extern} \textcolor{keyword}{const} \_\_device\_\_ \_\_attribute\_\_((weak)) \_\_hip\_builtin\_gridDim\_t gridDim;}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#define hipThreadIdx\_x threadIdx.x}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#define hipThreadIdx\_y threadIdx.y}}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#define hipThreadIdx\_z threadIdx.z}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#define hipBlockIdx\_x blockIdx.x}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#define hipBlockIdx\_y blockIdx.y}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#define hipBlockIdx\_z blockIdx.z}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#define hipBlockDim\_x blockDim.x}}
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#define hipBlockDim\_y blockDim.y}}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#define hipBlockDim\_z blockDim.z}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#define hipGridDim\_x gridDim.x}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#define hipGridDim\_y gridDim.y}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#define hipGridDim\_z gridDim.z}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// defined(\_\_clang\_\_) \&\& defined(\_\_HIP\_\_)}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{comment}{/*************************************************************************************************/}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#include "{}hip\_to\_chip.hh"{}}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{143   EVENT\_STATUS\_INIT = 5,}
+\DoxyCodeLine{144   EVENT\_STATUS\_RECORDING,}
+\DoxyCodeLine{145   EVENT\_STATUS\_RECORDED}
+\DoxyCodeLine{146 \} event\_status\_e;}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

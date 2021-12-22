@@ -1,0 +1,31 @@
+Build procedure
+
+We provide Makefile and CMake\+Lists.\+txt to build the samples seperately.
+
+1.\+Makefile supports shared lib of hip-\/rocclr runtime and nvcc.
+
+To build a sample, just type in sample folder,
+
+make
+
+2.\+CMake\+Lists.\+txt can support shared and static libs of hip-\/rocclr runtime.
+
+To build a sample, run in the sample folder,
+
+mkdir -\/p build \&\& cd build
+
+rm -\/rf $\ast$ (to clear up)
+
+a. to build with shared libs, run
+
+cmake ..
+
+b. to build with static libs, run
+
+cmake -\/DCMAKE\+\_\+\+PREFIX\+\_\+\+PATH=\char`\"{}/opt/rocm/llvm/lib/cmake\char`\"{} ..
+
+Then run,
+
+make
+
+Note that if you want debug version, add \char`\"{}-\/\+DCMAKE\+\_\+\+BUILD\+\_\+\+TYPE=\+Debug\char`\"{} in cmake cmd. 

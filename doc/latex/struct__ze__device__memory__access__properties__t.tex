@@ -1,0 +1,91 @@
+\hypertarget{struct__ze__device__memory__access__properties__t}{}\doxysection{\+\_\+ze\+\_\+device\+\_\+memory\+\_\+access\+\_\+properties\+\_\+t Struct Reference}
+\label{struct__ze__device__memory__access__properties__t}\index{\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}}
+
+
+Device memory access properties queried using \+::ze\+Device\+Get\+Memory\+Access\+Properties.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__device__memory__access__properties__t_a4d1d5eee413d10c7ec478b25cee2865e}\label{struct__ze__device__memory__access__properties__t_a4d1d5eee413d10c7ec478b25cee2865e}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__memory__access__properties__t_afd6bab56e23c847f8807d683430803aa}\label{struct__ze__device__memory__access__properties__t_afd6bab56e23c847f8807d683430803aa}} 
+void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in,out\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__memory__access__properties__t_aab09642be632c7b5738aef55aef3b043}{host\+Alloc\+Capabilities}}
+\begin{DoxyCompactList}\small\item\em returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. \end{DoxyCompactList}\item 
+ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__memory__access__properties__t_a92e865935fe424156a6f8df810d85856}{device\+Alloc\+Capabilities}}
+\begin{DoxyCompactList}\small\item\em returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. \end{DoxyCompactList}\item 
+ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__memory__access__properties__t_a544d101877c998acd4d74307eb72dde3}{shared\+Single\+Device\+Alloc\+Capabilities}}
+\begin{DoxyCompactList}\small\item\em returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. \end{DoxyCompactList}\item 
+ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__memory__access__properties__t_ae8030a5891e130f6421b0667b390ce17}{shared\+Cross\+Device\+Alloc\+Capabilities}}
+\begin{DoxyCompactList}\small\item\em returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. \end{DoxyCompactList}\item 
+ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__memory__access__properties__t_a1751ba882ef734dbd2dafbc981d2ff52}{shared\+System\+Alloc\+Capabilities}}
+\begin{DoxyCompactList}\small\item\em returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Device memory access properties queried using \+::ze\+Device\+Get\+Memory\+Access\+Properties. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__device__memory__access__properties__t_a92e865935fe424156a6f8df810d85856}\label{struct__ze__device__memory__access__properties__t_a92e865935fe424156a6f8df810d85856}} 
+\index{\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}!deviceAllocCapabilities@{deviceAllocCapabilities}}
+\index{deviceAllocCapabilities@{deviceAllocCapabilities}!\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{deviceAllocCapabilities}{deviceAllocCapabilities}}
+{\footnotesize\ttfamily ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+memory\+\_\+access\+\_\+properties\+\_\+t\+::device\+Alloc\+Capabilities}
+
+
+
+returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. 
+
+\mbox{[}out\mbox{]} device memory capabilities. \mbox{\Hypertarget{struct__ze__device__memory__access__properties__t_aab09642be632c7b5738aef55aef3b043}\label{struct__ze__device__memory__access__properties__t_aab09642be632c7b5738aef55aef3b043}} 
+\index{\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}!hostAllocCapabilities@{hostAllocCapabilities}}
+\index{hostAllocCapabilities@{hostAllocCapabilities}!\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{hostAllocCapabilities}{hostAllocCapabilities}}
+{\footnotesize\ttfamily ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+memory\+\_\+access\+\_\+properties\+\_\+t\+::host\+Alloc\+Capabilities}
+
+
+
+returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. 
+
+\mbox{[}out\mbox{]} host memory capabilities. \mbox{\Hypertarget{struct__ze__device__memory__access__properties__t_ae8030a5891e130f6421b0667b390ce17}\label{struct__ze__device__memory__access__properties__t_ae8030a5891e130f6421b0667b390ce17}} 
+\index{\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}!sharedCrossDeviceAllocCapabilities@{sharedCrossDeviceAllocCapabilities}}
+\index{sharedCrossDeviceAllocCapabilities@{sharedCrossDeviceAllocCapabilities}!\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{sharedCrossDeviceAllocCapabilities}{sharedCrossDeviceAllocCapabilities}}
+{\footnotesize\ttfamily ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+memory\+\_\+access\+\_\+properties\+\_\+t\+::shared\+Cross\+Device\+Alloc\+Capabilities}
+
+
+
+returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. 
+
+\mbox{[}out\mbox{]} shared, cross-\/device memory capabilities. \mbox{\Hypertarget{struct__ze__device__memory__access__properties__t_a544d101877c998acd4d74307eb72dde3}\label{struct__ze__device__memory__access__properties__t_a544d101877c998acd4d74307eb72dde3}} 
+\index{\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}!sharedSingleDeviceAllocCapabilities@{sharedSingleDeviceAllocCapabilities}}
+\index{sharedSingleDeviceAllocCapabilities@{sharedSingleDeviceAllocCapabilities}!\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{sharedSingleDeviceAllocCapabilities}{sharedSingleDeviceAllocCapabilities}}
+{\footnotesize\ttfamily ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+memory\+\_\+access\+\_\+properties\+\_\+t\+::shared\+Single\+Device\+Alloc\+Capabilities}
+
+
+
+returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. 
+
+\mbox{[}out\mbox{]} shared, single-\/device memory capabilities. \mbox{\Hypertarget{struct__ze__device__memory__access__properties__t_a1751ba882ef734dbd2dafbc981d2ff52}\label{struct__ze__device__memory__access__properties__t_a1751ba882ef734dbd2dafbc981d2ff52}} 
+\index{\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}!sharedSystemAllocCapabilities@{sharedSystemAllocCapabilities}}
+\index{sharedSystemAllocCapabilities@{sharedSystemAllocCapabilities}!\_ze\_device\_memory\_access\_properties\_t@{\_ze\_device\_memory\_access\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{sharedSystemAllocCapabilities}{sharedSystemAllocCapabilities}}
+{\footnotesize\ttfamily ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+memory\+\_\+access\+\_\+properties\+\_\+t\+::shared\+System\+Alloc\+Capabilities}
+
+
+
+returns 0 (unsupported) or a combination of \+::ze\+\_\+memory\+\_\+access\+\_\+cap\+\_\+flag\+\_\+t. 
+
+\mbox{[}out\mbox{]} shared, system memory capabilities. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

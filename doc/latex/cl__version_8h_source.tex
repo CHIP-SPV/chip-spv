@@ -1,0 +1,87 @@
+\hypertarget{cl__version_8h_source}{}\doxysection{cl\+\_\+version.\+h}
+\label{cl__version_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_version.h@{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_version.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (c) 2018-\/2020 The Khronos Group Inc.}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *    http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ ******************************************************************************/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef \_\_CL\_VERSION\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define \_\_CL\_VERSION\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{comment}{/* Detect which version to target */}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#if !defined(CL\_TARGET\_OPENCL\_VERSION)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#pragma message("{}cl\_version.h: CL\_TARGET\_OPENCL\_VERSION is not defined. Defaulting to 300 (OpenCL 3.0)"{}})}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define CL\_TARGET\_OPENCL\_VERSION 300}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION != 100 \&\& \(\backslash\)}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{    CL\_TARGET\_OPENCL\_VERSION != 110 \&\& \(\backslash\)}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{    CL\_TARGET\_OPENCL\_VERSION != 120 \&\& \(\backslash\)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{    CL\_TARGET\_OPENCL\_VERSION != 200 \&\& \(\backslash\)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{    CL\_TARGET\_OPENCL\_VERSION != 210 \&\& \(\backslash\)}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{    CL\_TARGET\_OPENCL\_VERSION != 220 \&\& \(\backslash\)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{    CL\_TARGET\_OPENCL\_VERSION != 300}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#pragma message("{}cl\_version: CL\_TARGET\_OPENCL\_VERSION is not a valid value (100, 110, 120, 200, 210, 220, 300). Defaulting to 300 (OpenCL 3.0)"{}})}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#undef CL\_TARGET\_OPENCL\_VERSION}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define CL\_TARGET\_OPENCL\_VERSION 300}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{/* OpenCL Version */}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION >= 300 \&\& !defined(CL\_VERSION\_3\_0)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define CL\_VERSION\_3\_0  1}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION >= 220 \&\& !defined(CL\_VERSION\_2\_2)}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define CL\_VERSION\_2\_2  1}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION >= 210 \&\& !defined(CL\_VERSION\_2\_1)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define CL\_VERSION\_2\_1  1}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION >= 200 \&\& !defined(CL\_VERSION\_2\_0)}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define CL\_VERSION\_2\_0  1}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION >= 120 \&\& !defined(CL\_VERSION\_1\_2)}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define CL\_VERSION\_1\_2  1}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION >= 110 \&\& !defined(CL\_VERSION\_1\_1)}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define CL\_VERSION\_1\_1  1}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION >= 100 \&\& !defined(CL\_VERSION\_1\_0)}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define CL\_VERSION\_1\_0  1}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{comment}{/* Allow deprecated APIs for older OpenCL versions. */}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION <= 220 \&\& !defined(CL\_USE\_DEPRECATED\_OPENCL\_2\_2\_APIS)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define CL\_USE\_DEPRECATED\_OPENCL\_2\_2\_APIS}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION <= 210 \&\& !defined(CL\_USE\_DEPRECATED\_OPENCL\_2\_1\_APIS)}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define CL\_USE\_DEPRECATED\_OPENCL\_2\_1\_APIS}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION <= 200 \&\& !defined(CL\_USE\_DEPRECATED\_OPENCL\_2\_0\_APIS)}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define CL\_USE\_DEPRECATED\_OPENCL\_2\_0\_APIS}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION <= 120 \&\& !defined(CL\_USE\_DEPRECATED\_OPENCL\_1\_2\_APIS)}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define CL\_USE\_DEPRECATED\_OPENCL\_1\_2\_APIS}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION <= 110 \&\& !defined(CL\_USE\_DEPRECATED\_OPENCL\_1\_1\_APIS)}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define CL\_USE\_DEPRECATED\_OPENCL\_1\_1\_APIS}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#if CL\_TARGET\_OPENCL\_VERSION <= 100 \&\& !defined(CL\_USE\_DEPRECATED\_OPENCL\_1\_0\_APIS)}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define CL\_USE\_DEPRECATED\_OPENCL\_1\_0\_APIS}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{/* \_\_CL\_VERSION\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

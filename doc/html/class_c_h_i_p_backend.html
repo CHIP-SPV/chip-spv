@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -98,12 +98,12 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPBackend</b> ()</td></tr>
 <tr class="memdesc:a32a882a442b96fb178e6a8eafa5f38cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_backend.html" title="Primary object to interact with the backend.">CHIPBackend</a> objectk. <br /></td></tr>
 <tr class="separator:a32a882a442b96fb178e6a8eafa5f38cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a6fcbc6ebcd65e7ae42d9faca085238"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#a4a6fcbc6ebcd65e7ae42d9faca085238">initialize</a> (std::string platform_str, std::string device_type_str, std::string device_ids_str)</td></tr>
+<tr class="memitem:a4a6fcbc6ebcd65e7ae42d9faca085238"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#a4a6fcbc6ebcd65e7ae42d9faca085238">initialize</a> (std::string platform_str, std::string device_type_str, std::string device_ids_str)</td></tr>
 <tr class="memdesc:a4a6fcbc6ebcd65e7ae42d9faca085238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize this backend with given environment flags.  <a href="class_c_h_i_p_backend.html#a4a6fcbc6ebcd65e7ae42d9faca085238">More...</a><br /></td></tr>
 <tr class="separator:a4a6fcbc6ebcd65e7ae42d9faca085238"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1feebf02400e235c83e3077d4c3ed3b5"><td class="memItemLeft" align="right" valign="top"><a id="a1feebf02400e235c83e3077d4c3ed3b5" name="a1feebf02400e235c83e3077d4c3ed3b5"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>initialize</b> ()=0</td></tr>
-<tr class="separator:a1feebf02400e235c83e3077d4c3ed3b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7760a3f08873929a938fe268bbc99e96"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#a7760a3f08873929a938fe268bbc99e96">initialize_</a> (std::string platform_str, std::string device_type_str, std::string device_ids_str)=0</td></tr>
+<tr class="memdesc:a7760a3f08873929a938fe268bbc99e96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize this backend with given environment flags.  <a href="class_c_h_i_p_backend.html#a7760a3f08873929a938fe268bbc99e96">More...</a><br /></td></tr>
+<tr class="separator:a7760a3f08873929a938fe268bbc99e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17e88d76e4d051b337571056a33f510f"><td class="memItemLeft" align="right" valign="top"><a id="a17e88d76e4d051b337571056a33f510f" name="a17e88d76e4d051b337571056a33f510f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>uninitialize</b> ()=0</td></tr>
 <tr class="separator:a17e88d76e4d051b337571056a33f510f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,19 +156,36 @@ std::vector&lt; <a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> * 
 <tr class="memitem:ae49a2aba857eebeb7ca7ecdb63f5826d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#ae49a2aba857eebeb7ca7ecdb63f5826d">findDeviceMatchingProps</a> (const hipDeviceProp_t *props)</td></tr>
 <tr class="memdesc:ae49a2aba857eebeb7ca7ecdb63f5826d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a device which meets or exceeds the requirements.  <a href="class_c_h_i_p_backend.html#ae49a2aba857eebeb7ca7ecdb63f5826d">More...</a><br /></td></tr>
 <tr class="separator:ae49a2aba857eebeb7ca7ecdb63f5826d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74f6eba63a841fe0234a597e26299227"><td class="memItemLeft" align="right" valign="top">hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#a74f6eba63a841fe0234a597e26299227">addModule</a> (<a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> *chip_module)</td></tr>
-<tr class="memdesc:a74f6eba63a841fe0234a597e26299227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="class_c_h_i_p_module.html" title="Module abstraction. Contains global variables and kernels. Can be extracted from FatBinary or loaded ...">CHIPModule</a> to every initialized device.  <a href="class_c_h_i_p_backend.html#a74f6eba63a841fe0234a597e26299227">More...</a><br /></td></tr>
-<tr class="separator:a74f6eba63a841fe0234a597e26299227"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a43733426c1ce74cc9f03727eb4ea51"><td class="memItemLeft" align="right" valign="top">hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#a6a43733426c1ce74cc9f03727eb4ea51">removeModule</a> (<a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> *chip_module)</td></tr>
-<tr class="memdesc:a6a43733426c1ce74cc9f03727eb4ea51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove this module from every device.  <a href="class_c_h_i_p_backend.html#a6a43733426c1ce74cc9f03727eb4ea51">More...</a><br /></td></tr>
-<tr class="separator:a6a43733426c1ce74cc9f03727eb4ea51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82263576ceaf972d6252df8ca59d3ff5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#a82263576ceaf972d6252df8ca59d3ff5">findQueue</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *q)</td></tr>
+<tr class="memdesc:a82263576ceaf972d6252df8ca59d3ff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a given queue in this backend.  <a href="class_c_h_i_p_backend.html#a82263576ceaf972d6252df8ca59d3ff5">More...</a><br /></td></tr>
+<tr class="separator:a82263576ceaf972d6252df8ca59d3ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85bb57a5eb88c2c616dc6fee2a9d56b1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#a85bb57a5eb88c2c616dc6fee2a9d56b1">createCHIPTexture</a> (intptr_t image_, intptr_t sampler_)=0</td></tr>
+<tr class="memdesc:a85bb57a5eb88c2c616dc6fee2a9d56b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="class_c_h_i_p_module.html" title="Module abstraction. Contains global variables and kernels. Can be extracted from FatBinary or loaded ...">CHIPModule</a> to every initialized device.  <a href="class_c_h_i_p_backend.html#a85bb57a5eb88c2c616dc6fee2a9d56b1">More...</a><br /></td></tr>
+<tr class="separator:a85bb57a5eb88c2c616dc6fee2a9d56b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a441a2fcb4222fdce2a4a95aeac3cb83c"><td class="memItemLeft" align="right" valign="top"><a id="a441a2fcb4222fdce2a4a95aeac3cb83c" name="a441a2fcb4222fdce2a4a95aeac3cb83c"></a>
+virtual <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>createCHIPQueue</b> (<a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *chip_dev)=0</td></tr>
+<tr class="separator:a441a2fcb4222fdce2a4a95aeac3cb83c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a123cc9aee4b3d8b77c0659e334252a2b"><td class="memItemLeft" align="right" valign="top"><a id="a123cc9aee4b3d8b77c0659e334252a2b" name="a123cc9aee4b3d8b77c0659e334252a2b"></a>
+virtual <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>createCHIPEvent</b> (<a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *chip_ctx_, CHIPEventType event_type_)=0</td></tr>
+<tr class="separator:a123cc9aee4b3d8b77c0659e334252a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb8f6a7fa8f9fb8009c1c35eaeddbfc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#aedb8f6a7fa8f9fb8009c1c35eaeddbfc">createCallbackData</a> (hipStreamCallback_t callback, void *userData, <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *chip_queue_)=0</td></tr>
+<tr class="memdesc:aedb8f6a7fa8f9fb8009c1c35eaeddbfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Callback Obj object Each backend must implement this function which calls a derived <a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> constructor.  <a href="class_c_h_i_p_backend.html#aedb8f6a7fa8f9fb8009c1c35eaeddbfc">More...</a><br /></td></tr>
+<tr class="separator:aedb8f6a7fa8f9fb8009c1c35eaeddbfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c4b3aff671ec109d8b80c14e6ddcff6"><td class="memItemLeft" align="right" valign="top"><a id="a8c4b3aff671ec109d8b80c14e6ddcff6" name="a8c4b3aff671ec109d8b80c14e6ddcff6"></a>
+virtual <a class="el" href="class_c_h_i_p_event_monitor.html">CHIPEventMonitor</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>createEventMonitor</b> ()=0</td></tr>
+<tr class="separator:a8c4b3aff671ec109d8b80c14e6ddcff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca81a5e90ec8aedd9dbe317dc57ba40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_backend.html#afca81a5e90ec8aedd9dbe317dc57ba40">getCallback</a> (<a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> **callback_data)</td></tr>
+<tr class="memdesc:afca81a5e90ec8aedd9dbe317dc57ba40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Callback object.  <a href="class_c_h_i_p_backend.html#afca81a5e90ec8aedd9dbe317dc57ba40">More...</a><br /></td></tr>
+<tr class="separator:afca81a5e90ec8aedd9dbe317dc57ba40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a666504e278e70bd6c522a0f11fd2659f"><td class="memItemLeft" align="right" valign="top"><a id="a666504e278e70bd6c522a0f11fd2659f" name="a666504e278e70bd6c522a0f11fd2659f"></a>
-<a class="el" href="class_c_h_i_p_allocation_tracker.html">CHIPAllocationTracker</a>&#160;</td><td class="memItemRight" valign="bottom"><b>AllocationTracker</b></td></tr>
-<tr class="memdesc:a666504e278e70bd6c522a0f11fd2659f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep track of pointers allocated on the device. Used to get info about allocaitons based on device poitner in case that findPointerInfo() is not overriden. <br /></td></tr>
-<tr class="separator:a666504e278e70bd6c522a0f11fd2659f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e50348a21584a2325fbb1de7c63595"><td class="memItemLeft" align="right" valign="top"><a id="a64e50348a21584a2325fbb1de7c63595" name="a64e50348a21584a2325fbb1de7c63595"></a>
+std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>callback_stack_mtx</b></td></tr>
+<tr class="separator:a64e50348a21584a2325fbb1de7c63595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e4930f48e7b0dced56cec14597a1557"><td class="memItemLeft" align="right" valign="top"><a id="a4e4930f48e7b0dced56cec14597a1557" name="a4e4930f48e7b0dced56cec14597a1557"></a>
+std::stack&lt; <a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>callback_stack</b></td></tr>
+<tr class="separator:a4e4930f48e7b0dced56cec14597a1557"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a547b872d24efaf90f06439021db7da20"><td class="memItemLeft" align="right" valign="top"><a id="a547b872d24efaf90f06439021db7da20" name="a547b872d24efaf90f06439021db7da20"></a>
 std::stack&lt; <a class="el" href="class_c_h_i_p_exec_item.html">CHIPExecItem</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>chip_execstack</b></td></tr>
 <tr class="separator:a547b872d24efaf90f06439021db7da20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,6 +203,7 @@ std::vector&lt; <a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> * 
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a3bd7079feec8797b732cf991a558859c"><td class="memItemLeft" align="right" valign="top"><a id="a3bd7079feec8797b732cf991a558859c" name="a3bd7079feec8797b732cf991a558859c"></a>
 static thread_local hipError_t&#160;</td><td class="memItemRight" valign="bottom"><b>tls_last_error</b> = hipSuccess</td></tr>
+<tr class="memdesc:a3bd7079feec8797b732cf991a558859c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keep track of pointers allocated on the device. Used to get info about allocaitons based on device poitner in case that findPointerInfo() is not overriden. <br /></td></tr>
 <tr class="separator:a3bd7079feec8797b732cf991a558859c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23c04f1265e4e30775ee9cbbd61cd0a1"><td class="memItemLeft" align="right" valign="top"><a id="a23c04f1265e4e30775ee9cbbd61cd0a1" name="a23c04f1265e4e30775ee9cbbd61cd0a1"></a>
 static thread_local <a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>tls_active_ctx</b></td></tr>
@@ -262,33 +280,6 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a74f6eba63a841fe0234a597e26299227" name="a74f6eba63a841fe0234a597e26299227"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74f6eba63a841fe0234a597e26299227">&#9670;&nbsp;</a></span>addModule()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">hipError_t CHIPBackend::addModule </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> *&#160;</td>
-          <td class="paramname"><em>chip_module</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a <a class="el" href="class_c_h_i_p_module.html" title="Module abstraction. Contains global variables and kernels. Can be extracted from FatBinary or loaded ...">CHIPModule</a> to every initialized device. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">chip_module</td><td>pointer to <a class="el" href="class_c_h_i_p_module.html" title="Module abstraction. Contains global variables and kernels. Can be extracted from FatBinary or loaded ...">CHIPModule</a> object </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
 
 </div>
 </div>
@@ -370,6 +361,108 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
 
 </div>
 </div>
+<a id="aedb8f6a7fa8f9fb8009c1c35eaeddbfc" name="aedb8f6a7fa8f9fb8009c1c35eaeddbfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb8f6a7fa8f9fb8009c1c35eaeddbfc">&#9670;&nbsp;</a></span>createCallbackData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> * CHIPBackend::createCallbackData </td>
+          <td>(</td>
+          <td class="paramtype">hipStreamCallback_t&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td>
+          <td class="paramname"><em>chip_queue_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a Callback Obj object Each backend must implement this function which calls a derived <a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> constructor. </p>
+<dl class="section return"><dt>Returns</dt><dd>CHIPCallbackData* pointer to newly allocated <a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> object. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_c_h_i_p_backend_level0.html#ad6eba47ba10bd042c59acb2e1325170a">CHIPBackendLevel0</a>, and <a class="el" href="class_c_h_i_p_backend_open_c_l.html#a4f45af540dd135a417e6dcb4e01e6fe8">CHIPBackendOpenCL</a>.</p>
+
+</div>
+</div>
+<a id="a85bb57a5eb88c2c616dc6fee2a9d56b1" name="a85bb57a5eb88c2c616dc6fee2a9d56b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85bb57a5eb88c2c616dc6fee2a9d56b1">&#9670;&nbsp;</a></span>createCHIPTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> * CHIPBackend::createCHIPTexture </td>
+          <td>(</td>
+          <td class="paramtype">intptr_t&#160;</td>
+          <td class="paramname"><em>image_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">intptr_t&#160;</td>
+          <td class="paramname"><em>sampler_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a <a class="el" href="class_c_h_i_p_module.html" title="Module abstraction. Contains global variables and kernels. Can be extracted from FatBinary or loaded ...">CHIPModule</a> to every initialized device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chip_module</td><td>pointer to <a class="el" href="class_c_h_i_p_module.html" title="Module abstraction. Contains global variables and kernels. Can be extracted from FatBinary or loaded ...">CHIPModule</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>hipError_t</dd></dl>
+<p>Remove this module from every device</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chip_module</td><td>pointer to the module which is to be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
+
+<p>Implemented in <a class="el" href="class_c_h_i_p_backend_level0.html#ad8b917cecc67cbf934a02bd34cdc8e95">CHIPBackendLevel0</a>, and <a class="el" href="class_c_h_i_p_backend_open_c_l.html#a0088a8f34d7bae78582a197ba7cc4ff8">CHIPBackendOpenCL</a>.</p>
+
+</div>
+</div>
 <a id="ae49a2aba857eebeb7ca7ecdb63f5826d" name="ae49a2aba857eebeb7ca7ecdb63f5826d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae49a2aba857eebeb7ca7ecdb63f5826d">&#9670;&nbsp;</a></span>findDeviceMatchingProps()</h2>
 
@@ -394,6 +487,33 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CHIPDevice* </dd></dl>
+
+</div>
+</div>
+<a id="a82263576ceaf972d6252df8ca59d3ff5" name="a82263576ceaf972d6252df8ca59d3ff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82263576ceaf972d6252df8ca59d3ff5">&#9670;&nbsp;</a></span>findQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * CHIPBackend::findQueue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td>
+          <td class="paramname"><em>q</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find a given queue in this backend. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">q</td><td>queue to find </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CHIPQueue* return queue or nullptr if not found </dd></dl>
 
 </div>
 </div>
@@ -454,6 +574,43 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
 
 <p>Get the Active Queue object. </p>
 <dl class="section return"><dt>Returns</dt><dd>CHIPQueue* </dd></dl>
+
+</div>
+</div>
+<a id="afca81a5e90ec8aedd9dbe317dc57ba40" name="afca81a5e90ec8aedd9dbe317dc57ba40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afca81a5e90ec8aedd9dbe317dc57ba40">&#9670;&nbsp;</a></span>getCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CHIPBackend::getCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a> **&#160;</td>
+          <td class="paramname"><em>callback_data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Callback object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback_data</td><td>pointer to callback object </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true callback object available </dd>
+<dd>
+false callback object not available </dd></dl>
 
 </div>
 </div>
@@ -522,9 +679,6 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void CHIPBackend::initialize </td>
@@ -550,9 +704,56 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
           <td></td><td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+<p>Initialize this backend with given environment flags. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">platform_str</td><td></td></tr>
+    <tr><td class="paramname">device_type_str</td><td></td></tr>
+    <tr><td class="paramname">device_ids_str</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7760a3f08873929a938fe268bbc99e96" name="a7760a3f08873929a938fe268bbc99e96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7760a3f08873929a938fe268bbc99e96">&#9670;&nbsp;</a></span>initialize_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void CHIPBackend::initialize_ </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>platform_str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>device_type_str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>device_ids_str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -567,7 +768,7 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></t
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_c_h_i_p_backend_level0.html#a9ca8b3d935593a3f9788dfd836e2ffa7">CHIPBackendLevel0</a>, and <a class="el" href="class_c_h_i_p_backend_open_c_l.html#ab829c228e2382ddbb057e242ec4d5c6e">CHIPBackendOpenCL</a>.</p>
+<p>Implemented in <a class="el" href="class_c_h_i_p_backend_level0.html#a37d93fb1117415fdb80ae0e45a1b619c">CHIPBackendLevel0</a>, and <a class="el" href="class_c_h_i_p_backend_open_c_l.html#af520a9da68d9cc2f0da46de8c9ea2797">CHIPBackendOpenCL</a>.</p>
 
 </div>
 </div>
@@ -658,33 +859,6 @@ false </dd></dl>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a6a43733426c1ce74cc9f03727eb4ea51" name="a6a43733426c1ce74cc9f03727eb4ea51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a43733426c1ce74cc9f03727eb4ea51">&#9670;&nbsp;</a></span>removeModule()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">hipError_t CHIPBackend::removeModule </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> *&#160;</td>
-          <td class="paramname"><em>chip_module</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Remove this module from every device. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">chip_module</td><td>pointer to the module which is to be removed </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
 
 </div>
 </div>
@@ -784,8 +958,8 @@ false </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

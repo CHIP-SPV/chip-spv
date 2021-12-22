@@ -1,0 +1,152 @@
+\hypertarget{_vulkan_base_app_8h_source}{}\doxysection{Vulkan\+Base\+App.\+h}
+\label{_vulkan_base_app_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/samples/2\_Cookbook/20\_hip\_vulkan/VulkanBaseApp.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/samples/2\_Cookbook/20\_hip\_vulkan/VulkanBaseApp.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* Copyright (c) 2020, NVIDIA CORPORATION. All rights reserved.}}
+\DoxyCodeLine{2 \textcolor{comment}{ *}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{4 \textcolor{comment}{ * modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{5 \textcolor{comment}{ * are met:}}
+\DoxyCodeLine{6 \textcolor{comment}{ *  * Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{7 \textcolor{comment}{ *    notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{8 \textcolor{comment}{ *  * Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{9 \textcolor{comment}{ *    notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{10 \textcolor{comment}{ *    documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{11 \textcolor{comment}{ *  * Neither the name of NVIDIA CORPORATION nor the names of its}}
+\DoxyCodeLine{12 \textcolor{comment}{ *    contributors may be used to endorse or promote products derived}}
+\DoxyCodeLine{13 \textcolor{comment}{ *    from this software without specific prior written permission.}}
+\DoxyCodeLine{14 \textcolor{comment}{ *}}
+\DoxyCodeLine{15 \textcolor{comment}{ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY}}
+\DoxyCodeLine{16 \textcolor{comment}{ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE}}
+\DoxyCodeLine{17 \textcolor{comment}{ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR}}
+\DoxyCodeLine{18 \textcolor{comment}{ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR}}
+\DoxyCodeLine{19 \textcolor{comment}{ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}}
+\DoxyCodeLine{20 \textcolor{comment}{ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}}
+\DoxyCodeLine{21 \textcolor{comment}{ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}}
+\DoxyCodeLine{22 \textcolor{comment}{ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY}}
+\DoxyCodeLine{23 \textcolor{comment}{ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
+\DoxyCodeLine{24 \textcolor{comment}{ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
+\DoxyCodeLine{25 \textcolor{comment}{ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{26 \textcolor{comment}{ */}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{comment}{/*}}
+\DoxyCodeLine{30 \textcolor{comment}{ * Modifications Copyright (C)2021 Advanced}}
+\DoxyCodeLine{31 \textcolor{comment}{ * Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{32 \textcolor{comment}{ */}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#ifndef \_\_VULKANBASEAPP\_H\_\_}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define \_\_VULKANBASEAPP\_H\_\_}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include <vulkan/vulkan.h>}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#ifdef \_WIN64}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define NOMINMAX}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#include <windows.h>}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#include <vulkan/vulkan\_win32.h>}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_WIN64 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keyword}{struct }GLFWwindow;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{keyword}{class }\mbox{\hyperlink{class_vulkan_base_app}{VulkanBaseApp}}}
+\DoxyCodeLine{50 \{}
+\DoxyCodeLine{51 \textcolor{keyword}{public}:}
+\DoxyCodeLine{52     \mbox{\hyperlink{class_vulkan_base_app}{VulkanBaseApp}}(\textcolor{keyword}{const} std::string\& appName, \textcolor{keywordtype}{bool} enableValidation = \textcolor{keyword}{false});}
+\DoxyCodeLine{53     \textcolor{keyword}{static} VkExternalSemaphoreHandleTypeFlagBits getDefaultSemaphoreHandleType();}
+\DoxyCodeLine{54     \textcolor{keyword}{static} VkExternalMemoryHandleTypeFlagBits getDefaultMemHandleType();}
+\DoxyCodeLine{55     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_vulkan_base_app}{\string~VulkanBaseApp}}();}
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} init();}
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} *getMemHandle(VkDeviceMemory memory, VkExternalMemoryHandleTypeFlagBits handleType);}
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} *getSemaphoreHandle(VkSemaphore semaphore, VkExternalSemaphoreHandleTypeFlagBits handleType);}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} createExternalSemaphore(VkSemaphore\& semaphore, VkExternalSemaphoreHandleTypeFlagBits handleType);}
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer\& buffer, VkDeviceMemory\& bufferMemory);}
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} createExternalBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkExternalMemoryHandleTypeFlagsKHR extMemHandleType, VkBuffer\& buffer, VkDeviceMemory\& bufferMemory);}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} importExternalBuffer(\textcolor{keywordtype}{void} *handle, VkExternalMemoryHandleTypeFlagBits handleType, \textcolor{keywordtype}{size\_t} size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer\& buffer, VkDeviceMemory\& memory);}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} copyBuffer(VkBuffer dst, VkBuffer src, VkDeviceSize size);}
+\DoxyCodeLine{64     VkCommandBuffer beginSingleTimeCommands();}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} endSingleTimeCommands(VkCommandBuffer commandBuffer);}
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} mainLoop();}
+\DoxyCodeLine{67 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{68     \textcolor{keyword}{const} std::string m\_appName;}
+\DoxyCodeLine{69     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} m\_enableValidation;}
+\DoxyCodeLine{70     VkInstance m\_instance;}
+\DoxyCodeLine{71     VkDebugUtilsMessengerEXT m\_debugMessenger;}
+\DoxyCodeLine{72     VkSurfaceKHR m\_surface;}
+\DoxyCodeLine{73     VkPhysicalDevice m\_physicalDevice;}
+\DoxyCodeLine{74     VkDevice m\_device;}
+\DoxyCodeLine{75     VkQueue m\_graphicsQueue;}
+\DoxyCodeLine{76     VkQueue m\_presentQueue;}
+\DoxyCodeLine{77     VkSwapchainKHR m\_swapChain;}
+\DoxyCodeLine{78     std::vector<VkImage> m\_swapChainImages;}
+\DoxyCodeLine{79     VkFormat m\_swapChainFormat;}
+\DoxyCodeLine{80     VkExtent2D m\_swapChainExtent;}
+\DoxyCodeLine{81     std::vector<VkImageView> m\_swapChainImageViews;}
+\DoxyCodeLine{82     std::vector<std::pair<VkShaderStageFlagBits, std::string> > m\_shaderFiles;}
+\DoxyCodeLine{83     VkRenderPass m\_renderPass;}
+\DoxyCodeLine{84     VkPipelineLayout m\_pipelineLayout;}
+\DoxyCodeLine{85     VkPipeline m\_graphicsPipeline;}
+\DoxyCodeLine{86     std::vector<VkFramebuffer> m\_swapChainFramebuffers;}
+\DoxyCodeLine{87     VkCommandPool m\_commandPool;}
+\DoxyCodeLine{88     std::vector<VkCommandBuffer> m\_commandBuffers;}
+\DoxyCodeLine{89     std::vector<VkSemaphore> m\_imageAvailableSemaphores;}
+\DoxyCodeLine{90     std::vector<VkSemaphore> m\_renderFinishedSemaphores;}
+\DoxyCodeLine{91     std::vector<VkFence> m\_inFlightFences;}
+\DoxyCodeLine{92     std::vector<VkBuffer> m\_uniformBuffers;}
+\DoxyCodeLine{93     std::vector<VkDeviceMemory> m\_uniformMemory;}
+\DoxyCodeLine{94     VkDescriptorSetLayout m\_descriptorSetLayout;}
+\DoxyCodeLine{95     VkDescriptorPool m\_descriptorPool;}
+\DoxyCodeLine{96     std::vector<VkDescriptorSet> m\_descriptorSets;}
+\DoxyCodeLine{97     VkImage m\_depthImage;}
+\DoxyCodeLine{98     VkDeviceMemory m\_depthImageMemory;}
+\DoxyCodeLine{99     VkImageView m\_depthImageView;}
+\DoxyCodeLine{100     \textcolor{keywordtype}{size\_t} m\_currentFrame;}
+\DoxyCodeLine{101     \textcolor{keywordtype}{bool} m\_framebufferResized;}
+\DoxyCodeLine{102     uint8\_t  m\_vkDeviceUUID[VK\_UUID\_SIZE];}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} initVulkanApp() \{\}}
+\DoxyCodeLine{105     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} fillRenderingCommandBuffer(VkCommandBuffer\& buffer) \{\}}
+\DoxyCodeLine{106     \textcolor{keyword}{virtual} std::vector<const char *> getRequiredExtensions() \textcolor{keyword}{const};}
+\DoxyCodeLine{107     \textcolor{keyword}{virtual} std::vector<const char *> getRequiredDeviceExtensions() \textcolor{keyword}{const};}
+\DoxyCodeLine{108     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} getVertexDescriptions(std::vector<VkVertexInputBindingDescription>\& bindingDesc, std::vector<VkVertexInputAttributeDescription>\& attribDesc);}
+\DoxyCodeLine{109     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} getAssemblyStateInfo(VkPipelineInputAssemblyStateCreateInfo\& info);}
+\DoxyCodeLine{110     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} getWaitFrameSemaphores(std::vector<VkSemaphore>\& wait, std::vector< VkPipelineStageFlags>\& waitStages) \textcolor{keyword}{const};}
+\DoxyCodeLine{111     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} getSignalFrameSemaphores(std::vector<VkSemaphore>\& signal) \textcolor{keyword}{const};}
+\DoxyCodeLine{112     \textcolor{keyword}{virtual} VkDeviceSize getUniformSize() \textcolor{keyword}{const};}
+\DoxyCodeLine{113     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} updateUniformBuffer(uint32\_t imageIndex);}
+\DoxyCodeLine{114     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} drawFrame();}
+\DoxyCodeLine{115 \textcolor{keyword}{private}:}
+\DoxyCodeLine{116     GLFWwindow *m\_window;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} initWindow();}
+\DoxyCodeLine{119     \textcolor{keywordtype}{void} initVulkan();}
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} createInstance();}
+\DoxyCodeLine{121     \textcolor{keywordtype}{void} createSurface();}
+\DoxyCodeLine{122     \textcolor{keywordtype}{void} createDevice();}
+\DoxyCodeLine{123     \textcolor{keywordtype}{void} createSwapChain();}
+\DoxyCodeLine{124     \textcolor{keywordtype}{void} createImageViews();}
+\DoxyCodeLine{125     \textcolor{keywordtype}{void} createRenderPass();}
+\DoxyCodeLine{126     \textcolor{keywordtype}{void} createDescriptorSetLayout();}
+\DoxyCodeLine{127     \textcolor{keywordtype}{void} createGraphicsPipeline();}
+\DoxyCodeLine{128     \textcolor{keywordtype}{void} createFramebuffers();}
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} createCommandPool();}
+\DoxyCodeLine{130     \textcolor{keywordtype}{void} createDepthResources();}
+\DoxyCodeLine{131     \textcolor{keywordtype}{void} createUniformBuffers();}
+\DoxyCodeLine{132     \textcolor{keywordtype}{void} createDescriptorPool();}
+\DoxyCodeLine{133     \textcolor{keywordtype}{void} createDescriptorSets();}
+\DoxyCodeLine{134     \textcolor{keywordtype}{void} createCommandBuffers();}
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} createSyncObjects();}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{keywordtype}{void} cleanupSwapChain();}
+\DoxyCodeLine{138     \textcolor{keywordtype}{void} recreateSwapChain();}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keywordtype}{bool} isSuitableDevice(VkPhysicalDevice dev) \textcolor{keyword}{const};}
+\DoxyCodeLine{141     \textcolor{keyword}{static} \textcolor{keywordtype}{void} resizeCallback(GLFWwindow *window, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height);}
+\DoxyCodeLine{142 \};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 \textcolor{keywordtype}{void} readFile(std::istream\& s, std::vector<char>\& data);}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_VULKANBASEAPP\_H\_\_ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

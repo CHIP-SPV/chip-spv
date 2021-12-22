@@ -1,0 +1,59 @@
+This tutorial is follow-\/up of the previous one where we learn how to write our first hip program, in which we compute Matrix Transpose. In this tutorial, we\textquotesingle{}ll explain how to use the hip\+Event to get the performance score for memory transfer and kernel execution time.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md899}{}\doxysection{Introduction\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md899}
+Memory transfer and kernel execution are the most important parameter in parallel computing (specially HPC and machine learning). Memory bottlenecks is the main problem why we are not able to get the highest performance, therefore obtaining the memory transfer timing and kernel execution timing plays key role in application optimization.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md900}{}\doxysection{Requirement\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md900}
+For hardware requirement and software installation \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/INSTALL.md}{\texttt{ Installation}}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md901}{}\doxysection{prerequiste knowledge\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md901}
+Programmers familiar with CUDA, Open\+CL will be able to quickly learn and start coding with the HIP API. In case you are not, don\textquotesingle{}t worry. You choose to start with the best one. We\textquotesingle{}ll be explaining everything assuming you are completely new to gpgpu programming.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md902}{}\doxysection{Simple Matrix Transpose}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md902}
+We will be using the Simple Matrix Transpose application from the previous tutorial and modify it to learn how to get the performance score for memory transfer and kernel execution time.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md903}{}\doxysection{hip\+Event\+\_\+t}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md903}
+We\textquotesingle{}ll learn how to use the event management functionality of HIP runtime api. In the same sourcecode, we used for Matrix\+Transpose we will declare the following events as follows\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{hipEvent\_t start, stop;}
+
+\end{DoxyCode}
+
+
+We\textquotesingle{}ll create the event with the help of following code\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{hipEventCreate(\&start);}
+\DoxyCodeLine{hipEventCreate(\&stop);}
+
+\end{DoxyCode}
+
+
+We\textquotesingle{}ll use the \char`\"{}event\+Ms\char`\"{} variable to store the time taken value\+: {\ttfamily float event\+Ms = 1.\+0f;}\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md904}{}\doxysection{Time taken measurement by using hip\+Events\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md904}
+We\textquotesingle{}ll start the timer by calling\+: {\ttfamily hip\+Event\+Record(start, NULL);} in this, the first parameter is the hip\+Event\+\_\+t, will will mark the start of the time from which the measurement has to be performed, while the second parameter has to be of the type hip\+Stream\+\_\+t. In current situation, we have passed NULL (the default stream). We will learn about the {\ttfamily hip\+Stream\+\_\+t} in more detail latter.
+
+Now, we\textquotesingle{}ll have the operation for which we need to compute the time taken. For the case of memory transfer, we\textquotesingle{}ll place the {\ttfamily hip\+Memcpy}\+: {\ttfamily hip\+Memcpy(gpu\+Matrix, Matrix, NUM$\ast$sizeof(float), hip\+Memcpy\+Host\+To\+Device);}
+
+and for kernel execution time we\textquotesingle{}ll use {\ttfamily hip\+Kernel\+Launch}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{hipLaunchKernelGGL(matrixTranspose,}
+\DoxyCodeLine{                   dim3(WIDTH/THREADS\_PER\_BLOCK\_X, HEIGHT/THREADS\_PER\_BLOCK\_Y),}
+\DoxyCodeLine{                   dim3(THREADS\_PER\_BLOCK\_X, THREADS\_PER\_BLOCK\_Y),}
+\DoxyCodeLine{                   0, 0,}
+\DoxyCodeLine{                   gpuTransposeMatrix , gpuMatrix, WIDTH ,HEIGHT);}
+
+\end{DoxyCode}
+
+
+Now to mark the end of the event\+Record, we will again use the hip\+Event\+Record by passing the stop event\+: {\ttfamily hip\+Event\+Record(stop, NULL);}
+
+Will synchronize the event with the help of\+: {\ttfamily hip\+Event\+Synchronize(stop);}
+
+In order to calculate the time taken by measuring the difference of occurance marked by the start and stop event, we\textquotesingle{}ll use\+: {\ttfamily hip\+Event\+Elapsed\+Time(\&event\+Ms, start, stop);} Here the first parameter will store the time taken value, second parameter is the starting marker for the event while the third one is marking the end.
+
+We can print the value of time take comfortably since event\+Ms is float variable.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md905}{}\doxysection{How to build and run\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md905}
+Use the make command and execute it using ./exe Use hipcc to build the application, which is using hcc on AMD and nvcc on nvidia.\hypertarget{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md906}{}\doxysection{More Info\+:}\label{md___users_pvelesko_local__c_h_i_p__s_p_v__h_i_p_samples_2__cookbook_1_hip_event__readme_autotoc_md906}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_faq.md}{\texttt{ HIP FAQ}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_kernel_language.md}{\texttt{ HIP Kernel Language}}
+\item \href{http://rocm-developer-tools.github.io/HIP}{\texttt{ HIP Runtime API (Doxygen)}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_porting_guide.md}{\texttt{ HIP Porting Guide}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/docs/markdown/hip_terms.md}{\texttt{ HIP Terminology}} (including Rosetta Stone of GPU computing terms across CUDA/\+HIP/\+HC/\+AMP/\+OpenL)
+\item \href{https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/README.md}{\texttt{ HIPIFY}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/CONTRIBUTING.md}{\texttt{ Developer/\+CONTRIBUTING Info}}
+\item \href{https://github.com/ROCm-Developer-Tools/HIP/blob/master/RELEASE.md}{\texttt{ Release Notes}} 
+\end{DoxyItemize}

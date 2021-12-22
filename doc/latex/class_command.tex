@@ -1,0 +1,43 @@
+\hypertarget{class_command}{}\doxysection{Command Class Reference}
+\label{class_command}\index{Command@{Command}}
+Inheritance diagram for Command\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=10.000000cm]{class_command}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_command_a6eeff67565dce7d5222bbb453d192d19}\label{class_command_a6eeff67565dce7d5222bbb453d192d19}} 
+{\bfseries Command} (\mbox{\hyperlink{class_command_stream}{Command\+Stream}} $\ast$cmd\+Stream, const std\+::vector$<$ std\+::string $>$ \&args, int min\+Args=0, int max\+Args=0)
+\item 
+\mbox{\Hypertarget{class_command_a5ac24135657566dc6da59cdee7cbd9a8}\label{class_command_a5ac24135657566dc6da59cdee7cbd9a8}} 
+void {\bfseries print\+Brief} (std\+::ostream \&s=std\+::cout) const
+\item 
+\mbox{\Hypertarget{class_command_a866e48fa2a328b7303d0e42938840433}\label{class_command_a866e48fa2a328b7303d0e42938840433}} 
+virtual void {\bfseries print} (const std\+::string \&indent=\char`\"{}\char`\"{}) const
+\item 
+\mbox{\Hypertarget{class_command_acee4e84f6cde710ba074eec35ff9d0d9}\label{class_command_acee4e84f6cde710ba074eec35ff9d0d9}} 
+virtual void {\bfseries run} ()=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_command_a4349aeb2074557483db6764a6b301f9a}\label{class_command_a4349aeb2074557483db6764a6b301f9a}} 
+int {\bfseries read\+Int\+Arg} (int arg\+Index, const std\+::string \&arg\+Name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_command_a5ff33561668b245969c169c5820f068b}\label{class_command_a5ff33561668b245969c169c5820f068b}} 
+\mbox{\hyperlink{class_command_stream}{Command\+Stream}} $\ast$ {\bfseries \+\_\+command\+Stream}
+\item 
+\mbox{\Hypertarget{class_command_af23a4d7fa0471b95c849aa669b1c319e}\label{class_command_af23a4d7fa0471b95c849aa669b1c319e}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries \+\_\+args}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/samples/1\+\_\+\+Utils/hip\+Commander/hip\+Commander.\+cpp\end{DoxyCompactItemize}

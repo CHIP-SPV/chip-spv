@@ -1,0 +1,198 @@
+\hypertarget{classdct_1_1_d_c_t}{}\doxysection{dct\+::DCT Class Reference}
+\label{classdct_1_1_d_c_t}\index{dct::DCT@{dct::DCT}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdct_1_1_d_c_t_a7c2790a3538d75a799888fca9931f45b}{DCT}} ()
+\item 
+\mbox{\Hypertarget{classdct_1_1_d_c_t_ae49e9a5fd285ca869ed9142b28955fa7}\label{classdct_1_1_d_c_t_ae49e9a5fd285ca869ed9142b28955fa7}} 
+long long {\bfseries get\+\_\+time} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_a5bb9e24860c59deda3d7aa5d9d8cfa88}{setup\+DCT}} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_adcd87419c76d6c022de542fc2ba552e9}{setup\+HIP}} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_a952196b1377c433955ae13a53b4014a4}{run\+Kernels}} ()
+\item 
+unsigned int \mbox{\hyperlink{classdct_1_1_d_c_t_a302b2733d4eafa7da1d428c876e2449f}{get\+Idx}} (unsigned int block\+Idx, unsigned int block\+Idy, unsigned int local\+Idx, unsigned int local\+Idy, unsigned int block\+Width, unsigned int global\+Width)
+\item 
+void \mbox{\hyperlink{classdct_1_1_d_c_t_a9e89127a1db1c198d64e622d94356744}{DCTCPUReference}} (float $\ast$output, const float $\ast$input, const float $\ast$dct8x8, const unsigned int width, const unsigned int height, const unsigned int num\+BlocksX, const unsigned int num\+BlocksY, const unsigned int inverse)
+\item 
+void \mbox{\hyperlink{classdct_1_1_d_c_t_a450189187e169630b26884d8daa90072}{print\+Stats}} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_a947d6ef7dc1701fd5f6050e345dcedea}{initialize}} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_ae99ab4cca757ff33d782d06e9fc0e3de}{setup}} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_af41eab2732f7f6789b8c757c24541939}{run}} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_a2c017a9cd16b96966e674e0ede8f1777}{cleanup}} ()
+\item 
+int \mbox{\hyperlink{classdct_1_1_d_c_t_a782ed6f5381432d4c8825008e4f63c48}{verify\+Results}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}} $\ast$ \mbox{\hyperlink{classdct_1_1_d_c_t_ae0f4145512d66e6771b9178fefe98d96}{sample\+Args}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classdct_1_1_d_c_t}{DCT}} Class implements HIP Discrete Cosine Transform 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a7c2790a3538d75a799888fca9931f45b}\label{classdct_1_1_d_c_t_a7c2790a3538d75a799888fca9931f45b}} 
+\index{dct::DCT@{dct::DCT}!DCT@{DCT}}
+\index{DCT@{DCT}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{DCT()}{DCT()}}
+{\footnotesize\ttfamily dct\+::\+DCT\+::\+DCT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor Initialize member variables 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of sample (string) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a2c017a9cd16b96966e674e0ede8f1777}\label{classdct_1_1_d_c_t_a2c017a9cd16b96966e674e0ede8f1777}} 
+\index{dct::DCT@{dct::DCT}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily int DCT\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Clean-\/up memory allocations \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a9e89127a1db1c198d64e622d94356744}\label{classdct_1_1_d_c_t_a9e89127a1db1c198d64e622d94356744}} 
+\index{dct::DCT@{dct::DCT}!DCTCPUReference@{DCTCPUReference}}
+\index{DCTCPUReference@{DCTCPUReference}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{DCTCPUReference()}{DCTCPUReference()}}
+{\footnotesize\ttfamily void DCT\+::\+DCTCPUReference (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{const float $\ast$}]{input,  }\item[{const float $\ast$}]{dct8x8,  }\item[{const unsigned int}]{width,  }\item[{const unsigned int}]{height,  }\item[{const unsigned int}]{num\+BlocksX,  }\item[{const unsigned int}]{num\+BlocksY,  }\item[{const unsigned int}]{inverse }\end{DoxyParamCaption})}
+
+Reference CPU implementation of Discrete Cosine Transform for performance comparison 
+\begin{DoxyParams}{Parameters}
+{\em output} & output of the DCT8x8 transform \\
+\hline
+{\em input} & input array \\
+\hline
+{\em dct8x8} & 8x8 cosine function base used to calculate DCT8x8 \\
+\hline
+{\em width} & width of the input matrix \\
+\hline
+{\em height} & height of the input matrix \\
+\hline
+{\em num\+BlocksX} & number of blocks horizontally \\
+\hline
+{\em num\+BlocksY} & number of blocks vertically \\
+\hline
+{\em inverse} & flag to perform inverse \mbox{\hyperlink{classdct_1_1_d_c_t}{DCT}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a302b2733d4eafa7da1d428c876e2449f}\label{classdct_1_1_d_c_t_a302b2733d4eafa7da1d428c876e2449f}} 
+\index{dct::DCT@{dct::DCT}!getIdx@{getIdx}}
+\index{getIdx@{getIdx}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{getIdx()}{getIdx()}}
+{\footnotesize\ttfamily unsigned int DCT\+::get\+Idx (\begin{DoxyParamCaption}\item[{unsigned int}]{block\+Idx,  }\item[{unsigned int}]{block\+Idy,  }\item[{unsigned int}]{local\+Idx,  }\item[{unsigned int}]{local\+Idy,  }\item[{unsigned int}]{block\+Width,  }\item[{unsigned int}]{global\+Width }\end{DoxyParamCaption})}
+
+Given the blockindices and local\+Indicies this function calculate the global index 
+\begin{DoxyParams}{Parameters}
+{\em block\+Idx} & index of the block horizontally \\
+\hline
+{\em block\+Idy} & index of the block vertically \\
+\hline
+{\em localidx} & index of the element relative to the block horizontally \\
+\hline
+{\em local\+Idy} & index of the element relative to the block vertically \\
+\hline
+{\em block\+Width} & width of each block which is 8 \\
+\hline
+{\em global\+Width} & Width of the input matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ID in x dimension 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a947d6ef7dc1701fd5f6050e345dcedea}\label{classdct_1_1_d_c_t_a947d6ef7dc1701fd5f6050e345dcedea}} 
+\index{dct::DCT@{dct::DCT}!initialize@{initialize}}
+\index{initialize@{initialize}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily int DCT\+::initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Initialize command line parser, add custom options \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a450189187e169630b26884d8daa90072}\label{classdct_1_1_d_c_t_a450189187e169630b26884d8daa90072}} 
+\index{dct::DCT@{dct::DCT}!printStats@{printStats}}
+\index{printStats@{printStats}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{printStats()}{printStats()}}
+{\footnotesize\ttfamily void DCT\+::print\+Stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Print sample stats. \mbox{\Hypertarget{classdct_1_1_d_c_t_af41eab2732f7f6789b8c757c24541939}\label{classdct_1_1_d_c_t_af41eab2732f7f6789b8c757c24541939}} 
+\index{dct::DCT@{dct::DCT}!run@{run}}
+\index{run@{run}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int DCT\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Run HIP \mbox{\hyperlink{classdct_1_1_d_c_t}{DCT}} \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a952196b1377c433955ae13a53b4014a4}\label{classdct_1_1_d_c_t_a952196b1377c433955ae13a53b4014a4}} 
+\index{dct::DCT@{dct::DCT}!runKernels@{runKernels}}
+\index{runKernels@{runKernels}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{runKernels()}{runKernels()}}
+{\footnotesize\ttfamily int DCT\+::run\+Kernels (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Set values for kernels\textquotesingle{} arguments, enqueue calls to the kernels Get kernel start and end time if timing is enabled \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_ae99ab4cca757ff33d782d06e9fc0e3de}\label{classdct_1_1_d_c_t_ae99ab4cca757ff33d782d06e9fc0e3de}} 
+\index{dct::DCT@{dct::DCT}!setup@{setup}}
+\index{setup@{setup}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily int DCT\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample, adjust width and height of execution domain, perform all sample setup \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a5bb9e24860c59deda3d7aa5d9d8cfa88}\label{classdct_1_1_d_c_t_a5bb9e24860c59deda3d7aa5d9d8cfa88}} 
+\index{dct::DCT@{dct::DCT}!setupDCT@{setupDCT}}
+\index{setupDCT@{setupDCT}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{setupDCT()}{setupDCT()}}
+{\footnotesize\ttfamily int DCT\+::setup\+DCT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allocate and initialize host memory array with random values \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_adcd87419c76d6c022de542fc2ba552e9}\label{classdct_1_1_d_c_t_adcd87419c76d6c022de542fc2ba552e9}} 
+\index{dct::DCT@{dct::DCT}!setupHIP@{setupHIP}}
+\index{setupHIP@{setupHIP}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{setupHIP()}{setupHIP()}}
+{\footnotesize\ttfamily int DCT\+::setup\+HIP (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+HIP related initialisations. Set up the environment, Memory buffers \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_a782ed6f5381432d4c8825008e4f63c48}\label{classdct_1_1_d_c_t_a782ed6f5381432d4c8825008e4f63c48}} 
+\index{dct::DCT@{dct::DCT}!verifyResults@{verifyResults}}
+\index{verifyResults@{verifyResults}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{verifyResults()}{verifyResults()}}
+{\footnotesize\ttfamily int DCT\+::verify\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Verify against reference implementation \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+reference implementation
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdct_1_1_d_c_t_ae0f4145512d66e6771b9178fefe98d96}\label{classdct_1_1_d_c_t_ae0f4145512d66e6771b9178fefe98d96}} 
+\index{dct::DCT@{dct::DCT}!sampleArgs@{sampleArgs}}
+\index{sampleArgs@{sampleArgs}!dct::DCT@{dct::DCT}}
+\doxysubsubsection{\texorpdfstring{sampleArgs}{sampleArgs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}}$\ast$ dct\+::\+DCT\+::sample\+Args}
+
+HIPCommand argument class 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/\+DCT/DCT.\+cpp\end{DoxyCompactItemize}

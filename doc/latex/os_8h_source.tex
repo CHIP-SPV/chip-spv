@@ -1,0 +1,427 @@
+\hypertarget{os_8h_source}{}\doxysection{os.\+h}
+\label{os_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/os.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/os.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}../common.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <cstdio>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <sys/stat.h>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef NOMINMAX}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define NOMINMAX }\textcolor{comment}{// prevent windows redefining min/max}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <io.h>}      \textcolor{comment}{// \_get\_osfhandle and \_isatty support}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <process.h>} \textcolor{comment}{//  \_get\_pid support}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <windows.h>}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#ifdef \_\_MINGW32\_\_}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include <share.h>}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#else }\textcolor{comment}{// unix}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include <fcntl.h>}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#ifdef \_\_linux\_\_}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#include <sys/syscall.h>} \textcolor{comment}{//Use gettid() syscall under linux to get thread id}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#elif \_\_FreeBSD\_\_}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#include <sys/thr.h>} \textcolor{comment}{//Use thr\_self() syscall under FreeBSD to get thread id}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// unix}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#ifndef \_\_has\_feature      }\textcolor{comment}{// Clang -\/ feature checking macros.}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define \_\_has\_feature(x) 0 }\textcolor{comment}{// Compatibility with non-\/clang compilers.}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{57 \textcolor{keyword}{namespace }details \{}
+\DoxyCodeLine{58 \textcolor{keyword}{namespace }os \{}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{keyword}{inline} spdlog::log\_clock::time\_point now() SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{61 \{}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#if defined \_\_linux\_\_ \&\& defined SPDLOG\_CLOCK\_COARSE}}
+\DoxyCodeLine{64     timespec ts;}
+\DoxyCodeLine{65     ::clock\_gettime(CLOCK\_REALTIME\_COARSE, \&ts);}
+\DoxyCodeLine{66     \textcolor{keywordflow}{return} std::chrono::time\_point<log\_clock, typename log\_clock::duration>(}
+\DoxyCodeLine{67         std::chrono::duration\_cast<typename log\_clock::duration>(std::chrono::seconds(ts.tv\_sec) + std::chrono::nanoseconds(ts.tv\_nsec)));}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{70     \textcolor{keywordflow}{return} log\_clock::now();}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{72 \}}
+\DoxyCodeLine{73 \textcolor{keyword}{inline} std::tm localtime(\textcolor{keyword}{const} std::time\_t \&time\_tt) SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{74 \{}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{77     std::tm tm;}
+\DoxyCodeLine{78     localtime\_s(\&tm, \&time\_tt);}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{80     std::tm tm;}
+\DoxyCodeLine{81     localtime\_r(\&time\_tt, \&tm);}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{83     \textcolor{keywordflow}{return} tm;}
+\DoxyCodeLine{84 \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{inline} std::tm localtime() SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{87 \{}
+\DoxyCodeLine{88     std::time\_t now\_t = time(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{89     \textcolor{keywordflow}{return} localtime(now\_t);}
+\DoxyCodeLine{90 \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{keyword}{inline} std::tm gmtime(\textcolor{keyword}{const} std::time\_t \&time\_tt) SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{93 \{}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{96     std::tm tm;}
+\DoxyCodeLine{97     gmtime\_s(\&tm, \&time\_tt);}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{99     std::tm tm;}
+\DoxyCodeLine{100     gmtime\_r(\&time\_tt, \&tm);}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{102     \textcolor{keywordflow}{return} tm;}
+\DoxyCodeLine{103 \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{inline} std::tm gmtime() SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{106 \{}
+\DoxyCodeLine{107     std::time\_t now\_t = time(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{108     \textcolor{keywordflow}{return} gmtime(now\_t);}
+\DoxyCodeLine{109 \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{comment}{// eol definition}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#if !defined(SPDLOG\_EOL)}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#define SPDLOG\_EOL "{}\(\backslash\)r\(\backslash\)n"{}}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#define SPDLOG\_EOL "{}\(\backslash\)n"{}}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 SPDLOG\_CONSTEXPR \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *default\_eol = SPDLOG\_EOL;}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{comment}{// folder separator}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{124 SPDLOG\_CONSTEXPR \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} folder\_sep = \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'};}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{126 SPDLOG\_CONSTEXPR \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} folder\_sep = \textcolor{charliteral}{'/'};}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} prevent\_child\_fd(FILE *f)}
+\DoxyCodeLine{130 \{}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#if !defined(\_\_cplusplus\_winrt)}}
+\DoxyCodeLine{134     \textcolor{keyword}{auto} file\_handle = (HANDLE)\_get\_osfhandle(\_fileno(f));}
+\DoxyCodeLine{135     \textcolor{keywordflow}{if} (!::SetHandleInformation(file\_handle, HANDLE\_FLAG\_INHERIT, 0))}
+\DoxyCodeLine{136         \textcolor{keywordflow}{throw} spdlog\_ex(\textcolor{stringliteral}{"{}SetHandleInformation failed"{}}, errno);}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{139     \textcolor{keyword}{auto} fd = fileno(f);}
+\DoxyCodeLine{140     \textcolor{keywordflow}{if} (fcntl(fd, F\_SETFD, FD\_CLOEXEC) == -\/1)}
+\DoxyCodeLine{141     \{}
+\DoxyCodeLine{142         \textcolor{keywordflow}{throw} spdlog\_ex(\textcolor{stringliteral}{"{}fcntl with FD\_CLOEXEC failed"{}}, errno);}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{145 \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \textcolor{comment}{// fopen\_s on non windows for writing}}
+\DoxyCodeLine{148 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} fopen\_s(FILE **fp, \textcolor{keyword}{const} filename\_t \&filename, \textcolor{keyword}{const} filename\_t \&mode)}
+\DoxyCodeLine{149 \{}
+\DoxyCodeLine{150 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{151 \textcolor{preprocessor}{\#ifdef SPDLOG\_WCHAR\_FILENAMES}}
+\DoxyCodeLine{152     *fp = \_wfsopen((filename.c\_str()), mode.c\_str(), \_SH\_DENYNO);}
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{154     *fp = \_fsopen((filename.c\_str()), mode.c\_str(), \_SH\_DENYNO);}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#else }\textcolor{comment}{// unix}}
+\DoxyCodeLine{157     *fp = fopen((filename.c\_str()), mode.c\_str());}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#ifdef SPDLOG\_PREVENT\_CHILD\_FD}}
+\DoxyCodeLine{161     \textcolor{keywordflow}{if} (*fp != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{162     \{}
+\DoxyCodeLine{163         prevent\_child\_fd(*fp);}
+\DoxyCodeLine{164     \}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{166     \textcolor{keywordflow}{return} *fp == \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{167 \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} remove(\textcolor{keyword}{const} filename\_t \&filename) SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{170 \{}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#if defined(\_WIN32) \&\& defined(SPDLOG\_WCHAR\_FILENAMES)}}
+\DoxyCodeLine{172     \textcolor{keywordflow}{return} \_wremove(filename.c\_str());}
+\DoxyCodeLine{173 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{174     \textcolor{keywordflow}{return} std::remove(filename.c\_str());}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{176 \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} rename(\textcolor{keyword}{const} filename\_t \&filename1, \textcolor{keyword}{const} filename\_t \&filename2) SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{179 \{}
+\DoxyCodeLine{180 \textcolor{preprocessor}{\#if defined(\_WIN32) \&\& defined(SPDLOG\_WCHAR\_FILENAMES)}}
+\DoxyCodeLine{181     \textcolor{keywordflow}{return} \_wrename(filename1.c\_str(), filename2.c\_str());}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{183     \textcolor{keywordflow}{return} std::rename(filename1.c\_str(), filename2.c\_str());}
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{185 \}}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{187 \textcolor{comment}{// Return if file exists}}
+\DoxyCodeLine{188 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} file\_exists(\textcolor{keyword}{const} filename\_t \&filename) SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{189 \{}
+\DoxyCodeLine{190 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#ifdef SPDLOG\_WCHAR\_FILENAMES}}
+\DoxyCodeLine{192     \textcolor{keyword}{auto} attribs = GetFileAttributesW(filename.c\_str());}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{194     \textcolor{keyword}{auto} attribs = GetFileAttributesA(filename.c\_str());}
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{196     \textcolor{keywordflow}{return} (attribs != INVALID\_FILE\_ATTRIBUTES \&\& !(attribs \& FILE\_ATTRIBUTE\_DIRECTORY));}
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#else }\textcolor{comment}{// common linux/unix all have the stat system call}}
+\DoxyCodeLine{198     \textcolor{keyword}{struct }stat buffer;}
+\DoxyCodeLine{199     \textcolor{keywordflow}{return} (stat(filename.c\_str(), \&buffer) == 0);}
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{201 \}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 \textcolor{comment}{// Return file size according to open FILE* object}}
+\DoxyCodeLine{204 \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} filesize(FILE *f)}
+\DoxyCodeLine{205 \{}
+\DoxyCodeLine{206     \textcolor{keywordflow}{if} (f == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{207     \{}
+\DoxyCodeLine{208         \textcolor{keywordflow}{throw} spdlog\_ex(\textcolor{stringliteral}{"{}Failed getting file size. fd is null"{}});}
+\DoxyCodeLine{209     \}}
+\DoxyCodeLine{210 \textcolor{preprocessor}{\#if defined(\_WIN32) \&\& !defined(\_\_CYGWIN\_\_)}}
+\DoxyCodeLine{211     \textcolor{keywordtype}{int} fd = \_fileno(f);}
+\DoxyCodeLine{212 \textcolor{preprocessor}{\#if \_WIN64 }\textcolor{comment}{// 64 bits}}
+\DoxyCodeLine{213     \_\_int64 ret = \_filelengthi64(fd);}
+\DoxyCodeLine{214     \textcolor{keywordflow}{if} (ret >= 0)}
+\DoxyCodeLine{215     \{}
+\DoxyCodeLine{216         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(ret);}
+\DoxyCodeLine{217     \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#else }\textcolor{comment}{// windows 32 bits}}
+\DoxyCodeLine{220     \textcolor{keywordtype}{long} ret = \_filelength(fd);}
+\DoxyCodeLine{221     \textcolor{keywordflow}{if} (ret >= 0)}
+\DoxyCodeLine{222     \{}
+\DoxyCodeLine{223         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(ret);}
+\DoxyCodeLine{224     \}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227 \textcolor{preprocessor}{\#else }\textcolor{comment}{// unix}}
+\DoxyCodeLine{228     \textcolor{keywordtype}{int} fd = fileno(f);}
+\DoxyCodeLine{229 \textcolor{comment}{// 64 bits(but not in osx or cygwin, where fstat64 is deprecated)}}
+\DoxyCodeLine{230 \textcolor{preprocessor}{\#if !defined(\_\_FreeBSD\_\_) \&\& !defined(\_\_APPLE\_\_) \&\& (defined(\_\_x86\_64\_\_) || defined(\_\_ppc64\_\_)) \&\& !defined(\_\_CYGWIN\_\_)}}
+\DoxyCodeLine{231     \textcolor{keyword}{struct }stat64 st;}
+\DoxyCodeLine{232     \textcolor{keywordflow}{if} (fstat64(fd, \&st) == 0)}
+\DoxyCodeLine{233     \{}
+\DoxyCodeLine{234         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(st.st\_size);}
+\DoxyCodeLine{235     \}}
+\DoxyCodeLine{236 \textcolor{preprocessor}{\#else }\textcolor{comment}{// unix 32 bits or cygwin}}
+\DoxyCodeLine{237     \textcolor{keyword}{struct }stat st;}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239     \textcolor{keywordflow}{if} (fstat(fd, \&st) == 0)}
+\DoxyCodeLine{240     \{}
+\DoxyCodeLine{241         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(st.st\_size);}
+\DoxyCodeLine{242     \}}
+\DoxyCodeLine{243 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{244 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{245     \textcolor{keywordflow}{throw} spdlog\_ex(\textcolor{stringliteral}{"{}Failed getting file size from fd"{}}, errno);}
+\DoxyCodeLine{246 \}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248 \textcolor{comment}{// Return utc offset in minutes or throw spdlog\_ex on failure}}
+\DoxyCodeLine{249 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} utc\_minutes\_offset(\textcolor{keyword}{const} std::tm \&tm = details::os::localtime())}
+\DoxyCodeLine{250 \{}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{253 \textcolor{preprocessor}{\#if \_WIN32\_WINNT < \_WIN32\_WINNT\_WS08}}
+\DoxyCodeLine{254     TIME\_ZONE\_INFORMATION tzinfo;}
+\DoxyCodeLine{255     \textcolor{keyword}{auto} rv = GetTimeZoneInformation(\&tzinfo);}
+\DoxyCodeLine{256 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{257     DYNAMIC\_TIME\_ZONE\_INFORMATION tzinfo;}
+\DoxyCodeLine{258     \textcolor{keyword}{auto} rv = GetDynamicTimeZoneInformation(\&tzinfo);}
+\DoxyCodeLine{259 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{260     \textcolor{keywordflow}{if} (rv == TIME\_ZONE\_ID\_INVALID)}
+\DoxyCodeLine{261         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classspdlog_1_1spdlog__ex}{spdlog::spdlog\_ex}}(\textcolor{stringliteral}{"{}Failed getting timezone info. "{}}, errno);}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{keywordtype}{int} offset = -\/tzinfo.Bias;}
+\DoxyCodeLine{264     \textcolor{keywordflow}{if} (tm.tm\_isdst)}
+\DoxyCodeLine{265     \{}
+\DoxyCodeLine{266         offset -\/= tzinfo.DaylightBias;}
+\DoxyCodeLine{267     \}}
+\DoxyCodeLine{268     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{269     \{}
+\DoxyCodeLine{270         offset -\/= tzinfo.StandardBias;}
+\DoxyCodeLine{271     \}}
+\DoxyCodeLine{272     \textcolor{keywordflow}{return} offset;}
+\DoxyCodeLine{273 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 \textcolor{preprocessor}{\#if defined(sun) || defined(\_\_sun) || defined(\_AIX)}}
+\DoxyCodeLine{276     \textcolor{comment}{// 'tm\_gmtoff' field is BSD extension and it's missing on SunOS/Solaris}}
+\DoxyCodeLine{277     \textcolor{keyword}{struct }helper}
+\DoxyCodeLine{278     \{}
+\DoxyCodeLine{279         \textcolor{keyword}{static} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} calculate\_gmt\_offset(\textcolor{keyword}{const} std::tm \&localtm = details::os::localtime(), \textcolor{keyword}{const} std::tm \&gmtm = details::os::gmtime())}
+\DoxyCodeLine{280         \{}
+\DoxyCodeLine{281             \textcolor{keywordtype}{int} local\_year = localtm.tm\_year + (1900 -\/ 1);}
+\DoxyCodeLine{282             \textcolor{keywordtype}{int} gmt\_year = gmtm.tm\_year + (1900 -\/ 1);}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284             \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} days = (}
+\DoxyCodeLine{285                 \textcolor{comment}{// difference in day of year}}
+\DoxyCodeLine{286                 localtm.tm\_yday -\/}
+\DoxyCodeLine{287                 gmtm.tm\_yday}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289                 \textcolor{comment}{// + intervening leap days}}
+\DoxyCodeLine{290                 + ((local\_year >> 2) -\/ (gmt\_year >> 2)) -\/ (local\_year / 100 -\/ gmt\_year / 100) +}
+\DoxyCodeLine{291                 ((local\_year / 100 >> 2) -\/ (gmt\_year / 100 >> 2))}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293                 \textcolor{comment}{// + difference in years * 365 */}}
+\DoxyCodeLine{294                 + (\textcolor{keywordtype}{long} \textcolor{keywordtype}{int})(local\_year -\/ gmt\_year) * 365);}
+\DoxyCodeLine{295 }
+\DoxyCodeLine{296             \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} hours = (24 * days) + (localtm.tm\_hour -\/ gmtm.tm\_hour);}
+\DoxyCodeLine{297             \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} mins = (60 * hours) + (localtm.tm\_min -\/ gmtm.tm\_min);}
+\DoxyCodeLine{298             \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} secs = (60 * mins) + (localtm.tm\_sec -\/ gmtm.tm\_sec);}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300             \textcolor{keywordflow}{return} secs;}
+\DoxyCodeLine{301         \}}
+\DoxyCodeLine{302     \};}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304     \textcolor{keyword}{auto} offset\_seconds = helper::calculate\_gmt\_offset(tm);}
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{306     \textcolor{keyword}{auto} offset\_seconds = tm.tm\_gmtoff;}
+\DoxyCodeLine{307 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(offset\_seconds / 60);}
+\DoxyCodeLine{310 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{311 \}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313 \textcolor{comment}{// Return current thread id as size\_t}}
+\DoxyCodeLine{314 \textcolor{comment}{// It exists because the std::this\_thread::get\_id() is much slower(especially}}
+\DoxyCodeLine{315 \textcolor{comment}{// under VS 2013)}}
+\DoxyCodeLine{316 \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \_thread\_id() SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{317 \{}
+\DoxyCodeLine{318 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{319     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(::GetCurrentThreadId());}
+\DoxyCodeLine{320 \textcolor{preprocessor}{\#elif \_\_linux\_\_}}
+\DoxyCodeLine{321 \textcolor{preprocessor}{\#if defined(\_\_ANDROID\_\_) \&\& defined(\_\_ANDROID\_API\_\_) \&\& (\_\_ANDROID\_API\_\_ < 21)}}
+\DoxyCodeLine{322 \textcolor{preprocessor}{\#define SYS\_gettid \_\_NR\_gettid}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{324     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(syscall(SYS\_gettid));}
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#elif \_\_FreeBSD\_\_}}
+\DoxyCodeLine{326     \textcolor{keywordtype}{long} tid;}
+\DoxyCodeLine{327     thr\_self(\&tid);}
+\DoxyCodeLine{328     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(tid);}
+\DoxyCodeLine{329 \textcolor{preprocessor}{\#elif \_\_APPLE\_\_}}
+\DoxyCodeLine{330     uint64\_t tid;}
+\DoxyCodeLine{331     pthread\_threadid\_np(\textcolor{keyword}{nullptr}, \&tid);}
+\DoxyCodeLine{332     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(tid);}
+\DoxyCodeLine{333 \textcolor{preprocessor}{\#else }\textcolor{comment}{// Default to standard C++11 (other Unix)}}
+\DoxyCodeLine{334     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(std::hash<std::thread::id>()(std::this\_thread::get\_id()));}
+\DoxyCodeLine{335 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{336 \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338 \textcolor{comment}{// Return current thread id as size\_t (from thread local storage)}}
+\DoxyCodeLine{339 \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} thread\_id() SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{340 \{}
+\DoxyCodeLine{341 \textcolor{preprocessor}{\#if defined(SPDLOG\_NO\_TLS)}}
+\DoxyCodeLine{342     \textcolor{keywordflow}{return} \_thread\_id();}
+\DoxyCodeLine{343 \textcolor{preprocessor}{\#else }\textcolor{comment}{// cache thread id in tls}}
+\DoxyCodeLine{344     \textcolor{keyword}{static} \textcolor{keyword}{thread\_local} \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} tid = \_thread\_id();}
+\DoxyCodeLine{345     \textcolor{keywordflow}{return} tid;}
+\DoxyCodeLine{346 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{347 \}}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{349 \textcolor{comment}{// This is avoid msvc issue in sleep\_for that happens if the clock changes.}}
+\DoxyCodeLine{350 \textcolor{comment}{// See https://github.com/gabime/spdlog/issues/609}}
+\DoxyCodeLine{351 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} sleep\_for\_millis(\textcolor{keywordtype}{int} milliseconds) SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{352 \{}
+\DoxyCodeLine{353 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{354     ::Sleep(milliseconds);}
+\DoxyCodeLine{355 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{356     std::this\_thread::sleep\_for(std::chrono::milliseconds(milliseconds));}
+\DoxyCodeLine{357 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{358 \}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360 \textcolor{comment}{// wchar support for windows file names (SPDLOG\_WCHAR\_FILENAMES must be defined)}}
+\DoxyCodeLine{361 \textcolor{preprocessor}{\#if defined(\_WIN32) \&\& defined(SPDLOG\_WCHAR\_FILENAMES)}}
+\DoxyCodeLine{362 \textcolor{preprocessor}{\#define SPDLOG\_FILENAME\_T(s) L\#\#s}}
+\DoxyCodeLine{363 \textcolor{keyword}{inline} std::string filename\_to\_str(\textcolor{keyword}{const} filename\_t \&filename)}
+\DoxyCodeLine{364 \{}
+\DoxyCodeLine{365     std::wstring\_convert<std::codecvt\_utf8<wchar\_t>, \textcolor{keywordtype}{wchar\_t}> c;}
+\DoxyCodeLine{366     \textcolor{keywordflow}{return} c.to\_bytes(filename);}
+\DoxyCodeLine{367 \}}
+\DoxyCodeLine{368 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{369 \textcolor{preprocessor}{\#define SPDLOG\_FILENAME\_T(s) s}}
+\DoxyCodeLine{370 \textcolor{keyword}{inline} std::string filename\_to\_str(\textcolor{keyword}{const} filename\_t \&filename)}
+\DoxyCodeLine{371 \{}
+\DoxyCodeLine{372     \textcolor{keywordflow}{return} filename;}
+\DoxyCodeLine{373 \}}
+\DoxyCodeLine{374 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} pid()}
+\DoxyCodeLine{377 \{}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{380     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(::GetCurrentProcessId());}
+\DoxyCodeLine{381 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{382     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(::getpid());}
+\DoxyCodeLine{383 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{384 \}}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386 \textcolor{comment}{// Determine if the terminal supports colors}}
+\DoxyCodeLine{387 \textcolor{comment}{// Source: https://github.com/agauniyal/rang/}}
+\DoxyCodeLine{388 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} is\_color\_terminal() SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{389 \{}
+\DoxyCodeLine{390 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{391     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{392 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{393     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *Terms[] = \{}
+\DoxyCodeLine{394         \textcolor{stringliteral}{"{}ansi"{}}, \textcolor{stringliteral}{"{}color"{}}, \textcolor{stringliteral}{"{}console"{}}, \textcolor{stringliteral}{"{}cygwin"{}}, \textcolor{stringliteral}{"{}gnome"{}}, \textcolor{stringliteral}{"{}konsole"{}}, \textcolor{stringliteral}{"{}kterm"{}}, \textcolor{stringliteral}{"{}linux"{}}, \textcolor{stringliteral}{"{}msys"{}}, \textcolor{stringliteral}{"{}putty"{}}, \textcolor{stringliteral}{"{}rxvt"{}}, \textcolor{stringliteral}{"{}screen"{}}, \textcolor{stringliteral}{"{}vt100"{}}, \textcolor{stringliteral}{"{}xterm"{}}\};}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *env\_p = std::getenv(\textcolor{stringliteral}{"{}TERM"{}});}
+\DoxyCodeLine{397     \textcolor{keywordflow}{if} (env\_p == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{398     \{}
+\DoxyCodeLine{399         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{400     \}}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{402     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} result =}
+\DoxyCodeLine{403         std::any\_of(std::begin(Terms), std::end(Terms), [\&](\textcolor{keyword}{const} \textcolor{keywordtype}{char} *term) \{ \textcolor{keywordflow}{return} std::strstr(env\_p, term) != \textcolor{keyword}{nullptr}; \});}
+\DoxyCodeLine{404     \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{405 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{406 \}}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408 \textcolor{comment}{// Detrmine if the terminal attached}}
+\DoxyCodeLine{409 \textcolor{comment}{// Source: https://github.com/agauniyal/rang/}}
+\DoxyCodeLine{410 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} in\_terminal(FILE *\mbox{\hyperlink{classfile}{file}}) SPDLOG\_NOEXCEPT}
+\DoxyCodeLine{411 \{}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{414     \textcolor{keywordflow}{return} \_isatty(\_fileno(\mbox{\hyperlink{classfile}{file}})) != 0;}
+\DoxyCodeLine{415 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{416     \textcolor{keywordflow}{return} isatty(fileno(\mbox{\hyperlink{classfile}{file}})) != 0;}
+\DoxyCodeLine{417 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{418 \}}
+\DoxyCodeLine{419 \} \textcolor{comment}{// namespace os}}
+\DoxyCodeLine{420 \} \textcolor{comment}{// namespace details}}
+\DoxyCodeLine{421 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

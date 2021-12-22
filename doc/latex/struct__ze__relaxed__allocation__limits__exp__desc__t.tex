@@ -1,0 +1,45 @@
+\hypertarget{struct__ze__relaxed__allocation__limits__exp__desc__t}{}\doxysection{\+\_\+ze\+\_\+relaxed\+\_\+allocation\+\_\+limits\+\_\+exp\+\_\+desc\+\_\+t Struct Reference}
+\label{struct__ze__relaxed__allocation__limits__exp__desc__t}\index{\_ze\_relaxed\_allocation\_limits\_exp\_desc\_t@{\_ze\_relaxed\_allocation\_limits\_exp\_desc\_t}}
+
+
+Relaxed limits memory allocation descriptor.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__relaxed__allocation__limits__exp__desc__t_a91fedb39d58744cfe04901c7d858df46}\label{struct__ze__relaxed__allocation__limits__exp__desc__t_a91fedb39d58744cfe04901c7d858df46}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__relaxed__allocation__limits__exp__desc__t_af8fdb1fef3ff78a66c85d9cfb85869d4}\label{struct__ze__relaxed__allocation__limits__exp__desc__t_af8fdb1fef3ff78a66c85d9cfb85869d4}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+relaxed\+\_\+allocation\+\_\+limits\+\_\+exp\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__relaxed__allocation__limits__exp__desc__t_a6aaadd7f1d93ce296e049abdac4e61ed}{flags}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Relaxed limits memory allocation descriptor. 
+
+
+\begin{DoxyItemize}
+\item This structure may be passed to \+::ze\+Mem\+Alloc\+Shared or \+::ze\+Mem\+Alloc\+Device, via {\ttfamily p\+Next} member of \+::ze\+\_\+device\+\_\+mem\+\_\+alloc\+\_\+desc\+\_\+t.
+\item This structure may also be passed to \+::ze\+Mem\+Alloc\+Host, via {\ttfamily p\+Next} member of \+::ze\+\_\+host\+\_\+mem\+\_\+alloc\+\_\+desc\+\_\+t. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__relaxed__allocation__limits__exp__desc__t_a6aaadd7f1d93ce296e049abdac4e61ed}\label{struct__ze__relaxed__allocation__limits__exp__desc__t_a6aaadd7f1d93ce296e049abdac4e61ed}} 
+\index{\_ze\_relaxed\_allocation\_limits\_exp\_desc\_t@{\_ze\_relaxed\_allocation\_limits\_exp\_desc\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_relaxed\_allocation\_limits\_exp\_desc\_t@{\_ze\_relaxed\_allocation\_limits\_exp\_desc\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+relaxed\+\_\+allocation\+\_\+limits\+\_\+exp\+\_\+flags\+\_\+t \+\_\+ze\+\_\+relaxed\+\_\+allocation\+\_\+limits\+\_\+exp\+\_\+desc\+\_\+t\+::flags}
+
+\mbox{[}in\mbox{]} flags specifying allocation limits to relax. must be 0 (default) or a valid combination of \+::ze\+\_\+relaxed\+\_\+allocation\+\_\+limits\+\_\+exp\+\_\+flag\+\_\+t; 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

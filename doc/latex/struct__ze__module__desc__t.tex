@@ -1,0 +1,87 @@
+\hypertarget{struct__ze__module__desc__t}{}\doxysection{\+\_\+ze\+\_\+module\+\_\+desc\+\_\+t Struct Reference}
+\label{struct__ze__module__desc__t}\index{\_ze\_module\_desc\_t@{\_ze\_module\_desc\_t}}
+
+
+Module descriptor.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__module__desc__t_a1ea7ccd6e2957b8f3265ec322f1350bb}\label{struct__ze__module__desc__t_a1ea7ccd6e2957b8f3265ec322f1350bb}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__module__desc__t_ad25f038a322ae4896b29467847aca54c}\label{struct__ze__module__desc__t_ad25f038a322ae4896b29467847aca54c}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__module__desc__t_a397a93415c18d6d38946fc559f9195af}\label{struct__ze__module__desc__t_a397a93415c18d6d38946fc559f9195af}} 
+ze\+\_\+module\+\_\+format\+\_\+t {\bfseries format}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} Module format passed in with p\+Input\+Module \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__module__desc__t_a4dae086152a739269780995dc16850cb}\label{struct__ze__module__desc__t_a4dae086152a739269780995dc16850cb}} 
+size\+\_\+t {\bfseries input\+Size}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} size of input IL or ISA from p\+Input\+Module. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__module__desc__t_a6688a24b628a8d92c3297c4c4ac2ea74}\label{struct__ze__module__desc__t_a6688a24b628a8d92c3297c4c4ac2ea74}} 
+const uint8\+\_\+t $\ast$ {\bfseries p\+Input\+Module}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} pointer to IL or ISA \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{struct__ze__module__desc__t_afdd57608f933f992519e44fa29323a74}{p\+Build\+Flags}}
+\item 
+const \mbox{\hyperlink{struct__ze__module__constants__t}{ze\+\_\+module\+\_\+constants\+\_\+t}} $\ast$ \mbox{\hyperlink{struct__ze__module__desc__t_a34a459cd1841d89dbbc2c0f63cc88993}{p\+Constants}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Module descriptor. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__module__desc__t_afdd57608f933f992519e44fa29323a74}\label{struct__ze__module__desc__t_afdd57608f933f992519e44fa29323a74}} 
+\index{\_ze\_module\_desc\_t@{\_ze\_module\_desc\_t}!pBuildFlags@{pBuildFlags}}
+\index{pBuildFlags@{pBuildFlags}!\_ze\_module\_desc\_t@{\_ze\_module\_desc\_t}}
+\doxysubsubsection{\texorpdfstring{pBuildFlags}{pBuildFlags}}
+{\footnotesize\ttfamily const char$\ast$ \+\_\+ze\+\_\+module\+\_\+desc\+\_\+t\+::p\+Build\+Flags}
+
+\mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} string containing compiler flags. Following options are supported.
+\begin{DoxyItemize}
+\item \char`\"{}-\/ze-\/opt-\/disable\char`\"{}
+\begin{DoxyItemize}
+\item Disable optimizations
+\end{DoxyItemize}
+\item \char`\"{}-\/ze-\/opt-\/level\char`\"{}
+\begin{DoxyItemize}
+\item Specifies optimization level for compiler. Levels are implementation specific.
+\begin{DoxyItemize}
+\item 0 is no optimizations (equivalent to -\/ze-\/opt-\/disable)
+\item 1 is optimize minimally (may be the same as 2)
+\item 2 is optimize more (default)
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item \char`\"{}-\/ze-\/opt-\/greater-\/than-\/4\+GB-\/buffer-\/required\char`\"{}
+\begin{DoxyItemize}
+\item Use 64-\/bit offset calculations for buffers.
+\end{DoxyItemize}
+\item \char`\"{}-\/ze-\/opt-\/large-\/register-\/file\char`\"{}
+\begin{DoxyItemize}
+\item Increase number of registers available to threads.
+\end{DoxyItemize}
+\item \char`\"{}-\/ze-\/opt-\/has-\/buffer-\/offset-\/arg\char`\"{}
+\begin{DoxyItemize}
+\item Extend stateless to stateful optimization to more cases with the use of additional offset (e.\+g. 64-\/bit pointer to binding table with 32-\/bit offset).
+\end{DoxyItemize}
+\item \char`\"{}-\/g\char`\"{}
+\begin{DoxyItemize}
+\item Include debugging information. 
+\end{DoxyItemize}
+\end{DoxyItemize}\mbox{\Hypertarget{struct__ze__module__desc__t_a34a459cd1841d89dbbc2c0f63cc88993}\label{struct__ze__module__desc__t_a34a459cd1841d89dbbc2c0f63cc88993}} 
+\index{\_ze\_module\_desc\_t@{\_ze\_module\_desc\_t}!pConstants@{pConstants}}
+\index{pConstants@{pConstants}!\_ze\_module\_desc\_t@{\_ze\_module\_desc\_t}}
+\doxysubsubsection{\texorpdfstring{pConstants}{pConstants}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{struct__ze__module__constants__t}{ze\+\_\+module\+\_\+constants\+\_\+t}}$\ast$ \+\_\+ze\+\_\+module\+\_\+desc\+\_\+t\+::p\+Constants}
+
+\mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to specialization constants. Valid only for SPIR-\/V input. This must be set to nullptr if no specialization constants are provided. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

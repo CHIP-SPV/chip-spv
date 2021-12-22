@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -82,12 +82,9 @@ Inheritance diagram for CHIPExecItemOpenCL:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0dfdbe2360d5106f4288b9e4711ba93b"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item_open_c_l.html#a0dfdbe2360d5106f4288b9e4711ba93b">launch</a> (<a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> *chip_kernel) override</td></tr>
-<tr class="memdesc:a0dfdbe2360d5106f4288b9e4711ba93b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.  <a href="class_c_h_i_p_exec_item_open_c_l.html#a0dfdbe2360d5106f4288b9e4711ba93b">More...</a><br /></td></tr>
-<tr class="separator:a0dfdbe2360d5106f4288b9e4711ba93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95f7a18f51a172e5e60dbbfb27423b95"><td class="memItemLeft" align="right" valign="top"><a id="a95f7a18f51a172e5e60dbbfb27423b95" name="a95f7a18f51a172e5e60dbbfb27423b95"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>setup_all_args</b> (<a class="el" href="class_c_h_i_p_kernel_open_c_l.html">CHIPKernelOpenCL</a> *kernel)</td></tr>
-<tr class="separator:a95f7a18f51a172e5e60dbbfb27423b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07dc9d420cf29328d6988b0cbd7ec86b"><td class="memItemLeft" align="right" valign="top"><a id="a07dc9d420cf29328d6988b0cbd7ec86b" name="a07dc9d420cf29328d6988b0cbd7ec86b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>setupAllArgs</b> (<a class="el" href="class_c_h_i_p_kernel_open_c_l.html">CHIPKernelOpenCL</a> *kernel)</td></tr>
+<tr class="separator:a07dc9d420cf29328d6988b0cbd7ec86b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63ee27ec231b1daabfd574627ea3e222"><td class="memItemLeft" align="right" valign="top"><a id="a63ee27ec231b1daabfd574627ea3e222" name="a63ee27ec231b1daabfd574627ea3e222"></a>
 cl::Kernel *&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()</td></tr>
 <tr class="separator:a63ee27ec231b1daabfd574627ea3e222"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,17 +106,30 @@ cl::Kernel *&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()</t
 <tr class="memitem:a0ab70870d2c58e6fa2a3e03762a5134a inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a0ab70870d2c58e6fa2a3e03762a5134a">getQueue</a> ()</td></tr>
 <tr class="memdesc:a0ab70870d2c58e6fa2a3e03762a5134a inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Queue object.  <a href="class_c_h_i_p_exec_item.html#a0ab70870d2c58e6fa2a3e03762a5134a">More...</a><br /></td></tr>
 <tr class="separator:a0ab70870d2c58e6fa2a3e03762a5134a inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59740e00d1f2d40b25e0368ff91440c inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top"><a id="ab59740e00d1f2d40b25e0368ff91440c" name="ab59740e00d1f2d40b25e0368ff91440c"></a>
+std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getArgData</b> ()</td></tr>
+<tr class="separator:ab59740e00d1f2d40b25e0368ff91440c inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa77c523d9cd1b910bbbc09f1099b2f5d inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top">dim3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#aa77c523d9cd1b910bbbc09f1099b2f5d">getGrid</a> ()</td></tr>
 <tr class="memdesc:aa77c523d9cd1b910bbbc09f1099b2f5d inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Grid object.  <a href="class_c_h_i_p_exec_item.html#aa77c523d9cd1b910bbbc09f1099b2f5d">More...</a><br /></td></tr>
 <tr class="separator:aa77c523d9cd1b910bbbc09f1099b2f5d inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7cd51c77750bf9f159a1cd6e9fa64e8 inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top">dim3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#aa7cd51c77750bf9f159a1cd6e9fa64e8">getBlock</a> ()</td></tr>
 <tr class="memdesc:aa7cd51c77750bf9f159a1cd6e9fa64e8 inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Block object.  <a href="class_c_h_i_p_exec_item.html#aa7cd51c77750bf9f159a1cd6e9fa64e8">More...</a><br /></td></tr>
 <tr class="separator:aa7cd51c77750bf9f159a1cd6e9fa64e8 inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14d1a06fed7ed4204cd3a66b50ca0eea inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a14d1a06fed7ed4204cd3a66b50ca0eea">getSharedMem</a> ()</td></tr>
+<tr class="memdesc:a14d1a06fed7ed4204cd3a66b50ca0eea inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the SharedMem.  <a href="class_c_h_i_p_exec_item.html#a14d1a06fed7ed4204cd3a66b50ca0eea">More...</a><br /></td></tr>
+<tr class="separator:a14d1a06fed7ed4204cd3a66b50ca0eea inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab095e25ece8b9edba9afee4db705f68e inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#ab095e25ece8b9edba9afee4db705f68e">setArg</a> (const void *arg, size_t size, size_t offset)</td></tr>
 <tr class="memdesc:ab095e25ece8b9edba9afee4db705f68e inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a single argument. gets called by hipSetupArgument calls to which are emitted by hip-clang.  <a href="class_c_h_i_p_exec_item.html#ab095e25ece8b9edba9afee4db705f68e">More...</a><br /></td></tr>
 <tr class="separator:ab095e25ece8b9edba9afee4db705f68e inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a662d2529f1b5aa74a9b530d1dc88edb5 inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a662d2529f1b5aa74a9b530d1dc88edb5">setArgPointer</a> (void **args)</td></tr>
+<tr class="memdesc:a662d2529f1b5aa74a9b530d1dc88edb5 inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Arg Pointer object for launching kernels via new HIP API.  <a href="class_c_h_i_p_exec_item.html#a662d2529f1b5aa74a9b530d1dc88edb5">More...</a><br /></td></tr>
+<tr class="separator:a662d2529f1b5aa74a9b530d1dc88edb5 inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bdab25f8dd647ea0ba0db925b2d21f inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top"><a id="ad1bdab25f8dd647ea0ba0db925b2d21f" name="ad1bdab25f8dd647ea0ba0db925b2d21f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setupAllArgs</b> ()</td></tr>
+<tr class="memdesc:ad1bdab25f8dd647ea0ba0db925b2d21f inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the kernel arguments via backend API calls. Called after all the arugments are setup either via hipSetupArg() (old HIP kernel launch API) Or after hipLaunchKernel (new HIP kernel launch API) <br /></td></tr>
+<tr class="separator:ad1bdab25f8dd647ea0ba0db925b2d21f inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f2b77c74962ea43bc49349e8639257a inherit pub_methods_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top">hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a4f2b77c74962ea43bc49349e8639257a">launchByHostPtr</a> (const void *hostPtr)</td></tr>
-<tr class="memdesc:a4f2b77c74962ea43bc49349e8639257a inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch a kernel associated with a host function pointer. Looks up the <a class="el" href="class_c_h_i_p_kernel.html" title="Contains information about the function on the host and device.">CHIPKernel</a> associated with this pointer and calls <a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9" title="Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.">launch()</a>  <a href="class_c_h_i_p_exec_item.html#a4f2b77c74962ea43bc49349e8639257a">More...</a><br /></td></tr>
+<tr class="memdesc:a4f2b77c74962ea43bc49349e8639257a inherit pub_methods_class_c_h_i_p_exec_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch a kernel associated with a host function pointer. Looks up the <a class="el" href="class_c_h_i_p_kernel.html" title="Contains information about the function on the host and device.">CHIPKernel</a> associated with this pointer and calls launch()  <a href="class_c_h_i_p_exec_item.html#a4f2b77c74962ea43bc49349e8639257a">More...</a><br /></td></tr>
 <tr class="separator:a4f2b77c74962ea43bc49349e8639257a inherit pub_methods_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -155,48 +165,13 @@ dim3&#160;</td><td class="memItemRight" valign="bottom"><b>block_dim</b></td></t
 <tr class="memitem:a5015853b029a5b463107ba6f68206b9e inherit pro_attribs_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top"><a id="a5015853b029a5b463107ba6f68206b9e" name="a5015853b029a5b463107ba6f68206b9e"></a>
 <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>chip_queue</b></td></tr>
 <tr class="separator:a5015853b029a5b463107ba6f68206b9e inherit pro_attribs_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a3e6299040a203f83c24bd93624e21 inherit pro_attribs_class_c_h_i_p_exec_item"><td class="memItemLeft" align="right" valign="top"><a id="ae4a3e6299040a203f83c24bd93624e21" name="ae4a3e6299040a203f83c24bd93624e21"></a>
+void **&#160;</td><td class="memItemRight" valign="bottom"><b>ArgsPointer</b> = nullptr</td></tr>
+<tr class="separator:ae4a3e6299040a203f83c24bd93624e21 inherit pro_attribs_class_c_h_i_p_exec_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0dfdbe2360d5106f4288b9e4711ba93b" name="a0dfdbe2360d5106f4288b9e4711ba93b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dfdbe2360d5106f4288b9e4711ba93b">&#9670;&nbsp;</a></span>launch()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">hipError_t CHIPExecItemOpenCL::launch </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> *&#160;</td>
-          <td class="paramname"><em>Kernel</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Kernel</td><td>kernel which is to be launched </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>hipError_t possible values: hipSuccess, hipErrorLaunchFailure </dd></dl>
-
-<p>Reimplemented from <a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9">CHIPExecItem</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/backend/OpenCL/<a class="el" href="_c_h_i_p_backend_open_c_l_8hh_source.html">CHIPBackendOpenCL.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/backend/OpenCL/CHIPBackendOpenCL.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/OpenCL/<a class="el" href="_c_h_i_p_backend_open_c_l_8hh_source.html">CHIPBackendOpenCL.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/OpenCL/CHIPBackendOpenCL.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

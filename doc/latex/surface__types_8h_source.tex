@@ -1,0 +1,43 @@
+\hypertarget{surface__types_8h_source}{}\doxysection{surface\+\_\+types.\+h}
+\label{surface__types_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/surface\_types.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/surface\_types.h}}
+\mbox{\hyperlink{surface__types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{4 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{5 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{6 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{7 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{8 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{10 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{11 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{12 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{13 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{14 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{15 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{16 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{17 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{18 \textcolor{comment}{*/}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_SURFACE\_TYPES\_H}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_SURFACE\_TYPES\_H}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <hip/driver\_types.h>}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{33 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{surface__types_8h_a8e399424af12e04be293a525f1159857}{hipSurfaceObject\_t}};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{38 \textcolor{keyword}{struct }\mbox{\hyperlink{structsurface_reference}{surfaceReference}} \{}
+\DoxyCodeLine{39     \mbox{\hyperlink{surface__types_8h_a8e399424af12e04be293a525f1159857}{hipSurfaceObject\_t}} surfaceObject;}
+\DoxyCodeLine{40 \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{45 \textcolor{keyword}{enum} \mbox{\hyperlink{surface__types_8h_a6e676f7f09bbe6a616a3547ed641dbc5}{hipSurfaceBoundaryMode}} \{}
+\DoxyCodeLine{46     hipBoundaryModeZero = 0,}
+\DoxyCodeLine{47     hipBoundaryModeTrap = 1,}
+\DoxyCodeLine{48     hipBoundaryModeClamp = 2}
+\DoxyCodeLine{49 \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* !HIP\_INCLUDE\_HIP\_SURFACE\_TYPES\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

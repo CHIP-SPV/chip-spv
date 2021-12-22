@@ -1,0 +1,42 @@
+\hypertarget{classinternal_1_1is__tuple__like__}{}\doxysection{internal\+::is\+\_\+tuple\+\_\+like\+\_\+\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classinternal_1_1is__tuple__like__}\index{internal::is\_tuple\_like\_$<$ T $>$@{internal::is\_tuple\_like\_$<$ T $>$}}
+
+
+tuple\+\_\+size and tuple\+\_\+element check.  
+
+
+
+
+{\ttfamily \#include $<$ranges.\+h$>$}
+
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static FMT\+\_\+\+CONSTEXPR\+\_\+\+DECL const bool \mbox{\hyperlink{classinternal_1_1is__tuple__like___a2d78d2520f310397d1bad082dc3e3fa0}{value}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class internal\+::is\+\_\+tuple\+\_\+like\+\_\+$<$ T $>$}
+tuple\+\_\+size and tuple\+\_\+element check. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classinternal_1_1is__tuple__like___a2d78d2520f310397d1bad082dc3e3fa0}\label{classinternal_1_1is__tuple__like___a2d78d2520f310397d1bad082dc3e3fa0}} 
+\index{internal::is\_tuple\_like\_$<$ T $>$@{internal::is\_tuple\_like\_$<$ T $>$}!value@{value}}
+\index{value@{value}!internal::is\_tuple\_like\_$<$ T $>$@{internal::is\_tuple\_like\_$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+FMT\+\_\+\+CONSTEXPR\+\_\+\+DECL const bool \mbox{\hyperlink{classinternal_1_1is__tuple__like__}{internal\+::is\+\_\+tuple\+\_\+like\+\_\+}}$<$ T $>$\+::\mbox{\hyperlink{classinternal_1_1value}{value}}\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    !std::is\_void<decltype(check<T>(FMT\_NULL))>::value}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/ranges.\+h\end{DoxyCompactItemize}

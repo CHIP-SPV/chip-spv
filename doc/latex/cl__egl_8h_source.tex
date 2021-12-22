@@ -1,0 +1,126 @@
+\hypertarget{cl__egl_8h_source}{}\doxysection{cl\+\_\+egl.\+h}
+\label{cl__egl_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_egl.h@{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_egl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (c) 2008-\/2020 The Khronos Group Inc.}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *    http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ ******************************************************************************/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef \_\_OPENCL\_CL\_EGL\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define \_\_OPENCL\_CL\_EGL\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <CL/cl.h>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{23 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{/* Command type for events created with clEnqueueAcquireEGLObjectsKHR */}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define CL\_COMMAND\_EGL\_FENCE\_SYNC\_OBJECT\_KHR  0x202F}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define CL\_COMMAND\_ACQUIRE\_EGL\_OBJECTS\_KHR    0x202D}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define CL\_COMMAND\_RELEASE\_EGL\_OBJECTS\_KHR    0x202E}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{comment}{/* Error type for clCreateFromEGLImageKHR */}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define CL\_INVALID\_EGL\_OBJECT\_KHR             -\/1093}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define CL\_EGL\_RESOURCE\_NOT\_ACQUIRED\_KHR      -\/1092}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{/* CLeglImageKHR is an opaque handle to an EGLImage */}}
+\DoxyCodeLine{37 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* CLeglImageKHR;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{comment}{/* CLeglDisplayKHR is an opaque handle to an EGLDisplay */}}
+\DoxyCodeLine{40 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* CLeglDisplayKHR;}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{comment}{/* CLeglSyncKHR is an opaque handle to an EGLSync object */}}
+\DoxyCodeLine{43 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* CLeglSyncKHR;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{comment}{/* properties passed to clCreateFromEGLImageKHR */}}
+\DoxyCodeLine{46 \textcolor{keyword}{typedef} intptr\_t cl\_egl\_image\_properties\_khr;}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define cl\_khr\_egl\_image 1}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_mem CL\_API\_CALL}
+\DoxyCodeLine{52 clCreateFromEGLImageKHR(cl\_context                  context,}
+\DoxyCodeLine{53                         CLeglDisplayKHR             egldisplay,}
+\DoxyCodeLine{54                         CLeglImageKHR               eglimage,}
+\DoxyCodeLine{55                         cl\_mem\_flags                flags,}
+\DoxyCodeLine{56                         \textcolor{keyword}{const} cl\_egl\_image\_properties\_khr * properties,}
+\DoxyCodeLine{57                         cl\_int *                    errcode\_ret) CL\_API\_SUFFIX\_\_VERSION\_1\_0;}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_mem (CL\_API\_CALL *clCreateFromEGLImageKHR\_fn)(}
+\DoxyCodeLine{60     cl\_context                  context,}
+\DoxyCodeLine{61     CLeglDisplayKHR             egldisplay,}
+\DoxyCodeLine{62     CLeglImageKHR               eglimage,}
+\DoxyCodeLine{63     cl\_mem\_flags                flags,}
+\DoxyCodeLine{64     \textcolor{keyword}{const} cl\_egl\_image\_properties\_khr * properties,}
+\DoxyCodeLine{65     cl\_int *                    errcode\_ret);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{69 clEnqueueAcquireEGLObjectsKHR(cl\_command\_queue command\_queue,}
+\DoxyCodeLine{70                               cl\_uint          num\_objects,}
+\DoxyCodeLine{71                               \textcolor{keyword}{const} cl\_mem *   mem\_objects,}
+\DoxyCodeLine{72                               cl\_uint          num\_events\_in\_wait\_list,}
+\DoxyCodeLine{73                               \textcolor{keyword}{const} cl\_event * event\_wait\_list,}
+\DoxyCodeLine{74                               cl\_event *       event) CL\_API\_SUFFIX\_\_VERSION\_1\_0;}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clEnqueueAcquireEGLObjectsKHR\_fn)(}
+\DoxyCodeLine{77     cl\_command\_queue command\_queue,}
+\DoxyCodeLine{78     cl\_uint          num\_objects,}
+\DoxyCodeLine{79     \textcolor{keyword}{const} cl\_mem *   mem\_objects,}
+\DoxyCodeLine{80     cl\_uint          num\_events\_in\_wait\_list,}
+\DoxyCodeLine{81     \textcolor{keyword}{const} cl\_event * event\_wait\_list,}
+\DoxyCodeLine{82     cl\_event *       event);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{86 clEnqueueReleaseEGLObjectsKHR(cl\_command\_queue command\_queue,}
+\DoxyCodeLine{87                               cl\_uint          num\_objects,}
+\DoxyCodeLine{88                               \textcolor{keyword}{const} cl\_mem *   mem\_objects,}
+\DoxyCodeLine{89                               cl\_uint          num\_events\_in\_wait\_list,}
+\DoxyCodeLine{90                               \textcolor{keyword}{const} cl\_event * event\_wait\_list,}
+\DoxyCodeLine{91                               cl\_event *       event) CL\_API\_SUFFIX\_\_VERSION\_1\_0;}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clEnqueueReleaseEGLObjectsKHR\_fn)(}
+\DoxyCodeLine{94     cl\_command\_queue command\_queue,}
+\DoxyCodeLine{95     cl\_uint          num\_objects,}
+\DoxyCodeLine{96     \textcolor{keyword}{const} cl\_mem *   mem\_objects,}
+\DoxyCodeLine{97     cl\_uint          num\_events\_in\_wait\_list,}
+\DoxyCodeLine{98     \textcolor{keyword}{const} cl\_event * event\_wait\_list,}
+\DoxyCodeLine{99     cl\_event *       event);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define cl\_khr\_egl\_event 1}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_event CL\_API\_CALL}
+\DoxyCodeLine{105 clCreateEventFromEGLSyncKHR(cl\_context      context,}
+\DoxyCodeLine{106                             CLeglSyncKHR    sync,}
+\DoxyCodeLine{107                             CLeglDisplayKHR display,}
+\DoxyCodeLine{108                             cl\_int *        errcode\_ret) CL\_API\_SUFFIX\_\_VERSION\_1\_0;}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_event (CL\_API\_CALL *clCreateEventFromEGLSyncKHR\_fn)(}
+\DoxyCodeLine{111     cl\_context      context,}
+\DoxyCodeLine{112     CLeglSyncKHR    sync,}
+\DoxyCodeLine{113     CLeglDisplayKHR display,}
+\DoxyCodeLine{114     cl\_int *        errcode\_ret);}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{117 \}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_OPENCL\_CL\_EGL\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

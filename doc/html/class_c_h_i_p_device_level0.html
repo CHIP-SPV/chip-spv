@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -81,22 +81,38 @@ Inheritance diagram for CHIPDeviceLevel0:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aae7a5decacc2eddc276c28eecb506e58"><td class="memItemLeft" align="right" valign="top"><a id="aae7a5decacc2eddc276c28eecb506e58" name="aae7a5decacc2eddc276c28eecb506e58"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPDeviceLevel0</b> (ze_device_handle_t &amp;&amp;ze_dev_, ze_context_handle_t ze_ctx_)</td></tr>
-<tr class="separator:aae7a5decacc2eddc276c28eecb506e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaf4099949c7c45c133d16feeb37956c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#abaf4099949c7c45c133d16feeb37956c">populateDeviceProperties</a> () override</td></tr>
-<tr class="memdesc:abaf4099949c7c45c133d16feeb37956c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a backend to populate device properties such as memory available, frequencies, etc.  <a href="class_c_h_i_p_device_level0.html#abaf4099949c7c45c133d16feeb37956c">More...</a><br /></td></tr>
-<tr class="separator:abaf4099949c7c45c133d16feeb37956c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9476b6ed30ddda6dba12c30dfc206157"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#a9476b6ed30ddda6dba12c30dfc206157">getName</a> () override</td></tr>
-<tr class="memdesc:a9476b6ed30ddda6dba12c30dfc206157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the device name.  <a href="class_c_h_i_p_device_level0.html#a9476b6ed30ddda6dba12c30dfc206157">More...</a><br /></td></tr>
-<tr class="separator:a9476b6ed30ddda6dba12c30dfc206157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a257539c0808dc193ef6bf80d507245d2"><td class="memItemLeft" align="right" valign="top"><a id="a257539c0808dc193ef6bf80d507245d2" name="a257539c0808dc193ef6bf80d507245d2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPDeviceLevel0</b> (ze_device_handle_t *ze_dev_, <a class="el" href="class_c_h_i_p_context_level0.html">CHIPContextLevel0</a> *chip_ctx_)</td></tr>
+<tr class="separator:a257539c0808dc193ef6bf80d507245d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a826930203b815f7d89e386764629881d"><td class="memItemLeft" align="right" valign="top"><a id="a826930203b815f7d89e386764629881d" name="a826930203b815f7d89e386764629881d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPDeviceLevel0</b> (ze_device_handle_t &amp;&amp;ze_dev_, <a class="el" href="class_c_h_i_p_context_level0.html">CHIPContextLevel0</a> *chip_ctx_)</td></tr>
+<tr class="separator:a826930203b815f7d89e386764629881d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76728b527fe3f8570a9f6402e1a0ee52"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#a76728b527fe3f8570a9f6402e1a0ee52">populateDeviceProperties_</a> () override</td></tr>
+<tr class="memdesc:a76728b527fe3f8570a9f6402e1a0ee52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a backend to populate device properties such as memory available, frequencies, etc.  <a href="class_c_h_i_p_device_level0.html#a76728b527fe3f8570a9f6402e1a0ee52">More...</a><br /></td></tr>
+<tr class="separator:a76728b527fe3f8570a9f6402e1a0ee52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3b6e76793de1fdffe70991404145285"><td class="memItemLeft" align="right" valign="top"><a id="ac3b6e76793de1fdffe70991404145285" name="ac3b6e76793de1fdffe70991404145285"></a>
 ze_device_handle_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ()</td></tr>
 <tr class="separator:ac3b6e76793de1fdffe70991404145285"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a082d942aa4d6c26114f00537f5fb7230"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#a082d942aa4d6c26114f00537f5fb7230">reset</a> () override</td></tr>
 <tr class="memdesc:a082d942aa4d6c26114f00537f5fb7230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy all allocations and reset all state on the current device in the current process.  <a href="class_c_h_i_p_device_level0.html#a082d942aa4d6c26114f00537f5fb7230">More...</a><br /></td></tr>
 <tr class="separator:a082d942aa4d6c26114f00537f5fb7230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa196b598a2b4e7652cbf28fb32ae04c7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_module_level0.html">CHIPModuleLevel0</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#aa196b598a2b4e7652cbf28fb32ae04c7">addModule</a> (std::string *module_str) override</td></tr>
+<tr class="separator:aa196b598a2b4e7652cbf28fb32ae04c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd471a3cbb392716da624494de90f51"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#aabd471a3cbb392716da624494de90f51">addQueue</a> (unsigned int flags, int priority) override</td></tr>
+<tr class="memdesc:aabd471a3cbb392716da624494de90f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an additional queue for this device.  <a href="class_c_h_i_p_device_level0.html#aabd471a3cbb392716da624494de90f51">More...</a><br /></td></tr>
+<tr class="separator:aabd471a3cbb392716da624494de90f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad4101d39f7d98c03aadcc8bd42a2806"><td class="memItemLeft" align="right" valign="top"><a id="aad4101d39f7d98c03aadcc8bd42a2806" name="aad4101d39f7d98c03aadcc8bd42a2806"></a>
+ze_device_properties_t *&#160;</td><td class="memItemRight" valign="bottom"><b>getDeviceProps</b> ()</td></tr>
+<tr class="separator:aad4101d39f7d98c03aadcc8bd42a2806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f0130ba4a32ec4d3906dced59307b92"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#a4f0130ba4a32ec4d3906dced59307b92">createTexture</a> (const hipResourceDesc *pResDesc, const hipTextureDesc *pTexDesc, const struct hipResourceViewDesc *pResViewDesc) override</td></tr>
+<tr class="separator:a4f0130ba4a32ec4d3906dced59307b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a093394dd044f24b926fe5e98fd580a09"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device_level0.html#a093394dd044f24b926fe5e98fd580a09">destroyTexture</a> (<a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> *textureObject) override</td></tr>
+<tr class="separator:a093394dd044f24b926fe5e98fd580a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_c_h_i_p_device"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_c_h_i_p_device')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a></td></tr>
+<tr class="memitem:aedf034af76863e920fff061e1027e53b inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="aedf034af76863e920fff061e1027e53b" name="aedf034af76863e920fff061e1027e53b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPDevice</b> (<a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *ctx_)</td></tr>
+<tr class="memdesc:aedf034af76863e920fff061e1027e53b inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_c_h_i_p_device.html" title="Compute device class.">CHIPDevice</a> object. <br /></td></tr>
+<tr class="separator:aedf034af76863e920fff061e1027e53b inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4922603bb72ecad2e9deeffd034b0993 inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a4922603bb72ecad2e9deeffd034b0993" name="a4922603bb72ecad2e9deeffd034b0993"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CHIPDevice</b> ()</td></tr>
 <tr class="memdesc:a4922603bb72ecad2e9deeffd034b0993 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_c_h_i_p_device.html" title="Compute device class.">CHIPDevice</a> object. <br /></td></tr>
@@ -105,9 +121,16 @@ ze_device_handle_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>g
 &#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPDevice</b> ()</td></tr>
 <tr class="memdesc:a4994ef9c50511e2522d0397c69871d1a inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_device.html" title="Compute device class.">CHIPDevice</a> object. <br /></td></tr>
 <tr class="separator:a4994ef9c50511e2522d0397c69871d1a inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46cae46416b74f4b0f912351503f450c inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a46cae46416b74f4b0f912351503f450c">getKernels</a> ()</td></tr>
-<tr class="memdesc:a46cae46416b74f4b0f912351503f450c inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Kernels object.  <a href="class_c_h_i_p_device.html#a46cae46416b74f4b0f912351503f450c">More...</a><br /></td></tr>
-<tr class="separator:a46cae46416b74f4b0f912351503f450c inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8c7dfb1b40e78260cb4011cc0509dd inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#aed8c7dfb1b40e78260cb4011cc0509dd">getKernels</a> ()</td></tr>
+<tr class="memdesc:aed8c7dfb1b40e78260cb4011cc0509dd inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Kernels object.  <a href="class_c_h_i_p_device.html#aed8c7dfb1b40e78260cb4011cc0509dd">More...</a><br /></td></tr>
+<tr class="separator:aed8c7dfb1b40e78260cb4011cc0509dd inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0381200acd5010c1657c6c39c4c25632 inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a0381200acd5010c1657c6c39c4c25632">getModules</a> ()</td></tr>
+<tr class="memdesc:a0381200acd5010c1657c6c39c4c25632 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Modules object.  <a href="class_c_h_i_p_device.html#a0381200acd5010c1657c6c39c4c25632">More...</a><br /></td></tr>
+<tr class="separator:a0381200acd5010c1657c6c39c4c25632 inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5194693b5813c5bc1551d293d48b3899 inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a5194693b5813c5bc1551d293d48b3899" name="a5194693b5813c5bc1551d293d48b3899"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>populateDeviceProperties</b> ()</td></tr>
+<tr class="memdesc:a5194693b5813c5bc1551d293d48b3899 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a backend to populate device properties such as memory available, frequencies, etc. <br /></td></tr>
+<tr class="separator:a5194693b5813c5bc1551d293d48b3899 inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a375f7ce1038f3bfc9c3d98bc4ee18c6d inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a375f7ce1038f3bfc9c3d98bc4ee18c6d">copyDeviceProperties</a> (hipDeviceProp_t *prop)</td></tr>
 <tr class="memdesc:a375f7ce1038f3bfc9c3d98bc4ee18c6d inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the device for properties.  <a href="class_c_h_i_p_device.html#a375f7ce1038f3bfc9c3d98bc4ee18c6d">More...</a><br /></td></tr>
 <tr class="separator:a375f7ce1038f3bfc9c3d98bc4ee18c6d inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,7 +141,7 @@ ze_device_handle_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>g
 <tr class="memdesc:a967f4b9220725a2debcb6f66d22060fd inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the context object.  <a href="class_c_h_i_p_device.html#a967f4b9220725a2debcb6f66d22060fd">More...</a><br /></td></tr>
 <tr class="separator:a967f4b9220725a2debcb6f66d22060fd inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a343592eef975d362baac0006456e8337 inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a343592eef975d362baac0006456e8337">addQueue</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *chip_queue_)</td></tr>
-<tr class="memdesc:a343592eef975d362baac0006456e8337 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an additional queue for this device.  <a href="class_c_h_i_p_device.html#a343592eef975d362baac0006456e8337">More...</a><br /></td></tr>
+<tr class="memdesc:a343592eef975d362baac0006456e8337 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a queue to this device.  <a href="class_c_h_i_p_device.html#a343592eef975d362baac0006456e8337">More...</a><br /></td></tr>
 <tr class="separator:a343592eef975d362baac0006456e8337 inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13160a0a12a1e885faa15f20c88e3923 inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a13160a0a12a1e885faa15f20c88e3923">getQueues</a> ()</td></tr>
 <tr class="memdesc:a13160a0a12a1e885faa15f20c88e3923 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Queues object.  <a href="class_c_h_i_p_device.html#a13160a0a12a1e885faa15f20c88e3923">More...</a><br /></td></tr>
@@ -132,12 +155,9 @@ ze_device_handle_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>g
 <tr class="memitem:a0647eabfa0ae2fe14b1ea95666919090 inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a0647eabfa0ae2fe14b1ea95666919090">getDeviceId</a> ()</td></tr>
 <tr class="memdesc:a0647eabfa0ae2fe14b1ea95666919090 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the integer ID of this device as it appears in the Backend's chip_devices list.  <a href="class_c_h_i_p_device.html#a0647eabfa0ae2fe14b1ea95666919090">More...</a><br /></td></tr>
 <tr class="separator:a0647eabfa0ae2fe14b1ea95666919090 inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab57d0ccdf88628f1851645750e9cdc1f inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#ab57d0ccdf88628f1851645750e9cdc1f">reserveMem</a> (size_t bytes)</td></tr>
-<tr class="memdesc:ab57d0ccdf88628f1851645750e9cdc1f inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device TODO: Move to AllocationTracker.  <a href="class_c_h_i_p_device.html#ab57d0ccdf88628f1851645750e9cdc1f">More...</a><br /></td></tr>
-<tr class="separator:ab57d0ccdf88628f1851645750e9cdc1f inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75cbad24717ec1390e631f354c5fea3e inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a75cbad24717ec1390e631f354c5fea3e">releaseMemReservation</a> (size_t bytes)</td></tr>
-<tr class="memdesc:a75cbad24717ec1390e631f354c5fea3e inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release some of the reserved memory. Called by free() TODO: Move to AllocationTracker.  <a href="class_c_h_i_p_device.html#a75cbad24717ec1390e631f354c5fea3e">More...</a><br /></td></tr>
-<tr class="separator:a75cbad24717ec1390e631f354c5fea3e inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca3d9af44bd816743e81eaf840066928 inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#aca3d9af44bd816743e81eaf840066928">getName</a> ()</td></tr>
+<tr class="memdesc:aca3d9af44bd816743e81eaf840066928 inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the device name.  <a href="class_c_h_i_p_device.html#aca3d9af44bd816743e81eaf840066928">More...</a><br /></td></tr>
+<tr class="separator:aca3d9af44bd816743e81eaf840066928 inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11990aabcfa593917f152ed9614fb2fd inherit pub_methods_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a11990aabcfa593917f152ed9614fb2fd">getAttr</a> (hipDeviceAttribute_t attr)</td></tr>
 <tr class="memdesc:a11990aabcfa593917f152ed9614fb2fd inherit pub_methods_class_c_h_i_p_device"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query for a specific device attribute. Implementation copied from HIPAMD.  <a href="class_c_h_i_p_device.html#a11990aabcfa593917f152ed9614fb2fd">More...</a><br /></td></tr>
 <tr class="separator:a11990aabcfa593917f152ed9614fb2fd inherit pub_methods_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -218,12 +238,9 @@ std::unordered_map&lt; const void *, <a class="el" href="class_c_h_i_p_kernel.ht
 <tr class="memitem:ab03330d166b8621a745583df6786c03c inherit pub_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="ab03330d166b8621a745583df6786c03c" name="ab03330d166b8621a745583df6786c03c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>idx</b></td></tr>
 <tr class="separator:ab03330d166b8621a745583df6786c03c inherit pub_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72f505d327649e6325dbee25c5d00144 inherit pub_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a72f505d327649e6325dbee25c5d00144" name="a72f505d327649e6325dbee25c5d00144"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_used_mem</b></td></tr>
-<tr class="separator:a72f505d327649e6325dbee25c5d00144 inherit pub_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afff08ae14824374150fdfcd303c7d7f8 inherit pub_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="afff08ae14824374150fdfcd303c7d7f8" name="afff08ae14824374150fdfcd303c7d7f8"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_used_mem</b></td></tr>
-<tr class="separator:afff08ae14824374150fdfcd303c7d7f8 inherit pub_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f173c29ce72a9f699ef8765fe8efcc5 inherit pub_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a0f173c29ce72a9f699ef8765fe8efcc5" name="a0f173c29ce72a9f699ef8765fe8efcc5"></a>
+<a class="el" href="class_c_h_i_p_allocation_tracker.html">CHIPAllocationTracker</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>allocation_tracker</b> = nullptr</td></tr>
+<tr class="separator:a0f173c29ce72a9f699ef8765fe8efcc5 inherit pub_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_c_h_i_p_device"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_c_h_i_p_device')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a></td></tr>
 <tr class="memitem:acadc9022103fd54f87aadea5762bdaf5 inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="acadc9022103fd54f87aadea5762bdaf5" name="acadc9022103fd54f87aadea5762bdaf5"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>device_name</b></td></tr>
@@ -231,9 +248,6 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>device_name</b
 <tr class="memitem:ac7cdfc001a8852c0e69888c256254506 inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="ac7cdfc001a8852c0e69888c256254506" name="ac7cdfc001a8852c0e69888c256254506"></a>
 std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
 <tr class="separator:ac7cdfc001a8852c0e69888c256254506 inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39eb5834bfe4c36bac72e7a2415723fa inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a39eb5834bfe4c36bac72e7a2415723fa" name="a39eb5834bfe4c36bac72e7a2415723fa"></a>
-std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>chip_kernels</b></td></tr>
-<tr class="separator:a39eb5834bfe4c36bac72e7a2415723fa inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a333873706d2a7d547871a45613ae5e38 inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a333873706d2a7d547871a45613ae5e38" name="a333873706d2a7d547871a45613ae5e38"></a>
 <a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ctx</b></td></tr>
 <tr class="separator:a333873706d2a7d547871a45613ae5e38 inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -243,16 +257,25 @@ std::vector&lt; <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * &g
 <tr class="memitem:a1fae7b58c18f748c8cab910ba6890e1e inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a1fae7b58c18f748c8cab910ba6890e1e" name="a1fae7b58c18f748c8cab910ba6890e1e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>active_queue_id</b> = 0</td></tr>
 <tr class="separator:a1fae7b58c18f748c8cab910ba6890e1e inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ae79160adaeaaa4fd68c58677346526 inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a1ae79160adaeaaa4fd68c58677346526" name="a1ae79160adaeaaa4fd68c58677346526"></a>
+std::once_flag&#160;</td><td class="memItemRight" valign="bottom"><b>propsPopulated</b></td></tr>
+<tr class="separator:a1ae79160adaeaaa4fd68c58677346526 inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63a5a19d95283d5e2527ecc935bac6cb inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a63a5a19d95283d5e2527ecc935bac6cb" name="a63a5a19d95283d5e2527ecc935bac6cb"></a>
 hipDeviceAttribute_t&#160;</td><td class="memItemRight" valign="bottom"><b>attrs</b></td></tr>
 <tr class="separator:a63a5a19d95283d5e2527ecc935bac6cb inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aa417902885d6b15c26c6fc69aad547 inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a6aa417902885d6b15c26c6fc69aad547" name="a6aa417902885d6b15c26c6fc69aad547"></a>
 hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device_props</b></td></tr>
 <tr class="separator:a6aa417902885d6b15c26c6fc69aad547 inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1fe6033be1fc9717c30fcc20db0d7a inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a0b1fe6033be1fc9717c30fcc20db0d7a" name="a0b1fe6033be1fc9717c30fcc20db0d7a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>TotalUsedMem</b></td></tr>
+<tr class="separator:a0b1fe6033be1fc9717c30fcc20db0d7a inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797a22a51f4796fc8bd96e15b1ac28a0 inherit pro_attribs_class_c_h_i_p_device"><td class="memItemLeft" align="right" valign="top"><a id="a797a22a51f4796fc8bd96e15b1ac28a0" name="a797a22a51f4796fc8bd96e15b1ac28a0"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>MaxUsedMem</b></td></tr>
+<tr class="separator:a797a22a51f4796fc8bd96e15b1ac28a0 inherit pro_attribs_class_c_h_i_p_device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9476b6ed30ddda6dba12c30dfc206157" name="a9476b6ed30ddda6dba12c30dfc206157"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9476b6ed30ddda6dba12c30dfc206157">&#9670;&nbsp;</a></span>getName()</h2>
+<a id="aa196b598a2b4e7652cbf28fb32ae04c7" name="aa196b598a2b4e7652cbf28fb32ae04c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa196b598a2b4e7652cbf28fb32ae04c7">&#9670;&nbsp;</a></span>addModule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,9 +284,10 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::string CHIPDeviceLevel0::getName </td>
+          <td class="memname">virtual <a class="el" href="class_c_h_i_p_module_level0.html">CHIPModuleLevel0</a> * CHIPDeviceLevel0::addModule </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::string *&#160;</td>
+          <td class="paramname"><em>module_str</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -274,15 +298,12 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
 </table>
 </div><div class="memdoc">
 
-<p>Get the device name. </p>
-<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
-
-<p>Implements <a class="el" href="class_c_h_i_p_device.html#a98cebf6120181daeeeab073832c28b7b">CHIPDevice</a>.</p>
+<p>Implements <a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a>.</p>
 
 </div>
 </div>
-<a id="abaf4099949c7c45c133d16feeb37956c" name="abaf4099949c7c45c133d16feeb37956c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaf4099949c7c45c133d16feeb37956c">&#9670;&nbsp;</a></span>populateDeviceProperties()</h2>
+<a id="aabd471a3cbb392716da624494de90f51" name="aabd471a3cbb392716da624494de90f51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd471a3cbb392716da624494de90f51">&#9670;&nbsp;</a></span>addQueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,7 +312,127 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void CHIPDeviceLevel0::populateDeviceProperties </td>
+          <td class="memname"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * CHIPDeviceLevel0::addQueue </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct an additional queue for this device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flags</td><td></td></tr>
+    <tr><td class="paramname">priority</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CHIPQueue* pointer to the newly created queue (can also be found in chip_queues vector) </dd></dl>
+
+<p>Implements <a class="el" href="class_c_h_i_p_device.html#acd1d6b81696a43296a485647ec07f596">CHIPDevice</a>.</p>
+
+</div>
+</div>
+<a id="a4f0130ba4a32ec4d3906dced59307b92" name="a4f0130ba4a32ec4d3906dced59307b92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f0130ba4a32ec4d3906dced59307b92">&#9670;&nbsp;</a></span>createTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> * CHIPDeviceLevel0::createTexture </td>
+          <td>(</td>
+          <td class="paramtype">const hipResourceDesc *&#160;</td>
+          <td class="paramname"><em>pResDesc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const hipTextureDesc *&#160;</td>
+          <td class="paramname"><em>pTexDesc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct hipResourceViewDesc *&#160;</td>
+          <td class="paramname"><em>pResViewDesc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a>.</p>
+
+</div>
+</div>
+<a id="a093394dd044f24b926fe5e98fd580a09" name="a093394dd044f24b926fe5e98fd580a09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a093394dd044f24b926fe5e98fd580a09">&#9670;&nbsp;</a></span>destroyTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void CHIPDeviceLevel0::destroyTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> *&#160;</td>
+          <td class="paramname"><em>textureObject</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a>.</p>
+
+</div>
+</div>
+<a id="a76728b527fe3f8570a9f6402e1a0ee52" name="a76728b527fe3f8570a9f6402e1a0ee52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76728b527fe3f8570a9f6402e1a0ee52">&#9670;&nbsp;</a></span>populateDeviceProperties_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CHIPDeviceLevel0::populateDeviceProperties_ </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -299,14 +440,14 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Use a backend to populate device properties such as memory available, frequencies, etc. </p>
 
-<p>Implements <a class="el" href="class_c_h_i_p_device.html#ab8fb4cdbe080397c5639d2d742c33f2b">CHIPDevice</a>.</p>
+<p>Implements <a class="el" href="class_c_h_i_p_device.html#aa7bfa85e318cda92cfe5c5cc394f6eca">CHIPDevice</a>.</p>
 
 </div>
 </div>
@@ -340,8 +481,8 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/backend/Level0/<a class="el" href="_level0_backend_8hh_source.html">Level0Backend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/backend/Level0/Level0Backend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/Level0/<a class="el" href="_level0_backend_8hh_source.html">Level0Backend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/Level0/Level0Backend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

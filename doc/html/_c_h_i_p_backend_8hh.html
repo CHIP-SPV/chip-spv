@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CHIP-SPV: /Users/pvelesko/local/HIPxx/src/CHIPBackend.hh File Reference</title>
+<title>CHIP-SPV: /Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.hh File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -69,7 +69,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">CHIPBackend.hh File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -79,20 +80,29 @@ $(function() {
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
+<code>#include &lt;set&gt;</code><br />
 <code>#include &lt;mutex&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;stack&gt;</code><br />
 <code>#include &quot;spirv.hh&quot;</code><br />
-<code>#include &quot;include/hip/hip.hh&quot;</code><br />
+<code>#include &quot;hip/hip_runtime_api.h&quot;</code><br />
+<code>#include &quot;hip/spirv_hip.hh&quot;</code><br />
 <code>#include &quot;<a class="el" href="_c_h_i_p_driver_8hh_source.html">CHIPDriver.hh</a>&quot;</code><br />
 <code>#include &quot;logging.hh&quot;</code><br />
 <code>#include &quot;macros.hh&quot;</code><br />
+<code>#include &quot;CHIPException.hh&quot;</code><br />
 </div>
 <p><a href="_c_h_i_p_backend_8hh_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_callback_data.html">CHIPCallbackData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_event_monitor.html">CHIPEventMonitor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structallocation__info.html">allocation_info</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html">CHIPAllocationTracker</a></td></tr>
@@ -109,7 +119,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains information about the function on the host and device.  <a href="class_c_h_i_p_kernel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html">CHIPExecItem</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains kernel arguments and a queue on which to execute. Prior to kernel launch, the arguments are setup via <a class="el" href="class_c_h_i_p_backend.html#a9d802a4ed8ee1c36996ea05d346bdb1d" title="Configure an upcoming kernel call.">CHIPBackend::configureCall()</a>. Because of this, we get the kernel last so the kernel so the <a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9" title="Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.">launch()</a> takes a kernel argument as opposed to queue receiving a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> containing the kernel and arguments.  <a href="class_c_h_i_p_exec_item.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains kernel arguments and a queue on which to execute. Prior to kernel launch, the arguments are setup via <a class="el" href="class_c_h_i_p_backend.html#a9d802a4ed8ee1c36996ea05d346bdb1d" title="Configure an upcoming kernel call.">CHIPBackend::configureCall()</a>. Because of this, we get the kernel last so the kernel so the launch() takes a kernel argument as opposed to queue receiving a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> containing the kernel and arguments.  <a href="class_c_h_i_p_exec_item.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute device class.  <a href="class_c_h_i_p_device.html#details">More...</a><br /></td></tr>
@@ -137,6 +147,16 @@ Enumerations</h2></td></tr>
 , <b>Interprocess</b> = hipEventInterprocess
  }</td></tr>
 <tr class="separator:a5a433b3bd8236b2b473f2a73e3b1fe6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad699516f65dc92809e7d82791b6e0c02"><td class="memItemLeft" align="right" valign="top"><a id="ad699516f65dc92809e7d82791b6e0c02" name="ad699516f65dc92809e7d82791b6e0c02"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>monitor_wrapper</b> (void *event_monitor_)</td></tr>
+<tr class="separator:ad699516f65dc92809e7d82791b6e0c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd250241a724b134aa19aec8c48760d6"><td class="memTemplParams" colspan="2"><a id="abd250241a724b134aa19aec8c48760d6" name="abd250241a724b134aa19aec8c48760d6"></a>
+template&lt;class T &gt; </td></tr>
+<tr class="memitem:abd250241a724b134aa19aec8c48760d6"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><b>resultToString</b> (T err)</td></tr>
+<tr class="separator:abd250241a724b134aa19aec8c48760d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="class_c_h_i_p_backend.html" title="Primary object to interact with the backend.">CHIPBackend</a> class definition. CHIP backends are to inherit from this base class and override desired virtual functions. Overrides for this class are expected to be minimal with primary overrides being done on lower-level classes such as <a class="el" href="class_c_h_i_p_context.html" title="Context class Contexts contain execution queues and are created on top of a single or multiple device...">CHIPContext</a> consturctors, etc. </p>

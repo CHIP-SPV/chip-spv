@@ -1,0 +1,137 @@
+\hypertarget{_histogram_8hpp_source}{}\doxysection{Histogram.\+hpp}
+\label{_histogram_8hpp_source}\index{/Users/pvelesko/local/CHIP-\/SPV/samples/hip-\/cuda/Histogram/Histogram.hpp@{/Users/pvelesko/local/CHIP-\/SPV/samples/hip-\/cuda/Histogram/Histogram.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015-\/2016 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef HISTOGRAM\_H\_}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define HISTOGRAM\_H\_}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include "{}hip/hip\_runtime.h"{}}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include "{}../include/HIPUtil.hpp"{}}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{using namespace }\mbox{\hyperlink{namespaceappsdk}{appsdk}};}
+\DoxyCodeLine{37 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define SAMPLE\_VERSION "{}HIP-\/Examples-\/Applications-\/v1.0"{}}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define WIDTH 1024}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define HEIGHT 1024}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define BIN\_SIZE 256}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define GROUP\_SIZE 16}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define GROUP\_ITERATIONS (BIN\_SIZE / 2)}\textcolor{comment}{//This is done to avoid overflow in the kernel}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define SUB\_HISTOGRAM\_COUNT ((WIDTH * HEIGHT) /(GROUP\_SIZE * GROUP\_ITERATIONS))}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 }
+\DoxyCodeLine{54 \textcolor{keyword}{class }\mbox{\hyperlink{class_histogram}{Histogram}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         \textcolor{keywordtype}{int} binSize;             }
+\DoxyCodeLine{58         \textcolor{keywordtype}{int} groupSize;           }
+\DoxyCodeLine{59         \textcolor{keywordtype}{int} subHistgCnt;         }
+\DoxyCodeLine{60         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} *data;              }
+\DoxyCodeLine{61         \textcolor{keywordtype}{int} width;               }
+\DoxyCodeLine{62         \textcolor{keywordtype}{int} height;              }
+\DoxyCodeLine{63         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} *hostBin;           }
+\DoxyCodeLine{64         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} *midDeviceBin;      }
+\DoxyCodeLine{65         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} *deviceBin;         }
+\DoxyCodeLine{67         \textcolor{keywordtype}{double} setupTime;        }
+\DoxyCodeLine{68         \textcolor{keywordtype}{double} kernelTime;       }
+\DoxyCodeLine{70         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} totalLocalMemory;      }
+\DoxyCodeLine{71         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} usedLocalMemory;       }
+\DoxyCodeLine{73         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* dataBuf;                 }
+\DoxyCodeLine{74         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* deviceBinBuf;         }
+\DoxyCodeLine{76         \textcolor{keywordtype}{int} iterations;                     }
+\DoxyCodeLine{77         \textcolor{keywordtype}{bool} scalar;                        }
+\DoxyCodeLine{78         \textcolor{keywordtype}{bool} vector;                        }
+\DoxyCodeLine{79         \textcolor{keywordtype}{int} vectorWidth;                    }
+\DoxyCodeLine{80         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} globalThreads;}
+\DoxyCodeLine{81         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} localThreads ;}
+\DoxyCodeLine{82         \textcolor{keywordtype}{int} groupIterations;}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         \mbox{\hyperlink{classappsdk_1_1_s_d_k_timer}{SDKTimer}}    *sampleTimer;      }
+\DoxyCodeLine{86     \textcolor{keyword}{public}:}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommandArgs}}   *\mbox{\hyperlink{class_histogram_a847976be16d6bbf3e072723947e484b0}{sampleArgs}};   }
+\DoxyCodeLine{94         \mbox{\hyperlink{class_histogram_af681f293852ac145f867ecfcce3062a5}{Histogram}}()}
+\DoxyCodeLine{95             :}
+\DoxyCodeLine{96             binSize(BIN\_SIZE),}
+\DoxyCodeLine{97             groupSize(GROUP\_SIZE),}
+\DoxyCodeLine{98             setupTime(0),}
+\DoxyCodeLine{99             kernelTime(0),}
+\DoxyCodeLine{100             subHistgCnt(SUB\_HISTOGRAM\_COUNT),}
+\DoxyCodeLine{101             groupIterations(GROUP\_ITERATIONS),}
+\DoxyCodeLine{102             data(NULL),}
+\DoxyCodeLine{103             hostBin(NULL),}
+\DoxyCodeLine{104             midDeviceBin(NULL),}
+\DoxyCodeLine{105             deviceBin(NULL),}
+\DoxyCodeLine{106             iterations(1),}
+\DoxyCodeLine{107             scalar(false),}
+\DoxyCodeLine{108             vector(false),}
+\DoxyCodeLine{109             vectorWidth(0)}
+\DoxyCodeLine{110         \{}
+\DoxyCodeLine{111             \textcolor{comment}{/* Set default values for width and height */}}
+\DoxyCodeLine{112             width = WIDTH;}
+\DoxyCodeLine{113             height = HEIGHT;}
+\DoxyCodeLine{114             \mbox{\hyperlink{class_histogram_a847976be16d6bbf3e072723947e484b0}{sampleArgs}} = \textcolor{keyword}{new} \mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommandArgs}}() ;}
+\DoxyCodeLine{115             sampleTimer = \textcolor{keyword}{new} \mbox{\hyperlink{classappsdk_1_1_s_d_k_timer}{SDKTimer}}();}
+\DoxyCodeLine{116             \mbox{\hyperlink{class_histogram_a847976be16d6bbf3e072723947e484b0}{sampleArgs}}-\/>\mbox{\hyperlink{classappsdk_1_1_s_d_k_cmd_args_parser_a328dfb6c0e566268c2ec0a5b5d93ed7d}{sampleVerStr}} = SAMPLE\_VERSION;}
+\DoxyCodeLine{117         \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120         \mbox{\hyperlink{class_histogram}{\string~Histogram}}()}
+\DoxyCodeLine{121         \{}
+\DoxyCodeLine{122         \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{128         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_a67753d7a22dd13aa21398f735aec8021}{setupHistogram}}();}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{136         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_aa4a84bcaf9d67ba1d0d184a1c63f396d}{setupHIP}}();}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{144         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_aa9aec249be61f021237f0a6131d1e550}{runKernels}}();}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{149         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_histogram_a61f5f38d6f5864c3954132a7806269b7}{printStats}}();}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{156         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_afe96e22e82e3ecaea0d2abc545ce0bb1}{initialize}}();}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{163         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_af3be21f978afdfa7e62213c25fa21b69}{setup}}();}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{170         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_a0b4468d235007db4c69e12b269301540}{run}}();}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{177         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_ad4d561795cd2a35adba43763215ce532}{cleanup}}();}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{184         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_histogram_acc55887ca28abf5f45ef5964e16dde3b}{verifyResults}}();}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186     \textcolor{keyword}{private}:}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{191         \textcolor{keywordtype}{int} calculateHostBin();}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{205 \};}
+\DoxyCodeLine{206 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

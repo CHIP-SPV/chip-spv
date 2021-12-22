@@ -1,0 +1,26 @@
+\hypertarget{formatter_8h_source}{}\doxysection{formatter.\+h}
+\label{formatter_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/formatter.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/formatter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}fmt/fmt.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}spdlog/details/log\_msg.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1formatter}{formatter}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{public}:}
+\DoxyCodeLine{16     \textcolor{keyword}{virtual} \mbox{\hyperlink{classspdlog_1_1formatter}{\string~formatter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{17     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, fmt::memory\_buffer \&dest) = 0;}
+\DoxyCodeLine{18     \textcolor{keyword}{virtual} std::unique\_ptr<formatter> clone() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{19 \};}
+\DoxyCodeLine{20 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

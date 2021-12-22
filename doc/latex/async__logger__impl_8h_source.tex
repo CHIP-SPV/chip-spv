@@ -1,0 +1,116 @@
+\hypertarget{async__logger__impl_8h_source}{}\doxysection{async\+\_\+logger\+\_\+impl.\+h}
+\label{async__logger__impl_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/async\_logger\_impl.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/async\_logger\_impl.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{// async logger implementation}}
+\DoxyCodeLine{9 \textcolor{comment}{// uses a thread pool to perform the actual logging}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}spdlog/details/thread\_pool.h"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{template}<\textcolor{keyword}{typename} It>}
+\DoxyCodeLine{18 \textcolor{keyword}{inline} spdlog::async\_logger::async\_logger(}
+\DoxyCodeLine{19     std::string logger\_name, It begin, It end, std::weak\_ptr<details::thread\_pool> tp, async\_overflow\_policy overflow\_policy)}
+\DoxyCodeLine{20     : logger(std::move(logger\_name), begin, end)}
+\DoxyCodeLine{21     , thread\_pool\_(std::move(tp))}
+\DoxyCodeLine{22     , overflow\_policy\_(overflow\_policy)}
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{24 \}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{inline} spdlog::async\_logger::async\_logger(}
+\DoxyCodeLine{27     std::string logger\_name, sinks\_init\_list sinks\_list, std::weak\_ptr<details::thread\_pool> tp, async\_overflow\_policy overflow\_policy)}
+\DoxyCodeLine{28     : async\_logger(std::move(logger\_name), sinks\_list.begin(), sinks\_list.end(), std::move(tp), overflow\_policy)}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{inline} spdlog::async\_logger::async\_logger(}
+\DoxyCodeLine{33     std::string logger\_name, sink\_ptr single\_sink, std::weak\_ptr<details::thread\_pool> tp, async\_overflow\_policy overflow\_policy)}
+\DoxyCodeLine{34     : async\_logger(std::move(logger\_name), \{std::move(single\_sink)\}, std::move(tp), overflow\_policy)}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36 \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{// send the log message to the thread pool}}
+\DoxyCodeLine{39 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} spdlog::async\_logger::sink\_it\_(details::log\_msg \&msg)}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#if defined(SPDLOG\_ENABLE\_MESSAGE\_COUNTER)}}
+\DoxyCodeLine{42     incr\_msg\_counter\_(msg);}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{44     \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} pool\_ptr = thread\_pool\_.lock())}
+\DoxyCodeLine{45     \{}
+\DoxyCodeLine{46         pool\_ptr-\/>post\_log(shared\_from\_this(), msg, overflow\_policy\_);}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{49     \{}
+\DoxyCodeLine{50         \textcolor{keywordflow}{throw} spdlog\_ex(\textcolor{stringliteral}{"{}async log: thread pool doesn't exist anymore"{}});}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52 \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{comment}{// send flush request to the thread pool}}
+\DoxyCodeLine{55 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} spdlog::async\_logger::flush\_()}
+\DoxyCodeLine{56 \{}
+\DoxyCodeLine{57     \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} pool\_ptr = thread\_pool\_.lock())}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         pool\_ptr-\/>post\_flush(shared\_from\_this(), overflow\_policy\_);}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{62     \{}
+\DoxyCodeLine{63         \textcolor{keywordflow}{throw} spdlog\_ex(\textcolor{stringliteral}{"{}async flush: thread pool doesn't exist anymore"{}});}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{//}}
+\DoxyCodeLine{68 \textcolor{comment}{// backend functions -\/ called from the thread pool to do the actual job}}
+\DoxyCodeLine{69 \textcolor{comment}{//}}
+\DoxyCodeLine{70 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} spdlog::async\_logger::backend\_log\_(\textcolor{keyword}{const} details::log\_msg \&incoming\_log\_msg)}
+\DoxyCodeLine{71 \{}
+\DoxyCodeLine{72     \textcolor{keywordflow}{try}}
+\DoxyCodeLine{73     \{}
+\DoxyCodeLine{74         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&s : sinks\_)}
+\DoxyCodeLine{75         \{}
+\DoxyCodeLine{76             \textcolor{keywordflow}{if} (s-\/>should\_log(incoming\_log\_msg.level))}
+\DoxyCodeLine{77             \{}
+\DoxyCodeLine{78                 s-\/>log(incoming\_log\_msg);}
+\DoxyCodeLine{79             \}}
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82     SPDLOG\_CATCH\_AND\_HANDLE}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \textcolor{keywordflow}{if} (should\_flush\_(incoming\_log\_msg))}
+\DoxyCodeLine{85     \{}
+\DoxyCodeLine{86         backend\_flush\_();}
+\DoxyCodeLine{87     \}}
+\DoxyCodeLine{88 \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} spdlog::async\_logger::backend\_flush\_()}
+\DoxyCodeLine{91 \{}
+\DoxyCodeLine{92     \textcolor{keywordflow}{try}}
+\DoxyCodeLine{93     \{}
+\DoxyCodeLine{94         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&sink : sinks\_)}
+\DoxyCodeLine{95         \{}
+\DoxyCodeLine{96             sink-\/>flush();}
+\DoxyCodeLine{97         \}}
+\DoxyCodeLine{98     \}}
+\DoxyCodeLine{99     SPDLOG\_CATCH\_AND\_HANDLE}
+\DoxyCodeLine{100 \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{keyword}{inline} std::shared\_ptr<spdlog::logger> spdlog::async\_logger::clone(std::string new\_name)}
+\DoxyCodeLine{103 \{}
+\DoxyCodeLine{104     \textcolor{keyword}{auto} cloned = std::make\_shared<spdlog::async\_logger>(std::move(new\_name), sinks\_.begin(), sinks\_.end(), thread\_pool\_, overflow\_policy\_);}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     cloned-\/>set\_level(this-\/>level());}
+\DoxyCodeLine{107     cloned-\/>flush\_on(this-\/>flush\_level());}
+\DoxyCodeLine{108     cloned-\/>set\_error\_handler(this-\/>error\_handler());}
+\DoxyCodeLine{109     \textcolor{keywordflow}{return} std::move(cloned);}
+\DoxyCodeLine{110 \}}
+
+\end{DoxyCode}

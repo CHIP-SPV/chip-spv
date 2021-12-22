@@ -1,0 +1,49 @@
+\hypertarget{struct__ze__external__memory__export__win32__handle__t}{}\doxysection{\+\_\+ze\+\_\+external\+\_\+memory\+\_\+export\+\_\+win32\+\_\+handle\+\_\+t Struct Reference}
+\label{struct__ze__external__memory__export__win32__handle__t}\index{\_ze\_external\_memory\_export\_win32\_handle\_t@{\_ze\_external\_memory\_export\_win32\_handle\_t}}
+
+
+Exports an allocation as a Win32 handle.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__external__memory__export__win32__handle__t_a00a1221154eb911fea631c3b5cf4d12a}\label{struct__ze__external__memory__export__win32__handle__t_a00a1221154eb911fea631c3b5cf4d12a}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__external__memory__export__win32__handle__t_a288b1c4a6938b1c514a2e0b093fe53de}\label{struct__ze__external__memory__export__win32__handle__t_a288b1c4a6938b1c514a2e0b093fe53de}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__external__memory__export__win32__handle__t_a50e928e7be3a962520de6d9f0e41588e}{flags}}
+\item 
+\mbox{\Hypertarget{struct__ze__external__memory__export__win32__handle__t_a6c1eed2bc3bdbb8460565fb7b8fe16a9}\label{struct__ze__external__memory__export__win32__handle__t_a6c1eed2bc3bdbb8460565fb7b8fe16a9}} 
+void $\ast$ {\bfseries handle}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} the exported Win32 handle representing the allocation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Exports an allocation as a Win32 handle. 
+
+
+\begin{DoxyItemize}
+\item This structure may be passed to \+::ze\+Mem\+Get\+Alloc\+Properties, via the {\ttfamily p\+Next} member of \+::ze\+\_\+memory\+\_\+allocation\+\_\+properties\+\_\+t, to export a memory allocation as a file descriptor.
+\item This structure may be passed to \+::ze\+Image\+Get\+Properties, via the {\ttfamily p\+Next} member of \+::ze\+\_\+image\+\_\+properties\+\_\+t, to export an image as a file descriptor.
+\item The requested memory export type must have been specified when the allocation was made. 
+\end{DoxyItemize}
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__external__memory__export__win32__handle__t_a50e928e7be3a962520de6d9f0e41588e}\label{struct__ze__external__memory__export__win32__handle__t_a50e928e7be3a962520de6d9f0e41588e}} 
+\index{\_ze\_external\_memory\_export\_win32\_handle\_t@{\_ze\_external\_memory\_export\_win32\_handle\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_external\_memory\_export\_win32\_handle\_t@{\_ze\_external\_memory\_export\_win32\_handle\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t \+\_\+ze\+\_\+external\+\_\+memory\+\_\+export\+\_\+win32\+\_\+handle\+\_\+t\+::flags}
+
+\mbox{[}in\mbox{]} flags specifying the memory export type for the file descriptor. must be 0 (default) or a valid combination of \+::ze\+\_\+external\+\_\+memory\+\_\+type\+\_\+flags\+\_\+t 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

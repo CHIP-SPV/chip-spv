@@ -1,0 +1,112 @@
+\hypertarget{spirv__hip__ldg_8h_source}{}\doxysection{spirv\+\_\+hip\+\_\+ldg.\+h}
+\label{spirv__hip__ldg_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip\_ldg.h@{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip\_ldg.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_AMD\_DETAIL\_HIP\_LDG\_H}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_AMD\_DETAIL\_HIP\_LDG\_H}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include "{}spirv\_hip\_vector\_types.h"{}}}
+\DoxyCodeLine{27 \textcolor{comment}{//\#include "{}host\_defines.h"{}}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{char} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} char2 \_\_ldg(\textcolor{keyword}{const} char2* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} char4 \_\_ldg(\textcolor{keyword}{const} char4* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{signed} \textcolor{keywordtype}{char} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{signed} \textcolor{keywordtype}{char}* ptr) \{}
+\DoxyCodeLine{36   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* ptr) \{}
+\DoxyCodeLine{40   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{41 \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{short} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{short}* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} short2 \_\_ldg(\textcolor{keyword}{const} short2* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} short4 \_\_ldg(\textcolor{keyword}{const} short4* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}* ptr) \{}
+\DoxyCodeLine{50   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{51 \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{int} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{int}* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} int2 \_\_ldg(\textcolor{keyword}{const} int2* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} int4 \_\_ldg(\textcolor{keyword}{const} int4* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}* ptr) \{}
+\DoxyCodeLine{60   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{61 \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{long} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{long}* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}* ptr) \{}
+\DoxyCodeLine{66   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{67 \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long}* ptr) \{}
+\DoxyCodeLine{70   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{71 \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} longlong2 \_\_ldg(\textcolor{keyword}{const} longlong2* ptr) \{}
+\DoxyCodeLine{74   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{75 \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_ldg(}
+\DoxyCodeLine{78     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long}* ptr) \{}
+\DoxyCodeLine{79   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{80 \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} uchar2 \_\_ldg(\textcolor{keyword}{const} uchar2* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} uchar4 \_\_ldg(\textcolor{keyword}{const} uchar4* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} ushort2 \_\_ldg(\textcolor{keyword}{const} ushort2* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} uint2 \_\_ldg(\textcolor{keyword}{const} uint2* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} uint4 \_\_ldg(\textcolor{keyword}{const} uint4* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} ulonglong2 \_\_ldg(\textcolor{keyword}{const} ulonglong2* ptr) \{}
+\DoxyCodeLine{93   \textcolor{keywordflow}{return} ptr[0];}
+\DoxyCodeLine{94 \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{float} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{float}* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} float2 \_\_ldg(\textcolor{keyword}{const} float2* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} float4 \_\_ldg(\textcolor{keyword}{const} float4* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{double} \_\_ldg(\textcolor{keyword}{const} \textcolor{keywordtype}{double}* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \_\_device\_\_ \textcolor{keyword}{inline} \textcolor{keyword}{static} double2 \_\_ldg(\textcolor{keyword}{const} double2* ptr) \{ \textcolor{keywordflow}{return} ptr[0]; \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// HIP\_LDG\_H}}
+
+\end{DoxyCode}

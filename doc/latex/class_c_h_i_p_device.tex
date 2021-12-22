@@ -18,15 +18,23 @@ Inheritance diagram for CHIPDevice\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_c_h_i_p_device_aedf034af76863e920fff061e1027e53b}\label{class_c_h_i_p_device_aedf034af76863e920fff061e1027e53b}} 
+{\bfseries CHIPDevice} (\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$ctx\+\_\+)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_device_a4922603bb72ecad2e9deeffd034b0993}\label{class_c_h_i_p_device_a4922603bb72ecad2e9deeffd034b0993}} 
 {\bfseries CHIPDevice} ()
 \begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_device_a4994ef9c50511e2522d0397c69871d1a}\label{class_c_h_i_p_device_a4994ef9c50511e2522d0397c69871d1a}} 
 {\bfseries $\sim$\+CHIPDevice} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} object. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ $>$ \& \mbox{\hyperlink{class_c_h_i_p_device_a46cae46416b74f4b0f912351503f450c}{get\+Kernels}} ()
+std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ $>$ \mbox{\hyperlink{class_c_h_i_p_device_aed8c7dfb1b40e78260cb4011cc0509dd}{get\+Kernels}} ()
 \begin{DoxyCompactList}\small\item\em Get the Kernels object. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_c_h_i_p_device_ab8fb4cdbe080397c5639d2d742c33f2b}{populate\+Device\+Properties}} ()=0
+std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} $\ast$ $>$ \& \mbox{\hyperlink{class_c_h_i_p_device_a0381200acd5010c1657c6c39c4c25632}{get\+Modules}} ()
+\begin{DoxyCompactList}\small\item\em Get the Modules object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_device_a5194693b5813c5bc1551d293d48b3899}\label{class_c_h_i_p_device_a5194693b5813c5bc1551d293d48b3899}} 
+void {\bfseries populate\+Device\+Properties} ()
+\begin{DoxyCompactList}\small\item\em Use a backend to populate device properties such as memory available, frequencies, etc. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_c_h_i_p_device_aa7bfa85e318cda92cfe5c5cc394f6eca}{populate\+Device\+Properties\+\_\+}} ()=0
 \begin{DoxyCompactList}\small\item\em Use a backend to populate device properties such as memory available, frequencies, etc. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_c_h_i_p_device_a375f7ce1038f3bfc9c3d98bc4ee18c6d}{copy\+Device\+Properties}} (hip\+Device\+Prop\+\_\+t $\ast$prop)
 \begin{DoxyCompactList}\small\item\em Query the device for properties. \end{DoxyCompactList}\item 
@@ -34,8 +42,10 @@ void \mbox{\hyperlink{class_c_h_i_p_device_a375f7ce1038f3bfc9c3d98bc4ee18c6d}{co
 \begin{DoxyCompactList}\small\item\em Use the host function pointer to retrieve the kernel. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_device_a967f4b9220725a2debcb6f66d22060fd}{get\+Context}} ()
 \begin{DoxyCompactList}\small\item\em Get the context object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_c_h_i_p_device_a343592eef975d362baac0006456e8337}{add\+Queue}} (\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$chip\+\_\+queue\+\_\+)
+virtual \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_device_acd1d6b81696a43296a485647ec07f596}{add\+Queue}} (unsigned int flags, int priority)=0
 \begin{DoxyCompactList}\small\item\em Construct an additional queue for this device. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_h_i_p_device_a343592eef975d362baac0006456e8337}{add\+Queue}} (\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$chip\+\_\+queue\+\_\+)
+\begin{DoxyCompactList}\small\item\em Add a queue to this device. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ $>$ \mbox{\hyperlink{class_c_h_i_p_device_a13160a0a12a1e885faa15f20c88e3923}{get\+Queues}} ()
 \begin{DoxyCompactList}\small\item\em Get the Queues object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_device_aebb742c0c5df3f563d1a8f5c13c3b6d4}{get\+Active\+Queue}} ()
@@ -44,12 +54,8 @@ bool \mbox{\hyperlink{class_c_h_i_p_device_ae49f9f351ba18e15a8baaa7c734ee679}{re
 \begin{DoxyCompactList}\small\item\em Remove a queue from this device\textquotesingle{}s queue vector. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_c_h_i_p_device_a0647eabfa0ae2fe14b1ea95666919090}{get\+Device\+Id}} ()
 \begin{DoxyCompactList}\small\item\em Get the integer ID of this device as it appears in the Backend\textquotesingle{}s chip\+\_\+devices list. \end{DoxyCompactList}\item 
-virtual std\+::string \mbox{\hyperlink{class_c_h_i_p_device_a98cebf6120181daeeeab073832c28b7b}{get\+Name}} ()=0
+std\+::string \mbox{\hyperlink{class_c_h_i_p_device_aca3d9af44bd816743e81eaf840066928}{get\+Name}} ()
 \begin{DoxyCompactList}\small\item\em Get the device name. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_c_h_i_p_device_ab57d0ccdf88628f1851645750e9cdc1f}{reserve\+Mem}} (size\+\_\+t bytes)
-\begin{DoxyCompactList}\small\item\em Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device TODO\+: Move to Allocation\+Tracker. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_c_h_i_p_device_a75cbad24717ec1390e631f354c5fea3e}{release\+Mem\+Reservation}} (size\+\_\+t bytes)
-\begin{DoxyCompactList}\small\item\em Release some of the reserved memory. Called by free() TODO\+: Move to Allocation\+Tracker. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_c_h_i_p_device_abd7d4be48339d070b09fcf5d6270caaa}{reset}} ()=0
 \begin{DoxyCompactList}\small\item\em Destroy all allocations and reset all state on the current device in the current process. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_c_h_i_p_device_a11990aabcfa593917f152ed9614fb2fd}{get\+Attr}} (hip\+Device\+Attribute\+\_\+t attr)
@@ -81,7 +87,16 @@ size\+\_\+t \mbox{\hyperlink{class_c_h_i_p_device_adfc125b715bd7bfa8d63d684ddf65
 \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDevice\+Var}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_device_a97317260a798fc0d79d1c51c29d60f07}{get\+Global\+Var}} (const void $\ast$host\+\_\+var\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em Get the global variable. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_c_h_i_p_device_aff26bc18398f030d01f92e0ef3d69244}{register\+Function\+As\+Kernel}} (std\+::string $\ast$module\+\_\+str, const void $\ast$host\+\_\+f\+\_\+ptr, const char $\ast$host\+\_\+f\+\_\+name)
-\begin{DoxyCompactList}\small\item\em Take the module source, compile the kernels and associate the host function pointer with a kernel whose name matches host function name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Take the module source, compile the kernels and associate the host function pointer with a kernel whose name matches host function name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_device_addfa497b07b59a484fb17a37c3c424cd}\label{class_c_h_i_p_device_addfa497b07b59a484fb17a37c3c424cd}} 
+virtual \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} $\ast$ {\bfseries add\+Module} (std\+::string $\ast$module\+\_\+str)=0
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_device_ab4d1b7774f410e21bbe305503a3b9d21}\label{class_c_h_i_p_device_ab4d1b7774f410e21bbe305503a3b9d21}} 
+virtual \mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}} $\ast$ {\bfseries create\+Texture} (const hip\+Resource\+Desc $\ast$p\+Res\+Desc, const hip\+Texture\+Desc $\ast$p\+Tex\+Desc, const struct hip\+Resource\+View\+Desc $\ast$p\+Res\+View\+Desc)=0
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_device_a2057969bf46da575da3f0a439e7f787a}\label{class_c_h_i_p_device_a2057969bf46da575da3f0a439e7f787a}} 
+virtual void {\bfseries destroy\+Texture} (\mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}} $\ast$texture\+Object)=0
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -110,11 +125,8 @@ std\+::unordered\+\_\+map$<$ const void $\ast$, \mbox{\hyperlink{class_c_h_i_p_d
 \mbox{\Hypertarget{class_c_h_i_p_device_ab03330d166b8621a745583df6786c03c}\label{class_c_h_i_p_device_ab03330d166b8621a745583df6786c03c}} 
 int {\bfseries idx}
 \item 
-\mbox{\Hypertarget{class_c_h_i_p_device_a72f505d327649e6325dbee25c5d00144}\label{class_c_h_i_p_device_a72f505d327649e6325dbee25c5d00144}} 
-size\+\_\+t {\bfseries total\+\_\+used\+\_\+mem}
-\item 
-\mbox{\Hypertarget{class_c_h_i_p_device_afff08ae14824374150fdfcd303c7d7f8}\label{class_c_h_i_p_device_afff08ae14824374150fdfcd303c7d7f8}} 
-size\+\_\+t {\bfseries max\+\_\+used\+\_\+mem}
+\mbox{\Hypertarget{class_c_h_i_p_device_a0f173c29ce72a9f699ef8765fe8efcc5}\label{class_c_h_i_p_device_a0f173c29ce72a9f699ef8765fe8efcc5}} 
+\mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocation\+Tracker}} $\ast$ {\bfseries allocation\+\_\+tracker} = nullptr
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -125,9 +137,6 @@ std\+::string {\bfseries device\+\_\+name}
 \mbox{\Hypertarget{class_c_h_i_p_device_ac7cdfc001a8852c0e69888c256254506}\label{class_c_h_i_p_device_ac7cdfc001a8852c0e69888c256254506}} 
 std\+::mutex {\bfseries mtx}
 \item 
-\mbox{\Hypertarget{class_c_h_i_p_device_a39eb5834bfe4c36bac72e7a2415723fa}\label{class_c_h_i_p_device_a39eb5834bfe4c36bac72e7a2415723fa}} 
-std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ $>$ {\bfseries chip\+\_\+kernels}
-\item 
 \mbox{\Hypertarget{class_c_h_i_p_device_a333873706d2a7d547871a45613ae5e38}\label{class_c_h_i_p_device_a333873706d2a7d547871a45613ae5e38}} 
 \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$ {\bfseries ctx}
 \item 
@@ -137,11 +146,20 @@ std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ $>$ {\
 \mbox{\Hypertarget{class_c_h_i_p_device_a1fae7b58c18f748c8cab910ba6890e1e}\label{class_c_h_i_p_device_a1fae7b58c18f748c8cab910ba6890e1e}} 
 int {\bfseries active\+\_\+queue\+\_\+id} = 0
 \item 
+\mbox{\Hypertarget{class_c_h_i_p_device_a1ae79160adaeaaa4fd68c58677346526}\label{class_c_h_i_p_device_a1ae79160adaeaaa4fd68c58677346526}} 
+std\+::once\+\_\+flag {\bfseries props\+Populated}
+\item 
 \mbox{\Hypertarget{class_c_h_i_p_device_a63a5a19d95283d5e2527ecc935bac6cb}\label{class_c_h_i_p_device_a63a5a19d95283d5e2527ecc935bac6cb}} 
 hip\+Device\+Attribute\+\_\+t {\bfseries attrs}
 \item 
 \mbox{\Hypertarget{class_c_h_i_p_device_a6aa417902885d6b15c26c6fc69aad547}\label{class_c_h_i_p_device_a6aa417902885d6b15c26c6fc69aad547}} 
 hip\+Device\+Prop\+\_\+t {\bfseries hip\+\_\+device\+\_\+props}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_device_a0b1fe6033be1fc9717c30fcc20db0d7a}\label{class_c_h_i_p_device_a0b1fe6033be1fc9717c30fcc20db0d7a}} 
+size\+\_\+t {\bfseries Total\+Used\+Mem}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_device_a797a22a51f4796fc8bd96e15b1ac28a0}\label{class_c_h_i_p_device_a797a22a51f4796fc8bd96e15b1ac28a0}} 
+size\+\_\+t {\bfseries Max\+Used\+Mem}
 \end{DoxyCompactItemize}
 
 
@@ -152,8 +170,23 @@ Compute device class.
 \mbox{\Hypertarget{class_c_h_i_p_device_a343592eef975d362baac0006456e8337}\label{class_c_h_i_p_device_a343592eef975d362baac0006456e8337}} 
 \index{CHIPDevice@{CHIPDevice}!addQueue@{addQueue}}
 \index{addQueue@{addQueue}!CHIPDevice@{CHIPDevice}}
-\doxysubsubsection{\texorpdfstring{addQueue()}{addQueue()}}
+\doxysubsubsection{\texorpdfstring{addQueue()}{addQueue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void CHIPDevice\+::add\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$}]{chip\+\_\+queue\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Add a queue to this device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chip\+\_\+queue\+\_\+} & \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_h_i_p_device_acd1d6b81696a43296a485647ec07f596}\label{class_c_h_i_p_device_acd1d6b81696a43296a485647ec07f596}} 
+\index{CHIPDevice@{CHIPDevice}!addQueue@{addQueue}}
+\index{addQueue@{addQueue}!CHIPDevice@{CHIPDevice}}
+\doxysubsubsection{\texorpdfstring{addQueue()}{addQueue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ CHIPDevice\+::add\+Queue (\begin{DoxyParamCaption}\item[{unsigned int}]{flags,  }\item[{int}]{priority }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -169,6 +202,10 @@ Construct an additional queue for this device.
 \begin{DoxyReturn}{Returns}
 CHIPQueue$\ast$ pointer to the newly created queue (can also be found in chip\+\_\+queues vector) 
 \end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_c_h_i_p_device_level0_aabd471a3cbb392716da624494de90f51}{CHIPDevice\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_device_open_c_l_acea38f2032eb4355363c1c939638c1df}{CHIPDevice\+Open\+CL}}.
+
 \mbox{\Hypertarget{class_c_h_i_p_device_a375f7ce1038f3bfc9c3d98bc4ee18c6d}\label{class_c_h_i_p_device_a375f7ce1038f3bfc9c3d98bc4ee18c6d}} 
 \index{CHIPDevice@{CHIPDevice}!copyDeviceProperties@{copyDeviceProperties}}
 \index{copyDeviceProperties@{copyDeviceProperties}!CHIPDevice@{CHIPDevice}}
@@ -321,11 +358,11 @@ Get the global variable.
 \begin{DoxyReturn}{Returns}
 CHIPDevice\+Var$\ast$ if not found returns nullptr 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_device_a46cae46416b74f4b0f912351503f450c}\label{class_c_h_i_p_device_a46cae46416b74f4b0f912351503f450c}} 
+\mbox{\Hypertarget{class_c_h_i_p_device_aed8c7dfb1b40e78260cb4011cc0509dd}\label{class_c_h_i_p_device_aed8c7dfb1b40e78260cb4011cc0509dd}} 
 \index{CHIPDevice@{CHIPDevice}!getKernels@{getKernels}}
 \index{getKernels@{getKernels}!CHIPDevice@{CHIPDevice}}
 \doxysubsubsection{\texorpdfstring{getKernels()}{getKernels()}}
-{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ $>$ \& CHIPDevice\+::get\+Kernels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ $>$ CHIPDevice\+::get\+Kernels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -334,11 +371,24 @@ Get the Kernels object.
 \begin{DoxyReturn}{Returns}
 std\+::vector$<$\+CHIPKernel$\ast$$>$\& 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_device_a98cebf6120181daeeeab073832c28b7b}\label{class_c_h_i_p_device_a98cebf6120181daeeeab073832c28b7b}} 
+\mbox{\Hypertarget{class_c_h_i_p_device_a0381200acd5010c1657c6c39c4c25632}\label{class_c_h_i_p_device_a0381200acd5010c1657c6c39c4c25632}} 
+\index{CHIPDevice@{CHIPDevice}!getModules@{getModules}}
+\index{getModules@{getModules}!CHIPDevice@{CHIPDevice}}
+\doxysubsubsection{\texorpdfstring{getModules()}{getModules()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} $\ast$ $>$ \& CHIPDevice\+::get\+Modules (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Modules object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+CHIPModule$\ast$$>$\& 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_h_i_p_device_aca3d9af44bd816743e81eaf840066928}\label{class_c_h_i_p_device_aca3d9af44bd816743e81eaf840066928}} 
 \index{CHIPDevice@{CHIPDevice}!getName@{getName}}
 \index{getName@{getName}!CHIPDevice@{CHIPDevice}}
 \doxysubsubsection{\texorpdfstring{getName()}{getName()}}
-{\footnotesize\ttfamily virtual std\+::string CHIPDevice\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily std\+::string CHIPDevice\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -347,10 +397,6 @@ Get the device name.
 \begin{DoxyReturn}{Returns}
 std\+::string 
 \end{DoxyReturn}
-
-
-Implemented in \mbox{\hyperlink{class_c_h_i_p_device_level0_a9476b6ed30ddda6dba12c30dfc206157}{CHIPDevice\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_device_open_c_l_a5fa748efe4b61972f968275d78a17893}{CHIPDevice\+Open\+CL}}.
-
 \mbox{\Hypertarget{class_c_h_i_p_device_aa293773bba48a9bf66b2fc02f0b7e7f8}\label{class_c_h_i_p_device_aa293773bba48a9bf66b2fc02f0b7e7f8}} 
 \index{CHIPDevice@{CHIPDevice}!getPeerAccess@{getPeerAccess}}
 \index{getPeerAccess@{getPeerAccess}!CHIPDevice@{CHIPDevice}}
@@ -450,11 +496,11 @@ true
 
 false 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_device_ab8fb4cdbe080397c5639d2d742c33f2b}\label{class_c_h_i_p_device_ab8fb4cdbe080397c5639d2d742c33f2b}} 
-\index{CHIPDevice@{CHIPDevice}!populateDeviceProperties@{populateDeviceProperties}}
-\index{populateDeviceProperties@{populateDeviceProperties}!CHIPDevice@{CHIPDevice}}
-\doxysubsubsection{\texorpdfstring{populateDeviceProperties()}{populateDeviceProperties()}}
-{\footnotesize\ttfamily virtual void CHIPDevice\+::populate\+Device\+Properties (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+\mbox{\Hypertarget{class_c_h_i_p_device_aa7bfa85e318cda92cfe5c5cc394f6eca}\label{class_c_h_i_p_device_aa7bfa85e318cda92cfe5c5cc394f6eca}} 
+\index{CHIPDevice@{CHIPDevice}!populateDeviceProperties\_@{populateDeviceProperties\_}}
+\index{populateDeviceProperties\_@{populateDeviceProperties\_}!CHIPDevice@{CHIPDevice}}
+\doxysubsubsection{\texorpdfstring{populateDeviceProperties\_()}{populateDeviceProperties\_()}}
+{\footnotesize\ttfamily virtual void CHIPDevice\+::populate\+Device\+Properties\+\_\+ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -462,7 +508,7 @@ Use a backend to populate device properties such as memory available, frequencie
 
 
 
-Implemented in \mbox{\hyperlink{class_c_h_i_p_device_level0_abaf4099949c7c45c133d16feeb37956c}{CHIPDevice\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_device_open_c_l_af4a2ab7d0d56063710d875ab2505755f}{CHIPDevice\+Open\+CL}}.
+Implemented in \mbox{\hyperlink{class_c_h_i_p_device_level0_a76728b527fe3f8570a9f6402e1a0ee52}{CHIPDevice\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_device_open_c_l_a7baeebbfab0342cb95a0df689a6af50b}{CHIPDevice\+Open\+CL}}.
 
 \mbox{\Hypertarget{class_c_h_i_p_device_aff26bc18398f030d01f92e0ef3d69244}\label{class_c_h_i_p_device_aff26bc18398f030d01f92e0ef3d69244}} 
 \index{CHIPDevice@{CHIPDevice}!registerFunctionAsKernel@{registerFunctionAsKernel}}
@@ -483,26 +529,6 @@ Take the module source, compile the kernels and associate the host function poin
 {\em host\+\_\+f\+\_\+name} & host function name \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_c_h_i_p_device_a75cbad24717ec1390e631f354c5fea3e}\label{class_c_h_i_p_device_a75cbad24717ec1390e631f354c5fea3e}} 
-\index{CHIPDevice@{CHIPDevice}!releaseMemReservation@{releaseMemReservation}}
-\index{releaseMemReservation@{releaseMemReservation}!CHIPDevice@{CHIPDevice}}
-\doxysubsubsection{\texorpdfstring{releaseMemReservation()}{releaseMemReservation()}}
-{\footnotesize\ttfamily bool CHIPDevice\+::release\+Mem\+Reservation (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{bytes }\end{DoxyParamCaption})}
-
-
-
-Release some of the reserved memory. Called by free() TODO\+: Move to Allocation\+Tracker. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em bytes} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true 
-
-false 
-\end{DoxyReturn}
 \mbox{\Hypertarget{class_c_h_i_p_device_ae49f9f351ba18e15a8baaa7c734ee679}\label{class_c_h_i_p_device_ae49f9f351ba18e15a8baaa7c734ee679}} 
 \index{CHIPDevice@{CHIPDevice}!removeQueue@{removeQueue}}
 \index{removeQueue@{removeQueue}!CHIPDevice@{CHIPDevice}}
@@ -522,26 +548,6 @@ Remove a queue from this device\textquotesingle{}s queue vector.
 true 
 
 false 
-\end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_device_ab57d0ccdf88628f1851645750e9cdc1f}\label{class_c_h_i_p_device_ab57d0ccdf88628f1851645750e9cdc1f}} 
-\index{CHIPDevice@{CHIPDevice}!reserveMem@{reserveMem}}
-\index{reserveMem@{reserveMem}!CHIPDevice@{CHIPDevice}}
-\doxysubsubsection{\texorpdfstring{reserveMem()}{reserveMem()}}
-{\footnotesize\ttfamily bool CHIPDevice\+::reserve\+Mem (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{bytes }\end{DoxyParamCaption})}
-
-
-
-Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device TODO\+: Move to Allocation\+Tracker. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em bytes} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true Reservation successful 
-
-false Not enough available memory for reservation of this size. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_c_h_i_p_device_abd7d4be48339d070b09fcf5d6270caaa}\label{class_c_h_i_p_device_abd7d4be48339d070b09fcf5d6270caaa}} 
 \index{CHIPDevice@{CHIPDevice}!reset@{reset}}
@@ -645,5 +651,5 @@ Map host variable address to device pointer and size for statically loaded globa
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
-/\+Users/pvelesko/local/\+HIPxx/src/CHIPBackend.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/CHIPBackend.\+cc\end{DoxyCompactItemize}

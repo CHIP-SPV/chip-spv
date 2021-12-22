@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -71,7 +71,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Contains kernel arguments and a queue on which to execute. Prior to kernel launch, the arguments are setup via <a class="el" href="class_c_h_i_p_backend.html#a9d802a4ed8ee1c36996ea05d346bdb1d" title="Configure an upcoming kernel call.">CHIPBackend::configureCall()</a>. Because of this, we get the kernel last so the kernel so the <a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9" title="Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.">launch()</a> takes a kernel argument as opposed to queue receiving a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> containing the kernel and arguments.  
+<p>Contains kernel arguments and a queue on which to execute. Prior to kernel launch, the arguments are setup via <a class="el" href="class_c_h_i_p_backend.html#a9d802a4ed8ee1c36996ea05d346bdb1d" title="Configure an upcoming kernel call.">CHIPBackend::configureCall()</a>. Because of this, we get the kernel last so the kernel so the launch() takes a kernel argument as opposed to queue receiving a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> containing the kernel and arguments.  
  <a href="class_c_h_i_p_exec_item.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a>&gt;</code></p>
@@ -104,20 +104,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0ab70870d2c58e6fa2a3e03762a5134a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a0ab70870d2c58e6fa2a3e03762a5134a">getQueue</a> ()</td></tr>
 <tr class="memdesc:a0ab70870d2c58e6fa2a3e03762a5134a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Queue object.  <a href="class_c_h_i_p_exec_item.html#a0ab70870d2c58e6fa2a3e03762a5134a">More...</a><br /></td></tr>
 <tr class="separator:a0ab70870d2c58e6fa2a3e03762a5134a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59740e00d1f2d40b25e0368ff91440c"><td class="memItemLeft" align="right" valign="top"><a id="ab59740e00d1f2d40b25e0368ff91440c" name="ab59740e00d1f2d40b25e0368ff91440c"></a>
+std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getArgData</b> ()</td></tr>
+<tr class="separator:ab59740e00d1f2d40b25e0368ff91440c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa77c523d9cd1b910bbbc09f1099b2f5d"><td class="memItemLeft" align="right" valign="top">dim3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#aa77c523d9cd1b910bbbc09f1099b2f5d">getGrid</a> ()</td></tr>
 <tr class="memdesc:aa77c523d9cd1b910bbbc09f1099b2f5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Grid object.  <a href="class_c_h_i_p_exec_item.html#aa77c523d9cd1b910bbbc09f1099b2f5d">More...</a><br /></td></tr>
 <tr class="separator:aa77c523d9cd1b910bbbc09f1099b2f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7cd51c77750bf9f159a1cd6e9fa64e8"><td class="memItemLeft" align="right" valign="top">dim3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#aa7cd51c77750bf9f159a1cd6e9fa64e8">getBlock</a> ()</td></tr>
 <tr class="memdesc:aa7cd51c77750bf9f159a1cd6e9fa64e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Block object.  <a href="class_c_h_i_p_exec_item.html#aa7cd51c77750bf9f159a1cd6e9fa64e8">More...</a><br /></td></tr>
 <tr class="separator:aa7cd51c77750bf9f159a1cd6e9fa64e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14d1a06fed7ed4204cd3a66b50ca0eea"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a14d1a06fed7ed4204cd3a66b50ca0eea">getSharedMem</a> ()</td></tr>
+<tr class="memdesc:a14d1a06fed7ed4204cd3a66b50ca0eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the SharedMem.  <a href="class_c_h_i_p_exec_item.html#a14d1a06fed7ed4204cd3a66b50ca0eea">More...</a><br /></td></tr>
+<tr class="separator:a14d1a06fed7ed4204cd3a66b50ca0eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab095e25ece8b9edba9afee4db705f68e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#ab095e25ece8b9edba9afee4db705f68e">setArg</a> (const void *arg, size_t size, size_t offset)</td></tr>
 <tr class="memdesc:ab095e25ece8b9edba9afee4db705f68e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a single argument. gets called by hipSetupArgument calls to which are emitted by hip-clang.  <a href="class_c_h_i_p_exec_item.html#ab095e25ece8b9edba9afee4db705f68e">More...</a><br /></td></tr>
 <tr class="separator:ab095e25ece8b9edba9afee4db705f68e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bc7d3cb9c57e4843db0dd3601f09da9"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9">launch</a> (<a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> *Kernel)</td></tr>
-<tr class="memdesc:a9bc7d3cb9c57e4843db0dd3601f09da9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.  <a href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9">More...</a><br /></td></tr>
-<tr class="separator:a9bc7d3cb9c57e4843db0dd3601f09da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a662d2529f1b5aa74a9b530d1dc88edb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a662d2529f1b5aa74a9b530d1dc88edb5">setArgPointer</a> (void **args)</td></tr>
+<tr class="memdesc:a662d2529f1b5aa74a9b530d1dc88edb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Arg Pointer object for launching kernels via new HIP API.  <a href="class_c_h_i_p_exec_item.html#a662d2529f1b5aa74a9b530d1dc88edb5">More...</a><br /></td></tr>
+<tr class="separator:a662d2529f1b5aa74a9b530d1dc88edb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bdab25f8dd647ea0ba0db925b2d21f"><td class="memItemLeft" align="right" valign="top"><a id="ad1bdab25f8dd647ea0ba0db925b2d21f" name="ad1bdab25f8dd647ea0ba0db925b2d21f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setupAllArgs</b> ()</td></tr>
+<tr class="memdesc:ad1bdab25f8dd647ea0ba0db925b2d21f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the kernel arguments via backend API calls. Called after all the arugments are setup either via hipSetupArg() (old HIP kernel launch API) Or after hipLaunchKernel (new HIP kernel launch API) <br /></td></tr>
+<tr class="separator:ad1bdab25f8dd647ea0ba0db925b2d21f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f2b77c74962ea43bc49349e8639257a"><td class="memItemLeft" align="right" valign="top">hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_exec_item.html#a4f2b77c74962ea43bc49349e8639257a">launchByHostPtr</a> (const void *hostPtr)</td></tr>
-<tr class="memdesc:a4f2b77c74962ea43bc49349e8639257a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch a kernel associated with a host function pointer. Looks up the <a class="el" href="class_c_h_i_p_kernel.html" title="Contains information about the function on the host and device.">CHIPKernel</a> associated with this pointer and calls <a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9" title="Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.">launch()</a>  <a href="class_c_h_i_p_exec_item.html#a4f2b77c74962ea43bc49349e8639257a">More...</a><br /></td></tr>
+<tr class="memdesc:a4f2b77c74962ea43bc49349e8639257a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch a kernel associated with a host function pointer. Looks up the <a class="el" href="class_c_h_i_p_kernel.html" title="Contains information about the function on the host and device.">CHIPKernel</a> associated with this pointer and calls launch()  <a href="class_c_h_i_p_exec_item.html#a4f2b77c74962ea43bc49349e8639257a">More...</a><br /></td></tr>
 <tr class="separator:a4f2b77c74962ea43bc49349e8639257a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -146,9 +156,12 @@ dim3&#160;</td><td class="memItemRight" valign="bottom"><b>block_dim</b></td></t
 <tr class="memitem:a5015853b029a5b463107ba6f68206b9e"><td class="memItemLeft" align="right" valign="top"><a id="a5015853b029a5b463107ba6f68206b9e" name="a5015853b029a5b463107ba6f68206b9e"></a>
 <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>chip_queue</b></td></tr>
 <tr class="separator:a5015853b029a5b463107ba6f68206b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4a3e6299040a203f83c24bd93624e21"><td class="memItemLeft" align="right" valign="top"><a id="ae4a3e6299040a203f83c24bd93624e21" name="ae4a3e6299040a203f83c24bd93624e21"></a>
+void **&#160;</td><td class="memItemRight" valign="bottom"><b>ArgsPointer</b> = nullptr</td></tr>
+<tr class="separator:ae4a3e6299040a203f83c24bd93624e21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Contains kernel arguments and a queue on which to execute. Prior to kernel launch, the arguments are setup via <a class="el" href="class_c_h_i_p_backend.html#a9d802a4ed8ee1c36996ea05d346bdb1d" title="Configure an upcoming kernel call.">CHIPBackend::configureCall()</a>. Because of this, we get the kernel last so the kernel so the <a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9" title="Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.">launch()</a> takes a kernel argument as opposed to queue receiving a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> containing the kernel and arguments. </p>
+<div class="textblock"><p >Contains kernel arguments and a queue on which to execute. Prior to kernel launch, the arguments are setup via <a class="el" href="class_c_h_i_p_backend.html#a9d802a4ed8ee1c36996ea05d346bdb1d" title="Configure an upcoming kernel call.">CHIPBackend::configureCall()</a>. Because of this, we get the kernel last so the kernel so the launch() takes a kernel argument as opposed to queue receiving a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> containing the kernel and arguments. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad240eeebfcca8d53597798e3399971f8" name="ad240eeebfcca8d53597798e3399971f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad240eeebfcca8d53597798e3399971f8">&#9670;&nbsp;</a></span>CHIPExecItem()</h2>
@@ -282,40 +295,23 @@ dim3&#160;</td><td class="memItemRight" valign="bottom"><b>block_dim</b></td></t
 
 </div>
 </div>
-<a id="a9bc7d3cb9c57e4843db0dd3601f09da9" name="a9bc7d3cb9c57e4843db0dd3601f09da9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bc7d3cb9c57e4843db0dd3601f09da9">&#9670;&nbsp;</a></span>launch()</h2>
+<a id="a14d1a06fed7ed4204cd3a66b50ca0eea" name="a14d1a06fed7ed4204cd3a66b50ca0eea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14d1a06fed7ed4204cd3a66b50ca0eea">&#9670;&nbsp;</a></span>getSharedMem()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">hipError_t CHIPExecItem::launch </td>
+          <td class="memname">size_t CHIPExecItem::getSharedMem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> *&#160;</td>
-          <td class="paramname"><em>Kernel</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Kernel</td><td>kernel which is to be launched </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>hipError_t possible values: hipSuccess, hipErrorLaunchFailure </dd></dl>
-
-<p>Reimplemented in <a class="el" href="class_c_h_i_p_exec_item_open_c_l.html#a0dfdbe2360d5106f4288b9e4711ba93b">CHIPExecItemOpenCL</a>.</p>
+<p>Get the SharedMem. </p>
+<dl class="section return"><dt>Returns</dt><dd>size_t </dd></dl>
 
 </div>
 </div>
@@ -335,7 +331,7 @@ dim3&#160;</td><td class="memItemRight" valign="bottom"><b>block_dim</b></td></t
       </table>
 </div><div class="memdoc">
 
-<p>Launch a kernel associated with a host function pointer. Looks up the <a class="el" href="class_c_h_i_p_kernel.html" title="Contains information about the function on the host and device.">CHIPKernel</a> associated with this pointer and calls <a class="el" href="class_c_h_i_p_exec_item.html#a9bc7d3cb9c57e4843db0dd3601f09da9" title="Submit a kernel to the associated queue for execution. chip_queue must be set prior to this call.">launch()</a> </p>
+<p>Launch a kernel associated with a host function pointer. Looks up the <a class="el" href="class_c_h_i_p_kernel.html" title="Contains information about the function on the host and device.">CHIPKernel</a> associated with this pointer and calls launch() </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">hostPtr</td><td>pointer to the host function </td></tr>
@@ -390,9 +386,44 @@ dim3&#160;</td><td class="memItemRight" valign="bottom"><b>block_dim</b></td></t
 
 </div>
 </div>
+<a id="a662d2529f1b5aa74a9b530d1dc88edb5" name="a662d2529f1b5aa74a9b530d1dc88edb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662d2529f1b5aa74a9b530d1dc88edb5">&#9670;&nbsp;</a></span>setArgPointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CHIPExecItem::setArgPointer </td>
+          <td>(</td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the Arg Pointer object for launching kernels via new HIP API. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>args pointer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/Level0/Level0Backend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

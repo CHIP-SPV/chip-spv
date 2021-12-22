@@ -1,0 +1,31 @@
+\hypertarget{fmt_8h_source}{}\doxysection{fmt.\+h}
+\label{fmt_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/fmt.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/fmt.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2016-\/2018 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{//}}
+\DoxyCodeLine{9 \textcolor{comment}{// Include a bundled header-\/only copy of fmtlib or an external one.}}
+\DoxyCodeLine{10 \textcolor{comment}{// By default spdlog include its own copy.}}
+\DoxyCodeLine{11 \textcolor{comment}{//}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#if !defined(SPDLOG\_FMT\_EXTERNAL)}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#ifndef FMT\_HEADER\_ONLY}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define FMT\_HEADER\_ONLY}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef FMT\_USE\_WINDOWS\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FMT\_USE\_WINDOWS\_H 0}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}bundled/core.h"{}}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}bundled/format.h"{}}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#else }\textcolor{comment}{// external fmtlib}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <fmt/core.h>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <fmt/format.h>}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

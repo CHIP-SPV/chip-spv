@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -92,6 +92,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac7a16cdbdb05de96ea3fa04b4f625d33"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_kernel.html#ac7a16cdbdb05de96ea3fa04b4f625d33">getName</a> ()</td></tr>
 <tr class="memdesc:ac7a16cdbdb05de96ea3fa04b4f625d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Name object.  <a href="class_c_h_i_p_kernel.html#ac7a16cdbdb05de96ea3fa04b4f625d33">More...</a><br /></td></tr>
 <tr class="separator:ac7a16cdbdb05de96ea3fa04b4f625d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65fc718337be4853774fdc8e6f86f5ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_kernel.html#a65fc718337be4853774fdc8e6f86f5ba">getFuncInfo</a> ()</td></tr>
+<tr class="memdesc:a65fc718337be4853774fdc8e6f86f5ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Func Info object.  <a href="class_c_h_i_p_kernel.html#a65fc718337be4853774fdc8e6f86f5ba">More...</a><br /></td></tr>
+<tr class="separator:a65fc718337be4853774fdc8e6f86f5ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a15ce1cd2760e9e28006ff0e9dcf740"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_kernel.html#a7a15ce1cd2760e9e28006ff0e9dcf740">getHostPtr</a> ()</td></tr>
 <tr class="memdesc:a7a15ce1cd2760e9e28006ff0e9dcf740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the associated host pointer to a host function.  <a href="class_c_h_i_p_kernel.html#a7a15ce1cd2760e9e28006ff0e9dcf740">More...</a><br /></td></tr>
 <tr class="separator:a7a15ce1cd2760e9e28006ff0e9dcf740"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,10 +113,10 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a097d99fa464626f26bfdc0e14254820f"><td class="memItemLeft" align="right" valign="top"><a id="a097d99fa464626f26bfdc0e14254820f" name="a097d99fa464626f26bfdc0e14254820f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPKernel</b> ()=default</td></tr>
-<tr class="memdesc:a097d99fa464626f26bfdc0e14254820f"><td class="mdescLeft">&#160;</td><td class="mdescRight">hidden default constructor. Only derived type constructor should be called. <br /></td></tr>
-<tr class="separator:a097d99fa464626f26bfdc0e14254820f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f6a315e2c38973f180b77558aae5192"><td class="memItemLeft" align="right" valign="top"><a id="a8f6a315e2c38973f180b77558aae5192" name="a8f6a315e2c38973f180b77558aae5192"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPKernel</b> (std::string host_f_name_, <a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *func_info_)</td></tr>
+<tr class="memdesc:a8f6a315e2c38973f180b77558aae5192"><td class="mdescLeft">&#160;</td><td class="mdescRight">hidden default constructor. Only derived type constructor should be called. <br /></td></tr>
+<tr class="separator:a8f6a315e2c38973f180b77558aae5192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -129,6 +132,9 @@ const void *&#160;</td><td class="memItemRight" valign="bottom"><b>host_f_ptr</b
 const void *&#160;</td><td class="memItemRight" valign="bottom"><b>dev_f_ptr</b></td></tr>
 <tr class="memdesc:a3fc76a9d6028b090652482da4a06be69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the device function. <br /></td></tr>
 <tr class="separator:a3fc76a9d6028b090652482da4a06be69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8af9e7c17ddfc0e7cc351b9d703898"><td class="memItemLeft" align="right" valign="top"><a id="a8b8af9e7c17ddfc0e7cc351b9d703898" name="a8b8af9e7c17ddfc0e7cc351b9d703898"></a>
+<a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>func_info</b></td></tr>
+<tr class="separator:a8b8af9e7c17ddfc0e7cc351b9d703898"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Contains information about the function on the host and device. </p>
@@ -150,6 +156,26 @@ const void *&#160;</td><td class="memItemRight" valign="bottom"><b>dev_f_ptr</b>
 
 <p>Get the associated funciton pointer on the device. </p>
 <dl class="section return"><dt>Returns</dt><dd>const void* </dd></dl>
+
+</div>
+</div>
+<a id="a65fc718337be4853774fdc8e6f86f5ba" name="a65fc718337be4853774fdc8e6f86f5ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65fc718337be4853774fdc8e6f86f5ba">&#9670;&nbsp;</a></span>getFuncInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> * CHIPKernel::getFuncInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Func Info object. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a>&amp; </dd></dl>
 
 </div>
 </div>
@@ -257,8 +283,8 @@ const void *&#160;</td><td class="memItemRight" valign="bottom"><b>dev_f_ptr</b>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

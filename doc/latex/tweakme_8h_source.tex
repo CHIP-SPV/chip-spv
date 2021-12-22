@@ -1,0 +1,109 @@
+\hypertarget{tweakme_8h_source}{}\doxysection{tweakme.\+h}
+\label{tweakme_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/tweakme.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/tweakme.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{// Edit this file to squeeze more performance, and to customize supported}}
+\DoxyCodeLine{11 \textcolor{comment}{// features}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{14 \textcolor{comment}{}}
+\DoxyCodeLine{16 \textcolor{comment}{// Under Linux, the much faster CLOCK\_REALTIME\_COARSE clock can be used.}}
+\DoxyCodeLine{17 \textcolor{comment}{// This clock is less accurate -\/ can be off by dozens of millis -\/ depending on}}
+\DoxyCodeLine{18 \textcolor{comment}{// the kernel HZ.}}
+\DoxyCodeLine{19 \textcolor{comment}{// Uncomment to use it instead of the regular clock.}}
+\DoxyCodeLine{20 \textcolor{comment}{//}}
+\DoxyCodeLine{21 \textcolor{comment}{// \#define SPDLOG\_CLOCK\_COARSE}}
+\DoxyCodeLine{23 \textcolor{comment}{}}
+\DoxyCodeLine{25 \textcolor{comment}{// Uncomment if date/time logging is not needed and never appear in the log}}
+\DoxyCodeLine{26 \textcolor{comment}{// pattern.}}
+\DoxyCodeLine{27 \textcolor{comment}{// This will prevent spdlog from querying the clock on each log call.}}
+\DoxyCodeLine{28 \textcolor{comment}{//}}
+\DoxyCodeLine{29 \textcolor{comment}{// WARNING: If the log pattern contains any date/time while this flag is on, the}}
+\DoxyCodeLine{30 \textcolor{comment}{// result is undefined.}}
+\DoxyCodeLine{31 \textcolor{comment}{//          You must set new pattern(spdlog::set\_pattern(.."{}) without any}}
+\DoxyCodeLine{32 \textcolor{comment}{//          date/time in it}}
+\DoxyCodeLine{33 \textcolor{comment}{//}}
+\DoxyCodeLine{34 \textcolor{comment}{// \#define SPDLOG\_NO\_DATETIME}}
+\DoxyCodeLine{36 \textcolor{comment}{}}
+\DoxyCodeLine{38 \textcolor{comment}{// Uncomment if thread id logging is not needed (i.e. no \%t in the log pattern).}}
+\DoxyCodeLine{39 \textcolor{comment}{// This will prevent spdlog from querying the thread id on each log call.}}
+\DoxyCodeLine{40 \textcolor{comment}{//}}
+\DoxyCodeLine{41 \textcolor{comment}{// WARNING: If the log pattern contains thread id (i.e, \%t) while this flag is}}
+\DoxyCodeLine{42 \textcolor{comment}{// on, the result is undefined.}}
+\DoxyCodeLine{43 \textcolor{comment}{//}}
+\DoxyCodeLine{44 \textcolor{comment}{// \#define SPDLOG\_NO\_THREAD\_ID}}
+\DoxyCodeLine{46 \textcolor{comment}{}}
+\DoxyCodeLine{48 \textcolor{comment}{// Uncomment to prevent spdlog from using thread local storage.}}
+\DoxyCodeLine{49 \textcolor{comment}{//}}
+\DoxyCodeLine{50 \textcolor{comment}{// WARNING: if your program forks, UNCOMMENT this flag to prevent undefined}}
+\DoxyCodeLine{51 \textcolor{comment}{// thread ids in the children logs.}}
+\DoxyCodeLine{52 \textcolor{comment}{//}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define SPDLOG\_NO\_TLS}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{57 \textcolor{comment}{// Uncomment if logger name logging is not needed.}}
+\DoxyCodeLine{58 \textcolor{comment}{// This will prevent spdlog from copying the logger name on each log call.}}
+\DoxyCodeLine{59 \textcolor{comment}{//}}
+\DoxyCodeLine{60 \textcolor{comment}{// \#define SPDLOG\_NO\_NAME}}
+\DoxyCodeLine{62 \textcolor{comment}{}}
+\DoxyCodeLine{64 \textcolor{comment}{// Uncomment to enable the SPDLOG\_DEBUG/SPDLOG\_TRACE macros.}}
+\DoxyCodeLine{65 \textcolor{comment}{//}}
+\DoxyCodeLine{66 \textcolor{comment}{// \#define SPDLOG\_DEBUG\_ON}}
+\DoxyCodeLine{67 \textcolor{comment}{// \#define SPDLOG\_TRACE\_ON}}
+\DoxyCodeLine{69 \textcolor{comment}{}}
+\DoxyCodeLine{71 \textcolor{comment}{// Uncomment to avoid spdlog's usage of atomic log levels}}
+\DoxyCodeLine{72 \textcolor{comment}{// Use only if your code never modifies a logger's log levels concurrently by}}
+\DoxyCodeLine{73 \textcolor{comment}{// different threads.}}
+\DoxyCodeLine{74 \textcolor{comment}{//}}
+\DoxyCodeLine{75 \textcolor{comment}{// \#define SPDLOG\_NO\_ATOMIC\_LEVELS}}
+\DoxyCodeLine{77 \textcolor{comment}{}}
+\DoxyCodeLine{79 \textcolor{comment}{// Uncomment to enable usage of wchar\_t for file names on Windows.}}
+\DoxyCodeLine{80 \textcolor{comment}{//}}
+\DoxyCodeLine{81 \textcolor{comment}{// \#define SPDLOG\_WCHAR\_FILENAMES}}
+\DoxyCodeLine{83 \textcolor{comment}{}}
+\DoxyCodeLine{85 \textcolor{comment}{// Uncomment to override default eol ("{}\(\backslash\)n"{} or "{}\(\backslash\)r\(\backslash\)n"{} under Linux/Windows)}}
+\DoxyCodeLine{86 \textcolor{comment}{//}}
+\DoxyCodeLine{87 \textcolor{comment}{// \#define SPDLOG\_EOL "{};-\/)\(\backslash\)n"{}}}
+\DoxyCodeLine{89 \textcolor{comment}{}}
+\DoxyCodeLine{91 \textcolor{comment}{// Uncomment to use your own copy of the fmt library instead of spdlog's copy.}}
+\DoxyCodeLine{92 \textcolor{comment}{// In this case spdlog will try to include <fmt/format.h> so set your -\/I flag}}
+\DoxyCodeLine{93 \textcolor{comment}{// accordingly.}}
+\DoxyCodeLine{94 \textcolor{comment}{//}}
+\DoxyCodeLine{95 \textcolor{comment}{// \#define SPDLOG\_FMT\_EXTERNAL}}
+\DoxyCodeLine{97 \textcolor{comment}{}}
+\DoxyCodeLine{99 \textcolor{comment}{// Uncomment to enable wchar\_t support (convert to utf8)}}
+\DoxyCodeLine{100 \textcolor{comment}{//}}
+\DoxyCodeLine{101 \textcolor{comment}{// \#define SPDLOG\_WCHAR\_TO\_UTF8\_SUPPORT}}
+\DoxyCodeLine{103 \textcolor{comment}{}}
+\DoxyCodeLine{105 \textcolor{comment}{// Uncomment to prevent child processes from inheriting log file descriptors}}
+\DoxyCodeLine{106 \textcolor{comment}{//}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#define SPDLOG\_PREVENT\_CHILD\_FD}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{111 \textcolor{comment}{// Uncomment to enable message counting feature.}}
+\DoxyCodeLine{112 \textcolor{comment}{// Use the \%i in the logger pattern to display log message sequence id.}}
+\DoxyCodeLine{113 \textcolor{comment}{//}}
+\DoxyCodeLine{114 \textcolor{comment}{// \#define SPDLOG\_ENABLE\_MESSAGE\_COUNTER}}
+\DoxyCodeLine{116 \textcolor{comment}{}}
+\DoxyCodeLine{118 \textcolor{comment}{// Uncomment to customize level names (e.g. "{}MT TRACE"{})}}
+\DoxyCodeLine{119 \textcolor{comment}{//}}
+\DoxyCodeLine{120 \textcolor{comment}{// \#define SPDLOG\_LEVEL\_NAMES \{ "{}MY TRACE"{}, "{}MY DEBUG"{}, "{}MY INFO"{}, "{}MY WARNING"{},}}
+\DoxyCodeLine{121 \textcolor{comment}{// "{}MY ERROR"{}, "{}MY CRITICAL"{}, "{}OFF"{} \}}}
+\DoxyCodeLine{123 \textcolor{comment}{}}
+\DoxyCodeLine{125 \textcolor{comment}{// Uncomment to disable default logger creation.}}
+\DoxyCodeLine{126 \textcolor{comment}{// This might save some (very) small initialization time if no default logger is needed.}}
+\DoxyCodeLine{127 \textcolor{comment}{//}}
+\DoxyCodeLine{128 \textcolor{comment}{// \#define SPDLOG\_DISABLE\_DEFAULT\_LOGGER}}
+\DoxyCodeLine{130 \textcolor{comment}{}}
+\DoxyCodeLine{132 \textcolor{comment}{// Uncomment and set to compile time level with zero cost (default is INFO).}}
+\DoxyCodeLine{133 \textcolor{comment}{// Macros like SPDLOG\_DEBUG(..), SPDLOG\_INFO(..)  will expand to empty statements if not enabled}}
+\DoxyCodeLine{134 \textcolor{comment}{//}}
+\DoxyCodeLine{135 \textcolor{comment}{// \#define SPDLOG\_ACTIVE\_LEVEL SPDLOG\_LEVEL\_INFO}}
+\DoxyCodeLine{136 }
+
+\end{DoxyCode}

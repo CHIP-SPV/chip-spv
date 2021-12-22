@@ -1,0 +1,232 @@
+\hypertarget{classcl_1_1_buffer}{}\doxysection{cl\+::Buffer Class Reference}
+\label{classcl_1_1_buffer}\index{cl::Buffer@{cl::Buffer}}
+
+
+Class interface for \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} Objects.  
+
+
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Buffer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.994652cm]{classcl_1_1_buffer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcl_1_1_buffer_a8f9d6f5bc452c2171e8eaf6e49617268}{Buffer}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+mem\+\_\+flags flags, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} size, void $\ast$host\+\_\+ptr=NULL, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in a specified context. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_aad541314b64a8ac6e94ca50315d87678}{Buffer}} (cl\+\_\+mem\+\_\+flags flags, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} size, void $\ast$host\+\_\+ptr=NULL, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in the default context. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_aadd3663801107fabb88238565c55ba16}\label{classcl_1_1_buffer_aadd3663801107fabb88238565c55ba16}} 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\{\bfseries Buffer} (Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, bool read\+Only, bool use\+Host\+Ptr=false, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} from a host container via iterators. Iterator\+Type must be random access. If use\+Host\+Ptr is specified iterators must represent contiguous data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a96e0d46de95bd3f335c39f5b4f10c640}\label{classcl_1_1_buffer_a96e0d46de95bd3f335c39f5b4f10c640}} 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\{\bfseries Buffer} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, bool read\+Only, bool use\+Host\+Ptr=false, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} from a host container via iterators using a specified context. Iterator\+Type must be random access. If use\+Host\+Ptr is specified iterators must represent contiguous data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a589e770b263ccedb789620860799e2c6}\label{classcl_1_1_buffer_a589e770b263ccedb789620860799e2c6}} 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\{\bfseries Buffer} (const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&queue, Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, bool read\+Only, bool use\+Host\+Ptr=false, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} from a host container via iterators using a specified queue. If use\+Host\+Ptr is specified iterators must represent contiguous data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a1c82aa24dd8a4d80b698605f60a26d71}\label{classcl_1_1_buffer_a1c82aa24dd8a4d80b698605f60a26d71}} 
+{\bfseries Buffer} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS \mbox{\hyperlink{classcl_1_1_buffer_ac980442b8e673fd6e4895ca7880b6b6b}{Buffer}} (const cl\+\_\+mem \&buffer)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+mem -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \& \mbox{\hyperlink{classcl_1_1_buffer_a7b4092e9d1481249a5111c523372bb19}{operator=}} (const cl\+\_\+mem \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment from cl\+\_\+mem -\/ performs shallow copy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a2cfe3144f7d69d4b390edfa934641dcf}\label{classcl_1_1_buffer_a2cfe3144f7d69d4b390edfa934641dcf}} 
+{\bfseries Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buf)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_aded956cded7526705b2e734b00c8bb0d}\label{classcl_1_1_buffer_aded956cded7526705b2e734b00c8bb0d}} 
+\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buf)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_a66ee6c9c837b5f74f02bef8f90459b5c}{Buffer}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+mem\+\_\+flags flags, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, void $\ast$host\+\_\+ptr=NULL, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in a specified context. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_ac9eaf7f65478faefa7053ab6c9f1e16d}{Buffer}} (cl\+\_\+mem\+\_\+flags flags, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, void $\ast$host\+\_\+ptr=NULL, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in the default context. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_aadd3663801107fabb88238565c55ba16}\label{classcl_1_1_buffer_aadd3663801107fabb88238565c55ba16}} 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\{\bfseries Buffer} (Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, bool read\+Only, bool use\+Host\+Ptr=false, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} from a host container via iterators. Iterator\+Type must be random access. If use\+Host\+Ptr is specified iterators must represent contiguous data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a96e0d46de95bd3f335c39f5b4f10c640}\label{classcl_1_1_buffer_a96e0d46de95bd3f335c39f5b4f10c640}} 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\{\bfseries Buffer} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, bool read\+Only, bool use\+Host\+Ptr=false, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} from a host container via iterators using a specified context. Iterator\+Type must be random access. If use\+Host\+Ptr is specified iterators must represent contiguous data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a589e770b263ccedb789620860799e2c6}\label{classcl_1_1_buffer_a589e770b263ccedb789620860799e2c6}} 
+{\footnotesize template$<$typename Iterator\+Type $>$ }\\{\bfseries Buffer} (const \mbox{\hyperlink{classcl_1_1_command_queue}{Command\+Queue}} \&queue, Iterator\+Type start\+Iterator, Iterator\+Type end\+Iterator, bool read\+Only, bool use\+Host\+Ptr=false, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} from a host container via iterators using a specified queue. If use\+Host\+Ptr is specified iterators must be random access. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a1c82aa24dd8a4d80b698605f60a26d71}\label{classcl_1_1_buffer_a1c82aa24dd8a4d80b698605f60a26d71}} 
+{\bfseries Buffer} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer_a68c77da266a476c4b4789bd53aa33337}{Buffer}} (const cl\+\_\+mem \&buffer, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+mem -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \& \mbox{\hyperlink{classcl_1_1_buffer_a7b4092e9d1481249a5111c523372bb19}{operator=}} (const cl\+\_\+mem \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment from cl\+\_\+mem -\/ performs shallow copy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a2cfe3144f7d69d4b390edfa934641dcf}\label{classcl_1_1_buffer_a2cfe3144f7d69d4b390edfa934641dcf}} 
+{\bfseries Buffer} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buf)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_aded956cded7526705b2e734b00c8bb0d}\label{classcl_1_1_buffer_aded956cded7526705b2e734b00c8bb0d}} 
+\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&buf)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a5ee4055b862daa313919ef577600b9fa}\label{classcl_1_1_buffer_a5ee4055b862daa313919ef577600b9fa}} 
+{\bfseries Buffer} (\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&\&buf) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\begin{DoxyCompactList}\small\item\em Move constructor to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_buffer_a377765a15200e00c317ded88dca8b6be}\label{classcl_1_1_buffer_a377765a15200e00c317ded88dca8b6be}} 
+\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \& {\bfseries operator=} (\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \&\&buf)
+\begin{DoxyCompactList}\small\item\em Move assignment to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_buffer_ab73f1e0ab2224f3d515820dd6b0c1d73}{create\+Sub\+Buffer}} (cl\+\_\+mem\+\_\+flags flags, cl\+\_\+buffer\+\_\+create\+\_\+type buffer\+\_\+create\+\_\+type, const void $\ast$buffer\+\_\+create\+\_\+info, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Creates a new buffer object from this. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class interface for \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} Objects. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for details about copy semantics, etc.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classcl_1_1_memory}{Memory}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_buffer_a8f9d6f5bc452c2171e8eaf6e49617268}\label{classcl_1_1_buffer_a8f9d6f5bc452c2171e8eaf6e49617268}} 
+\index{cl::Buffer@{cl::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+::\+Buffer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{\+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}}]{size,  }\item[{void $\ast$}]{host\+\_\+ptr = {\ttfamily NULL},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in a specified context. 
+
+Wraps cl\+Create\+Buffer().
+
+
+\begin{DoxyParams}{Parameters}
+{\em host\+\_\+ptr} & Storage to be used if the CL\+\_\+\+MEM\+\_\+\+USE\+\_\+\+HOST\+\_\+\+PTR flag was specified. Note alignment \& exclusivity requirements. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_buffer_aad541314b64a8ac6e94ca50315d87678}\label{classcl_1_1_buffer_aad541314b64a8ac6e94ca50315d87678}} 
+\index{cl::Buffer@{cl::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+::\+Buffer (\begin{DoxyParamCaption}\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{\+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}}}]{size,  }\item[{void $\ast$}]{host\+\_\+ptr = {\ttfamily NULL},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in the default context. 
+
+Wraps cl\+Create\+Buffer().
+
+
+\begin{DoxyParams}{Parameters}
+{\em host\+\_\+ptr} & Storage to be used if the CL\+\_\+\+MEM\+\_\+\+USE\+\_\+\+HOST\+\_\+\+PTR flag was specified. Note alignment \& exclusivity requirements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classcl_1_1_context_ad180f6f7d8b5a95710ab72f96162b051}{Context\+::get\+Default()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcl_1_1_buffer_ac980442b8e673fd6e4895ca7880b6b6b}\label{classcl_1_1_buffer_ac980442b8e673fd6e4895ca7880b6b6b}} 
+\index{cl::Buffer@{cl::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS cl\+::\+Buffer\+::\+Buffer (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor from cl\+\_\+mem -\/ takes ownership. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. \mbox{\Hypertarget{classcl_1_1_buffer_a66ee6c9c837b5f74f02bef8f90459b5c}\label{classcl_1_1_buffer_a66ee6c9c837b5f74f02bef8f90459b5c}} 
+\index{cl::Buffer@{cl::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+::\+Buffer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}}]{size,  }\item[{void $\ast$}]{host\+\_\+ptr = {\ttfamily NULL},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in a specified context. 
+
+Wraps cl\+Create\+Buffer().
+
+
+\begin{DoxyParams}{Parameters}
+{\em host\+\_\+ptr} & Storage to be used if the CL\+\_\+\+MEM\+\_\+\+USE\+\_\+\+HOST\+\_\+\+PTR flag was specified. Note alignment \& exclusivity requirements. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcl_1_1_buffer_ac9eaf7f65478faefa7053ab6c9f1e16d}\label{classcl_1_1_buffer_ac9eaf7f65478faefa7053ab6c9f1e16d}} 
+\index{cl::Buffer@{cl::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+::\+Buffer (\begin{DoxyParamCaption}\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}}}]{size,  }\item[{void $\ast$}]{host\+\_\+ptr = {\ttfamily NULL},  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} in the default context. 
+
+Wraps cl\+Create\+Buffer().
+
+
+\begin{DoxyParams}{Parameters}
+{\em host\+\_\+ptr} & Storage to be used if the CL\+\_\+\+MEM\+\_\+\+USE\+\_\+\+HOST\+\_\+\+PTR flag was specified. Note alignment \& exclusivity requirements.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classcl_1_1_context_ad180f6f7d8b5a95710ab72f96162b051}{Context\+::get\+Default()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcl_1_1_buffer_a68c77da266a476c4b4789bd53aa33337}\label{classcl_1_1_buffer_a68c77da266a476c4b4789bd53aa33337}} 
+\index{cl::Buffer@{cl::Buffer}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{Buffer()}{Buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily cl\+::\+Buffer\+::\+Buffer (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{buffer,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+mem -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions.\\
+\hline
+\end{DoxyParams}
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_buffer_ab73f1e0ab2224f3d515820dd6b0c1d73}\label{classcl_1_1_buffer_ab73f1e0ab2224f3d515820dd6b0c1d73}} 
+\index{cl::Buffer@{cl::Buffer}!createSubBuffer@{createSubBuffer}}
+\index{createSubBuffer@{createSubBuffer}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{createSubBuffer()}{createSubBuffer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} cl\+::\+Buffer\+::create\+Sub\+Buffer (\begin{DoxyParamCaption}\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{cl\+\_\+buffer\+\_\+create\+\_\+type}]{buffer\+\_\+create\+\_\+type,  }\item[{const void $\ast$}]{buffer\+\_\+create\+\_\+info,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new buffer object from this. 
+
+Wraps cl\+Create\+Sub\+Buffer(). \mbox{\Hypertarget{classcl_1_1_buffer_a7b4092e9d1481249a5111c523372bb19}\label{classcl_1_1_buffer_a7b4092e9d1481249a5111c523372bb19}} 
+\index{cl::Buffer@{cl::Buffer}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \& cl\+::\+Buffer\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment from cl\+\_\+mem -\/ performs shallow copy. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. \mbox{\Hypertarget{classcl_1_1_buffer_a7b4092e9d1481249a5111c523372bb19}\label{classcl_1_1_buffer_a7b4092e9d1481249a5111c523372bb19}} 
+\index{cl::Buffer@{cl::Buffer}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::Buffer@{cl::Buffer}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_buffer}{Buffer}} \& cl\+::\+Buffer\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment from cl\+\_\+mem -\/ performs shallow copy. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

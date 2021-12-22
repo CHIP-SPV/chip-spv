@@ -1,0 +1,161 @@
+\hypertarget{class_vulkan_cuda_sine_wave}{}\doxysection{Vulkan\+Cuda\+Sine\+Wave Class Reference}
+\label{class_vulkan_cuda_sine_wave}\index{VulkanCudaSineWave@{VulkanCudaSineWave}}
+Inheritance diagram for Vulkan\+Cuda\+Sine\+Wave\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_vulkan_cuda_sine_wave}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_ab61bdb29127bb14bd8f0527f4795e669}\label{class_vulkan_cuda_sine_wave_ab61bdb29127bb14bd8f0527f4795e669}} 
+{\bfseries Vulkan\+Cuda\+Sine\+Wave} (size\+\_\+t width, size\+\_\+t height)
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_a1c0fa199dbed0430f82af6352adcf36f}{fill\+Rendering\+Command\+Buffer}} (Vk\+Command\+Buffer \&command\+Buffer)
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_ac94625c05bf0843f6e38195bc4098087}{get\+Vertex\+Descriptions}} (std\+::vector$<$ Vk\+Vertex\+Input\+Binding\+Description $>$ \&binding\+Desc, std\+::vector$<$ Vk\+Vertex\+Input\+Attribute\+Description $>$ \&attrib\+Desc)
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_aca70f8b177bb24b1ad4a1367aed09c1b}{get\+Assembly\+State\+Info}} (Vk\+Pipeline\+Input\+Assembly\+State\+Create\+Info \&info)
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_aba41f6c0802ab4d9223ee4ed0024b9c1}{get\+Wait\+Frame\+Semaphores}} (std\+::vector$<$ Vk\+Semaphore $>$ \&wait, std\+::vector$<$ Vk\+Pipeline\+Stage\+Flags $>$ \&wait\+Stages) const
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_aaadc8ed42e07cc6d3b30aaa4d0e85b16}{get\+Signal\+Frame\+Semaphores}} (std\+::vector$<$ Vk\+Semaphore $>$ \&signal) const
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_a893eda593ef71d74236d3825964b28a7}{init\+Vulkan\+App}} ()
+\item 
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_abe91db802a4aaf4891ba135f7caa54b5}\label{class_vulkan_cuda_sine_wave_abe91db802a4aaf4891ba135f7caa54b5}} 
+void {\bfseries import\+Hip\+External\+Memory} (void $\ast$$\ast$cuda\+Ptr, hip\+External\+Memory\+\_\+t \&cuda\+Mem, Vk\+Device\+Memory \&vk\+Mem, Vk\+Device\+Size size, Vk\+External\+Memory\+Handle\+Type\+Flag\+Bits handle\+Type)
+\item 
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_acc09af6207af2dad73de1a6edc6ab292}\label{class_vulkan_cuda_sine_wave_acc09af6207af2dad73de1a6edc6ab292}} 
+void {\bfseries import\+Cuda\+External\+Semaphore} (hip\+External\+Semaphore\+\_\+t \&cuda\+Sem, Vk\+Semaphore \&vk\+Sem, Vk\+External\+Semaphore\+Handle\+Type\+Flag\+Bits handle\+Type)
+\item 
+Vk\+Device\+Size \mbox{\hyperlink{class_vulkan_cuda_sine_wave_afdf1260cf893c211dcc97155d9a7fccd}{get\+Uniform\+Size}} () const
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_a70a4ca173acab1ad9638ad8d9ce084f6}{update\+Uniform\+Buffer}} (uint32\+\_\+t image\+Index)
+\item 
+std\+::vector$<$ const char $\ast$ $>$ \mbox{\hyperlink{class_vulkan_cuda_sine_wave_afdeb178de0571b86d3cf04599b4bf65f}{get\+Required\+Extensions}} () const
+\item 
+std\+::vector$<$ const char $\ast$ $>$ \mbox{\hyperlink{class_vulkan_cuda_sine_wave_a9103e10bb1c65ed6e27119d9c55abfa6}{get\+Required\+Device\+Extensions}} () const
+\item 
+void \mbox{\hyperlink{class_vulkan_cuda_sine_wave_a7bef5cbbac72464a6209bdd5c4d1995b}{draw\+Frame}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_a7bef5cbbac72464a6209bdd5c4d1995b}\label{class_vulkan_cuda_sine_wave_a7bef5cbbac72464a6209bdd5c4d1995b}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!drawFrame@{drawFrame}}
+\index{drawFrame@{drawFrame}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{drawFrame()}{drawFrame()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::draw\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_a1c0fa199dbed0430f82af6352adcf36f}\label{class_vulkan_cuda_sine_wave_a1c0fa199dbed0430f82af6352adcf36f}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!fillRenderingCommandBuffer@{fillRenderingCommandBuffer}}
+\index{fillRenderingCommandBuffer@{fillRenderingCommandBuffer}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{fillRenderingCommandBuffer()}{fillRenderingCommandBuffer()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::fill\+Rendering\+Command\+Buffer (\begin{DoxyParamCaption}\item[{Vk\+Command\+Buffer \&}]{command\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_aca70f8b177bb24b1ad4a1367aed09c1b}\label{class_vulkan_cuda_sine_wave_aca70f8b177bb24b1ad4a1367aed09c1b}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!getAssemblyStateInfo@{getAssemblyStateInfo}}
+\index{getAssemblyStateInfo@{getAssemblyStateInfo}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{getAssemblyStateInfo()}{getAssemblyStateInfo()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::get\+Assembly\+State\+Info (\begin{DoxyParamCaption}\item[{Vk\+Pipeline\+Input\+Assembly\+State\+Create\+Info \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_a9103e10bb1c65ed6e27119d9c55abfa6}\label{class_vulkan_cuda_sine_wave_a9103e10bb1c65ed6e27119d9c55abfa6}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!getRequiredDeviceExtensions@{getRequiredDeviceExtensions}}
+\index{getRequiredDeviceExtensions@{getRequiredDeviceExtensions}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{getRequiredDeviceExtensions()}{getRequiredDeviceExtensions()}}
+{\footnotesize\ttfamily std\+::vector$<$ const char $\ast$ $>$ Vulkan\+Cuda\+Sine\+Wave\+::get\+Required\+Device\+Extensions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_afdeb178de0571b86d3cf04599b4bf65f}\label{class_vulkan_cuda_sine_wave_afdeb178de0571b86d3cf04599b4bf65f}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!getRequiredExtensions@{getRequiredExtensions}}
+\index{getRequiredExtensions@{getRequiredExtensions}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{getRequiredExtensions()}{getRequiredExtensions()}}
+{\footnotesize\ttfamily std\+::vector$<$ const char $\ast$ $>$ Vulkan\+Cuda\+Sine\+Wave\+::get\+Required\+Extensions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_aaadc8ed42e07cc6d3b30aaa4d0e85b16}\label{class_vulkan_cuda_sine_wave_aaadc8ed42e07cc6d3b30aaa4d0e85b16}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!getSignalFrameSemaphores@{getSignalFrameSemaphores}}
+\index{getSignalFrameSemaphores@{getSignalFrameSemaphores}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{getSignalFrameSemaphores()}{getSignalFrameSemaphores()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::get\+Signal\+Frame\+Semaphores (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Vk\+Semaphore $>$ \&}]{signal }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_afdf1260cf893c211dcc97155d9a7fccd}\label{class_vulkan_cuda_sine_wave_afdf1260cf893c211dcc97155d9a7fccd}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!getUniformSize@{getUniformSize}}
+\index{getUniformSize@{getUniformSize}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{getUniformSize()}{getUniformSize()}}
+{\footnotesize\ttfamily Vk\+Device\+Size Vulkan\+Cuda\+Sine\+Wave\+::get\+Uniform\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_ac94625c05bf0843f6e38195bc4098087}\label{class_vulkan_cuda_sine_wave_ac94625c05bf0843f6e38195bc4098087}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!getVertexDescriptions@{getVertexDescriptions}}
+\index{getVertexDescriptions@{getVertexDescriptions}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{getVertexDescriptions()}{getVertexDescriptions()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::get\+Vertex\+Descriptions (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Vk\+Vertex\+Input\+Binding\+Description $>$ \&}]{binding\+Desc,  }\item[{std\+::vector$<$ Vk\+Vertex\+Input\+Attribute\+Description $>$ \&}]{attrib\+Desc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_aba41f6c0802ab4d9223ee4ed0024b9c1}\label{class_vulkan_cuda_sine_wave_aba41f6c0802ab4d9223ee4ed0024b9c1}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!getWaitFrameSemaphores@{getWaitFrameSemaphores}}
+\index{getWaitFrameSemaphores@{getWaitFrameSemaphores}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{getWaitFrameSemaphores()}{getWaitFrameSemaphores()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::get\+Wait\+Frame\+Semaphores (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Vk\+Semaphore $>$ \&}]{wait,  }\item[{std\+::vector$<$ Vk\+Pipeline\+Stage\+Flags $>$ \&}]{wait\+Stages }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_a893eda593ef71d74236d3825964b28a7}\label{class_vulkan_cuda_sine_wave_a893eda593ef71d74236d3825964b28a7}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!initVulkanApp@{initVulkanApp}}
+\index{initVulkanApp@{initVulkanApp}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{initVulkanApp()}{initVulkanApp()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::init\+Vulkan\+App (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+\mbox{\Hypertarget{class_vulkan_cuda_sine_wave_a70a4ca173acab1ad9638ad8d9ce084f6}\label{class_vulkan_cuda_sine_wave_a70a4ca173acab1ad9638ad8d9ce084f6}} 
+\index{VulkanCudaSineWave@{VulkanCudaSineWave}!updateUniformBuffer@{updateUniformBuffer}}
+\index{updateUniformBuffer@{updateUniformBuffer}!VulkanCudaSineWave@{VulkanCudaSineWave}}
+\doxysubsubsection{\texorpdfstring{updateUniformBuffer()}{updateUniformBuffer()}}
+{\footnotesize\ttfamily void Vulkan\+Cuda\+Sine\+Wave\+::update\+Uniform\+Buffer (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{image\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_vulkan_base_app}{Vulkan\+Base\+App}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/samples/2\+\_\+\+Cookbook/20\+\_\+hip\+\_\+vulkan/main.\+cpp\end{DoxyCompactItemize}

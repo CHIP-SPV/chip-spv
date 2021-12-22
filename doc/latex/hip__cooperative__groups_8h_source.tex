@@ -1,0 +1,53 @@
+\hypertarget{hip__cooperative__groups_8h_source}{}\doxysection{hip\+\_\+cooperative\+\_\+groups.\+h}
+\label{hip__cooperative__groups_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_cooperative\_groups.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_cooperative\_groups.h}}
+\mbox{\hyperlink{hip__cooperative__groups_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_HIP\_COOPERATIVE\_GROUP\_H}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_HIP\_COOPERATIVE\_GROUP\_H}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <hip/hip\_version.h>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <hip/hip\_common.h>}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#if (defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                            \(\backslash\)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                       \(\backslash\)}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#include <hip/amd\_detail/amd\_hip\_cooperative\_groups.h>}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_))}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#include <hip/nvidia\_detail/nvidia\_hip\_cooperative\_groups.h>}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#elif (defined(\_\_HIP\_PLATFORM\_CLANG\_\_) || defined(\_\_HIP\_PLATFORM\_SPIRV\_\_)) \&\&                      \(\backslash\)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_HCC\_\_) || defined(\_\_HIP\_PLATFORM\_AMD\_\_)) \&\&                           \(\backslash\)}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{    !(defined(\_\_HIP\_PLATFORM\_NVCC\_\_) || defined(\_\_HIP\_PLATFORM\_NVIDIA\_\_))}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#include "{}spirv\_hip\_cooperative\_groups.h"{}}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#error("{}Must define exactly one of \_\_HIP\_PLATFORM\_AMD\_\_, \_\_HIP\_PLATFORM\_NVIDIA\_\_ or \_\_HIP\_PLATFORM\_SPIRV\_\_"{}});}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// HIP\_INCLUDE\_HIP\_HIP\_COOPERATIVE\_GROUP\_H}}
+
+\end{DoxyCode}

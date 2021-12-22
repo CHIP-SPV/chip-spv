@@ -1,0 +1,75 @@
+\hypertarget{classappsdk_1_1_cond_var_impl}{}\doxysection{appsdk\+::Cond\+Var\+Impl Class Reference}
+\label{classappsdk_1_1_cond_var_impl}\index{appsdk::CondVarImpl@{appsdk::CondVarImpl}}
+
+
+{\ttfamily \#include $<$SDKThread.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_cond_var_impl_a6a3165fab5c6e3e1c3f067df35337a19}{Cond\+Var\+Impl}} ()
+\item 
+\mbox{\hyperlink{classappsdk_1_1_cond_var_impl_a280f3ba876bf1454a2b927b38a248953}{$\sim$\+Cond\+Var\+Impl}} ()
+\item 
+bool \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_acceaa959707c0bbc55f9e6fdf6100a29}{init}} (unsigned int max\+Thread\+Count)
+\item 
+bool \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_a6b545250ae5b4b3eed633991eea9fe41}{destroy}} ()
+\item 
+void \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_af1ab36e64bd44a909f45bce508ed5ecf}{sync\+Threads}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classappsdk_1_1_cond_var_impl}{Cond\+Var\+Impl}} class Implementation of Condition variable class Provides Implementation of condition variable Note that condition variable is not initialized in constructor Separate functions available to initialize and destroy condition variable 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_cond_var_impl_a6a3165fab5c6e3e1c3f067df35337a19}\label{classappsdk_1_1_cond_var_impl_a6a3165fab5c6e3e1c3f067df35337a19}} 
+\index{appsdk::CondVarImpl@{appsdk::CondVarImpl}!CondVarImpl@{CondVarImpl}}
+\index{CondVarImpl@{CondVarImpl}!appsdk::CondVarImpl@{appsdk::CondVarImpl}}
+\doxysubsubsection{\texorpdfstring{CondVarImpl()}{CondVarImpl()}}
+{\footnotesize\ttfamily appsdk\+::\+Cond\+Var\+Impl\+::\+Cond\+Var\+Impl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor \mbox{\Hypertarget{classappsdk_1_1_cond_var_impl_a280f3ba876bf1454a2b927b38a248953}\label{classappsdk_1_1_cond_var_impl_a280f3ba876bf1454a2b927b38a248953}} 
+\index{appsdk::CondVarImpl@{appsdk::CondVarImpl}!````~CondVarImpl@{$\sim$CondVarImpl}}
+\index{````~CondVarImpl@{$\sim$CondVarImpl}!appsdk::CondVarImpl@{appsdk::CondVarImpl}}
+\doxysubsubsection{\texorpdfstring{$\sim$CondVarImpl()}{~CondVarImpl()}}
+{\footnotesize\ttfamily appsdk\+::\+Cond\+Var\+Impl\+::$\sim$\+Cond\+Var\+Impl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_cond_var_impl_a6b545250ae5b4b3eed633991eea9fe41}\label{classappsdk_1_1_cond_var_impl_a6b545250ae5b4b3eed633991eea9fe41}} 
+\index{appsdk::CondVarImpl@{appsdk::CondVarImpl}!destroy@{destroy}}
+\index{destroy@{destroy}!appsdk::CondVarImpl@{appsdk::CondVarImpl}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily bool appsdk\+::\+Cond\+Var\+Impl\+::destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destroy condition variable Destroy condition variable lock
+
+Destroy condition variable\mbox{\Hypertarget{classappsdk_1_1_cond_var_impl_acceaa959707c0bbc55f9e6fdf6100a29}\label{classappsdk_1_1_cond_var_impl_acceaa959707c0bbc55f9e6fdf6100a29}} 
+\index{appsdk::CondVarImpl@{appsdk::CondVarImpl}!init@{init}}
+\index{init@{init}!appsdk::CondVarImpl@{appsdk::CondVarImpl}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool appsdk\+::\+Cond\+Var\+Impl\+::init (\begin{DoxyParamCaption}\item[{unsigned int}]{max\+Thread\+Count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Initialize condition variable Initialize count and max\+Threads\mbox{\Hypertarget{classappsdk_1_1_cond_var_impl_af1ab36e64bd44a909f45bce508ed5ecf}\label{classappsdk_1_1_cond_var_impl_af1ab36e64bd44a909f45bce508ed5ecf}} 
+\index{appsdk::CondVarImpl@{appsdk::CondVarImpl}!syncThreads@{syncThreads}}
+\index{syncThreads@{syncThreads}!appsdk::CondVarImpl@{appsdk::CondVarImpl}}
+\doxysubsubsection{\texorpdfstring{syncThreads()}{syncThreads()}}
+{\footnotesize\ttfamily void appsdk\+::\+Cond\+Var\+Impl\+::sync\+Threads (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Synchronize threads Lock condition variable lock
+
+count threads
+
+Set to highest value before broadcasting
+
+Unblock all waiting threads
+
+Block on a condition variable
+
+Unlock condition variable lock
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/include/SDKThread.\+hpp\end{DoxyCompactItemize}

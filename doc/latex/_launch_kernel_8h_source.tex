@@ -1,0 +1,49 @@
+\hypertarget{_launch_kernel_8h_source}{}\doxysection{Launch\+Kernel.\+h}
+\label{_launch_kernel_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/gcc/LaunchKernel.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/gcc/LaunchKernel.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{comment}{/* Copyright (c) 2019 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{4 \textcolor{comment}{ * of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{5 \textcolor{comment}{ * in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{6 \textcolor{comment}{ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{7 \textcolor{comment}{ * copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{8 \textcolor{comment}{ * furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{9 \textcolor{comment}{ * The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{10 \textcolor{comment}{ * all copies or substantial portions of the Software.}}
+\DoxyCodeLine{11 \textcolor{comment}{ * THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANNTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{12 \textcolor{comment}{ * IMPLIED, INNCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{13 \textcolor{comment}{ * FITNNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{14 \textcolor{comment}{ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANNY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{15 \textcolor{comment}{ * LIABILITY, WHETHER INN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{16 \textcolor{comment}{ * OUT OF OR INN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{17 \textcolor{comment}{ * THE SOFTWARE.}}
+\DoxyCodeLine{18 \textcolor{comment}{ */}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{21 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{struct }\mbox{\hyperlink{structthings}{things}} \{}
+\DoxyCodeLine{26     \textcolor{keywordtype}{char} c;}
+\DoxyCodeLine{27     \textcolor{keywordtype}{short} s;}
+\DoxyCodeLine{28     \textcolor{keywordtype}{int} i;}
+\DoxyCodeLine{29 \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} func\{}
+\DoxyCodeLine{32    mykernel,}
+\DoxyCodeLine{33    mykernel1,}
+\DoxyCodeLine{34    mykernel2,}
+\DoxyCodeLine{35    mykernel3,}
+\DoxyCodeLine{36    mykernel4}
+\DoxyCodeLine{37 \}func;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{void}* getKernelFunc(\textcolor{keyword}{enum} func f);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{42 \}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

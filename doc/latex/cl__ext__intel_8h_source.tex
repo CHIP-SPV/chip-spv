@@ -1,0 +1,737 @@
+\hypertarget{cl__ext__intel_8h_source}{}\doxysection{cl\+\_\+ext\+\_\+intel.\+h}
+\label{cl__ext__intel_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_ext\_intel.h@{/Users/pvelesko/local/CHIP-\/SPV/include/CL/cl\_ext\_intel.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*******************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (c) 2008-\/2020 The Khronos Group Inc.}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *    http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ *}}
+\DoxyCodeLine{16 \textcolor{comment}{ ******************************************************************************/}}
+\DoxyCodeLine{17 \textcolor{comment}{/*****************************************************************************\(\backslash\)}}
+\DoxyCodeLine{18 \textcolor{comment}{}}
+\DoxyCodeLine{19 \textcolor{comment}{Copyright (c) 2013-\/2020 Intel Corporation All Rights Reserved.}}
+\DoxyCodeLine{20 \textcolor{comment}{}}
+\DoxyCodeLine{21 \textcolor{comment}{THESE MATERIALS ARE PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}}
+\DoxyCodeLine{22 \textcolor{comment}{"{}AS IS"{} AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}}
+\DoxyCodeLine{23 \textcolor{comment}{LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}}
+\DoxyCodeLine{24 \textcolor{comment}{A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL INTEL OR ITS}}
+\DoxyCodeLine{25 \textcolor{comment}{CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}}
+\DoxyCodeLine{26 \textcolor{comment}{EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}}
+\DoxyCodeLine{27 \textcolor{comment}{PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}}
+\DoxyCodeLine{28 \textcolor{comment}{PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY}}
+\DoxyCodeLine{29 \textcolor{comment}{OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY OR TORT (INCLUDING}}
+\DoxyCodeLine{30 \textcolor{comment}{NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THESE}}
+\DoxyCodeLine{31 \textcolor{comment}{MATERIALS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{32 \textcolor{comment}{}}
+\DoxyCodeLine{33 \textcolor{comment}{File Name: cl\_ext\_intel.h}}
+\DoxyCodeLine{34 \textcolor{comment}{}}
+\DoxyCodeLine{35 \textcolor{comment}{Abstract:}}
+\DoxyCodeLine{36 \textcolor{comment}{}}
+\DoxyCodeLine{37 \textcolor{comment}{Notes:}}
+\DoxyCodeLine{38 \textcolor{comment}{}}
+\DoxyCodeLine{39 \textcolor{comment}{\(\backslash\)*****************************************************************************/}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#ifndef \_\_CL\_EXT\_INTEL\_H}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define \_\_CL\_EXT\_INTEL\_H}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#include <CL/cl.h>}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#include <CL/cl\_platform.h>}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{48 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{comment}{/***************************************}}
+\DoxyCodeLine{52 \textcolor{comment}{* cl\_intel\_thread\_local\_exec extension *}}
+\DoxyCodeLine{53 \textcolor{comment}{****************************************/}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define cl\_intel\_thread\_local\_exec 1}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define CL\_QUEUE\_THREAD\_LOCAL\_EXEC\_ENABLE\_INTEL      (((cl\_bitfield)1) << 31)}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{comment}{/***********************************************}}
+\DoxyCodeLine{60 \textcolor{comment}{* cl\_intel\_device\_partition\_by\_names extension *}}
+\DoxyCodeLine{61 \textcolor{comment}{************************************************/}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define cl\_intel\_device\_partition\_by\_names 1}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define CL\_DEVICE\_PARTITION\_BY\_NAMES\_INTEL          0x4052}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define CL\_PARTITION\_BY\_NAMES\_LIST\_END\_INTEL        -\/1}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{comment}{/************************************************}}
+\DoxyCodeLine{69 \textcolor{comment}{* cl\_intel\_accelerator extension                *}}
+\DoxyCodeLine{70 \textcolor{comment}{* cl\_intel\_motion\_estimation extension          *}}
+\DoxyCodeLine{71 \textcolor{comment}{* cl\_intel\_advanced\_motion\_estimation extension *}}
+\DoxyCodeLine{72 \textcolor{comment}{*************************************************/}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define cl\_intel\_accelerator 1}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define cl\_intel\_motion\_estimation 1}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define cl\_intel\_advanced\_motion\_estimation 1}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\_cl\_accelerator\_intel* cl\_accelerator\_intel;}
+\DoxyCodeLine{79 \textcolor{keyword}{typedef} cl\_uint cl\_accelerator\_type\_intel;}
+\DoxyCodeLine{80 \textcolor{keyword}{typedef} cl\_uint cl\_accelerator\_info\_intel;}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct__cl__motion__estimation__desc__intel}{\_cl\_motion\_estimation\_desc\_intel}} \{}
+\DoxyCodeLine{83     cl\_uint mb\_block\_type;}
+\DoxyCodeLine{84     cl\_uint subpixel\_mode;}
+\DoxyCodeLine{85     cl\_uint sad\_adjust\_mode;}
+\DoxyCodeLine{86     cl\_uint search\_path\_type;}
+\DoxyCodeLine{87 \} \mbox{\hyperlink{struct__cl__motion__estimation__desc__intel}{cl\_motion\_estimation\_desc\_intel}};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{comment}{/* error codes */}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define CL\_INVALID\_ACCELERATOR\_INTEL                              -\/1094}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define CL\_INVALID\_ACCELERATOR\_TYPE\_INTEL                         -\/1095}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define CL\_INVALID\_ACCELERATOR\_DESCRIPTOR\_INTEL                   -\/1096}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define CL\_ACCELERATOR\_TYPE\_NOT\_SUPPORTED\_INTEL                   -\/1097}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{comment}{/* cl\_accelerator\_type\_intel */}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define CL\_ACCELERATOR\_TYPE\_MOTION\_ESTIMATION\_INTEL               0x0}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{comment}{/* cl\_accelerator\_info\_intel */}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define CL\_ACCELERATOR\_DESCRIPTOR\_INTEL                           0x4090}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define CL\_ACCELERATOR\_REFERENCE\_COUNT\_INTEL                      0x4091}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define CL\_ACCELERATOR\_CONTEXT\_INTEL                              0x4092}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define CL\_ACCELERATOR\_TYPE\_INTEL                                 0x4093}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{comment}{/* cl\_motion\_detect\_desc\_intel flags */}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define CL\_ME\_MB\_TYPE\_16x16\_INTEL                                 0x0}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#define CL\_ME\_MB\_TYPE\_8x8\_INTEL                                   0x1}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#define CL\_ME\_MB\_TYPE\_4x4\_INTEL                                   0x2}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#define CL\_ME\_SUBPIXEL\_MODE\_INTEGER\_INTEL                         0x0}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#define CL\_ME\_SUBPIXEL\_MODE\_HPEL\_INTEL                            0x1}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#define CL\_ME\_SUBPIXEL\_MODE\_QPEL\_INTEL                            0x2}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#define CL\_ME\_SAD\_ADJUST\_MODE\_NONE\_INTEL                          0x0}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#define CL\_ME\_SAD\_ADJUST\_MODE\_HAAR\_INTEL                          0x1}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#define CL\_ME\_SEARCH\_PATH\_RADIUS\_2\_2\_INTEL                        0x0}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#define CL\_ME\_SEARCH\_PATH\_RADIUS\_4\_4\_INTEL                        0x1}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#define CL\_ME\_SEARCH\_PATH\_RADIUS\_16\_12\_INTEL                      0x5}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#define CL\_ME\_SKIP\_BLOCK\_TYPE\_16x16\_INTEL                         0x0}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#define CL\_ME\_CHROMA\_INTRA\_PREDICT\_ENABLED\_INTEL                  0x1}}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_INTRA\_PREDICT\_ENABLED\_INTEL                    0x2}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#define CL\_ME\_SKIP\_BLOCK\_TYPE\_8x8\_INTEL                           0x4}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#define CL\_ME\_FORWARD\_INPUT\_MODE\_INTEL                            0x1}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#define CL\_ME\_BACKWARD\_INPUT\_MODE\_INTEL                           0x2}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#define CL\_ME\_BIDIRECTION\_INPUT\_MODE\_INTEL                        0x3}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#define CL\_ME\_BIDIR\_WEIGHT\_QUARTER\_INTEL                          16}}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#define CL\_ME\_BIDIR\_WEIGHT\_THIRD\_INTEL                            21}}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#define CL\_ME\_BIDIR\_WEIGHT\_HALF\_INTEL                             32}}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#define CL\_ME\_BIDIR\_WEIGHT\_TWO\_THIRD\_INTEL                        43}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#define CL\_ME\_BIDIR\_WEIGHT\_THREE\_QUARTER\_INTEL                    48}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PENALTY\_NONE\_INTEL                             0x0}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PENALTY\_LOW\_INTEL                              0x1}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PENALTY\_NORMAL\_INTEL                           0x2}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PENALTY\_HIGH\_INTEL                             0x3}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PRECISION\_QPEL\_INTEL                           0x0}}
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PRECISION\_HPEL\_INTEL                           0x1}}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PRECISION\_PEL\_INTEL                            0x2}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#define CL\_ME\_COST\_PRECISION\_DPEL\_INTEL                           0x3}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_VERTICAL\_INTEL                  0x0}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_HORIZONTAL\_INTEL                0x1}}
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_DC\_INTEL                        0x2}}
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_DIAGONAL\_DOWN\_LEFT\_INTEL        0x3}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_DIAGONAL\_DOWN\_RIGHT\_INTEL       0x4}}
+\DoxyCodeLine{151 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_PLANE\_INTEL                     0x4}}
+\DoxyCodeLine{152 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_VERTICAL\_RIGHT\_INTEL            0x5}}
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_HORIZONTAL\_DOWN\_INTEL           0x6}}
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_VERTICAL\_LEFT\_INTEL             0x7}}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#define CL\_ME\_LUMA\_PREDICTOR\_MODE\_HORIZONTAL\_UP\_INTEL             0x8}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#define CL\_ME\_CHROMA\_PREDICTOR\_MODE\_DC\_INTEL                      0x0}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#define CL\_ME\_CHROMA\_PREDICTOR\_MODE\_HORIZONTAL\_INTEL              0x1}}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#define CL\_ME\_CHROMA\_PREDICTOR\_MODE\_VERTICAL\_INTEL                0x2}}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#define CL\_ME\_CHROMA\_PREDICTOR\_MODE\_PLANE\_INTEL                   0x3}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{comment}{/* cl\_device\_info */}}
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#define CL\_DEVICE\_ME\_VERSION\_INTEL                                0x407E}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#define CL\_ME\_VERSION\_LEGACY\_INTEL                                0x0}}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#define CL\_ME\_VERSION\_ADVANCED\_VER\_1\_INTEL                        0x1}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#define CL\_ME\_VERSION\_ADVANCED\_VER\_2\_INTEL                        0x2}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_accelerator\_intel CL\_API\_CALL}
+\DoxyCodeLine{170 clCreateAcceleratorINTEL(}
+\DoxyCodeLine{171     cl\_context                   context,}
+\DoxyCodeLine{172     cl\_accelerator\_type\_intel    accelerator\_type,}
+\DoxyCodeLine{173     \textcolor{keywordtype}{size\_t}                       descriptor\_size,}
+\DoxyCodeLine{174     \textcolor{keyword}{const} \textcolor{keywordtype}{void}*                  descriptor,}
+\DoxyCodeLine{175     cl\_int*                      errcode\_ret) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_accelerator\_intel (CL\_API\_CALL *clCreateAcceleratorINTEL\_fn)(}
+\DoxyCodeLine{178     cl\_context                   context,}
+\DoxyCodeLine{179     cl\_accelerator\_type\_intel    accelerator\_type,}
+\DoxyCodeLine{180     \textcolor{keywordtype}{size\_t}                       descriptor\_size,}
+\DoxyCodeLine{181     \textcolor{keyword}{const} \textcolor{keywordtype}{void}*                  descriptor,}
+\DoxyCodeLine{182     cl\_int*                      errcode\_ret) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{185 clGetAcceleratorInfoINTEL(}
+\DoxyCodeLine{186     cl\_accelerator\_intel         accelerator,}
+\DoxyCodeLine{187     cl\_accelerator\_info\_intel    param\_name,}
+\DoxyCodeLine{188     \textcolor{keywordtype}{size\_t}                       param\_value\_size,}
+\DoxyCodeLine{189     \textcolor{keywordtype}{void}*                        param\_value,}
+\DoxyCodeLine{190     \textcolor{keywordtype}{size\_t}*                      param\_value\_size\_ret) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clGetAcceleratorInfoINTEL\_fn)(}
+\DoxyCodeLine{193     cl\_accelerator\_intel         accelerator,}
+\DoxyCodeLine{194     cl\_accelerator\_info\_intel    param\_name,}
+\DoxyCodeLine{195     \textcolor{keywordtype}{size\_t}                       param\_value\_size,}
+\DoxyCodeLine{196     \textcolor{keywordtype}{void}*                        param\_value,}
+\DoxyCodeLine{197     \textcolor{keywordtype}{size\_t}*                      param\_value\_size\_ret) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{200 clRetainAcceleratorINTEL(}
+\DoxyCodeLine{201     cl\_accelerator\_intel         accelerator) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clRetainAcceleratorINTEL\_fn)(}
+\DoxyCodeLine{204     cl\_accelerator\_intel         accelerator) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{207 clReleaseAcceleratorINTEL(}
+\DoxyCodeLine{208     cl\_accelerator\_intel         accelerator) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *clReleaseAcceleratorINTEL\_fn)(}
+\DoxyCodeLine{211     cl\_accelerator\_intel         accelerator) CL\_EXT\_SUFFIX\_\_VERSION\_1\_2;}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213 \textcolor{comment}{/******************************************}}
+\DoxyCodeLine{214 \textcolor{comment}{* cl\_intel\_simultaneous\_sharing extension *}}
+\DoxyCodeLine{215 \textcolor{comment}{*******************************************/}}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217 \textcolor{preprocessor}{\#define cl\_intel\_simultaneous\_sharing 1}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#define CL\_DEVICE\_SIMULTANEOUS\_INTEROPS\_INTEL            0x4104}}
+\DoxyCodeLine{220 \textcolor{preprocessor}{\#define CL\_DEVICE\_NUM\_SIMULTANEOUS\_INTEROPS\_INTEL        0x4105}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222 \textcolor{comment}{/***********************************}}
+\DoxyCodeLine{223 \textcolor{comment}{* cl\_intel\_egl\_image\_yuv extension *}}
+\DoxyCodeLine{224 \textcolor{comment}{************************************/}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226 \textcolor{preprocessor}{\#define cl\_intel\_egl\_image\_yuv 1}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228 \textcolor{preprocessor}{\#define CL\_EGL\_YUV\_PLANE\_INTEL                           0x4107}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 \textcolor{comment}{/********************************}}
+\DoxyCodeLine{231 \textcolor{comment}{* cl\_intel\_packed\_yuv extension *}}
+\DoxyCodeLine{232 \textcolor{comment}{*********************************/}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 \textcolor{preprocessor}{\#define cl\_intel\_packed\_yuv 1}}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236 \textcolor{preprocessor}{\#define CL\_YUYV\_INTEL                                    0x4076}}
+\DoxyCodeLine{237 \textcolor{preprocessor}{\#define CL\_UYVY\_INTEL                                    0x4077}}
+\DoxyCodeLine{238 \textcolor{preprocessor}{\#define CL\_YVYU\_INTEL                                    0x4078}}
+\DoxyCodeLine{239 \textcolor{preprocessor}{\#define CL\_VYUY\_INTEL                                    0x4079}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241 \textcolor{comment}{/********************************************}}
+\DoxyCodeLine{242 \textcolor{comment}{* cl\_intel\_required\_subgroup\_size extension *}}
+\DoxyCodeLine{243 \textcolor{comment}{*********************************************/}}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 \textcolor{preprocessor}{\#define cl\_intel\_required\_subgroup\_size 1}}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{247 \textcolor{preprocessor}{\#define CL\_DEVICE\_SUB\_GROUP\_SIZES\_INTEL                  0x4108}}
+\DoxyCodeLine{248 \textcolor{preprocessor}{\#define CL\_KERNEL\_SPILL\_MEM\_SIZE\_INTEL                   0x4109}}
+\DoxyCodeLine{249 \textcolor{preprocessor}{\#define CL\_KERNEL\_COMPILE\_SUB\_GROUP\_SIZE\_INTEL           0x410A}}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251 \textcolor{comment}{/****************************************}}
+\DoxyCodeLine{252 \textcolor{comment}{* cl\_intel\_driver\_diagnostics extension *}}
+\DoxyCodeLine{253 \textcolor{comment}{*****************************************/}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 \textcolor{preprocessor}{\#define cl\_intel\_driver\_diagnostics 1}}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 \textcolor{keyword}{typedef} cl\_uint cl\_diagnostics\_verbose\_level;}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259 \textcolor{preprocessor}{\#define CL\_CONTEXT\_SHOW\_DIAGNOSTICS\_INTEL                0x4106}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261 \textcolor{preprocessor}{\#define CL\_CONTEXT\_DIAGNOSTICS\_LEVEL\_ALL\_INTEL           ( 0xff )}}
+\DoxyCodeLine{262 \textcolor{preprocessor}{\#define CL\_CONTEXT\_DIAGNOSTICS\_LEVEL\_GOOD\_INTEL          ( 1 )}}
+\DoxyCodeLine{263 \textcolor{preprocessor}{\#define CL\_CONTEXT\_DIAGNOSTICS\_LEVEL\_BAD\_INTEL           ( 1 << 1 )}}
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#define CL\_CONTEXT\_DIAGNOSTICS\_LEVEL\_NEUTRAL\_INTEL       ( 1 << 2 )}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 \textcolor{comment}{/********************************}}
+\DoxyCodeLine{267 \textcolor{comment}{* cl\_intel\_planar\_yuv extension *}}
+\DoxyCodeLine{268 \textcolor{comment}{*********************************/}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270 \textcolor{preprocessor}{\#define CL\_NV12\_INTEL                                       0x410E}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272 \textcolor{preprocessor}{\#define CL\_MEM\_NO\_ACCESS\_INTEL                              ( 1 << 24 )}}
+\DoxyCodeLine{273 \textcolor{preprocessor}{\#define CL\_MEM\_ACCESS\_FLAGS\_UNRESTRICTED\_INTEL              ( 1 << 25 )}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 \textcolor{preprocessor}{\#define CL\_DEVICE\_PLANAR\_YUV\_MAX\_WIDTH\_INTEL                0x417E}}
+\DoxyCodeLine{276 \textcolor{preprocessor}{\#define CL\_DEVICE\_PLANAR\_YUV\_MAX\_HEIGHT\_INTEL               0x417F}}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278 \textcolor{comment}{/*******************************************************}}
+\DoxyCodeLine{279 \textcolor{comment}{* cl\_intel\_device\_side\_avc\_motion\_estimation extension *}}
+\DoxyCodeLine{280 \textcolor{comment}{********************************************************/}}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282 \textcolor{preprocessor}{\#define CL\_DEVICE\_AVC\_ME\_VERSION\_INTEL                      0x410B}}
+\DoxyCodeLine{283 \textcolor{preprocessor}{\#define CL\_DEVICE\_AVC\_ME\_SUPPORTS\_TEXTURE\_SAMPLER\_USE\_INTEL 0x410C}}
+\DoxyCodeLine{284 \textcolor{preprocessor}{\#define CL\_DEVICE\_AVC\_ME\_SUPPORTS\_PREEMPTION\_INTEL          0x410D}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_VERSION\_0\_INTEL                           0x0   }\textcolor{comment}{/* No support. */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{287 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_VERSION\_1\_INTEL                           0x1   }\textcolor{comment}{/* First supported version. */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MAJOR\_16x16\_INTEL                         0x0}}
+\DoxyCodeLine{290 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MAJOR\_16x8\_INTEL                          0x1}}
+\DoxyCodeLine{291 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MAJOR\_8x16\_INTEL                          0x2}}
+\DoxyCodeLine{292 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MAJOR\_8x8\_INTEL                           0x3}}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MINOR\_8x8\_INTEL                           0x0}}
+\DoxyCodeLine{295 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MINOR\_8x4\_INTEL                           0x1}}
+\DoxyCodeLine{296 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MINOR\_4x8\_INTEL                           0x2}}
+\DoxyCodeLine{297 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MINOR\_4x4\_INTEL                           0x3}}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MAJOR\_FORWARD\_INTEL                       0x0}}
+\DoxyCodeLine{300 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MAJOR\_BACKWARD\_INTEL                      0x1}}
+\DoxyCodeLine{301 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_MAJOR\_BIDIRECTIONAL\_INTEL                 0x2}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_ALL\_INTEL                  0x0}}
+\DoxyCodeLine{304 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_16x16\_INTEL                0x7E}}
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_16x8\_INTEL                 0x7D}}
+\DoxyCodeLine{306 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_8x16\_INTEL                 0x7B}}
+\DoxyCodeLine{307 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_8x8\_INTEL                  0x77}}
+\DoxyCodeLine{308 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_8x4\_INTEL                  0x6F}}
+\DoxyCodeLine{309 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_4x8\_INTEL                  0x5F}}
+\DoxyCodeLine{310 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_PARTITION\_MASK\_4x4\_INTEL                  0x3F}}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_EXHAUSTIVE\_INTEL            0x0}}
+\DoxyCodeLine{313 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_SMALL\_INTEL                 0x1}}
+\DoxyCodeLine{314 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_TINY\_INTEL                  0x2}}
+\DoxyCodeLine{315 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_EXTRA\_TINY\_INTEL            0x3}}
+\DoxyCodeLine{316 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_DIAMOND\_INTEL               0x4}}
+\DoxyCodeLine{317 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_LARGE\_DIAMOND\_INTEL         0x5}}
+\DoxyCodeLine{318 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_RESERVED0\_INTEL             0x6}}
+\DoxyCodeLine{319 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_RESERVED1\_INTEL             0x7}}
+\DoxyCodeLine{320 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_CUSTOM\_INTEL                0x8}}
+\DoxyCodeLine{321 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_16x12\_RADIUS\_INTEL          0x9}}
+\DoxyCodeLine{322 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_4x4\_RADIUS\_INTEL            0x2}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SEARCH\_WINDOW\_2x2\_RADIUS\_INTEL            0xa}}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SAD\_ADJUST\_MODE\_NONE\_INTEL                0x0}}
+\DoxyCodeLine{326 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SAD\_ADJUST\_MODE\_HAAR\_INTEL                0x2}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SUBPIXEL\_MODE\_INTEGER\_INTEL               0x0}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SUBPIXEL\_MODE\_HPEL\_INTEL                  0x1}}
+\DoxyCodeLine{330 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SUBPIXEL\_MODE\_QPEL\_INTEL                  0x3}}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_COST\_PRECISION\_QPEL\_INTEL                 0x0}}
+\DoxyCodeLine{333 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_COST\_PRECISION\_HPEL\_INTEL                 0x1}}
+\DoxyCodeLine{334 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_COST\_PRECISION\_PEL\_INTEL                  0x2}}
+\DoxyCodeLine{335 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_COST\_PRECISION\_DPEL\_INTEL                 0x3}}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BIDIR\_WEIGHT\_QUARTER\_INTEL                0x10}}
+\DoxyCodeLine{338 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BIDIR\_WEIGHT\_THIRD\_INTEL                  0x15}}
+\DoxyCodeLine{339 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BIDIR\_WEIGHT\_HALF\_INTEL                   0x20}}
+\DoxyCodeLine{340 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BIDIR\_WEIGHT\_TWO\_THIRD\_INTEL              0x2B}}
+\DoxyCodeLine{341 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BIDIR\_WEIGHT\_THREE\_QUARTER\_INTEL          0x30}}
+\DoxyCodeLine{342 }
+\DoxyCodeLine{343 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BORDER\_REACHED\_LEFT\_INTEL                 0x0}}
+\DoxyCodeLine{344 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BORDER\_REACHED\_RIGHT\_INTEL                0x2}}
+\DoxyCodeLine{345 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BORDER\_REACHED\_TOP\_INTEL                  0x4}}
+\DoxyCodeLine{346 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BORDER\_REACHED\_BOTTOM\_INTEL               0x8}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_PARTITION\_16x16\_INTEL          0x0}}
+\DoxyCodeLine{349 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_PARTITION\_8x8\_INTEL            0x4000}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_16x16\_FORWARD\_ENABLE\_INTEL     ( 0x1 << 24 )}}
+\DoxyCodeLine{352 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_16x16\_BACKWARD\_ENABLE\_INTEL    ( 0x2 << 24 )}}
+\DoxyCodeLine{353 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_16x16\_DUAL\_ENABLE\_INTEL        ( 0x3 << 24 )}}
+\DoxyCodeLine{354 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_FORWARD\_ENABLE\_INTEL       ( 0x55 << 24 )}}
+\DoxyCodeLine{355 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_BACKWARD\_ENABLE\_INTEL      ( 0xAA << 24 )}}
+\DoxyCodeLine{356 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_DUAL\_ENABLE\_INTEL          ( 0xFF << 24 )}}
+\DoxyCodeLine{357 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_0\_FORWARD\_ENABLE\_INTEL     ( 0x1 << 24 )}}
+\DoxyCodeLine{358 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_0\_BACKWARD\_ENABLE\_INTEL    ( 0x2 << 24 )}}
+\DoxyCodeLine{359 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_1\_FORWARD\_ENABLE\_INTEL     ( 0x1 << 26 )}}
+\DoxyCodeLine{360 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_1\_BACKWARD\_ENABLE\_INTEL    ( 0x2 << 26 )}}
+\DoxyCodeLine{361 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_2\_FORWARD\_ENABLE\_INTEL     ( 0x1 << 28 )}}
+\DoxyCodeLine{362 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_2\_BACKWARD\_ENABLE\_INTEL    ( 0x2 << 28 )}}
+\DoxyCodeLine{363 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_3\_FORWARD\_ENABLE\_INTEL     ( 0x1 << 30 )}}
+\DoxyCodeLine{364 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SKIP\_BLOCK\_8x8\_3\_BACKWARD\_ENABLE\_INTEL    ( 0x2 << 30 )}}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BLOCK\_BASED\_SKIP\_4x4\_INTEL                0x00}}
+\DoxyCodeLine{367 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_BLOCK\_BASED\_SKIP\_8x8\_INTEL                0x80}}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_16x16\_INTEL                         0x0}}
+\DoxyCodeLine{370 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_8x8\_INTEL                           0x1}}
+\DoxyCodeLine{371 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_4x4\_INTEL                           0x2}}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_LUMA\_PARTITION\_MASK\_16x16\_INTEL     0x6}}
+\DoxyCodeLine{374 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_LUMA\_PARTITION\_MASK\_8x8\_INTEL       0x5}}
+\DoxyCodeLine{375 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_LUMA\_PARTITION\_MASK\_4x4\_INTEL       0x3}}
+\DoxyCodeLine{376 }
+\DoxyCodeLine{377 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_NEIGHBOR\_LEFT\_MASK\_ENABLE\_INTEL         0x60}}
+\DoxyCodeLine{378 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_NEIGHBOR\_UPPER\_MASK\_ENABLE\_INTEL        0x10}}
+\DoxyCodeLine{379 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_NEIGHBOR\_UPPER\_RIGHT\_MASK\_ENABLE\_INTEL  0x8}}
+\DoxyCodeLine{380 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTRA\_NEIGHBOR\_UPPER\_LEFT\_MASK\_ENABLE\_INTEL   0x4}}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_VERTICAL\_INTEL            0x0}}
+\DoxyCodeLine{383 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_HORIZONTAL\_INTEL          0x1}}
+\DoxyCodeLine{384 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_DC\_INTEL                  0x2}}
+\DoxyCodeLine{385 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_DIAGONAL\_DOWN\_LEFT\_INTEL  0x3}}
+\DoxyCodeLine{386 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_DIAGONAL\_DOWN\_RIGHT\_INTEL 0x4}}
+\DoxyCodeLine{387 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_PLANE\_INTEL               0x4}}
+\DoxyCodeLine{388 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_VERTICAL\_RIGHT\_INTEL      0x5}}
+\DoxyCodeLine{389 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_HORIZONTAL\_DOWN\_INTEL     0x6}}
+\DoxyCodeLine{390 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_VERTICAL\_LEFT\_INTEL       0x7}}
+\DoxyCodeLine{391 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_LUMA\_PREDICTOR\_MODE\_HORIZONTAL\_UP\_INTEL       0x8}}
+\DoxyCodeLine{392 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_CHROMA\_PREDICTOR\_MODE\_DC\_INTEL                0x0}}
+\DoxyCodeLine{393 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_CHROMA\_PREDICTOR\_MODE\_HORIZONTAL\_INTEL        0x1}}
+\DoxyCodeLine{394 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_CHROMA\_PREDICTOR\_MODE\_VERTICAL\_INTEL          0x2}}
+\DoxyCodeLine{395 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_CHROMA\_PREDICTOR\_MODE\_PLANE\_INTEL             0x3}}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_FRAME\_FORWARD\_INTEL                       0x1}}
+\DoxyCodeLine{398 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_FRAME\_BACKWARD\_INTEL                      0x2}}
+\DoxyCodeLine{399 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_FRAME\_DUAL\_INTEL                          0x3}}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SLICE\_TYPE\_PRED\_INTEL                     0x0}}
+\DoxyCodeLine{402 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SLICE\_TYPE\_BPRED\_INTEL                    0x1}}
+\DoxyCodeLine{403 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_SLICE\_TYPE\_INTRA\_INTEL                    0x2}}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{405 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTERLACED\_SCAN\_TOP\_FIELD\_INTEL           0x0}}
+\DoxyCodeLine{406 \textcolor{preprocessor}{\#define CL\_AVC\_ME\_INTERLACED\_SCAN\_BOTTOM\_FIELD\_INTEL        0x1}}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408 \textcolor{comment}{/*******************************************}}
+\DoxyCodeLine{409 \textcolor{comment}{* cl\_intel\_unified\_shared\_memory extension *}}
+\DoxyCodeLine{410 \textcolor{comment}{********************************************/}}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412 \textcolor{comment}{/* These APIs are in sync with Revision Q of the cl\_intel\_unified\_shared\_memory spec! */}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414 \textcolor{preprocessor}{\#define cl\_intel\_unified\_shared\_memory 1}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416 \textcolor{comment}{/* cl\_device\_info */}}
+\DoxyCodeLine{417 \textcolor{preprocessor}{\#define CL\_DEVICE\_HOST\_MEM\_CAPABILITIES\_INTEL                   0x4190}}
+\DoxyCodeLine{418 \textcolor{preprocessor}{\#define CL\_DEVICE\_DEVICE\_MEM\_CAPABILITIES\_INTEL                 0x4191}}
+\DoxyCodeLine{419 \textcolor{preprocessor}{\#define CL\_DEVICE\_SINGLE\_DEVICE\_SHARED\_MEM\_CAPABILITIES\_INTEL   0x4192}}
+\DoxyCodeLine{420 \textcolor{preprocessor}{\#define CL\_DEVICE\_CROSS\_DEVICE\_SHARED\_MEM\_CAPABILITIES\_INTEL    0x4193}}
+\DoxyCodeLine{421 \textcolor{preprocessor}{\#define CL\_DEVICE\_SHARED\_SYSTEM\_MEM\_CAPABILITIES\_INTEL          0x4194}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423 \textcolor{keyword}{typedef} cl\_bitfield cl\_device\_unified\_shared\_memory\_capabilities\_intel;}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425 \textcolor{comment}{/* cl\_device\_unified\_shared\_memory\_capabilities\_intel -\/ bitfield */}}
+\DoxyCodeLine{426 \textcolor{preprocessor}{\#define CL\_UNIFIED\_SHARED\_MEMORY\_ACCESS\_INTEL                   (1 << 0)}}
+\DoxyCodeLine{427 \textcolor{preprocessor}{\#define CL\_UNIFIED\_SHARED\_MEMORY\_ATOMIC\_ACCESS\_INTEL            (1 << 1)}}
+\DoxyCodeLine{428 \textcolor{preprocessor}{\#define CL\_UNIFIED\_SHARED\_MEMORY\_CONCURRENT\_ACCESS\_INTEL        (1 << 2)}}
+\DoxyCodeLine{429 \textcolor{preprocessor}{\#define CL\_UNIFIED\_SHARED\_MEMORY\_CONCURRENT\_ATOMIC\_ACCESS\_INTEL (1 << 3)}}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431 \textcolor{keyword}{typedef} cl\_properties cl\_mem\_properties\_intel;}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433 \textcolor{comment}{/* cl\_mem\_properties\_intel */}}
+\DoxyCodeLine{434 \textcolor{preprocessor}{\#define CL\_MEM\_ALLOC\_FLAGS\_INTEL        0x4195}}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436 \textcolor{keyword}{typedef} cl\_bitfield cl\_mem\_alloc\_flags\_intel;}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438 \textcolor{comment}{/* cl\_mem\_alloc\_flags\_intel -\/ bitfield */}}
+\DoxyCodeLine{439 \textcolor{preprocessor}{\#define CL\_MEM\_ALLOC\_WRITE\_COMBINED\_INTEL               (1 << 0)}}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441 \textcolor{keyword}{typedef} cl\_uint cl\_mem\_info\_intel;}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{443 \textcolor{comment}{/* cl\_mem\_alloc\_info\_intel */}}
+\DoxyCodeLine{444 \textcolor{preprocessor}{\#define CL\_MEM\_ALLOC\_TYPE\_INTEL         0x419A}}
+\DoxyCodeLine{445 \textcolor{preprocessor}{\#define CL\_MEM\_ALLOC\_BASE\_PTR\_INTEL     0x419B}}
+\DoxyCodeLine{446 \textcolor{preprocessor}{\#define CL\_MEM\_ALLOC\_SIZE\_INTEL         0x419C}}
+\DoxyCodeLine{447 \textcolor{preprocessor}{\#define CL\_MEM\_ALLOC\_DEVICE\_INTEL       0x419D}}
+\DoxyCodeLine{448 \textcolor{comment}{/* Enum values 0x419E-\/0x419F are reserved for future queries. */}}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{450 \textcolor{keyword}{typedef} cl\_uint cl\_unified\_shared\_memory\_type\_intel;}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452 \textcolor{comment}{/* cl\_unified\_shared\_memory\_type\_intel */}}
+\DoxyCodeLine{453 \textcolor{preprocessor}{\#define CL\_MEM\_TYPE\_UNKNOWN\_INTEL       0x4196}}
+\DoxyCodeLine{454 \textcolor{preprocessor}{\#define CL\_MEM\_TYPE\_HOST\_INTEL          0x4197}}
+\DoxyCodeLine{455 \textcolor{preprocessor}{\#define CL\_MEM\_TYPE\_DEVICE\_INTEL        0x4198}}
+\DoxyCodeLine{456 \textcolor{preprocessor}{\#define CL\_MEM\_TYPE\_SHARED\_INTEL        0x4199}}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458 \textcolor{keyword}{typedef} cl\_uint cl\_mem\_advice\_intel;}
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460 \textcolor{comment}{/* cl\_mem\_advice\_intel */}}
+\DoxyCodeLine{461 \textcolor{comment}{/* Enum values 0x4208-\/0x420F are reserved for future memory advices. */}}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463 \textcolor{comment}{/* cl\_kernel\_exec\_info */}}
+\DoxyCodeLine{464 \textcolor{preprocessor}{\#define CL\_KERNEL\_EXEC\_INFO\_INDIRECT\_HOST\_ACCESS\_INTEL      0x4200}}
+\DoxyCodeLine{465 \textcolor{preprocessor}{\#define CL\_KERNEL\_EXEC\_INFO\_INDIRECT\_DEVICE\_ACCESS\_INTEL    0x4201}}
+\DoxyCodeLine{466 \textcolor{preprocessor}{\#define CL\_KERNEL\_EXEC\_INFO\_INDIRECT\_SHARED\_ACCESS\_INTEL    0x4202}}
+\DoxyCodeLine{467 \textcolor{preprocessor}{\#define CL\_KERNEL\_EXEC\_INFO\_USM\_PTRS\_INTEL                  0x4203}}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469 \textcolor{comment}{/* cl\_command\_type */}}
+\DoxyCodeLine{470 \textcolor{preprocessor}{\#define CL\_COMMAND\_MEMFILL\_INTEL        0x4204}}
+\DoxyCodeLine{471 \textcolor{preprocessor}{\#define CL\_COMMAND\_MEMCPY\_INTEL         0x4205}}
+\DoxyCodeLine{472 \textcolor{preprocessor}{\#define CL\_COMMAND\_MIGRATEMEM\_INTEL     0x4206}}
+\DoxyCodeLine{473 \textcolor{preprocessor}{\#define CL\_COMMAND\_MEMADVISE\_INTEL      0x4207}}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{475 \textcolor{keyword}{extern} CL\_API\_ENTRY \textcolor{keywordtype}{void}* CL\_API\_CALL}
+\DoxyCodeLine{476 clHostMemAllocINTEL(}
+\DoxyCodeLine{477             cl\_context context,}
+\DoxyCodeLine{478             \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{479             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{480             cl\_uint alignment,}
+\DoxyCodeLine{481             cl\_int* errcode\_ret);}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483 \textcolor{keyword}{typedef} CL\_API\_ENTRY \textcolor{keywordtype}{void}* (CL\_API\_CALL *}
+\DoxyCodeLine{484 clHostMemAllocINTEL\_fn)(}
+\DoxyCodeLine{485             cl\_context context,}
+\DoxyCodeLine{486             \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{487             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{488             cl\_uint alignment,}
+\DoxyCodeLine{489             cl\_int* errcode\_ret);}
+\DoxyCodeLine{490 }
+\DoxyCodeLine{491 \textcolor{keyword}{extern} CL\_API\_ENTRY \textcolor{keywordtype}{void}* CL\_API\_CALL}
+\DoxyCodeLine{492 clDeviceMemAllocINTEL(}
+\DoxyCodeLine{493             cl\_context context,}
+\DoxyCodeLine{494             cl\_device\_id device,}
+\DoxyCodeLine{495             \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{496             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{497             cl\_uint alignment,}
+\DoxyCodeLine{498             cl\_int* errcode\_ret);}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500 \textcolor{keyword}{typedef} CL\_API\_ENTRY \textcolor{keywordtype}{void}* (CL\_API\_CALL *}
+\DoxyCodeLine{501 clDeviceMemAllocINTEL\_fn)(}
+\DoxyCodeLine{502             cl\_context context,}
+\DoxyCodeLine{503             cl\_device\_id device,}
+\DoxyCodeLine{504             \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{505             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{506             cl\_uint alignment,}
+\DoxyCodeLine{507             cl\_int* errcode\_ret);}
+\DoxyCodeLine{508 }
+\DoxyCodeLine{509 \textcolor{keyword}{extern} CL\_API\_ENTRY \textcolor{keywordtype}{void}* CL\_API\_CALL}
+\DoxyCodeLine{510 clSharedMemAllocINTEL(}
+\DoxyCodeLine{511             cl\_context context,}
+\DoxyCodeLine{512             cl\_device\_id device,}
+\DoxyCodeLine{513             \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{514             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{515             cl\_uint alignment,}
+\DoxyCodeLine{516             cl\_int* errcode\_ret);}
+\DoxyCodeLine{517 }
+\DoxyCodeLine{518 \textcolor{keyword}{typedef} CL\_API\_ENTRY \textcolor{keywordtype}{void}* (CL\_API\_CALL *}
+\DoxyCodeLine{519 clSharedMemAllocINTEL\_fn)(}
+\DoxyCodeLine{520             cl\_context context,}
+\DoxyCodeLine{521             cl\_device\_id device,}
+\DoxyCodeLine{522             \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{523             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{524             cl\_uint alignment,}
+\DoxyCodeLine{525             cl\_int* errcode\_ret);}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{528 clMemFreeINTEL(}
+\DoxyCodeLine{529             cl\_context context,}
+\DoxyCodeLine{530             \textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{532 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{533 clMemFreeINTEL\_fn)(}
+\DoxyCodeLine{534             cl\_context context,}
+\DoxyCodeLine{535             \textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{538 clMemBlockingFreeINTEL(}
+\DoxyCodeLine{539             cl\_context context,}
+\DoxyCodeLine{540             \textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{541 }
+\DoxyCodeLine{542 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{543 clMemBlockingFreeINTEL\_fn)(}
+\DoxyCodeLine{544             cl\_context context,}
+\DoxyCodeLine{545             \textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{548 clGetMemAllocInfoINTEL(}
+\DoxyCodeLine{549             cl\_context context,}
+\DoxyCodeLine{550             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr,}
+\DoxyCodeLine{551             cl\_mem\_info\_intel param\_name,}
+\DoxyCodeLine{552             \textcolor{keywordtype}{size\_t} param\_value\_size,}
+\DoxyCodeLine{553             \textcolor{keywordtype}{void}* param\_value,}
+\DoxyCodeLine{554             \textcolor{keywordtype}{size\_t}* param\_value\_size\_ret);}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{556 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{557 clGetMemAllocInfoINTEL\_fn)(}
+\DoxyCodeLine{558             cl\_context context,}
+\DoxyCodeLine{559             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr,}
+\DoxyCodeLine{560             cl\_mem\_info\_intel param\_name,}
+\DoxyCodeLine{561             \textcolor{keywordtype}{size\_t} param\_value\_size,}
+\DoxyCodeLine{562             \textcolor{keywordtype}{void}* param\_value,}
+\DoxyCodeLine{563             \textcolor{keywordtype}{size\_t}* param\_value\_size\_ret);}
+\DoxyCodeLine{564 }
+\DoxyCodeLine{565 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{566 clSetKernelArgMemPointerINTEL(}
+\DoxyCodeLine{567             cl\_kernel kernel,}
+\DoxyCodeLine{568             cl\_uint arg\_index,}
+\DoxyCodeLine{569             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* arg\_value);}
+\DoxyCodeLine{570 }
+\DoxyCodeLine{571 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{572 clSetKernelArgMemPointerINTEL\_fn)(}
+\DoxyCodeLine{573             cl\_kernel kernel,}
+\DoxyCodeLine{574             cl\_uint arg\_index,}
+\DoxyCodeLine{575             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* arg\_value);}
+\DoxyCodeLine{576 }
+\DoxyCodeLine{577 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{578 clEnqueueMemsetINTEL(       \textcolor{comment}{/* Deprecated */}}
+\DoxyCodeLine{579             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{580             \textcolor{keywordtype}{void}* dst\_ptr,}
+\DoxyCodeLine{581             cl\_int value,}
+\DoxyCodeLine{582             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{583             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{584             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{585             cl\_event* event);}
+\DoxyCodeLine{586 }
+\DoxyCodeLine{587 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{588 clEnqueueMemsetINTEL\_fn)(   \textcolor{comment}{/* Deprecated */}}
+\DoxyCodeLine{589             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{590             \textcolor{keywordtype}{void}* dst\_ptr,}
+\DoxyCodeLine{591             cl\_int value,}
+\DoxyCodeLine{592             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{593             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{594             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{595             cl\_event* event);}
+\DoxyCodeLine{596 }
+\DoxyCodeLine{597 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{598 clEnqueueMemFillINTEL(}
+\DoxyCodeLine{599             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{600             \textcolor{keywordtype}{void}* dst\_ptr,}
+\DoxyCodeLine{601             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* pattern,}
+\DoxyCodeLine{602             \textcolor{keywordtype}{size\_t} pattern\_size,}
+\DoxyCodeLine{603             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{604             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{605             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{606             cl\_event* event);}
+\DoxyCodeLine{607 }
+\DoxyCodeLine{608 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{609 clEnqueueMemFillINTEL\_fn)(}
+\DoxyCodeLine{610             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{611             \textcolor{keywordtype}{void}* dst\_ptr,}
+\DoxyCodeLine{612             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* pattern,}
+\DoxyCodeLine{613             \textcolor{keywordtype}{size\_t} pattern\_size,}
+\DoxyCodeLine{614             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{615             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{616             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{617             cl\_event* event);}
+\DoxyCodeLine{618 }
+\DoxyCodeLine{619 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{620 clEnqueueMemcpyINTEL(}
+\DoxyCodeLine{621             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{622             cl\_bool blocking,}
+\DoxyCodeLine{623             \textcolor{keywordtype}{void}* dst\_ptr,}
+\DoxyCodeLine{624             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src\_ptr,}
+\DoxyCodeLine{625             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{626             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{627             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{628             cl\_event* event);}
+\DoxyCodeLine{629 }
+\DoxyCodeLine{630 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{631 clEnqueueMemcpyINTEL\_fn)(}
+\DoxyCodeLine{632             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{633             cl\_bool blocking,}
+\DoxyCodeLine{634             \textcolor{keywordtype}{void}* dst\_ptr,}
+\DoxyCodeLine{635             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src\_ptr,}
+\DoxyCodeLine{636             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{637             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{638             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{639             cl\_event* event);}
+\DoxyCodeLine{640 }
+\DoxyCodeLine{641 \textcolor{preprocessor}{\#ifdef CL\_VERSION\_1\_2}}
+\DoxyCodeLine{642 }
+\DoxyCodeLine{643 \textcolor{comment}{/* Because these APIs use cl\_mem\_migration\_flags, they require}}
+\DoxyCodeLine{644 \textcolor{comment}{   OpenCL 1.2: */}}
+\DoxyCodeLine{645 }
+\DoxyCodeLine{646 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{647 clEnqueueMigrateMemINTEL(}
+\DoxyCodeLine{648             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{649             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr,}
+\DoxyCodeLine{650             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{651             cl\_mem\_migration\_flags flags,}
+\DoxyCodeLine{652             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{653             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{654             cl\_event* event);}
+\DoxyCodeLine{655 }
+\DoxyCodeLine{656 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{657 clEnqueueMigrateMemINTEL\_fn)(}
+\DoxyCodeLine{658             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{659             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr,}
+\DoxyCodeLine{660             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{661             cl\_mem\_migration\_flags flags,}
+\DoxyCodeLine{662             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{663             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{664             cl\_event* event);}
+\DoxyCodeLine{665 }
+\DoxyCodeLine{666 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_int CL\_API\_CALL}
+\DoxyCodeLine{669 clEnqueueMemAdviseINTEL(}
+\DoxyCodeLine{670             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{671             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr,}
+\DoxyCodeLine{672             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{673             cl\_mem\_advice\_intel advice,}
+\DoxyCodeLine{674             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{675             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{676             cl\_event* event);}
+\DoxyCodeLine{677 }
+\DoxyCodeLine{678 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_int (CL\_API\_CALL *}
+\DoxyCodeLine{679 clEnqueueMemAdviseINTEL\_fn)(}
+\DoxyCodeLine{680             cl\_command\_queue command\_queue,}
+\DoxyCodeLine{681             \textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr,}
+\DoxyCodeLine{682             \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{683             cl\_mem\_advice\_intel advice,}
+\DoxyCodeLine{684             cl\_uint num\_events\_in\_wait\_list,}
+\DoxyCodeLine{685             \textcolor{keyword}{const} cl\_event* event\_wait\_list,}
+\DoxyCodeLine{686             cl\_event* event);}
+\DoxyCodeLine{687 }
+\DoxyCodeLine{688 \textcolor{comment}{/***************************************************}}
+\DoxyCodeLine{689 \textcolor{comment}{* cl\_intel\_create\_buffer\_with\_properties extension *}}
+\DoxyCodeLine{690 \textcolor{comment}{****************************************************/}}
+\DoxyCodeLine{691 }
+\DoxyCodeLine{692 \textcolor{preprocessor}{\#define cl\_intel\_create\_buffer\_with\_properties 1}}
+\DoxyCodeLine{693 }
+\DoxyCodeLine{694 \textcolor{keyword}{extern} CL\_API\_ENTRY cl\_mem CL\_API\_CALL}
+\DoxyCodeLine{695 clCreateBufferWithPropertiesINTEL(}
+\DoxyCodeLine{696     cl\_context   context,}
+\DoxyCodeLine{697     \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{698     cl\_mem\_flags flags,}
+\DoxyCodeLine{699     \textcolor{keywordtype}{size\_t}       size,}
+\DoxyCodeLine{700     \textcolor{keywordtype}{void} *       host\_ptr,}
+\DoxyCodeLine{701     cl\_int *     errcode\_ret) CL\_EXT\_SUFFIX\_\_VERSION\_1\_0;}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{703 \textcolor{keyword}{typedef} CL\_API\_ENTRY cl\_mem (CL\_API\_CALL *}
+\DoxyCodeLine{704 clCreateBufferWithPropertiesINTEL\_fn)(}
+\DoxyCodeLine{705     cl\_context   context,}
+\DoxyCodeLine{706     \textcolor{keyword}{const} cl\_mem\_properties\_intel* properties,}
+\DoxyCodeLine{707     cl\_mem\_flags flags,}
+\DoxyCodeLine{708     \textcolor{keywordtype}{size\_t}       size,}
+\DoxyCodeLine{709     \textcolor{keywordtype}{void} *       host\_ptr,}
+\DoxyCodeLine{710     cl\_int *     errcode\_ret) CL\_EXT\_SUFFIX\_\_VERSION\_1\_0;}
+\DoxyCodeLine{711 }
+\DoxyCodeLine{712 \textcolor{comment}{/******************************************}}
+\DoxyCodeLine{713 \textcolor{comment}{* cl\_intel\_mem\_channel\_property extension *}}
+\DoxyCodeLine{714 \textcolor{comment}{*******************************************/}}
+\DoxyCodeLine{715 }
+\DoxyCodeLine{716 \textcolor{preprocessor}{\#define CL\_MEM\_CHANNEL\_INTEL            0x4213}}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{718 \textcolor{comment}{/*********************************}}
+\DoxyCodeLine{719 \textcolor{comment}{* cl\_intel\_mem\_force\_host\_memory *}}
+\DoxyCodeLine{720 \textcolor{comment}{**********************************/}}
+\DoxyCodeLine{721 }
+\DoxyCodeLine{722 \textcolor{preprocessor}{\#define cl\_intel\_mem\_force\_host\_memory 1}}
+\DoxyCodeLine{723 }
+\DoxyCodeLine{724 \textcolor{comment}{/* cl\_mem\_flags */}}
+\DoxyCodeLine{725 \textcolor{preprocessor}{\#define CL\_MEM\_FORCE\_HOST\_MEMORY\_INTEL                      (1 << 20)}}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{727 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{728 \}}
+\DoxyCodeLine{729 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_CL\_EXT\_INTEL\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

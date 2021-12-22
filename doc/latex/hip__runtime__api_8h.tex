@@ -1,0 +1,603 @@
+\hypertarget{hip__runtime__api_8h}{}\doxysection{/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/include/hip/hip\+\_\+runtime\+\_\+api.h File Reference}
+\label{hip__runtime__api_8h}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_runtime\_api.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/include/hip/hip\_runtime\_api.h}}
+
+
+Defines the API signatures for HIP runtime. This file can be compiled with a standard compiler.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$hip/hip\+\_\+version.\+h$>$}\newline
+{\ttfamily \#include $<$hip/hip\+\_\+common.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structhip_device_arch__t}{hip\+Device\+Arch\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structhip_device_prop__t}{hip\+Device\+Prop\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structhip_pointer_attribute__t}{hip\+Pointer\+Attribute\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structhip_device_prop__t}{hip\+Device\+Prop\+\_\+t}} \mbox{\hyperlink{hip__runtime__api_8h_a5a309fe9c7d118b2a628085119233f6b}{hip\+Device\+Prop\+\_\+t}}
+\item 
+typedef enum \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hip\+Memory\+Type}} \mbox{\hyperlink{hip__runtime__api_8h_a4eb3d41c8712bc87617de18ac120b935}{hip\+Memory\+Type}}
+\item 
+typedef struct \mbox{\hyperlink{structhip_pointer_attribute__t}{hip\+Pointer\+Attribute\+\_\+t}} \mbox{\hyperlink{hip__runtime__api_8h_af19e38458817cae41c20d4224fbe61a3}{hip\+Pointer\+Attribute\+\_\+t}}
+\item 
+typedef enum \+\_\+\+\_\+\+HIP\+\_\+\+NODISCARD hip\+Error\+\_\+t {\bfseries hip\+Error\+\_\+t}
+\item 
+typedef enum \mbox{\hyperlink{group___global_defs_gacc0acd7b9bda126c6bb3dfd6e2796d7c}{hip\+Device\+Attribute\+\_\+t}} {\bfseries hip\+Device\+Attribute\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a06fc87d81c62e9abb8790b6e5713c55b}\label{hip__runtime__api_8h_a06fc87d81c62e9abb8790b6e5713c55b}} 
+enum \{ {\bfseries HIP\+\_\+\+SUCCESS} = 0
+, {\bfseries HIP\+\_\+\+ERROR\+\_\+\+INVALID\+\_\+\+VALUE}
+, {\bfseries HIP\+\_\+\+ERROR\+\_\+\+NOT\+\_\+\+INITIALIZED}
+, {\bfseries HIP\+\_\+\+ERROR\+\_\+\+LAUNCH\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RESOURCES}
+ \}
+\item 
+enum \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hip\+Memory\+Type}} \{ \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a5c5c99ed85b2599362089aa089cdad77}{hip\+Memory\+Type\+Host}}
+, \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a0e5f84f5565ba2a011ef3a9df2584a7a}{hip\+Memory\+Type\+Device}}
+, \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3abbd7b93a87068c9dbb8d841ff0f3a366}{hip\+Memory\+Type\+Array}}
+, \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3aceb68d38418e0a54dd9f7c8e113a4ec4}{hip\+Memory\+Type\+Unified}}
+ \}
+\item 
+enum \mbox{\hyperlink{group___global_defs_gacc0acd7b9bda126c6bb3dfd6e2796d7c}{hip\+Device\+Attribute\+\_\+t}} \{ \newline
+{\bfseries hip\+Device\+Attribute\+Cuda\+Compatible\+Begin} = 0
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca52fa8868e3d06d6ceed35072946c4500}{hip\+Device\+Attribute\+Ecc\+Enabled}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca3453c7d157ca16c6a94c312205c3ae86}{hip\+Device\+Attribute\+Access\+Policy\+Max\+Window\+Size}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca773d2f74a90f647fcfec39ba19aa7b9e}{hip\+Device\+Attribute\+Async\+Engine\+Count}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca9753ae75a27d737cb02c3ef762275106}{hip\+Device\+Attribute\+Can\+Map\+Host\+Memory}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca56a8b8ee9b1165461ea6c1ee7d56e90d}{hip\+Device\+Attribute\+Can\+Use\+Host\+Pointer\+For\+Registered\+Mem}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca2300e077e020e7967592065561373b00}{hip\+Device\+Attribute\+Clock\+Rate}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca4d0369a6ef7bd7890fdcabc16ed3385d}{hip\+Device\+Attribute\+Compute\+Mode}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8af4079129030527721246176198f75d}{hip\+Device\+Attribute\+Compute\+Preemption\+Supported}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cad9f45254d0d048677f560032532d5504}{hip\+Device\+Attribute\+Concurrent\+Kernels}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca9e5af4761458152e645d2e1312767514}{hip\+Device\+Attribute\+Concurrent\+Managed\+Access}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6ffb0a3933411c136ea1f9d154fab5cc}{hip\+Device\+Attribute\+Cooperative\+Launch}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5169c438b4ba17f8588d744bf56d87e4}{hip\+Device\+Attribute\+Cooperative\+Multi\+Device\+Launch}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca41202a4affefb5cf099beb8c8bf70bbf}{hip\+Device\+Attribute\+Device\+Overlap}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca0037b357264179e4093c551a80a2a21c}{hip\+Device\+Attribute\+Direct\+Managed\+Mem\+Access\+From\+Host}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca28029ba35569753cbdbd777b21eab37b}{hip\+Device\+Attribute\+Global\+L1\+Cache\+Supported}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca1421bb450fe736fda9605a607be69836}{hip\+Device\+Attribute\+Host\+Native\+Atomic\+Supported}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa384485d5fe1ac26746d817af1aa669b}{hip\+Device\+Attribute\+Integrated}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6129311200a17dcc5fa8d2256874ae3d}{hip\+Device\+Attribute\+Is\+Multi\+Gpu\+Board}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca58434135137ef3af09567698829810f1}{hip\+Device\+Attribute\+Kernel\+Exec\+Timeout}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca582ae5a26a7148504878890028e4b64c}{hip\+Device\+Attribute\+L2\+Cache\+Size}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7d251fb7e063e4703489eddbc41a440d}{hip\+Device\+Attribute\+Local\+L1\+Cache\+Supported}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cada0ca948530460469095f6a63729219a}{hip\+Device\+Attribute\+Luid}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caea6c84c14d2539fc9abcdfb0f940acbe}{hip\+Device\+Attribute\+Luid\+Device\+Node\+Mask}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca2735739cf977b7d303266f6781131e8d}{hip\+Device\+Attribute\+Compute\+Capability\+Major}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa1a9b27307b3dda43201bfaead8458c5}{hip\+Device\+Attribute\+Managed\+Memory}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caae53485511cc012addc523e602ef9b98}{hip\+Device\+Attribute\+Max\+Blocks\+Per\+Multi\+Processor}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac1e4ac589db0d8adbbc241e3d0fcd594}{hip\+Device\+Attribute\+Max\+Block\+DimX}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca187dbffe12db09a56c0f75c340d879c9}{hip\+Device\+Attribute\+Max\+Block\+DimY}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caf811f51e03d1ffb025d80ac1da088675}{hip\+Device\+Attribute\+Max\+Block\+DimZ}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca03db8df0e7a9fbdaae683d97e8ac9c87}{hip\+Device\+Attribute\+Max\+Grid\+DimX}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5b5cc49972679c5ccf62b79425ee99df}{hip\+Device\+Attribute\+Max\+Grid\+DimY}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6c206ac083999caf4640e5d91dae24f7}{hip\+Device\+Attribute\+Max\+Grid\+DimZ}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8d9538aecd5fa764b6b13dd9ae05a1cf}{hip\+Device\+Attribute\+Max\+Surface1D}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca48c9f35454f5c329718bec08b54e8928}{hip\+Device\+Attribute\+Max\+Surface1\+DLayered}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca45e5f8d0e1b6b8ba58cf4b0f00b793b0}{hip\+Device\+Attribute\+Max\+Surface2D}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca63f784bd3a09ed4b9c1feb3628410bbe}{hip\+Device\+Attribute\+Max\+Surface2\+DLayered}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca09c1178054d1e7eda20fd5bd5dd17175}{hip\+Device\+Attribute\+Max\+Surface3D}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca1a76a9768fb8e98c4f437e3f7962027f}{hip\+Device\+Attribute\+Max\+Surface\+Cubemap}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca08a044c95db3574e2c89ca856adcf4df}{hip\+Device\+Attribute\+Max\+Surface\+Cubemap\+Layered}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca9ca92f0db9775c913bc681d87449bf1a}{hip\+Device\+Attribute\+Max\+Texture1\+DWidth}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cacc59d7cf69f95371c8e8d7fbccf13e73}{hip\+Device\+Attribute\+Max\+Texture1\+DLayered}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca929925869c0fee0db630b4fd08f87b3a}{hip\+Device\+Attribute\+Max\+Texture1\+DLinear}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca2428066c6ecb425d5b61c7532042bedf}{hip\+Device\+Attribute\+Max\+Texture1\+DMipmap}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caba995e4cf2e8e3cf99dbca7c5adf4342}{hip\+Device\+Attribute\+Max\+Texture2\+DWidth}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca523ab7684ddf2fd7ad7e7b9123e49163}{hip\+Device\+Attribute\+Max\+Texture2\+DHeight}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca92b064e8b236f1d06b528056ce6fddae}{hip\+Device\+Attribute\+Max\+Texture2\+DGather}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa4d2c06274d024a40fc0e4b797a5a3a2}{hip\+Device\+Attribute\+Max\+Texture2\+DLayered}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca45b44857785bff4085506a56022fbf0f}{hip\+Device\+Attribute\+Max\+Texture2\+DLinear}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caf1b78e548e4cd729f0e0be4ab7736c62}{hip\+Device\+Attribute\+Max\+Texture2\+DMipmap}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac38a9aec2fba4d56ad90a0bd76c26380}{hip\+Device\+Attribute\+Max\+Texture3\+DWidth}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca36a3b206969474f65c0d5ad4831c1ba8}{hip\+Device\+Attribute\+Max\+Texture3\+DHeight}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa7be0131e8f44109c377ca1b7d634ce7}{hip\+Device\+Attribute\+Max\+Texture3\+DDepth}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca90020ecaeb108308c5b13a335d5c9130}{hip\+Device\+Attribute\+Max\+Texture3\+DAlt}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca3b576766317055e3bf321761fe5d84fd}{hip\+Device\+Attribute\+Max\+Texture\+Cubemap}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caeab620ddac9e5520e0411fda9f6a5fb1}{hip\+Device\+Attribute\+Max\+Texture\+Cubemap\+Layered}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5a4d13aaac8710b1d078306125f24e25}{hip\+Device\+Attribute\+Max\+Threads\+Dim}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8327aa23782d9c994bdef33a6d62e02e}{hip\+Device\+Attribute\+Max\+Threads\+Per\+Block}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caddc08922b491eb1f6a583833cbf4e2f0}{hip\+Device\+Attribute\+Max\+Threads\+Per\+Multi\+Processor}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca0b3f58899744df724961b664061afd54}{hip\+Device\+Attribute\+Max\+Pitch}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca848c1396fab6f20463c6aefb828b0870}{hip\+Device\+Attribute\+Memory\+Bus\+Width}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6b68deafd65f036b30dc8051573eb000}{hip\+Device\+Attribute\+Memory\+Clock\+Rate}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca38edc4fcae456e47160d349da3249b85}{hip\+Device\+Attribute\+Compute\+Capability\+Minor}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7770672185967b47674798253cb7f47d}{hip\+Device\+Attribute\+Multi\+Gpu\+Board\+Group\+ID}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5c1519870733ccf0b83f722678240e5f}{hip\+Device\+Attribute\+Multiprocessor\+Count}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca1eebd317c912b422a1d66323e8605448}{hip\+Device\+Attribute\+Name}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca21e422662a09d4894c8ebc60473384ff}{hip\+Device\+Attribute\+Pageable\+Memory\+Access}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca14dff2a1b8c0ba131b06a6685bb052f3}{hip\+Device\+Attribute\+Pageable\+Memory\+Access\+Uses\+Host\+Page\+Tables}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca572b29c44f1322aa7657fdd784832f88}{hip\+Device\+Attribute\+Pci\+Bus\+Id}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca955d90286e87be9e3528f0b817ab32ff}{hip\+Device\+Attribute\+Pci\+Device\+Id}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cadb8cdb8c1f1e140ae5340cf9fbe8aa8e}{hip\+Device\+Attribute\+Pci\+Domain\+ID}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca52d3c74a3d94c02ebfda31b32a0cd75a}{hip\+Device\+Attribute\+Persisting\+L2\+Cache\+Max\+Size}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca82289b170192b6ea742be0efc6f95107}{hip\+Device\+Attribute\+Max\+Registers\+Per\+Block}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5f366458f31c0dc0f3faa0a11446ada4}{hip\+Device\+Attribute\+Max\+Registers\+Per\+Multiprocessor}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cad612849d153747b7be03b0e697a2aead}{hip\+Device\+Attribute\+Reserved\+Shared\+Mem\+Per\+Block}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7bca3aa18b26d40eba043ae93e15c7e5}{hip\+Device\+Attribute\+Max\+Shared\+Memory\+Per\+Block}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6299fb9b996d154c456d1622d447fe47}{hip\+Device\+Attribute\+Shared\+Mem\+Per\+Block\+Optin}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cae88a51d68a16de43c9036bd1c555e0c9}{hip\+Device\+Attribute\+Shared\+Mem\+Per\+Multiprocessor}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5aa88c2c66ab8d71bb5b3177da16eecd}{hip\+Device\+Attribute\+Single\+To\+Double\+Precision\+Perf\+Ratio}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca7ace06929e3bb30616db62f966ad50db}{hip\+Device\+Attribute\+Stream\+Priorities\+Supported}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca02af979ebb5db7921872c8eff4d667bd}{hip\+Device\+Attribute\+Surface\+Alignment}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca0eb1b68cd4148e015736be9dc965caa4}{hip\+Device\+Attribute\+Tcc\+Driver}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac72b2427df2ba58dbbee2e1399b3e135}{hip\+Device\+Attribute\+Texture\+Alignment}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cae044c1754ea66c8f9f7b420a2f14671e}{hip\+Device\+Attribute\+Texture\+Pitch\+Alignment}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cac6089ac3a0f9c77cc382fb0eaa73ae9c}{hip\+Device\+Attribute\+Total\+Constant\+Memory}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caad0e1bd8d5bb28ae8e0c710fd70bea29}{hip\+Device\+Attribute\+Total\+Global\+Mem}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca72a250028cf4eac11a83410a86de83a4}{hip\+Device\+Attribute\+Unified\+Addressing}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5d2d51c79c898f3b7714882e5c18fd1d}{hip\+Device\+Attribute\+Uuid}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caffd94133e823247a6f1215343232f6ec}{hip\+Device\+Attribute\+Warp\+Size}}
+, {\bfseries hip\+Device\+Attribute\+Cuda\+Compatible\+End} = 9999
+, {\bfseries hip\+Device\+Attribute\+Amd\+Specific\+Begin} = 10000
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caefd7213ecdc587ca7e74822d2ca97309}{hip\+Device\+Attribute\+Clock\+Instruction\+Rate}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa07ec54921a1bf8c0b454da21fedfa9d}{hip\+Device\+Attribute\+Arch}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cad3e7f3d01533b32e12211172fcf410ba}{hip\+Device\+Attribute\+Max\+Shared\+Memory\+Per\+Multiprocessor}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6be0d12d53e9f39ceba14df0a6720742}{hip\+Device\+Attribute\+Gcn\+Arch}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca5faea582f3f7b9663b9ecc7ef1bbae42}{hip\+Device\+Attribute\+Gcn\+Arch\+Name}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca6c9f83e4239d19aa000dd13cbcfc00dd}{hip\+Device\+Attribute\+Hdp\+Mem\+Flush\+Cntl}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca49f4f8395025ba1ebe1a0a7eff0f24ed}{hip\+Device\+Attribute\+Hdp\+Reg\+Flush\+Cntl}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca4d791a8a67ad0c89d413a67ce184be5d}{hip\+Device\+Attribute\+Cooperative\+Multi\+Device\+Unmatched\+Func}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caa5679987f35a74bfcbb1d3ac36db73cb}{hip\+Device\+Attribute\+Cooperative\+Multi\+Device\+Unmatched\+Grid\+Dim}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7caeb7c0c783e1f88a0675726bf2da6424b}{hip\+Device\+Attribute\+Cooperative\+Multi\+Device\+Unmatched\+Block\+Dim}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca3295f0728fc8152a98556d89ba81216f}{hip\+Device\+Attribute\+Cooperative\+Multi\+Device\+Unmatched\+Shared\+Mem}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7cab980fc82595b70b6338b9dd2b913ec26}{hip\+Device\+Attribute\+Is\+Large\+Bar}}
+, \mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca4e443d1d515e56a1f8cee4a9f3a7a546}{hip\+Device\+Attribute\+Asic\+Revision}}
+, \newline
+\mbox{\hyperlink{group___global_defs_ggacc0acd7b9bda126c6bb3dfd6e2796d7ca8179e5c1507831eaeb4690513e618913}{hip\+Device\+Attribute\+Can\+Use\+Stream\+Wait\+Value}}
+, {\bfseries hip\+Device\+Attribute\+Amd\+Specific\+End} = 19999
+, {\bfseries hip\+Device\+Attribute\+Vendor\+Specific\+Begin} = 20000
+ \}
+\item 
+\mbox{\Hypertarget{group___global_defs_ga35133e080ad8aecd57ec2c5387e3a376}\label{group___global_defs_ga35133e080ad8aecd57ec2c5387e3a376}} 
+enum {\bfseries hip\+Compute\+Mode} \{ {\bfseries hip\+Compute\+Mode\+Default} = 0
+, {\bfseries hip\+Compute\+Mode\+Exclusive} = 1
+, {\bfseries hip\+Compute\+Mode\+Prohibited} = 2
+, {\bfseries hip\+Compute\+Mode\+Exclusive\+Process} = 3
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ae4a28dbad173b548a3ac2a2092994d6b}\label{hip__runtime__api_8h_ae4a28dbad173b548a3ac2a2092994d6b}} 
+{\bfseries hip\+Success} = 0
+\begin{DoxyCompactList}\small\item\em Successful completion. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a657deda9809cdddcbfcd336a29894635}{hip\+Error\+Invalid\+Value}} = 1
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ae23caaaf7a374a9f79db8c0909c83a8d}\label{hip__runtime__api_8h_ae23caaaf7a374a9f79db8c0909c83a8d}} 
+{\bfseries hip\+Error\+Out\+Of\+Memory} = 2
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a05eeeb24bcbaf9bce1e70c96406e11d3}\label{hip__runtime__api_8h_a05eeeb24bcbaf9bce1e70c96406e11d3}} 
+{\bfseries hip\+Error\+Memory\+Allocation} = 2
+\begin{DoxyCompactList}\small\item\em Memory allocation error. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a3d05c67d55c8aa7f82639a2f5f829be7}\label{hip__runtime__api_8h_a3d05c67d55c8aa7f82639a2f5f829be7}} 
+{\bfseries hip\+Error\+Not\+Initialized} = 3
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a5c89e5f5df28b68b481e4070dd079252}\label{hip__runtime__api_8h_a5c89e5f5df28b68b481e4070dd079252}} 
+{\bfseries hip\+Error\+Initialization\+Error} = 3
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ace22befc51bb6dd1bdb3f0d8517b1409}\label{hip__runtime__api_8h_ace22befc51bb6dd1bdb3f0d8517b1409}} 
+{\bfseries hip\+Error\+Deinitialized} = 4
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a0ef7384b10737f3c0a04d650347f2b64}\label{hip__runtime__api_8h_a0ef7384b10737f3c0a04d650347f2b64}} 
+{\bfseries hip\+Error\+Profiler\+Disabled} = 5
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ab4beac0c6a3efa3f287fabdad39938b1}\label{hip__runtime__api_8h_ab4beac0c6a3efa3f287fabdad39938b1}} 
+{\bfseries hip\+Error\+Profiler\+Not\+Initialized} = 6
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ab4c7951acb5a8eca5686d4f35c12c8a8}\label{hip__runtime__api_8h_ab4c7951acb5a8eca5686d4f35c12c8a8}} 
+{\bfseries hip\+Error\+Profiler\+Already\+Started} = 7
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_acbbc174b8df47e6cd2f36504b673d1cb}\label{hip__runtime__api_8h_acbbc174b8df47e6cd2f36504b673d1cb}} 
+{\bfseries hip\+Error\+Profiler\+Already\+Stopped} = 8
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ad2e6cccb1d5fb3027a24cd2f4235fe5b}\label{hip__runtime__api_8h_ad2e6cccb1d5fb3027a24cd2f4235fe5b}} 
+{\bfseries hip\+Error\+Invalid\+Configuration} = 9
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a3e430f069904db0f8aefdaeb67effa22}\label{hip__runtime__api_8h_a3e430f069904db0f8aefdaeb67effa22}} 
+{\bfseries hip\+Error\+Invalid\+Pitch\+Value} = 12
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ae421cba0a78149a64ddfe5d3a3ac7ddc}\label{hip__runtime__api_8h_ae421cba0a78149a64ddfe5d3a3ac7ddc}} 
+{\bfseries hip\+Error\+Invalid\+Symbol} = 13
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a12c0c3939a86d4cf25df0e00abca9a6b}\label{hip__runtime__api_8h_a12c0c3939a86d4cf25df0e00abca9a6b}} 
+{\bfseries hip\+Error\+Invalid\+Device\+Pointer} = 17
+\begin{DoxyCompactList}\small\item\em Invalid Device Pointer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_afaf16f46f53d8dc4b42ddcf896f40c14}\label{hip__runtime__api_8h_afaf16f46f53d8dc4b42ddcf896f40c14}} 
+{\bfseries hip\+Error\+Invalid\+Memcpy\+Direction} = 21
+\begin{DoxyCompactList}\small\item\em Invalid memory copy direction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_aef0d4743caf5249274dcabd843f9f978}\label{hip__runtime__api_8h_aef0d4743caf5249274dcabd843f9f978}} 
+{\bfseries hip\+Error\+Insufficient\+Driver} = 35
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a78545a1decf8081b29e56fb12143b2e3}\label{hip__runtime__api_8h_a78545a1decf8081b29e56fb12143b2e3}} 
+{\bfseries hip\+Error\+Missing\+Configuration} = 52
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a5f3693e60f9eff0d6dc62de673dc4115}\label{hip__runtime__api_8h_a5f3693e60f9eff0d6dc62de673dc4115}} 
+{\bfseries hip\+Error\+Prior\+Launch\+Failure} = 53
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a9f94b582bc6d3780d616e697b9d364c3}\label{hip__runtime__api_8h_a9f94b582bc6d3780d616e697b9d364c3}} 
+{\bfseries hip\+Error\+Invalid\+Device\+Function} = 98
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_abaff13a1ce1dd40f0578115c56d9dc8d}\label{hip__runtime__api_8h_abaff13a1ce1dd40f0578115c56d9dc8d}} 
+{\bfseries hip\+Error\+No\+Device} = 100
+\begin{DoxyCompactList}\small\item\em Call to hip\+Get\+Device\+Count returned 0 devices. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a6f9140865b70074d26b28b72b5b832b5}\label{hip__runtime__api_8h_a6f9140865b70074d26b28b72b5b832b5}} 
+{\bfseries hip\+Error\+Invalid\+Device} = 101
+\begin{DoxyCompactList}\small\item\em Device\+ID must be in range 0...\#compute-\/devices. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a1988fef2a9c47f5c0986b88a79d030a4}\label{hip__runtime__api_8h_a1988fef2a9c47f5c0986b88a79d030a4}} 
+{\bfseries hip\+Error\+Invalid\+Image} = 200
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a50d78024cb74c593bb51563027f78e97}\label{hip__runtime__api_8h_a50d78024cb74c593bb51563027f78e97}} 
+{\bfseries hip\+Error\+Invalid\+Context} = 201
+\begin{DoxyCompactList}\small\item\em Produced when input context is invalid. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_afae93e4dbd64d93422fc9a288e733c8f}\label{hip__runtime__api_8h_afae93e4dbd64d93422fc9a288e733c8f}} 
+{\bfseries hip\+Error\+Context\+Already\+Current} = 202
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ac17907adccb71e0ffdbfdbf793980a3d}\label{hip__runtime__api_8h_ac17907adccb71e0ffdbfdbf793980a3d}} 
+{\bfseries hip\+Error\+Map\+Failed} = 205
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a7022728813a843e61609a33e6c227a5c}\label{hip__runtime__api_8h_a7022728813a843e61609a33e6c227a5c}} 
+{\bfseries hip\+Error\+Map\+Buffer\+Object\+Failed} = 205
+\begin{DoxyCompactList}\small\item\em Produced when the IPC memory attach failed from ROCr. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a673578f1ca7273c3758167c64d02b606}\label{hip__runtime__api_8h_a673578f1ca7273c3758167c64d02b606}} 
+{\bfseries hip\+Error\+Unmap\+Failed} = 206
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a241833d24dd3522ec343f96c8dd090ee}\label{hip__runtime__api_8h_a241833d24dd3522ec343f96c8dd090ee}} 
+{\bfseries hip\+Error\+Array\+Is\+Mapped} = 207
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_aaf50525f1f69afa4bbb1c038cca91fce}\label{hip__runtime__api_8h_aaf50525f1f69afa4bbb1c038cca91fce}} 
+{\bfseries hip\+Error\+Already\+Mapped} = 208
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a4c00fd98df29b38f17ba18570693c34f}\label{hip__runtime__api_8h_a4c00fd98df29b38f17ba18570693c34f}} 
+{\bfseries hip\+Error\+No\+Binary\+For\+Gpu} = 209
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_aecfa4e26bd686ba79333cc3203453117}\label{hip__runtime__api_8h_aecfa4e26bd686ba79333cc3203453117}} 
+{\bfseries hip\+Error\+Already\+Acquired} = 210
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a2dec418e2e372f569c0d4d46986f8051}\label{hip__runtime__api_8h_a2dec418e2e372f569c0d4d46986f8051}} 
+{\bfseries hip\+Error\+Not\+Mapped} = 211
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_acfbac2564a5b95ca412b512f00de3b6e}\label{hip__runtime__api_8h_acfbac2564a5b95ca412b512f00de3b6e}} 
+{\bfseries hip\+Error\+Not\+Mapped\+As\+Array} = 212
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a5d15a4decc9ee7edec5d937d32309f84}\label{hip__runtime__api_8h_a5d15a4decc9ee7edec5d937d32309f84}} 
+{\bfseries hip\+Error\+Not\+Mapped\+As\+Pointer} = 213
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a7f16d5ecc7cd9d7baa12aa21bd74e2b9}\label{hip__runtime__api_8h_a7f16d5ecc7cd9d7baa12aa21bd74e2b9}} 
+{\bfseries hip\+Error\+ECCNot\+Correctable} = 214
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a700ce451a4df4dca02b539df3cd8c03d}\label{hip__runtime__api_8h_a700ce451a4df4dca02b539df3cd8c03d}} 
+{\bfseries hip\+Error\+Unsupported\+Limit} = 215
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a8c55dfeda10a4bd23875e15d8a7d3077}\label{hip__runtime__api_8h_a8c55dfeda10a4bd23875e15d8a7d3077}} 
+{\bfseries hip\+Error\+Context\+Already\+In\+Use} = 216
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a23dea6ad3fc2778dee28b33fa43fd802}\label{hip__runtime__api_8h_a23dea6ad3fc2778dee28b33fa43fd802}} 
+{\bfseries hip\+Error\+Peer\+Access\+Unsupported} = 217
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a278559b9c4a689af93f24217658c2522}\label{hip__runtime__api_8h_a278559b9c4a689af93f24217658c2522}} 
+{\bfseries hip\+Error\+Invalid\+Kernel\+File} = 218
+\begin{DoxyCompactList}\small\item\em In CUDA DRV, it is CUDA\+\_\+\+ERROR\+\_\+\+INVALID\+\_\+\+PTX. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ada5df6316020e501283885c577839588}\label{hip__runtime__api_8h_ada5df6316020e501283885c577839588}} 
+{\bfseries hip\+Error\+Invalid\+Graphics\+Context} = 219
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a940395e27285e7da0a0357512e4f0c8a}\label{hip__runtime__api_8h_a940395e27285e7da0a0357512e4f0c8a}} 
+{\bfseries hip\+Error\+Invalid\+Source} = 300
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a68b083041e88827b329d20bbd06df557}\label{hip__runtime__api_8h_a68b083041e88827b329d20bbd06df557}} 
+{\bfseries hip\+Error\+File\+Not\+Found} = 301
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a786f82e3ad5231a71b0b667b02121cd6}\label{hip__runtime__api_8h_a786f82e3ad5231a71b0b667b02121cd6}} 
+{\bfseries hip\+Error\+Shared\+Object\+Symbol\+Not\+Found} = 302
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a3e2bb13294030f0ebce0a5db1b55c4c4}\label{hip__runtime__api_8h_a3e2bb13294030f0ebce0a5db1b55c4c4}} 
+{\bfseries hip\+Error\+Shared\+Object\+Init\+Failed} = 303
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a57b7f198b5706b2bc57e39029803bd3a}\label{hip__runtime__api_8h_a57b7f198b5706b2bc57e39029803bd3a}} 
+{\bfseries hip\+Error\+Operating\+System} = 304
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_aeb3d4c53136bc4d018316afb760a0611}\label{hip__runtime__api_8h_aeb3d4c53136bc4d018316afb760a0611}} 
+{\bfseries hip\+Error\+Invalid\+Handle} = 400
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a3d3fd8119e311ec4c028e74225d5edc2}\label{hip__runtime__api_8h_a3d3fd8119e311ec4c028e74225d5edc2}} 
+{\bfseries hip\+Error\+Invalid\+Resource\+Handle} = 400
+\begin{DoxyCompactList}\small\item\em Resource handle (hip\+Event\+\_\+t or hip\+Stream\+\_\+t) invalid. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_adbc9063863e0cb8f70021622133161b7}\label{hip__runtime__api_8h_adbc9063863e0cb8f70021622133161b7}} 
+{\bfseries hip\+Error\+Illegal\+State} = 401
+\begin{DoxyCompactList}\small\item\em Resource required is not in a valid state to perform operation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a06c39dc608210baa87be26f49620197d}\label{hip__runtime__api_8h_a06c39dc608210baa87be26f49620197d}} 
+{\bfseries hip\+Error\+Not\+Found} = 500
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a8e981181b750f34a4c9532cbba73ba76}{hip\+Error\+Not\+Ready}} = 600
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a0386ff3376dee4133856cd9a1d02a7eb}\label{hip__runtime__api_8h_a0386ff3376dee4133856cd9a1d02a7eb}} 
+{\bfseries hip\+Error\+Illegal\+Address} = 700
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a9aefc3e9d1456dcfd6e9344b87cdd90a}\label{hip__runtime__api_8h_a9aefc3e9d1456dcfd6e9344b87cdd90a}} 
+{\bfseries hip\+Error\+Launch\+Out\+Of\+Resources} = 701
+\begin{DoxyCompactList}\small\item\em Out of resources error. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a66dc2910c027f51c0730e165395ed131}\label{hip__runtime__api_8h_a66dc2910c027f51c0730e165395ed131}} 
+{\bfseries hip\+Error\+Launch\+Time\+Out} = 702
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_acf78b2ed8f41d21e8f23eaa084c75349}{hip\+Error\+Peer\+Access\+Already\+Enabled}}
+\begin{DoxyCompactList}\small\item\em Peer access was already enabled from the current device. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a5605bce676c6a2b37d04a21971f0d596}\label{hip__runtime__api_8h_a5605bce676c6a2b37d04a21971f0d596}} 
+{\bfseries hip\+Error\+Peer\+Access\+Not\+Enabled} = 705
+\begin{DoxyCompactList}\small\item\em Peer access was never enabled from the current device. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a67cb78915676025c488014407580c212}\label{hip__runtime__api_8h_a67cb78915676025c488014407580c212}} 
+{\bfseries hip\+Error\+Set\+On\+Active\+Process} = 708
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a6351a54f4747c7ada9963ca60ec74cf4}\label{hip__runtime__api_8h_a6351a54f4747c7ada9963ca60ec74cf4}} 
+{\bfseries hip\+Error\+Context\+Is\+Destroyed} = 709
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a88730674de63a86cfbd71cadb65a178d}\label{hip__runtime__api_8h_a88730674de63a86cfbd71cadb65a178d}} 
+{\bfseries hip\+Error\+Assert} = 710
+\begin{DoxyCompactList}\small\item\em Produced when the kernel calls assert. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a72d149b0136daea226380c5132e8fb41}{hip\+Error\+Host\+Memory\+Already\+Registered}}
+\begin{DoxyCompactList}\small\item\em Produced when trying to lock a page-\/locked memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{hip__runtime__api_8h_af00e5e06824b43d1a91fc1f66cee8abe}{hip\+Error\+Host\+Memory\+Not\+Registered}}
+\begin{DoxyCompactList}\small\item\em Produced when trying to unlock a non-\/page-\/locked memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_a6f1f32a3741b37e03030cfbc08852f6a}\label{hip__runtime__api_8h_a6f1f32a3741b37e03030cfbc08852f6a}} 
+{\bfseries hip\+Error\+Launch\+Failure} = 719
+\begin{DoxyCompactList}\small\item\em An exception occurred on the device while executing a kernel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{hip__runtime__api_8h_aa935871ec793bddb05a16585eb6e7610}{hip\+Error\+Cooperative\+Launch\+Too\+Large}}
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ad037fb0b0de6155067a1a561070008cc}\label{hip__runtime__api_8h_ad037fb0b0de6155067a1a561070008cc}} 
+{\bfseries hip\+Error\+Not\+Supported} = 801
+\begin{DoxyCompactList}\small\item\em Produced when the hip API is not supported/implemented. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a559492d5a940523210be9bfd5e9bd21c}{hip\+Error\+Stream\+Capture\+Unsupported}} = 900
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_ac602971341075208eaf7337df7bdbc53}{hip\+Error\+Stream\+Capture\+Invalidated}} = 901
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_ad75417ed16a1ca2012810232e57c28ea}{hip\+Error\+Stream\+Capture\+Merge}} = 902
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_aeb40419dba42abb29596ed33d14ba37d}\label{hip__runtime__api_8h_aeb40419dba42abb29596ed33d14ba37d}} 
+{\bfseries hip\+Error\+Stream\+Capture\+Unmatched} = 903
+\begin{DoxyCompactList}\small\item\em The capture was not initiated in this stream. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a59e9d63626bb3362201edfd42b59414e}{hip\+Error\+Stream\+Capture\+Unjoined}} = 904
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a258f25d58416bc8b797976ad94021fa1}{hip\+Error\+Stream\+Capture\+Isolation}} = 905
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_ad6fee0d337b88d486f9eda8608275334}{hip\+Error\+Stream\+Capture\+Implicit}} = 906
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_aebc72bda905596209d4b40bc8d93d63a}{hip\+Error\+Captured\+Event}} = 907
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a8408604c91ff5be40b1136be96ee997d}{hip\+Error\+Stream\+Capture\+Wrong\+Thread}} = 908
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a3aa157043af8a1579eb0d89c05ff5aa1}{hip\+Error\+Graph\+Exec\+Update\+Failure}} = 910
+\item 
+\mbox{\Hypertarget{hip__runtime__api_8h_ae67bef804631be7d7eeebb93d933958c}\label{hip__runtime__api_8h_ae67bef804631be7d7eeebb93d933958c}} 
+{\bfseries hip\+Error\+Unknown} = 999
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_a18438eee895bcf9832fbc2d1c27776d8}{hip\+Error\+Runtime\+Memory}} = 1052
+\item 
+\mbox{\hyperlink{hip__runtime__api_8h_af727a2bf27aa44da418f8c53a183850a}{hip\+Error\+Runtime\+Other}} = 1053
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the API signatures for HIP runtime. This file can be compiled with a standard compiler. 
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{hip__runtime__api_8h_a5a309fe9c7d118b2a628085119233f6b}\label{hip__runtime__api_8h_a5a309fe9c7d118b2a628085119233f6b}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipDeviceProp\_t@{hipDeviceProp\_t}}
+\index{hipDeviceProp\_t@{hipDeviceProp\_t}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipDeviceProp\_t}{hipDeviceProp\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structhip_device_prop__t}{hip\+Device\+Prop\+\_\+t}} \mbox{\hyperlink{structhip_device_prop__t}{hip\+Device\+Prop\+\_\+t}}}
+
+hip\+Device\+Prop \mbox{\Hypertarget{hip__runtime__api_8h_a4eb3d41c8712bc87617de18ac120b935}\label{hip__runtime__api_8h_a4eb3d41c8712bc87617de18ac120b935}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipMemoryType@{hipMemoryType}}
+\index{hipMemoryType@{hipMemoryType}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipMemoryType}{hipMemoryType}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hip\+Memory\+Type}} \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hip\+Memory\+Type}}}
+
+Memory type (for pointer attributes) \mbox{\Hypertarget{hip__runtime__api_8h_af19e38458817cae41c20d4224fbe61a3}\label{hip__runtime__api_8h_af19e38458817cae41c20d4224fbe61a3}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipPointerAttribute\_t@{hipPointerAttribute\_t}}
+\index{hipPointerAttribute\_t@{hipPointerAttribute\_t}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipPointerAttribute\_t}{hipPointerAttribute\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structhip_pointer_attribute__t}{hip\+Pointer\+Attribute\+\_\+t}} \mbox{\hyperlink{structhip_pointer_attribute__t}{hip\+Pointer\+Attribute\+\_\+t}}}
+
+Pointer attributes 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}\label{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipMemoryType@{hipMemoryType}}
+\index{hipMemoryType@{hipMemoryType}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipMemoryType}{hipMemoryType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3}{hip\+Memory\+Type}}}
+
+Memory type (for pointer attributes) \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{hipMemoryTypeHost@{hipMemoryTypeHost}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipMemoryTypeHost@{hipMemoryTypeHost}}}\mbox{\Hypertarget{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a5c5c99ed85b2599362089aa089cdad77}\label{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a5c5c99ed85b2599362089aa089cdad77}} 
+hip\+Memory\+Type\+Host&Memory is physically located on host. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{hipMemoryTypeDevice@{hipMemoryTypeDevice}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipMemoryTypeDevice@{hipMemoryTypeDevice}}}\mbox{\Hypertarget{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a0e5f84f5565ba2a011ef3a9df2584a7a}\label{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3a0e5f84f5565ba2a011ef3a9df2584a7a}} 
+hip\+Memory\+Type\+Device&Memory is physically located on device. (see device\+Id for specific device) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{hipMemoryTypeArray@{hipMemoryTypeArray}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipMemoryTypeArray@{hipMemoryTypeArray}}}\mbox{\Hypertarget{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3abbd7b93a87068c9dbb8d841ff0f3a366}\label{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3abbd7b93a87068c9dbb8d841ff0f3a366}} 
+hip\+Memory\+Type\+Array&Array memory, physically located on device. (see device\+Id for specific device) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{hipMemoryTypeUnified@{hipMemoryTypeUnified}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipMemoryTypeUnified@{hipMemoryTypeUnified}}}\mbox{\Hypertarget{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3aceb68d38418e0a54dd9f7c8e113a4ec4}\label{hip__runtime__api_8h_aea86e91d3cd65992d787b39b218435a3aceb68d38418e0a54dd9f7c8e113a4ec4}} 
+hip\+Memory\+Type\+Unified&Not used currently. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{hip__runtime__api_8h_aebc72bda905596209d4b40bc8d93d63a}\label{hip__runtime__api_8h_aebc72bda905596209d4b40bc8d93d63a}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorCapturedEvent@{hipErrorCapturedEvent}}
+\index{hipErrorCapturedEvent@{hipErrorCapturedEvent}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorCapturedEvent}{hipErrorCapturedEvent}}
+{\footnotesize\ttfamily hip\+Error\+Captured\+Event = 907}
+
+The operation is not permitted on an event which was last recorded in a capturing stream. \mbox{\Hypertarget{hip__runtime__api_8h_aa935871ec793bddb05a16585eb6e7610}\label{hip__runtime__api_8h_aa935871ec793bddb05a16585eb6e7610}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorCooperativeLaunchTooLarge@{hipErrorCooperativeLaunchTooLarge}}
+\index{hipErrorCooperativeLaunchTooLarge@{hipErrorCooperativeLaunchTooLarge}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorCooperativeLaunchTooLarge}{hipErrorCooperativeLaunchTooLarge}}
+{\footnotesize\ttfamily hip\+Error\+Cooperative\+Launch\+Too\+Large}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      720}
+
+\end{DoxyCode}
+This error indicates that the number of blocks launched per grid for a kernel that was launched via cooperative launch APIs exceeds the maximum number of allowed blocks for the current device \mbox{\Hypertarget{hip__runtime__api_8h_a3aa157043af8a1579eb0d89c05ff5aa1}\label{hip__runtime__api_8h_a3aa157043af8a1579eb0d89c05ff5aa1}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorGraphExecUpdateFailure@{hipErrorGraphExecUpdateFailure}}
+\index{hipErrorGraphExecUpdateFailure@{hipErrorGraphExecUpdateFailure}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorGraphExecUpdateFailure}{hipErrorGraphExecUpdateFailure}}
+{\footnotesize\ttfamily hip\+Error\+Graph\+Exec\+Update\+Failure = 910}
+
+This error indicates that the graph update not performed because it included changes which violated constraintsspecific to instantiated graph update. \mbox{\Hypertarget{hip__runtime__api_8h_a72d149b0136daea226380c5132e8fb41}\label{hip__runtime__api_8h_a72d149b0136daea226380c5132e8fb41}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorHostMemoryAlreadyRegistered@{hipErrorHostMemoryAlreadyRegistered}}
+\index{hipErrorHostMemoryAlreadyRegistered@{hipErrorHostMemoryAlreadyRegistered}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorHostMemoryAlreadyRegistered}{hipErrorHostMemoryAlreadyRegistered}}
+{\footnotesize\ttfamily hip\+Error\+Host\+Memory\+Already\+Registered}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      712}
+
+\end{DoxyCode}
+
+
+Produced when trying to lock a page-\/locked memory. 
+
+\mbox{\Hypertarget{hip__runtime__api_8h_af00e5e06824b43d1a91fc1f66cee8abe}\label{hip__runtime__api_8h_af00e5e06824b43d1a91fc1f66cee8abe}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorHostMemoryNotRegistered@{hipErrorHostMemoryNotRegistered}}
+\index{hipErrorHostMemoryNotRegistered@{hipErrorHostMemoryNotRegistered}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorHostMemoryNotRegistered}{hipErrorHostMemoryNotRegistered}}
+{\footnotesize\ttfamily hip\+Error\+Host\+Memory\+Not\+Registered}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      713}
+
+\end{DoxyCode}
+
+
+Produced when trying to unlock a non-\/page-\/locked memory. 
+
+\mbox{\Hypertarget{hip__runtime__api_8h_a657deda9809cdddcbfcd336a29894635}\label{hip__runtime__api_8h_a657deda9809cdddcbfcd336a29894635}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorInvalidValue@{hipErrorInvalidValue}}
+\index{hipErrorInvalidValue@{hipErrorInvalidValue}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorInvalidValue}{hipErrorInvalidValue}}
+{\footnotesize\ttfamily hip\+Error\+Invalid\+Value = 1}
+
+One or more of the parameters passed to the API call is NULL or not in an acceptable range. \mbox{\Hypertarget{hip__runtime__api_8h_a8e981181b750f34a4c9532cbba73ba76}\label{hip__runtime__api_8h_a8e981181b750f34a4c9532cbba73ba76}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorNotReady@{hipErrorNotReady}}
+\index{hipErrorNotReady@{hipErrorNotReady}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorNotReady}{hipErrorNotReady}}
+{\footnotesize\ttfamily hip\+Error\+Not\+Ready = 600}
+
+Indicates that asynchronous operations enqueued earlier are not ready. This is not actually an error, but is used to distinguish from hip\+Success (which indicates completion). APIs that return this error include hip\+Event\+Query and hip\+Stream\+Query. \mbox{\Hypertarget{hip__runtime__api_8h_acf78b2ed8f41d21e8f23eaa084c75349}\label{hip__runtime__api_8h_acf78b2ed8f41d21e8f23eaa084c75349}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorPeerAccessAlreadyEnabled@{hipErrorPeerAccessAlreadyEnabled}}
+\index{hipErrorPeerAccessAlreadyEnabled@{hipErrorPeerAccessAlreadyEnabled}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorPeerAccessAlreadyEnabled}{hipErrorPeerAccessAlreadyEnabled}}
+{\footnotesize\ttfamily hip\+Error\+Peer\+Access\+Already\+Enabled}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      704}
+
+\end{DoxyCode}
+
+
+Peer access was already enabled from the current device. 
+
+\mbox{\Hypertarget{hip__runtime__api_8h_a18438eee895bcf9832fbc2d1c27776d8}\label{hip__runtime__api_8h_a18438eee895bcf9832fbc2d1c27776d8}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorRuntimeMemory@{hipErrorRuntimeMemory}}
+\index{hipErrorRuntimeMemory@{hipErrorRuntimeMemory}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorRuntimeMemory}{hipErrorRuntimeMemory}}
+{\footnotesize\ttfamily hip\+Error\+Runtime\+Memory = 1052}
+
+HSA runtime memory call returned error. Typically not seen in production systems. \mbox{\Hypertarget{hip__runtime__api_8h_af727a2bf27aa44da418f8c53a183850a}\label{hip__runtime__api_8h_af727a2bf27aa44da418f8c53a183850a}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorRuntimeOther@{hipErrorRuntimeOther}}
+\index{hipErrorRuntimeOther@{hipErrorRuntimeOther}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorRuntimeOther}{hipErrorRuntimeOther}}
+{\footnotesize\ttfamily hip\+Error\+Runtime\+Other = 1053}
+
+HSA runtime call other than memory returned error. Typically not seen in production systems. \mbox{\Hypertarget{hip__runtime__api_8h_ad6fee0d337b88d486f9eda8608275334}\label{hip__runtime__api_8h_ad6fee0d337b88d486f9eda8608275334}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorStreamCaptureImplicit@{hipErrorStreamCaptureImplicit}}
+\index{hipErrorStreamCaptureImplicit@{hipErrorStreamCaptureImplicit}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorStreamCaptureImplicit}{hipErrorStreamCaptureImplicit}}
+{\footnotesize\ttfamily hip\+Error\+Stream\+Capture\+Implicit = 906}
+
+The operation would have resulted in a disallowed implicit dependency on a current capture sequence from hip\+Stream\+Legacy. \mbox{\Hypertarget{hip__runtime__api_8h_ac602971341075208eaf7337df7bdbc53}\label{hip__runtime__api_8h_ac602971341075208eaf7337df7bdbc53}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorStreamCaptureInvalidated@{hipErrorStreamCaptureInvalidated}}
+\index{hipErrorStreamCaptureInvalidated@{hipErrorStreamCaptureInvalidated}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorStreamCaptureInvalidated}{hipErrorStreamCaptureInvalidated}}
+{\footnotesize\ttfamily hip\+Error\+Stream\+Capture\+Invalidated = 901}
+
+The current capture sequence on the stream has been invalidated due to a previous error. \mbox{\Hypertarget{hip__runtime__api_8h_a258f25d58416bc8b797976ad94021fa1}\label{hip__runtime__api_8h_a258f25d58416bc8b797976ad94021fa1}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorStreamCaptureIsolation@{hipErrorStreamCaptureIsolation}}
+\index{hipErrorStreamCaptureIsolation@{hipErrorStreamCaptureIsolation}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorStreamCaptureIsolation}{hipErrorStreamCaptureIsolation}}
+{\footnotesize\ttfamily hip\+Error\+Stream\+Capture\+Isolation = 905}
+
+\mbox{\hyperlink{class_a}{A}} dependency would have been created which crosses the capture sequence boundary. Only implicit in-\/stream ordering dependencies are allowed to cross the boundary \mbox{\Hypertarget{hip__runtime__api_8h_ad75417ed16a1ca2012810232e57c28ea}\label{hip__runtime__api_8h_ad75417ed16a1ca2012810232e57c28ea}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorStreamCaptureMerge@{hipErrorStreamCaptureMerge}}
+\index{hipErrorStreamCaptureMerge@{hipErrorStreamCaptureMerge}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorStreamCaptureMerge}{hipErrorStreamCaptureMerge}}
+{\footnotesize\ttfamily hip\+Error\+Stream\+Capture\+Merge = 902}
+
+The operation would have resulted in a merge of two independent capture sequences. \mbox{\Hypertarget{hip__runtime__api_8h_a59e9d63626bb3362201edfd42b59414e}\label{hip__runtime__api_8h_a59e9d63626bb3362201edfd42b59414e}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorStreamCaptureUnjoined@{hipErrorStreamCaptureUnjoined}}
+\index{hipErrorStreamCaptureUnjoined@{hipErrorStreamCaptureUnjoined}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorStreamCaptureUnjoined}{hipErrorStreamCaptureUnjoined}}
+{\footnotesize\ttfamily hip\+Error\+Stream\+Capture\+Unjoined = 904}
+
+The capture sequence contains a fork that was not joined to the primary stream. \mbox{\Hypertarget{hip__runtime__api_8h_a559492d5a940523210be9bfd5e9bd21c}\label{hip__runtime__api_8h_a559492d5a940523210be9bfd5e9bd21c}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorStreamCaptureUnsupported@{hipErrorStreamCaptureUnsupported}}
+\index{hipErrorStreamCaptureUnsupported@{hipErrorStreamCaptureUnsupported}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorStreamCaptureUnsupported}{hipErrorStreamCaptureUnsupported}}
+{\footnotesize\ttfamily hip\+Error\+Stream\+Capture\+Unsupported = 900}
+
+The operation is not permitted when the stream is capturing. \mbox{\Hypertarget{hip__runtime__api_8h_a8408604c91ff5be40b1136be96ee997d}\label{hip__runtime__api_8h_a8408604c91ff5be40b1136be96ee997d}} 
+\index{hip\_runtime\_api.h@{hip\_runtime\_api.h}!hipErrorStreamCaptureWrongThread@{hipErrorStreamCaptureWrongThread}}
+\index{hipErrorStreamCaptureWrongThread@{hipErrorStreamCaptureWrongThread}!hip\_runtime\_api.h@{hip\_runtime\_api.h}}
+\doxysubsubsection{\texorpdfstring{hipErrorStreamCaptureWrongThread}{hipErrorStreamCaptureWrongThread}}
+{\footnotesize\ttfamily hip\+Error\+Stream\+Capture\+Wrong\+Thread = 908}
+
+\mbox{\hyperlink{class_a}{A}} stream capture sequence not initiated with the hip\+Stream\+Capture\+Mode\+Relaxed argument to hip\+Stream\+Begin\+Capture was passed to hip\+Stream\+End\+Capture in a different thread. 

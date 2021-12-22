@@ -1,0 +1,24 @@
+\hypertarget{_hip_defrost_8h_source}{}\doxysection{Hip\+Defrost.\+h}
+\label{_hip_defrost_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/llvm\_passes/HipDefrost.h@{/Users/pvelesko/local/CHIP-\/SPV/llvm\_passes/HipDefrost.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef LLVM\_PASSES\_HIP\_DEFROST\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#define LLVM\_PASSES\_HIP\_DEFROST\_H}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}llvm/IR/PassManager.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{using namespace }llvm;}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#if LLVM\_VERSION\_MAJOR > 11}}
+\DoxyCodeLine{10 \textcolor{keyword}{class }HipDefrostPass}
+\DoxyCodeLine{11     : \textcolor{keyword}{public} PassInfoMixin<HipDefrostPass> \{}
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13   PreservedAnalyses run(Function \&M, FunctionAnalysisManager \&AM);}
+\DoxyCodeLine{14   \textcolor{keyword}{static} \textcolor{keywordtype}{bool} isRequired() \{ \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{15 \};}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

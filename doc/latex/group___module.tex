@@ -1,0 +1,61 @@
+\hypertarget{group___module}{}\doxysection{Module Management}
+\label{group___module}\index{Module Management@{Module Management}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+HIP\+\_\+\+PUBLIC\+\_\+\+API hip\+Error\+\_\+t \mbox{\hyperlink{group___module_ga24e7d4e178ff4ca322b0076dab7b0c6f}{hip\+Ext\+Module\+Launch\+Kernel}} (\mbox{\hyperlink{class_c_h_i_p_kernel}{hip\+Function\+\_\+t}} f, uint32\+\_\+t global\+Work\+SizeX, uint32\+\_\+t global\+Work\+SizeY, uint32\+\_\+t global\+Work\+SizeZ, uint32\+\_\+t local\+Work\+SizeX, uint32\+\_\+t local\+Work\+SizeY, uint32\+\_\+t local\+Work\+SizeZ, size\+\_\+t shared\+Mem\+Bytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} h\+Stream, void $\ast$$\ast$kernel\+Params, void $\ast$$\ast$extra, \mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}} start\+Event=nullptr, \mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}} stop\+Event=nullptr, uint32\+\_\+t flags=0)
+\begin{DoxyCompactList}\small\item\em launches kernel f with launch parameters and shared memory on stream with arguments passed to kernelparams or extra \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group___module_gad3c6c9fd8ac4a6a30a3f385d2d6bf1be}\label{group___module_gad3c6c9fd8ac4a6a30a3f385d2d6bf1be}} 
+HIP\+\_\+\+PUBLIC\+\_\+\+API hip\+Error\+\_\+t {\bfseries hip\+Hcc\+Module\+Launch\+Kernel} (\mbox{\hyperlink{class_c_h_i_p_kernel}{hip\+Function\+\_\+t}} f, uint32\+\_\+t global\+Work\+SizeX, uint32\+\_\+t global\+Work\+SizeY, uint32\+\_\+t global\+Work\+SizeZ, uint32\+\_\+t local\+Work\+SizeX, uint32\+\_\+t local\+Work\+SizeY, uint32\+\_\+t local\+Work\+SizeZ, size\+\_\+t shared\+Mem\+Bytes, \mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} h\+Stream, void $\ast$$\ast$kernel\+Params, void $\ast$$\ast$extra, \mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}} start\+Event=nullptr, \mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}} stop\+Event=nullptr) \+\_\+\+\_\+attribute\+\_\+\+\_\+((deprecated(\char`\"{}use \mbox{\hyperlink{group___module_ga24e7d4e178ff4ca322b0076dab7b0c6f}{hip\+Ext\+Module\+Launch\+Kernel}} instead\char`\"{})))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group___module_ga24e7d4e178ff4ca322b0076dab7b0c6f}\label{group___module_ga24e7d4e178ff4ca322b0076dab7b0c6f}} 
+\index{Module Management@{Module Management}!hipExtModuleLaunchKernel@{hipExtModuleLaunchKernel}}
+\index{hipExtModuleLaunchKernel@{hipExtModuleLaunchKernel}!Module Management@{Module Management}}
+\doxysubsubsection{\texorpdfstring{hipExtModuleLaunchKernel()}{hipExtModuleLaunchKernel()}}
+{\footnotesize\ttfamily HIP\+\_\+\+PUBLIC\+\_\+\+API hip\+Error\+\_\+t hip\+Ext\+Module\+Launch\+Kernel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_kernel}{hip\+Function\+\_\+t}}}]{f,  }\item[{uint32\+\_\+t}]{global\+Work\+SizeX,  }\item[{uint32\+\_\+t}]{global\+Work\+SizeY,  }\item[{uint32\+\_\+t}]{global\+Work\+SizeZ,  }\item[{uint32\+\_\+t}]{local\+Work\+SizeX,  }\item[{uint32\+\_\+t}]{local\+Work\+SizeY,  }\item[{uint32\+\_\+t}]{local\+Work\+SizeZ,  }\item[{size\+\_\+t}]{shared\+Mem\+Bytes,  }\item[{\mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}}}]{h\+Stream,  }\item[{void $\ast$$\ast$}]{kernel\+Params,  }\item[{void $\ast$$\ast$}]{extra,  }\item[{\mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}}}]{start\+Event = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}}}]{stop\+Event = {\ttfamily nullptr},  }\item[{uint32\+\_\+t}]{flags = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+launches kernel f with launch parameters and shared memory on stream with arguments passed to kernelparams or extra 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em \mbox{[}in\mbox{[}} & f Kernel to launch. \\
+\hline
+\mbox{\texttt{ in}}  & {\em grid\+DimX} & X grid dimension specified in work-\/items \\
+\hline
+\mbox{\texttt{ in}}  & {\em grid\+DimY} & Y grid dimension specified in work-\/items \\
+\hline
+\mbox{\texttt{ in}}  & {\em grid\+DimZ} & Z grid dimension specified in work-\/items \\
+\hline
+\mbox{\texttt{ in}}  & {\em block\+DimX} & X block dimensions specified in work-\/items \\
+\hline
+\mbox{\texttt{ in}}  & {\em block\+DimY} & Y grid dimension specified in work-\/items \\
+\hline
+\mbox{\texttt{ in}}  & {\em block\+DimZ} & Z grid dimension specified in work-\/items \\
+\hline
+\mbox{\texttt{ in}}  & {\em shared\+Mem\+Bytes} & Amount of dynamic shared memory to allocate for this kernel. The HIP-\/\+Clang compiler provides support for extern shared declarations \\
+\hline
+\mbox{\texttt{ in}}  & {\em stream} & Stream where the kernel should be dispatched. May be 0, in which case th default stream is used with associated synchronization rules. \\
+\hline
+\mbox{\texttt{ in}}  & {\em kernel\+Params} & \\
+\hline
+\mbox{\texttt{ in}}  & {\em extra} & Pointer to kernel arguments. These are passed directly to the kernel and must be in the memory layout and alignment expected by the kernel. \\
+\hline
+\mbox{\texttt{ in}}  & {\em start\+Event} & If non-\/null, specified event will be updated to track the start time of the kernel launch. The event must be created before calling this API. \\
+\hline
+\mbox{\texttt{ in}}  & {\em stop\+Event} & If non-\/null, specified event will be updated to track the stop time of the kernel launch. The event must be created before calling this API.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+hip\+Success, hip\+Invalid\+Device, hip\+Error\+Not\+Initialized, hip\+Error\+Invalid\+Value
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+kernell\+Params argument is not yet implemented in HIP. Please use extra instead. Please refer to hip\+\_\+porting\+\_\+driver\+\_\+api.\+md for sample usage. HIP/\+ROCm actually updates the start event when the associated kernel completes. Currently, timing between start\+Event and stop\+Event does not include the time it takes to perform a system scope release / cache flush -\/ only the time it takes to issues writes to cache. 
+\end{DoxyWarning}

@@ -1,0 +1,1317 @@
+\hypertarget{pattern__formatter_8h_source}{}\doxysection{pattern\+\_\+formatter.\+h}
+\label{pattern__formatter_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/pattern\_formatter.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/pattern\_formatter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}spdlog/details/fmt\_helper.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}spdlog/details/log\_msg.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}spdlog/details/os.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}spdlog/fmt/fmt.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}spdlog/formatter.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <cctype>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{26 \textcolor{keyword}{namespace }details \{}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{// padding information.}}
+\DoxyCodeLine{29 \textcolor{keyword}{struct }\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}}}
+\DoxyCodeLine{30 \{}
+\DoxyCodeLine{31     \textcolor{keyword}{enum} pad\_side}
+\DoxyCodeLine{32     \{}
+\DoxyCodeLine{33         left,}
+\DoxyCodeLine{34         right,}
+\DoxyCodeLine{35         center}
+\DoxyCodeLine{36     \};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{39     \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}}(\textcolor{keywordtype}{size\_t} width, padding\_info::pad\_side side)}
+\DoxyCodeLine{40         : width\_(width)}
+\DoxyCodeLine{41         , side\_(side)}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{bool} enabled()\textcolor{keyword}{ const}}
+\DoxyCodeLine{46 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{47         \textcolor{keywordflow}{return} width\_ != 0;}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} width\_ = 0;}
+\DoxyCodeLine{50     \textcolor{keyword}{const} pad\_side side\_ = left;}
+\DoxyCodeLine{51 \};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}}}
+\DoxyCodeLine{54 \{}
+\DoxyCodeLine{55 \textcolor{keyword}{public}:}
+\DoxyCodeLine{56     \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}}(\textcolor{keywordtype}{size\_t} wrapped\_size, \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} \&padinfo, fmt::memory\_buffer \&dest)}
+\DoxyCodeLine{57         : padinfo\_(padinfo)}
+\DoxyCodeLine{58         , dest\_(dest)}
+\DoxyCodeLine{59     \{}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61         \textcolor{keywordflow}{if} (padinfo\_.width\_ <= wrapped\_size)}
+\DoxyCodeLine{62         \{}
+\DoxyCodeLine{63             total\_pad\_ = 0;}
+\DoxyCodeLine{64             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{65         \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         total\_pad\_ = padinfo.width\_ -\/ wrapped\_size;}
+\DoxyCodeLine{68         \textcolor{keywordflow}{if} (padinfo\_.side\_ == padding\_info::left)}
+\DoxyCodeLine{69         \{}
+\DoxyCodeLine{70             pad\_it(total\_pad\_);}
+\DoxyCodeLine{71             total\_pad\_ = 0;}
+\DoxyCodeLine{72         \}}
+\DoxyCodeLine{73         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (padinfo\_.side\_ == padding\_info::center)}
+\DoxyCodeLine{74         \{}
+\DoxyCodeLine{75             \textcolor{keyword}{auto} half\_pad = total\_pad\_ / 2;}
+\DoxyCodeLine{76             \textcolor{keyword}{auto} reminder = total\_pad\_ \& 1;}
+\DoxyCodeLine{77             pad\_it(half\_pad);}
+\DoxyCodeLine{78             total\_pad\_ = half\_pad + reminder; \textcolor{comment}{// for the right side}}
+\DoxyCodeLine{79         \}}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}}(spdlog::string\_view\_t txt, \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} \&padinfo, fmt::memory\_buffer \&dest)}
+\DoxyCodeLine{83         : \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}}(txt.size(), padinfo, dest)}
+\DoxyCodeLine{84     \{}
+\DoxyCodeLine{85     \}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{\string~scoped\_pad}}()}
+\DoxyCodeLine{88     \{}
+\DoxyCodeLine{89         \textcolor{keywordflow}{if} (total\_pad\_)}
+\DoxyCodeLine{90         \{}
+\DoxyCodeLine{91             pad\_it(total\_pad\_);}
+\DoxyCodeLine{92         \}}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{keyword}{private}:}
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} pad\_it(\textcolor{keywordtype}{size\_t} count)}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98         \textcolor{comment}{// count = std::min(count, spaces\_.size());}}
+\DoxyCodeLine{99         assert(count <= spaces\_.size());}
+\DoxyCodeLine{100         fmt\_helper::append\_string\_view(string\_view\_t(spaces\_.data(), count), dest\_);}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} \&padinfo\_;}
+\DoxyCodeLine{104     fmt::memory\_buffer \&dest\_;}
+\DoxyCodeLine{105     \textcolor{keywordtype}{size\_t} total\_pad\_;}
+\DoxyCodeLine{106     string\_view\_t spaces\_\{\textcolor{stringliteral}{"{}                                                                "{}}}
+\DoxyCodeLine{107                           \textcolor{stringliteral}{"{}                                                                "{}},}
+\DoxyCodeLine{108         128\};}
+\DoxyCodeLine{109 \};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{112 \{}
+\DoxyCodeLine{113 \textcolor{keyword}{public}:}
+\DoxyCodeLine{114     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{115         : padinfo\_(padinfo)}
+\DoxyCodeLine{116     \{}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118     \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{119     \textcolor{keyword}{virtual} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{\string~flag\_formatter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{120     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest) = 0;}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{123     \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo\_;}
+\DoxyCodeLine{124 \};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{127 \textcolor{comment}{// name \& level pattern appender}}
+\DoxyCodeLine{129 \textcolor{comment}{}\textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1name__formatter}{name\_formatter}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{130 \{}
+\DoxyCodeLine{131 \textcolor{keyword}{public}:}
+\DoxyCodeLine{132     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1name__formatter}{name\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{133         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{134     \{}
+\DoxyCodeLine{135     \}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{138 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{139         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{140         \{}
+\DoxyCodeLine{141             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(*msg.logger\_name, padinfo\_, dest);}
+\DoxyCodeLine{142             fmt\_helper::append\_string\_view(*msg.logger\_name, dest);}
+\DoxyCodeLine{143         \}}
+\DoxyCodeLine{144         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{145         \{}
+\DoxyCodeLine{146             fmt\_helper::append\_string\_view(*msg.logger\_name, dest);}
+\DoxyCodeLine{147         \}}
+\DoxyCodeLine{148     \}}
+\DoxyCodeLine{149 \};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{comment}{// log level appender}}
+\DoxyCodeLine{152 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1level__formatter}{level\_formatter}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{153 \{}
+\DoxyCodeLine{154 \textcolor{keyword}{public}:}
+\DoxyCodeLine{155     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1level__formatter}{level\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{156         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{157     \{}
+\DoxyCodeLine{158     \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{161 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{162         string\_view\_t \&level\_name = level::to\_string\_view(msg.level);}
+\DoxyCodeLine{163         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{164         \{}
+\DoxyCodeLine{165             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(level\_name, padinfo\_, dest);}
+\DoxyCodeLine{166             fmt\_helper::append\_string\_view(level\_name, dest);}
+\DoxyCodeLine{167         \}}
+\DoxyCodeLine{168         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{169         \{}
+\DoxyCodeLine{170             fmt\_helper::append\_string\_view(level\_name, dest);}
+\DoxyCodeLine{171         \}}
+\DoxyCodeLine{172     \}}
+\DoxyCodeLine{173 \};}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 \textcolor{comment}{// short log level appender}}
+\DoxyCodeLine{176 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1short__level__formatter}{short\_level\_formatter}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{177 \{}
+\DoxyCodeLine{178 \textcolor{keyword}{public}:}
+\DoxyCodeLine{179     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1short__level__formatter}{short\_level\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{180         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{181     \{}
+\DoxyCodeLine{182     \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{185 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{186         string\_view\_t level\_name\{level::to\_short\_c\_str(msg.level)\};}
+\DoxyCodeLine{187         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(level\_name, padinfo\_, dest);}
+\DoxyCodeLine{188         fmt\_helper::append\_string\_view(level\_name, dest);}
+\DoxyCodeLine{189     \}}
+\DoxyCodeLine{190 \};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{193 \textcolor{comment}{// Date time pattern appenders}}
+\DoxyCodeLine{195 \textcolor{comment}{}}
+\DoxyCodeLine{196 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *ampm(\textcolor{keyword}{const} tm \&t)}
+\DoxyCodeLine{197 \{}
+\DoxyCodeLine{198     \textcolor{keywordflow}{return} t.tm\_hour >= 12 ? \textcolor{stringliteral}{"{}PM"{}} : \textcolor{stringliteral}{"{}AM"{}};}
+\DoxyCodeLine{199 \}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201 \textcolor{keyword}{static} \textcolor{keywordtype}{int} to12h(\textcolor{keyword}{const} tm \&t)}
+\DoxyCodeLine{202 \{}
+\DoxyCodeLine{203     \textcolor{keywordflow}{return} t.tm\_hour > 12 ? t.tm\_hour -\/ 12 : t.tm\_hour;}
+\DoxyCodeLine{204 \}}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 \textcolor{comment}{// Abbreviated weekday name}}
+\DoxyCodeLine{207 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *days[]\{\textcolor{stringliteral}{"{}Sun"{}}, \textcolor{stringliteral}{"{}Mon"{}}, \textcolor{stringliteral}{"{}Tue"{}}, \textcolor{stringliteral}{"{}Wed"{}}, \textcolor{stringliteral}{"{}Thu"{}}, \textcolor{stringliteral}{"{}Fri"{}}, \textcolor{stringliteral}{"{}Sat"{}}\};}
+\DoxyCodeLine{208 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1a__formatter}{a\_formatter}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{209 \{}
+\DoxyCodeLine{210 \textcolor{keyword}{public}:}
+\DoxyCodeLine{211     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1a__formatter}{a\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{212         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{213     \{}
+\DoxyCodeLine{214     \}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{217 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{218         string\_view\_t field\_value\{days[tm\_time.tm\_wday]\};}
+\DoxyCodeLine{219         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_value, padinfo\_, dest);}
+\DoxyCodeLine{220         fmt\_helper::append\_string\_view(field\_value, dest);}
+\DoxyCodeLine{221     \}}
+\DoxyCodeLine{222 \};}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224 \textcolor{comment}{// Full weekday name}}
+\DoxyCodeLine{225 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *full\_days[]\{\textcolor{stringliteral}{"{}Sunday"{}}, \textcolor{stringliteral}{"{}Monday"{}}, \textcolor{stringliteral}{"{}Tuesday"{}}, \textcolor{stringliteral}{"{}Wednesday"{}}, \textcolor{stringliteral}{"{}Thursday"{}}, \textcolor{stringliteral}{"{}Friday"{}}, \textcolor{stringliteral}{"{}Saturday"{}}\};}
+\DoxyCodeLine{226 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_a__formatter}{A\_formatter}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{227 \{}
+\DoxyCodeLine{228 \textcolor{keyword}{public}:}
+\DoxyCodeLine{229     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_a__formatter}{A\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{230         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{231     \{}
+\DoxyCodeLine{232     \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{235 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{236         string\_view\_t field\_value\{full\_days[tm\_time.tm\_wday]\};}
+\DoxyCodeLine{237         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_value, padinfo\_, dest);}
+\DoxyCodeLine{238         fmt\_helper::append\_string\_view(field\_value, dest);}
+\DoxyCodeLine{239     \}}
+\DoxyCodeLine{240 \};}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 \textcolor{comment}{// Abbreviated month}}
+\DoxyCodeLine{243 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *months[]\{\textcolor{stringliteral}{"{}Jan"{}}, \textcolor{stringliteral}{"{}Feb"{}}, \textcolor{stringliteral}{"{}Mar"{}}, \textcolor{stringliteral}{"{}Apr"{}}, \textcolor{stringliteral}{"{}May"{}}, \textcolor{stringliteral}{"{}Jun"{}}, \textcolor{stringliteral}{"{}Jul"{}}, \textcolor{stringliteral}{"{}Aug"{}}, \textcolor{stringliteral}{"{}Sept"{}}, \textcolor{stringliteral}{"{}Oct"{}}, \textcolor{stringliteral}{"{}Nov"{}}, \textcolor{stringliteral}{"{}Dec"{}}\};}
+\DoxyCodeLine{244 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1b__formatter}{b\_formatter}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{245 \{}
+\DoxyCodeLine{246 \textcolor{keyword}{public}:}
+\DoxyCodeLine{247     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1b__formatter}{b\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{248         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{249     \{}
+\DoxyCodeLine{250     \}}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{253 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{254         string\_view\_t field\_value\{months[tm\_time.tm\_mon]\};}
+\DoxyCodeLine{255         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_value, padinfo\_, dest);}
+\DoxyCodeLine{256         fmt\_helper::append\_string\_view(field\_value, dest);}
+\DoxyCodeLine{257     \}}
+\DoxyCodeLine{258 \};}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 \textcolor{comment}{// Full month name}}
+\DoxyCodeLine{261 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *full\_months[]\{}
+\DoxyCodeLine{262     \textcolor{stringliteral}{"{}January"{}}, \textcolor{stringliteral}{"{}February"{}}, \textcolor{stringliteral}{"{}March"{}}, \textcolor{stringliteral}{"{}April"{}}, \textcolor{stringliteral}{"{}May"{}}, \textcolor{stringliteral}{"{}June"{}}, \textcolor{stringliteral}{"{}July"{}}, \textcolor{stringliteral}{"{}August"{}}, \textcolor{stringliteral}{"{}September"{}}, \textcolor{stringliteral}{"{}October"{}}, \textcolor{stringliteral}{"{}November"{}}, \textcolor{stringliteral}{"{}December"{}}\};}
+\DoxyCodeLine{263 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_b__formatter}{B\_formatter}} : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{264 \{}
+\DoxyCodeLine{265 \textcolor{keyword}{public}:}
+\DoxyCodeLine{266     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_b__formatter}{B\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{267         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{268     \{}
+\DoxyCodeLine{269     \}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{272 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{273         string\_view\_t field\_value\{full\_months[tm\_time.tm\_mon]\};}
+\DoxyCodeLine{274         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_value, padinfo\_, dest);}
+\DoxyCodeLine{275         fmt\_helper::append\_string\_view(field\_value, dest);}
+\DoxyCodeLine{276     \}}
+\DoxyCodeLine{277 \};}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279 \textcolor{comment}{// Date and time representation (Thu Aug 23 15:35:46 2014)}}
+\DoxyCodeLine{280 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1c__formatter}{c\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{281 \{}
+\DoxyCodeLine{282 \textcolor{keyword}{public}:}
+\DoxyCodeLine{283     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1c__formatter}{c\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{284         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{285     \{}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{289 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{290         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 24;}
+\DoxyCodeLine{291         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293         fmt\_helper::append\_string\_view(days[tm\_time.tm\_wday], dest);}
+\DoxyCodeLine{294         dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{295         fmt\_helper::append\_string\_view(months[tm\_time.tm\_mon], dest);}
+\DoxyCodeLine{296         dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{297         fmt\_helper::append\_int(tm\_time.tm\_mday, dest);}
+\DoxyCodeLine{298         dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{299         \textcolor{comment}{// time}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301         fmt\_helper::pad2(tm\_time.tm\_hour, dest);}
+\DoxyCodeLine{302         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{303         fmt\_helper::pad2(tm\_time.tm\_min, dest);}
+\DoxyCodeLine{304         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{305         fmt\_helper::pad2(tm\_time.tm\_sec, dest);}
+\DoxyCodeLine{306         dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{307         fmt\_helper::append\_int(tm\_time.tm\_year + 1900, dest);}
+\DoxyCodeLine{308     \}}
+\DoxyCodeLine{309 \};}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311 \textcolor{comment}{// year -\/ 2 digit}}
+\DoxyCodeLine{312 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_c__formatter}{C\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{313 \{}
+\DoxyCodeLine{314 \textcolor{keyword}{public}:}
+\DoxyCodeLine{315     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_c__formatter}{C\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{316         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{317     \{}
+\DoxyCodeLine{318     \}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{321 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{322         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{323         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{324         fmt\_helper::pad2(tm\_time.tm\_year \% 100, dest);}
+\DoxyCodeLine{325     \}}
+\DoxyCodeLine{326 \};}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328 \textcolor{comment}{// Short MM/DD/YY date, equivalent to \%m/\%d/\%y 08/23/01}}
+\DoxyCodeLine{329 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_d__formatter}{D\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{330 \{}
+\DoxyCodeLine{331 \textcolor{keyword}{public}:}
+\DoxyCodeLine{332     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_d__formatter}{D\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{333         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{334     \{}
+\DoxyCodeLine{335     \}}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{338 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{339         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 10;}
+\DoxyCodeLine{340         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342         fmt\_helper::pad2(tm\_time.tm\_mon + 1, dest);}
+\DoxyCodeLine{343         dest.push\_back(\textcolor{charliteral}{'/'});}
+\DoxyCodeLine{344         fmt\_helper::pad2(tm\_time.tm\_mday, dest);}
+\DoxyCodeLine{345         dest.push\_back(\textcolor{charliteral}{'/'});}
+\DoxyCodeLine{346         fmt\_helper::pad2(tm\_time.tm\_year \% 100, dest);}
+\DoxyCodeLine{347     \}}
+\DoxyCodeLine{348 \};}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350 \textcolor{comment}{// year -\/ 4 digit}}
+\DoxyCodeLine{351 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_y__formatter}{Y\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{352 \{}
+\DoxyCodeLine{353 \textcolor{keyword}{public}:}
+\DoxyCodeLine{354     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_y__formatter}{Y\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{355         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{358 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{359         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 4;}
+\DoxyCodeLine{360         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{361         fmt\_helper::append\_int(tm\_time.tm\_year + 1900, dest);}
+\DoxyCodeLine{362     \}}
+\DoxyCodeLine{363 \};}
+\DoxyCodeLine{364 }
+\DoxyCodeLine{365 \textcolor{comment}{// month 1-\/12}}
+\DoxyCodeLine{366 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1m__formatter}{m\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{367 \{}
+\DoxyCodeLine{368 \textcolor{keyword}{public}:}
+\DoxyCodeLine{369     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1m__formatter}{m\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{370         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{371     \{}
+\DoxyCodeLine{372     \}}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{375 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{376         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{377         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{378         fmt\_helper::pad2(tm\_time.tm\_mon + 1, dest);}
+\DoxyCodeLine{379     \}}
+\DoxyCodeLine{380 \};}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 \textcolor{comment}{// day of month 1-\/31}}
+\DoxyCodeLine{383 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1d__formatter}{d\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{384 \{}
+\DoxyCodeLine{385 \textcolor{keyword}{public}:}
+\DoxyCodeLine{386     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1d__formatter}{d\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{387         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{388     \{}
+\DoxyCodeLine{389     \}}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{392 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{393         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{394         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{395         fmt\_helper::pad2(tm\_time.tm\_mday, dest);}
+\DoxyCodeLine{396     \}}
+\DoxyCodeLine{397 \};}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399 \textcolor{comment}{// hours in 24 format 0-\/23}}
+\DoxyCodeLine{400 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_h__formatter}{H\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{401 \{}
+\DoxyCodeLine{402 \textcolor{keyword}{public}:}
+\DoxyCodeLine{403     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_h__formatter}{H\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{404         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{405     \{}
+\DoxyCodeLine{406     \}}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{409 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{410         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{411         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{412         fmt\_helper::pad2(tm\_time.tm\_hour, dest);}
+\DoxyCodeLine{413     \}}
+\DoxyCodeLine{414 \};}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416 \textcolor{comment}{// hours in 12 format 1-\/12}}
+\DoxyCodeLine{417 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_i__formatter}{I\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{418 \{}
+\DoxyCodeLine{419 \textcolor{keyword}{public}:}
+\DoxyCodeLine{420     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_i__formatter}{I\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{421         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{424 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{425         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{426         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{427         fmt\_helper::pad2(to12h(tm\_time), dest);}
+\DoxyCodeLine{428     \}}
+\DoxyCodeLine{429 \};}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431 \textcolor{comment}{// minutes 0-\/59}}
+\DoxyCodeLine{432 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_m__formatter}{M\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{433 \{}
+\DoxyCodeLine{434 \textcolor{keyword}{public}:}
+\DoxyCodeLine{435     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_m__formatter}{M\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{436         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{439 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{440         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{441         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{442         fmt\_helper::pad2(tm\_time.tm\_min, dest);}
+\DoxyCodeLine{443     \}}
+\DoxyCodeLine{444 \};}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446 \textcolor{comment}{// seconds 0-\/59}}
+\DoxyCodeLine{447 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_s__formatter}{S\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{448 \{}
+\DoxyCodeLine{449 \textcolor{keyword}{public}:}
+\DoxyCodeLine{450     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_s__formatter}{S\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{451         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{454 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{455         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{456         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{457         fmt\_helper::pad2(tm\_time.tm\_sec, dest);}
+\DoxyCodeLine{458     \}}
+\DoxyCodeLine{459 \};}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461 \textcolor{comment}{// milliseconds}}
+\DoxyCodeLine{462 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1e__formatter}{e\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{463 \{}
+\DoxyCodeLine{464 \textcolor{keyword}{public}:}
+\DoxyCodeLine{465     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1e__formatter}{e\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{466         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{468     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{469 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{470         \textcolor{keyword}{auto} millis = fmt\_helper::time\_fraction<std::chrono::milliseconds>(msg.time);}
+\DoxyCodeLine{471         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{472         \{}
+\DoxyCodeLine{473             \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 3;}
+\DoxyCodeLine{474             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{475             fmt\_helper::pad3(\textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(millis.count()), dest);}
+\DoxyCodeLine{476         \}}
+\DoxyCodeLine{477         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{478         \{}
+\DoxyCodeLine{479             fmt\_helper::pad3(\textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(millis.count()), dest);}
+\DoxyCodeLine{480         \}}
+\DoxyCodeLine{481     \}}
+\DoxyCodeLine{482 \};}
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484 \textcolor{comment}{// microseconds}}
+\DoxyCodeLine{485 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1f__formatter}{f\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{486 \{}
+\DoxyCodeLine{487 \textcolor{keyword}{public}:}
+\DoxyCodeLine{488     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1f__formatter}{f\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{489         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{490 }
+\DoxyCodeLine{491     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{492 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{493         \textcolor{keyword}{auto} micros = fmt\_helper::time\_fraction<std::chrono::microseconds>(msg.time);}
+\DoxyCodeLine{494         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{495         \{}
+\DoxyCodeLine{496             \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 6;}
+\DoxyCodeLine{497             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{498             fmt\_helper::pad6(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(micros.count()), dest);}
+\DoxyCodeLine{499         \}}
+\DoxyCodeLine{500         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{501         \{}
+\DoxyCodeLine{502             fmt\_helper::pad6(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(micros.count()), dest);}
+\DoxyCodeLine{503         \}}
+\DoxyCodeLine{504     \}}
+\DoxyCodeLine{505 \};}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{507 \textcolor{comment}{// nanoseconds}}
+\DoxyCodeLine{508 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_f__formatter}{F\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{509 \{}
+\DoxyCodeLine{510 \textcolor{keyword}{public}:}
+\DoxyCodeLine{511     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_f__formatter}{F\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{512         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{515 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{516         \textcolor{keyword}{auto} ns = fmt\_helper::time\_fraction<std::chrono::nanoseconds>(msg.time);}
+\DoxyCodeLine{517         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{518         \{}
+\DoxyCodeLine{519             \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 9;}
+\DoxyCodeLine{520             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{521             fmt\_helper::pad9(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(ns.count()), dest);}
+\DoxyCodeLine{522         \}}
+\DoxyCodeLine{523         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{524         \{}
+\DoxyCodeLine{525             fmt\_helper::pad9(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(ns.count()), dest);}
+\DoxyCodeLine{526         \}}
+\DoxyCodeLine{527     \}}
+\DoxyCodeLine{528 \};}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530 \textcolor{comment}{// seconds since epoch}}
+\DoxyCodeLine{531 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_e__formatter}{E\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{532 \{}
+\DoxyCodeLine{533 \textcolor{keyword}{public}:}
+\DoxyCodeLine{534     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_e__formatter}{E\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{535         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{538 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{539         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 10;}
+\DoxyCodeLine{540         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{541         \textcolor{keyword}{auto} duration = msg.time.time\_since\_epoch();}
+\DoxyCodeLine{542         \textcolor{keyword}{auto} seconds = std::chrono::duration\_cast<std::chrono::seconds>(duration).count();}
+\DoxyCodeLine{543         fmt\_helper::append\_int(seconds, dest);}
+\DoxyCodeLine{544     \}}
+\DoxyCodeLine{545 \};}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547 \textcolor{comment}{// AM/PM}}
+\DoxyCodeLine{548 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1p__formatter}{p\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{549 \{}
+\DoxyCodeLine{550 \textcolor{keyword}{public}:}
+\DoxyCodeLine{551     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1p__formatter}{p\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{552         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{555 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{556         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 2;}
+\DoxyCodeLine{557         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{558         fmt\_helper::append\_string\_view(ampm(tm\_time), dest);}
+\DoxyCodeLine{559     \}}
+\DoxyCodeLine{560 \};}
+\DoxyCodeLine{561 }
+\DoxyCodeLine{562 \textcolor{comment}{// 12 hour clock 02:55:02 pm}}
+\DoxyCodeLine{563 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1r__formatter}{r\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{564 \{}
+\DoxyCodeLine{565 \textcolor{keyword}{public}:}
+\DoxyCodeLine{566     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1r__formatter}{r\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{567         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{569     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{570 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{571         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 11;}
+\DoxyCodeLine{572         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{573 }
+\DoxyCodeLine{574         fmt\_helper::pad2(to12h(tm\_time), dest);}
+\DoxyCodeLine{575         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{576         fmt\_helper::pad2(tm\_time.tm\_min, dest);}
+\DoxyCodeLine{577         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{578         fmt\_helper::pad2(tm\_time.tm\_sec, dest);}
+\DoxyCodeLine{579         dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{580         fmt\_helper::append\_string\_view(ampm(tm\_time), dest);}
+\DoxyCodeLine{581     \}}
+\DoxyCodeLine{582 \};}
+\DoxyCodeLine{583 }
+\DoxyCodeLine{584 \textcolor{comment}{// 24-\/hour HH:MM time, equivalent to \%H:\%M}}
+\DoxyCodeLine{585 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_r__formatter}{R\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{586 \{}
+\DoxyCodeLine{587 \textcolor{keyword}{public}:}
+\DoxyCodeLine{588     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_r__formatter}{R\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{589         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{590 }
+\DoxyCodeLine{591     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{592 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{593         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 5;}
+\DoxyCodeLine{594         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{596         fmt\_helper::pad2(tm\_time.tm\_hour, dest);}
+\DoxyCodeLine{597         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{598         fmt\_helper::pad2(tm\_time.tm\_min, dest);}
+\DoxyCodeLine{599     \}}
+\DoxyCodeLine{600 \};}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{602 \textcolor{comment}{// ISO 8601 time format (HH:MM:SS), equivalent to \%H:\%M:\%S}}
+\DoxyCodeLine{603 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1_t__formatter}{T\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{604 \{}
+\DoxyCodeLine{605 \textcolor{keyword}{public}:}
+\DoxyCodeLine{606     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1_t__formatter}{T\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{607         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{608 }
+\DoxyCodeLine{609     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{610 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{611         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 8;}
+\DoxyCodeLine{612         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{613 }
+\DoxyCodeLine{614         fmt\_helper::pad2(tm\_time.tm\_hour, dest);}
+\DoxyCodeLine{615         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{616         fmt\_helper::pad2(tm\_time.tm\_min, dest);}
+\DoxyCodeLine{617         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{618         fmt\_helper::pad2(tm\_time.tm\_sec, dest);}
+\DoxyCodeLine{619     \}}
+\DoxyCodeLine{620 \};}
+\DoxyCodeLine{621 }
+\DoxyCodeLine{622 \textcolor{comment}{// ISO 8601 offset from UTC in timezone (+-\/HH:MM)}}
+\DoxyCodeLine{623 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1z__formatter}{z\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{624 \{}
+\DoxyCodeLine{625 \textcolor{keyword}{public}:}
+\DoxyCodeLine{626     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1z__formatter}{z\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{627         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{628 }
+\DoxyCodeLine{629     \textcolor{keyword}{const} std::chrono::seconds cache\_refresh = std::chrono::seconds(5);}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631     \mbox{\hyperlink{classspdlog_1_1details_1_1z__formatter}{z\_formatter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{632     \mbox{\hyperlink{classspdlog_1_1details_1_1z__formatter}{z\_formatter}}(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1details_1_1z__formatter}{z\_formatter}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{633     \mbox{\hyperlink{classspdlog_1_1details_1_1z__formatter}{z\_formatter}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1details_1_1z__formatter}{z\_formatter}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{634 }
+\DoxyCodeLine{635     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{636 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{637         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 6;}
+\DoxyCodeLine{638         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{640 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{641         \textcolor{keywordtype}{int} total\_minutes = get\_cached\_offset(msg, tm\_time);}
+\DoxyCodeLine{642 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{643         \textcolor{comment}{// No need to chache under gcc,}}
+\DoxyCodeLine{644         \textcolor{comment}{// it is very fast (already stored in tm.tm\_gmtoff)}}
+\DoxyCodeLine{645         (void)(msg);}
+\DoxyCodeLine{646         \textcolor{keywordtype}{int} total\_minutes = os::utc\_minutes\_offset(tm\_time);}
+\DoxyCodeLine{647 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{648         \textcolor{keywordtype}{bool} is\_negative = total\_minutes < 0;}
+\DoxyCodeLine{649         \textcolor{keywordflow}{if} (is\_negative)}
+\DoxyCodeLine{650         \{}
+\DoxyCodeLine{651             total\_minutes = -\/total\_minutes;}
+\DoxyCodeLine{652             dest.push\_back(\textcolor{charliteral}{'-\/'});}
+\DoxyCodeLine{653         \}}
+\DoxyCodeLine{654         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{655         \{}
+\DoxyCodeLine{656             dest.push\_back(\textcolor{charliteral}{'+'});}
+\DoxyCodeLine{657         \}}
+\DoxyCodeLine{658 }
+\DoxyCodeLine{659         fmt\_helper::pad2(total\_minutes / 60, dest); \textcolor{comment}{// hours}}
+\DoxyCodeLine{660         dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{661         fmt\_helper::pad2(total\_minutes \% 60, dest); \textcolor{comment}{// minutes}}
+\DoxyCodeLine{662     \}}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{664 \textcolor{keyword}{private}:}
+\DoxyCodeLine{665     log\_clock::time\_point last\_update\_\{std::chrono::seconds(0)\};}
+\DoxyCodeLine{666 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{667     \textcolor{keywordtype}{int} offset\_minutes\_\{0\};}
+\DoxyCodeLine{668 }
+\DoxyCodeLine{669     \textcolor{keywordtype}{int} get\_cached\_offset(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&tm\_time)}
+\DoxyCodeLine{670     \{}
+\DoxyCodeLine{671         \textcolor{keywordflow}{if} (msg.time -\/ last\_update\_ >= cache\_refresh)}
+\DoxyCodeLine{672         \{}
+\DoxyCodeLine{673             offset\_minutes\_ = os::utc\_minutes\_offset(tm\_time);}
+\DoxyCodeLine{674             last\_update\_ = msg.time;}
+\DoxyCodeLine{675         \}}
+\DoxyCodeLine{676         \textcolor{keywordflow}{return} offset\_minutes\_;}
+\DoxyCodeLine{677     \}}
+\DoxyCodeLine{678 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{679 \};}
+\DoxyCodeLine{680 }
+\DoxyCodeLine{681 \textcolor{comment}{// Thread id}}
+\DoxyCodeLine{682 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1t__formatter}{t\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{683 \{}
+\DoxyCodeLine{684 \textcolor{keyword}{public}:}
+\DoxyCodeLine{685     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1t__formatter}{t\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{686         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{687 }
+\DoxyCodeLine{688     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{689 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{690         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{691         \{}
+\DoxyCodeLine{692             \textcolor{keyword}{const} \textcolor{keyword}{auto} field\_size = fmt\_helper::count\_digits(msg.thread\_id);}
+\DoxyCodeLine{693             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{694             fmt\_helper::append\_int(msg.thread\_id, dest);}
+\DoxyCodeLine{695         \}}
+\DoxyCodeLine{696         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{697         \{}
+\DoxyCodeLine{698             fmt\_helper::append\_int(msg.thread\_id, dest);}
+\DoxyCodeLine{699         \}}
+\DoxyCodeLine{700     \}}
+\DoxyCodeLine{701 \};}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{703 \textcolor{comment}{// Current pid}}
+\DoxyCodeLine{704 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1pid__formatter}{pid\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{705 \{}
+\DoxyCodeLine{706 \textcolor{keyword}{public}:}
+\DoxyCodeLine{707     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1pid__formatter}{pid\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{708         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{709 }
+\DoxyCodeLine{710     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{711 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{712         \textcolor{keyword}{const} \textcolor{keyword}{auto} pid = \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(details::os::pid());}
+\DoxyCodeLine{713         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{714         \{}
+\DoxyCodeLine{715             \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = fmt::internal::count\_digits(pid);}
+\DoxyCodeLine{716             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{717             fmt\_helper::append\_int(pid, dest);}
+\DoxyCodeLine{718         \}}
+\DoxyCodeLine{719         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{720         \{}
+\DoxyCodeLine{721             fmt\_helper::append\_int(pid, dest);}
+\DoxyCodeLine{722         \}}
+\DoxyCodeLine{723     \}}
+\DoxyCodeLine{724 \};}
+\DoxyCodeLine{725 }
+\DoxyCodeLine{726 \textcolor{comment}{// message counter formatter}}
+\DoxyCodeLine{727 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1i__formatter}{i\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{728 \{}
+\DoxyCodeLine{729 \textcolor{keyword}{public}:}
+\DoxyCodeLine{730     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1i__formatter}{i\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{731         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{732 }
+\DoxyCodeLine{733     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{734 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{735         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 6;}
+\DoxyCodeLine{736         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{737         fmt\_helper::pad6(msg.msg\_id, dest);}
+\DoxyCodeLine{738     \}}
+\DoxyCodeLine{739 \};}
+\DoxyCodeLine{740 }
+\DoxyCodeLine{741 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1v__formatter}{v\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{742 \{}
+\DoxyCodeLine{743 \textcolor{keyword}{public}:}
+\DoxyCodeLine{744     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1v__formatter}{v\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{745         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{746 }
+\DoxyCodeLine{747     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{748 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{749         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{750         \{}
+\DoxyCodeLine{751             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(msg.payload, padinfo\_, dest);}
+\DoxyCodeLine{752             fmt\_helper::append\_string\_view(msg.payload, dest);}
+\DoxyCodeLine{753         \}}
+\DoxyCodeLine{754         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{755         \{}
+\DoxyCodeLine{756             fmt\_helper::append\_string\_view(msg.payload, dest);}
+\DoxyCodeLine{757         \}}
+\DoxyCodeLine{758     \}}
+\DoxyCodeLine{759 \};}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{761 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1ch__formatter}{ch\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{762 \{}
+\DoxyCodeLine{763 \textcolor{keyword}{public}:}
+\DoxyCodeLine{764     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1ch__formatter}{ch\_formatter}}(\textcolor{keywordtype}{char} ch)}
+\DoxyCodeLine{765         : ch\_(ch)}
+\DoxyCodeLine{766     \{}
+\DoxyCodeLine{767     \}}
+\DoxyCodeLine{768 }
+\DoxyCodeLine{769     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{770 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{771         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = 1;}
+\DoxyCodeLine{772         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{773         dest.push\_back(ch\_);}
+\DoxyCodeLine{774     \}}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{776 \textcolor{keyword}{private}:}
+\DoxyCodeLine{777     \textcolor{keywordtype}{char} ch\_;}
+\DoxyCodeLine{778 \};}
+\DoxyCodeLine{779 }
+\DoxyCodeLine{780 \textcolor{comment}{// aggregate user chars to display as is}}
+\DoxyCodeLine{781 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1aggregate__formatter}{aggregate\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{782 \{}
+\DoxyCodeLine{783 \textcolor{keyword}{public}:}
+\DoxyCodeLine{784     \mbox{\hyperlink{classspdlog_1_1details_1_1aggregate__formatter}{aggregate\_formatter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{785 }
+\DoxyCodeLine{786     \textcolor{keywordtype}{void} add\_ch(\textcolor{keywordtype}{char} ch)}
+\DoxyCodeLine{787     \{}
+\DoxyCodeLine{788         str\_ += ch;}
+\DoxyCodeLine{789     \}}
+\DoxyCodeLine{790     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{791 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{792         fmt\_helper::append\_string\_view(str\_, dest);}
+\DoxyCodeLine{793     \}}
+\DoxyCodeLine{794 }
+\DoxyCodeLine{795 \textcolor{keyword}{private}:}
+\DoxyCodeLine{796     std::string str\_;}
+\DoxyCodeLine{797 \};}
+\DoxyCodeLine{798 }
+\DoxyCodeLine{799 \textcolor{comment}{// mark the color range. expect it to be in the form of "{}\%\string^colored text\%\$"{}}}
+\DoxyCodeLine{800 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1color__start__formatter}{color\_start\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{801 \{}
+\DoxyCodeLine{802 \textcolor{keyword}{public}:}
+\DoxyCodeLine{803     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1color__start__formatter}{color\_start\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{804         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{805     \{}
+\DoxyCodeLine{806     \}}
+\DoxyCodeLine{807 }
+\DoxyCodeLine{808     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{809 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{810         msg.color\_range\_start = dest.size();}
+\DoxyCodeLine{811     \}}
+\DoxyCodeLine{812 \};}
+\DoxyCodeLine{813 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1color__stop__formatter}{color\_stop\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{814 \{}
+\DoxyCodeLine{815 \textcolor{keyword}{public}:}
+\DoxyCodeLine{816     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1color__stop__formatter}{color\_stop\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{817         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{818     \{}
+\DoxyCodeLine{819     \}}
+\DoxyCodeLine{820 }
+\DoxyCodeLine{821     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{822 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{823         msg.color\_range\_end = dest.size();}
+\DoxyCodeLine{824     \}}
+\DoxyCodeLine{825 \};}
+\DoxyCodeLine{826 }
+\DoxyCodeLine{827 \textcolor{comment}{// print source location}}
+\DoxyCodeLine{828 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1source__location__formatter}{source\_location\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{829 \{}
+\DoxyCodeLine{830 \textcolor{keyword}{public}:}
+\DoxyCodeLine{831     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1source__location__formatter}{source\_location\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{832         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{833 }
+\DoxyCodeLine{834     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{835 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{836         \textcolor{keywordflow}{if} (msg.source.empty())}
+\DoxyCodeLine{837         \{}
+\DoxyCodeLine{838             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{839         \}}
+\DoxyCodeLine{840         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{841         \{}
+\DoxyCodeLine{842             \textcolor{keyword}{const} \textcolor{keyword}{auto} text\_size = std::char\_traits<char>::length(msg.source.filename) + fmt\_helper::count\_digits(msg.source.line) + 1;}
+\DoxyCodeLine{843             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(text\_size, padinfo\_, dest);}
+\DoxyCodeLine{844             fmt\_helper::append\_string\_view(msg.source.filename, dest);}
+\DoxyCodeLine{845             dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{846             fmt\_helper::append\_int(msg.source.line, dest);}
+\DoxyCodeLine{847         \}}
+\DoxyCodeLine{848         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{849         \{}
+\DoxyCodeLine{850             fmt\_helper::append\_string\_view(msg.source.filename, dest);}
+\DoxyCodeLine{851             dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{852             fmt\_helper::append\_int(msg.source.line, dest);}
+\DoxyCodeLine{853         \}}
+\DoxyCodeLine{854     \}}
+\DoxyCodeLine{855 \};}
+\DoxyCodeLine{856 \textcolor{comment}{// print source filename}}
+\DoxyCodeLine{857 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1source__filename__formatter}{source\_filename\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{858 \{}
+\DoxyCodeLine{859 \textcolor{keyword}{public}:}
+\DoxyCodeLine{860     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1source__filename__formatter}{source\_filename\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{861         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{862 }
+\DoxyCodeLine{863     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{864 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{865         \textcolor{keywordflow}{if} (msg.source.empty())}
+\DoxyCodeLine{866         \{}
+\DoxyCodeLine{867             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{868         \}}
+\DoxyCodeLine{869         \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(msg.source.filename, padinfo\_, dest);}
+\DoxyCodeLine{870         fmt\_helper::append\_string\_view(msg.source.filename, dest);}
+\DoxyCodeLine{871     \}}
+\DoxyCodeLine{872 \};}
+\DoxyCodeLine{873 }
+\DoxyCodeLine{874 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1source__linenum__formatter}{source\_linenum\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{875 \{}
+\DoxyCodeLine{876 \textcolor{keyword}{public}:}
+\DoxyCodeLine{877     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1source__linenum__formatter}{source\_linenum\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{878         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)\{\};}
+\DoxyCodeLine{879 }
+\DoxyCodeLine{880     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{881 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{882         \textcolor{keywordflow}{if} (msg.source.empty())}
+\DoxyCodeLine{883         \{}
+\DoxyCodeLine{884             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{885         \}}
+\DoxyCodeLine{886         \textcolor{keywordflow}{if} (padinfo\_.enabled())}
+\DoxyCodeLine{887         \{}
+\DoxyCodeLine{888             \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} field\_size = fmt::internal::count\_digits(msg.source.line);}
+\DoxyCodeLine{889             \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{scoped\_pad}} p(field\_size, padinfo\_, dest);}
+\DoxyCodeLine{890             fmt\_helper::append\_int(msg.source.line, dest);}
+\DoxyCodeLine{891         \}}
+\DoxyCodeLine{892         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{893         \{}
+\DoxyCodeLine{894             fmt\_helper::append\_int(msg.source.line, dest);}
+\DoxyCodeLine{895         \}}
+\DoxyCodeLine{896     \}}
+\DoxyCodeLine{897 \};}
+\DoxyCodeLine{898 }
+\DoxyCodeLine{899 \textcolor{comment}{// Full info formatter}}
+\DoxyCodeLine{900 \textcolor{comment}{// pattern: [\%Y-\/\%m-\/\%d \%H:\%M:\%S.\%e] [\%n] [\%l] \%v}}
+\DoxyCodeLine{901 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1full__formatter}{full\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}}
+\DoxyCodeLine{902 \{}
+\DoxyCodeLine{903 \textcolor{keyword}{public}:}
+\DoxyCodeLine{904     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1full__formatter}{full\_formatter}}(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{padding\_info}} padinfo)}
+\DoxyCodeLine{905         : \mbox{\hyperlink{classspdlog_1_1details_1_1flag__formatter}{flag\_formatter}}(padinfo)}
+\DoxyCodeLine{906     \{}
+\DoxyCodeLine{907     \}}
+\DoxyCodeLine{908 }
+\DoxyCodeLine{909     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, \textcolor{keyword}{const} std::tm \&tm\_time, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{910 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{911         \textcolor{keyword}{using} std::chrono::duration\_cast;}
+\DoxyCodeLine{912         \textcolor{keyword}{using} std::chrono::milliseconds;}
+\DoxyCodeLine{913         \textcolor{keyword}{using} std::chrono::seconds;}
+\DoxyCodeLine{914 }
+\DoxyCodeLine{915 \textcolor{preprocessor}{\#ifndef SPDLOG\_NO\_DATETIME}}
+\DoxyCodeLine{916 }
+\DoxyCodeLine{917         \textcolor{comment}{// cache the date/time part for the next second.}}
+\DoxyCodeLine{918         \textcolor{keyword}{auto} duration = msg.time.time\_since\_epoch();}
+\DoxyCodeLine{919         \textcolor{keyword}{auto} secs = duration\_cast<seconds>(duration);}
+\DoxyCodeLine{920 }
+\DoxyCodeLine{921         \textcolor{keywordflow}{if} (cache\_timestamp\_ != secs || cached\_datetime\_.size() == 0)}
+\DoxyCodeLine{922         \{}
+\DoxyCodeLine{923             cached\_datetime\_.clear();}
+\DoxyCodeLine{924             cached\_datetime\_.push\_back(\textcolor{charliteral}{'['});}
+\DoxyCodeLine{925             fmt\_helper::append\_int(tm\_time.tm\_year + 1900, cached\_datetime\_);}
+\DoxyCodeLine{926             cached\_datetime\_.push\_back(\textcolor{charliteral}{'-\/'});}
+\DoxyCodeLine{927 }
+\DoxyCodeLine{928             fmt\_helper::pad2(tm\_time.tm\_mon + 1, cached\_datetime\_);}
+\DoxyCodeLine{929             cached\_datetime\_.push\_back(\textcolor{charliteral}{'-\/'});}
+\DoxyCodeLine{930 }
+\DoxyCodeLine{931             fmt\_helper::pad2(tm\_time.tm\_mday, cached\_datetime\_);}
+\DoxyCodeLine{932             cached\_datetime\_.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{933 }
+\DoxyCodeLine{934             fmt\_helper::pad2(tm\_time.tm\_hour, cached\_datetime\_);}
+\DoxyCodeLine{935             cached\_datetime\_.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{936 }
+\DoxyCodeLine{937             fmt\_helper::pad2(tm\_time.tm\_min, cached\_datetime\_);}
+\DoxyCodeLine{938             cached\_datetime\_.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{939 }
+\DoxyCodeLine{940             fmt\_helper::pad2(tm\_time.tm\_sec, cached\_datetime\_);}
+\DoxyCodeLine{941             cached\_datetime\_.push\_back(\textcolor{charliteral}{'.'});}
+\DoxyCodeLine{942 }
+\DoxyCodeLine{943             cache\_timestamp\_ = secs;}
+\DoxyCodeLine{944         \}}
+\DoxyCodeLine{945         fmt\_helper::append\_buf(cached\_datetime\_, dest);}
+\DoxyCodeLine{946 }
+\DoxyCodeLine{947         \textcolor{keyword}{auto} millis = fmt\_helper::time\_fraction<milliseconds>(msg.time);}
+\DoxyCodeLine{948         fmt\_helper::pad3(\textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(millis.count()), dest);}
+\DoxyCodeLine{949         dest.push\_back(\textcolor{charliteral}{']'});}
+\DoxyCodeLine{950         dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{951 }
+\DoxyCodeLine{952 \textcolor{preprocessor}{\#else }\textcolor{comment}{// no datetime needed}}
+\DoxyCodeLine{953         (void)tm\_time;}
+\DoxyCodeLine{954 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{955 }
+\DoxyCodeLine{956 \textcolor{preprocessor}{\#ifndef SPDLOG\_NO\_NAME}}
+\DoxyCodeLine{957         \textcolor{keywordflow}{if} (!msg.logger\_name-\/>empty())}
+\DoxyCodeLine{958         \{}
+\DoxyCodeLine{959             dest.push\_back(\textcolor{charliteral}{'['});}
+\DoxyCodeLine{960             \textcolor{comment}{// fmt\_helper::append\_str(*msg.logger\_name, dest);}}
+\DoxyCodeLine{961             fmt\_helper::append\_string\_view(*msg.logger\_name, dest);}
+\DoxyCodeLine{962             dest.push\_back(\textcolor{charliteral}{']'});}
+\DoxyCodeLine{963             dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{964         \}}
+\DoxyCodeLine{965 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{966 }
+\DoxyCodeLine{967         dest.push\_back(\textcolor{charliteral}{'['});}
+\DoxyCodeLine{968         \textcolor{comment}{// wrap the level name with color}}
+\DoxyCodeLine{969         msg.color\_range\_start = dest.size();}
+\DoxyCodeLine{970         \textcolor{comment}{// fmt\_helper::append\_string\_view(level::to\_c\_str(msg.level), dest);}}
+\DoxyCodeLine{971         fmt\_helper::append\_string\_view(level::to\_string\_view(msg.level), dest);}
+\DoxyCodeLine{972         msg.color\_range\_end = dest.size();}
+\DoxyCodeLine{973         dest.push\_back(\textcolor{charliteral}{']'});}
+\DoxyCodeLine{974         dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{975 }
+\DoxyCodeLine{976         \textcolor{comment}{// add source location if present}}
+\DoxyCodeLine{977         \textcolor{keywordflow}{if} (!msg.source.empty())}
+\DoxyCodeLine{978         \{}
+\DoxyCodeLine{979             dest.push\_back(\textcolor{charliteral}{'['});}
+\DoxyCodeLine{980             fmt\_helper::append\_string\_view(msg.source.filename, dest);}
+\DoxyCodeLine{981             dest.push\_back(\textcolor{charliteral}{':'});}
+\DoxyCodeLine{982             fmt\_helper::append\_int(msg.source.line, dest);}
+\DoxyCodeLine{983             dest.push\_back(\textcolor{charliteral}{']'});}
+\DoxyCodeLine{984             dest.push\_back(\textcolor{charliteral}{' '});}
+\DoxyCodeLine{985         \}}
+\DoxyCodeLine{986         \textcolor{comment}{// fmt\_helper::append\_string\_view(msg.msg(), dest);}}
+\DoxyCodeLine{987         fmt\_helper::append\_string\_view(msg.payload, dest);}
+\DoxyCodeLine{988     \}}
+\DoxyCodeLine{989 }
+\DoxyCodeLine{990 \textcolor{keyword}{private}:}
+\DoxyCodeLine{991     std::chrono::seconds cache\_timestamp\_\{0\};}
+\DoxyCodeLine{992     fmt::basic\_memory\_buffer<char, 128> cached\_datetime\_;}
+\DoxyCodeLine{993 \};}
+\DoxyCodeLine{994 }
+\DoxyCodeLine{995 \} \textcolor{comment}{// namespace details}}
+\DoxyCodeLine{996 }
+\DoxyCodeLine{997 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1formatter}{formatter}}}
+\DoxyCodeLine{998 \{}
+\DoxyCodeLine{999 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1000     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}}(}
+\DoxyCodeLine{1001         std::string pattern, pattern\_time\_type time\_type = pattern\_time\_type::local, std::string eol = spdlog::details::os::default\_eol)}
+\DoxyCodeLine{1002         : pattern\_(std::move(pattern))}
+\DoxyCodeLine{1003         , eol\_(std::move(eol))}
+\DoxyCodeLine{1004         , pattern\_time\_type\_(time\_type)}
+\DoxyCodeLine{1005         , last\_log\_secs\_(0)}
+\DoxyCodeLine{1006     \{}
+\DoxyCodeLine{1007         std::memset(\&cached\_tm\_, 0, \textcolor{keyword}{sizeof}(cached\_tm\_));}
+\DoxyCodeLine{1008         compile\_pattern\_(pattern\_);}
+\DoxyCodeLine{1009     \}}
+\DoxyCodeLine{1010 }
+\DoxyCodeLine{1011     \textcolor{comment}{// use by default full formatter for if pattern is not given}}
+\DoxyCodeLine{1012     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}}(pattern\_time\_type time\_type = pattern\_time\_type::local, std::string eol = spdlog::details::os::default\_eol)}
+\DoxyCodeLine{1013         : pattern\_(\textcolor{stringliteral}{"{}\%+"{}})}
+\DoxyCodeLine{1014         , eol\_(std::move(eol))}
+\DoxyCodeLine{1015         , pattern\_time\_type\_(time\_type)}
+\DoxyCodeLine{1016         , last\_log\_secs\_(0)}
+\DoxyCodeLine{1017     \{}
+\DoxyCodeLine{1018         std::memset(\&cached\_tm\_, 0, \textcolor{keyword}{sizeof}(cached\_tm\_));}
+\DoxyCodeLine{1019         formatters\_.push\_back(details::make\_unique<details::full\_formatter>(\mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{details::padding\_info}}\{\}));}
+\DoxyCodeLine{1020     \}}
+\DoxyCodeLine{1021 }
+\DoxyCodeLine{1022     \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}}(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}} \&other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{1023     \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{pattern\_formatter}} \&other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{1024 }
+\DoxyCodeLine{1025     std::unique\_ptr<formatter> clone()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{1026 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1027         \textcolor{keywordflow}{return} details::make\_unique<pattern\_formatter>(pattern\_, pattern\_time\_type\_, eol\_);}
+\DoxyCodeLine{1028     \}}
+\DoxyCodeLine{1029 }
+\DoxyCodeLine{1030     \textcolor{keywordtype}{void} format(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg, fmt::memory\_buffer \&dest)\textcolor{keyword}{ override}}
+\DoxyCodeLine{1031 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1032 \textcolor{preprocessor}{\#ifndef SPDLOG\_NO\_DATETIME}}
+\DoxyCodeLine{1033         \textcolor{keyword}{auto} secs = std::chrono::duration\_cast<std::chrono::seconds>(msg.time.time\_since\_epoch());}
+\DoxyCodeLine{1034         \textcolor{keywordflow}{if} (secs != last\_log\_secs\_)}
+\DoxyCodeLine{1035         \{}
+\DoxyCodeLine{1036             cached\_tm\_ = get\_time\_(msg);}
+\DoxyCodeLine{1037             last\_log\_secs\_ = secs;}
+\DoxyCodeLine{1038         \}}
+\DoxyCodeLine{1039 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1040         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&f : formatters\_)}
+\DoxyCodeLine{1041         \{}
+\DoxyCodeLine{1042             f-\/>format(msg, cached\_tm\_, dest);}
+\DoxyCodeLine{1043         \}}
+\DoxyCodeLine{1044         \textcolor{comment}{// write eol}}
+\DoxyCodeLine{1045         details::fmt\_helper::append\_string\_view(eol\_, dest);}
+\DoxyCodeLine{1046     \}}
+\DoxyCodeLine{1047 }
+\DoxyCodeLine{1048 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1049     std::string pattern\_;}
+\DoxyCodeLine{1050     std::string eol\_;}
+\DoxyCodeLine{1051     pattern\_time\_type pattern\_time\_type\_;}
+\DoxyCodeLine{1052     std::tm cached\_tm\_;}
+\DoxyCodeLine{1053     std::chrono::seconds last\_log\_secs\_;}
+\DoxyCodeLine{1054 }
+\DoxyCodeLine{1055     std::vector<std::unique\_ptr<details::flag\_formatter>> formatters\_;}
+\DoxyCodeLine{1056 }
+\DoxyCodeLine{1057     std::tm get\_time\_(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg)}
+\DoxyCodeLine{1058     \{}
+\DoxyCodeLine{1059         \textcolor{keywordflow}{if} (pattern\_time\_type\_ == pattern\_time\_type::local)}
+\DoxyCodeLine{1060         \{}
+\DoxyCodeLine{1061             \textcolor{keywordflow}{return} details::os::localtime(log\_clock::to\_time\_t(msg.time));}
+\DoxyCodeLine{1062         \}}
+\DoxyCodeLine{1063         \textcolor{keywordflow}{return} details::os::gmtime(log\_clock::to\_time\_t(msg.time));}
+\DoxyCodeLine{1064     \}}
+\DoxyCodeLine{1065 }
+\DoxyCodeLine{1066     \textcolor{keywordtype}{void} handle\_flag\_(\textcolor{keywordtype}{char} flag, \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{details::padding\_info}} padding)}
+\DoxyCodeLine{1067     \{}
+\DoxyCodeLine{1068         \textcolor{keywordflow}{switch} (flag)}
+\DoxyCodeLine{1069         \{}
+\DoxyCodeLine{1070 }
+\DoxyCodeLine{1071         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'+'}): \textcolor{comment}{// default formatter}}
+\DoxyCodeLine{1072             formatters\_.push\_back(details::make\_unique<details::full\_formatter>(padding));}
+\DoxyCodeLine{1073             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1074 }
+\DoxyCodeLine{1075         \textcolor{keywordflow}{case} \textcolor{charliteral}{'n'}: \textcolor{comment}{// logger name}}
+\DoxyCodeLine{1076             formatters\_.push\_back(details::make\_unique<details::name\_formatter>(padding));}
+\DoxyCodeLine{1077             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1078 }
+\DoxyCodeLine{1079         \textcolor{keywordflow}{case} \textcolor{charliteral}{'l'}: \textcolor{comment}{// level}}
+\DoxyCodeLine{1080             formatters\_.push\_back(details::make\_unique<details::level\_formatter>(padding));}
+\DoxyCodeLine{1081             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1082 }
+\DoxyCodeLine{1083         \textcolor{keywordflow}{case} \textcolor{charliteral}{'L'}: \textcolor{comment}{// short level}}
+\DoxyCodeLine{1084             formatters\_.push\_back(details::make\_unique<details::short\_level\_formatter>(padding));}
+\DoxyCodeLine{1085             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1086 }
+\DoxyCodeLine{1087         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'t'}): \textcolor{comment}{// thread id}}
+\DoxyCodeLine{1088             formatters\_.push\_back(details::make\_unique<details::t\_formatter>(padding));}
+\DoxyCodeLine{1089             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1090 }
+\DoxyCodeLine{1091         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'v'}): \textcolor{comment}{// the message text}}
+\DoxyCodeLine{1092             formatters\_.push\_back(details::make\_unique<details::v\_formatter>(padding));}
+\DoxyCodeLine{1093             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1094 }
+\DoxyCodeLine{1095         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'a'}): \textcolor{comment}{// weekday}}
+\DoxyCodeLine{1096             formatters\_.push\_back(details::make\_unique<details::a\_formatter>(padding));}
+\DoxyCodeLine{1097             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1098 }
+\DoxyCodeLine{1099         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'A'}): \textcolor{comment}{// short weekday}}
+\DoxyCodeLine{1100             formatters\_.push\_back(details::make\_unique<details::A\_formatter>(padding));}
+\DoxyCodeLine{1101             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1102 }
+\DoxyCodeLine{1103         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'b'}):}
+\DoxyCodeLine{1104         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'h'}): \textcolor{comment}{// month}}
+\DoxyCodeLine{1105             formatters\_.push\_back(details::make\_unique<details::b\_formatter>(padding));}
+\DoxyCodeLine{1106             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1107 }
+\DoxyCodeLine{1108         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'B'}): \textcolor{comment}{// short month}}
+\DoxyCodeLine{1109             formatters\_.push\_back(details::make\_unique<details::B\_formatter>(padding));}
+\DoxyCodeLine{1110             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1111 }
+\DoxyCodeLine{1112         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'c'}): \textcolor{comment}{// datetime}}
+\DoxyCodeLine{1113             formatters\_.push\_back(details::make\_unique<details::c\_formatter>(padding));}
+\DoxyCodeLine{1114             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1115 }
+\DoxyCodeLine{1116         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'C'}): \textcolor{comment}{// year 2 digits}}
+\DoxyCodeLine{1117             formatters\_.push\_back(details::make\_unique<details::C\_formatter>(padding));}
+\DoxyCodeLine{1118             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1119 }
+\DoxyCodeLine{1120         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'Y'}): \textcolor{comment}{// year 4 digits}}
+\DoxyCodeLine{1121             formatters\_.push\_back(details::make\_unique<details::Y\_formatter>(padding));}
+\DoxyCodeLine{1122             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1123 }
+\DoxyCodeLine{1124         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'D'}):}
+\DoxyCodeLine{1125         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'x'}): \textcolor{comment}{// datetime MM/DD/YY}}
+\DoxyCodeLine{1126             formatters\_.push\_back(details::make\_unique<details::D\_formatter>(padding));}
+\DoxyCodeLine{1127             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1128 }
+\DoxyCodeLine{1129         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'m'}): \textcolor{comment}{// month 1-\/12}}
+\DoxyCodeLine{1130             formatters\_.push\_back(details::make\_unique<details::m\_formatter>(padding));}
+\DoxyCodeLine{1131             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1132 }
+\DoxyCodeLine{1133         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'d'}): \textcolor{comment}{// day of month 1-\/31}}
+\DoxyCodeLine{1134             formatters\_.push\_back(details::make\_unique<details::d\_formatter>(padding));}
+\DoxyCodeLine{1135             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1136 }
+\DoxyCodeLine{1137         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'H'}): \textcolor{comment}{// hours 24}}
+\DoxyCodeLine{1138             formatters\_.push\_back(details::make\_unique<details::H\_formatter>(padding));}
+\DoxyCodeLine{1139             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1140 }
+\DoxyCodeLine{1141         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'I'}): \textcolor{comment}{// hours 12}}
+\DoxyCodeLine{1142             formatters\_.push\_back(details::make\_unique<details::I\_formatter>(padding));}
+\DoxyCodeLine{1143             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1144 }
+\DoxyCodeLine{1145         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'M'}): \textcolor{comment}{// minutes}}
+\DoxyCodeLine{1146             formatters\_.push\_back(details::make\_unique<details::M\_formatter>(padding));}
+\DoxyCodeLine{1147             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1148 }
+\DoxyCodeLine{1149         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'S'}): \textcolor{comment}{// seconds}}
+\DoxyCodeLine{1150             formatters\_.push\_back(details::make\_unique<details::S\_formatter>(padding));}
+\DoxyCodeLine{1151             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1152 }
+\DoxyCodeLine{1153         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'e'}): \textcolor{comment}{// milliseconds}}
+\DoxyCodeLine{1154             formatters\_.push\_back(details::make\_unique<details::e\_formatter>(padding));}
+\DoxyCodeLine{1155             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1156 }
+\DoxyCodeLine{1157         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'f'}): \textcolor{comment}{// microseconds}}
+\DoxyCodeLine{1158             formatters\_.push\_back(details::make\_unique<details::f\_formatter>(padding));}
+\DoxyCodeLine{1159             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1160 }
+\DoxyCodeLine{1161         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'F'}): \textcolor{comment}{// nanoseconds}}
+\DoxyCodeLine{1162             formatters\_.push\_back(details::make\_unique<details::F\_formatter>(padding));}
+\DoxyCodeLine{1163             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1164 }
+\DoxyCodeLine{1165         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'E'}): \textcolor{comment}{// seconds since epoch}}
+\DoxyCodeLine{1166             formatters\_.push\_back(details::make\_unique<details::E\_formatter>(padding));}
+\DoxyCodeLine{1167             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1168 }
+\DoxyCodeLine{1169         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'p'}): \textcolor{comment}{// am/pm}}
+\DoxyCodeLine{1170             formatters\_.push\_back(details::make\_unique<details::p\_formatter>(padding));}
+\DoxyCodeLine{1171             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1172 }
+\DoxyCodeLine{1173         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'r'}): \textcolor{comment}{// 12 hour clock 02:55:02 pm}}
+\DoxyCodeLine{1174             formatters\_.push\_back(details::make\_unique<details::r\_formatter>(padding));}
+\DoxyCodeLine{1175             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1176 }
+\DoxyCodeLine{1177         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'R'}): \textcolor{comment}{// 24-\/hour HH:MM time}}
+\DoxyCodeLine{1178             formatters\_.push\_back(details::make\_unique<details::R\_formatter>(padding));}
+\DoxyCodeLine{1179             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1180 }
+\DoxyCodeLine{1181         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'T'}):}
+\DoxyCodeLine{1182         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'X'}): \textcolor{comment}{// ISO 8601 time format (HH:MM:SS)}}
+\DoxyCodeLine{1183             formatters\_.push\_back(details::make\_unique<details::T\_formatter>(padding));}
+\DoxyCodeLine{1184             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1185 }
+\DoxyCodeLine{1186         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'z'}): \textcolor{comment}{// timezone}}
+\DoxyCodeLine{1187             formatters\_.push\_back(details::make\_unique<details::z\_formatter>(padding));}
+\DoxyCodeLine{1188             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1189 }
+\DoxyCodeLine{1190         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'P'}): \textcolor{comment}{// pid}}
+\DoxyCodeLine{1191             formatters\_.push\_back(details::make\_unique<details::pid\_formatter>(padding));}
+\DoxyCodeLine{1192             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1193 }
+\DoxyCodeLine{1194 \textcolor{preprocessor}{\#ifdef SPDLOG\_ENABLE\_MESSAGE\_COUNTER}}
+\DoxyCodeLine{1195         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'i'}):}
+\DoxyCodeLine{1196             formatters\_.push\_back(details::make\_unique<details::i\_formatter>(padding));}
+\DoxyCodeLine{1197             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1198 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1199         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'\string^'}): \textcolor{comment}{// color range start}}
+\DoxyCodeLine{1200             formatters\_.push\_back(details::make\_unique<details::color\_start\_formatter>(padding));}
+\DoxyCodeLine{1201             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1202 }
+\DoxyCodeLine{1203         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'\$'}): \textcolor{comment}{// color range end}}
+\DoxyCodeLine{1204             formatters\_.push\_back(details::make\_unique<details::color\_stop\_formatter>(padding));}
+\DoxyCodeLine{1205             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1206 }
+\DoxyCodeLine{1207         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'@'}): \textcolor{comment}{// source location (filename:filenumber)}}
+\DoxyCodeLine{1208             formatters\_.push\_back(details::make\_unique<details::source\_location\_formatter>(padding));}
+\DoxyCodeLine{1209             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1210 }
+\DoxyCodeLine{1211         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'s'}): \textcolor{comment}{// source filename}}
+\DoxyCodeLine{1212             formatters\_.push\_back(details::make\_unique<details::source\_filename\_formatter>(padding));}
+\DoxyCodeLine{1213             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1214 }
+\DoxyCodeLine{1215         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'\#'}): \textcolor{comment}{// source line number}}
+\DoxyCodeLine{1216             formatters\_.push\_back(details::make\_unique<details::source\_linenum\_formatter>(padding));}
+\DoxyCodeLine{1217             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1218 }
+\DoxyCodeLine{1219         \textcolor{keywordflow}{case} (\textcolor{charliteral}{'\%'}): \textcolor{comment}{// \% char}}
+\DoxyCodeLine{1220             formatters\_.push\_back(details::make\_unique<details::ch\_formatter>(\textcolor{charliteral}{'\%'}));}
+\DoxyCodeLine{1221             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1222 }
+\DoxyCodeLine{1223         \textcolor{keywordflow}{default}: \textcolor{comment}{// Unknown flag appears as is}}
+\DoxyCodeLine{1224             \textcolor{keyword}{auto} unknown\_flag = details::make\_unique<details::aggregate\_formatter>();}
+\DoxyCodeLine{1225             unknown\_flag-\/>add\_ch(\textcolor{charliteral}{'\%'});}
+\DoxyCodeLine{1226             unknown\_flag-\/>add\_ch(flag);}
+\DoxyCodeLine{1227             formatters\_.push\_back((std::move(unknown\_flag)));}
+\DoxyCodeLine{1228             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1229         \}}
+\DoxyCodeLine{1230     \}}
+\DoxyCodeLine{1231 }
+\DoxyCodeLine{1232     \textcolor{comment}{// Extract given pad spec (e.g. \%8X)}}
+\DoxyCodeLine{1233     \textcolor{comment}{// Advance the given it pass the end of the padding spec found (if any)}}
+\DoxyCodeLine{1234     \textcolor{comment}{// Return padding.}}
+\DoxyCodeLine{1235     \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{details::padding\_info}} handle\_padspec\_(std::string::const\_iterator \&it, std::string::const\_iterator end)}
+\DoxyCodeLine{1236     \{}
+\DoxyCodeLine{1237         \textcolor{keyword}{using} \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{details::padding\_info}};}
+\DoxyCodeLine{1238         \textcolor{keyword}{using} \mbox{\hyperlink{classspdlog_1_1details_1_1scoped__pad}{details::scoped\_pad}};}
+\DoxyCodeLine{1239         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} max\_width = 128;}
+\DoxyCodeLine{1240         \textcolor{keywordflow}{if} (it == end)}
+\DoxyCodeLine{1241         \{}
+\DoxyCodeLine{1242             \textcolor{keywordflow}{return} padding\_info\{\};}
+\DoxyCodeLine{1243         \}}
+\DoxyCodeLine{1244 }
+\DoxyCodeLine{1245         padding\_info::pad\_side side;}
+\DoxyCodeLine{1246         \textcolor{keywordflow}{switch} (*it)}
+\DoxyCodeLine{1247         \{}
+\DoxyCodeLine{1248         \textcolor{keywordflow}{case} \textcolor{charliteral}{'-\/'}:}
+\DoxyCodeLine{1249             side = padding\_info::right;}
+\DoxyCodeLine{1250             ++it;}
+\DoxyCodeLine{1251             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1252         \textcolor{keywordflow}{case} \textcolor{charliteral}{'='}:}
+\DoxyCodeLine{1253             side = padding\_info::center;}
+\DoxyCodeLine{1254             ++it;}
+\DoxyCodeLine{1255             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1256         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{1257             side = details::padding\_info::left;}
+\DoxyCodeLine{1258             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1259         \}}
+\DoxyCodeLine{1260 }
+\DoxyCodeLine{1261         \textcolor{keywordflow}{if} (it == end || !std::isdigit(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}\textcolor{keyword}{>}(*it)))}
+\DoxyCodeLine{1262         \{}
+\DoxyCodeLine{1263             \textcolor{keywordflow}{return} padding\_info\{0, side\};}
+\DoxyCodeLine{1264         \}}
+\DoxyCodeLine{1265 }
+\DoxyCodeLine{1266         \textcolor{keyword}{auto} width = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(*it -\/ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{1267         \textcolor{keywordflow}{for} (++it; it != end \&\& std::isdigit(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}\textcolor{keyword}{>}(*it)); ++it)}
+\DoxyCodeLine{1268         \{}
+\DoxyCodeLine{1269             \textcolor{keyword}{auto} digit = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(*it -\/ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{1270             width = width * 10 + digit;}
+\DoxyCodeLine{1271         \}}
+\DoxyCodeLine{1272         \textcolor{keywordflow}{return} \mbox{\hyperlink{structspdlog_1_1details_1_1padding__info}{details::padding\_info}}\{std::min<size\_t>(width, max\_width), side\};}
+\DoxyCodeLine{1273     \}}
+\DoxyCodeLine{1274 }
+\DoxyCodeLine{1275     \textcolor{keywordtype}{void} compile\_pattern\_(\textcolor{keyword}{const} std::string \&pattern)}
+\DoxyCodeLine{1276     \{}
+\DoxyCodeLine{1277         \textcolor{keyword}{auto} end = pattern.end();}
+\DoxyCodeLine{1278         std::unique\_ptr<details::aggregate\_formatter> user\_chars;}
+\DoxyCodeLine{1279         formatters\_.clear();}
+\DoxyCodeLine{1280         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it = pattern.begin(); it != end; ++it)}
+\DoxyCodeLine{1281         \{}
+\DoxyCodeLine{1282             \textcolor{keywordflow}{if} (*it == \textcolor{charliteral}{'\%'})}
+\DoxyCodeLine{1283             \{}
+\DoxyCodeLine{1284                 \textcolor{keywordflow}{if} (user\_chars) \textcolor{comment}{// append user chars found so far}}
+\DoxyCodeLine{1285                 \{}
+\DoxyCodeLine{1286                     formatters\_.push\_back(std::move(user\_chars));}
+\DoxyCodeLine{1287                 \}}
+\DoxyCodeLine{1288 }
+\DoxyCodeLine{1289                 \textcolor{keyword}{auto} padding = handle\_padspec\_(++it, end);}
+\DoxyCodeLine{1290 }
+\DoxyCodeLine{1291                 \textcolor{keywordflow}{if} (it != end)}
+\DoxyCodeLine{1292                 \{}
+\DoxyCodeLine{1293                     handle\_flag\_(*it, padding);}
+\DoxyCodeLine{1294                 \}}
+\DoxyCodeLine{1295                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1296                 \{}
+\DoxyCodeLine{1297                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1298                 \}}
+\DoxyCodeLine{1299             \}}
+\DoxyCodeLine{1300             \textcolor{keywordflow}{else} \textcolor{comment}{// chars not following the \% sign should be displayed as is}}
+\DoxyCodeLine{1301             \{}
+\DoxyCodeLine{1302                 \textcolor{keywordflow}{if} (!user\_chars)}
+\DoxyCodeLine{1303                 \{}
+\DoxyCodeLine{1304                     user\_chars = details::make\_unique<details::aggregate\_formatter>();}
+\DoxyCodeLine{1305                 \}}
+\DoxyCodeLine{1306                 user\_chars-\/>add\_ch(*it);}
+\DoxyCodeLine{1307             \}}
+\DoxyCodeLine{1308         \}}
+\DoxyCodeLine{1309         \textcolor{keywordflow}{if} (user\_chars) \textcolor{comment}{// append raw chars found so far}}
+\DoxyCodeLine{1310         \{}
+\DoxyCodeLine{1311             formatters\_.push\_back(std::move(user\_chars));}
+\DoxyCodeLine{1312         \}}
+\DoxyCodeLine{1313     \}}
+\DoxyCodeLine{1314 \};}
+\DoxyCodeLine{1315 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

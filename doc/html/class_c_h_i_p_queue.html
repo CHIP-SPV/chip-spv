@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -65,9 +65,10 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_c_h_i_p_queue-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">CHIPQueue Class Reference</div></div>
+  <div class="headertitle"><div class="title">CHIPQueue Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -101,36 +102,54 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPQueue</b> ()</td></tr>
 <tr class="memdesc:a8acc0d8a03ba62beca18a55bbc87284b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_queue.html" title="Queue class for submitting kernels to for execution.">CHIPQueue</a> object. <br /></td></tr>
 <tr class="separator:a8acc0d8a03ba62beca18a55bbc87284b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a048fbad716d90dd1932f00da71e32f34"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a048fbad716d90dd1932f00da71e32f34">memCopy</a> (void *dst, const void *src, size_t size)</td></tr>
-<tr class="memdesc:a048fbad716d90dd1932f00da71e32f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocking memory copy.  <a href="class_c_h_i_p_queue.html#a048fbad716d90dd1932f00da71e32f34">More...</a><br /></td></tr>
-<tr class="separator:a048fbad716d90dd1932f00da71e32f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51223f0572a9a67c86851afb722b54dc"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a51223f0572a9a67c86851afb722b54dc">memCopyAsync</a> (void *dst, const void *src, size_t size)</td></tr>
-<tr class="memdesc:a51223f0572a9a67c86851afb722b54dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-blocking memory copy.  <a href="class_c_h_i_p_queue.html#a51223f0572a9a67c86851afb722b54dc">More...</a><br /></td></tr>
-<tr class="separator:a51223f0572a9a67c86851afb722b54dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a764ca839ae19a406e79f8a17807d64f8"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a764ca839ae19a406e79f8a17807d64f8">memCopy</a> (void *dst, const void *src, size_t size)=0</td></tr>
+<tr class="memdesc:a764ca839ae19a406e79f8a17807d64f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocking memory copy.  <a href="class_c_h_i_p_queue.html#a764ca839ae19a406e79f8a17807d64f8">More...</a><br /></td></tr>
+<tr class="separator:a764ca839ae19a406e79f8a17807d64f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94257094d35a810506e3163c8b6ebb2d"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a94257094d35a810506e3163c8b6ebb2d">memCopyAsync</a> (void *dst, const void *src, size_t size)=0</td></tr>
+<tr class="memdesc:a94257094d35a810506e3163c8b6ebb2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-blocking memory copy.  <a href="class_c_h_i_p_queue.html#a94257094d35a810506e3163c8b6ebb2d">More...</a><br /></td></tr>
+<tr class="separator:a94257094d35a810506e3163c8b6ebb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedd41a24c72895ccb0a578e6914184ca"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#aedd41a24c72895ccb0a578e6914184ca">memFill</a> (void *dst, size_t size, const void *pattern, size_t pattern_size)</td></tr>
 <tr class="memdesc:aedd41a24c72895ccb0a578e6914184ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocking memset.  <a href="class_c_h_i_p_queue.html#aedd41a24c72895ccb0a578e6914184ca">More...</a><br /></td></tr>
 <tr class="separator:aedd41a24c72895ccb0a578e6914184ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bc51f0c05a8dc9eabe7679dfb5acb67"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a0bc51f0c05a8dc9eabe7679dfb5acb67">memFillAsync</a> (void *dst, size_t size, const void *pattern, size_t pattern_size)</td></tr>
-<tr class="memdesc:a0bc51f0c05a8dc9eabe7679dfb5acb67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-blocking mem set.  <a href="class_c_h_i_p_queue.html#a0bc51f0c05a8dc9eabe7679dfb5acb67">More...</a><br /></td></tr>
-<tr class="separator:a0bc51f0c05a8dc9eabe7679dfb5acb67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab647308242069e21491828b4fea2799c"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#ab647308242069e21491828b4fea2799c">launch</a> (<a class="el" href="class_c_h_i_p_exec_item.html">CHIPExecItem</a> *exec_item)</td></tr>
-<tr class="memdesc:ab647308242069e21491828b4fea2799c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> to this queue for execution. <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> needs to be complete - contain the kernel and arguments.  <a href="class_c_h_i_p_queue.html#ab647308242069e21491828b4fea2799c">More...</a><br /></td></tr>
-<tr class="separator:ab647308242069e21491828b4fea2799c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac173fb5ca3d0ec542ce7a3a735e008f5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#ac173fb5ca3d0ec542ce7a3a735e008f5">memFillAsync</a> (void *dst, size_t size, const void *pattern, size_t pattern_size)=0</td></tr>
+<tr class="memdesc:ac173fb5ca3d0ec542ce7a3a735e008f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-blocking mem set.  <a href="class_c_h_i_p_queue.html#ac173fb5ca3d0ec542ce7a3a735e008f5">More...</a><br /></td></tr>
+<tr class="separator:ac173fb5ca3d0ec542ce7a3a735e008f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b8317459ec340e0fce5396fc542a6cd"><td class="memItemLeft" align="right" valign="top"><a id="a6b8317459ec340e0fce5396fc542a6cd" name="a6b8317459ec340e0fce5396fc542a6cd"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>memCopy2D</b> (void *dst, size_t dpitch, const void *src, size_t spitch, size_t width, size_t height)</td></tr>
+<tr class="separator:a6b8317459ec340e0fce5396fc542a6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9018b0bbc0c8194c3c4e71ac899fe11b"><td class="memItemLeft" align="right" valign="top"><a id="a9018b0bbc0c8194c3c4e71ac899fe11b" name="a9018b0bbc0c8194c3c4e71ac899fe11b"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>memCopy2DAsync</b> (void *dst, size_t dpitch, const void *src, size_t spitch, size_t width, size_t height)=0</td></tr>
+<tr class="separator:a9018b0bbc0c8194c3c4e71ac899fe11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fb66009dc0a14a16cb6065a49a92d88"><td class="memItemLeft" align="right" valign="top"><a id="a5fb66009dc0a14a16cb6065a49a92d88" name="a5fb66009dc0a14a16cb6065a49a92d88"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>memCopy3D</b> (void *dst, size_t dpitch, size_t dspitch, const void *src, size_t spitch, size_t sspitch, size_t width, size_t height, size_t depth)</td></tr>
+<tr class="separator:a5fb66009dc0a14a16cb6065a49a92d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde6588e340ef5922928b3f3b924ab4e"><td class="memItemLeft" align="right" valign="top"><a id="abde6588e340ef5922928b3f3b924ab4e" name="abde6588e340ef5922928b3f3b924ab4e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>memCopy3DAsync</b> (void *dst, size_t dpitch, size_t dspitch, const void *src, size_t spitch, size_t sspitch, size_t width, size_t height, size_t depth)=0</td></tr>
+<tr class="separator:abde6588e340ef5922928b3f3b924ab4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293e3367df7d64e5d4fc985ba4374864"><td class="memItemLeft" align="right" valign="top"><a id="a293e3367df7d64e5d4fc985ba4374864" name="a293e3367df7d64e5d4fc985ba4374864"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>memCopyToTexture</b> (<a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> *texObj, void *src)=0</td></tr>
+<tr class="separator:a293e3367df7d64e5d4fc985ba4374864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7b9c53a719655c0cae37479e670e99a"><td class="memItemLeft" align="right" valign="top">virtual hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#ac7b9c53a719655c0cae37479e670e99a">launch</a> (<a class="el" href="class_c_h_i_p_exec_item.html">CHIPExecItem</a> *exec_item)=0</td></tr>
+<tr class="memdesc:ac7b9c53a719655c0cae37479e670e99a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> to this queue for execution. <a class="el" href="class_c_h_i_p_exec_item.html" title="Contains kernel arguments and a queue on which to execute. Prior to kernel launch,...">CHIPExecItem</a> needs to be complete - contain the kernel and arguments.  <a href="class_c_h_i_p_queue.html#ac7b9c53a719655c0cae37479e670e99a">More...</a><br /></td></tr>
+<tr class="separator:ac7b9c53a719655c0cae37479e670e99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51a3ed46801b642ad48f5d7e71873ba1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_device.html">CHIPDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a51a3ed46801b642ad48f5d7e71873ba1">getDevice</a> ()</td></tr>
 <tr class="memdesc:a51a3ed46801b642ad48f5d7e71873ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Device obj.  <a href="class_c_h_i_p_queue.html#a51a3ed46801b642ad48f5d7e71873ba1">More...</a><br /></td></tr>
 <tr class="separator:a51a3ed46801b642ad48f5d7e71873ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b4d58bc6b0d35eada59ce1a0239da9b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a7b4d58bc6b0d35eada59ce1a0239da9b">finish</a> ()</td></tr>
-<tr class="memdesc:a7b4d58bc6b0d35eada59ce1a0239da9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for this queue to finish.  <a href="class_c_h_i_p_queue.html#a7b4d58bc6b0d35eada59ce1a0239da9b">More...</a><br /></td></tr>
-<tr class="separator:a7b4d58bc6b0d35eada59ce1a0239da9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf779db7f06ee6280326b9efa66d1a6f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#abf779db7f06ee6280326b9efa66d1a6f">finish</a> ()=0</td></tr>
+<tr class="memdesc:abf779db7f06ee6280326b9efa66d1a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for this queue to finish.  <a href="class_c_h_i_p_queue.html#abf779db7f06ee6280326b9efa66d1a6f">More...</a><br /></td></tr>
+<tr class="separator:abf779db7f06ee6280326b9efa66d1a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3af332cd6734719316001897c16a1bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#af3af332cd6734719316001897c16a1bd">query</a> ()</td></tr>
 <tr class="memdesc:af3af332cd6734719316001897c16a1bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the queue is still actively executing.  <a href="class_c_h_i_p_queue.html#af3af332cd6734719316001897c16a1bd">More...</a><br /></td></tr>
 <tr class="separator:af3af332cd6734719316001897c16a1bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a9491f6087d089c340e2ca33c516691"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a5a9491f6087d089c340e2ca33c516691">getPriorityRange</a> (int lower_or_upper)</td></tr>
 <tr class="memdesc:a5a9491f6087d089c340e2ca33c516691"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Priority Range object defining the bounds for hipStreamCreateWithPriority.  <a href="class_c_h_i_p_queue.html#a5a9491f6087d089c340e2ca33c516691">More...</a><br /></td></tr>
 <tr class="separator:a5a9491f6087d089c340e2ca33c516691"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10888a9a6d7b27c2313814ba44698c1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a10888a9a6d7b27c2313814ba44698c1e">enqueueBarrierForEvent</a> (<a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *e)</td></tr>
-<tr class="memdesc:a10888a9a6d7b27c2313814ba44698c1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert an event into this queue.  <a href="class_c_h_i_p_queue.html#a10888a9a6d7b27c2313814ba44698c1e">More...</a><br /></td></tr>
-<tr class="separator:a10888a9a6d7b27c2313814ba44698c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a168ae9587a5ae954749e6da60bab3966"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a168ae9587a5ae954749e6da60bab3966">enqueueBarrier</a> (<a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *eventToSignal, std::vector&lt; <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> * &gt; *eventsToWaitFor)=0</td></tr>
+<tr class="memdesc:a168ae9587a5ae954749e6da60bab3966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert an event into this queue.  <a href="class_c_h_i_p_queue.html#a168ae9587a5ae954749e6da60bab3966">More...</a><br /></td></tr>
+<tr class="separator:a168ae9587a5ae954749e6da60bab3966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afff970ca9d24760b07ecdb19f5cd586e"><td class="memItemLeft" align="right" valign="top"><a id="afff970ca9d24760b07ecdb19f5cd586e" name="afff970ca9d24760b07ecdb19f5cd586e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>enqueueSignal</b> (<a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *eventToSignal)=0</td></tr>
+<tr class="separator:afff970ca9d24760b07ecdb19f5cd586e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2146ab0b3a8b0adc47bb47dc3f7e28e3"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a2146ab0b3a8b0adc47bb47dc3f7e28e3">getFlags</a> ()</td></tr>
 <tr class="memdesc:a2146ab0b3a8b0adc47bb47dc3f7e28e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Flags object with which this queue was created.  <a href="class_c_h_i_p_queue.html#a2146ab0b3a8b0adc47bb47dc3f7e28e3">More...</a><br /></td></tr>
 <tr class="separator:a2146ab0b3a8b0adc47bb47dc3f7e28e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +169,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9f37eb5092629cac246e560f01b5da67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0f64cf2adc1d78d91c8a182b145c566"><td class="memItemLeft" align="right" valign="top">hipError_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#aa0f64cf2adc1d78d91c8a182b145c566">launchWithExtraParams</a> (dim3 grid, dim3 block, unsigned int sharedMemBytes, void **extra, <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> *kernel)</td></tr>
 <tr class="separator:aa0f64cf2adc1d78d91c8a182b145c566"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca99c3f4cc131fd99366c4e6f1d015d7"><td class="memItemLeft" align="right" valign="top"><a id="aca99c3f4cc131fd99366c4e6f1d015d7" name="aca99c3f4cc131fd99366c4e6f1d015d7"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>getBackendHandles</b> (unsigned long *nativeInfo, int *size)=0</td></tr>
+<tr class="separator:aca99c3f4cc131fd99366c4e6f1d015d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fdd4a4242cd03d04af6832be92fd0c4"><td class="memItemLeft" align="right" valign="top"><a id="a8fdd4a4242cd03d04af6832be92fd0c4" name="a8fdd4a4242cd03d04af6832be92fd0c4"></a>
+<a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getContext</b> ()</td></tr>
+<tr class="separator:a8fdd4a4242cd03d04af6832be92fd0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a27dd9f3c768ae545f02fb13df697faa4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_queue.html#a27dd9f3c768ae545f02fb13df697faa4">LastEvent</a></td></tr>
+<tr class="separator:a27dd9f3c768ae545f02fb13df697faa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -170,6 +200,9 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>flags</b></td
 <a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>chip_context</b></td></tr>
 <tr class="memdesc:adf51de007fa09b5ff2b1a9fb4ebe3341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context to which device belongs to. <br /></td></tr>
 <tr class="separator:adf51de007fa09b5ff2b1a9fb4ebe3341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01caa74e3703cf5c142f4f4e55127d00"><td class="memItemLeft" align="right" valign="top"><a id="a01caa74e3703cf5c142f4f4e55127d00" name="a01caa74e3703cf5c142f4f4e55127d00"></a>
+<a class="el" href="class_c_h_i_p_event_monitor.html">CHIPEventMonitor</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>event_monitor</b> = nullptr</td></tr>
+<tr class="separator:a01caa74e3703cf5c142f4f4e55127d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Queue class for submitting kernels to for execution. </p>
@@ -322,20 +355,38 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a10888a9a6d7b27c2313814ba44698c1e" name="a10888a9a6d7b27c2313814ba44698c1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10888a9a6d7b27c2313814ba44698c1e">&#9670;&nbsp;</a></span>enqueueBarrierForEvent()</h2>
+<a id="a168ae9587a5ae954749e6da60bab3966" name="a168ae9587a5ae954749e6da60bab3966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a168ae9587a5ae954749e6da60bab3966">&#9670;&nbsp;</a></span>enqueueBarrier()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool CHIPQueue::enqueueBarrierForEvent </td>
+          <td class="memname">virtual void CHIPQueue::enqueueBarrier </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> *&#160;</td>
-          <td class="paramname"><em>e</em></td><td>)</td>
+          <td class="paramname"><em>eventToSignal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>eventsToWaitFor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Insert an event into this queue. </p>
@@ -349,10 +400,12 @@ false </dd></dl>
 <dd>
 false </dd></dl>
 
+<p>Implemented in <a class="el" href="class_c_h_i_p_queue_level0.html#a00e65d847be32a119bfcaf0efcc9065b">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#a5350a4e73c2150fbbb34c7da5083e7d6">CHIPQueueOpenCL</a>.</p>
+
 </div>
 </div>
-<a id="a7b4d58bc6b0d35eada59ce1a0239da9b" name="a7b4d58bc6b0d35eada59ce1a0239da9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b4d58bc6b0d35eada59ce1a0239da9b">&#9670;&nbsp;</a></span>finish()</h2>
+<a id="abf779db7f06ee6280326b9efa66d1a6f" name="abf779db7f06ee6280326b9efa66d1a6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf779db7f06ee6280326b9efa66d1a6f">&#9670;&nbsp;</a></span>finish()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -361,7 +414,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void CHIPQueue::finish </td>
+          <td class="memname">virtual void CHIPQueue::finish </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -369,14 +422,14 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Wait for this queue to finish. </p>
 
-<p>Reimplemented in <a class="el" href="class_c_h_i_p_queue_open_c_l.html#a0421bc2ada82f32a8aebf81eddbce9a1">CHIPQueueOpenCL</a>.</p>
+<p>Implemented in <a class="el" href="class_c_h_i_p_queue_level0.html#a335e520e008f56e32e9f0cc885b453cf">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#a0421bc2ada82f32a8aebf81eddbce9a1">CHIPQueueOpenCL</a>.</p>
 
 </div>
 </div>
@@ -467,8 +520,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="ab647308242069e21491828b4fea2799c" name="ab647308242069e21491828b4fea2799c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab647308242069e21491828b4fea2799c">&#9670;&nbsp;</a></span>launch()</h2>
+<a id="ac7b9c53a719655c0cae37479e670e99a" name="ac7b9c53a719655c0cae37479e670e99a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7b9c53a719655c0cae37479e670e99a">&#9670;&nbsp;</a></span>launch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,7 +530,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">hipError_t CHIPQueue::launch </td>
+          <td class="memname">virtual hipError_t CHIPQueue::launch </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_c_h_i_p_exec_item.html">CHIPExecItem</a> *&#160;</td>
           <td class="paramname"><em>exec_item</em></td><td>)</td>
@@ -486,7 +539,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -500,7 +553,7 @@ false </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_c_h_i_p_queue_level0.html#aebaaa63d16f0cb190595c34d61690df3">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#a825b6a9ab7bcde9a9479e5cd0c68e517">CHIPQueueOpenCL</a>.</p>
+<p>Implemented in <a class="el" href="class_c_h_i_p_queue_level0.html#a4d555e9a5ff944e21ab1900f9da6d168">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#a825b6a9ab7bcde9a9479e5cd0c68e517">CHIPQueueOpenCL</a>.</p>
 
 </div>
 </div>
@@ -679,8 +732,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a048fbad716d90dd1932f00da71e32f34" name="a048fbad716d90dd1932f00da71e32f34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a048fbad716d90dd1932f00da71e32f34">&#9670;&nbsp;</a></span>memCopy()</h2>
+<a id="a764ca839ae19a406e79f8a17807d64f8" name="a764ca839ae19a406e79f8a17807d64f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a764ca839ae19a406e79f8a17807d64f8">&#9670;&nbsp;</a></span>memCopy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -689,7 +742,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">hipError_t CHIPQueue::memCopy </td>
+          <td class="memname">virtual hipError_t CHIPQueue::memCopy </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>dst</em>, </td>
@@ -714,7 +767,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -730,12 +783,12 @@ false </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_c_h_i_p_queue_level0.html#a5a953fc9978aa7a76e69212c338b45d9">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#aca3e19319400c9f130af1bf600b26da3">CHIPQueueOpenCL</a>.</p>
+<p>Implemented in <a class="el" href="class_c_h_i_p_queue_level0.html#a5a953fc9978aa7a76e69212c338b45d9">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#aca3e19319400c9f130af1bf600b26da3">CHIPQueueOpenCL</a>.</p>
 
 </div>
 </div>
-<a id="a51223f0572a9a67c86851afb722b54dc" name="a51223f0572a9a67c86851afb722b54dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51223f0572a9a67c86851afb722b54dc">&#9670;&nbsp;</a></span>memCopyAsync()</h2>
+<a id="a94257094d35a810506e3163c8b6ebb2d" name="a94257094d35a810506e3163c8b6ebb2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94257094d35a810506e3163c8b6ebb2d">&#9670;&nbsp;</a></span>memCopyAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,7 +797,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">hipError_t CHIPQueue::memCopyAsync </td>
+          <td class="memname">virtual hipError_t CHIPQueue::memCopyAsync </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>dst</em>, </td>
@@ -769,7 +822,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -784,6 +837,8 @@ false </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>hipError_t </dd></dl>
+
+<p>Implemented in <a class="el" href="class_c_h_i_p_queue_level0.html#a7e258c5bdff64d5f9d887a4cf5b0c13e">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#a1e361ae58bbae7a10959acc1ec462cea">CHIPQueueOpenCL</a>.</p>
 
 </div>
 </div>
@@ -846,8 +901,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a0bc51f0c05a8dc9eabe7679dfb5acb67" name="a0bc51f0c05a8dc9eabe7679dfb5acb67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bc51f0c05a8dc9eabe7679dfb5acb67">&#9670;&nbsp;</a></span>memFillAsync()</h2>
+<a id="ac173fb5ca3d0ec542ce7a3a735e008f5" name="ac173fb5ca3d0ec542ce7a3a735e008f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac173fb5ca3d0ec542ce7a3a735e008f5">&#9670;&nbsp;</a></span>memFillAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -856,7 +911,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void CHIPQueue::memFillAsync </td>
+          <td class="memname">virtual void CHIPQueue::memFillAsync </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>dst</em>, </td>
@@ -887,7 +942,7 @@ false </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -902,6 +957,8 @@ false </dd></dl>
   </table>
   </dd>
 </dl>
+
+<p>Implemented in <a class="el" href="class_c_h_i_p_queue_level0.html#a58be16b3d102301d682cdbb6605fdeba">CHIPQueueLevel0</a>, and <a class="el" href="class_c_h_i_p_queue_open_c_l.html#ae8b194735874d6d483babf47d83ec0cd">CHIPQueueOpenCL</a>.</p>
 
 </div>
 </div>
@@ -967,9 +1024,25 @@ false </dd></dl>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a27dd9f3c768ae545f02fb13df697faa4" name="a27dd9f3c768ae545f02fb13df697faa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27dd9f3c768ae545f02fb13df697faa4">&#9670;&nbsp;</a></span>LastEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_c_h_i_p_event.html">CHIPEvent</a>* CHIPQueue::LastEvent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Keep track of what was the last event submitted to this queue. Required for enforcing proper queue syncronization as per HIP/CUDA API. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

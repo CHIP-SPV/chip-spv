@@ -1,0 +1,86 @@
+\hypertarget{classclara_1_1detail_1_1_opt}{}\doxysection{clara\+::detail\+::Opt Class Reference}
+\label{classclara_1_1detail_1_1_opt}\index{clara::detail::Opt@{clara::detail::Opt}}
+Inheritance diagram for clara\+::detail\+::Opt\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{classclara_1_1detail_1_1_opt}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_ae9efc1d77f16f819f75c8939a6f5650d}\label{classclara_1_1detail_1_1_opt_ae9efc1d77f16f819f75c8939a6f5650d}} 
+{\footnotesize template$<$typename LambdaT $>$ }\\{\bfseries Opt} (LambdaT const \&ref)
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_a70fb551de78f03ba087ecc1104042694}\label{classclara_1_1detail_1_1_opt_a70fb551de78f03ba087ecc1104042694}} 
+{\bfseries Opt} (bool \&ref)
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_a4aa7fcd1770169651701a533428981b7}\label{classclara_1_1detail_1_1_opt_a4aa7fcd1770169651701a533428981b7}} 
+{\footnotesize template$<$typename LambdaT $>$ }\\{\bfseries Opt} (LambdaT const \&ref, std\+::string const \&hint)
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_aa440ab649d42d9fdbd5eb9ce5ee20f86}\label{classclara_1_1detail_1_1_opt_aa440ab649d42d9fdbd5eb9ce5ee20f86}} 
+{\footnotesize template$<$typename T $>$ }\\{\bfseries Opt} (T \&ref, std\+::string const \&hint)
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_aa8703b1caaf492c1028d2f66dd419af5}\label{classclara_1_1detail_1_1_opt_aa8703b1caaf492c1028d2f66dd419af5}} 
+auto {\bfseries operator\mbox{[}$\,$\mbox{]}} (std\+::string const \&opt\+Name) -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}} \&
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_af91049f70e848ba07f899b2ef5637e20}\label{classclara_1_1detail_1_1_opt_af91049f70e848ba07f899b2ef5637e20}} 
+auto {\bfseries get\+Help\+Columns} () const -\/$>$ std\+::vector$<$ \mbox{\hyperlink{structclara_1_1detail_1_1_help_columns}{Help\+Columns}} $>$
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_ae90ef5667c4d14bb6d2aa12c0ca3ada1}\label{classclara_1_1detail_1_1_opt_ae90ef5667c4d14bb6d2aa12c0ca3ada1}} 
+auto {\bfseries is\+Match} (std\+::string const \&opt\+Token) const -\/$>$ bool
+\item 
+auto \mbox{\hyperlink{classclara_1_1detail_1_1_opt_a467ec64216dc9a3e2e5a27120afab6b2}{parse}} (std\+::string const \&, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&tokens) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}} override
+\item 
+auto \mbox{\hyperlink{classclara_1_1detail_1_1_opt_a5b9ff60d5b491673c74721f3409c867d}{validate}} () const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}} override
+\item 
+virtual auto \mbox{\hyperlink{classclara_1_1detail_1_1_opt_a4cdccf0242e2888192292adb900b16c1}{parse}} (std\+::string const \&exe\+Name, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&tokens) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}=0
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_a0d8b760304e7f179b05ed2ee8cadf54c}\label{classclara_1_1detail_1_1_opt_a0d8b760304e7f179b05ed2ee8cadf54c}} 
+auto {\bfseries parse} (\mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}} const \&args) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_a12e3945526054c2c87ad7b860a907028}\label{classclara_1_1detail_1_1_opt_a12e3945526054c2c87ad7b860a907028}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries m\+\_\+opt\+Names}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_a467ec64216dc9a3e2e5a27120afab6b2}\label{classclara_1_1detail_1_1_opt_a467ec64216dc9a3e2e5a27120afab6b2}} 
+\index{clara::detail::Opt@{clara::detail::Opt}!parse@{parse}}
+\index{parse@{parse}!clara::detail::Opt@{clara::detail::Opt}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto clara\+::detail\+::\+Opt\+::parse (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{,  }\item[{\mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&}]{tokens }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{clara\+::detail\+::\+Parser\+Base}}.
+
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_a4cdccf0242e2888192292adb900b16c1}\label{classclara_1_1detail_1_1_opt_a4cdccf0242e2888192292adb900b16c1}} 
+\index{clara::detail::Opt@{clara::detail::Opt}!parse@{parse}}
+\index{parse@{parse}!clara::detail::Opt@{clara::detail::Opt}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual auto clara\+::detail\+::\+Parser\+Base\+::parse (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{exe\+Name,  }\item[{\mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{Token\+Stream}} const \&}]{tokens }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Internal\+Parse\+Result}}\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{clara\+::detail\+::\+Parser\+Base}}.
+
+\mbox{\Hypertarget{classclara_1_1detail_1_1_opt_a5b9ff60d5b491673c74721f3409c867d}\label{classclara_1_1detail_1_1_opt_a5b9ff60d5b491673c74721f3409c867d}} 
+\index{clara::detail::Opt@{clara::detail::Opt}!validate@{validate}}
+\index{validate@{validate}!clara::detail::Opt@{clara::detail::Opt}}
+\doxysubsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily auto clara\+::detail\+::\+Opt\+::validate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const -\/$>$ \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{clara\+::detail\+::\+Parser\+Base}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/src/clara/clara.\+hpp\end{DoxyCompactItemize}

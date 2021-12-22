@@ -28,8 +28,8 @@ Inheritance diagram for CHIPModule\+:\begin{figure}[H]
 void \mbox{\hyperlink{class_c_h_i_p_module_aff1fa19df4e5b585949ba09a7cfd2885}{add\+Kernel}} (\mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$kernel)
 \begin{DoxyCompactList}\small\item\em Add a \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} to this module. During initialization when the Fat\+Binary is consumed, a \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} is constructed for every device. SPIR-\/V kernels reside in this module. This method is called called via the constructor during this initialization phase. Modules can also be loaded from a file during runtime, however. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_c_h_i_p_module_aa9cef37d3934498397b8644af4619d57}{compile\+Once}} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$chip\+\_\+dev)
-\begin{DoxyCompactList}\small\item\em Wrapper around \mbox{\hyperlink{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403d486}{compile()}} called via std\+::call\+\_\+once. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403d486}{compile}} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$chip\+\_\+dev)
+\begin{DoxyCompactList}\small\item\em Wrapper around \mbox{\hyperlink{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}{compile()}} called via std\+::call\+\_\+once. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}{compile}} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$chip\+\_\+dev)=0
 \begin{DoxyCompactList}\small\item\em Kernel JIT compilation can be lazy. This is configured via Cmake LAZY\+\_\+\+JIT option. If LAZY\+\_\+\+JIT is set to true then this module won\textquotesingle{}t be compiled until the first call to one of its kernels. If LAZY\+\_\+\+JIT is set to false(default) then this method should be called in the constructor;. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDevice\+Var}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_module_ab38f04b5f853ae1bd4f2f91c840fb104}{get\+Global\+Var}} (std\+::string name)
 \begin{DoxyCompactList}\small\item\em Get the Global Var object A module, along with device kernels, can also contain global variables. \end{DoxyCompactList}\item 
@@ -38,7 +38,10 @@ virtual void \mbox{\hyperlink{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403
 std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ $>$ \& \mbox{\hyperlink{class_c_h_i_p_module_a706583e02dbd275aaff49f3aa8cde001}{get\+Kernels}} ()
 \begin{DoxyCompactList}\small\item\em Get the Kernels object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_module_a12434a4c6058130e9a5ffd46adc0b62f}{get\+Kernel}} (const void $\ast$host\+\_\+f\+\_\+ptr)
-\begin{DoxyCompactList}\small\item\em Get the Kernel object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the Kernel object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_module_a1a498223339fde624c01ee0d5e813068}\label{class_c_h_i_p_module_a1a498223339fde624c01ee0d5e813068}} 
+void {\bfseries consume\+SPIRV} ()
+\begin{DoxyCompactList}\small\item\em consume SPIRV and fill in OCLFunc\+INFO \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -47,6 +50,12 @@ std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$ $>$ 
 \begin{DoxyCompactList}\small\item\em hidden default constuctor. Only derived type constructor should be called. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_module_ad5287d431156728c82cd56f76f9e1469}\label{class_c_h_i_p_module_ad5287d431156728c82cd56f76f9e1469}} 
+uint8\+\_\+t $\ast$ {\bfseries func\+IL}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_module_a655291932b6d2a893cb55f179e4364b6}\label{class_c_h_i_p_module_a655291932b6d2a893cb55f179e4364b6}} 
+size\+\_\+t {\bfseries il\+Size}
 \item 
 \mbox{\Hypertarget{class_c_h_i_p_module_aa36eefdf63362c6bd085c610921c5284}\label{class_c_h_i_p_module_aa36eefdf63362c6bd085c610921c5284}} 
 std\+::mutex {\bfseries mtx}
@@ -62,6 +71,12 @@ std\+::string {\bfseries src}
 \begin{DoxyCompactList}\small\item\em Binary representation extracted from Fat\+Binary. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_module_a8beb6e4f2c4c66d59b455bcf91259581}\label{class_c_h_i_p_module_a8beb6e4f2c4c66d59b455bcf91259581}} 
 std\+::once\+\_\+flag {\bfseries compiled}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_module_ac541461569cbb38e0ee10849967f9a65}\label{class_c_h_i_p_module_ac541461569cbb38e0ee10849967f9a65}} 
+int32\+\_\+t $\ast$ {\bfseries binary\+\_\+data}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_module_ad0a6d060e92229eaf46e7b40174c932f}\label{class_c_h_i_p_module_ad0a6d060e92229eaf46e7b40174c932f}} 
+Open\+CLFunction\+Info\+Map {\bfseries func\+\_\+infos}
 \end{DoxyCompactItemize}
 
 
@@ -117,11 +132,11 @@ Add a \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} to this module. During
 {\em kernel} & \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} to be added to this module. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403d486}\label{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403d486}} 
+\mbox{\Hypertarget{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}\label{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}} 
 \index{CHIPModule@{CHIPModule}!compile@{compile}}
 \index{compile@{compile}!CHIPModule@{CHIPModule}}
 \doxysubsubsection{\texorpdfstring{compile()}{compile()}}
-{\footnotesize\ttfamily void CHIPModule\+::compile (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$}]{chip\+\_\+dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void CHIPModule\+::compile (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$}]{chip\+\_\+dev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -129,7 +144,7 @@ Kernel JIT compilation can be lazy. This is configured via Cmake LAZY\+\_\+\+JIT
 
 This method should populate this modules chip\+\_\+kernels vector. These kernels would have a name extracted from the kernel but no associated host function pointers. 
 
-Reimplemented in \mbox{\hyperlink{class_c_h_i_p_module_open_c_l_a01ab6cdabbb9fcf5eda5d842f1a17150}{CHIPModule\+Open\+CL}}.
+Implemented in \mbox{\hyperlink{class_c_h_i_p_module_level0_a179feac2e0336518ccf55016ccc10513}{CHIPModule\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_module_open_c_l_a01ab6cdabbb9fcf5eda5d842f1a17150}{CHIPModule\+Open\+CL}}.
 
 \mbox{\Hypertarget{class_c_h_i_p_module_aa9cef37d3934498397b8644af4619d57}\label{class_c_h_i_p_module_aa9cef37d3934498397b8644af4619d57}} 
 \index{CHIPModule@{CHIPModule}!compileOnce@{compileOnce}}
@@ -139,7 +154,7 @@ Reimplemented in \mbox{\hyperlink{class_c_h_i_p_module_open_c_l_a01ab6cdabbb9fcf
 
 
 
-Wrapper around \mbox{\hyperlink{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403d486}{compile()}} called via std\+::call\+\_\+once. 
+Wrapper around \mbox{\hyperlink{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}{compile()}} called via std\+::call\+\_\+once. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -217,5 +232,5 @@ std\+::vector$<$\+CHIPKernel$\ast$$>$\&
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
-/\+Users/pvelesko/local/\+HIPxx/src/CHIPBackend.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/CHIPBackend.\+cc\end{DoxyCompactItemize}

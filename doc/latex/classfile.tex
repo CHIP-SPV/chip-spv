@@ -1,0 +1,61 @@
+\hypertarget{classfile}{}\doxysection{file Class Reference}
+\label{classfile}\index{file@{file}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfile_a6afd7c4751519c2c305903ce32a60d9b}\label{classfile_a6afd7c4751519c2c305903ce32a60d9b}} 
+enum \{ {\bfseries RDONLY} = FMT\+\_\+\+POSIX(O\+\_\+\+RDONLY)
+, {\bfseries WRONLY} = FMT\+\_\+\+POSIX(O\+\_\+\+WRONLY)
+, {\bfseries RDWR} = FMT\+\_\+\+POSIX(O\+\_\+\+RDWR)
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfile_a26bc3b2f162d44e6689757e35396c61c}\label{classfile_a26bc3b2f162d44e6689757e35396c61c}} 
+FMT\+\_\+\+API {\bfseries file} (\mbox{\hyperlink{classbasic__cstring__view}{cstring\+\_\+view}} path, int oflag)
+\item 
+\mbox{\Hypertarget{classfile_a12ab9fbce2297a5839c1d0b3159be261}\label{classfile_a12ab9fbce2297a5839c1d0b3159be261}} 
+{\bfseries file} (\mbox{\hyperlink{classfile}{file}} \&\&other) FMT\+\_\+\+NOEXCEPT
+\item 
+\mbox{\Hypertarget{classfile_adec0f79a39a67d9628bfd6272c9b3aa3}\label{classfile_adec0f79a39a67d9628bfd6272c9b3aa3}} 
+\mbox{\hyperlink{classfile}{file}} \& {\bfseries operator=} (\mbox{\hyperlink{classfile}{file}} \&\&other)
+\item 
+\mbox{\Hypertarget{classfile_a14a03f1516c926cc0785728ebad4175c}\label{classfile_a14a03f1516c926cc0785728ebad4175c}} 
+int {\bfseries descriptor} () const FMT\+\_\+\+NOEXCEPT
+\item 
+\mbox{\Hypertarget{classfile_a843b122e594108e44d7435d57dbecce5}\label{classfile_a843b122e594108e44d7435d57dbecce5}} 
+FMT\+\_\+\+API void {\bfseries close} ()
+\item 
+\mbox{\Hypertarget{classfile_a6ddfe0a8c58656f1dcdfd90869307bf1}\label{classfile_a6ddfe0a8c58656f1dcdfd90869307bf1}} 
+FMT\+\_\+\+API long long {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{classfile_a0bd904f0a22919c36cefef0098c869e5}\label{classfile_a0bd904f0a22919c36cefef0098c869e5}} 
+FMT\+\_\+\+API std\+::size\+\_\+t {\bfseries read} (void $\ast$buffer, std\+::size\+\_\+t count)
+\item 
+\mbox{\Hypertarget{classfile_a3b9de9cd17abc79f4cd8b7fd48fcd9ec}\label{classfile_a3b9de9cd17abc79f4cd8b7fd48fcd9ec}} 
+FMT\+\_\+\+API std\+::size\+\_\+t {\bfseries write} (const void $\ast$buffer, std\+::size\+\_\+t count)
+\item 
+\mbox{\Hypertarget{classfile_a5438e03088d3b7792a7bf0c2af581e7d}\label{classfile_a5438e03088d3b7792a7bf0c2af581e7d}} 
+FMT\+\_\+\+API void {\bfseries dup2} (int fd)
+\item 
+\mbox{\Hypertarget{classfile_afcd00b59adb3e06540627960832a164c}\label{classfile_afcd00b59adb3e06540627960832a164c}} 
+FMT\+\_\+\+API void {\bfseries dup2} (int fd, \mbox{\hyperlink{classerror__code}{error\+\_\+code}} \&ec) FMT\+\_\+\+NOEXCEPT
+\item 
+\mbox{\Hypertarget{classfile_a8e6b39b08670ce61993ee23acfe36c80}\label{classfile_a8e6b39b08670ce61993ee23acfe36c80}} 
+FMT\+\_\+\+API \mbox{\hyperlink{classbuffered__file}{buffered\+\_\+file}} {\bfseries fdopen} (const char $\ast$mode)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfile_a68335715e12fa4a8b66390d9c875bf65}\label{classfile_a68335715e12fa4a8b66390d9c875bf65}} 
+static FMT\+\_\+\+API \mbox{\hyperlink{classfile}{file}} {\bfseries dup} (int fd)
+\item 
+\mbox{\Hypertarget{classfile_a096b53bfb1b4cd1b566ddea0d6a6f3bc}\label{classfile_a096b53bfb1b4cd1b566ddea0d6a6f3bc}} 
+static FMT\+\_\+\+API void {\bfseries pipe} (\mbox{\hyperlink{classfile}{file}} \&read\+\_\+end, \mbox{\hyperlink{classfile}{file}} \&write\+\_\+end)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/posix.\+h\end{DoxyCompactItemize}

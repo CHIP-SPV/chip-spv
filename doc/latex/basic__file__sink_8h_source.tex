@@ -1,0 +1,76 @@
+\hypertarget{basic__file__sink_8h_source}{}\doxysection{basic\+\_\+file\+\_\+sink.\+h}
+\label{basic__file__sink_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/basic\_file\_sink.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/sinks/basic\_file\_sink.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015-\/2018 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef SPDLOG\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#error "{}spdlog.h must be included before this file."{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}spdlog/details/file\_helper.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}spdlog/details/null\_mutex.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}spdlog/sinks/base\_sink.h"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{20 \textcolor{keyword}{namespace }sinks \{}
+\DoxyCodeLine{21 \textcolor{comment}{/*}}
+\DoxyCodeLine{22 \textcolor{comment}{ * Trivial file sink with single file as target}}
+\DoxyCodeLine{23 \textcolor{comment}{ */}}
+\DoxyCodeLine{24 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Mutex>}
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1sinks_1_1basic__file__sink}{basic\_file\_sink}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classspdlog_1_1sinks_1_1base__sink}{base\_sink}}<Mutex>}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{28     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1sinks_1_1basic__file__sink}{basic\_file\_sink}}(\textcolor{keyword}{const} filename\_t \&filename, \textcolor{keywordtype}{bool} truncate = \textcolor{keyword}{false})}
+\DoxyCodeLine{29     \{}
+\DoxyCodeLine{30         file\_helper\_.open(filename, truncate);}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{34     \textcolor{keywordtype}{void} sink\_it\_(\textcolor{keyword}{const} \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details::log\_msg}} \&msg)\textcolor{keyword}{ override}}
+\DoxyCodeLine{35 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{36         fmt::memory\_buffer formatted;}
+\DoxyCodeLine{37         sink::formatter\_-\/>format(msg, formatted);}
+\DoxyCodeLine{38         file\_helper\_.write(formatted);}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{void} flush\_()\textcolor{keyword}{ override}}
+\DoxyCodeLine{42 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{43         file\_helper\_.flush();}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{private}:}
+\DoxyCodeLine{47     \mbox{\hyperlink{classspdlog_1_1details_1_1file__helper}{details::file\_helper}} file\_helper\_;}
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keyword}{using} \mbox{\hyperlink{classspdlog_1_1sinks_1_1basic__file__sink}{basic\_file\_sink\_mt}} = \mbox{\hyperlink{classspdlog_1_1sinks_1_1basic__file__sink}{basic\_file\_sink<std::mutex>}};}
+\DoxyCodeLine{51 \textcolor{keyword}{using} \mbox{\hyperlink{classspdlog_1_1sinks_1_1basic__file__sink}{basic\_file\_sink\_st}} = \mbox{\hyperlink{classspdlog_1_1sinks_1_1basic__file__sink}{basic\_file\_sink<details::null\_mutex>}};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \} \textcolor{comment}{// namespace sinks}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{comment}{//}}
+\DoxyCodeLine{56 \textcolor{comment}{// factory functions}}
+\DoxyCodeLine{57 \textcolor{comment}{//}}
+\DoxyCodeLine{58 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{59 \textcolor{keyword}{inline} std::shared\_ptr<logger> basic\_logger\_mt(\textcolor{keyword}{const} std::string \&logger\_name, \textcolor{keyword}{const} filename\_t \&filename, \textcolor{keywordtype}{bool} truncate = \textcolor{keyword}{false})}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61     \textcolor{keywordflow}{return} Factory::template create<sinks::basic\_file\_sink\_mt>(logger\_name, filename, truncate);}
+\DoxyCodeLine{62 \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Factory = default\_factory>}
+\DoxyCodeLine{65 \textcolor{keyword}{inline} std::shared\_ptr<logger> basic\_logger\_st(\textcolor{keyword}{const} std::string \&logger\_name, \textcolor{keyword}{const} filename\_t \&filename, \textcolor{keywordtype}{bool} truncate = \textcolor{keyword}{false})}
+\DoxyCodeLine{66 \{}
+\DoxyCodeLine{67     \textcolor{keywordflow}{return} Factory::template create<sinks::basic\_file\_sink\_st>(logger\_name, filename, truncate);}
+\DoxyCodeLine{68 \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

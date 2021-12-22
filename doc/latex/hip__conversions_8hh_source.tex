@@ -1,0 +1,879 @@
+\hypertarget{hip__conversions_8hh_source}{}\doxysection{hip\+\_\+conversions.\+hh}
+\label{hip__conversions_8hh_source}\index{/Users/pvelesko/local/CHIP-\/SPV/src/hip\_conversions.hh@{/Users/pvelesko/local/CHIP-\/SPV/src/hip\_conversions.hh}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ 2021 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <hip/driver\_types.h>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <hip/texture\_types.h>}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{inline} cl\_channel\_type getCLChannelType(\textcolor{keyword}{const} hipArray\_Format hipFormat,}
+\DoxyCodeLine{29                                         \textcolor{keyword}{const} hipTextureReadMode hipReadMode) \{}
+\DoxyCodeLine{30   \textcolor{keywordflow}{if} (hipReadMode == hipReadModeElementType) \{}
+\DoxyCodeLine{31     \textcolor{keywordflow}{switch} (hipFormat) \{}
+\DoxyCodeLine{32       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT8:}
+\DoxyCodeLine{33         \textcolor{keywordflow}{return} CL\_UNSIGNED\_INT8;}
+\DoxyCodeLine{34       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT8:}
+\DoxyCodeLine{35         \textcolor{keywordflow}{return} CL\_SIGNED\_INT8;}
+\DoxyCodeLine{36       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT16:}
+\DoxyCodeLine{37         \textcolor{keywordflow}{return} CL\_UNSIGNED\_INT16;}
+\DoxyCodeLine{38       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT16:}
+\DoxyCodeLine{39         \textcolor{keywordflow}{return} CL\_SIGNED\_INT16;}
+\DoxyCodeLine{40       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT32:}
+\DoxyCodeLine{41         \textcolor{keywordflow}{return} CL\_UNSIGNED\_INT32;}
+\DoxyCodeLine{42       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT32:}
+\DoxyCodeLine{43         \textcolor{keywordflow}{return} CL\_SIGNED\_INT32;}
+\DoxyCodeLine{44       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_HALF:}
+\DoxyCodeLine{45         \textcolor{keywordflow}{return} CL\_HALF\_FLOAT;}
+\DoxyCodeLine{46       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_FLOAT:}
+\DoxyCodeLine{47         \textcolor{keywordflow}{return} CL\_FLOAT;}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hipReadMode == hipReadModeNormalizedFloat) \{}
+\DoxyCodeLine{50     \textcolor{keywordflow}{switch} (hipFormat) \{}
+\DoxyCodeLine{51       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT8:}
+\DoxyCodeLine{52         \textcolor{keywordflow}{return} CL\_UNORM\_INT8;}
+\DoxyCodeLine{53       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT8:}
+\DoxyCodeLine{54         \textcolor{keywordflow}{return} CL\_SNORM\_INT8;}
+\DoxyCodeLine{55       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT16:}
+\DoxyCodeLine{56         \textcolor{keywordflow}{return} CL\_UNORM\_INT16;}
+\DoxyCodeLine{57       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT16:}
+\DoxyCodeLine{58         \textcolor{keywordflow}{return} CL\_SNORM\_INT16;}
+\DoxyCodeLine{59       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT32:}
+\DoxyCodeLine{60         \textcolor{keywordflow}{return} CL\_UNSIGNED\_INT32;}
+\DoxyCodeLine{61       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT32:}
+\DoxyCodeLine{62         \textcolor{keywordflow}{return} CL\_SIGNED\_INT32;}
+\DoxyCodeLine{63       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_HALF:}
+\DoxyCodeLine{64         \textcolor{keywordflow}{return} CL\_HALF\_FLOAT;}
+\DoxyCodeLine{65       \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_FLOAT:}
+\DoxyCodeLine{66         \textcolor{keywordflow}{return} CL\_FLOAT;}
+\DoxyCodeLine{67     \}}
+\DoxyCodeLine{68   \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{73 \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{keyword}{inline} cl\_channel\_order getCLChannelOrder(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} hipNumChannels,}
+\DoxyCodeLine{76                                           \textcolor{keyword}{const} \textcolor{keywordtype}{int} sRGB) \{}
+\DoxyCodeLine{77   \textcolor{keywordflow}{switch} (hipNumChannels) \{}
+\DoxyCodeLine{78     \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{79       \textcolor{keywordflow}{return} CL\_R;}
+\DoxyCodeLine{80     \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{81       \textcolor{keywordflow}{return} CL\_RG;}
+\DoxyCodeLine{82     \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{83       \textcolor{keywordflow}{return} (sRGB == 1) ? CL\_sRGBA : CL\_RGBA;}
+\DoxyCodeLine{84     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{85       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{86   \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{91 \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{keyword}{inline} cl\_mem\_object\_type getCLMemObjectType(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} hipWidth,}
+\DoxyCodeLine{94                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} hipHeight,}
+\DoxyCodeLine{95                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} hipDepth,}
+\DoxyCodeLine{96                                              \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags) \{}
+\DoxyCodeLine{97   \textcolor{keywordflow}{if} (flags == hipArrayDefault) \{}
+\DoxyCodeLine{98     \textcolor{keywordflow}{if} ((hipWidth != 0) \&\& (hipHeight == 0) \&\& (hipDepth == 0)) \{}
+\DoxyCodeLine{99       \textcolor{keywordflow}{return} CL\_MEM\_OBJECT\_IMAGE1D;}
+\DoxyCodeLine{100     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((hipWidth != 0) \&\& (hipHeight != 0) \&\& (hipDepth == 0)) \{}
+\DoxyCodeLine{101       \textcolor{keywordflow}{return} CL\_MEM\_OBJECT\_IMAGE2D;}
+\DoxyCodeLine{102     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((hipWidth != 0) \&\& (hipHeight != 0) \&\& (hipDepth != 0)) \{}
+\DoxyCodeLine{103       \textcolor{keywordflow}{return} CL\_MEM\_OBJECT\_IMAGE3D;}
+\DoxyCodeLine{104     \}}
+\DoxyCodeLine{105   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (flags == hipArrayLayered) \{}
+\DoxyCodeLine{106     \textcolor{keywordflow}{if} ((hipWidth != 0) \&\& (hipHeight == 0) \&\& (hipDepth != 0)) \{}
+\DoxyCodeLine{107       \textcolor{keywordflow}{return} CL\_MEM\_OBJECT\_IMAGE1D\_ARRAY;}
+\DoxyCodeLine{108     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((hipWidth != 0) \&\& (hipHeight != 0) \&\& (hipDepth != 0)) \{}
+\DoxyCodeLine{109       \textcolor{keywordflow}{return} CL\_MEM\_OBJECT\_IMAGE2D\_ARRAY;}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111   \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{116 \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{keyword}{inline} cl\_addressing\_mode getCLAddressingMode(}
+\DoxyCodeLine{119     \textcolor{keyword}{const} hipTextureAddressMode hipAddressMode) \{}
+\DoxyCodeLine{120   \textcolor{keywordflow}{switch} (hipAddressMode) \{}
+\DoxyCodeLine{121     \textcolor{keywordflow}{case} hipAddressModeWrap:}
+\DoxyCodeLine{122       \textcolor{keywordflow}{return} CL\_ADDRESS\_REPEAT;}
+\DoxyCodeLine{123     \textcolor{keywordflow}{case} hipAddressModeClamp:}
+\DoxyCodeLine{124       \textcolor{keywordflow}{return} CL\_ADDRESS\_CLAMP\_TO\_EDGE;}
+\DoxyCodeLine{125     \textcolor{keywordflow}{case} hipAddressModeMirror:}
+\DoxyCodeLine{126       \textcolor{keywordflow}{return} CL\_ADDRESS\_MIRRORED\_REPEAT;}
+\DoxyCodeLine{127     \textcolor{keywordflow}{case} hipAddressModeBorder:}
+\DoxyCodeLine{128       \textcolor{keywordflow}{return} CL\_ADDRESS\_CLAMP;}
+\DoxyCodeLine{129   \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{134 \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{keyword}{inline} cl\_filter\_mode getCLFilterMode(}
+\DoxyCodeLine{137     \textcolor{keyword}{const} hipTextureFilterMode hipFilterMode) \{}
+\DoxyCodeLine{138   \textcolor{keywordflow}{switch} (hipFilterMode) \{}
+\DoxyCodeLine{139     \textcolor{keywordflow}{case} hipFilterModePoint:}
+\DoxyCodeLine{140       \textcolor{keywordflow}{return} CL\_FILTER\_NEAREST;}
+\DoxyCodeLine{141     \textcolor{keywordflow}{case} hipFilterModeLinear:}
+\DoxyCodeLine{142       \textcolor{keywordflow}{return} CL\_FILTER\_LINEAR;}
+\DoxyCodeLine{143   \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{148 \}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150 \textcolor{keyword}{inline} cl\_mem\_object\_type getCLMemObjectType(\textcolor{keyword}{const} hipResourceType hipResType) \{}
+\DoxyCodeLine{151   \textcolor{keywordflow}{switch} (hipResType) \{}
+\DoxyCodeLine{152     \textcolor{keywordflow}{case} hipResourceTypeLinear:}
+\DoxyCodeLine{153       \textcolor{keywordflow}{return} CL\_MEM\_OBJECT\_IMAGE1D\_BUFFER;}
+\DoxyCodeLine{154     \textcolor{keywordflow}{case} hipResourceTypePitch2D:}
+\DoxyCodeLine{155       \textcolor{keywordflow}{return} CL\_MEM\_OBJECT\_IMAGE2D;}
+\DoxyCodeLine{156     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{157       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{158   \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{163 \}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165 \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} getElementSize(\textcolor{keyword}{const} hipArray\_const\_t array) \{}
+\DoxyCodeLine{166   \textcolor{keywordflow}{switch} (array-\/>Format) \{}
+\DoxyCodeLine{167     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT8:}
+\DoxyCodeLine{168     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT8:}
+\DoxyCodeLine{169       \textcolor{keywordflow}{return} 1 * array-\/>NumChannels;}
+\DoxyCodeLine{170     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT16:}
+\DoxyCodeLine{171     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT16:}
+\DoxyCodeLine{172     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_HALF:}
+\DoxyCodeLine{173       \textcolor{keywordflow}{return} 2 * array-\/>NumChannels;}
+\DoxyCodeLine{174     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT32:}
+\DoxyCodeLine{175     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT32:}
+\DoxyCodeLine{176     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_FLOAT:}
+\DoxyCodeLine{177       \textcolor{keywordflow}{return} 4 * array-\/>NumChannels;}
+\DoxyCodeLine{178   \}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{183 \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185 \textcolor{keyword}{inline} hipChannelFormatDesc getChannelFormatDesc(\textcolor{keywordtype}{int} numChannels,}
+\DoxyCodeLine{186                                                  hipArray\_Format arrayFormat) \{}
+\DoxyCodeLine{187   \textcolor{keywordflow}{switch} (arrayFormat) \{}
+\DoxyCodeLine{188     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT8:}
+\DoxyCodeLine{189       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{190         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{191           \textcolor{keywordflow}{return} \{8, 0, 0, 0, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{192         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{193           \textcolor{keywordflow}{return} \{8, 8, 0, 0, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{194         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{195           \textcolor{keywordflow}{return} \{8, 8, 8, 8, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{196       \}}
+\DoxyCodeLine{197     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT8:}
+\DoxyCodeLine{198       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{199         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{200           \textcolor{keywordflow}{return} \{8, 0, 0, 0, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{201         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{202           \textcolor{keywordflow}{return} \{8, 8, 0, 0, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{203         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{204           \textcolor{keywordflow}{return} \{8, 8, 8, 8, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{205       \}}
+\DoxyCodeLine{206     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT16:}
+\DoxyCodeLine{207       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{208         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{209           \textcolor{keywordflow}{return} \{16, 0, 0, 0, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{210         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{211           \textcolor{keywordflow}{return} \{16, 16, 0, 0, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{212         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{213           \textcolor{keywordflow}{return} \{16, 16, 16, 16, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{214       \}}
+\DoxyCodeLine{215     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT16:}
+\DoxyCodeLine{216       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{217         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{218           \textcolor{keywordflow}{return} \{16, 0, 0, 0, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{219         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{220           \textcolor{keywordflow}{return} \{16, 16, 0, 0, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{221         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{222           \textcolor{keywordflow}{return} \{16, 16, 16, 16, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{223       \}}
+\DoxyCodeLine{224     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_UNSIGNED\_INT32:}
+\DoxyCodeLine{225       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{226         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{227           \textcolor{keywordflow}{return} \{32, 0, 0, 0, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{228         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{229           \textcolor{keywordflow}{return} \{32, 32, 0, 0, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{230         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{231           \textcolor{keywordflow}{return} \{32, 32, 32, 32, hipChannelFormatKindUnsigned\};}
+\DoxyCodeLine{232       \}}
+\DoxyCodeLine{233     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_SIGNED\_INT32:}
+\DoxyCodeLine{234       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{235         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{236           \textcolor{keywordflow}{return} \{32, 0, 0, 0, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{237         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{238           \textcolor{keywordflow}{return} \{32, 32, 0, 0, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{239         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{240           \textcolor{keywordflow}{return} \{32, 32, 32, 32, hipChannelFormatKindSigned\};}
+\DoxyCodeLine{241       \}}
+\DoxyCodeLine{242     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_HALF:}
+\DoxyCodeLine{243       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{244         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{245           \textcolor{keywordflow}{return} \{16, 0, 0, 0, hipChannelFormatKindFloat\};}
+\DoxyCodeLine{246         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{247           \textcolor{keywordflow}{return} \{16, 16, 0, 0, hipChannelFormatKindFloat\};}
+\DoxyCodeLine{248         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{249           \textcolor{keywordflow}{return} \{16, 16, 16, 16, hipChannelFormatKindFloat\};}
+\DoxyCodeLine{250       \}}
+\DoxyCodeLine{251     \textcolor{keywordflow}{case} HIP\_AD\_FORMAT\_FLOAT:}
+\DoxyCodeLine{252       \textcolor{keywordflow}{switch} (numChannels) \{}
+\DoxyCodeLine{253         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{254           \textcolor{keywordflow}{return} \{32, 0, 0, 0, hipChannelFormatKindFloat\};}
+\DoxyCodeLine{255         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{256           \textcolor{keywordflow}{return} \{32, 32, 0, 0, hipChannelFormatKindFloat\};}
+\DoxyCodeLine{257         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{258           \textcolor{keywordflow}{return} \{32, 32, 32, 32, hipChannelFormatKindFloat\};}
+\DoxyCodeLine{259       \}}
+\DoxyCodeLine{260   \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{265 \}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267 \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} getNumChannels(\textcolor{keyword}{const} hipChannelFormatDesc\& desc) \{}
+\DoxyCodeLine{268   \textcolor{keywordflow}{return} ((desc.x != 0) + (desc.y != 0) + (desc.z != 0) + (desc.w != 0));}
+\DoxyCodeLine{269 \}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271 \textcolor{keyword}{inline} hipArray\_Format getArrayFormat(\textcolor{keyword}{const} hipChannelFormatDesc\& desc) \{}
+\DoxyCodeLine{272   \textcolor{keywordflow}{switch} (desc.f) \{}
+\DoxyCodeLine{273     \textcolor{keywordflow}{case} hipChannelFormatKindUnsigned:}
+\DoxyCodeLine{274       \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{275         \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{276           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_UNSIGNED\_INT8;}
+\DoxyCodeLine{277         \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{278           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_UNSIGNED\_INT16;}
+\DoxyCodeLine{279         \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{280           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_UNSIGNED\_INT32;}
+\DoxyCodeLine{281       \}}
+\DoxyCodeLine{282     \textcolor{keywordflow}{case} hipChannelFormatKindSigned:}
+\DoxyCodeLine{283       \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{284         \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{285           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_SIGNED\_INT8;}
+\DoxyCodeLine{286         \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{287           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_SIGNED\_INT16;}
+\DoxyCodeLine{288         \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{289           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_SIGNED\_INT32;}
+\DoxyCodeLine{290       \}}
+\DoxyCodeLine{291     \textcolor{keywordflow}{case} hipChannelFormatKindFloat:}
+\DoxyCodeLine{292       \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{293         \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{294           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_HALF;}
+\DoxyCodeLine{295         \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{296           \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_FLOAT;}
+\DoxyCodeLine{297       \}}
+\DoxyCodeLine{298     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{299       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{300   \}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{305 \}}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} getNumChannels(\textcolor{keyword}{const} hipResourceViewFormat hipFormat) \{}
+\DoxyCodeLine{308   \textcolor{keywordflow}{switch} (hipFormat) \{}
+\DoxyCodeLine{309     \textcolor{keywordflow}{case} hipResViewFormatUnsignedChar1:}
+\DoxyCodeLine{310     \textcolor{keywordflow}{case} hipResViewFormatSignedChar1:}
+\DoxyCodeLine{311     \textcolor{keywordflow}{case} hipResViewFormatUnsignedShort1:}
+\DoxyCodeLine{312     \textcolor{keywordflow}{case} hipResViewFormatSignedShort1:}
+\DoxyCodeLine{313     \textcolor{keywordflow}{case} hipResViewFormatUnsignedInt1:}
+\DoxyCodeLine{314     \textcolor{keywordflow}{case} hipResViewFormatSignedInt1:}
+\DoxyCodeLine{315     \textcolor{keywordflow}{case} hipResViewFormatHalf1:}
+\DoxyCodeLine{316     \textcolor{keywordflow}{case} hipResViewFormatFloat1:}
+\DoxyCodeLine{317       \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{318     \textcolor{keywordflow}{case} hipResViewFormatUnsignedChar2:}
+\DoxyCodeLine{319     \textcolor{keywordflow}{case} hipResViewFormatSignedChar2:}
+\DoxyCodeLine{320     \textcolor{keywordflow}{case} hipResViewFormatUnsignedShort2:}
+\DoxyCodeLine{321     \textcolor{keywordflow}{case} hipResViewFormatSignedShort2:}
+\DoxyCodeLine{322     \textcolor{keywordflow}{case} hipResViewFormatUnsignedInt2:}
+\DoxyCodeLine{323     \textcolor{keywordflow}{case} hipResViewFormatSignedInt2:}
+\DoxyCodeLine{324     \textcolor{keywordflow}{case} hipResViewFormatHalf2:}
+\DoxyCodeLine{325     \textcolor{keywordflow}{case} hipResViewFormatFloat2:}
+\DoxyCodeLine{326       \textcolor{keywordflow}{return} 2;}
+\DoxyCodeLine{327     \textcolor{keywordflow}{case} hipResViewFormatUnsignedChar4:}
+\DoxyCodeLine{328     \textcolor{keywordflow}{case} hipResViewFormatSignedChar4:}
+\DoxyCodeLine{329     \textcolor{keywordflow}{case} hipResViewFormatUnsignedShort4:}
+\DoxyCodeLine{330     \textcolor{keywordflow}{case} hipResViewFormatSignedShort4:}
+\DoxyCodeLine{331     \textcolor{keywordflow}{case} hipResViewFormatUnsignedInt4:}
+\DoxyCodeLine{332     \textcolor{keywordflow}{case} hipResViewFormatSignedInt4:}
+\DoxyCodeLine{333     \textcolor{keywordflow}{case} hipResViewFormatHalf4:}
+\DoxyCodeLine{334     \textcolor{keywordflow}{case} hipResViewFormatFloat4:}
+\DoxyCodeLine{335       \textcolor{keywordflow}{return} 4;}
+\DoxyCodeLine{336     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{337       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{338   \}}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{343 \}}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345 \textcolor{keyword}{inline} hipArray\_Format getArrayFormat(\textcolor{keyword}{const} hipResourceViewFormat hipFormat) \{}
+\DoxyCodeLine{346   \textcolor{keywordflow}{switch} (hipFormat) \{}
+\DoxyCodeLine{347     \textcolor{keywordflow}{case} hipResViewFormatUnsignedChar1:}
+\DoxyCodeLine{348     \textcolor{keywordflow}{case} hipResViewFormatUnsignedChar2:}
+\DoxyCodeLine{349     \textcolor{keywordflow}{case} hipResViewFormatUnsignedChar4:}
+\DoxyCodeLine{350       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_UNSIGNED\_INT8;}
+\DoxyCodeLine{351     \textcolor{keywordflow}{case} hipResViewFormatSignedChar1:}
+\DoxyCodeLine{352     \textcolor{keywordflow}{case} hipResViewFormatSignedChar2:}
+\DoxyCodeLine{353     \textcolor{keywordflow}{case} hipResViewFormatSignedChar4:}
+\DoxyCodeLine{354       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_SIGNED\_INT8;}
+\DoxyCodeLine{355     \textcolor{keywordflow}{case} hipResViewFormatUnsignedShort1:}
+\DoxyCodeLine{356     \textcolor{keywordflow}{case} hipResViewFormatUnsignedShort2:}
+\DoxyCodeLine{357     \textcolor{keywordflow}{case} hipResViewFormatUnsignedShort4:}
+\DoxyCodeLine{358       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_UNSIGNED\_INT16;}
+\DoxyCodeLine{359     \textcolor{keywordflow}{case} hipResViewFormatSignedShort1:}
+\DoxyCodeLine{360     \textcolor{keywordflow}{case} hipResViewFormatSignedShort2:}
+\DoxyCodeLine{361     \textcolor{keywordflow}{case} hipResViewFormatSignedShort4:}
+\DoxyCodeLine{362       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_SIGNED\_INT16;}
+\DoxyCodeLine{363     \textcolor{keywordflow}{case} hipResViewFormatUnsignedInt1:}
+\DoxyCodeLine{364     \textcolor{keywordflow}{case} hipResViewFormatUnsignedInt2:}
+\DoxyCodeLine{365     \textcolor{keywordflow}{case} hipResViewFormatUnsignedInt4:}
+\DoxyCodeLine{366       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_UNSIGNED\_INT32;}
+\DoxyCodeLine{367     \textcolor{keywordflow}{case} hipResViewFormatSignedInt1:}
+\DoxyCodeLine{368     \textcolor{keywordflow}{case} hipResViewFormatSignedInt2:}
+\DoxyCodeLine{369     \textcolor{keywordflow}{case} hipResViewFormatSignedInt4:}
+\DoxyCodeLine{370       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_SIGNED\_INT32;}
+\DoxyCodeLine{371     \textcolor{keywordflow}{case} hipResViewFormatHalf1:}
+\DoxyCodeLine{372     \textcolor{keywordflow}{case} hipResViewFormatHalf2:}
+\DoxyCodeLine{373     \textcolor{keywordflow}{case} hipResViewFormatHalf4:}
+\DoxyCodeLine{374       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_HALF;}
+\DoxyCodeLine{375     \textcolor{keywordflow}{case} hipResViewFormatFloat1:}
+\DoxyCodeLine{376     \textcolor{keywordflow}{case} hipResViewFormatFloat2:}
+\DoxyCodeLine{377     \textcolor{keywordflow}{case} hipResViewFormatFloat4:}
+\DoxyCodeLine{378       \textcolor{keywordflow}{return} HIP\_AD\_FORMAT\_FLOAT;}
+\DoxyCodeLine{379     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{380       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{381   \}}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{386 \}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388 \textcolor{keyword}{inline} hipResourceViewFormat getResourceViewFormat(}
+\DoxyCodeLine{389     \textcolor{keyword}{const} hipChannelFormatDesc\& desc) \{}
+\DoxyCodeLine{390   \textcolor{keywordflow}{switch} (desc.f) \{}
+\DoxyCodeLine{391     \textcolor{keywordflow}{case} hipChannelFormatKindUnsigned:}
+\DoxyCodeLine{392       \textcolor{keywordflow}{switch} (getNumChannels(desc)) \{}
+\DoxyCodeLine{393         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{394           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{395             \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{396               \textcolor{keywordflow}{return} hipResViewFormatUnsignedChar1;}
+\DoxyCodeLine{397             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{398               \textcolor{keywordflow}{return} hipResViewFormatUnsignedShort1;}
+\DoxyCodeLine{399             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{400               \textcolor{keywordflow}{return} hipResViewFormatUnsignedInt1;}
+\DoxyCodeLine{401           \}}
+\DoxyCodeLine{402         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{403           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{404             \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{405               \textcolor{keywordflow}{return} hipResViewFormatUnsignedChar2;}
+\DoxyCodeLine{406             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{407               \textcolor{keywordflow}{return} hipResViewFormatUnsignedShort2;}
+\DoxyCodeLine{408             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{409               \textcolor{keywordflow}{return} hipResViewFormatUnsignedInt2;}
+\DoxyCodeLine{410           \}}
+\DoxyCodeLine{411         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{412           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{413             \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{414               \textcolor{keywordflow}{return} hipResViewFormatUnsignedChar4;}
+\DoxyCodeLine{415             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{416               \textcolor{keywordflow}{return} hipResViewFormatUnsignedShort4;}
+\DoxyCodeLine{417             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{418               \textcolor{keywordflow}{return} hipResViewFormatUnsignedInt4;}
+\DoxyCodeLine{419           \}}
+\DoxyCodeLine{420       \}}
+\DoxyCodeLine{421     \textcolor{keywordflow}{case} hipChannelFormatKindSigned:}
+\DoxyCodeLine{422       \textcolor{keywordflow}{switch} (getNumChannels(desc)) \{}
+\DoxyCodeLine{423         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{424           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{425             \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{426               \textcolor{keywordflow}{return} hipResViewFormatSignedChar1;}
+\DoxyCodeLine{427             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{428               \textcolor{keywordflow}{return} hipResViewFormatSignedShort1;}
+\DoxyCodeLine{429             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{430               \textcolor{keywordflow}{return} hipResViewFormatSignedInt1;}
+\DoxyCodeLine{431           \}}
+\DoxyCodeLine{432         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{433           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{434             \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{435               \textcolor{keywordflow}{return} hipResViewFormatSignedChar2;}
+\DoxyCodeLine{436             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{437               \textcolor{keywordflow}{return} hipResViewFormatSignedShort2;}
+\DoxyCodeLine{438             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{439               \textcolor{keywordflow}{return} hipResViewFormatSignedInt2;}
+\DoxyCodeLine{440           \}}
+\DoxyCodeLine{441         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{442           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{443             \textcolor{keywordflow}{case} 8:}
+\DoxyCodeLine{444               \textcolor{keywordflow}{return} hipResViewFormatSignedChar4;}
+\DoxyCodeLine{445             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{446               \textcolor{keywordflow}{return} hipResViewFormatSignedShort4;}
+\DoxyCodeLine{447             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{448               \textcolor{keywordflow}{return} hipResViewFormatSignedInt4;}
+\DoxyCodeLine{449           \}}
+\DoxyCodeLine{450       \}}
+\DoxyCodeLine{451     \textcolor{keywordflow}{case} hipChannelFormatKindFloat:}
+\DoxyCodeLine{452       \textcolor{keywordflow}{switch} (getNumChannels(desc)) \{}
+\DoxyCodeLine{453         \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{454           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{455             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{456               \textcolor{keywordflow}{return} hipResViewFormatHalf1;}
+\DoxyCodeLine{457             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{458               \textcolor{keywordflow}{return} hipResViewFormatFloat1;}
+\DoxyCodeLine{459           \}}
+\DoxyCodeLine{460         \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{461           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{462             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{463               \textcolor{keywordflow}{return} hipResViewFormatHalf2;}
+\DoxyCodeLine{464             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{465               \textcolor{keywordflow}{return} hipResViewFormatFloat2;}
+\DoxyCodeLine{466           \}}
+\DoxyCodeLine{467         \textcolor{keywordflow}{case} 4:}
+\DoxyCodeLine{468           \textcolor{keywordflow}{switch} (desc.x) \{}
+\DoxyCodeLine{469             \textcolor{keywordflow}{case} 16:}
+\DoxyCodeLine{470               \textcolor{keywordflow}{return} hipResViewFormatHalf4;}
+\DoxyCodeLine{471             \textcolor{keywordflow}{case} 32:}
+\DoxyCodeLine{472               \textcolor{keywordflow}{return} hipResViewFormatFloat4;}
+\DoxyCodeLine{473           \}}
+\DoxyCodeLine{474       \}}
+\DoxyCodeLine{475     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{476       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{477   \}}
+\DoxyCodeLine{478 }
+\DoxyCodeLine{479   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{482 \}}
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484 \textcolor{keyword}{inline} hipTextureDesc getTextureDesc(\textcolor{keyword}{const} textureReference* texRef) \{}
+\DoxyCodeLine{485   hipTextureDesc texDesc = \{\};}
+\DoxyCodeLine{486   std::memcpy(texDesc.addressMode, texRef-\/>addressMode,}
+\DoxyCodeLine{487               \textcolor{keyword}{sizeof}(texDesc.addressMode));}
+\DoxyCodeLine{488   texDesc.filterMode = texRef-\/>filterMode;}
+\DoxyCodeLine{489   texDesc.readMode = texRef-\/>readMode;}
+\DoxyCodeLine{490   texDesc.sRGB = texRef-\/>sRGB;}
+\DoxyCodeLine{491   texDesc.normalizedCoords = texRef-\/>normalized;}
+\DoxyCodeLine{492   texDesc.maxAnisotropy = texRef-\/>maxAnisotropy;}
+\DoxyCodeLine{493   texDesc.mipmapFilterMode = texRef-\/>mipmapFilterMode;}
+\DoxyCodeLine{494   texDesc.mipmapLevelBias = texRef-\/>mipmapLevelBias;}
+\DoxyCodeLine{495   texDesc.minMipmapLevelClamp = texRef-\/>minMipmapLevelClamp;}
+\DoxyCodeLine{496   texDesc.maxMipmapLevelClamp = texRef-\/>maxMipmapLevelClamp;}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{498   \textcolor{keywordflow}{return} texDesc;}
+\DoxyCodeLine{499 \}}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501 \textcolor{keyword}{inline} hipResourceViewDesc getResourceViewDesc(}
+\DoxyCodeLine{502     hipArray\_const\_t array, \textcolor{keyword}{const} hipResourceViewFormat format) \{}
+\DoxyCodeLine{503   hipResourceViewDesc resViewDesc = \{\};}
+\DoxyCodeLine{504   resViewDesc.format = format;}
+\DoxyCodeLine{505   resViewDesc.width = array-\/>width;}
+\DoxyCodeLine{506   resViewDesc.height = array-\/>height;}
+\DoxyCodeLine{507   resViewDesc.depth = array-\/>depth;}
+\DoxyCodeLine{508   resViewDesc.firstMipmapLevel = 0;}
+\DoxyCodeLine{509   resViewDesc.lastMipmapLevel = 0;}
+\DoxyCodeLine{510   resViewDesc.firstLayer = 0;}
+\DoxyCodeLine{511   resViewDesc.lastLayer = 0; \textcolor{comment}{/* TODO add hipArray::numLayers */}}
+\DoxyCodeLine{512 }
+\DoxyCodeLine{513   \textcolor{keywordflow}{return} resViewDesc;}
+\DoxyCodeLine{514 \}}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516 \textcolor{keyword}{inline} hipResourceViewDesc getResourceViewDesc(}
+\DoxyCodeLine{517     hipMipmappedArray\_const\_t array, \textcolor{keyword}{const} hipResourceViewFormat format) \{}
+\DoxyCodeLine{518   hipResourceViewDesc resViewDesc = \{\};}
+\DoxyCodeLine{519   resViewDesc.format = format;}
+\DoxyCodeLine{520   resViewDesc.width = array-\/>width;}
+\DoxyCodeLine{521   resViewDesc.height = array-\/>height;}
+\DoxyCodeLine{522   resViewDesc.depth = array-\/>depth;}
+\DoxyCodeLine{523   resViewDesc.firstMipmapLevel = 0;}
+\DoxyCodeLine{524   resViewDesc.lastMipmapLevel =}
+\DoxyCodeLine{525       0; \textcolor{comment}{/* TODO add hipMipmappedArray::numMipLevels */}}
+\DoxyCodeLine{526   resViewDesc.firstLayer = 0;}
+\DoxyCodeLine{527   resViewDesc.lastLayer = 0; \textcolor{comment}{/* TODO add hipArray::numLayers */}}
+\DoxyCodeLine{528 }
+\DoxyCodeLine{529   \textcolor{keywordflow}{return} resViewDesc;}
+\DoxyCodeLine{530 \}}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{532 \textcolor{keyword}{inline} std::pair<hipMemoryType, hipMemoryType> getMemoryType(}
+\DoxyCodeLine{533     \textcolor{keyword}{const} hipMemcpyKind kind) \{}
+\DoxyCodeLine{534   \textcolor{keywordflow}{switch} (kind) \{}
+\DoxyCodeLine{535     \textcolor{keywordflow}{case} hipMemcpyHostToHost:}
+\DoxyCodeLine{536       \textcolor{keywordflow}{return} \{hipMemoryTypeHost, hipMemoryTypeHost\};}
+\DoxyCodeLine{537     \textcolor{keywordflow}{case} hipMemcpyHostToDevice:}
+\DoxyCodeLine{538       \textcolor{keywordflow}{return} \{hipMemoryTypeHost, hipMemoryTypeDevice\};}
+\DoxyCodeLine{539     \textcolor{keywordflow}{case} hipMemcpyDeviceToHost:}
+\DoxyCodeLine{540       \textcolor{keywordflow}{return} \{hipMemoryTypeDevice, hipMemoryTypeHost\};}
+\DoxyCodeLine{541     \textcolor{keywordflow}{case} hipMemcpyDeviceToDevice:}
+\DoxyCodeLine{542       \textcolor{keywordflow}{return} \{hipMemoryTypeDevice, hipMemoryTypeDevice\};}
+\DoxyCodeLine{543     \textcolor{keywordflow}{case} hipMemcpyDefault:}
+\DoxyCodeLine{544       \textcolor{keywordflow}{return} \{hipMemoryTypeUnified, hipMemoryTypeUnified\};}
+\DoxyCodeLine{545   \}}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547   \textcolor{comment}{// ShouldNotReachHere();();}}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549   \textcolor{keywordflow}{return} \{\};}
+\DoxyCodeLine{550 \}}
+\DoxyCodeLine{551 }
+\DoxyCodeLine{552 \textcolor{keyword}{inline} HIP\_MEMCPY3D getDrvMemcpy3DDesc(\textcolor{keyword}{const} hip\_Memcpy2D\& desc2D) \{}
+\DoxyCodeLine{553   HIP\_MEMCPY3D desc3D = \{\};}
+\DoxyCodeLine{554 }
+\DoxyCodeLine{555   desc3D.srcXInBytes = desc2D.srcXInBytes;}
+\DoxyCodeLine{556   desc3D.srcY = desc2D.srcY;}
+\DoxyCodeLine{557   desc3D.srcZ = 0;}
+\DoxyCodeLine{558   desc3D.srcLOD = 0;}
+\DoxyCodeLine{559   desc3D.srcMemoryType = desc2D.srcMemoryType;}
+\DoxyCodeLine{560   desc3D.srcHost = desc2D.srcHost;}
+\DoxyCodeLine{561   desc3D.srcDevice = desc2D.srcDevice;}
+\DoxyCodeLine{562   desc3D.srcArray = desc2D.srcArray;}
+\DoxyCodeLine{563   desc3D.srcPitch = desc2D.srcPitch;}
+\DoxyCodeLine{564   desc3D.srcHeight = 0;}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566   desc3D.dstXInBytes = desc2D.dstXInBytes;}
+\DoxyCodeLine{567   desc3D.dstY = desc2D.dstY;}
+\DoxyCodeLine{568   desc3D.dstZ = 0;}
+\DoxyCodeLine{569   desc3D.dstLOD = 0;}
+\DoxyCodeLine{570   desc3D.dstMemoryType = desc2D.dstMemoryType;}
+\DoxyCodeLine{571   desc3D.dstHost = desc2D.dstHost;}
+\DoxyCodeLine{572   desc3D.dstDevice = desc2D.dstDevice;}
+\DoxyCodeLine{573   desc3D.dstArray = desc2D.dstArray;}
+\DoxyCodeLine{574   desc3D.dstPitch = desc2D.dstPitch;}
+\DoxyCodeLine{575   desc3D.dstHeight = 0;}
+\DoxyCodeLine{576 }
+\DoxyCodeLine{577   desc3D.WidthInBytes = desc2D.WidthInBytes;}
+\DoxyCodeLine{578   desc3D.Height = desc2D.Height;}
+\DoxyCodeLine{579   desc3D.Depth = 1;}
+\DoxyCodeLine{580 }
+\DoxyCodeLine{581   \textcolor{keywordflow}{return} desc3D;}
+\DoxyCodeLine{582 \}}
+\DoxyCodeLine{583 }
+\DoxyCodeLine{584 \textcolor{keyword}{inline} HIP\_MEMCPY3D getDrvMemcpy3DDesc(\textcolor{keyword}{const} hipMemcpy3DParms\& desc) \{}
+\DoxyCodeLine{585   HIP\_MEMCPY3D descDrv = \{\};}
+\DoxyCodeLine{586 }
+\DoxyCodeLine{587   descDrv.WidthInBytes = desc.extent.width;}
+\DoxyCodeLine{588   descDrv.Height = desc.extent.height;}
+\DoxyCodeLine{589   descDrv.Depth = desc.extent.depth;}
+\DoxyCodeLine{590 }
+\DoxyCodeLine{591   descDrv.srcXInBytes = desc.srcPos.x;}
+\DoxyCodeLine{592   descDrv.srcY = desc.srcPos.y;}
+\DoxyCodeLine{593   descDrv.srcZ = desc.srcPos.z;}
+\DoxyCodeLine{594   descDrv.srcLOD = 0;}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{596   descDrv.dstXInBytes = desc.dstPos.x;}
+\DoxyCodeLine{597   descDrv.dstY = desc.dstPos.y;}
+\DoxyCodeLine{598   descDrv.dstZ = desc.dstPos.z;}
+\DoxyCodeLine{599   descDrv.dstLOD = 0;}
+\DoxyCodeLine{600 }
+\DoxyCodeLine{601   \textcolor{keywordflow}{if} (desc.srcArray != \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{602     descDrv.srcMemoryType = hipMemoryTypeArray;}
+\DoxyCodeLine{603     descDrv.srcArray = desc.srcArray;}
+\DoxyCodeLine{604     \textcolor{comment}{// When reffering to array memory, hipPos::x is in elements.}}
+\DoxyCodeLine{605     descDrv.srcXInBytes *= getElementSize(desc.srcArray);}
+\DoxyCodeLine{606   \}}
+\DoxyCodeLine{607 }
+\DoxyCodeLine{608   \textcolor{keywordflow}{if} (desc.srcPtr.ptr != \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{609     descDrv.srcMemoryType = std::get<0>(getMemoryType(desc.kind));}
+\DoxyCodeLine{610     descDrv.srcHost = desc.srcPtr.ptr;}
+\DoxyCodeLine{611     descDrv.srcDevice = desc.srcPtr.ptr;}
+\DoxyCodeLine{612     descDrv.srcPitch = desc.srcPtr.pitch;}
+\DoxyCodeLine{613     descDrv.srcHeight = desc.srcPtr.ysize;}
+\DoxyCodeLine{614   \}}
+\DoxyCodeLine{615 }
+\DoxyCodeLine{616   \textcolor{keywordflow}{if} (desc.dstArray != \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{617     descDrv.dstMemoryType = hipMemoryTypeArray;}
+\DoxyCodeLine{618     descDrv.dstArray = desc.dstArray;}
+\DoxyCodeLine{619     \textcolor{comment}{// When reffering to array memory, hipPos::x is in elements.}}
+\DoxyCodeLine{620     descDrv.dstXInBytes *= getElementSize(desc.dstArray);}
+\DoxyCodeLine{621   \}}
+\DoxyCodeLine{622 }
+\DoxyCodeLine{623   \textcolor{keywordflow}{if} (desc.dstPtr.ptr != \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{624     descDrv.dstMemoryType = std::get<1>(getMemoryType(desc.kind));}
+\DoxyCodeLine{625     descDrv.dstHost = desc.dstPtr.ptr;}
+\DoxyCodeLine{626     descDrv.dstDevice = desc.dstPtr.ptr;}
+\DoxyCodeLine{627     descDrv.dstPitch = desc.dstPtr.pitch;}
+\DoxyCodeLine{628     descDrv.dstHeight = desc.dstPtr.ysize;}
+\DoxyCodeLine{629   \}}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631   \textcolor{comment}{// If a HIP array is participating in the copy, the extent is defined in terms}}
+\DoxyCodeLine{632   \textcolor{comment}{// of that array's elements.}}
+\DoxyCodeLine{633   \textcolor{keywordflow}{if} ((desc.srcArray != \textcolor{keyword}{nullptr}) \&\& (desc.dstArray == \textcolor{keyword}{nullptr})) \{}
+\DoxyCodeLine{634     descDrv.WidthInBytes *= getElementSize(desc.srcArray);}
+\DoxyCodeLine{635   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((desc.srcArray == \textcolor{keyword}{nullptr}) \&\& (desc.dstArray != \textcolor{keyword}{nullptr})) \{}
+\DoxyCodeLine{636     descDrv.WidthInBytes *= getElementSize(desc.dstArray);}
+\DoxyCodeLine{637   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((desc.srcArray != \textcolor{keyword}{nullptr}) \&\& (desc.dstArray != \textcolor{keyword}{nullptr})) \{}
+\DoxyCodeLine{638     descDrv.WidthInBytes *= getElementSize(desc.dstArray);}
+\DoxyCodeLine{639   \}}
+\DoxyCodeLine{640 }
+\DoxyCodeLine{641   \textcolor{keywordflow}{return} descDrv;}
+\DoxyCodeLine{642 \}}
+\DoxyCodeLine{643 }
+\DoxyCodeLine{644 \textcolor{keyword}{inline} hipResourceType getResourceType(\textcolor{keyword}{const} HIPresourcetype resType) \{}
+\DoxyCodeLine{645   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{646   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}hipResourceType\textcolor{keyword}{>}(resType);}
+\DoxyCodeLine{647 \}}
+\DoxyCodeLine{648 }
+\DoxyCodeLine{649 \textcolor{keyword}{inline} HIPresourcetype getResourceType(\textcolor{keyword}{const} hipResourceType resType) \{}
+\DoxyCodeLine{650   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{651   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}HIPresourcetype\textcolor{keyword}{>}(resType);}
+\DoxyCodeLine{652 \}}
+\DoxyCodeLine{653 }
+\DoxyCodeLine{654 \textcolor{keyword}{inline} hipResourceDesc getResourceDesc(\textcolor{keyword}{const} HIP\_RESOURCE\_DESC\& resDesc) \{}
+\DoxyCodeLine{655   hipResourceDesc desc;}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657   desc.resType = getResourceType(resDesc.resType);}
+\DoxyCodeLine{658   \textcolor{keywordflow}{switch} (desc.resType) \{}
+\DoxyCodeLine{659     \textcolor{keywordflow}{case} hipResourceTypeArray:}
+\DoxyCodeLine{660       desc.res.array.array = resDesc.res.array.hArray;}
+\DoxyCodeLine{661       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{662     \textcolor{keywordflow}{case} hipResourceTypeMipmappedArray:}
+\DoxyCodeLine{663       desc.res.mipmap.mipmap = resDesc.res.mipmap.hMipmappedArray;}
+\DoxyCodeLine{664       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{665     \textcolor{keywordflow}{case} hipResourceTypeLinear:}
+\DoxyCodeLine{666       desc.res.linear.devPtr = resDesc.res.linear.devPtr;}
+\DoxyCodeLine{667       desc.res.linear.desc = getChannelFormatDesc(}
+\DoxyCodeLine{668           resDesc.res.linear.numChannels, resDesc.res.linear.format);}
+\DoxyCodeLine{669       desc.res.linear.sizeInBytes = resDesc.res.linear.sizeInBytes;}
+\DoxyCodeLine{670       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{671     \textcolor{keywordflow}{case} hipResourceTypePitch2D:}
+\DoxyCodeLine{672       desc.res.pitch2D.devPtr = resDesc.res.pitch2D.devPtr;}
+\DoxyCodeLine{673       desc.res.pitch2D.desc = getChannelFormatDesc(}
+\DoxyCodeLine{674           resDesc.res.pitch2D.numChannels, resDesc.res.pitch2D.format);}
+\DoxyCodeLine{675       desc.res.pitch2D.width = resDesc.res.pitch2D.width;}
+\DoxyCodeLine{676       desc.res.pitch2D.height = resDesc.res.pitch2D.height;}
+\DoxyCodeLine{677       desc.res.pitch2D.pitchInBytes = resDesc.res.pitch2D.pitchInBytes;}
+\DoxyCodeLine{678       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{679     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{680       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{681   \}}
+\DoxyCodeLine{682 }
+\DoxyCodeLine{683   \textcolor{keywordflow}{return} desc;}
+\DoxyCodeLine{684 \}}
+\DoxyCodeLine{685 }
+\DoxyCodeLine{686 \textcolor{keyword}{inline} HIP\_RESOURCE\_DESC getResourceDesc(\textcolor{keyword}{const} hipResourceDesc\& resDesc) \{}
+\DoxyCodeLine{687   HIP\_RESOURCE\_DESC desc;}
+\DoxyCodeLine{688 }
+\DoxyCodeLine{689   desc.resType = getResourceType(resDesc.resType);}
+\DoxyCodeLine{690   \textcolor{keywordflow}{switch} (desc.resType) \{}
+\DoxyCodeLine{691     \textcolor{keywordflow}{case} HIP\_RESOURCE\_TYPE\_ARRAY:}
+\DoxyCodeLine{692       desc.res.array.hArray = resDesc.res.array.array;}
+\DoxyCodeLine{693       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{694     \textcolor{keywordflow}{case} HIP\_RESOURCE\_TYPE\_MIPMAPPED\_ARRAY:}
+\DoxyCodeLine{695       desc.res.mipmap.hMipmappedArray = resDesc.res.mipmap.mipmap;}
+\DoxyCodeLine{696       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{697     \textcolor{keywordflow}{case} HIP\_RESOURCE\_TYPE\_LINEAR:}
+\DoxyCodeLine{698       desc.res.linear.devPtr = resDesc.res.linear.devPtr;}
+\DoxyCodeLine{699       desc.res.linear.numChannels = getNumChannels(resDesc.res.linear.desc);}
+\DoxyCodeLine{700       desc.res.linear.format = getArrayFormat(resDesc.res.linear.desc);}
+\DoxyCodeLine{701       desc.res.linear.sizeInBytes = resDesc.res.linear.sizeInBytes;}
+\DoxyCodeLine{702       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{703     \textcolor{keywordflow}{case} HIP\_RESOURCE\_TYPE\_PITCH2D:}
+\DoxyCodeLine{704       desc.res.pitch2D.devPtr = resDesc.res.pitch2D.devPtr;}
+\DoxyCodeLine{705       desc.res.pitch2D.numChannels = getNumChannels(resDesc.res.pitch2D.desc);}
+\DoxyCodeLine{706       desc.res.pitch2D.format = getArrayFormat(resDesc.res.pitch2D.desc);}
+\DoxyCodeLine{707       desc.res.pitch2D.width = resDesc.res.pitch2D.width;}
+\DoxyCodeLine{708       desc.res.pitch2D.height = resDesc.res.pitch2D.height;}
+\DoxyCodeLine{709       desc.res.pitch2D.pitchInBytes = resDesc.res.pitch2D.pitchInBytes;}
+\DoxyCodeLine{710       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{711     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{712       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{713   \}}
+\DoxyCodeLine{714 }
+\DoxyCodeLine{715   \textcolor{keywordflow}{return} desc;}
+\DoxyCodeLine{716 \}}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{718 \textcolor{keyword}{inline} hipTextureAddressMode getAddressMode(\textcolor{keyword}{const} HIPaddress\_mode mode) \{}
+\DoxyCodeLine{719   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{720   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}hipTextureAddressMode\textcolor{keyword}{>}(mode);}
+\DoxyCodeLine{721 \}}
+\DoxyCodeLine{722 }
+\DoxyCodeLine{723 \textcolor{keyword}{inline} HIPaddress\_mode getAddressMode(\textcolor{keyword}{const} hipTextureAddressMode mode) \{}
+\DoxyCodeLine{724   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{725   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}HIPaddress\_mode\textcolor{keyword}{>}(mode);}
+\DoxyCodeLine{726 \}}
+\DoxyCodeLine{727 }
+\DoxyCodeLine{728 \textcolor{keyword}{inline} hipTextureFilterMode getFilterMode(\textcolor{keyword}{const} HIPfilter\_mode mode) \{}
+\DoxyCodeLine{729   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{730   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}hipTextureFilterMode\textcolor{keyword}{>}(mode);}
+\DoxyCodeLine{731 \}}
+\DoxyCodeLine{732 }
+\DoxyCodeLine{733 \textcolor{keyword}{inline} HIPfilter\_mode getFilterMode(\textcolor{keyword}{const} hipTextureFilterMode mode) \{}
+\DoxyCodeLine{734   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{735   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}HIPfilter\_mode\textcolor{keyword}{>}(mode);}
+\DoxyCodeLine{736 \}}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{738 \textcolor{keyword}{inline} hipTextureReadMode getReadMode(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags) \{}
+\DoxyCodeLine{739   \textcolor{keywordflow}{if} (flags \& HIP\_TRSF\_READ\_AS\_INTEGER) \{}
+\DoxyCodeLine{740     \textcolor{keywordflow}{return} hipReadModeElementType;}
+\DoxyCodeLine{741   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{742     \textcolor{keywordflow}{return} hipReadModeNormalizedFloat;}
+\DoxyCodeLine{743   \}}
+\DoxyCodeLine{744 \}}
+\DoxyCodeLine{745 }
+\DoxyCodeLine{746 \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} getReadMode(\textcolor{keyword}{const} hipTextureReadMode mode) \{}
+\DoxyCodeLine{747   \textcolor{keywordflow}{if} (mode == hipReadModeElementType) \{}
+\DoxyCodeLine{748     \textcolor{keywordflow}{return} HIP\_TRSF\_READ\_AS\_INTEGER;}
+\DoxyCodeLine{749   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{750     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{751   \}}
+\DoxyCodeLine{752 \}}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{754 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} getsRGB(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags) \{}
+\DoxyCodeLine{755   \textcolor{keywordflow}{if} (flags \& HIP\_TRSF\_SRGB) \{}
+\DoxyCodeLine{756     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{757   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{758     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{759   \}}
+\DoxyCodeLine{760 \}}
+\DoxyCodeLine{761 }
+\DoxyCodeLine{762 \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} getsRGB(\textcolor{keyword}{const} \textcolor{keywordtype}{int} sRGB) \{}
+\DoxyCodeLine{763   \textcolor{keywordflow}{if} (sRGB == 1) \{}
+\DoxyCodeLine{764     \textcolor{keywordflow}{return} HIP\_TRSF\_SRGB;}
+\DoxyCodeLine{765   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{766     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{767   \}}
+\DoxyCodeLine{768 \}}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{770 \textcolor{keyword}{inline} \textcolor{keywordtype}{int} getNormalizedCoords(\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags) \{}
+\DoxyCodeLine{771   \textcolor{keywordflow}{if} (flags \& HIP\_TRSF\_NORMALIZED\_COORDINATES) \{}
+\DoxyCodeLine{772     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{773   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{774     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{775   \}}
+\DoxyCodeLine{776 \}}
+\DoxyCodeLine{777 }
+\DoxyCodeLine{778 \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} getNormalizedCoords(\textcolor{keyword}{const} \textcolor{keywordtype}{int} normalizedCoords) \{}
+\DoxyCodeLine{779   \textcolor{keywordflow}{if} (normalizedCoords == 1) \{}
+\DoxyCodeLine{780     \textcolor{keywordflow}{return} HIP\_TRSF\_NORMALIZED\_COORDINATES;}
+\DoxyCodeLine{781   \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{782     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{783   \}}
+\DoxyCodeLine{784 \}}
+\DoxyCodeLine{785 }
+\DoxyCodeLine{786 \textcolor{keyword}{inline} hipTextureDesc getTextureDesc(\textcolor{keyword}{const} HIP\_TEXTURE\_DESC\& texDesc) \{}
+\DoxyCodeLine{787   hipTextureDesc desc;}
+\DoxyCodeLine{788 }
+\DoxyCodeLine{789   desc.addressMode[0] = getAddressMode(texDesc.addressMode[0]);}
+\DoxyCodeLine{790   desc.addressMode[1] = getAddressMode(texDesc.addressMode[1]);}
+\DoxyCodeLine{791   desc.addressMode[2] = getAddressMode(texDesc.addressMode[2]);}
+\DoxyCodeLine{792   desc.filterMode = getFilterMode(texDesc.filterMode);}
+\DoxyCodeLine{793   desc.readMode = getReadMode(texDesc.flags);}
+\DoxyCodeLine{794   desc.sRGB = getsRGB(texDesc.flags);}
+\DoxyCodeLine{795   std::memcpy(desc.borderColor, texDesc.borderColor, \textcolor{keyword}{sizeof}(desc.borderColor));}
+\DoxyCodeLine{796   desc.normalizedCoords = getNormalizedCoords(texDesc.flags);}
+\DoxyCodeLine{797   desc.maxAnisotropy = texDesc.maxAnisotropy;}
+\DoxyCodeLine{798   desc.mipmapFilterMode = getFilterMode(texDesc.mipmapFilterMode);}
+\DoxyCodeLine{799   desc.mipmapLevelBias = texDesc.mipmapLevelBias;}
+\DoxyCodeLine{800   desc.minMipmapLevelClamp = texDesc.minMipmapLevelClamp;}
+\DoxyCodeLine{801   desc.maxMipmapLevelClamp = texDesc.maxMipmapLevelClamp;}
+\DoxyCodeLine{802 }
+\DoxyCodeLine{803   \textcolor{keywordflow}{return} desc;}
+\DoxyCodeLine{804 \}}
+\DoxyCodeLine{805 }
+\DoxyCodeLine{806 \textcolor{keyword}{inline} HIP\_TEXTURE\_DESC getTextureDesc(\textcolor{keyword}{const} hipTextureDesc\& texDesc) \{}
+\DoxyCodeLine{807   HIP\_TEXTURE\_DESC desc;}
+\DoxyCodeLine{808 }
+\DoxyCodeLine{809   desc.addressMode[0] = getAddressMode(texDesc.addressMode[0]);}
+\DoxyCodeLine{810   desc.addressMode[1] = getAddressMode(texDesc.addressMode[1]);}
+\DoxyCodeLine{811   desc.addressMode[2] = getAddressMode(texDesc.addressMode[2]);}
+\DoxyCodeLine{812   desc.filterMode = getFilterMode(texDesc.filterMode);}
+\DoxyCodeLine{813   desc.flags = 0;}
+\DoxyCodeLine{814   desc.flags |= getReadMode(texDesc.readMode);}
+\DoxyCodeLine{815   desc.flags |= getsRGB(texDesc.sRGB);}
+\DoxyCodeLine{816   desc.flags |= getNormalizedCoords(texDesc.normalizedCoords);}
+\DoxyCodeLine{817   desc.maxAnisotropy = texDesc.maxAnisotropy;}
+\DoxyCodeLine{818   desc.mipmapFilterMode = getFilterMode(texDesc.mipmapFilterMode);}
+\DoxyCodeLine{819   desc.mipmapLevelBias = texDesc.mipmapLevelBias;}
+\DoxyCodeLine{820   desc.minMipmapLevelClamp = texDesc.minMipmapLevelClamp;}
+\DoxyCodeLine{821   desc.maxMipmapLevelClamp = texDesc.maxMipmapLevelClamp;}
+\DoxyCodeLine{822   std::memcpy(desc.borderColor, texDesc.borderColor, \textcolor{keyword}{sizeof}(desc.borderColor));}
+\DoxyCodeLine{823 }
+\DoxyCodeLine{824   \textcolor{keywordflow}{return} desc;}
+\DoxyCodeLine{825 \}}
+\DoxyCodeLine{826 }
+\DoxyCodeLine{827 \textcolor{keyword}{inline} hipResourceViewFormat getResourceViewFormat(}
+\DoxyCodeLine{828     \textcolor{keyword}{const} HIPresourceViewFormat format) \{}
+\DoxyCodeLine{829   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{830   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}hipResourceViewFormat\textcolor{keyword}{>}(format);}
+\DoxyCodeLine{831 \}}
+\DoxyCodeLine{832 }
+\DoxyCodeLine{833 \textcolor{keyword}{inline} HIPresourceViewFormat getResourceViewFormat(}
+\DoxyCodeLine{834     \textcolor{keyword}{const} hipResourceViewFormat format) \{}
+\DoxyCodeLine{835   \textcolor{comment}{// These two enums should be isomorphic.}}
+\DoxyCodeLine{836   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}HIPresourceViewFormat\textcolor{keyword}{>}(format);}
+\DoxyCodeLine{837 \}}
+\DoxyCodeLine{838 }
+\DoxyCodeLine{839 \textcolor{keyword}{inline} hipResourceViewDesc getResourceViewDesc(}
+\DoxyCodeLine{840     \textcolor{keyword}{const} HIP\_RESOURCE\_VIEW\_DESC\& resViewDesc) \{}
+\DoxyCodeLine{841   hipResourceViewDesc desc;}
+\DoxyCodeLine{842 }
+\DoxyCodeLine{843   desc.format = getResourceViewFormat(resViewDesc.format);}
+\DoxyCodeLine{844   desc.width = resViewDesc.width;}
+\DoxyCodeLine{845   desc.height = resViewDesc.height;}
+\DoxyCodeLine{846   desc.depth = resViewDesc.depth;}
+\DoxyCodeLine{847   desc.firstMipmapLevel = resViewDesc.firstMipmapLevel;}
+\DoxyCodeLine{848   desc.lastMipmapLevel = resViewDesc.lastMipmapLevel;}
+\DoxyCodeLine{849   desc.firstLayer = resViewDesc.firstLayer;}
+\DoxyCodeLine{850   desc.lastLayer = resViewDesc.lastLayer;}
+\DoxyCodeLine{851 }
+\DoxyCodeLine{852   \textcolor{keywordflow}{return} desc;}
+\DoxyCodeLine{853 \}}
+\DoxyCodeLine{854 }
+\DoxyCodeLine{855 \textcolor{keyword}{inline} HIP\_RESOURCE\_VIEW\_DESC getResourceViewDesc(}
+\DoxyCodeLine{856     \textcolor{keyword}{const} hipResourceViewDesc\& resViewDesc) \{}
+\DoxyCodeLine{857   HIP\_RESOURCE\_VIEW\_DESC desc;}
+\DoxyCodeLine{858 }
+\DoxyCodeLine{859   desc.format = getResourceViewFormat(resViewDesc.format);}
+\DoxyCodeLine{860   desc.width = resViewDesc.width;}
+\DoxyCodeLine{861   desc.height = resViewDesc.height;}
+\DoxyCodeLine{862   desc.depth = resViewDesc.depth;}
+\DoxyCodeLine{863   desc.firstMipmapLevel = resViewDesc.firstMipmapLevel;}
+\DoxyCodeLine{864   desc.lastMipmapLevel = resViewDesc.lastMipmapLevel;}
+\DoxyCodeLine{865   desc.firstLayer = resViewDesc.firstLayer;}
+\DoxyCodeLine{866   desc.lastLayer = resViewDesc.lastLayer;}
+\DoxyCodeLine{867 }
+\DoxyCodeLine{868   \textcolor{keywordflow}{return} desc;}
+\DoxyCodeLine{869 \}}
+\DoxyCodeLine{870 }
+\DoxyCodeLine{871 \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} getElementSize(\textcolor{keyword}{const} hipChannelFormatDesc\& desc) \{}
+\DoxyCodeLine{872   \textcolor{keywordflow}{return} (desc.x / 8) * getNumChannels(desc);}
+\DoxyCodeLine{873 \}}
+
+\end{DoxyCode}

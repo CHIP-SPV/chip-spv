@@ -24,7 +24,7 @@ Inheritance diagram for CHIPContext\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_c_h_i_p_context_ac2ba6ad31278cb28ec9a48f848dfcffa}\label{class_c_h_i_p_context_ac2ba6ad31278cb28ec9a48f848dfcffa}} 
 {\bfseries $\sim$\+CHIPContext} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} object. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_c_h_i_p_context_aab9f64f142801289bdb91afbbc4ed990}{add\+Device}} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$dev)
+void \mbox{\hyperlink{class_c_h_i_p_context_a0a539403301fcc9a5ebff80a4791ec54}{add\+Device}} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$dev)
 \begin{DoxyCompactList}\small\item\em Add a device to this context. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_c_h_i_p_context_aa8cbc5f609c668c6fd8ed2161b8f5b4f}{add\+Queue}} (\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$q)
 \begin{DoxyCompactList}\small\item\em Add a queue to this context. \end{DoxyCompactList}\item 
@@ -46,7 +46,7 @@ hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_context_a65074e4320308218e6af6a
 \begin{DoxyCompactList}\small\item\em Free memory. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_c_h_i_p_context_aff2c9209a0ff52dd241188065a1f489a}{free\+\_\+}} (void $\ast$ptr)=0
 \begin{DoxyCompactList}\small\item\em Free memory To be overriden by the backend. \end{DoxyCompactList}\item 
-virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_context_aa2541d2c5d3f61cf96263a59a41554ea}{mem\+Copy}} (void $\ast$dst, const void $\ast$src, size\+\_\+t size, hip\+Stream\+\_\+t stream)=0
+virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_context_a0fc1f032f9742d6348121870cc5be04c}{mem\+Copy}} (void $\ast$dst, const void $\ast$src, size\+\_\+t size, hip\+Stream\+\_\+t stream)
 \begin{DoxyCompactList}\small\item\em Copy memory. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_context_a31d79308f3a70a9293923835122da23c}\label{class_c_h_i_p_context_a31d79308f3a70a9293923835122da23c}} 
 void {\bfseries finish\+All} ()
@@ -59,13 +59,11 @@ void \mbox{\hyperlink{class_c_h_i_p_context_a99583fe33f2dd9bf23b278e42fb168ec}{s
 \begin{DoxyCompactList}\small\item\em Set the flags for this context. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_context_a4b0f248e3f69b73f42ef7ad787e2fd44}\label{class_c_h_i_p_context_a4b0f248e3f69b73f42ef7ad787e2fd44}} 
 void {\bfseries reset} ()
-\begin{DoxyCompactList}\small\item\em Reset this context. TODO\+: what does it mean to reset a context? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Reset this context. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_context_a7d03567273b7899b7d2e0df0e5f015cf}{retain}} ()
 \begin{DoxyCompactList}\small\item\em Retain this context. TODO\+: What does it mean to retain a context? \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_c_h_i_p_context_abff033626b0fa70dcd319a0d9406bfd3}{record\+Event}} (\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$q, \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$event)
-\begin{DoxyCompactList}\small\item\em Record an event in a given queue. \end{DoxyCompactList}\item 
-virtual CHIPTexture $\ast$ \mbox{\hyperlink{class_c_h_i_p_context_a90a36c0230e9aa63e381c679433f63f3}{create\+Image}} (hip\+Resource\+Desc $\ast$res\+Desc, hip\+Texture\+Desc $\ast$tex\+Desc)
-\begin{DoxyCompactList}\small\item\em Create a Image objct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+virtual \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_context_a4af79ee3405b648afb092ff3622577e6}{create\+Event}} (unsigned flags)=0
+\begin{DoxyCompactList}\small\item\em Create a Event object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -77,6 +75,12 @@ std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ $>$ {\
 \item 
 \mbox{\Hypertarget{class_c_h_i_p_context_a33626d8a7006c2c63dbb1760f47ac6ba}\label{class_c_h_i_p_context_a33626d8a7006c2c63dbb1760f47ac6ba}} 
 std\+::mutex {\bfseries mtx}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_context_ab175053d15520cb4011750f2e34ba840}\label{class_c_h_i_p_context_ab175053d15520cb4011750f2e34ba840}} 
+std\+::vector$<$ void $\ast$ $>$ {\bfseries allocated\+\_\+ptrs}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_context_aac93e4738059538da2d50b92ef74b01a}\label{class_c_h_i_p_context_aac93e4738059538da2d50b92ef74b01a}} 
+unsigned int {\bfseries flags}
 \end{DoxyCompactItemize}
 
 
@@ -84,11 +88,11 @@ std\+::mutex {\bfseries mtx}
 Context class Contexts contain execution queues and are created on top of a single or multiple devices. Provides for creation of additional queues, events, and interaction with devices. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_c_h_i_p_context_aab9f64f142801289bdb91afbbc4ed990}\label{class_c_h_i_p_context_aab9f64f142801289bdb91afbbc4ed990}} 
+\mbox{\Hypertarget{class_c_h_i_p_context_a0a539403301fcc9a5ebff80a4791ec54}\label{class_c_h_i_p_context_a0a539403301fcc9a5ebff80a4791ec54}} 
 \index{CHIPContext@{CHIPContext}!addDevice@{addDevice}}
 \index{addDevice@{addDevice}!CHIPContext@{CHIPContext}}
 \doxysubsubsection{\texorpdfstring{addDevice()}{addDevice()}}
-{\footnotesize\ttfamily bool CHIPContext\+::add\+Device (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$}]{dev }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void CHIPContext\+::add\+Device (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$}]{dev }\end{DoxyParamCaption})}
 
 
 
@@ -205,26 +209,28 @@ void$\ast$
 
 Implemented in \mbox{\hyperlink{class_c_h_i_p_context_open_c_l_a96df9d9e97324f90df1729ae8079ac95}{CHIPContext\+Open\+CL}}, and \mbox{\hyperlink{class_c_h_i_p_context_level0_a15b8f5766763255a7dbd0d770e430283}{CHIPContext\+Level0}}.
 
-\mbox{\Hypertarget{class_c_h_i_p_context_a90a36c0230e9aa63e381c679433f63f3}\label{class_c_h_i_p_context_a90a36c0230e9aa63e381c679433f63f3}} 
-\index{CHIPContext@{CHIPContext}!createImage@{createImage}}
-\index{createImage@{createImage}!CHIPContext@{CHIPContext}}
-\doxysubsubsection{\texorpdfstring{createImage()}{createImage()}}
-{\footnotesize\ttfamily CHIPTexture $\ast$ CHIPContext\+::create\+Image (\begin{DoxyParamCaption}\item[{hip\+Resource\+Desc $\ast$}]{res\+Desc,  }\item[{hip\+Texture\+Desc $\ast$}]{tex\+Desc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{class_c_h_i_p_context_a4af79ee3405b648afb092ff3622577e6}\label{class_c_h_i_p_context_a4af79ee3405b648afb092ff3622577e6}} 
+\index{CHIPContext@{CHIPContext}!createEvent@{createEvent}}
+\index{createEvent@{createEvent}!CHIPContext@{CHIPContext}}
+\doxysubsubsection{\texorpdfstring{createEvent()}{createEvent()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ CHIPContext\+::create\+Event (\begin{DoxyParamCaption}\item[{unsigned}]{flags }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
-Create a Image objct. 
+Create a Event object. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em res\+Desc} & \\
-\hline
-{\em tex\+Desc} & \\
+{\em flags} & \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-CHIPTexture$\ast$ 
+CHIPEvent$\ast$ 
 \end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_c_h_i_p_context_level0_a75728e1abd0713132085d18b3cf15b7f}{CHIPContext\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_context_open_c_l_a62abcf865241a49b79b9051d63b03ed6}{CHIPContext\+Open\+CL}}.
+
 \mbox{\Hypertarget{class_c_h_i_p_context_aad24b4b21e4b87cb2a3ab8bcba3f373e}\label{class_c_h_i_p_context_aad24b4b21e4b87cb2a3ab8bcba3f373e}} 
 \index{CHIPContext@{CHIPContext}!findPointerInfo@{findPointerInfo}}
 \index{findPointerInfo@{findPointerInfo}!CHIPContext@{CHIPContext}}
@@ -348,11 +354,11 @@ Get the this contexts CHIPQueues.
 \begin{DoxyReturn}{Returns}
 std\+::vector$<$\+CHIPQueue$\ast$$>$\& 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_context_aa2541d2c5d3f61cf96263a59a41554ea}\label{class_c_h_i_p_context_aa2541d2c5d3f61cf96263a59a41554ea}} 
+\mbox{\Hypertarget{class_c_h_i_p_context_a0fc1f032f9742d6348121870cc5be04c}\label{class_c_h_i_p_context_a0fc1f032f9742d6348121870cc5be04c}} 
 \index{CHIPContext@{CHIPContext}!memCopy@{memCopy}}
 \index{memCopy@{memCopy}!CHIPContext@{CHIPContext}}
 \doxysubsubsection{\texorpdfstring{memCopy()}{memCopy()}}
-{\footnotesize\ttfamily virtual hip\+Error\+\_\+t CHIPContext\+::mem\+Copy (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{size,  }\item[{hip\+Stream\+\_\+t}]{stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual hip\+Error\+\_\+t CHIPContext\+::mem\+Copy (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{size,  }\item[{hip\+Stream\+\_\+t}]{stream }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -374,25 +380,8 @@ hip\+Error\+\_\+t
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{class_c_h_i_p_context_level0_a6f4fdbfd88439837f44536b2df3dab19}{CHIPContext\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_context_open_c_l_ad0c20ea340fac85c33d3ac63e0e4ac9b}{CHIPContext\+Open\+CL}}.
+Reimplemented in \mbox{\hyperlink{class_c_h_i_p_context_open_c_l_ad0c20ea340fac85c33d3ac63e0e4ac9b}{CHIPContext\+Open\+CL}}.
 
-\mbox{\Hypertarget{class_c_h_i_p_context_abff033626b0fa70dcd319a0d9406bfd3}\label{class_c_h_i_p_context_abff033626b0fa70dcd319a0d9406bfd3}} 
-\index{CHIPContext@{CHIPContext}!recordEvent@{recordEvent}}
-\index{recordEvent@{recordEvent}!CHIPContext@{CHIPContext}}
-\doxysubsubsection{\texorpdfstring{recordEvent()}{recordEvent()}}
-{\footnotesize\ttfamily void CHIPContext\+::record\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$}]{q,  }\item[{\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$}]{event }\end{DoxyParamCaption})}
-
-
-
-Record an event in a given queue. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em q} & queue into which to insert the event \\
-\hline
-{\em event} & event to be inserted \\
-\hline
-\end{DoxyParams}
 \mbox{\Hypertarget{class_c_h_i_p_context_a7d03567273b7899b7d2e0df0e5f015cf}\label{class_c_h_i_p_context_a7d03567273b7899b7d2e0df0e5f015cf}} 
 \index{CHIPContext@{CHIPContext}!retain@{retain}}
 \index{retain@{retain}!CHIPContext@{CHIPContext}}
@@ -425,5 +414,5 @@ Set the flags for this context.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
-/\+Users/pvelesko/local/\+HIPxx/src/CHIPBackend.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/CHIPBackend.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,155 @@
+\hypertarget{class_c_h_i_p_event_level0}{}\doxysection{CHIPEvent\+Level0 Class Reference}
+\label{class_c_h_i_p_event_level0}\index{CHIPEventLevel0@{CHIPEventLevel0}}
+Inheritance diagram for CHIPEvent\+Level0\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_c_h_i_p_event_level0}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a951d16f64b16fe8dfce850063564bdff}\label{class_c_h_i_p_event_level0_a951d16f64b16fe8dfce850063564bdff}} 
+{\bfseries CHIPEvent\+Level0} (\mbox{\hyperlink{class_c_h_i_p_context_level0}{CHIPContext\+Level0}} $\ast$chip\+\_\+ctx\+\_\+, CHIPEvent\+Type event\+\_\+type\+\_\+)
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a92e94054169a1b6eff6ed2df44f7647c}\label{class_c_h_i_p_event_level0_a92e94054169a1b6eff6ed2df44f7647c}} 
+ze\+\_\+event\+\_\+handle\+\_\+t {\bfseries get} ()
+\item 
+void \mbox{\hyperlink{class_c_h_i_p_event_level0_a817541d4cb42dbb9315ccb9c6dab7a68}{record\+Stream}} (\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$chip\+\_\+queue\+\_\+) override
+\begin{DoxyCompactList}\small\item\em Enqueue this event in a given \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_c_h_i_p_event_level0_a4a7e44eaac96803672d44a490234f166}{wait}} () override
+\begin{DoxyCompactList}\small\item\em Wait for this event to complete. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_c_h_i_p_event_level0_a7fe03e1547cda68f051a73987f5a9003}{is\+Finished}} () override
+\begin{DoxyCompactList}\small\item\em Query the event to see if it completed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a68eab9381a00994f92a6b0c20fd5b15a}\label{class_c_h_i_p_event_level0_a68eab9381a00994f92a6b0c20fd5b15a}} 
+bool {\bfseries is\+Recording\+Or\+Recorded} () const
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_afdc56de67c47c9bab123121d4d004b00}\label{class_c_h_i_p_event_level0_afdc56de67c47c9bab123121d4d004b00}} 
+bool {\bfseries update\+Finish\+Status} ()
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a5063a71fd74cc273c5f521c9e7df7b2f}\label{class_c_h_i_p_event_level0_a5063a71fd74cc273c5f521c9e7df7b2f}} 
+uint64\+\_\+t {\bfseries get\+Finish\+Time} ()
+\item 
+float \mbox{\hyperlink{class_c_h_i_p_event_level0_a3cc8367a7c1c9a333d65c97cbb7575de}{get\+Elapsed\+Time}} (\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$other\+\_\+) override
+\begin{DoxyCompactList}\small\item\em Calculate absolute difference between completion timestamps of this event and other. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_c_h_i_p_event_level0_a948af6fb5cb5ace178db3effddde57ae}{host\+Signal}} () override
+\begin{DoxyCompactList}\small\item\em Toggle this event from the host. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_c_h_i_p_event_level0_a1844dd99af64a56c8695e46ec24221da}{barrier}} (\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$chip\+\_\+queue\+\_\+) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a1844dd99af64a56c8695e46ec24221da}\label{class_c_h_i_p_event_level0_a1844dd99af64a56c8695e46ec24221da}} 
+\index{CHIPEventLevel0@{CHIPEventLevel0}!barrier@{barrier}}
+\index{barrier@{barrier}!CHIPEventLevel0@{CHIPEventLevel0}}
+\doxysubsubsection{\texorpdfstring{barrier()}{barrier()}}
+{\footnotesize\ttfamily virtual void CHIPEvent\+Level0\+::barrier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$}]{chip\+\_\+queue\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a3cc8367a7c1c9a333d65c97cbb7575de}\label{class_c_h_i_p_event_level0_a3cc8367a7c1c9a333d65c97cbb7575de}} 
+\index{CHIPEventLevel0@{CHIPEventLevel0}!getElapsedTime@{getElapsedTime}}
+\index{getElapsedTime@{getElapsedTime}!CHIPEventLevel0@{CHIPEventLevel0}}
+\doxysubsubsection{\texorpdfstring{getElapsedTime()}{getElapsedTime()}}
+{\footnotesize\ttfamily float CHIPEvent\+Level0\+::get\+Elapsed\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calculate absolute difference between completion timestamps of this event and other. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_c_h_i_p_event_a6ae00777df6af9b892ff03ccc221388a}{CHIPEvent}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a948af6fb5cb5ace178db3effddde57ae}\label{class_c_h_i_p_event_level0_a948af6fb5cb5ace178db3effddde57ae}} 
+\index{CHIPEventLevel0@{CHIPEventLevel0}!hostSignal@{hostSignal}}
+\index{hostSignal@{hostSignal}!CHIPEventLevel0@{CHIPEventLevel0}}
+\doxysubsubsection{\texorpdfstring{hostSignal()}{hostSignal()}}
+{\footnotesize\ttfamily virtual void CHIPEvent\+Level0\+::host\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Toggle this event from the host. 
+
+
+
+Implements \mbox{\hyperlink{class_c_h_i_p_event_aafb096cc87dab294e41bc91ce849924b}{CHIPEvent}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a7fe03e1547cda68f051a73987f5a9003}\label{class_c_h_i_p_event_level0_a7fe03e1547cda68f051a73987f5a9003}} 
+\index{CHIPEventLevel0@{CHIPEventLevel0}!isFinished@{isFinished}}
+\index{isFinished@{isFinished}!CHIPEventLevel0@{CHIPEventLevel0}}
+\doxysubsubsection{\texorpdfstring{isFinished()}{isFinished()}}
+{\footnotesize\ttfamily bool CHIPEvent\+Level0\+::is\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Query the event to see if it completed. 
+
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_c_h_i_p_event_a892b65012e770b660f5d364483067f05}{CHIPEvent}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a817541d4cb42dbb9315ccb9c6dab7a68}\label{class_c_h_i_p_event_level0_a817541d4cb42dbb9315ccb9c6dab7a68}} 
+\index{CHIPEventLevel0@{CHIPEventLevel0}!recordStream@{recordStream}}
+\index{recordStream@{recordStream}!CHIPEventLevel0@{CHIPEventLevel0}}
+\doxysubsubsection{\texorpdfstring{recordStream()}{recordStream()}}
+{\footnotesize\ttfamily void CHIPEvent\+Level0\+::record\+Stream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$}]{chip\+\_\+queue\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Enqueue this event in a given \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chip\+\_\+queue\+\_\+} & \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} in which to enque this event \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_c_h_i_p_event_a362bff72a0ab2faa563d16fdb85dc869}{CHIPEvent}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_event_level0_a4a7e44eaac96803672d44a490234f166}\label{class_c_h_i_p_event_level0_a4a7e44eaac96803672d44a490234f166}} 
+\index{CHIPEventLevel0@{CHIPEventLevel0}!wait@{wait}}
+\index{wait@{wait}!CHIPEventLevel0@{CHIPEventLevel0}}
+\doxysubsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily bool CHIPEvent\+Level0\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Wait for this event to complete. 
+
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_c_h_i_p_event_ab6b0d22539acd85209159e85f21807c8}{CHIPEvent}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/backend/\+Level0/Level0\+Backend.\+hh\end{DoxyCompactItemize}

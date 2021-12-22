@@ -1,0 +1,90 @@
+\hypertarget{classappsdk_1_1_thread_lock}{}\doxysection{appsdk\+::Thread\+Lock Class Reference}
+\label{classappsdk_1_1_thread_lock}\index{appsdk::ThreadLock@{appsdk::ThreadLock}}
+
+
+Provides a wrapper for locking primitives used to synchronize {\itshape CPU} threads.  
+
+
+
+
+{\ttfamily \#include $<$SDKThread.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_thread_lock_a92cb8d82d28bc96d7f2c020b4706cba6}{Thread\+Lock}} ()
+\item 
+\mbox{\hyperlink{classappsdk_1_1_thread_lock_a608c4791eed1d663e6bb306b8c19c6d3}{$\sim$\+Thread\+Lock}} ()
+\item 
+bool \mbox{\hyperlink{classappsdk_1_1_thread_lock_a3cc2e942cfafdf654f666ce48be82567}{is\+Locked}} ()
+\item 
+void \mbox{\hyperlink{classappsdk_1_1_thread_lock_ac039a89ccb8a1a5924af02642342165c}{lock}} ()
+\item 
+bool \mbox{\hyperlink{classappsdk_1_1_thread_lock_ab38db8bb6b935bd2c6b277e138bee79e}{try\+Lock}} ()
+\item 
+void \mbox{\hyperlink{classappsdk_1_1_thread_lock_ab608c6584dd75c1e598b6b3c7d89ce63}{unlock}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides a wrapper for locking primitives used to synchronize {\itshape CPU} threads. 
+
+class \mbox{\hyperlink{classappsdk_1_1_thread_lock}{Thread\+Lock}}
+
+Common usage would be\+:
+
+CALLock lock;
+
+// Critical section begins
+
+lock.\+lock();
+
+Critical section ends
+
+lock.\+unlock(); class \mbox{\hyperlink{classappsdk_1_1_thread_lock}{Thread\+Lock}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_thread_lock_a92cb8d82d28bc96d7f2c020b4706cba6}\label{classappsdk_1_1_thread_lock_a92cb8d82d28bc96d7f2c020b4706cba6}} 
+\index{appsdk::ThreadLock@{appsdk::ThreadLock}!ThreadLock@{ThreadLock}}
+\index{ThreadLock@{ThreadLock}!appsdk::ThreadLock@{appsdk::ThreadLock}}
+\doxysubsubsection{\texorpdfstring{ThreadLock()}{ThreadLock()}}
+{\footnotesize\ttfamily appsdk\+::\+Thread\+Lock\+::\+Thread\+Lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor \mbox{\Hypertarget{classappsdk_1_1_thread_lock_a608c4791eed1d663e6bb306b8c19c6d3}\label{classappsdk_1_1_thread_lock_a608c4791eed1d663e6bb306b8c19c6d3}} 
+\index{appsdk::ThreadLock@{appsdk::ThreadLock}!````~ThreadLock@{$\sim$ThreadLock}}
+\index{````~ThreadLock@{$\sim$ThreadLock}!appsdk::ThreadLock@{appsdk::ThreadLock}}
+\doxysubsubsection{\texorpdfstring{$\sim$ThreadLock()}{~ThreadLock()}}
+{\footnotesize\ttfamily appsdk\+::\+Thread\+Lock\+::$\sim$\+Thread\+Lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_thread_lock_a3cc2e942cfafdf654f666ce48be82567}\label{classappsdk_1_1_thread_lock_a3cc2e942cfafdf654f666ce48be82567}} 
+\index{appsdk::ThreadLock@{appsdk::ThreadLock}!isLocked@{isLocked}}
+\index{isLocked@{isLocked}!appsdk::ThreadLock@{appsdk::ThreadLock}}
+\doxysubsubsection{\texorpdfstring{isLocked()}{isLocked()}}
+{\footnotesize\ttfamily bool appsdk\+::\+Thread\+Lock\+::is\+Locked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns true if the lock is already locked, false otherwise \mbox{\Hypertarget{classappsdk_1_1_thread_lock_ac039a89ccb8a1a5924af02642342165c}\label{classappsdk_1_1_thread_lock_ac039a89ccb8a1a5924af02642342165c}} 
+\index{appsdk::ThreadLock@{appsdk::ThreadLock}!lock@{lock}}
+\index{lock@{lock}!appsdk::ThreadLock@{appsdk::ThreadLock}}
+\doxysubsubsection{\texorpdfstring{lock()}{lock()}}
+{\footnotesize\ttfamily void appsdk\+::\+Thread\+Lock\+::lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Try to acquire the lock, if available continue, else wait on the lock \mbox{\Hypertarget{classappsdk_1_1_thread_lock_ab38db8bb6b935bd2c6b277e138bee79e}\label{classappsdk_1_1_thread_lock_ab38db8bb6b935bd2c6b277e138bee79e}} 
+\index{appsdk::ThreadLock@{appsdk::ThreadLock}!tryLock@{tryLock}}
+\index{tryLock@{tryLock}!appsdk::ThreadLock@{appsdk::ThreadLock}}
+\doxysubsubsection{\texorpdfstring{tryLock()}{tryLock()}}
+{\footnotesize\ttfamily bool appsdk\+::\+Thread\+Lock\+::try\+Lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Try to acquire the lock, if available, hold it, else continue doing something else \mbox{\Hypertarget{classappsdk_1_1_thread_lock_ab608c6584dd75c1e598b6b3c7d89ce63}\label{classappsdk_1_1_thread_lock_ab608c6584dd75c1e598b6b3c7d89ce63}} 
+\index{appsdk::ThreadLock@{appsdk::ThreadLock}!unlock@{unlock}}
+\index{unlock@{unlock}!appsdk::ThreadLock@{appsdk::ThreadLock}}
+\doxysubsubsection{\texorpdfstring{unlock()}{unlock()}}
+{\footnotesize\ttfamily void appsdk\+::\+Thread\+Lock\+::unlock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Unlock the lock and return 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/include/SDKThread.\+hpp\end{DoxyCompactItemize}

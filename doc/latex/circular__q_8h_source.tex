@@ -1,0 +1,78 @@
+\hypertarget{circular__q_8h_source}{}\doxysection{circular\+\_\+q.\+h}
+\label{circular__q_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/circular\_q.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/circular\_q.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2018 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{comment}{// cirucal q view of std::vector.}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }details \{}
+\DoxyCodeLine{13 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1circular__q}{circular\_q}}}
+\DoxyCodeLine{15 \{}
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \textcolor{keyword}{using} item\_type = T;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{keyword}{explicit} \mbox{\hyperlink{classspdlog_1_1details_1_1circular__q}{circular\_q}}(\textcolor{keywordtype}{size\_t} max\_items)}
+\DoxyCodeLine{20         : max\_items\_(max\_items + 1) \textcolor{comment}{// one item is reserved as marker for full q}}
+\DoxyCodeLine{21         , v\_(max\_items\_)}
+\DoxyCodeLine{22     \{}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{comment}{// push back, overrun (oldest) item if no room left}}
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} push\_back(T \&\&item)}
+\DoxyCodeLine{27     \{}
+\DoxyCodeLine{28         v\_[tail\_] = std::move(item);}
+\DoxyCodeLine{29         tail\_ = (tail\_ + 1) \% max\_items\_;}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \textcolor{keywordflow}{if} (tail\_ == head\_) \textcolor{comment}{// overrun last item if full}}
+\DoxyCodeLine{32         \{}
+\DoxyCodeLine{33             head\_ = (head\_ + 1) \% max\_items\_;}
+\DoxyCodeLine{34             ++overrun\_counter\_;}
+\DoxyCodeLine{35         \}}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{comment}{// Pop item from front.}}
+\DoxyCodeLine{39     \textcolor{comment}{// If there are no elements in the container, the behavior is undefined.}}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} pop\_front(T \&popped\_item)}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         popped\_item = std::move(v\_[head\_]);}
+\DoxyCodeLine{43         head\_ = (head\_ + 1) \% max\_items\_;}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keywordtype}{bool} empty()}
+\DoxyCodeLine{47     \{}
+\DoxyCodeLine{48         \textcolor{keywordflow}{return} tail\_ == head\_;}
+\DoxyCodeLine{49     \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{bool} full()}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         \textcolor{comment}{// head is ahead of the tail by 1}}
+\DoxyCodeLine{54         \textcolor{keywordflow}{return} ((tail\_ + 1) \% max\_items\_) == head\_;}
+\DoxyCodeLine{55     \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{size\_t} overrun\_counter()\textcolor{keyword}{ const}}
+\DoxyCodeLine{58 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{59         \textcolor{keywordflow}{return} overrun\_counter\_;}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keyword}{private}:}
+\DoxyCodeLine{63     \textcolor{keywordtype}{size\_t} max\_items\_;}
+\DoxyCodeLine{64     \textcolor{keyword}{typename} std::vector<T>::size\_type head\_ = 0;}
+\DoxyCodeLine{65     \textcolor{keyword}{typename} std::vector<T>::size\_type tail\_ = 0;}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     std::vector<T> v\_;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keywordtype}{size\_t} overrun\_counter\_ = 0;}
+\DoxyCodeLine{70 \};}
+\DoxyCodeLine{71 \} \textcolor{comment}{// namespace details}}
+\DoxyCodeLine{72 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

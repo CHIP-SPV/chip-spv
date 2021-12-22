@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -65,6 +65,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_c_h_i_p_allocation_tracker-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">CHIPAllocationTracker Class Reference</div></div>
 </div><!--header-->
@@ -77,16 +78,85 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ac0802b0677c3cb64400fcb85b44d750b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html#ac0802b0677c3cb64400fcb85b44d750b">CHIPAllocationTracker</a> (size_t global_mem_size_, std::string name_)</td></tr>
+<tr class="memdesc:ac0802b0677c3cb64400fcb85b44d750b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_c_h_i_p_allocation_tracker.html" title="Class for keeping track of device allocations.">CHIPAllocationTracker</a> object.  <a href="class_c_h_i_p_allocation_tracker.html#ac0802b0677c3cb64400fcb85b44d750b">More...</a><br /></td></tr>
+<tr class="separator:ac0802b0677c3cb64400fcb85b44d750b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1af7b5eb5f8ee53db36cf54d787527a"><td class="memItemLeft" align="right" valign="top"><a id="aa1af7b5eb5f8ee53db36cf54d787527a" name="aa1af7b5eb5f8ee53db36cf54d787527a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPAllocationTracker</b> ()</td></tr>
+<tr class="memdesc:aa1af7b5eb5f8ee53db36cf54d787527a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_allocation_tracker.html" title="Class for keeping track of device allocations.">CHIPAllocationTracker</a> object. <br /></td></tr>
+<tr class="separator:aa1af7b5eb5f8ee53db36cf54d787527a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe77cb55e816e947538f086628d917ed"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html#afe77cb55e816e947538f086628d917ed">getName</a> ()</td></tr>
+<tr class="memdesc:afe77cb55e816e947538f086628d917ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Name object.  <a href="class_c_h_i_p_allocation_tracker.html#afe77cb55e816e947538f086628d917ed">More...</a><br /></td></tr>
+<tr class="separator:afe77cb55e816e947538f086628d917ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bb390011b14cbbadbc474c78efe3fe4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structallocation__info.html">allocation_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html#a1bb390011b14cbbadbc474c78efe3fe4">getByHostPtr</a> (const void *)</td></tr>
 <tr class="memdesc:a1bb390011b14cbbadbc474c78efe3fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="structallocation__info.html">allocation_info</a> based on host pointer.  <a href="class_c_h_i_p_allocation_tracker.html#a1bb390011b14cbbadbc474c78efe3fe4">More...</a><br /></td></tr>
 <tr class="separator:a1bb390011b14cbbadbc474c78efe3fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9ae5c2c59ca00cca00a7c85aa8a0f68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structallocation__info.html">allocation_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html#af9ae5c2c59ca00cca00a7c85aa8a0f68">getByDevPtr</a> (const void *)</td></tr>
 <tr class="memdesc:af9ae5c2c59ca00cca00a7c85aa8a0f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="structallocation__info.html">allocation_info</a> based on device pointer.  <a href="class_c_h_i_p_allocation_tracker.html#af9ae5c2c59ca00cca00a7c85aa8a0f68">More...</a><br /></td></tr>
 <tr class="separator:af9ae5c2c59ca00cca00a7c85aa8a0f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335d9e806c72fb65a0359026058c2775"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html#a335d9e806c72fb65a0359026058c2775">reserveMem</a> (size_t bytes)</td></tr>
+<tr class="memdesc:a335d9e806c72fb65a0359026058c2775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device.  <a href="class_c_h_i_p_allocation_tracker.html#a335d9e806c72fb65a0359026058c2775">More...</a><br /></td></tr>
+<tr class="separator:a335d9e806c72fb65a0359026058c2775"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d1cf5b6d07e19424c6f7f1369c3202"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html#a46d1cf5b6d07e19424c6f7f1369c3202">releaseMemReservation</a> (size_t bytes)</td></tr>
+<tr class="memdesc:a46d1cf5b6d07e19424c6f7f1369c3202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release some of the reserved memory. Called by free()  <a href="class_c_h_i_p_allocation_tracker.html#a46d1cf5b6d07e19424c6f7f1369c3202">More...</a><br /></td></tr>
+<tr class="separator:a46d1cf5b6d07e19424c6f7f1369c3202"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45057c59e2b56470d717f3b0814629e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_allocation_tracker.html#a45057c59e2b56470d717f3b0814629e1">recordAllocation</a> (void *dev_ptr, size_t size_)</td></tr>
+<tr class="memdesc:a45057c59e2b56470d717f3b0814629e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Record the pointer received from <a class="el" href="class_c_h_i_p_context.html#a3ad920ded6df2e7a66396ed77ab442b2" title="Allocate data. Pure virtual function - to be overriden by each backend. This member function is the o...">CHIPContext::allocate_()</a>  <a href="class_c_h_i_p_allocation_tracker.html#a45057c59e2b56470d717f3b0814629e1">More...</a><br /></td></tr>
+<tr class="separator:a45057c59e2b56470d717f3b0814629e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a62cbdb4cda95b7d938c7cb08d0d0db10"><td class="memItemLeft" align="right" valign="top"><a id="a62cbdb4cda95b7d938c7cb08d0d0db10" name="a62cbdb4cda95b7d938c7cb08d0d0db10"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>global_mem_size</b></td></tr>
+<tr class="separator:a62cbdb4cda95b7d938c7cb08d0d0db10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368d330189e4fc9dad046f61b94580f4"><td class="memItemLeft" align="right" valign="top"><a id="a368d330189e4fc9dad046f61b94580f4" name="a368d330189e4fc9dad046f61b94580f4"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_mem_used</b></td></tr>
+<tr class="separator:a368d330189e4fc9dad046f61b94580f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a114b879084ab6ac54899cbb771154bec"><td class="memItemLeft" align="right" valign="top"><a id="a114b879084ab6ac54899cbb771154bec" name="a114b879084ab6ac54899cbb771154bec"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_mem_used</b></td></tr>
+<tr class="separator:a114b879084ab6ac54899cbb771154bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Class for keeping track of device allocations. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac0802b0677c3cb64400fcb85b44d750b" name="ac0802b0677c3cb64400fcb85b44d750b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0802b0677c3cb64400fcb85b44d750b">&#9670;&nbsp;</a></span>CHIPAllocationTracker()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CHIPAllocationTracker::CHIPAllocationTracker </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>global_mem_size_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_c_h_i_p_allocation_tracker.html" title="Class for keeping track of device allocations.">CHIPAllocationTracker</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">global_mem_size_</td><td>Total available global memory on the device </td></tr>
+    <tr><td class="paramname">name_</td><td>name for this allocation tracker for logging. Normally device name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="af9ae5c2c59ca00cca00a7c85aa8a0f68" name="af9ae5c2c59ca00cca00a7c85aa8a0f68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9ae5c2c59ca00cca00a7c85aa8a0f68">&#9670;&nbsp;</a></span>getByDevPtr()</h2>
 
@@ -129,9 +199,123 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="afe77cb55e816e947538f086628d917ed" name="afe77cb55e816e947538f086628d917ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe77cb55e816e947538f086628d917ed">&#9670;&nbsp;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CHIPAllocationTracker::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Name object. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
+
+</div>
+</div>
+<a id="a45057c59e2b56470d717f3b0814629e1" name="a45057c59e2b56470d717f3b0814629e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45057c59e2b56470d717f3b0814629e1">&#9670;&nbsp;</a></span>recordAllocation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CHIPAllocationTracker::recordAllocation </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>dev_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Record the pointer received from <a class="el" href="class_c_h_i_p_context.html#a3ad920ded6df2e7a66396ed77ab442b2" title="Allocate data. Pure virtual function - to be overriden by each backend. This member function is the o...">CHIPContext::allocate_()</a> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dev_ptr</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a46d1cf5b6d07e19424c6f7f1369c3202" name="a46d1cf5b6d07e19424c6f7f1369c3202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46d1cf5b6d07e19424c6f7f1369c3202">&#9670;&nbsp;</a></span>releaseMemReservation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CHIPAllocationTracker::releaseMemReservation </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Release some of the reserved memory. Called by free() </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bytes</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="a335d9e806c72fb65a0359026058c2775" name="a335d9e806c72fb65a0359026058c2775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a335d9e806c72fb65a0359026058c2775">&#9670;&nbsp;</a></span>reserveMem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CHIPAllocationTracker::reserveMem </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bytes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bytes</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true Reservation successful </dd>
+<dd>
+false Not enough available memory for reservation of this size. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -89,6 +89,10 @@ Inheritance diagram for CHIPDevice:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aedf034af76863e920fff061e1027e53b"><td class="memItemLeft" align="right" valign="top"><a id="aedf034af76863e920fff061e1027e53b" name="aedf034af76863e920fff061e1027e53b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPDevice</b> (<a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *ctx_)</td></tr>
+<tr class="memdesc:aedf034af76863e920fff061e1027e53b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_c_h_i_p_device.html" title="Compute device class.">CHIPDevice</a> object. <br /></td></tr>
+<tr class="separator:aedf034af76863e920fff061e1027e53b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4922603bb72ecad2e9deeffd034b0993"><td class="memItemLeft" align="right" valign="top"><a id="a4922603bb72ecad2e9deeffd034b0993" name="a4922603bb72ecad2e9deeffd034b0993"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CHIPDevice</b> ()</td></tr>
 <tr class="memdesc:a4922603bb72ecad2e9deeffd034b0993"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_c_h_i_p_device.html" title="Compute device class.">CHIPDevice</a> object. <br /></td></tr>
@@ -97,12 +101,19 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~CHIPDevice</b> ()</td></tr>
 <tr class="memdesc:a4994ef9c50511e2522d0397c69871d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_c_h_i_p_device.html" title="Compute device class.">CHIPDevice</a> object. <br /></td></tr>
 <tr class="separator:a4994ef9c50511e2522d0397c69871d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46cae46416b74f4b0f912351503f450c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a46cae46416b74f4b0f912351503f450c">getKernels</a> ()</td></tr>
-<tr class="memdesc:a46cae46416b74f4b0f912351503f450c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Kernels object.  <a href="class_c_h_i_p_device.html#a46cae46416b74f4b0f912351503f450c">More...</a><br /></td></tr>
-<tr class="separator:a46cae46416b74f4b0f912351503f450c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8fb4cdbe080397c5639d2d742c33f2b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#ab8fb4cdbe080397c5639d2d742c33f2b">populateDeviceProperties</a> ()=0</td></tr>
-<tr class="memdesc:ab8fb4cdbe080397c5639d2d742c33f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a backend to populate device properties such as memory available, frequencies, etc.  <a href="class_c_h_i_p_device.html#ab8fb4cdbe080397c5639d2d742c33f2b">More...</a><br /></td></tr>
-<tr class="separator:ab8fb4cdbe080397c5639d2d742c33f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8c7dfb1b40e78260cb4011cc0509dd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#aed8c7dfb1b40e78260cb4011cc0509dd">getKernels</a> ()</td></tr>
+<tr class="memdesc:aed8c7dfb1b40e78260cb4011cc0509dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Kernels object.  <a href="class_c_h_i_p_device.html#aed8c7dfb1b40e78260cb4011cc0509dd">More...</a><br /></td></tr>
+<tr class="separator:aed8c7dfb1b40e78260cb4011cc0509dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0381200acd5010c1657c6c39c4c25632"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a0381200acd5010c1657c6c39c4c25632">getModules</a> ()</td></tr>
+<tr class="memdesc:a0381200acd5010c1657c6c39c4c25632"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Modules object.  <a href="class_c_h_i_p_device.html#a0381200acd5010c1657c6c39c4c25632">More...</a><br /></td></tr>
+<tr class="separator:a0381200acd5010c1657c6c39c4c25632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5194693b5813c5bc1551d293d48b3899"><td class="memItemLeft" align="right" valign="top"><a id="a5194693b5813c5bc1551d293d48b3899" name="a5194693b5813c5bc1551d293d48b3899"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>populateDeviceProperties</b> ()</td></tr>
+<tr class="memdesc:a5194693b5813c5bc1551d293d48b3899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a backend to populate device properties such as memory available, frequencies, etc. <br /></td></tr>
+<tr class="separator:a5194693b5813c5bc1551d293d48b3899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7bfa85e318cda92cfe5c5cc394f6eca"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#aa7bfa85e318cda92cfe5c5cc394f6eca">populateDeviceProperties_</a> ()=0</td></tr>
+<tr class="memdesc:aa7bfa85e318cda92cfe5c5cc394f6eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use a backend to populate device properties such as memory available, frequencies, etc.  <a href="class_c_h_i_p_device.html#aa7bfa85e318cda92cfe5c5cc394f6eca">More...</a><br /></td></tr>
+<tr class="separator:aa7bfa85e318cda92cfe5c5cc394f6eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a375f7ce1038f3bfc9c3d98bc4ee18c6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a375f7ce1038f3bfc9c3d98bc4ee18c6d">copyDeviceProperties</a> (hipDeviceProp_t *prop)</td></tr>
 <tr class="memdesc:a375f7ce1038f3bfc9c3d98bc4ee18c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the device for properties.  <a href="class_c_h_i_p_device.html#a375f7ce1038f3bfc9c3d98bc4ee18c6d">More...</a><br /></td></tr>
 <tr class="separator:a375f7ce1038f3bfc9c3d98bc4ee18c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,8 +123,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a967f4b9220725a2debcb6f66d22060fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a967f4b9220725a2debcb6f66d22060fd">getContext</a> ()</td></tr>
 <tr class="memdesc:a967f4b9220725a2debcb6f66d22060fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the context object.  <a href="class_c_h_i_p_device.html#a967f4b9220725a2debcb6f66d22060fd">More...</a><br /></td></tr>
 <tr class="separator:a967f4b9220725a2debcb6f66d22060fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1d6b81696a43296a485647ec07f596"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#acd1d6b81696a43296a485647ec07f596">addQueue</a> (unsigned int flags, int priority)=0</td></tr>
+<tr class="memdesc:acd1d6b81696a43296a485647ec07f596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an additional queue for this device.  <a href="class_c_h_i_p_device.html#acd1d6b81696a43296a485647ec07f596">More...</a><br /></td></tr>
+<tr class="separator:acd1d6b81696a43296a485647ec07f596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a343592eef975d362baac0006456e8337"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a343592eef975d362baac0006456e8337">addQueue</a> (<a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> *chip_queue_)</td></tr>
-<tr class="memdesc:a343592eef975d362baac0006456e8337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an additional queue for this device.  <a href="class_c_h_i_p_device.html#a343592eef975d362baac0006456e8337">More...</a><br /></td></tr>
+<tr class="memdesc:a343592eef975d362baac0006456e8337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a queue to this device.  <a href="class_c_h_i_p_device.html#a343592eef975d362baac0006456e8337">More...</a><br /></td></tr>
 <tr class="separator:a343592eef975d362baac0006456e8337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13160a0a12a1e885faa15f20c88e3923"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a13160a0a12a1e885faa15f20c88e3923">getQueues</a> ()</td></tr>
 <tr class="memdesc:a13160a0a12a1e885faa15f20c88e3923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Queues object.  <a href="class_c_h_i_p_device.html#a13160a0a12a1e885faa15f20c88e3923">More...</a><br /></td></tr>
@@ -127,15 +141,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0647eabfa0ae2fe14b1ea95666919090"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a0647eabfa0ae2fe14b1ea95666919090">getDeviceId</a> ()</td></tr>
 <tr class="memdesc:a0647eabfa0ae2fe14b1ea95666919090"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the integer ID of this device as it appears in the Backend's chip_devices list.  <a href="class_c_h_i_p_device.html#a0647eabfa0ae2fe14b1ea95666919090">More...</a><br /></td></tr>
 <tr class="separator:a0647eabfa0ae2fe14b1ea95666919090"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98cebf6120181daeeeab073832c28b7b"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a98cebf6120181daeeeab073832c28b7b">getName</a> ()=0</td></tr>
-<tr class="memdesc:a98cebf6120181daeeeab073832c28b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the device name.  <a href="class_c_h_i_p_device.html#a98cebf6120181daeeeab073832c28b7b">More...</a><br /></td></tr>
-<tr class="separator:a98cebf6120181daeeeab073832c28b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab57d0ccdf88628f1851645750e9cdc1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#ab57d0ccdf88628f1851645750e9cdc1f">reserveMem</a> (size_t bytes)</td></tr>
-<tr class="memdesc:ab57d0ccdf88628f1851645750e9cdc1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device TODO: Move to AllocationTracker.  <a href="class_c_h_i_p_device.html#ab57d0ccdf88628f1851645750e9cdc1f">More...</a><br /></td></tr>
-<tr class="separator:ab57d0ccdf88628f1851645750e9cdc1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75cbad24717ec1390e631f354c5fea3e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#a75cbad24717ec1390e631f354c5fea3e">releaseMemReservation</a> (size_t bytes)</td></tr>
-<tr class="memdesc:a75cbad24717ec1390e631f354c5fea3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release some of the reserved memory. Called by free() TODO: Move to AllocationTracker.  <a href="class_c_h_i_p_device.html#a75cbad24717ec1390e631f354c5fea3e">More...</a><br /></td></tr>
-<tr class="separator:a75cbad24717ec1390e631f354c5fea3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca3d9af44bd816743e81eaf840066928"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#aca3d9af44bd816743e81eaf840066928">getName</a> ()</td></tr>
+<tr class="memdesc:aca3d9af44bd816743e81eaf840066928"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the device name.  <a href="class_c_h_i_p_device.html#aca3d9af44bd816743e81eaf840066928">More...</a><br /></td></tr>
+<tr class="separator:aca3d9af44bd816743e81eaf840066928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd7d4be48339d070b09fcf5d6270caaa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#abd7d4be48339d070b09fcf5d6270caaa">reset</a> ()=0</td></tr>
 <tr class="memdesc:abd7d4be48339d070b09fcf5d6270caaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy all allocations and reset all state on the current device in the current process.  <a href="class_c_h_i_p_device.html#abd7d4be48339d070b09fcf5d6270caaa">More...</a><br /></td></tr>
 <tr class="separator:abd7d4be48339d070b09fcf5d6270caaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +192,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aff26bc18398f030d01f92e0ef3d69244"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_device.html#aff26bc18398f030d01f92e0ef3d69244">registerFunctionAsKernel</a> (std::string *module_str, const void *host_f_ptr, const char *host_f_name)</td></tr>
 <tr class="memdesc:aff26bc18398f030d01f92e0ef3d69244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take the module source, compile the kernels and associate the host function pointer with a kernel whose name matches host function name.  <a href="class_c_h_i_p_device.html#aff26bc18398f030d01f92e0ef3d69244">More...</a><br /></td></tr>
 <tr class="separator:aff26bc18398f030d01f92e0ef3d69244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addfa497b07b59a484fb17a37c3c424cd"><td class="memItemLeft" align="right" valign="top"><a id="addfa497b07b59a484fb17a37c3c424cd" name="addfa497b07b59a484fb17a37c3c424cd"></a>
+virtual <a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>addModule</b> (std::string *module_str)=0</td></tr>
+<tr class="separator:addfa497b07b59a484fb17a37c3c424cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d1b7774f410e21bbe305503a3b9d21"><td class="memItemLeft" align="right" valign="top"><a id="ab4d1b7774f410e21bbe305503a3b9d21" name="ab4d1b7774f410e21bbe305503a3b9d21"></a>
+virtual <a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>createTexture</b> (const hipResourceDesc *pResDesc, const hipTextureDesc *pTexDesc, const struct hipResourceViewDesc *pResViewDesc)=0</td></tr>
+<tr class="separator:ab4d1b7774f410e21bbe305503a3b9d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2057969bf46da575da3f0a439e7f787a"><td class="memItemLeft" align="right" valign="top"><a id="a2057969bf46da575da3f0a439e7f787a" name="a2057969bf46da575da3f0a439e7f787a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyTexture</b> (<a class="el" href="class_c_h_i_p_texture.html">CHIPTexture</a> *textureObject)=0</td></tr>
+<tr class="separator:a2057969bf46da575da3f0a439e7f787a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -218,12 +235,9 @@ std::unordered_map&lt; const void *, <a class="el" href="class_c_h_i_p_kernel.ht
 <tr class="memitem:ab03330d166b8621a745583df6786c03c"><td class="memItemLeft" align="right" valign="top"><a id="ab03330d166b8621a745583df6786c03c" name="ab03330d166b8621a745583df6786c03c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>idx</b></td></tr>
 <tr class="separator:ab03330d166b8621a745583df6786c03c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72f505d327649e6325dbee25c5d00144"><td class="memItemLeft" align="right" valign="top"><a id="a72f505d327649e6325dbee25c5d00144" name="a72f505d327649e6325dbee25c5d00144"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>total_used_mem</b></td></tr>
-<tr class="separator:a72f505d327649e6325dbee25c5d00144"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afff08ae14824374150fdfcd303c7d7f8"><td class="memItemLeft" align="right" valign="top"><a id="afff08ae14824374150fdfcd303c7d7f8" name="afff08ae14824374150fdfcd303c7d7f8"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_used_mem</b></td></tr>
-<tr class="separator:afff08ae14824374150fdfcd303c7d7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f173c29ce72a9f699ef8765fe8efcc5"><td class="memItemLeft" align="right" valign="top"><a id="a0f173c29ce72a9f699ef8765fe8efcc5" name="a0f173c29ce72a9f699ef8765fe8efcc5"></a>
+<a class="el" href="class_c_h_i_p_allocation_tracker.html">CHIPAllocationTracker</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>allocation_tracker</b> = nullptr</td></tr>
+<tr class="separator:a0f173c29ce72a9f699ef8765fe8efcc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -233,9 +247,6 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>device_name</b
 <tr class="memitem:ac7cdfc001a8852c0e69888c256254506"><td class="memItemLeft" align="right" valign="top"><a id="ac7cdfc001a8852c0e69888c256254506" name="ac7cdfc001a8852c0e69888c256254506"></a>
 std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mtx</b></td></tr>
 <tr class="separator:ac7cdfc001a8852c0e69888c256254506"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39eb5834bfe4c36bac72e7a2415723fa"><td class="memItemLeft" align="right" valign="top"><a id="a39eb5834bfe4c36bac72e7a2415723fa" name="a39eb5834bfe4c36bac72e7a2415723fa"></a>
-std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>chip_kernels</b></td></tr>
-<tr class="separator:a39eb5834bfe4c36bac72e7a2415723fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a333873706d2a7d547871a45613ae5e38"><td class="memItemLeft" align="right" valign="top"><a id="a333873706d2a7d547871a45613ae5e38" name="a333873706d2a7d547871a45613ae5e38"></a>
 <a class="el" href="class_c_h_i_p_context.html">CHIPContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ctx</b></td></tr>
 <tr class="separator:a333873706d2a7d547871a45613ae5e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -245,18 +256,27 @@ std::vector&lt; <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * &g
 <tr class="memitem:a1fae7b58c18f748c8cab910ba6890e1e"><td class="memItemLeft" align="right" valign="top"><a id="a1fae7b58c18f748c8cab910ba6890e1e" name="a1fae7b58c18f748c8cab910ba6890e1e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>active_queue_id</b> = 0</td></tr>
 <tr class="separator:a1fae7b58c18f748c8cab910ba6890e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ae79160adaeaaa4fd68c58677346526"><td class="memItemLeft" align="right" valign="top"><a id="a1ae79160adaeaaa4fd68c58677346526" name="a1ae79160adaeaaa4fd68c58677346526"></a>
+std::once_flag&#160;</td><td class="memItemRight" valign="bottom"><b>propsPopulated</b></td></tr>
+<tr class="separator:a1ae79160adaeaaa4fd68c58677346526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63a5a19d95283d5e2527ecc935bac6cb"><td class="memItemLeft" align="right" valign="top"><a id="a63a5a19d95283d5e2527ecc935bac6cb" name="a63a5a19d95283d5e2527ecc935bac6cb"></a>
 hipDeviceAttribute_t&#160;</td><td class="memItemRight" valign="bottom"><b>attrs</b></td></tr>
 <tr class="separator:a63a5a19d95283d5e2527ecc935bac6cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aa417902885d6b15c26c6fc69aad547"><td class="memItemLeft" align="right" valign="top"><a id="a6aa417902885d6b15c26c6fc69aad547" name="a6aa417902885d6b15c26c6fc69aad547"></a>
 hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device_props</b></td></tr>
 <tr class="separator:a6aa417902885d6b15c26c6fc69aad547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b1fe6033be1fc9717c30fcc20db0d7a"><td class="memItemLeft" align="right" valign="top"><a id="a0b1fe6033be1fc9717c30fcc20db0d7a" name="a0b1fe6033be1fc9717c30fcc20db0d7a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>TotalUsedMem</b></td></tr>
+<tr class="separator:a0b1fe6033be1fc9717c30fcc20db0d7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797a22a51f4796fc8bd96e15b1ac28a0"><td class="memItemLeft" align="right" valign="top"><a id="a797a22a51f4796fc8bd96e15b1ac28a0" name="a797a22a51f4796fc8bd96e15b1ac28a0"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>MaxUsedMem</b></td></tr>
+<tr class="separator:a797a22a51f4796fc8bd96e15b1ac28a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Compute device class. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a343592eef975d362baac0006456e8337" name="a343592eef975d362baac0006456e8337"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a343592eef975d362baac0006456e8337">&#9670;&nbsp;</a></span>addQueue()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a343592eef975d362baac0006456e8337">&#9670;&nbsp;</a></span>addQueue() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,6 +291,50 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
       </table>
 </div><div class="memdoc">
 
+<p>Add a queue to this device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">chip_queue_</td><td><a class="el" href="class_c_h_i_p_queue.html" title="Queue class for submitting kernels to for execution.">CHIPQueue</a> to be added </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acd1d6b81696a43296a485647ec07f596" name="acd1d6b81696a43296a485647ec07f596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd1d6b81696a43296a485647ec07f596">&#9670;&nbsp;</a></span>addQueue() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_c_h_i_p_queue.html">CHIPQueue</a> * CHIPDevice::addQueue </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
 <p>Construct an additional queue for this device. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -280,6 +344,8 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CHIPQueue* pointer to the newly created queue (can also be found in chip_queues vector) </dd></dl>
+
+<p>Implemented in <a class="el" href="class_c_h_i_p_device_level0.html#aabd471a3cbb392716da624494de90f51">CHIPDeviceLevel0</a>, and <a class="el" href="class_c_h_i_p_device_open_c_l.html#acea38f2032eb4355363c1c939638c1df">CHIPDeviceOpenCL</a>.</p>
 
 </div>
 </div>
@@ -525,14 +591,14 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
 
 </div>
 </div>
-<a id="a46cae46416b74f4b0f912351503f450c" name="a46cae46416b74f4b0f912351503f450c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46cae46416b74f4b0f912351503f450c">&#9670;&nbsp;</a></span>getKernels()</h2>
+<a id="aed8c7dfb1b40e78260cb4011cc0509dd" name="aed8c7dfb1b40e78260cb4011cc0509dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed8c7dfb1b40e78260cb4011cc0509dd">&#9670;&nbsp;</a></span>getKernels()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt; &amp; CHIPDevice::getKernels </td>
+          <td class="memname">std::vector&lt; <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a> * &gt; CHIPDevice::getKernels </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -545,33 +611,43 @@ hipDeviceProp_t&#160;</td><td class="memItemRight" valign="bottom"><b>hip_device
 
 </div>
 </div>
-<a id="a98cebf6120181daeeeab073832c28b7b" name="a98cebf6120181daeeeab073832c28b7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98cebf6120181daeeeab073832c28b7b">&#9670;&nbsp;</a></span>getName()</h2>
+<a id="a0381200acd5010c1657c6c39c4c25632" name="a0381200acd5010c1657c6c39c4c25632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0381200acd5010c1657c6c39c4c25632">&#9670;&nbsp;</a></span>getModules()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::string CHIPDevice::getName </td>
+          <td class="memname">std::vector&lt; <a class="el" href="class_c_h_i_p_module.html">CHIPModule</a> * &gt; &amp; CHIPDevice::getModules </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
+</div><div class="memdoc">
+
+<p>Get the Modules object. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;CHIPModule*&gt;&amp; </dd></dl>
+
+</div>
+</div>
+<a id="aca3d9af44bd816743e81eaf840066928" name="aca3d9af44bd816743e81eaf840066928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca3d9af44bd816743e81eaf840066928">&#9670;&nbsp;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string CHIPDevice::getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 <p>Get the device name. </p>
 <dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
-
-<p>Implemented in <a class="el" href="class_c_h_i_p_device_level0.html#a9476b6ed30ddda6dba12c30dfc206157">CHIPDeviceLevel0</a>, and <a class="el" href="class_c_h_i_p_device_open_c_l.html#a5fa748efe4b61972f968275d78a17893">CHIPDeviceOpenCL</a>.</p>
 
 </div>
 </div>
@@ -744,8 +820,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="ab8fb4cdbe080397c5639d2d742c33f2b" name="ab8fb4cdbe080397c5639d2d742c33f2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8fb4cdbe080397c5639d2d742c33f2b">&#9670;&nbsp;</a></span>populateDeviceProperties()</h2>
+<a id="aa7bfa85e318cda92cfe5c5cc394f6eca" name="aa7bfa85e318cda92cfe5c5cc394f6eca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7bfa85e318cda92cfe5c5cc394f6eca">&#9670;&nbsp;</a></span>populateDeviceProperties_()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -754,7 +830,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void CHIPDevice::populateDeviceProperties </td>
+          <td class="memname">virtual void CHIPDevice::populateDeviceProperties_ </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -769,7 +845,7 @@ false </dd></dl>
 
 <p>Use a backend to populate device properties such as memory available, frequencies, etc. </p>
 
-<p>Implemented in <a class="el" href="class_c_h_i_p_device_level0.html#abaf4099949c7c45c133d16feeb37956c">CHIPDeviceLevel0</a>, and <a class="el" href="class_c_h_i_p_device_open_c_l.html#af4a2ab7d0d56063710d875ab2505755f">CHIPDeviceOpenCL</a>.</p>
+<p>Implemented in <a class="el" href="class_c_h_i_p_device_level0.html#a76728b527fe3f8570a9f6402e1a0ee52">CHIPDeviceLevel0</a>, and <a class="el" href="class_c_h_i_p_device_open_c_l.html#a7baeebbfab0342cb95a0df689a6af50b">CHIPDeviceOpenCL</a>.</p>
 
 </div>
 </div>
@@ -817,35 +893,6 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a75cbad24717ec1390e631f354c5fea3e" name="a75cbad24717ec1390e631f354c5fea3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75cbad24717ec1390e631f354c5fea3e">&#9670;&nbsp;</a></span>releaseMemReservation()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool CHIPDevice::releaseMemReservation </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bytes</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Release some of the reserved memory. Called by free() TODO: Move to AllocationTracker. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bytes</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
-
-</div>
-</div>
 <a id="ae49f9f351ba18e15a8baaa7c734ee679" name="ae49f9f351ba18e15a8baaa7c734ee679"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae49f9f351ba18e15a8baaa7c734ee679">&#9670;&nbsp;</a></span>removeQueue()</h2>
 
@@ -872,35 +919,6 @@ false </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true </dd>
 <dd>
 false </dd></dl>
-
-</div>
-</div>
-<a id="ab57d0ccdf88628f1851645750e9cdc1f" name="ab57d0ccdf88628f1851645750e9cdc1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab57d0ccdf88628f1851645750e9cdc1f">&#9670;&nbsp;</a></span>reserveMem()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool CHIPDevice::reserveMem </td>
-          <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bytes</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device TODO: Move to AllocationTracker. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bytes</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true Reservation successful </dd>
-<dd>
-false Not enough available memory for reservation of this size. </dd></dl>
 
 </div>
 </div>
@@ -1123,8 +1141,8 @@ false Not enough available memory for reservation of this size. </dd></dl>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
-<li>/Users/pvelesko/local/HIPxx/src/CHIPBackend.cc</li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/<a class="el" href="_c_h_i_p_backend_8hh_source.html">CHIPBackend.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/CHIPBackend.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

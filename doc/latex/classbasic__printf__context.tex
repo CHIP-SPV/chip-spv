@@ -1,0 +1,79 @@
+\hypertarget{classbasic__printf__context}{}\doxysection{basic\+\_\+printf\+\_\+context\texorpdfstring{$<$}{<} Output\+It, Char, Arg\+Formatter \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classbasic__printf__context}\index{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$@{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$}}
+
+
+{\ttfamily \#include $<$printf.\+h$>$}
+
+Inheritance diagram for basic\+\_\+printf\+\_\+context\texorpdfstring{$<$}{<} Output\+It, Char, Arg\+Formatter \texorpdfstring{$>$}{>}\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbasic__printf__context}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structbasic__printf__context_1_1formatter__type}{formatter\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef Char \mbox{\hyperlink{classbasic__printf__context_a7f19ba5dfbcd66a87281c4b05bcf324e}{char\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbasic__printf__context_ae71967bec500702473ba5b98d4e36aa2}{basic\+\_\+printf\+\_\+context}} (Output\+It out, \mbox{\hyperlink{classbasic__string__view}{basic\+\_\+string\+\_\+view}}$<$ \mbox{\hyperlink{classbasic__printf__context_a7f19ba5dfbcd66a87281c4b05bcf324e}{char\+\_\+type}} $>$ format\+\_\+str, \mbox{\hyperlink{classbasic__format__args}{basic\+\_\+format\+\_\+args}}$<$ \mbox{\hyperlink{classbasic__printf__context}{basic\+\_\+printf\+\_\+context}} $>$ args)
+\item 
+void \mbox{\hyperlink{classbasic__printf__context_a1740a3a0a6d2748e4f489fb9b4b9e82c}{format}} ()
+\item 
+\mbox{\Hypertarget{classbasic__printf__context_a6e9c28682d941d90e2a09c953fdc361c}\label{classbasic__printf__context_a6e9c28682d941d90e2a09c953fdc361c}} 
+\mbox{\hyperlink{classbasic__parse__context}{basic\+\_\+parse\+\_\+context}}$<$ \mbox{\hyperlink{classbasic__printf__context_a7f19ba5dfbcd66a87281c4b05bcf324e}{char\+\_\+type}} $>$ \& {\bfseries parse\+\_\+context} ()
+\item 
+\mbox{\Hypertarget{classbasic__printf__context_ab77c1d5e2cf72ef323e1599be8567fee}\label{classbasic__printf__context_ab77c1d5e2cf72ef323e1599be8567fee}} 
+\mbox{\hyperlink{classinternal_1_1null__terminating__iterator}{iterator}} {\bfseries out} ()
+\item 
+\mbox{\Hypertarget{classbasic__printf__context_a9b9ce1c9b8d586251ab40312840779c9}\label{classbasic__printf__context_a9b9ce1c9b8d586251ab40312840779c9}} 
+void {\bfseries advance\+\_\+to} (\mbox{\hyperlink{classinternal_1_1null__terminating__iterator}{iterator}} it)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Output\+It, typename Char, typename Arg\+Formatter$>$\newline
+class basic\+\_\+printf\+\_\+context$<$ Output\+It, Char, Arg\+Formatter $>$}
+This template formats data and writes the output to a writer. 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classbasic__printf__context_a7f19ba5dfbcd66a87281c4b05bcf324e}\label{classbasic__printf__context_a7f19ba5dfbcd66a87281c4b05bcf324e}} 
+\index{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$@{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$}!char\_type@{char\_type}}
+\index{char\_type@{char\_type}!basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$@{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$}}
+\doxysubsubsection{\texorpdfstring{char\_type}{char\_type}}
+{\footnotesize\ttfamily template$<$typename Output\+It , typename Char , typename Arg\+Formatter $>$ \\
+typedef Char \mbox{\hyperlink{classbasic__printf__context}{basic\+\_\+printf\+\_\+context}}$<$ Output\+It, Char, Arg\+Formatter $>$\+::\mbox{\hyperlink{classbasic__printf__context_a7f19ba5dfbcd66a87281c4b05bcf324e}{char\+\_\+type}}}
+
+The character type for the output. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbasic__printf__context_ae71967bec500702473ba5b98d4e36aa2}\label{classbasic__printf__context_ae71967bec500702473ba5b98d4e36aa2}} 
+\index{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$@{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$}!basic\_printf\_context@{basic\_printf\_context}}
+\index{basic\_printf\_context@{basic\_printf\_context}!basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$@{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$}}
+\doxysubsubsection{\texorpdfstring{basic\_printf\_context()}{basic\_printf\_context()}}
+{\footnotesize\ttfamily template$<$typename Output\+It , typename Char , typename Arg\+Formatter $>$ \\
+\mbox{\hyperlink{classbasic__printf__context}{basic\+\_\+printf\+\_\+context}}$<$ Output\+It, Char, Arg\+Formatter $>$\+::\mbox{\hyperlink{classbasic__printf__context}{basic\+\_\+printf\+\_\+context}} (\begin{DoxyParamCaption}\item[{Output\+It}]{out,  }\item[{\mbox{\hyperlink{classbasic__string__view}{basic\+\_\+string\+\_\+view}}$<$ \mbox{\hyperlink{classbasic__printf__context_a7f19ba5dfbcd66a87281c4b05bcf324e}{char\+\_\+type}} $>$}]{format\+\_\+str,  }\item[{\mbox{\hyperlink{classbasic__format__args}{basic\+\_\+format\+\_\+args}}$<$ \mbox{\hyperlink{classbasic__printf__context}{basic\+\_\+printf\+\_\+context}}$<$ Output\+It, Char, Arg\+Formatter $>$ $>$}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst Constructs a {\ttfamily \mbox{\hyperlink{structprintf__context}{printf\+\_\+context}}} object. References to the arguments and the writer are stored in the context object so make sure they have appropriate lifetimes. \textbackslash{}endrst 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbasic__printf__context_a1740a3a0a6d2748e4f489fb9b4b9e82c}\label{classbasic__printf__context_a1740a3a0a6d2748e4f489fb9b4b9e82c}} 
+\index{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$@{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$}!format@{format}}
+\index{format@{format}!basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$@{basic\_printf\_context$<$ OutputIt, Char, ArgFormatter $>$}}
+\doxysubsubsection{\texorpdfstring{format()}{format()}}
+{\footnotesize\ttfamily template$<$typename Output\+It , typename Char , typename AF $>$ \\
+void \mbox{\hyperlink{classbasic__printf__context}{basic\+\_\+printf\+\_\+context}}$<$ Output\+It, Char, AF $>$\+::format}
+
+Formats stored arguments and writes the output to the range. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/fmt/bundled/printf.\+h\end{DoxyCompactItemize}

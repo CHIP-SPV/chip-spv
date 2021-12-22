@@ -1,0 +1,71 @@
+\hypertarget{struct__ze__device__compute__properties__t}{}\doxysection{\+\_\+ze\+\_\+device\+\_\+compute\+\_\+properties\+\_\+t Struct Reference}
+\label{struct__ze__device__compute__properties__t}\index{\_ze\_device\_compute\_properties\_t@{\_ze\_device\_compute\_properties\_t}}
+
+
+Device compute properties queried using \+::ze\+Device\+Get\+Compute\+Properties.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_ab5db55b8cace88919b05457fab019d53}\label{struct__ze__device__compute__properties__t_ab5db55b8cace88919b05457fab019d53}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_a25779dde3eb4e2de5f7fd32fd65f05e7}\label{struct__ze__device__compute__properties__t_a25779dde3eb4e2de5f7fd32fd65f05e7}} 
+void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in,out\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{struct__ze__device__compute__properties__t_a8496c062968ffad3debf05b10514ec0a}{max\+Total\+Group\+Size}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_ad9cfd498d5ad8a654deb81d7620f1608}\label{struct__ze__device__compute__properties__t_ad9cfd498d5ad8a654deb81d7620f1608}} 
+uint32\+\_\+t {\bfseries max\+Group\+SizeX}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum items for X dimension in group \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_ad64e69a3176c48e030e5bf0c5ff12a20}\label{struct__ze__device__compute__properties__t_ad64e69a3176c48e030e5bf0c5ff12a20}} 
+uint32\+\_\+t {\bfseries max\+Group\+SizeY}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum items for Y dimension in group \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_a389b6af5228e9e82b42ecccbdbee11a0}\label{struct__ze__device__compute__properties__t_a389b6af5228e9e82b42ecccbdbee11a0}} 
+uint32\+\_\+t {\bfseries max\+Group\+SizeZ}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum items for Z dimension in group \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_aee27edef7e9db299a1ed55d763a99514}\label{struct__ze__device__compute__properties__t_aee27edef7e9db299a1ed55d763a99514}} 
+uint32\+\_\+t {\bfseries max\+Group\+CountX}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum groups that can be launched for x dimension \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_aee9beecae2d9d9184d0f073a3701d595}\label{struct__ze__device__compute__properties__t_aee9beecae2d9d9184d0f073a3701d595}} 
+uint32\+\_\+t {\bfseries max\+Group\+CountY}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum groups that can be launched for y dimension \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_afb9757ce7a8f693edc5db521be198f64}\label{struct__ze__device__compute__properties__t_afb9757ce7a8f693edc5db521be198f64}} 
+uint32\+\_\+t {\bfseries max\+Group\+CountZ}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum groups that can be launched for z dimension \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_af834358851a3382e8e16eace88146b95}\label{struct__ze__device__compute__properties__t_af834358851a3382e8e16eace88146b95}} 
+uint32\+\_\+t {\bfseries max\+Shared\+Local\+Memory}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum shared local memory per group. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{struct__ze__device__compute__properties__t_adbe161a4df0f35d02e76de507891c36a}{num\+Sub\+Group\+Sizes}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_aaa77d7b6e02f2b86e41cf866fc0d3ed9}\label{struct__ze__device__compute__properties__t_aaa77d7b6e02f2b86e41cf866fc0d3ed9}} 
+uint32\+\_\+t {\bfseries sub\+Group\+Sizes} \mbox{[}ZE\+\_\+\+SUBGROUPSIZE\+\_\+\+COUNT\mbox{]}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Size group sizes supported. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Device compute properties queried using \+::ze\+Device\+Get\+Compute\+Properties. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__device__compute__properties__t_a8496c062968ffad3debf05b10514ec0a}\label{struct__ze__device__compute__properties__t_a8496c062968ffad3debf05b10514ec0a}} 
+\index{\_ze\_device\_compute\_properties\_t@{\_ze\_device\_compute\_properties\_t}!maxTotalGroupSize@{maxTotalGroupSize}}
+\index{maxTotalGroupSize@{maxTotalGroupSize}!\_ze\_device\_compute\_properties\_t@{\_ze\_device\_compute\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{maxTotalGroupSize}{maxTotalGroupSize}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+ze\+\_\+device\+\_\+compute\+\_\+properties\+\_\+t\+::max\+Total\+Group\+Size}
+
+\mbox{[}out\mbox{]} Maximum items per compute group. (group\+SizeX $\ast$ group\+SizeY $\ast$ group\+SizeZ) \texorpdfstring{$<$}{<}= max\+Total\+Group\+Size \mbox{\Hypertarget{struct__ze__device__compute__properties__t_adbe161a4df0f35d02e76de507891c36a}\label{struct__ze__device__compute__properties__t_adbe161a4df0f35d02e76de507891c36a}} 
+\index{\_ze\_device\_compute\_properties\_t@{\_ze\_device\_compute\_properties\_t}!numSubGroupSizes@{numSubGroupSizes}}
+\index{numSubGroupSizes@{numSubGroupSizes}!\_ze\_device\_compute\_properties\_t@{\_ze\_device\_compute\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{numSubGroupSizes}{numSubGroupSizes}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+ze\+\_\+device\+\_\+compute\+\_\+properties\+\_\+t\+::num\+Sub\+Group\+Sizes}
+
+\mbox{[}out\mbox{]} Number of subgroup sizes supported. This indicates number of entries in sub\+Group\+Sizes. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

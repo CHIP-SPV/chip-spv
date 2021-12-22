@@ -9,6 +9,9 @@ Inheritance diagram for CHIPModule\+Open\+CL\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_c_h_i_p_module_open_c_l_a75fe3a3303c81f407430f1219540582b}\label{class_c_h_i_p_module_open_c_l_a75fe3a3303c81f407430f1219540582b}} 
+{\bfseries CHIPModule\+Open\+CL} (std\+::string $\ast$module\+\_\+str)
+\item 
 virtual void \mbox{\hyperlink{class_c_h_i_p_module_open_c_l_a01ab6cdabbb9fcf5eda5d842f1a17150}{compile}} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$chip\+\_\+dev) override
 \begin{DoxyCompactList}\small\item\em Kernel JIT compilation can be lazy. This is configured via Cmake LAZY\+\_\+\+JIT option. If LAZY\+\_\+\+JIT is set to true then this module won\textquotesingle{}t be compiled until the first call to one of its kernels. If LAZY\+\_\+\+JIT is set to false(default) then this method should be called in the constructor;. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_module_open_c_l_a261c0d6dbea19b7032caadfb20e80f58}\label{class_c_h_i_p_module_open_c_l_a261c0d6dbea19b7032caadfb20e80f58}} 
@@ -36,11 +39,11 @@ Kernel JIT compilation can be lazy. This is configured via Cmake LAZY\+\_\+\+JIT
 
 This method should populate this modules chip\+\_\+kernels vector. These kernels would have a name extracted from the kernel but no associated host function pointers. 
 
-Reimplemented from \mbox{\hyperlink{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403d486}{CHIPModule}}.
+Implements \mbox{\hyperlink{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}{CHIPModule}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+hh\item 
-/\+Users/pvelesko/local/\+HIPxx/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+hh\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/backend/\+Open\+CL/CHIPBackend\+Open\+CL.\+cc\end{DoxyCompactItemize}

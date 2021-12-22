@@ -27,26 +27,44 @@ Inheritance diagram for CHIPQueue\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_c_h_i_p_queue_a8acc0d8a03ba62beca18a55bbc87284b}\label{class_c_h_i_p_queue_a8acc0d8a03ba62beca18a55bbc87284b}} 
 {\bfseries $\sim$\+CHIPQueue} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} object. \end{DoxyCompactList}\item 
-virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_a048fbad716d90dd1932f00da71e32f34}{mem\+Copy}} (void $\ast$dst, const void $\ast$src, size\+\_\+t size)
+virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_a764ca839ae19a406e79f8a17807d64f8}{mem\+Copy}} (void $\ast$dst, const void $\ast$src, size\+\_\+t size)=0
 \begin{DoxyCompactList}\small\item\em Blocking memory copy. \end{DoxyCompactList}\item 
-virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_a51223f0572a9a67c86851afb722b54dc}{mem\+Copy\+Async}} (void $\ast$dst, const void $\ast$src, size\+\_\+t size)
+virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_a94257094d35a810506e3163c8b6ebb2d}{mem\+Copy\+Async}} (void $\ast$dst, const void $\ast$src, size\+\_\+t size)=0
 \begin{DoxyCompactList}\small\item\em Non-\/blocking memory copy. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_c_h_i_p_queue_aedd41a24c72895ccb0a578e6914184ca}{mem\+Fill}} (void $\ast$dst, size\+\_\+t size, const void $\ast$pattern, size\+\_\+t pattern\+\_\+size)
 \begin{DoxyCompactList}\small\item\em Blocking memset. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_c_h_i_p_queue_a0bc51f0c05a8dc9eabe7679dfb5acb67}{mem\+Fill\+Async}} (void $\ast$dst, size\+\_\+t size, const void $\ast$pattern, size\+\_\+t pattern\+\_\+size)
+virtual void \mbox{\hyperlink{class_c_h_i_p_queue_ac173fb5ca3d0ec542ce7a3a735e008f5}{mem\+Fill\+Async}} (void $\ast$dst, size\+\_\+t size, const void $\ast$pattern, size\+\_\+t pattern\+\_\+size)=0
 \begin{DoxyCompactList}\small\item\em Non-\/blocking mem set. \end{DoxyCompactList}\item 
-virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_ab647308242069e21491828b4fea2799c}{launch}} (\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExec\+Item}} $\ast$exec\+\_\+item)
+\mbox{\Hypertarget{class_c_h_i_p_queue_a6b8317459ec340e0fce5396fc542a6cd}\label{class_c_h_i_p_queue_a6b8317459ec340e0fce5396fc542a6cd}} 
+virtual void {\bfseries mem\+Copy2D} (void $\ast$dst, size\+\_\+t dpitch, const void $\ast$src, size\+\_\+t spitch, size\+\_\+t width, size\+\_\+t height)
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_a9018b0bbc0c8194c3c4e71ac899fe11b}\label{class_c_h_i_p_queue_a9018b0bbc0c8194c3c4e71ac899fe11b}} 
+virtual void {\bfseries mem\+Copy2\+DAsync} (void $\ast$dst, size\+\_\+t dpitch, const void $\ast$src, size\+\_\+t spitch, size\+\_\+t width, size\+\_\+t height)=0
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_a5fb66009dc0a14a16cb6065a49a92d88}\label{class_c_h_i_p_queue_a5fb66009dc0a14a16cb6065a49a92d88}} 
+virtual void {\bfseries mem\+Copy3D} (void $\ast$dst, size\+\_\+t dpitch, size\+\_\+t dspitch, const void $\ast$src, size\+\_\+t spitch, size\+\_\+t sspitch, size\+\_\+t width, size\+\_\+t height, size\+\_\+t depth)
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_abde6588e340ef5922928b3f3b924ab4e}\label{class_c_h_i_p_queue_abde6588e340ef5922928b3f3b924ab4e}} 
+virtual void {\bfseries mem\+Copy3\+DAsync} (void $\ast$dst, size\+\_\+t dpitch, size\+\_\+t dspitch, const void $\ast$src, size\+\_\+t spitch, size\+\_\+t sspitch, size\+\_\+t width, size\+\_\+t height, size\+\_\+t depth)=0
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_a293e3367df7d64e5d4fc985ba4374864}\label{class_c_h_i_p_queue_a293e3367df7d64e5d4fc985ba4374864}} 
+virtual void {\bfseries mem\+Copy\+To\+Texture} (\mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}} $\ast$tex\+Obj, void $\ast$src)=0
+\item 
+virtual hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_ac7b9c53a719655c0cae37479e670e99a}{launch}} (\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExec\+Item}} $\ast$exec\+\_\+item)=0
 \begin{DoxyCompactList}\small\item\em Submit a \mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExec\+Item}} to this queue for execution. \mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExec\+Item}} needs to be complete -\/ contain the kernel and arguments. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_queue_a51a3ed46801b642ad48f5d7e71873ba1}{get\+Device}} ()
 \begin{DoxyCompactList}\small\item\em Get the Device obj. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_c_h_i_p_queue_a7b4d58bc6b0d35eada59ce1a0239da9b}{finish}} ()
+virtual void \mbox{\hyperlink{class_c_h_i_p_queue_abf779db7f06ee6280326b9efa66d1a6f}{finish}} ()=0
 \begin{DoxyCompactList}\small\item\em Wait for this queue to finish. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_c_h_i_p_queue_af3af332cd6734719316001897c16a1bd}{query}} ()
 \begin{DoxyCompactList}\small\item\em Check if the queue is still actively executing. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_c_h_i_p_queue_a5a9491f6087d089c340e2ca33c516691}{get\+Priority\+Range}} (int lower\+\_\+or\+\_\+upper)
 \begin{DoxyCompactList}\small\item\em Get the Priority Range object defining the bounds for hip\+Stream\+Create\+With\+Priority. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_c_h_i_p_queue_a10888a9a6d7b27c2313814ba44698c1e}{enqueue\+Barrier\+For\+Event}} (\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$e)
+virtual void \mbox{\hyperlink{class_c_h_i_p_queue_a168ae9587a5ae954749e6da60bab3966}{enqueue\+Barrier}} (\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$event\+To\+Signal, std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ $>$ $\ast$events\+To\+Wait\+For)=0
 \begin{DoxyCompactList}\small\item\em Insert an event into this queue. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_afff970ca9d24760b07ecdb19f5cd586e}\label{class_c_h_i_p_queue_afff970ca9d24760b07ecdb19f5cd586e}} 
+virtual void {\bfseries enqueue\+Signal} (\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$event\+To\+Signal)=0
+\item 
 unsigned int \mbox{\hyperlink{class_c_h_i_p_queue_a2146ab0b3a8b0adc47bb47dc3f7e28e3}{get\+Flags}} ()
 \begin{DoxyCompactList}\small\item\em Get the Flags object with which this queue was created. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_c_h_i_p_queue_a4572f51ceddd12d262d4a592843e011f}{get\+Priority}} ()
@@ -60,6 +78,17 @@ bool \mbox{\hyperlink{class_c_h_i_p_queue_aa5825bed6d4f82a8b237a6e685a00ee5}{lau
 hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_a9f37eb5092629cac246e560f01b5da67}{launch\+With\+Kernel\+Params}} (dim3 grid, dim3 block, unsigned int shared\+Mem\+Bytes, void $\ast$$\ast$args, \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$kernel)
 \item 
 hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_queue_aa0f64cf2adc1d78d91c8a182b145c566}{launch\+With\+Extra\+Params}} (dim3 grid, dim3 block, unsigned int shared\+Mem\+Bytes, void $\ast$$\ast$extra, \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} $\ast$kernel)
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_aca99c3f4cc131fd99366c4e6f1d015d7}\label{class_c_h_i_p_queue_aca99c3f4cc131fd99366c4e6f1d015d7}} 
+virtual void {\bfseries get\+Backend\+Handles} (unsigned long $\ast$native\+Info, int $\ast$size)=0
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_a8fdd4a4242cd03d04af6832be92fd0c4}\label{class_c_h_i_p_queue_a8fdd4a4242cd03d04af6832be92fd0c4}} 
+\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$ {\bfseries get\+Context} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_queue_a27dd9f3c768ae545f02fb13df697faa4}{Last\+Event}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -78,7 +107,10 @@ unsigned int {\bfseries flags}
 \begin{DoxyCompactList}\small\item\em Device on which this queue will execute. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_queue_adf51de007fa09b5ff2b1a9fb4ebe3341}\label{class_c_h_i_p_queue_adf51de007fa09b5ff2b1a9fb4ebe3341}} 
 \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$ {\bfseries chip\+\_\+context}
-\begin{DoxyCompactList}\small\item\em Context to which device belongs to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Context to which device belongs to. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_queue_a01caa74e3703cf5c142f4f4e55127d00}\label{class_c_h_i_p_queue_a01caa74e3703cf5c142f4f4e55127d00}} 
+\mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEvent\+Monitor}} $\ast$ {\bfseries event\+\_\+monitor} = nullptr
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -161,11 +193,11 @@ true
 
 false 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_queue_a10888a9a6d7b27c2313814ba44698c1e}\label{class_c_h_i_p_queue_a10888a9a6d7b27c2313814ba44698c1e}} 
-\index{CHIPQueue@{CHIPQueue}!enqueueBarrierForEvent@{enqueueBarrierForEvent}}
-\index{enqueueBarrierForEvent@{enqueueBarrierForEvent}!CHIPQueue@{CHIPQueue}}
-\doxysubsubsection{\texorpdfstring{enqueueBarrierForEvent()}{enqueueBarrierForEvent()}}
-{\footnotesize\ttfamily bool CHIPQueue\+::enqueue\+Barrier\+For\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$}]{e }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_c_h_i_p_queue_a168ae9587a5ae954749e6da60bab3966}\label{class_c_h_i_p_queue_a168ae9587a5ae954749e6da60bab3966}} 
+\index{CHIPQueue@{CHIPQueue}!enqueueBarrier@{enqueueBarrier}}
+\index{enqueueBarrier@{enqueueBarrier}!CHIPQueue@{CHIPQueue}}
+\doxysubsubsection{\texorpdfstring{enqueueBarrier()}{enqueueBarrier()}}
+{\footnotesize\ttfamily virtual void CHIPQueue\+::enqueue\+Barrier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$}]{event\+To\+Signal,  }\item[{std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ $>$ $\ast$}]{events\+To\+Wait\+For }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -181,11 +213,15 @@ true
 
 false 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_queue_a7b4d58bc6b0d35eada59ce1a0239da9b}\label{class_c_h_i_p_queue_a7b4d58bc6b0d35eada59ce1a0239da9b}} 
+
+
+Implemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_a00e65d847be32a119bfcaf0efcc9065b}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_a5350a4e73c2150fbbb34c7da5083e7d6}{CHIPQueue\+Open\+CL}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_queue_abf779db7f06ee6280326b9efa66d1a6f}\label{class_c_h_i_p_queue_abf779db7f06ee6280326b9efa66d1a6f}} 
 \index{CHIPQueue@{CHIPQueue}!finish@{finish}}
 \index{finish@{finish}!CHIPQueue@{CHIPQueue}}
 \doxysubsubsection{\texorpdfstring{finish()}{finish()}}
-{\footnotesize\ttfamily void CHIPQueue\+::finish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void CHIPQueue\+::finish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -193,7 +229,7 @@ Wait for this queue to finish.
 
 
 
-Reimplemented in \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_a0421bc2ada82f32a8aebf81eddbce9a1}{CHIPQueue\+Open\+CL}}.
+Implemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_a335e520e008f56e32e9f0cc885b453cf}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_a0421bc2ada82f32a8aebf81eddbce9a1}{CHIPQueue\+Open\+CL}}.
 
 \mbox{\Hypertarget{class_c_h_i_p_queue_a51a3ed46801b642ad48f5d7e71873ba1}\label{class_c_h_i_p_queue_a51a3ed46801b642ad48f5d7e71873ba1}} 
 \index{CHIPQueue@{CHIPQueue}!getDevice@{getDevice}}
@@ -252,11 +288,11 @@ Get the Priority Range object defining the bounds for hip\+Stream\+Create\+With\
 \begin{DoxyReturn}{Returns}
 int bound 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_queue_ab647308242069e21491828b4fea2799c}\label{class_c_h_i_p_queue_ab647308242069e21491828b4fea2799c}} 
+\mbox{\Hypertarget{class_c_h_i_p_queue_ac7b9c53a719655c0cae37479e670e99a}\label{class_c_h_i_p_queue_ac7b9c53a719655c0cae37479e670e99a}} 
 \index{CHIPQueue@{CHIPQueue}!launch@{launch}}
 \index{launch@{launch}!CHIPQueue@{CHIPQueue}}
 \doxysubsubsection{\texorpdfstring{launch()}{launch()}}
-{\footnotesize\ttfamily hip\+Error\+\_\+t CHIPQueue\+::launch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExec\+Item}} $\ast$}]{exec\+\_\+item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual hip\+Error\+\_\+t CHIPQueue\+::launch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExec\+Item}} $\ast$}]{exec\+\_\+item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -272,7 +308,7 @@ hip\+Error\+\_\+t
 \end{DoxyReturn}
 
 
-Reimplemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_aebaaa63d16f0cb190595c34d61690df3}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_a825b6a9ab7bcde9a9479e5cd0c68e517}{CHIPQueue\+Open\+CL}}.
+Implemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_a4d555e9a5ff944e21ab1900f9da6d168}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_a825b6a9ab7bcde9a9479e5cd0c68e517}{CHIPQueue\+Open\+CL}}.
 
 \mbox{\Hypertarget{class_c_h_i_p_queue_aa5825bed6d4f82a8b237a6e685a00ee5}\label{class_c_h_i_p_queue_aa5825bed6d4f82a8b237a6e685a00ee5}} 
 \index{CHIPQueue@{CHIPQueue}!launchHostFunc@{launchHostFunc}}
@@ -346,11 +382,11 @@ hip\+Error\+\_\+t
 \begin{DoxyReturn}{Returns}
 hip\+Error\+\_\+t 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_c_h_i_p_queue_a048fbad716d90dd1932f00da71e32f34}\label{class_c_h_i_p_queue_a048fbad716d90dd1932f00da71e32f34}} 
+\mbox{\Hypertarget{class_c_h_i_p_queue_a764ca839ae19a406e79f8a17807d64f8}\label{class_c_h_i_p_queue_a764ca839ae19a406e79f8a17807d64f8}} 
 \index{CHIPQueue@{CHIPQueue}!memCopy@{memCopy}}
 \index{memCopy@{memCopy}!CHIPQueue@{CHIPQueue}}
 \doxysubsubsection{\texorpdfstring{memCopy()}{memCopy()}}
-{\footnotesize\ttfamily hip\+Error\+\_\+t CHIPQueue\+::mem\+Copy (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual hip\+Error\+\_\+t CHIPQueue\+::mem\+Copy (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -370,13 +406,13 @@ hip\+Error\+\_\+t
 \end{DoxyReturn}
 
 
-Reimplemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_a5a953fc9978aa7a76e69212c338b45d9}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_aca3e19319400c9f130af1bf600b26da3}{CHIPQueue\+Open\+CL}}.
+Implemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_a5a953fc9978aa7a76e69212c338b45d9}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_aca3e19319400c9f130af1bf600b26da3}{CHIPQueue\+Open\+CL}}.
 
-\mbox{\Hypertarget{class_c_h_i_p_queue_a51223f0572a9a67c86851afb722b54dc}\label{class_c_h_i_p_queue_a51223f0572a9a67c86851afb722b54dc}} 
+\mbox{\Hypertarget{class_c_h_i_p_queue_a94257094d35a810506e3163c8b6ebb2d}\label{class_c_h_i_p_queue_a94257094d35a810506e3163c8b6ebb2d}} 
 \index{CHIPQueue@{CHIPQueue}!memCopyAsync@{memCopyAsync}}
 \index{memCopyAsync@{memCopyAsync}!CHIPQueue@{CHIPQueue}}
 \doxysubsubsection{\texorpdfstring{memCopyAsync()}{memCopyAsync()}}
-{\footnotesize\ttfamily hip\+Error\+\_\+t CHIPQueue\+::mem\+Copy\+Async (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual hip\+Error\+\_\+t CHIPQueue\+::mem\+Copy\+Async (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{const void $\ast$}]{src,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -394,6 +430,10 @@ Non-\/blocking memory copy.
 \begin{DoxyReturn}{Returns}
 hip\+Error\+\_\+t 
 \end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_a7e258c5bdff64d5f9d887a4cf5b0c13e}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_a1e361ae58bbae7a10959acc1ec462cea}{CHIPQueue\+Open\+CL}}.
+
 \mbox{\Hypertarget{class_c_h_i_p_queue_aedd41a24c72895ccb0a578e6914184ca}\label{class_c_h_i_p_queue_aedd41a24c72895ccb0a578e6914184ca}} 
 \index{CHIPQueue@{CHIPQueue}!memFill@{memFill}}
 \index{memFill@{memFill}!CHIPQueue@{CHIPQueue}}
@@ -415,11 +455,11 @@ Blocking memset.
 {\em pattern\+\_\+size} & \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_c_h_i_p_queue_a0bc51f0c05a8dc9eabe7679dfb5acb67}\label{class_c_h_i_p_queue_a0bc51f0c05a8dc9eabe7679dfb5acb67}} 
+\mbox{\Hypertarget{class_c_h_i_p_queue_ac173fb5ca3d0ec542ce7a3a735e008f5}\label{class_c_h_i_p_queue_ac173fb5ca3d0ec542ce7a3a735e008f5}} 
 \index{CHIPQueue@{CHIPQueue}!memFillAsync@{memFillAsync}}
 \index{memFillAsync@{memFillAsync}!CHIPQueue@{CHIPQueue}}
 \doxysubsubsection{\texorpdfstring{memFillAsync()}{memFillAsync()}}
-{\footnotesize\ttfamily void CHIPQueue\+::mem\+Fill\+Async (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{size\+\_\+t}]{size,  }\item[{const void $\ast$}]{pattern,  }\item[{size\+\_\+t}]{pattern\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily virtual void CHIPQueue\+::mem\+Fill\+Async (\begin{DoxyParamCaption}\item[{void $\ast$}]{dst,  }\item[{size\+\_\+t}]{size,  }\item[{const void $\ast$}]{pattern,  }\item[{size\+\_\+t}]{pattern\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -436,6 +476,10 @@ Non-\/blocking mem set.
 {\em pattern\+\_\+size} & \\
 \hline
 \end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_c_h_i_p_queue_level0_a58be16b3d102301d682cdbb6605fdeba}{CHIPQueue\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_queue_open_c_l_ae8b194735874d6d483babf47d83ec0cd}{CHIPQueue\+Open\+CL}}.
+
 \mbox{\Hypertarget{class_c_h_i_p_queue_ada089f192fa000cad8cfb0ea886af0f1}\label{class_c_h_i_p_queue_ada089f192fa000cad8cfb0ea886af0f1}} 
 \index{CHIPQueue@{CHIPQueue}!memPrefetch@{memPrefetch}}
 \index{memPrefetch@{memPrefetch}!CHIPQueue@{CHIPQueue}}
@@ -475,7 +519,16 @@ false
 \end{DoxyReturn}
 
 
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_c_h_i_p_queue_a27dd9f3c768ae545f02fb13df697faa4}\label{class_c_h_i_p_queue_a27dd9f3c768ae545f02fb13df697faa4}} 
+\index{CHIPQueue@{CHIPQueue}!LastEvent@{LastEvent}}
+\index{LastEvent@{LastEvent}!CHIPQueue@{CHIPQueue}}
+\doxysubsubsection{\texorpdfstring{LastEvent}{LastEvent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}$\ast$ CHIPQueue\+::\+Last\+Event}
+
+Keep track of what was the last event submitted to this queue. Required for enforcing proper queue syncronization as per HIP/\+CUDA API. 
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
-/\+Users/pvelesko/local/\+HIPxx/src/CHIPBackend.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/CHIPBackend.\+cc\end{DoxyCompactItemize}

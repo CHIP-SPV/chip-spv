@@ -1,0 +1,156 @@
+\hypertarget{class_dwt_haar1_d}{}\doxysection{Dwt\+Haar1D Class Reference}
+\label{class_dwt_haar1_d}\index{DwtHaar1D@{DwtHaar1D}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dwt_haar1_d_af9c3ee76b436742933843472ce45b801}{Dwt\+Haar1D}} ()
+\item 
+\mbox{\Hypertarget{class_dwt_haar1_d_af10603e0f7bd4fbcbc07727c2c107107}\label{class_dwt_haar1_d_af10603e0f7bd4fbcbc07727c2c107107}} 
+long long {\bfseries get\+\_\+time} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_a8fa872a5642763f367f9107dc90b8cc9}{setup\+Dwt\+Haar1D}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_a84d8f8ab728c8ead306e233a0397afa0}{set\+Work\+Group\+Size}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_a44181f19acee69002e69a6fa62125b4d}{setup\+HIP}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_abceb03f610cf47c9e51b135bc98eac89}{run\+Kernels}} ()
+\item 
+void \mbox{\hyperlink{class_dwt_haar1_d_af5848297a97021ffc33e58a3b59ffd53}{print\+Stats}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_ad168e26176956c7a4517be7daf6df8bc}{initialize}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_a926a19557742c86c0f07666de73c82d8}{setup}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_a9bbb5e00bc8a4789d7e7e37875c438cf}{run}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_a029a92ec3ebe3462c78190401ba4a92b}{cleanup}} ()
+\item 
+int \mbox{\hyperlink{class_dwt_haar1_d_a100f2eb5ff7945837be602b63d5cc7e5}{verify\+Results}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}} $\ast$ \mbox{\hyperlink{class_dwt_haar1_d_a227b7c0f0d1cbac7d5a9b461aa960c58}{sample\+Args}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_dwt_haar1_d}{Dwt\+Haar1D}} Class implements One-\/dimensional Haar wavelet decomposition 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_dwt_haar1_d_af9c3ee76b436742933843472ce45b801}\label{class_dwt_haar1_d_af9c3ee76b436742933843472ce45b801}} 
+\index{DwtHaar1D@{DwtHaar1D}!DwtHaar1D@{DwtHaar1D}}
+\index{DwtHaar1D@{DwtHaar1D}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{DwtHaar1D()}{DwtHaar1D()}}
+{\footnotesize\ttfamily Dwt\+Haar1\+D\+::\+Dwt\+Haar1D (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor Initialize member variables 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of sample (string) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dwt_haar1_d_a029a92ec3ebe3462c78190401ba4a92b}\label{class_dwt_haar1_d_a029a92ec3ebe3462c78190401ba4a92b}} 
+\index{DwtHaar1D@{DwtHaar1D}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Cleanup memory allocations \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_ad168e26176956c7a4517be7daf6df8bc}\label{class_dwt_haar1_d_ad168e26176956c7a4517be7daf6df8bc}} 
+\index{DwtHaar1D@{DwtHaar1D}!initialize@{initialize}}
+\index{initialize@{initialize}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Initialize command line parser, add custom options \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_af5848297a97021ffc33e58a3b59ffd53}\label{class_dwt_haar1_d_af5848297a97021ffc33e58a3b59ffd53}} 
+\index{DwtHaar1D@{DwtHaar1D}!printStats@{printStats}}
+\index{printStats@{printStats}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{printStats()}{printStats()}}
+{\footnotesize\ttfamily void Dwt\+Haar1\+D\+::print\+Stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Print sample stats. \mbox{\Hypertarget{class_dwt_haar1_d_a9bbb5e00bc8a4789d7e7e37875c438cf}\label{class_dwt_haar1_d_a9bbb5e00bc8a4789d7e7e37875c438cf}} 
+\index{DwtHaar1D@{DwtHaar1D}!run@{run}}
+\index{run@{run}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Run HIP \mbox{\hyperlink{class_dwt_haar1_d}{Dwt\+Haar1D}} \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_abceb03f610cf47c9e51b135bc98eac89}\label{class_dwt_haar1_d_abceb03f610cf47c9e51b135bc98eac89}} 
+\index{DwtHaar1D@{DwtHaar1D}!runKernels@{runKernels}}
+\index{runKernels@{runKernels}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{runKernels()}{runKernels()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::run\+Kernels (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Set values for kernels\textquotesingle{} arguments, enqueue calls to the kernels on to the command queue, wait till end of kernel execution. Get kernel start and end time if timing is enabled \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_a926a19557742c86c0f07666de73c82d8}\label{class_dwt_haar1_d_a926a19557742c86c0f07666de73c82d8}} 
+\index{DwtHaar1D@{DwtHaar1D}!setup@{setup}}
+\index{setup@{setup}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample, adjust width and height of execution domain, perform all sample setup \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_a8fa872a5642763f367f9107dc90b8cc9}\label{class_dwt_haar1_d_a8fa872a5642763f367f9107dc90b8cc9}} 
+\index{DwtHaar1D@{DwtHaar1D}!setupDwtHaar1D@{setupDwtHaar1D}}
+\index{setupDwtHaar1D@{setupDwtHaar1D}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{setupDwtHaar1D()}{setupDwtHaar1D()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::setup\+Dwt\+Haar1D (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allocate and initialize required host memory with appropriate values \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_a44181f19acee69002e69a6fa62125b4d}\label{class_dwt_haar1_d_a44181f19acee69002e69a6fa62125b4d}} 
+\index{DwtHaar1D@{DwtHaar1D}!setupHIP@{setupHIP}}
+\index{setupHIP@{setupHIP}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{setupHIP()}{setupHIP()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::setup\+HIP (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Override from SDKSample, Generate binary image of given kernel and exit application \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_a84d8f8ab728c8ead306e233a0397afa0}\label{class_dwt_haar1_d_a84d8f8ab728c8ead306e233a0397afa0}} 
+\index{DwtHaar1D@{DwtHaar1D}!setWorkGroupSize@{setWorkGroupSize}}
+\index{setWorkGroupSize@{setWorkGroupSize}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{setWorkGroupSize()}{setWorkGroupSize()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::set\+Work\+Group\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Calculates the value of Work\+Group Size based in global NDRange and kernel properties \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dwt_haar1_d_a100f2eb5ff7945837be602b63d5cc7e5}\label{class_dwt_haar1_d_a100f2eb5ff7945837be602b63d5cc7e5}} 
+\index{DwtHaar1D@{DwtHaar1D}!verifyResults@{verifyResults}}
+\index{verifyResults@{verifyResults}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{verifyResults()}{verifyResults()}}
+{\footnotesize\ttfamily int Dwt\+Haar1\+D\+::verify\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Verify against reference implementation \begin{DoxyReturn}{Returns}
+returns SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE otherwise 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_dwt_haar1_d_a227b7c0f0d1cbac7d5a9b461aa960c58}\label{class_dwt_haar1_d_a227b7c0f0d1cbac7d5a9b461aa960c58}} 
+\index{DwtHaar1D@{DwtHaar1D}!sampleArgs@{sampleArgs}}
+\index{sampleArgs@{sampleArgs}!DwtHaar1D@{DwtHaar1D}}
+\doxysubsubsection{\texorpdfstring{sampleArgs}{sampleArgs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}}$\ast$ Dwt\+Haar1\+D\+::sample\+Args}
+
+HIPCommand argument class 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/dwt\+Haar1\+D/dwt\+Haar1\+D.\+cpp\end{DoxyCompactItemize}

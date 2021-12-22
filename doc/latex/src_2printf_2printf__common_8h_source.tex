@@ -1,0 +1,169 @@
+\hypertarget{src_2printf_2printf__common_8h_source}{}\doxysection{printf\+\_\+common.\+h}
+\label{src_2printf_2printf__common_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/printf/printf\_common.h@{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/printf/printf\_common.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef COMMON\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define COMMON\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <fcntl.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <sys/stat.h>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <io.h>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <error.h>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#if defined(\_WIN32)}}
+\DoxyCodeLine{22 \textcolor{keyword}{class }\mbox{\hyperlink{struct_capture_stream}{CaptureStream}} \{}
+\DoxyCodeLine{23 \textcolor{keyword}{private}:}
+\DoxyCodeLine{24   FILE* stream;}
+\DoxyCodeLine{25   \textcolor{keywordtype}{int} fdPipe[2];}
+\DoxyCodeLine{26   \textcolor{keywordtype}{int} fd;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28   \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} bufferSize = 25 * 1024 * 1024;}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{31   \mbox{\hyperlink{struct_capture_stream}{CaptureStream}}(FILE *original) \{}
+\DoxyCodeLine{32     stream = original;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordflow}{if} (pipe(fdPipe, bufferSize, O\_TEXT) != 0) \{}
+\DoxyCodeLine{35       fprintf(stderr, \textcolor{stringliteral}{"{}pipe(3) failed with error \%d\(\backslash\)n"{}}, errno);}
+\DoxyCodeLine{36       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{37     \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keywordflow}{if} ((fd = dup(fileno(stream))) == -\/1) \{}
+\DoxyCodeLine{40       fprintf(stderr, \textcolor{stringliteral}{"{}dup(1) failed with error \%d\(\backslash\)n"{}}, errno);}
+\DoxyCodeLine{41       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43   \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45   \mbox{\hyperlink{struct_capture_stream}{\string~CaptureStream}}() \{}
+\DoxyCodeLine{46     close(fd);}
+\DoxyCodeLine{47     close(fdPipe[1]);}
+\DoxyCodeLine{48     close(fdPipe[0]);}
+\DoxyCodeLine{49   \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51   \textcolor{keywordtype}{void} Begin() \{}
+\DoxyCodeLine{52     fflush(stream);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keywordflow}{if} (dup2(fdPipe[1], fileno(stream)) == -\/1) \{}
+\DoxyCodeLine{55       fprintf(stderr, \textcolor{stringliteral}{"{}dup2(2) failed with error \%d\(\backslash\)n"{}}, errno);}
+\DoxyCodeLine{56       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     setvbuf(stream, NULL, \_IONBF, 0);}
+\DoxyCodeLine{60   \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62   \textcolor{keywordtype}{void} End() \{}
+\DoxyCodeLine{63     \textcolor{keywordflow}{if} (dup2(fd, fileno(stream)) == -\/1) \{}
+\DoxyCodeLine{64       fprintf(stderr, \textcolor{stringliteral}{"{}dup2(2) failed with error \%d\(\backslash\)n"{}}, errno);}
+\DoxyCodeLine{65       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67   \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69   std::string getData() \{}
+\DoxyCodeLine{70     std::string data;}
+\DoxyCodeLine{71     data.resize(bufferSize);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{keywordtype}{int} numRead = read(fdPipe[0], \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(data.c\_str()), bufferSize);}
+\DoxyCodeLine{74     data[numRead] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     data.resize(strlen(data.c\_str()));}
+\DoxyCodeLine{77     data.shrink\_to\_fit();}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{keywordflow}{return} data;}
+\DoxyCodeLine{80   \}}
+\DoxyCodeLine{81 \};}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{83 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_capture_stream}{CaptureStream}} \{}
+\DoxyCodeLine{84   \textcolor{keywordtype}{int} saved\_fd;}
+\DoxyCodeLine{85   \textcolor{keywordtype}{int} orig\_fd;}
+\DoxyCodeLine{86   \textcolor{keywordtype}{int} temp\_fd;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88   \textcolor{keywordtype}{char} tempname[13] = \textcolor{stringliteral}{"{}mytestXXXXXX"{}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90   \mbox{\hyperlink{struct_capture_stream}{CaptureStream}}(FILE *original) \{}
+\DoxyCodeLine{91     orig\_fd = fileno(original);}
+\DoxyCodeLine{92     saved\_fd = dup(orig\_fd);}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{keywordflow}{if} ((temp\_fd = mkstemp(tempname)) == -\/1) \{}
+\DoxyCodeLine{95       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{96       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98   \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100   \textcolor{keywordtype}{void} Begin() \{}
+\DoxyCodeLine{101     fflush(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{102     \textcolor{keywordflow}{if} (dup2(temp\_fd, orig\_fd) == -\/1) \{}
+\DoxyCodeLine{103       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{104       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106     \textcolor{keywordflow}{if} (close(temp\_fd) != 0) \{}
+\DoxyCodeLine{107       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{108       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{109     \}}
+\DoxyCodeLine{110   \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112   \textcolor{keywordtype}{void} End() \{}
+\DoxyCodeLine{113     fflush(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{114     \textcolor{keywordflow}{if} (dup2(saved\_fd, orig\_fd) == -\/1) \{}
+\DoxyCodeLine{115       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{116       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118     \textcolor{keywordflow}{if} (close(saved\_fd) != 0) \{}
+\DoxyCodeLine{119       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{120       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{121     \}}
+\DoxyCodeLine{122   \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124   std::string getData() \{}
+\DoxyCodeLine{125     std::ifstream tmpFileStream(tempname);}
+\DoxyCodeLine{126     std::stringstream strStream;}
+\DoxyCodeLine{127     strStream << tmpFileStream.rdbuf();}
+\DoxyCodeLine{128     \textcolor{keywordflow}{return} strStream.str();}
+\DoxyCodeLine{129   \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131   \mbox{\hyperlink{struct_capture_stream}{\string~CaptureStream}}() \{}
+\DoxyCodeLine{132     \textcolor{keywordflow}{if} (remove(tempname) != 0) \{}
+\DoxyCodeLine{133       error(0, errno, \textcolor{stringliteral}{"{}Error"{}});}
+\DoxyCodeLine{134       assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{135     \}}
+\DoxyCodeLine{136   \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138   \textcolor{comment}{// Truncate the file up to size if we don't want too long log}}
+\DoxyCodeLine{139   \textcolor{keywordtype}{void} Truncate(\textcolor{keywordtype}{size\_t} size) \{}
+\DoxyCodeLine{140     \textcolor{keyword}{struct }stat sb = \{ 0 \};}
+\DoxyCodeLine{141     \textcolor{keywordflow}{if} (::stat(tempname, \&sb) == -\/1) \{}
+\DoxyCodeLine{142       failed(\textcolor{stringliteral}{"{}failed lstat(\%s) with error: \%s \(\backslash\)n"{}}, tempname, ::strerror(errno));}
+\DoxyCodeLine{143       \textcolor{keywordflow}{return};}
+\DoxyCodeLine{144     \}}
+\DoxyCodeLine{145     \textcolor{keywordflow}{if} (sb.st\_size > size) \{}
+\DoxyCodeLine{146       \textcolor{keywordflow}{if} (::truncate(tempname, \textcolor{keyword}{static\_cast<}off\_t\textcolor{keyword}{>}(size)) == -\/1) \{}
+\DoxyCodeLine{147         failed(\textcolor{stringliteral}{"{}failed truncate(\%s) with error: \%s \(\backslash\)n"{}}, tempname, ::strerror(errno));}
+\DoxyCodeLine{148         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{149       \}}
+\DoxyCodeLine{150     \}}
+\DoxyCodeLine{151   \}}
+\DoxyCodeLine{152 \};}
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#define DECLARE\_DATA()                                                         \(\backslash\)}}
+\DoxyCodeLine{156 \textcolor{preprocessor}{  const char *msg\_short = "{}Carpe diem."{}};                                       \(\backslash\)}
+\DoxyCodeLine{157   const char *msg\_long1 = "{}Lorem ipsum dolor sit amet, consectetur nullam. "{}   \(\backslash\)}
+\DoxyCodeLine{158                           "{}In mollis imperdiet nibh nec ullamcorper."{};         \(\backslash\)}
+\DoxyCodeLine{159   const char *msg\_long2 = "{}Curabitur nec metus sit amet augue vehicula "{}       \(\backslash\)}
+\DoxyCodeLine{160                           "{}ultrices ut id leo. Lorem ipsum dolor sit amet, "{}   \(\backslash\)}
+\DoxyCodeLine{161                           "{}consectetur adipiscing elit amet."{};}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

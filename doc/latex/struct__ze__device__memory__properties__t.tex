@@ -1,0 +1,51 @@
+\hypertarget{struct__ze__device__memory__properties__t}{}\doxysection{\+\_\+ze\+\_\+device\+\_\+memory\+\_\+properties\+\_\+t Struct Reference}
+\label{struct__ze__device__memory__properties__t}\index{\_ze\_device\_memory\_properties\_t@{\_ze\_device\_memory\_properties\_t}}
+
+
+Device local memory properties queried using \+::ze\+Device\+Get\+Memory\+Properties.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__device__memory__properties__t_afbed274d1d73728259357593aa813990}\label{struct__ze__device__memory__properties__t_afbed274d1d73728259357593aa813990}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__memory__properties__t_a2f45d87420d9ce94af2b352bde89d737}\label{struct__ze__device__memory__properties__t_a2f45d87420d9ce94af2b352bde89d737}} 
+void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in,out\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+ze\+\_\+device\+\_\+memory\+\_\+property\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__memory__properties__t_a166453786c2640beb34252a516d3bb03}{flags}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__memory__properties__t_a0a9cc80b8d7f6630cfabc0d1da740cd9}\label{struct__ze__device__memory__properties__t_a0a9cc80b8d7f6630cfabc0d1da740cd9}} 
+uint32\+\_\+t {\bfseries max\+Clock\+Rate}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum clock rate for device memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__memory__properties__t_a653021983b20cb76d6bf73c926053a6c}\label{struct__ze__device__memory__properties__t_a653021983b20cb76d6bf73c926053a6c}} 
+uint32\+\_\+t {\bfseries max\+Bus\+Width}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum bus width between device and memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__memory__properties__t_a7e3a3dfcba0c36b7727d21f0ab3315e5}\label{struct__ze__device__memory__properties__t_a7e3a3dfcba0c36b7727d21f0ab3315e5}} 
+uint64\+\_\+t {\bfseries total\+Size}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Total memory size in bytes that is available to the device. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__memory__properties__t_a40598cd468cc410cbe99604c92f1165e}\label{struct__ze__device__memory__properties__t_a40598cd468cc410cbe99604c92f1165e}} 
+char {\bfseries name} \mbox{[}ZE\+\_\+\+MAX\+\_\+\+DEVICE\+\_\+\+NAME\mbox{]}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Memory name \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Device local memory properties queried using \+::ze\+Device\+Get\+Memory\+Properties. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__device__memory__properties__t_a166453786c2640beb34252a516d3bb03}\label{struct__ze__device__memory__properties__t_a166453786c2640beb34252a516d3bb03}} 
+\index{\_ze\_device\_memory\_properties\_t@{\_ze\_device\_memory\_properties\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_device\_memory\_properties\_t@{\_ze\_device\_memory\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+device\+\_\+memory\+\_\+property\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+memory\+\_\+properties\+\_\+t\+::flags}
+
+\mbox{[}out\mbox{]} 0 (none) or a valid combination of \+::ze\+\_\+device\+\_\+memory\+\_\+property\+\_\+flag\+\_\+t 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

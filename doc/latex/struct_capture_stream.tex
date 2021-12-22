@@ -1,0 +1,53 @@
+\hypertarget{struct_capture_stream}{}\doxysection{Capture\+Stream Struct Reference}
+\label{struct_capture_stream}\index{CaptureStream@{CaptureStream}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a60ea95e07647b77af697f221ff933dd0}\label{struct_capture_stream_a60ea95e07647b77af697f221ff933dd0}} 
+{\bfseries Capture\+Stream} (FILE $\ast$original)
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a1ca78e6a9d4dfcfad445a4dff2612817}\label{struct_capture_stream_a1ca78e6a9d4dfcfad445a4dff2612817}} 
+void {\bfseries restore\+Stream} ()
+\item 
+\mbox{\Hypertarget{struct_capture_stream_aea0e996b4d6666e80cba3bba4db9e742}\label{struct_capture_stream_aea0e996b4d6666e80cba3bba4db9e742}} 
+const char $\ast$ {\bfseries get\+Temp\+Filename} ()
+\item 
+\mbox{\Hypertarget{struct_capture_stream_ad81e37ed296c451074644e49e09c4624}\label{struct_capture_stream_ad81e37ed296c451074644e49e09c4624}} 
+std\+::ifstream {\bfseries get\+Captured\+Data} ()
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a60ea95e07647b77af697f221ff933dd0}\label{struct_capture_stream_a60ea95e07647b77af697f221ff933dd0}} 
+{\bfseries Capture\+Stream} (FILE $\ast$original)
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a53a8cdbba399899daf0d21c84a7cf51c}\label{struct_capture_stream_a53a8cdbba399899daf0d21c84a7cf51c}} 
+void {\bfseries Begin} ()
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a4cfdabd3f2a8fad67d78067b03c65ab0}\label{struct_capture_stream_a4cfdabd3f2a8fad67d78067b03c65ab0}} 
+void {\bfseries End} ()
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a21eaff60ad0e962641a2e84572ddae31}\label{struct_capture_stream_a21eaff60ad0e962641a2e84572ddae31}} 
+std\+::string {\bfseries get\+Data} ()
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a95ebc866c1976897901fc99c0066a00d}\label{struct_capture_stream_a95ebc866c1976897901fc99c0066a00d}} 
+void {\bfseries Truncate} (size\+\_\+t size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a8ec1397befe418f036e8465822cd6513}\label{struct_capture_stream_a8ec1397befe418f036e8465822cd6513}} 
+int {\bfseries saved\+\_\+fd}
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a790dd1ed88f0a1fdb3dfd26f75071dc9}\label{struct_capture_stream_a790dd1ed88f0a1fdb3dfd26f75071dc9}} 
+int {\bfseries orig\+\_\+fd}
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a0a6354d8b09747ae07b6e4cdcfbfedf0}\label{struct_capture_stream_a0a6354d8b09747ae07b6e4cdcfbfedf0}} 
+int {\bfseries temp\+\_\+fd}
+\item 
+\mbox{\Hypertarget{struct_capture_stream_a9a94b89a69af937a7ad0f9a401098f29}\label{struct_capture_stream_a9a94b89a69af937a7ad0f9a401098f29}} 
+char {\bfseries tempname} \mbox{[}13\mbox{]} = \char`\"{}mytest\+XXXXXX\char`\"{}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/catch/stress/printf/printf\+\_\+common.\+h\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/src/printf/printf\+\_\+common.\+h\end{DoxyCompactItemize}

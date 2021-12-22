@@ -1,0 +1,178 @@
+\hypertarget{bin__to__hex_8h_source}{}\doxysection{bin\+\_\+to\+\_\+hex.\+h}
+\label{bin__to__hex_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/bin\_to\_hex.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/bin\_to\_hex.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{//}}
+\DoxyCodeLine{9 \textcolor{comment}{// Support for logging binary data as hex}}
+\DoxyCodeLine{10 \textcolor{comment}{// format flags:}}
+\DoxyCodeLine{11 \textcolor{comment}{// \{:X\} -\/ print in uppercase.}}
+\DoxyCodeLine{12 \textcolor{comment}{// \{:s\} -\/ don't separate each byte with space.}}
+\DoxyCodeLine{13 \textcolor{comment}{// \{:p\} -\/ don't print the position on each line start.}}
+\DoxyCodeLine{14 \textcolor{comment}{// \{:n\} -\/ don't split the output to lines.}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{//}}
+\DoxyCodeLine{17 \textcolor{comment}{// Examples:}}
+\DoxyCodeLine{18 \textcolor{comment}{//}}
+\DoxyCodeLine{19 \textcolor{comment}{// std::vector<char> v(200, 0x0b);}}
+\DoxyCodeLine{20 \textcolor{comment}{// logger-\/>info("{}Some buffer \{\}"{}, spdlog::to\_hex(v));}}
+\DoxyCodeLine{21 \textcolor{comment}{// char buf[128];}}
+\DoxyCodeLine{22 \textcolor{comment}{// logger-\/>info("{}Some buffer \{:X\}"{}, spdlog::to\_hex(std::begin(buf), std::end(buf)));}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{25 \textcolor{keyword}{namespace }details \{}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{template}<\textcolor{keyword}{typename} It>}
+\DoxyCodeLine{28 \textcolor{keyword}{class }\mbox{\hyperlink{classspdlog_1_1details_1_1bytes__range}{bytes\_range}}}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{31     \mbox{\hyperlink{classspdlog_1_1details_1_1bytes__range}{bytes\_range}}(It range\_begin, It range\_end)}
+\DoxyCodeLine{32         : begin\_(range\_begin)}
+\DoxyCodeLine{33         , end\_(range\_end)}
+\DoxyCodeLine{34     \{}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     It begin()\textcolor{keyword}{ const}}
+\DoxyCodeLine{38 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{39         \textcolor{keywordflow}{return} begin\_;}
+\DoxyCodeLine{40     \}}
+\DoxyCodeLine{41     It end()\textcolor{keyword}{ const}}
+\DoxyCodeLine{42 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{43         \textcolor{keywordflow}{return} end\_;}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{private}:}
+\DoxyCodeLine{47     It begin\_, end\_;}
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 \} \textcolor{comment}{// namespace details}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{comment}{// create a bytes\_range that wraps the given container}}
+\DoxyCodeLine{52 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Container>}
+\DoxyCodeLine{53 \textcolor{keyword}{inline} \mbox{\hyperlink{classspdlog_1_1details_1_1bytes__range}{details::bytes\_range<typename Container::const\_iterator>}} to\_hex(\textcolor{keyword}{const} Container \&container)}
+\DoxyCodeLine{54 \{}
+\DoxyCodeLine{55     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(\textcolor{keyword}{typename} Container::value\_type) == 1, \textcolor{stringliteral}{"{}sizeof(Container::value\_type) != 1"{}});}
+\DoxyCodeLine{56     \textcolor{keyword}{using} Iter = \textcolor{keyword}{typename} Container::const\_iterator;}
+\DoxyCodeLine{57     \textcolor{keywordflow}{return} \mbox{\hyperlink{classspdlog_1_1details_1_1bytes__range}{details::bytes\_range<Iter>}}(std::begin(container), std::end(container));}
+\DoxyCodeLine{58 \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{comment}{// create bytes\_range from ranges}}
+\DoxyCodeLine{61 \textcolor{keyword}{template}<\textcolor{keyword}{typename} It>}
+\DoxyCodeLine{62 \textcolor{keyword}{inline} details::bytes\_range<It> to\_hex(\textcolor{keyword}{const} It range\_begin, \textcolor{keyword}{const} It range\_end)}
+\DoxyCodeLine{63 \{}
+\DoxyCodeLine{64     \textcolor{keywordflow}{return} details::bytes\_range<It>(range\_begin, range\_end);}
+\DoxyCodeLine{65 \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \} \textcolor{comment}{// namespace spdlog}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{keyword}{namespace }fmt \{}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{72 \textcolor{keyword}{struct }\mbox{\hyperlink{structformatter}{formatter}}<spdlog::details::bytes\_range<T>>}
+\DoxyCodeLine{73 \{}
+\DoxyCodeLine{74     \textcolor{keyword}{const} std::size\_t line\_size = 100;}
+\DoxyCodeLine{75     \textcolor{keyword}{const} \textcolor{keywordtype}{char} delimiter = \textcolor{charliteral}{' '};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     \textcolor{keywordtype}{bool} put\_newlines = \textcolor{keyword}{true};}
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} put\_delimiters = \textcolor{keyword}{true};}
+\DoxyCodeLine{79     \textcolor{keywordtype}{bool} use\_uppercase = \textcolor{keyword}{false};}
+\DoxyCodeLine{80     \textcolor{keywordtype}{bool} put\_positions = \textcolor{keyword}{true}; \textcolor{comment}{// position on start of each line}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{// parse the format string flags}}
+\DoxyCodeLine{83     \textcolor{keyword}{template}<\textcolor{keyword}{typename} ParseContext>}
+\DoxyCodeLine{84     \textcolor{keyword}{auto} parse(ParseContext \&ctx) -\/> \textcolor{keyword}{decltype}(ctx.begin())}
+\DoxyCodeLine{85     \{}
+\DoxyCodeLine{86         \textcolor{keyword}{auto} it = ctx.begin();}
+\DoxyCodeLine{87         \textcolor{keywordflow}{while} (*it \&\& *it != \textcolor{charliteral}{'\}'})}
+\DoxyCodeLine{88         \{}
+\DoxyCodeLine{89             \textcolor{keywordflow}{switch} (*it)}
+\DoxyCodeLine{90             \{}
+\DoxyCodeLine{91             \textcolor{keywordflow}{case} \textcolor{charliteral}{'X'}:}
+\DoxyCodeLine{92                 use\_uppercase = \textcolor{keyword}{true};}
+\DoxyCodeLine{93                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{94             \textcolor{keywordflow}{case} \textcolor{charliteral}{'s'}:}
+\DoxyCodeLine{95                 put\_delimiters = \textcolor{keyword}{false};}
+\DoxyCodeLine{96                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{97             \textcolor{keywordflow}{case} \textcolor{charliteral}{'p'}:}
+\DoxyCodeLine{98                 put\_positions = \textcolor{keyword}{false};}
+\DoxyCodeLine{99                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{100             \textcolor{keywordflow}{case} \textcolor{charliteral}{'n'}:}
+\DoxyCodeLine{101                 put\_newlines = \textcolor{keyword}{false};}
+\DoxyCodeLine{102                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{103             \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105             ++it;}
+\DoxyCodeLine{106         \}}
+\DoxyCodeLine{107         \textcolor{keywordflow}{return} it;}
+\DoxyCodeLine{108     \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{// format the given bytes range as hex}}
+\DoxyCodeLine{111     \textcolor{keyword}{template}<\textcolor{keyword}{typename} FormatContext, \textcolor{keyword}{typename} Container>}
+\DoxyCodeLine{112     \textcolor{keyword}{auto} format(\textcolor{keyword}{const} \mbox{\hyperlink{classspdlog_1_1details_1_1bytes__range}{spdlog::details::bytes\_range<Container>}} \&the\_range, FormatContext \&ctx) -\/> \textcolor{keyword}{decltype}(ctx.out())}
+\DoxyCodeLine{113     \{}
+\DoxyCodeLine{114         SPDLOG\_CONSTEXPR \textcolor{keyword}{const} \textcolor{keywordtype}{char} *hex\_upper = \textcolor{stringliteral}{"{}0123456789ABCDEF"{}};}
+\DoxyCodeLine{115         SPDLOG\_CONSTEXPR \textcolor{keyword}{const} \textcolor{keywordtype}{char} *hex\_lower = \textcolor{stringliteral}{"{}0123456789abcdef"{}};}
+\DoxyCodeLine{116         \textcolor{keyword}{const} \textcolor{keywordtype}{char} *hex\_chars = use\_uppercase ? hex\_upper : hex\_lower;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         std::size\_t pos = 0;}
+\DoxyCodeLine{119         std::size\_t column = line\_size;}
+\DoxyCodeLine{120         \textcolor{keyword}{auto} inserter = ctx.begin();}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&item : the\_range)}
+\DoxyCodeLine{123         \{}
+\DoxyCodeLine{124             \textcolor{keyword}{auto} ch = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}\textcolor{keyword}{>}(item);}
+\DoxyCodeLine{125             pos++;}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127             \textcolor{keywordflow}{if} (put\_newlines \&\& column >= line\_size)}
+\DoxyCodeLine{128             \{}
+\DoxyCodeLine{129                 column = put\_newline(inserter, pos);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131                 \textcolor{comment}{// put first byte without delimiter in front of it}}
+\DoxyCodeLine{132                 *inserter++ = hex\_chars[(ch >> 4) \& 0x0f];}
+\DoxyCodeLine{133                 *inserter++ = hex\_chars[ch \& 0x0f];}
+\DoxyCodeLine{134                 column += 2;}
+\DoxyCodeLine{135                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{136             \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138             \textcolor{keywordflow}{if} (put\_delimiters)}
+\DoxyCodeLine{139             \{}
+\DoxyCodeLine{140                 *inserter++ = delimiter;}
+\DoxyCodeLine{141                 ++column;}
+\DoxyCodeLine{142             \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144             *inserter++ = hex\_chars[(ch >> 4) \& 0x0f];}
+\DoxyCodeLine{145             *inserter++ = hex\_chars[ch \& 0x0f];}
+\DoxyCodeLine{146             column += 2;}
+\DoxyCodeLine{147         \}}
+\DoxyCodeLine{148         \textcolor{keywordflow}{return} inserter;}
+\DoxyCodeLine{149     \}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{comment}{// put newline(and position header)}}
+\DoxyCodeLine{152     \textcolor{comment}{// return the next column}}
+\DoxyCodeLine{153     \textcolor{keyword}{template}<\textcolor{keyword}{typename} It>}
+\DoxyCodeLine{154     std::size\_t put\_newline(It inserter, std::size\_t pos)}
+\DoxyCodeLine{155     \{}
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{157         *inserter++ = \textcolor{charliteral}{'\(\backslash\)r'};}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{159         *inserter++ = \textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keywordflow}{if} (put\_positions)}
+\DoxyCodeLine{162         \{}
+\DoxyCodeLine{163             fmt::format\_to(inserter, \textcolor{stringliteral}{"{}\{:<04X\}: "{}}, pos -\/ 1);}
+\DoxyCodeLine{164             \textcolor{keywordflow}{return} 7;}
+\DoxyCodeLine{165         \}}
+\DoxyCodeLine{166         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{167         \{}
+\DoxyCodeLine{168             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{169         \}}
+\DoxyCodeLine{170     \}}
+\DoxyCodeLine{171 \};}
+\DoxyCodeLine{172 \} \textcolor{comment}{// namespace fmt}}
+
+\end{DoxyCode}

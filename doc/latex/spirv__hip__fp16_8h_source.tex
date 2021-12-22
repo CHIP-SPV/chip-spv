@@ -1,0 +1,949 @@
+\hypertarget{spirv__hip__fp16_8h_source}{}\doxysection{spirv\+\_\+hip\+\_\+fp16.\+h}
+\label{spirv__hip__fp16_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip\_fp16.h@{/Users/pvelesko/local/CHIP-\/SPV/include/hip/spirv\_hip\_fp16.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright (c) 2015 -\/ present Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{5 \textcolor{comment}{of this software and associated documentation files (the "{}Software"{}), to deal}}
+\DoxyCodeLine{6 \textcolor{comment}{in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{7 \textcolor{comment}{to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{8 \textcolor{comment}{copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{9 \textcolor{comment}{furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{10 \textcolor{comment}{}}
+\DoxyCodeLine{11 \textcolor{comment}{The above copyright notice and this permission notice shall be included in}}
+\DoxyCodeLine{12 \textcolor{comment}{all copies or substantial portions of the Software.}}
+\DoxyCodeLine{13 \textcolor{comment}{}}
+\DoxyCodeLine{14 \textcolor{comment}{THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{15 \textcolor{comment}{IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{16 \textcolor{comment}{FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE}}
+\DoxyCodeLine{17 \textcolor{comment}{AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{18 \textcolor{comment}{LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{19 \textcolor{comment}{OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN}}
+\DoxyCodeLine{20 \textcolor{comment}{THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{*/}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_HIP\_RUNTIME\_H}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#error Include this file after including hip/hip\_runtime.h}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef HIP\_INCLUDE\_HIP\_FP16\_H}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define HIP\_INCLUDE\_HIP\_FP16\_H}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <type\_traits>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#if defined(\_\_clang\_\_)}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#if defined(\_\_HIP\_DEVICE\_COMPILE\_\_)}}
+\DoxyCodeLine{39 \textcolor{keyword}{typedef} \_Float16 \_hip\_f16;}
+\DoxyCodeLine{40 \textcolor{keyword}{typedef} \_Float16 \_hip\_f16\_2 \_\_attribute\_\_((ext\_vector\_type(2)));}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{42 \textcolor{keyword}{typedef} api\_half \_hip\_f16;}
+\DoxyCodeLine{43 \textcolor{keyword}{typedef} api\_half2 \_hip\_f16\_2;}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{struct }\_\_half\_raw \{}
+\DoxyCodeLine{47   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{48     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(\_hip\_f16) == \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}), \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \_hip\_f16 data;}
+\DoxyCodeLine{51     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x;}
+\DoxyCodeLine{52   \};}
+\DoxyCodeLine{53 \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{keyword}{struct }\_\_half2\_raw \{}
+\DoxyCodeLine{56   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{57     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(\_hip\_f16\_2) == \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}[2]), \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \_hip\_f16\_2 data;}
+\DoxyCodeLine{60     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{61       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x;}
+\DoxyCodeLine{62       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} y;}
+\DoxyCodeLine{63     \};}
+\DoxyCodeLine{64   \};}
+\DoxyCodeLine{65 \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#include "{}spirv\_hip\_vector\_types.h"{}}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{keyword}{namespace }std \{}
+\DoxyCodeLine{71 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{72 \textcolor{keyword}{struct }is\_floating\_point<\_hip\_f16> : std::true\_type \{\};}
+\DoxyCodeLine{73 \}  \textcolor{comment}{// namespace std}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} cond, \textcolor{keyword}{typename} T = \textcolor{keywordtype}{void}>}
+\DoxyCodeLine{76 \textcolor{keyword}{using} Enable\_if\_t = \textcolor{keyword}{typename} std::enable\_if<cond, T>::type;}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{comment}{// BEGIN STRUCT \_\_HALF}}
+\DoxyCodeLine{79 \textcolor{keyword}{struct }\_\_half \{}
+\DoxyCodeLine{80  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{81   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{82     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(\_hip\_f16) == \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}), \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \_hip\_f16 data;}
+\DoxyCodeLine{85     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_x;}
+\DoxyCodeLine{86   \};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88  \textcolor{keyword}{public}:}
+\DoxyCodeLine{89   \textcolor{comment}{// CREATORS}}
+\DoxyCodeLine{90   \_\_host\_\_ \_\_device\_\_ \_\_half() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{91   \_\_host\_\_ \_\_device\_\_ \_\_half(\textcolor{keyword}{const} \_\_half\_raw\& x) : data\{x.data\} \{\}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_CONVERSIONS\_\_)}}
+\DoxyCodeLine{93   \_\_host\_\_ \_\_device\_\_ \_\_half(\textcolor{keyword}{decltype}(data) x) : data\{x\} \{\}}
+\DoxyCodeLine{94   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, Enable\_if\_t<std::is\_\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}<T>\{\}>* = \textcolor{keywordtype}{nullptr}>}
+\DoxyCodeLine{95   \_\_host\_\_ \_\_device\_\_ \_\_half(T x) : data\{static\_cast<\_hip\_f16>(x)\} \{\}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{97   \_\_host\_\_ \_\_device\_\_ \_\_half(\textcolor{keyword}{const} \_\_half\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{98   \_\_host\_\_ \_\_device\_\_ \_\_half(\_\_half\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{99   \_\_host\_\_ \_\_device\_\_ \string~\_\_half() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{comment}{// CREATORS -\/ DEVICE ONLY}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_CONVERSIONS\_\_)}}
+\DoxyCodeLine{103   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, Enable\_if\_t<std::is\_\textcolor{keywordtype}{int}egral<T>\{\}>* = \textcolor{keywordtype}{nullptr}>}
+\DoxyCodeLine{104   \_\_device\_\_ \_\_half(T x) : data\{static\_cast<\_hip\_f16>(x)\} \{\}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107   \textcolor{comment}{// MANIPULATORS}}
+\DoxyCodeLine{108   \_\_host\_\_ \_\_device\_\_ \_\_half\& operator=(\textcolor{keyword}{const} \_\_half\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{109   \_\_host\_\_ \_\_device\_\_ \_\_half\& operator=(\_\_half\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{110   \_\_host\_\_ \_\_device\_\_ \_\_half\& operator=(\textcolor{keyword}{const} \_\_half\_raw\& x) \{}
+\DoxyCodeLine{111     data = x.data;}
+\DoxyCodeLine{112     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{113   \}}
+\DoxyCodeLine{114   \_\_host\_\_ \_\_device\_\_ \textcolor{keyword}{volatile} \_\_half\& operator=(\textcolor{keyword}{const} \_\_half\_raw\& x)\textcolor{keyword}{ volatile }\{}
+\DoxyCodeLine{115     data = x.data;}
+\DoxyCodeLine{116     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{117   \}}
+\DoxyCodeLine{118   \textcolor{keyword}{volatile} \_\_half\& operator=(\textcolor{keyword}{const} \textcolor{keyword}{volatile} \_\_half\_raw\& x)\textcolor{keyword}{ volatile }\{}
+\DoxyCodeLine{119     data = x.data;}
+\DoxyCodeLine{120     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{121   \}}
+\DoxyCodeLine{122   \_\_half\& operator=(\_\_half\_raw\&\& x) \{}
+\DoxyCodeLine{123     data = x.data;}
+\DoxyCodeLine{124     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{125   \}}
+\DoxyCodeLine{126   \textcolor{keyword}{volatile} \_\_half\& operator=(\_\_half\_raw\&\& x)\textcolor{keyword}{ volatile }\{}
+\DoxyCodeLine{127     data = x.data;}
+\DoxyCodeLine{128     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{129   \}}
+\DoxyCodeLine{130   \textcolor{keyword}{volatile} \_\_half\& operator=(\textcolor{keyword}{volatile} \_\_half\_raw\&\& x)\textcolor{keyword}{ volatile }\{}
+\DoxyCodeLine{131     data = x.data;}
+\DoxyCodeLine{132     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{133   \}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_CONVERSIONS\_\_)}}
+\DoxyCodeLine{135   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, Enable\_if\_t<std::is\_\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}<T>\{\}>* = \textcolor{keywordtype}{nullptr}>}
+\DoxyCodeLine{136   \_\_host\_\_ \_\_device\_\_ \_\_half\& operator=(T x) \{}
+\DoxyCodeLine{137     data = \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x);}
+\DoxyCodeLine{138     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{139   \}}
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{comment}{// MANIPULATORS -\/ DEVICE ONLY}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_CONVERSIONS\_\_)}}
+\DoxyCodeLine{144   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, Enable\_if\_t<std::is\_\textcolor{keywordtype}{int}egral<T>\{\}>* = \textcolor{keywordtype}{nullptr}>}
+\DoxyCodeLine{145   \_\_device\_\_ \_\_half\& operator=(T x) \{}
+\DoxyCodeLine{146     data = \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x);}
+\DoxyCodeLine{147     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{148   \}}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{152   \_\_device\_\_ \_\_half\& operator+=(\textcolor{keyword}{const} \_\_half\& x) \{}
+\DoxyCodeLine{153     data += x.data;}
+\DoxyCodeLine{154     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{155   \}}
+\DoxyCodeLine{156   \_\_device\_\_ \_\_half\& operator-\/=(\textcolor{keyword}{const} \_\_half\& x) \{}
+\DoxyCodeLine{157     data -\/= x.data;}
+\DoxyCodeLine{158     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{159   \}}
+\DoxyCodeLine{160   \_\_device\_\_ \_\_half\& operator*=(\textcolor{keyword}{const} \_\_half\& x) \{}
+\DoxyCodeLine{161     data *= x.data;}
+\DoxyCodeLine{162     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{163   \}}
+\DoxyCodeLine{164   \_\_device\_\_ \_\_half\& operator/=(\textcolor{keyword}{const} \_\_half\& x) \{}
+\DoxyCodeLine{165     data /= x.data;}
+\DoxyCodeLine{166     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{167   \}}
+\DoxyCodeLine{168   \_\_device\_\_ \_\_half\& operator++() \{}
+\DoxyCodeLine{169     ++data;}
+\DoxyCodeLine{170     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{171   \}}
+\DoxyCodeLine{172   \_\_device\_\_ \_\_half operator++(\textcolor{keywordtype}{int}) \{}
+\DoxyCodeLine{173     \_\_half tmp\{*\textcolor{keyword}{this}\};}
+\DoxyCodeLine{174     ++*\textcolor{keyword}{this};}
+\DoxyCodeLine{175     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{176   \}}
+\DoxyCodeLine{177   \_\_device\_\_ \_\_half\& operator-\/-\/() \{}
+\DoxyCodeLine{178     -\/-\/data;}
+\DoxyCodeLine{179     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{180   \}}
+\DoxyCodeLine{181   \_\_device\_\_ \_\_half operator-\/-\/(\textcolor{keywordtype}{int}) \{}
+\DoxyCodeLine{182     \_\_half tmp\{*\textcolor{keyword}{this}\};}
+\DoxyCodeLine{183     -\/-\/*\textcolor{keyword}{this};}
+\DoxyCodeLine{184     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{185   \}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{comment}{// ACCESSORS}}
+\DoxyCodeLine{189 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_CONVERSIONS\_\_)}}
+\DoxyCodeLine{190   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, Enable\_if\_t<std::is\_\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}<T>\{\} \&\&}
+\DoxyCodeLine{191                                     !std::is\_same<T, \textcolor{keywordtype}{double}>\{\}>* = \textcolor{keywordtype}{nullptr}>}
+\DoxyCodeLine{192   \textcolor{keyword}{operator} T()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{193     \textcolor{keywordflow}{return} data;}
+\DoxyCodeLine{194   \}}
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{196   \_\_host\_\_ \_\_device\_\_ \textcolor{keyword}{operator} \_\_half\_raw()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \_\_half\_raw\{data\}; \}}
+\DoxyCodeLine{197   \_\_host\_\_ \_\_device\_\_ \textcolor{keyword}{operator} \textcolor{keyword}{volatile} \_\_half\_raw()\textcolor{keyword}{ const volatile }\{}
+\DoxyCodeLine{198     \textcolor{keywordflow}{return} \_\_half\_raw\{data\};}
+\DoxyCodeLine{199   \}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201 \textcolor{comment}{// ACCESSORS -\/ DEVICE ONLY}}
+\DoxyCodeLine{202 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_CONVERSIONS\_\_)}}
+\DoxyCodeLine{203   \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, Enable\_if\_t<std::is\_\textcolor{keywordtype}{int}egral<T>\{\}>* = \textcolor{keywordtype}{nullptr}>}
+\DoxyCodeLine{204   \_\_device\_\_ \textcolor{keyword}{operator} T()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{205     \textcolor{keywordflow}{return} data;}
+\DoxyCodeLine{206   \}}
+\DoxyCodeLine{207 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{210   \_\_device\_\_ \_\_half operator+()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{211   \_\_device\_\_ \_\_half operator-\/()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{212     \_\_half tmp\{*\textcolor{keyword}{this}\};}
+\DoxyCodeLine{213     tmp.data = -\/tmp.data;}
+\DoxyCodeLine{214     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{215   \}}
+\DoxyCodeLine{216 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218 \textcolor{comment}{// FRIENDS}}
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{220   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half operator+(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{221     \textcolor{keywordflow}{return} \_\_half\{x\} += y;}
+\DoxyCodeLine{222   \}}
+\DoxyCodeLine{223   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half operator-\/(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{224     \textcolor{keywordflow}{return} \_\_half\{x\} -\/= y;}
+\DoxyCodeLine{225   \}}
+\DoxyCodeLine{226   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half operator*(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{227     \textcolor{keywordflow}{return} \_\_half\{x\} *= y;}
+\DoxyCodeLine{228   \}}
+\DoxyCodeLine{229   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half operator/(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{230     \textcolor{keywordflow}{return} \_\_half\{x\} /= y;}
+\DoxyCodeLine{231   \}}
+\DoxyCodeLine{232   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{233     \textcolor{keywordflow}{return} x.data == y.data;}
+\DoxyCodeLine{234   \}}
+\DoxyCodeLine{235   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{236     \textcolor{keywordflow}{return} !(x == y);}
+\DoxyCodeLine{237   \}}
+\DoxyCodeLine{238   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator<(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{239     \textcolor{keywordflow}{return} x.data < y.data;}
+\DoxyCodeLine{240   \}}
+\DoxyCodeLine{241   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator>(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{242     \textcolor{keywordflow}{return} y.data < x.data;}
+\DoxyCodeLine{243   \}}
+\DoxyCodeLine{244   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator<=(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{245     \textcolor{keywordflow}{return} !(y < x);}
+\DoxyCodeLine{246   \}}
+\DoxyCodeLine{247   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator>=(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y) \{}
+\DoxyCodeLine{248     \textcolor{keywordflow}{return} !(x < y);}
+\DoxyCodeLine{249   \}}
+\DoxyCodeLine{250 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{251 \};}
+\DoxyCodeLine{252 \textcolor{comment}{// END STRUCT \_\_HALF}}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254 \textcolor{comment}{// BEGIN STRUCT \_\_HALF2}}
+\DoxyCodeLine{255 \textcolor{keyword}{struct }\_\_half2 \{}
+\DoxyCodeLine{256  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{257   \textcolor{keyword}{union }\{}
+\DoxyCodeLine{258     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(\_hip\_f16\_2) == \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}[2]), \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260     \_hip\_f16\_2 data;}
+\DoxyCodeLine{261     \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{262       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x;}
+\DoxyCodeLine{263       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} y;}
+\DoxyCodeLine{264     \};}
+\DoxyCodeLine{265   \};}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267  \textcolor{keyword}{public}:}
+\DoxyCodeLine{268   \textcolor{comment}{// CREATORS}}
+\DoxyCodeLine{269   \_\_host\_\_ \_\_device\_\_ \_\_half2() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{270   \_\_host\_\_ \_\_device\_\_ \_\_half2(\textcolor{keyword}{const} \_\_half2\_raw\& x) : data\{x.data\} \{\}}
+\DoxyCodeLine{271   \_\_host\_\_ \_\_device\_\_ \_\_half2(\textcolor{keyword}{decltype}(data) x) : data\{x\} \{\}}
+\DoxyCodeLine{272   \_\_host\_\_ \_\_device\_\_ \_\_half2(\textcolor{keyword}{const} \_\_half\& x, \textcolor{keyword}{const} \_\_half\& y)}
+\DoxyCodeLine{273       : data\{static\_cast<\_\_half\_raw>(x).data, static\_cast<\_\_half\_raw>(y).data\} \{}
+\DoxyCodeLine{274   \}}
+\DoxyCodeLine{275   \_\_host\_\_ \_\_device\_\_ \_\_half2(\textcolor{keyword}{const} \_\_half2\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{276   \_\_host\_\_ \_\_device\_\_ \_\_half2(\_\_half2\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{277   \_\_host\_\_ \_\_device\_\_ \string~\_\_half2() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279   \textcolor{comment}{// MANIPULATORS}}
+\DoxyCodeLine{280   \_\_host\_\_ \_\_device\_\_ \_\_half2\& operator=(\textcolor{keyword}{const} \_\_half2\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{281   \_\_host\_\_ \_\_device\_\_ \_\_half2\& operator=(\_\_half2\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{282   \_\_host\_\_ \_\_device\_\_ \_\_half2\& operator=(\textcolor{keyword}{const} \_\_half2\_raw\& x) \{}
+\DoxyCodeLine{283     data = x.data;}
+\DoxyCodeLine{284     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{285   \}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287 \textcolor{comment}{// MANIPULATORS -\/ DEVICE ONLY}}
+\DoxyCodeLine{288 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{289   \_\_device\_\_ \_\_half2\& operator+=(\textcolor{keyword}{const} \_\_half2\& x) \{}
+\DoxyCodeLine{290     data += x.data;}
+\DoxyCodeLine{291     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{292   \}}
+\DoxyCodeLine{293   \_\_device\_\_ \_\_half2\& operator-\/=(\textcolor{keyword}{const} \_\_half2\& x) \{}
+\DoxyCodeLine{294     data -\/= x.data;}
+\DoxyCodeLine{295     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{296   \}}
+\DoxyCodeLine{297   \_\_device\_\_ \_\_half2\& operator*=(\textcolor{keyword}{const} \_\_half2\& x) \{}
+\DoxyCodeLine{298     data *= x.data;}
+\DoxyCodeLine{299     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{300   \}}
+\DoxyCodeLine{301   \_\_device\_\_ \_\_half2\& operator/=(\textcolor{keyword}{const} \_\_half2\& x) \{}
+\DoxyCodeLine{302     data /= x.data;}
+\DoxyCodeLine{303     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{304   \}}
+\DoxyCodeLine{305   \_\_device\_\_ \_\_half2\& operator++() \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this} += \_hip\_f16\_2\{1, 1\}; \}}
+\DoxyCodeLine{306   \_\_device\_\_ \_\_half2 operator++(\textcolor{keywordtype}{int}) \{}
+\DoxyCodeLine{307     \_\_half2 tmp\{*\textcolor{keyword}{this}\};}
+\DoxyCodeLine{308     ++*\textcolor{keyword}{this};}
+\DoxyCodeLine{309     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{310   \}}
+\DoxyCodeLine{311   \_\_device\_\_ \_\_half2\& operator-\/-\/() \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this} -\/= \_hip\_f16\_2\{1, 1\}; \}}
+\DoxyCodeLine{312   \_\_device\_\_ \_\_half2 operator-\/-\/(\textcolor{keywordtype}{int}) \{}
+\DoxyCodeLine{313     \_\_half2 tmp\{*\textcolor{keyword}{this}\};}
+\DoxyCodeLine{314     -\/-\/*\textcolor{keyword}{this};}
+\DoxyCodeLine{315     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{316   \}}
+\DoxyCodeLine{317 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319   \textcolor{comment}{// ACCESSORS}}
+\DoxyCodeLine{320   \_\_host\_\_ \_\_device\_\_ \textcolor{keyword}{operator} \textcolor{keyword}{decltype}(data)()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} data; \}}
+\DoxyCodeLine{321   \_\_host\_\_ \_\_device\_\_ \textcolor{keyword}{operator} \_\_half2\_raw()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \_\_half2\_raw\{data\}; \}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323 \textcolor{comment}{// ACCESSORS -\/ DEVICE ONLY}}
+\DoxyCodeLine{324 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{325   \_\_device\_\_ \_\_half2 operator+()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{326   \_\_device\_\_ \_\_half2 operator-\/()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{327     \_\_half2 tmp\{*\textcolor{keyword}{this}\};}
+\DoxyCodeLine{328     tmp.data = -\/tmp.data;}
+\DoxyCodeLine{329     \textcolor{keywordflow}{return} tmp;}
+\DoxyCodeLine{330   \}}
+\DoxyCodeLine{331 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{332 }
+\DoxyCodeLine{333 \textcolor{comment}{// FRIENDS}}
+\DoxyCodeLine{334 \textcolor{preprocessor}{\#if !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{335   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 operator+(\textcolor{keyword}{const} \_\_half2\& x,}
+\DoxyCodeLine{336                                              \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{337     \textcolor{keywordflow}{return} \_\_half2\{x\} += y;}
+\DoxyCodeLine{338   \}}
+\DoxyCodeLine{339   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 operator-\/(\textcolor{keyword}{const} \_\_half2\& x,}
+\DoxyCodeLine{340                                              \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{341     \textcolor{keywordflow}{return} \_\_half2\{x\} -\/= y;}
+\DoxyCodeLine{342   \}}
+\DoxyCodeLine{343   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 operator*(\textcolor{keyword}{const} \_\_half2\& x,}
+\DoxyCodeLine{344                                              \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{345     \textcolor{keywordflow}{return} \_\_half2\{x\} *= y;}
+\DoxyCodeLine{346   \}}
+\DoxyCodeLine{347   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 operator/(\textcolor{keyword}{const} \_\_half2\& x,}
+\DoxyCodeLine{348                                              \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{349     \textcolor{keywordflow}{return} \_\_half2\{x\} /= y;}
+\DoxyCodeLine{350   \}}
+\DoxyCodeLine{351   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} \_\_half2\& x, \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{352     \textcolor{keyword}{auto} r = x.data == y.data;}
+\DoxyCodeLine{353     \textcolor{keywordflow}{return} r.x != 0 \&\& r.y != 0;}
+\DoxyCodeLine{354   \}}
+\DoxyCodeLine{355   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} \_\_half2\& x, \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{356     \textcolor{keywordflow}{return} !(x == y);}
+\DoxyCodeLine{357   \}}
+\DoxyCodeLine{358   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator<(\textcolor{keyword}{const} \_\_half2\& x, \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{359     \textcolor{keyword}{auto} r = x.data < y.data;}
+\DoxyCodeLine{360     \textcolor{keywordflow}{return} r.x != 0 \&\& r.y != 0;}
+\DoxyCodeLine{361   \}}
+\DoxyCodeLine{362   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator>(\textcolor{keyword}{const} \_\_half2\& x, \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{363     \textcolor{keywordflow}{return} y < x;}
+\DoxyCodeLine{364   \}}
+\DoxyCodeLine{365   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator<=(\textcolor{keyword}{const} \_\_half2\& x, \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{366     \textcolor{keywordflow}{return} !(y < x);}
+\DoxyCodeLine{367   \}}
+\DoxyCodeLine{368   \textcolor{keyword}{friend} \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} operator>=(\textcolor{keyword}{const} \_\_half2\& x, \textcolor{keyword}{const} \_\_half2\& y) \{}
+\DoxyCodeLine{369     \textcolor{keywordflow}{return} !(x < y);}
+\DoxyCodeLine{370   \}}
+\DoxyCodeLine{371 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// !defined(\_\_HIP\_NO\_HALF\_OPERATORS\_\_)}}
+\DoxyCodeLine{372 \};}
+\DoxyCodeLine{373 \textcolor{comment}{// END STRUCT \_\_HALF2}}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375 \textcolor{keyword}{namespace }\{}
+\DoxyCodeLine{376 \textcolor{keyword}{inline} \_\_host\_\_ \_\_device\_\_ \_\_half2 make\_half2(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{377   \textcolor{keywordflow}{return} \_\_half2\{x, y\};}
+\DoxyCodeLine{378 \}}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_low2half(\_\_half2 x) \{}
+\DoxyCodeLine{381   \textcolor{keywordflow}{return} \_\_half\{\_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.x\}\};}
+\DoxyCodeLine{382 \}}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_high2half(\_\_half2 x) \{}
+\DoxyCodeLine{385   \textcolor{keywordflow}{return} \_\_half\{\_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.y\}\};}
+\DoxyCodeLine{386 \}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_half2half2(\_\_half x) \{ \textcolor{keywordflow}{return} \_\_half2\{x, x\}; \}}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{390 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_halves2half2(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{391   \textcolor{keywordflow}{return} \_\_half2\{x, y\};}
+\DoxyCodeLine{392 \}}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_low2half2(\_\_half2 x) \{}
+\DoxyCodeLine{395   \textcolor{keywordflow}{return} \_\_half2\{\_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.x,}
+\DoxyCodeLine{396                             \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.x\}\};}
+\DoxyCodeLine{397 \}}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_high2half2(\_\_half2 x) \{}
+\DoxyCodeLine{400   \textcolor{keywordflow}{return} \_\_half2\_raw\{\_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.y,}
+\DoxyCodeLine{401                                 \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.y\}\};}
+\DoxyCodeLine{402 \}}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_lows2half2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{405   \textcolor{keywordflow}{return} \_\_half2\_raw\{\_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.x,}
+\DoxyCodeLine{406                                 \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data.x\}\};}
+\DoxyCodeLine{407 \}}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_highs2half2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{410   \textcolor{keywordflow}{return} \_\_half2\_raw\{\_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.y,}
+\DoxyCodeLine{411                                 \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data.y\}\};}
+\DoxyCodeLine{412 \}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_lowhigh2highlow(\_\_half2 x) \{}
+\DoxyCodeLine{415   \textcolor{keywordflow}{return} \_\_half2\_raw\{\_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.y,}
+\DoxyCodeLine{416                                 \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.x\}\};}
+\DoxyCodeLine{417 \}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419 \textcolor{comment}{// Bitcasts}}
+\DoxyCodeLine{420 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{short} \_\_half\_as\_short(\_\_half x) \{}
+\DoxyCodeLine{421   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).x;}
+\DoxyCodeLine{422 \}}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_half\_as\_ushort(\_\_half x) \{}
+\DoxyCodeLine{425   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).x;}
+\DoxyCodeLine{426 \}}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_short\_as\_half(\textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{429   \_\_half\_raw r;}
+\DoxyCodeLine{430   r.x = x;}
+\DoxyCodeLine{431   \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{432 \}}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ushort\_as\_half(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{435   \_\_half\_raw r;}
+\DoxyCodeLine{436   r.x = x;}
+\DoxyCodeLine{437   \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{438 \}}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440 \textcolor{comment}{// TODO: rounding behaviour is not correct.}}
+\DoxyCodeLine{441 \textcolor{comment}{// float -\/> half | half2}}
+\DoxyCodeLine{442 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half \_\_float2half(\textcolor{keywordtype}{float} x) \{}
+\DoxyCodeLine{443   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{444 \}}
+\DoxyCodeLine{445 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half \_\_float2half\_rn(\textcolor{keywordtype}{float} x) \{}
+\DoxyCodeLine{446   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{447 \}}
+\DoxyCodeLine{448 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half \_\_float2half\_rz(\textcolor{keywordtype}{float} x) \{}
+\DoxyCodeLine{449   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{450 \}}
+\DoxyCodeLine{451 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half \_\_float2half\_rd(\textcolor{keywordtype}{float} x) \{}
+\DoxyCodeLine{452   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{453 \}}
+\DoxyCodeLine{454 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half \_\_float2half\_ru(\textcolor{keywordtype}{float} x) \{}
+\DoxyCodeLine{455   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{456 \}}
+\DoxyCodeLine{457 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half2 \_\_float2half2\_rn(\textcolor{keywordtype}{float} x) \{}
+\DoxyCodeLine{458   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{459       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\}\};}
+\DoxyCodeLine{460 \}}
+\DoxyCodeLine{461 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half2 \_\_floats2half2\_rn(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y) \{}
+\DoxyCodeLine{462   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{463       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(y)\}\};}
+\DoxyCodeLine{464 \}}
+\DoxyCodeLine{465 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \_\_half2 \_\_float22half2\_rn(float2 x) \{}
+\DoxyCodeLine{466   \textcolor{keywordflow}{return} \_\_floats2half2\_rn(x.x, x.y);}
+\DoxyCodeLine{467 \}}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469 \textcolor{comment}{// half | half2 -\/> float}}
+\DoxyCodeLine{470 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \textcolor{keywordtype}{float} \_\_half2float(\_\_half x) \{}
+\DoxyCodeLine{471   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{472 \}}
+\DoxyCodeLine{473 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \textcolor{keywordtype}{float} \_\_low2float(\_\_half2 x) \{}
+\DoxyCodeLine{474   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.x;}
+\DoxyCodeLine{475 \}}
+\DoxyCodeLine{476 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ \textcolor{keywordtype}{float} \_\_high2float(\_\_half2 x) \{}
+\DoxyCodeLine{477   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.y;}
+\DoxyCodeLine{478 \}}
+\DoxyCodeLine{479 \textcolor{keyword}{inline} \_\_device\_\_ \_\_host\_\_ float2 \_\_half22float2(\_\_half2 x) \{}
+\DoxyCodeLine{480   \textcolor{keywordflow}{return} make\_float2(\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.x,}
+\DoxyCodeLine{481                      \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data.y);}
+\DoxyCodeLine{482 \}}
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484 \textcolor{comment}{// half -\/> int}}
+\DoxyCodeLine{485 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{int} \_\_half2int\_rn(\_\_half x) \{}
+\DoxyCodeLine{486   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{487 \}}
+\DoxyCodeLine{488 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{int} \_\_half2int\_rz(\_\_half x) \{}
+\DoxyCodeLine{489   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{490 \}}
+\DoxyCodeLine{491 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{int} \_\_half2int\_rd(\_\_half x) \{}
+\DoxyCodeLine{492   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{493 \}}
+\DoxyCodeLine{494 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{int} \_\_half2int\_ru(\_\_half x) \{}
+\DoxyCodeLine{495   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{496 \}}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{498 \textcolor{comment}{// int -\/> half}}
+\DoxyCodeLine{499 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_int2half\_rn(\textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{500   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{501 \}}
+\DoxyCodeLine{502 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_int2half\_rz(\textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{503   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{504 \}}
+\DoxyCodeLine{505 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_int2half\_rd(\textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{506   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{507 \}}
+\DoxyCodeLine{508 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_int2half\_ru(\textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{509   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{510 \}}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512 \textcolor{comment}{// half -\/> short}}
+\DoxyCodeLine{513 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{short} \_\_half2short\_rn(\_\_half x) \{}
+\DoxyCodeLine{514   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{515 \}}
+\DoxyCodeLine{516 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{short} \_\_half2short\_rz(\_\_half x) \{}
+\DoxyCodeLine{517   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{518 \}}
+\DoxyCodeLine{519 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{short} \_\_half2short\_rd(\_\_half x) \{}
+\DoxyCodeLine{520   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{521 \}}
+\DoxyCodeLine{522 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{short} \_\_half2short\_ru(\_\_half x) \{}
+\DoxyCodeLine{523   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{524 \}}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526 \textcolor{comment}{// short -\/> half}}
+\DoxyCodeLine{527 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_short2half\_rn(\textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{528   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{529 \}}
+\DoxyCodeLine{530 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_short2half\_rz(\textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{531   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{532 \}}
+\DoxyCodeLine{533 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_short2half\_rd(\textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{534   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{535 \}}
+\DoxyCodeLine{536 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_short2half\_ru(\textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{537   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{538 \}}
+\DoxyCodeLine{539 }
+\DoxyCodeLine{540 \textcolor{comment}{// half -\/> long long}}
+\DoxyCodeLine{541 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ll\_rn(\_\_half x) \{}
+\DoxyCodeLine{542   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{543 \}}
+\DoxyCodeLine{544 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ll\_rz(\_\_half x) \{}
+\DoxyCodeLine{545   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{546 \}}
+\DoxyCodeLine{547 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ll\_rd(\_\_half x) \{}
+\DoxyCodeLine{548   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{549 \}}
+\DoxyCodeLine{550 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ll\_ru(\_\_half x) \{}
+\DoxyCodeLine{551   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{552 \}}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554 \textcolor{comment}{// long long -\/> half}}
+\DoxyCodeLine{555 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ll2half\_rn(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{556   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{557 \}}
+\DoxyCodeLine{558 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ll2half\_rz(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{559   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{560 \}}
+\DoxyCodeLine{561 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ll2half\_rd(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{562   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{563 \}}
+\DoxyCodeLine{564 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ll2half\_ru(\textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{565   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{566 \}}
+\DoxyCodeLine{567 }
+\DoxyCodeLine{568 \textcolor{comment}{// half -\/> unsigned int}}
+\DoxyCodeLine{569 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \_\_half2uint\_rn(\_\_half x) \{}
+\DoxyCodeLine{570   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{571 \}}
+\DoxyCodeLine{572 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \_\_half2uint\_rz(\_\_half x) \{}
+\DoxyCodeLine{573   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{574 \}}
+\DoxyCodeLine{575 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \_\_half2uint\_rd(\_\_half x) \{}
+\DoxyCodeLine{576   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{577 \}}
+\DoxyCodeLine{578 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \_\_half2uint\_ru(\_\_half x) \{}
+\DoxyCodeLine{579   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{580 \}}
+\DoxyCodeLine{581 }
+\DoxyCodeLine{582 \textcolor{comment}{// unsigned int -\/> half}}
+\DoxyCodeLine{583 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_uint2half\_rn(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{584   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{585 \}}
+\DoxyCodeLine{586 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_uint2half\_rz(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{587   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{588 \}}
+\DoxyCodeLine{589 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_uint2half\_rd(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{590   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{591 \}}
+\DoxyCodeLine{592 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_uint2half\_ru(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} x) \{}
+\DoxyCodeLine{593   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{594 \}}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{596 \textcolor{comment}{// half -\/> unsigned short}}
+\DoxyCodeLine{597 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_half2ushort\_rn(\_\_half x) \{}
+\DoxyCodeLine{598   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{599 \}}
+\DoxyCodeLine{600 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_half2ushort\_rz(\_\_half x) \{}
+\DoxyCodeLine{601   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{602 \}}
+\DoxyCodeLine{603 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_half2ushort\_rd(\_\_half x) \{}
+\DoxyCodeLine{604   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{605 \}}
+\DoxyCodeLine{606 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} \_\_half2ushort\_ru(\_\_half x) \{}
+\DoxyCodeLine{607   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{608 \}}
+\DoxyCodeLine{609 }
+\DoxyCodeLine{610 \textcolor{comment}{// unsigned short -\/> half}}
+\DoxyCodeLine{611 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ushort2half\_rn(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{612   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{613 \}}
+\DoxyCodeLine{614 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ushort2half\_rz(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{615   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{616 \}}
+\DoxyCodeLine{617 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ushort2half\_rd(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{618   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{619 \}}
+\DoxyCodeLine{620 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ushort2half\_ru(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} x) \{}
+\DoxyCodeLine{621   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{622 \}}
+\DoxyCodeLine{623 }
+\DoxyCodeLine{624 \textcolor{comment}{// half -\/> unsigned long long}}
+\DoxyCodeLine{625 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ull\_rn(\_\_half x) \{}
+\DoxyCodeLine{626   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{627 \}}
+\DoxyCodeLine{628 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ull\_rz(\_\_half x) \{}
+\DoxyCodeLine{629   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{630 \}}
+\DoxyCodeLine{631 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ull\_rd(\_\_half x) \{}
+\DoxyCodeLine{632   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{633 \}}
+\DoxyCodeLine{634 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \_\_half2ull\_ru(\_\_half x) \{}
+\DoxyCodeLine{635   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data;}
+\DoxyCodeLine{636 \}}
+\DoxyCodeLine{637 }
+\DoxyCodeLine{638 \textcolor{comment}{// unsigned long long -\/> half}}
+\DoxyCodeLine{639 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ull2half\_rn(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{640   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{641 \}}
+\DoxyCodeLine{642 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ull2half\_rz(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{643   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{644 \}}
+\DoxyCodeLine{645 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ull2half\_rd(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{646   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{647 \}}
+\DoxyCodeLine{648 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ull2half\_ru(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} x) \{}
+\DoxyCodeLine{649   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(x)\};}
+\DoxyCodeLine{650 \}}
+\DoxyCodeLine{651 }
+\DoxyCodeLine{652 \textcolor{comment}{// Load primitives}}
+\DoxyCodeLine{653 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ldg(\textcolor{keyword}{const} \_\_half* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{654 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ldcg(\textcolor{keyword}{const} \_\_half* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{655 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ldca(\textcolor{keyword}{const} \_\_half* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{656 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_ldcs(\textcolor{keyword}{const} \_\_half* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{657 }
+\DoxyCodeLine{658 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_ldg(\textcolor{keyword}{const} \_\_half2* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{659 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_ldcg(\textcolor{keyword}{const} \_\_half2* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{660 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_ldca(\textcolor{keyword}{const} \_\_half2* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{661 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_ldcs(\textcolor{keyword}{const} \_\_half2* ptr) \{ \textcolor{keywordflow}{return} *ptr; \}}
+\DoxyCodeLine{662 }
+\DoxyCodeLine{663 \textcolor{comment}{// Relations}}
+\DoxyCodeLine{664 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_heq(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{665   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data == \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{666 \}}
+\DoxyCodeLine{667 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hne(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{668   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data != \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{669 \}}
+\DoxyCodeLine{670 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hle(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{671   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data <= \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{672 \}}
+\DoxyCodeLine{673 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hge(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{674   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data >= \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{675 \}}
+\DoxyCodeLine{676 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hlt(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{677   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data < \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{678 \}}
+\DoxyCodeLine{679 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hgt(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{680   \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data > \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{681 \}}
+\DoxyCodeLine{682 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hequ(\_\_half x, \_\_half y) \{ \textcolor{keywordflow}{return} \_\_heq(x, y); \}}
+\DoxyCodeLine{683 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hneu(\_\_half x, \_\_half y) \{ \textcolor{keywordflow}{return} \_\_hne(x, y); \}}
+\DoxyCodeLine{684 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hleu(\_\_half x, \_\_half y) \{ \textcolor{keywordflow}{return} \_\_hle(x, y); \}}
+\DoxyCodeLine{685 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hgeu(\_\_half x, \_\_half y) \{ \textcolor{keywordflow}{return} \_\_hge(x, y); \}}
+\DoxyCodeLine{686 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hltu(\_\_half x, \_\_half y) \{ \textcolor{keywordflow}{return} \_\_hlt(x, y); \}}
+\DoxyCodeLine{687 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hgtu(\_\_half x, \_\_half y) \{ \textcolor{keywordflow}{return} \_\_hgt(x, y); \}}
+\DoxyCodeLine{688 }
+\DoxyCodeLine{689 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_heq2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{690   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data == \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{691   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{692       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{693 \}}
+\DoxyCodeLine{694 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hne2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{695   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data != \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{696   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{697       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{698 \}}
+\DoxyCodeLine{699 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hle2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{700   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data <= \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{701   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{702       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{703 \}}
+\DoxyCodeLine{704 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hge2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{705   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data >= \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{706   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{707       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{708 \}}
+\DoxyCodeLine{709 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hlt2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{710   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data < \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{711   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{712       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{713 \}}
+\DoxyCodeLine{714 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hgt2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{715   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data > \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data;}
+\DoxyCodeLine{716   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{717       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{718 \}}
+\DoxyCodeLine{719 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hequ2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_heq2(x, y); \}}
+\DoxyCodeLine{720 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hneu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hne2(x, y); \}}
+\DoxyCodeLine{721 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hleu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hle2(x, y); \}}
+\DoxyCodeLine{722 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hgeu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hge2(x, y); \}}
+\DoxyCodeLine{723 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hltu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hlt2(x, y); \}}
+\DoxyCodeLine{724 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hgtu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hgt2(x, y); \}}
+\DoxyCodeLine{725 }
+\DoxyCodeLine{726 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbeq2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{727   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_heq2(x, y));}
+\DoxyCodeLine{728   \textcolor{keywordflow}{return} r.data.x != 0 \&\& r.data.y != 0;}
+\DoxyCodeLine{729 \}}
+\DoxyCodeLine{730 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbne2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{731   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hne2(x, y));}
+\DoxyCodeLine{732   \textcolor{keywordflow}{return} r.data.x != 0 \&\& r.data.y != 0;}
+\DoxyCodeLine{733 \}}
+\DoxyCodeLine{734 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hble2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{735   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hle2(x, y));}
+\DoxyCodeLine{736   \textcolor{keywordflow}{return} r.data.x != 0 \&\& r.data.y != 0;}
+\DoxyCodeLine{737 \}}
+\DoxyCodeLine{738 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbge2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{739   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hge2(x, y));}
+\DoxyCodeLine{740   \textcolor{keywordflow}{return} r.data.x != 0 \&\& r.data.y != 0;}
+\DoxyCodeLine{741 \}}
+\DoxyCodeLine{742 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hblt2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{743   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hlt2(x, y));}
+\DoxyCodeLine{744   \textcolor{keywordflow}{return} r.data.x != 0 \&\& r.data.y != 0;}
+\DoxyCodeLine{745 \}}
+\DoxyCodeLine{746 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbgt2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{747   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hgt2(x, y));}
+\DoxyCodeLine{748   \textcolor{keywordflow}{return} r.data.x != 0 \&\& r.data.y != 0;}
+\DoxyCodeLine{749 \}}
+\DoxyCodeLine{750 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbequ2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hbeq2(x, y); \}}
+\DoxyCodeLine{751 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbneu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hbne2(x, y); \}}
+\DoxyCodeLine{752 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbleu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hble2(x, y); \}}
+\DoxyCodeLine{753 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbgeu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hbge2(x, y); \}}
+\DoxyCodeLine{754 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbltu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hblt2(x, y); \}}
+\DoxyCodeLine{755 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hbgtu2(\_\_half2 x, \_\_half2 y) \{ \textcolor{keywordflow}{return} \_\_hbgt2(x, y); \}}
+\DoxyCodeLine{756 }
+\DoxyCodeLine{757 \textcolor{comment}{// Arithmetic}}
+\DoxyCodeLine{758 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_clamp\_01(\_\_half x) \{}
+\DoxyCodeLine{759   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x);}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{761   \textcolor{keywordflow}{if} (\_\_hlt(x, \_\_half\_raw\{0\})) \textcolor{keywordflow}{return} \_\_half\_raw\{0\};}
+\DoxyCodeLine{762   \textcolor{keywordflow}{if} (\_\_hlt(\_\_half\_raw\{1\}, x)) \textcolor{keywordflow}{return} \_\_half\_raw\{1\};}
+\DoxyCodeLine{763   \textcolor{keywordflow}{return} r;}
+\DoxyCodeLine{764 \}}
+\DoxyCodeLine{765 }
+\DoxyCodeLine{766 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hadd(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{767   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data +}
+\DoxyCodeLine{768                                           \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data)\};}
+\DoxyCodeLine{769 \}}
+\DoxyCodeLine{770 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hsub(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{771   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data -\/}
+\DoxyCodeLine{772                                           \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data)\};}
+\DoxyCodeLine{773 \}}
+\DoxyCodeLine{774 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hmul(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{775   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data *}
+\DoxyCodeLine{776                                           \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data)\};}
+\DoxyCodeLine{777 \}}
+\DoxyCodeLine{778 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hadd\_sat(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{779   \textcolor{keywordflow}{return} \_\_clamp\_01(\_\_hadd(x, y));}
+\DoxyCodeLine{780 \}}
+\DoxyCodeLine{781 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hsub\_sat(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{782   \textcolor{keywordflow}{return} \_\_clamp\_01(\_\_hsub(x, y));}
+\DoxyCodeLine{783 \}}
+\DoxyCodeLine{784 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hmul\_sat(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{785   \textcolor{keywordflow}{return} \_\_clamp\_01(\_\_hmul(x, y));}
+\DoxyCodeLine{786 \}}
+\DoxyCodeLine{787 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hfma(\_\_half x, \_\_half y, \_\_half z) \{}
+\DoxyCodeLine{788   \textcolor{keywordflow}{return} \_\_half\_raw\{fma\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data,}
+\DoxyCodeLine{789                           \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data,}
+\DoxyCodeLine{790                           \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(z).data)\};}
+\DoxyCodeLine{791 \}}
+\DoxyCodeLine{792 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hfma\_sat(\_\_half x, \_\_half y, \_\_half z) \{}
+\DoxyCodeLine{793   \textcolor{keywordflow}{return} \_\_clamp\_01(\_\_hfma(x, y, z));}
+\DoxyCodeLine{794 \}}
+\DoxyCodeLine{795 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hdiv(\_\_half x, \_\_half y) \{}
+\DoxyCodeLine{796   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data /}
+\DoxyCodeLine{797                                           \textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(y).data)\};}
+\DoxyCodeLine{798 \}}
+\DoxyCodeLine{799 }
+\DoxyCodeLine{800 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hadd2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{801   \textcolor{keywordflow}{return} \_\_half2\_raw\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data +}
+\DoxyCodeLine{802                      \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data\};}
+\DoxyCodeLine{803 \}}
+\DoxyCodeLine{804 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hsub2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{805   \textcolor{keywordflow}{return} \_\_half2\_raw\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data -\/}
+\DoxyCodeLine{806                      \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data\};}
+\DoxyCodeLine{807 \}}
+\DoxyCodeLine{808 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hmul2(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{809   \textcolor{keywordflow}{return} \_\_half2\_raw\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data *}
+\DoxyCodeLine{810                      \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data\};}
+\DoxyCodeLine{811 \}}
+\DoxyCodeLine{812 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hadd2\_sat(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{813   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hadd2(x, y));}
+\DoxyCodeLine{814   \textcolor{keywordflow}{return} \_\_half2\{\_\_clamp\_01(\_\_half\_raw\{r.data.x\}),}
+\DoxyCodeLine{815                  \_\_clamp\_01(\_\_half\_raw\{r.data.y\})\};}
+\DoxyCodeLine{816 \}}
+\DoxyCodeLine{817 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hsub2\_sat(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{818   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hsub2(x, y));}
+\DoxyCodeLine{819   \textcolor{keywordflow}{return} \_\_half2\{\_\_clamp\_01(\_\_half\_raw\{r.data.x\}),}
+\DoxyCodeLine{820                  \_\_clamp\_01(\_\_half\_raw\{r.data.y\})\};}
+\DoxyCodeLine{821 \}}
+\DoxyCodeLine{822 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hmul2\_sat(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{823   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hmul2(x, y));}
+\DoxyCodeLine{824   \textcolor{keywordflow}{return} \_\_half2\{\_\_clamp\_01(\_\_half\_raw\{r.data.x\}),}
+\DoxyCodeLine{825                  \_\_clamp\_01(\_\_half\_raw\{r.data.y\})\};}
+\DoxyCodeLine{826 \}}
+\DoxyCodeLine{827 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hfma2(\_\_half2 x, \_\_half2 y, \_\_half2 z) \{}
+\DoxyCodeLine{828   \textcolor{keywordflow}{return} \_\_half2\_raw\{fma\_2h(x, y, z)\};}
+\DoxyCodeLine{829 \}}
+\DoxyCodeLine{830 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hfma2\_sat(\_\_half2 x, \_\_half2 y, \_\_half2 z) \{}
+\DoxyCodeLine{831   \textcolor{keyword}{auto} r = \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(\_\_hfma2(x, y, z));}
+\DoxyCodeLine{832   \textcolor{keywordflow}{return} \_\_half2\{\_\_clamp\_01(\_\_half\_raw\{r.data.x\}),}
+\DoxyCodeLine{833                  \_\_clamp\_01(\_\_half\_raw\{r.data.y\})\};}
+\DoxyCodeLine{834 \}}
+\DoxyCodeLine{835 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_h2div(\_\_half2 x, \_\_half2 y) \{}
+\DoxyCodeLine{836   \textcolor{keywordflow}{return} \_\_half2\_raw\{\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data /}
+\DoxyCodeLine{837                      \textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(y).data\};}
+\DoxyCodeLine{838 \}}
+\DoxyCodeLine{839 }
+\DoxyCodeLine{840 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half htrunc(\_\_half x) \{}
+\DoxyCodeLine{841   \textcolor{keywordflow}{return} \_\_half\_raw\{trunc\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{842 \}}
+\DoxyCodeLine{843 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hceil(\_\_half x) \{}
+\DoxyCodeLine{844   \textcolor{keywordflow}{return} \_\_half\_raw\{ceil\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{845 \}}
+\DoxyCodeLine{846 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hfloor(\_\_half x) \{}
+\DoxyCodeLine{847   \textcolor{keywordflow}{return} \_\_half\_raw\{floor\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{848 \}}
+\DoxyCodeLine{849 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hrint(\_\_half x) \{}
+\DoxyCodeLine{850   \textcolor{keywordflow}{return} \_\_half\_raw\{rint\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{851 \}}
+\DoxyCodeLine{852 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hsin(\_\_half x) \{}
+\DoxyCodeLine{853   \textcolor{keywordflow}{return} \_\_half\_raw\{sin\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{854 \}}
+\DoxyCodeLine{855 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hcos(\_\_half x) \{}
+\DoxyCodeLine{856   \textcolor{keywordflow}{return} \_\_half\_raw\{cos\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{857 \}}
+\DoxyCodeLine{858 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hexp(\_\_half x) \{}
+\DoxyCodeLine{859   \textcolor{keywordflow}{return} \_\_half\_raw\{exp\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{860 \}}
+\DoxyCodeLine{861 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hexp2(\_\_half x) \{}
+\DoxyCodeLine{862   \textcolor{keywordflow}{return} \_\_half\_raw\{exp2\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{863 \}}
+\DoxyCodeLine{864 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hexp10(\_\_half x) \{}
+\DoxyCodeLine{865   \textcolor{keywordflow}{return} \_\_half\_raw\{exp10\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{866 \}}
+\DoxyCodeLine{867 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hlog2(\_\_half x) \{}
+\DoxyCodeLine{868   \textcolor{keywordflow}{return} \_\_half\_raw\{log2\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{869 \}}
+\DoxyCodeLine{870 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hlog(\_\_half x) \{}
+\DoxyCodeLine{871   \textcolor{keywordflow}{return} \_\_half\_raw\{log\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{872 \}}
+\DoxyCodeLine{873 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hlog10(\_\_half x) \{}
+\DoxyCodeLine{874   \textcolor{keywordflow}{return} \_\_half\_raw\{log10\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{875 \}}
+\DoxyCodeLine{876 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hrcp(\_\_half x) \{}
+\DoxyCodeLine{877   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{comment}{// TODO}}
+\DoxyCodeLine{878                     \textcolor{comment}{// recip\_h(static\_cast<\_\_half\_raw>(x).data)\};}}
+\DoxyCodeLine{879                     log10\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{880 \}}
+\DoxyCodeLine{881 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hrsqrt(\_\_half x) \{}
+\DoxyCodeLine{882   \textcolor{keywordflow}{return} \_\_half\_raw\{rsqrt\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{883 \}}
+\DoxyCodeLine{884 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half hsqrt(\_\_half x) \{}
+\DoxyCodeLine{885   \textcolor{keywordflow}{return} \_\_half\_raw\{sqrt\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{886 \}}
+\DoxyCodeLine{887 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hisinf(\_\_half x) \{}
+\DoxyCodeLine{888   \textcolor{keywordflow}{return} isinf\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data);}
+\DoxyCodeLine{889 \}}
+\DoxyCodeLine{890 \textcolor{keyword}{inline} \_\_device\_\_ \textcolor{keywordtype}{bool} \_\_hisnan(\_\_half x) \{}
+\DoxyCodeLine{891   \textcolor{keywordflow}{return} isnan\_h(\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data);}
+\DoxyCodeLine{892 \}}
+\DoxyCodeLine{893 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half \_\_hneg(\_\_half x) \{}
+\DoxyCodeLine{894   \textcolor{keywordflow}{return} \_\_half\_raw\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(-\/\textcolor{keyword}{static\_cast<}\_\_half\_raw\textcolor{keyword}{>}(x).data)\};}
+\DoxyCodeLine{895 \}}
+\DoxyCodeLine{896 }
+\DoxyCodeLine{897 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2trunc(\_\_half2 x) \{}
+\DoxyCodeLine{898   \textcolor{keywordflow}{return} \_\_half2\_raw\{trunc\_2h(x)\};}
+\DoxyCodeLine{899 \}}
+\DoxyCodeLine{900 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2ceil(\_\_half2 x) \{ \textcolor{keywordflow}{return} \_\_half2\_raw\{ceil\_2h(x)\}; \}}
+\DoxyCodeLine{901 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2floor(\_\_half2 x) \{}
+\DoxyCodeLine{902   \textcolor{keywordflow}{return} \_\_half2\_raw\{floor\_2h(x)\};}
+\DoxyCodeLine{903 \}}
+\DoxyCodeLine{904 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2rint(\_\_half2 x) \{ \textcolor{keywordflow}{return} \_\_half2\_raw\{rint\_2h(x)\}; \}}
+\DoxyCodeLine{905 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2sin(\_\_half2 x) \{ \textcolor{keywordflow}{return} \_\_half2\_raw\{sin\_2h(x)\}; \}}
+\DoxyCodeLine{906 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2cos(\_\_half2 x) \{ \textcolor{keywordflow}{return} \_\_half2\_raw\{cos\_2h(x)\}; \}}
+\DoxyCodeLine{907 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2exp(\_\_half2 x) \{ \textcolor{keywordflow}{return} \_\_half2\_raw\{exp\_2h(x)\}; \}}
+\DoxyCodeLine{908 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2exp2(\_\_half2 x) \{ \textcolor{keywordflow}{return} \_\_half2\_raw\{exp2\_2h(x)\}; \}}
+\DoxyCodeLine{909 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2exp10(\_\_half2 x) \{}
+\DoxyCodeLine{910   \textcolor{keywordflow}{return} \_\_half2\_raw\{exp10\_2h(x)\};}
+\DoxyCodeLine{911 \}}
+\DoxyCodeLine{912 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2log2(\_\_half2 x) \{ \textcolor{keywordflow}{return} \_\_half2\_raw\{log2\_2h(x)\}; \}}
+\DoxyCodeLine{913 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2log(\_\_half2 x) \{ \textcolor{keywordflow}{return} log\_2h(x); \}}
+\DoxyCodeLine{914 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2log10(\_\_half2 x) \{ \textcolor{keywordflow}{return} log10\_2h(x); \}}
+\DoxyCodeLine{915 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2rcp(\_\_half2 x) \{ \textcolor{keywordflow}{return} log10\_2h(x); \}}
+\DoxyCodeLine{916 \textcolor{comment}{// TODO}}
+\DoxyCodeLine{917 \textcolor{comment}{//\_\_half2 h2rcp(\_\_half2 x) \{ return recip\_2h(x); \}}}
+\DoxyCodeLine{918 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2rsqrt(\_\_half2 x) \{ \textcolor{keywordflow}{return} rsqrt\_2h(x); \}}
+\DoxyCodeLine{919 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 h2sqrt(\_\_half2 x) \{ \textcolor{keywordflow}{return} sqrt\_2h(x); \}}
+\DoxyCodeLine{920 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hisinf2(\_\_half2 x) \{}
+\DoxyCodeLine{921   \textcolor{keyword}{auto} r = isinf\_2h(x);}
+\DoxyCodeLine{922   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{923       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{924 \}}
+\DoxyCodeLine{925 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hisnan2(\_\_half2 x) \{}
+\DoxyCodeLine{926   \textcolor{keyword}{auto} r = isnan\_2h(x);}
+\DoxyCodeLine{927   \textcolor{keywordflow}{return} \_\_half2\_raw\{}
+\DoxyCodeLine{928       \_hip\_f16\_2\{\textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.x), \textcolor{keyword}{static\_cast<}\_hip\_f16\textcolor{keyword}{>}(r.y)\}\};}
+\DoxyCodeLine{929 \}}
+\DoxyCodeLine{930 \textcolor{keyword}{inline} \_\_device\_\_ \_\_half2 \_\_hneg2(\_\_half2 x) \{}
+\DoxyCodeLine{931   \textcolor{keywordflow}{return} \_\_half2\_raw\{-\/\textcolor{keyword}{static\_cast<}\_\_half2\_raw\textcolor{keyword}{>}(x).data\};}
+\DoxyCodeLine{932 \}}
+\DoxyCodeLine{933 \}  \textcolor{comment}{// Anonymous namespace.}}
+\DoxyCodeLine{934 }
+\DoxyCodeLine{935 \textcolor{preprocessor}{\#if !defined(HIP\_NO\_HALF)}}
+\DoxyCodeLine{936 \textcolor{keyword}{using} half = \_\_half;}
+\DoxyCodeLine{937 \textcolor{keyword}{using} half2 = \_\_half2;}
+\DoxyCodeLine{938 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{939 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// defined(\_\_cplusplus)}}
+\DoxyCodeLine{940 }
+\DoxyCodeLine{941 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// defined(\_\_clang\_\_)}}
+\DoxyCodeLine{942 }
+\DoxyCodeLine{943 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

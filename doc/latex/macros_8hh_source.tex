@@ -1,33 +1,45 @@
 \hypertarget{macros_8hh_source}{}\doxysection{macros.\+hh}
-\label{macros_8hh_source}\index{/Users/pvelesko/local/HIPxx/src/macros.hh@{/Users/pvelesko/local/HIPxx/src/macros.hh}}
+\label{macros_8hh_source}\index{/Users/pvelesko/local/CHIP-\/SPV/src/macros.hh@{/Users/pvelesko/local/CHIP-\/SPV/src/macros.hh}}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef TEMP\_H}}
-\DoxyCodeLine{2 \textcolor{preprocessor}{\#define TEMP\_H}}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef MACROS\_HH}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define MACROS\_HH}}
 \DoxyCodeLine{3 }
-\DoxyCodeLine{4 \textcolor{preprocessor}{\#define RETURN(x)                  \(\backslash\)}}
-\DoxyCodeLine{5 \textcolor{preprocessor}{  do \{                             \(\backslash\)}}
-\DoxyCodeLine{6 \textcolor{preprocessor}{    hipError\_t err = (x);          \(\backslash\)}}
-\DoxyCodeLine{7 \textcolor{preprocessor}{    Backend-\/>tls\_last\_error = err; \(\backslash\)}}
-\DoxyCodeLine{8 \textcolor{preprocessor}{    return err;                    \(\backslash\)}}
-\DoxyCodeLine{9 \textcolor{preprocessor}{  \} while (0)}}
-\DoxyCodeLine{10 }
-\DoxyCodeLine{11 \textcolor{preprocessor}{\#define ERROR\_IF(cond, err)                                                  \(\backslash\)}}
-\DoxyCodeLine{12 \textcolor{preprocessor}{  if (cond) do \{                                                             \(\backslash\)}}
-\DoxyCodeLine{13 \textcolor{preprocessor}{      logError("{}Error \{\} at \{\}:\{\} code \{\}"{}}, err, \_\_FILE\_\_, \_\_LINE\_\_, \#cond); \(\backslash\)}
-\DoxyCodeLine{14       Backend-\/>tls\_last\_error = err;                                         \(\backslash\)}
-\DoxyCodeLine{15       return err;                                                            \(\backslash\)}
-\DoxyCodeLine{16   \} while (0)}
-\DoxyCodeLine{17 }
-\DoxyCodeLine{18 \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{19 }
-\DoxyCodeLine{20 \textcolor{preprocessor}{\#define ERROR\_CHECK\_DEVNUM(device)                                         \(\backslash\)}}
-\DoxyCodeLine{21 \textcolor{preprocessor}{  ERROR\_IF(((device < 0) || ((size\_t)device >= Backend-\/>getNumDevices())), \(\backslash\)}}
-\DoxyCodeLine{22 \textcolor{preprocessor}{           hipErrorInvalidDevice)}}
-\DoxyCodeLine{23 }
-\DoxyCodeLine{24 \textcolor{preprocessor}{\#define ERROR\_CHECK\_DEVHANDLE(device)                      \(\backslash\)}}
-\DoxyCodeLine{25 \textcolor{preprocessor}{  auto I = std::find(Backend-\/>getDevices().begin(),        \(\backslash\)}}
-\DoxyCodeLine{26 \textcolor{preprocessor}{                     Backend-\/>getDevices().end(), device); \(\backslash\)}}
-\DoxyCodeLine{27 \textcolor{preprocessor}{  ERROR\_IF(I == Backend-\/>getDevices().end(), hipErrorInvalidDevice)}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}logging.hh"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}iostream"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#ifdef CHIP\_ABORT\_ON\_UNIMPL}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define UNIMPLEMENTED(x)                                                       \(\backslash\)}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{  logCritical("{}\{\}: Called a function which is not implemented"{}}, \_\_FUNCTION\_\_); \(\backslash\)}
+\DoxyCodeLine{9   std::abort();}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#define UNIMPLEMENTED(x)                                                   \(\backslash\)}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{  logWarn("{}\{\}: Called a function which is not implemented"{}}, \_\_FUNCTION\_\_); \(\backslash\)}
+\DoxyCodeLine{13   return x;}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define RETURN(x)                  \(\backslash\)}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{  do \{                             \(\backslash\)}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{    hipError\_t err = (x);          \(\backslash\)}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{    Backend-\/>tls\_last\_error = err; \(\backslash\)}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{    return err;                    \(\backslash\)}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{  \} while (0)}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define ERROR\_IF(cond, err)                                                  \(\backslash\)}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{  if (cond) do \{                                                             \(\backslash\)}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{      logError("{}Error \{\} at \{\}:\{\} code \{\}"{}}, err, \_\_FILE\_\_, \_\_LINE\_\_, \#cond); \(\backslash\)}
+\DoxyCodeLine{26       Backend-\/>tls\_last\_error = err;                                         \(\backslash\)}
+\DoxyCodeLine{27       return err;                                                            \(\backslash\)}
+\DoxyCodeLine{28   \} while (0)}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define ERROR\_CHECK\_DEVNUM(device)                                         \(\backslash\)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{  ERROR\_IF(((device < 0) || ((size\_t)device >= Backend-\/>getNumDevices())), \(\backslash\)}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{           hipErrorInvalidDevice)}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define ERROR\_CHECK\_DEVHANDLE(device)                      \(\backslash\)}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{  auto I = std::find(Backend-\/>getDevices().begin(),        \(\backslash\)}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{                     Backend-\/>getDevices().end(), device); \(\backslash\)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{  ERROR\_IF(I == Backend-\/>getDevices().end(), hipErrorInvalidDevice)}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

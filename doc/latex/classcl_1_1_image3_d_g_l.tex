@@ -1,0 +1,89 @@
+\hypertarget{classcl_1_1_image3_d_g_l}{}\doxysection{cl\+::Image3\+DGL Class Reference}
+\label{classcl_1_1_image3_d_g_l}\index{cl::Image3DGL@{cl::Image3DGL}}
+
+
+Class interface for GL 3D \mbox{\hyperlink{classcl_1_1_image}{Image}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} objects.  
+
+
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Image3\+DGL\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.245989cm]{classcl_1_1_image3_d_g_l}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcl_1_1_image3_d_g_l_a887ef5a5f73871e5419d9cd48cb0aae8}{Image3\+DGL}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+mem\+\_\+flags flags, cl\+\_\+\+GLenum target, cl\+\_\+\+GLint miplevel, cl\+\_\+\+GLuint texobj, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs an \mbox{\hyperlink{classcl_1_1_image3_d_g_l}{Image3\+DGL}} in a specified context, from a given GL Texture. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image3_d_g_l_a21a8fd551430095711413e831cd42ddd}\label{classcl_1_1_image3_d_g_l_a21a8fd551430095711413e831cd42ddd}} 
+{\bfseries Image3\+DGL} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS \mbox{\hyperlink{classcl_1_1_image3_d_g_l_a98e053311f1a9a53e393522a825e51cc}{Image3\+DGL}} (const cl\+\_\+mem \&image)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+mem -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_image3_d_g_l}{Image3\+DGL}} \& \mbox{\hyperlink{classcl_1_1_image3_d_g_l_a61af1009d180963022a7107e1ecaf0c7}{operator=}} (const cl\+\_\+mem \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment from cl\+\_\+mem -\/ performs shallow copy. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image3_d_g_l_a547ae772ea5529329b278d8d551518f4}\label{classcl_1_1_image3_d_g_l_a547ae772ea5529329b278d8d551518f4}} 
+{\bfseries Image3\+DGL} (const \mbox{\hyperlink{classcl_1_1_image3_d_g_l}{Image3\+DGL}} \&img)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image3_d_g_l_a039a8f2cab446a5202e6d7081c746033}\label{classcl_1_1_image3_d_g_l_a039a8f2cab446a5202e6d7081c746033}} 
+\mbox{\hyperlink{classcl_1_1_image3_d_g_l}{Image3\+DGL}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_image3_d_g_l}{Image3\+DGL}} \&img)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class interface for GL 3D \mbox{\hyperlink{classcl_1_1_image}{Image}} \mbox{\hyperlink{classcl_1_1_memory}{Memory}} objects. 
+
+This is provided to facilitate interoperability with Open\+GL.
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for details about copy semantics, etc.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classcl_1_1_memory}{Memory}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_image3_d_g_l_a887ef5a5f73871e5419d9cd48cb0aae8}\label{classcl_1_1_image3_d_g_l_a887ef5a5f73871e5419d9cd48cb0aae8}} 
+\index{cl::Image3DGL@{cl::Image3DGL}!Image3DGL@{Image3DGL}}
+\index{Image3DGL@{Image3DGL}!cl::Image3DGL@{cl::Image3DGL}}
+\doxysubsubsection{\texorpdfstring{Image3DGL()}{Image3DGL()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cl\+::\+Image3\+DGL\+::\+Image3\+DGL (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{cl\+\_\+mem\+\_\+flags}]{flags,  }\item[{cl\+\_\+\+GLenum}]{target,  }\item[{cl\+\_\+\+GLint}]{miplevel,  }\item[{cl\+\_\+\+GLuint}]{texobj,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an \mbox{\hyperlink{classcl_1_1_image3_d_g_l}{Image3\+DGL}} in a specified context, from a given GL Texture. 
+
+Wraps cl\+Create\+From\+GLTexture3\+D(). \mbox{\Hypertarget{classcl_1_1_image3_d_g_l_a98e053311f1a9a53e393522a825e51cc}\label{classcl_1_1_image3_d_g_l_a98e053311f1a9a53e393522a825e51cc}} 
+\index{cl::Image3DGL@{cl::Image3DGL}!Image3DGL@{Image3DGL}}
+\index{Image3DGL@{Image3DGL}!cl::Image3DGL@{cl::Image3DGL}}
+\doxysubsubsection{\texorpdfstring{Image3DGL()}{Image3DGL()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS cl\+::\+Image3\+DGL\+::\+Image3\+DGL (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor from cl\+\_\+mem -\/ takes ownership. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_image3_d_g_l_a61af1009d180963022a7107e1ecaf0c7}\label{classcl_1_1_image3_d_g_l_a61af1009d180963022a7107e1ecaf0c7}} 
+\index{cl::Image3DGL@{cl::Image3DGL}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::Image3DGL@{cl::Image3DGL}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_image3_d_g_l}{Image3\+DGL}} \& cl\+::\+Image3\+DGL\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment from cl\+\_\+mem -\/ performs shallow copy. 
+
+See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\end{DoxyCompactItemize}

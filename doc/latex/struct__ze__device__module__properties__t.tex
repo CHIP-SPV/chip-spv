@@ -1,0 +1,85 @@
+\hypertarget{struct__ze__device__module__properties__t}{}\doxysection{\+\_\+ze\+\_\+device\+\_\+module\+\_\+properties\+\_\+t Struct Reference}
+\label{struct__ze__device__module__properties__t}\index{\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}}
+
+
+Device module properties queried using \+::ze\+Device\+Get\+Module\+Properties.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__device__module__properties__t_ac2161b7d70a3ea7bb30487c6bd55147d}\label{struct__ze__device__module__properties__t_ac2161b7d70a3ea7bb30487c6bd55147d}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__device__module__properties__t_a5241936fdaa8df13bf53ab803ad029aa}\label{struct__ze__device__module__properties__t_a5241936fdaa8df13bf53ab803ad029aa}} 
+void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in,out\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{struct__ze__device__module__properties__t_abe34621f93c60c9741fbfadbd6ab3484}{spirv\+Version\+Supported}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__module__properties__t_a529a1a00edcd6e92bd860ef2b7730a21}\label{struct__ze__device__module__properties__t_a529a1a00edcd6e92bd860ef2b7730a21}} 
+ze\+\_\+device\+\_\+module\+\_\+flags\+\_\+t {\bfseries flags}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} 0 or a valid combination of \+::ze\+\_\+device\+\_\+module\+\_\+flag\+\_\+t \end{DoxyCompactList}\item 
+ze\+\_\+device\+\_\+fp\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__module__properties__t_a4e293970c7e6b8e4c81e8e92a2e36775}{fp16flags}}
+\item 
+ze\+\_\+device\+\_\+fp\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__module__properties__t_a2ab9e3f3bcc415fb4e13a3f8d13182f6}{fp32flags}}
+\item 
+ze\+\_\+device\+\_\+fp\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__device__module__properties__t_ad53fb16e97a410d57e48c5c1cc3823e2}{fp64flags}}
+\item 
+\mbox{\Hypertarget{struct__ze__device__module__properties__t_a3ae201a4c753b8ed8671b3d59da7e2b6}\label{struct__ze__device__module__properties__t_a3ae201a4c753b8ed8671b3d59da7e2b6}} 
+uint32\+\_\+t {\bfseries max\+Arguments\+Size}
+\begin{DoxyCompactList}\small\item\em \mbox{[}out\mbox{]} Maximum kernel argument size that is supported. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{struct__ze__device__module__properties__t_a76e1c502bcb31d3f6f84a61958830a88}{printf\+Buffer\+Size}}
+\item 
+\mbox{\hyperlink{struct__ze__native__kernel__uuid__t}{ze\+\_\+native\+\_\+kernel\+\_\+uuid\+\_\+t}} \mbox{\hyperlink{struct__ze__device__module__properties__t_ae1830ffd32f1162d6197bd5fbddde20c}{native\+Kernel\+Supported}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Device module properties queried using \+::ze\+Device\+Get\+Module\+Properties. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__device__module__properties__t_a4e293970c7e6b8e4c81e8e92a2e36775}\label{struct__ze__device__module__properties__t_a4e293970c7e6b8e4c81e8e92a2e36775}} 
+\index{\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}!fp16flags@{fp16flags}}
+\index{fp16flags@{fp16flags}!\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{fp16flags}{fp16flags}}
+{\footnotesize\ttfamily ze\+\_\+device\+\_\+fp\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+module\+\_\+properties\+\_\+t\+::fp16flags}
+
+\mbox{[}out\mbox{]} Capabilities for half-\/precision floating-\/point operations. returns 0 (if \+::\+ZE\+\_\+\+DEVICE\+\_\+\+MODULE\+\_\+\+FLAG\+\_\+\+FP16 is not set) or a combination of \+::ze\+\_\+device\+\_\+fp\+\_\+flag\+\_\+t. \mbox{\Hypertarget{struct__ze__device__module__properties__t_a2ab9e3f3bcc415fb4e13a3f8d13182f6}\label{struct__ze__device__module__properties__t_a2ab9e3f3bcc415fb4e13a3f8d13182f6}} 
+\index{\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}!fp32flags@{fp32flags}}
+\index{fp32flags@{fp32flags}!\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{fp32flags}{fp32flags}}
+{\footnotesize\ttfamily ze\+\_\+device\+\_\+fp\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+module\+\_\+properties\+\_\+t\+::fp32flags}
+
+\mbox{[}out\mbox{]} Capabilities for single-\/precision floating-\/point operations. returns a combination of \+::ze\+\_\+device\+\_\+fp\+\_\+flag\+\_\+t. \mbox{\Hypertarget{struct__ze__device__module__properties__t_ad53fb16e97a410d57e48c5c1cc3823e2}\label{struct__ze__device__module__properties__t_ad53fb16e97a410d57e48c5c1cc3823e2}} 
+\index{\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}!fp64flags@{fp64flags}}
+\index{fp64flags@{fp64flags}!\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{fp64flags}{fp64flags}}
+{\footnotesize\ttfamily ze\+\_\+device\+\_\+fp\+\_\+flags\+\_\+t \+\_\+ze\+\_\+device\+\_\+module\+\_\+properties\+\_\+t\+::fp64flags}
+
+\mbox{[}out\mbox{]} Capabilities for double-\/precision floating-\/point operations. returns 0 (if \+::\+ZE\+\_\+\+DEVICE\+\_\+\+MODULE\+\_\+\+FLAG\+\_\+\+FP64 is not set) or a combination of \+::ze\+\_\+device\+\_\+fp\+\_\+flag\+\_\+t. \mbox{\Hypertarget{struct__ze__device__module__properties__t_ae1830ffd32f1162d6197bd5fbddde20c}\label{struct__ze__device__module__properties__t_ae1830ffd32f1162d6197bd5fbddde20c}} 
+\index{\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}!nativeKernelSupported@{nativeKernelSupported}}
+\index{nativeKernelSupported@{nativeKernelSupported}!\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{nativeKernelSupported}{nativeKernelSupported}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__ze__native__kernel__uuid__t}{ze\+\_\+native\+\_\+kernel\+\_\+uuid\+\_\+t}} \+\_\+ze\+\_\+device\+\_\+module\+\_\+properties\+\_\+t\+::native\+Kernel\+Supported}
+
+\mbox{[}out\mbox{]} Compatibility UUID of supported native kernel. UUID may or may not be the same across driver release, devices, or operating systems. Application is responsible for ensuring UUID matches before creating module using previously created native kernel. \mbox{\Hypertarget{struct__ze__device__module__properties__t_a76e1c502bcb31d3f6f84a61958830a88}\label{struct__ze__device__module__properties__t_a76e1c502bcb31d3f6f84a61958830a88}} 
+\index{\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}!printfBufferSize@{printfBufferSize}}
+\index{printfBufferSize@{printfBufferSize}!\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{printfBufferSize}{printfBufferSize}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+ze\+\_\+device\+\_\+module\+\_\+properties\+\_\+t\+::printf\+Buffer\+Size}
+
+\mbox{[}out\mbox{]} Maximum size of internal buffer that holds output of printf calls from kernel. \mbox{\Hypertarget{struct__ze__device__module__properties__t_abe34621f93c60c9741fbfadbd6ab3484}\label{struct__ze__device__module__properties__t_abe34621f93c60c9741fbfadbd6ab3484}} 
+\index{\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}!spirvVersionSupported@{spirvVersionSupported}}
+\index{spirvVersionSupported@{spirvVersionSupported}!\_ze\_device\_module\_properties\_t@{\_ze\_device\_module\_properties\_t}}
+\doxysubsubsection{\texorpdfstring{spirvVersionSupported}{spirvVersionSupported}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+ze\+\_\+device\+\_\+module\+\_\+properties\+\_\+t\+::spirv\+Version\+Supported}
+
+\mbox{[}out\mbox{]} Maximum supported SPIR-\/V version. Returns zero if SPIR-\/V is not supported. Contains major and minor attributes, use \+::\+ZE\+\_\+\+MAJOR\+\_\+\+VERSION and \+::\+ZE\+\_\+\+MINOR\+\_\+\+VERSION. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

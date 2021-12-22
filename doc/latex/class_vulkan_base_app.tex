@@ -1,0 +1,206 @@
+\hypertarget{class_vulkan_base_app}{}\doxysection{Vulkan\+Base\+App Class Reference}
+\label{class_vulkan_base_app}\index{VulkanBaseApp@{VulkanBaseApp}}
+Inheritance diagram for Vulkan\+Base\+App\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_vulkan_base_app}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a04f1de69b72ba60e047bb8063d79d47c}\label{class_vulkan_base_app_a04f1de69b72ba60e047bb8063d79d47c}} 
+{\bfseries Vulkan\+Base\+App} (const std\+::string \&app\+Name, bool enable\+Validation=false)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_af198c7b725d9e9c22726703736b60310}\label{class_vulkan_base_app_af198c7b725d9e9c22726703736b60310}} 
+void {\bfseries init} ()
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a6fb189d8315544c1c7cbc5efa39eac66}\label{class_vulkan_base_app_a6fb189d8315544c1c7cbc5efa39eac66}} 
+void $\ast$ {\bfseries get\+Mem\+Handle} (Vk\+Device\+Memory memory, Vk\+External\+Memory\+Handle\+Type\+Flag\+Bits handle\+Type)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a2371120c4e6e8db749bfb570d129518a}\label{class_vulkan_base_app_a2371120c4e6e8db749bfb570d129518a}} 
+void $\ast$ {\bfseries get\+Semaphore\+Handle} (Vk\+Semaphore semaphore, Vk\+External\+Semaphore\+Handle\+Type\+Flag\+Bits handle\+Type)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_adc7f7242d17fd82235c99daa17bc9c3e}\label{class_vulkan_base_app_adc7f7242d17fd82235c99daa17bc9c3e}} 
+void {\bfseries create\+External\+Semaphore} (Vk\+Semaphore \&semaphore, Vk\+External\+Semaphore\+Handle\+Type\+Flag\+Bits handle\+Type)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a05f0cb2bd93650cb25eae53f7aa94794}\label{class_vulkan_base_app_a05f0cb2bd93650cb25eae53f7aa94794}} 
+void {\bfseries create\+Buffer} (Vk\+Device\+Size size, Vk\+Buffer\+Usage\+Flags usage, Vk\+Memory\+Property\+Flags properties, Vk\+Buffer \&buffer, Vk\+Device\+Memory \&buffer\+Memory)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a6a15ad4163262b2105fd866878e370c3}\label{class_vulkan_base_app_a6a15ad4163262b2105fd866878e370c3}} 
+void {\bfseries create\+External\+Buffer} (Vk\+Device\+Size size, Vk\+Buffer\+Usage\+Flags usage, Vk\+Memory\+Property\+Flags properties, Vk\+External\+Memory\+Handle\+Type\+Flags\+KHR ext\+Mem\+Handle\+Type, Vk\+Buffer \&buffer, Vk\+Device\+Memory \&buffer\+Memory)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a82cf6105586f6c524b63591d26031b61}\label{class_vulkan_base_app_a82cf6105586f6c524b63591d26031b61}} 
+void {\bfseries import\+External\+Buffer} (void $\ast$handle, Vk\+External\+Memory\+Handle\+Type\+Flag\+Bits handle\+Type, size\+\_\+t size, Vk\+Buffer\+Usage\+Flags usage, Vk\+Memory\+Property\+Flags properties, Vk\+Buffer \&buffer, Vk\+Device\+Memory \&memory)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a4c835a2f7882896977fdf449686bcd22}\label{class_vulkan_base_app_a4c835a2f7882896977fdf449686bcd22}} 
+void {\bfseries copy\+Buffer} (Vk\+Buffer dst, Vk\+Buffer src, Vk\+Device\+Size size)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_af567b5548bd3b58805db045dd42592b5}\label{class_vulkan_base_app_af567b5548bd3b58805db045dd42592b5}} 
+Vk\+Command\+Buffer {\bfseries begin\+Single\+Time\+Commands} ()
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a40f37e80cc3f6faab65abf7ae1a1b987}\label{class_vulkan_base_app_a40f37e80cc3f6faab65abf7ae1a1b987}} 
+void {\bfseries end\+Single\+Time\+Commands} (Vk\+Command\+Buffer command\+Buffer)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a8bc553c0ceb6f2c06304030302b8554f}\label{class_vulkan_base_app_a8bc553c0ceb6f2c06304030302b8554f}} 
+void {\bfseries main\+Loop} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_af5ca9e915df111c4931804d2f3d5cb43}\label{class_vulkan_base_app_af5ca9e915df111c4931804d2f3d5cb43}} 
+static Vk\+External\+Semaphore\+Handle\+Type\+Flag\+Bits {\bfseries get\+Default\+Semaphore\+Handle\+Type} ()
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a69a540d084480a7a5de26fcf39e2ffb8}\label{class_vulkan_base_app_a69a540d084480a7a5de26fcf39e2ffb8}} 
+static Vk\+External\+Memory\+Handle\+Type\+Flag\+Bits {\bfseries get\+Default\+Mem\+Handle\+Type} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a05254c451f7dd03841869321422d3a88}\label{class_vulkan_base_app_a05254c451f7dd03841869321422d3a88}} 
+virtual void {\bfseries init\+Vulkan\+App} ()
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a44e0db2a2a252fda15f9637824af64a3}\label{class_vulkan_base_app_a44e0db2a2a252fda15f9637824af64a3}} 
+virtual void {\bfseries fill\+Rendering\+Command\+Buffer} (Vk\+Command\+Buffer \&buffer)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a6318398dc052c53db4004191214aad44}\label{class_vulkan_base_app_a6318398dc052c53db4004191214aad44}} 
+virtual std\+::vector$<$ const char $\ast$ $>$ {\bfseries get\+Required\+Extensions} () const
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a09b99a6c372605a58b2b21d2e7770170}\label{class_vulkan_base_app_a09b99a6c372605a58b2b21d2e7770170}} 
+virtual std\+::vector$<$ const char $\ast$ $>$ {\bfseries get\+Required\+Device\+Extensions} () const
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a7fd33e17dc922ff67c331640bd5d5390}\label{class_vulkan_base_app_a7fd33e17dc922ff67c331640bd5d5390}} 
+virtual void {\bfseries get\+Vertex\+Descriptions} (std\+::vector$<$ Vk\+Vertex\+Input\+Binding\+Description $>$ \&binding\+Desc, std\+::vector$<$ Vk\+Vertex\+Input\+Attribute\+Description $>$ \&attrib\+Desc)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a0310f615123bbdec07f5a112e10083a6}\label{class_vulkan_base_app_a0310f615123bbdec07f5a112e10083a6}} 
+virtual void {\bfseries get\+Assembly\+State\+Info} (Vk\+Pipeline\+Input\+Assembly\+State\+Create\+Info \&info)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_acebee36be79c48b4e720caf87fb41300}\label{class_vulkan_base_app_acebee36be79c48b4e720caf87fb41300}} 
+virtual void {\bfseries get\+Wait\+Frame\+Semaphores} (std\+::vector$<$ Vk\+Semaphore $>$ \&wait, std\+::vector$<$ Vk\+Pipeline\+Stage\+Flags $>$ \&wait\+Stages) const
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_aad52aacd51d4c5c3cea11b5e6db0d8a1}\label{class_vulkan_base_app_aad52aacd51d4c5c3cea11b5e6db0d8a1}} 
+virtual void {\bfseries get\+Signal\+Frame\+Semaphores} (std\+::vector$<$ Vk\+Semaphore $>$ \&signal) const
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a655b56b760dee39de53c9631c2ad8aea}\label{class_vulkan_base_app_a655b56b760dee39de53c9631c2ad8aea}} 
+virtual Vk\+Device\+Size {\bfseries get\+Uniform\+Size} () const
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a467807f33a07f96e81546d0c840fad69}\label{class_vulkan_base_app_a467807f33a07f96e81546d0c840fad69}} 
+virtual void {\bfseries update\+Uniform\+Buffer} (uint32\+\_\+t image\+Index)
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_ad00ac530af64b43fc031bb537917f099}\label{class_vulkan_base_app_ad00ac530af64b43fc031bb537917f099}} 
+virtual void {\bfseries draw\+Frame} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a998dfe74d6546d7fb763f51dfa9af7a1}\label{class_vulkan_base_app_a998dfe74d6546d7fb763f51dfa9af7a1}} 
+const std\+::string {\bfseries m\+\_\+app\+Name}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a1d7d66e9bc7e40575e1e2f28787c89c1}\label{class_vulkan_base_app_a1d7d66e9bc7e40575e1e2f28787c89c1}} 
+const bool {\bfseries m\+\_\+enable\+Validation}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a0a0d97e82c511249183140030408ae54}\label{class_vulkan_base_app_a0a0d97e82c511249183140030408ae54}} 
+Vk\+Instance {\bfseries m\+\_\+instance}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a05cda746e28339236c171056e3dcd488}\label{class_vulkan_base_app_a05cda746e28339236c171056e3dcd488}} 
+Vk\+Debug\+Utils\+Messenger\+EXT {\bfseries m\+\_\+debug\+Messenger}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a445c93cbb19ca2883c2e943bf4065722}\label{class_vulkan_base_app_a445c93cbb19ca2883c2e943bf4065722}} 
+Vk\+Surface\+KHR {\bfseries m\+\_\+surface}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_ad2feaee84c1b8ec3f53d75000e31391c}\label{class_vulkan_base_app_ad2feaee84c1b8ec3f53d75000e31391c}} 
+Vk\+Physical\+Device {\bfseries m\+\_\+physical\+Device}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a31b79424168878141a68384c0a9cc7f2}\label{class_vulkan_base_app_a31b79424168878141a68384c0a9cc7f2}} 
+Vk\+Device {\bfseries m\+\_\+device}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a235b83bcadc83f0819b06688ba744483}\label{class_vulkan_base_app_a235b83bcadc83f0819b06688ba744483}} 
+Vk\+Queue {\bfseries m\+\_\+graphics\+Queue}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_af0355299e7c61c0d1f3a7054463ac548}\label{class_vulkan_base_app_af0355299e7c61c0d1f3a7054463ac548}} 
+Vk\+Queue {\bfseries m\+\_\+present\+Queue}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a576f0aa69c1c2ba8fb4107e6942ca35f}\label{class_vulkan_base_app_a576f0aa69c1c2ba8fb4107e6942ca35f}} 
+Vk\+Swapchain\+KHR {\bfseries m\+\_\+swap\+Chain}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a276a07a6ec8fc11f4913b65a34adc7ba}\label{class_vulkan_base_app_a276a07a6ec8fc11f4913b65a34adc7ba}} 
+std\+::vector$<$ Vk\+Image $>$ {\bfseries m\+\_\+swap\+Chain\+Images}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_adcbadb398c3013b871e08f96d68a2a25}\label{class_vulkan_base_app_adcbadb398c3013b871e08f96d68a2a25}} 
+Vk\+Format {\bfseries m\+\_\+swap\+Chain\+Format}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_ac7e773e5a96adf09e782dd98a5095b5e}\label{class_vulkan_base_app_ac7e773e5a96adf09e782dd98a5095b5e}} 
+Vk\+Extent2D {\bfseries m\+\_\+swap\+Chain\+Extent}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a5830475205560844078b8d8b3d54f730}\label{class_vulkan_base_app_a5830475205560844078b8d8b3d54f730}} 
+std\+::vector$<$ Vk\+Image\+View $>$ {\bfseries m\+\_\+swap\+Chain\+Image\+Views}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_ab4deb8af32fc3635bb9bedee5d33083a}\label{class_vulkan_base_app_ab4deb8af32fc3635bb9bedee5d33083a}} 
+std\+::vector$<$ std\+::pair$<$ Vk\+Shader\+Stage\+Flag\+Bits, std\+::string $>$ $>$ {\bfseries m\+\_\+shader\+Files}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_aceecfc37f76fd597bbedf1f988e54c41}\label{class_vulkan_base_app_aceecfc37f76fd597bbedf1f988e54c41}} 
+Vk\+Render\+Pass {\bfseries m\+\_\+render\+Pass}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a487f6e77880ef1907f2a491cf2d1914a}\label{class_vulkan_base_app_a487f6e77880ef1907f2a491cf2d1914a}} 
+Vk\+Pipeline\+Layout {\bfseries m\+\_\+pipeline\+Layout}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a5b9589e29e6fa623d212cba8e69fe00f}\label{class_vulkan_base_app_a5b9589e29e6fa623d212cba8e69fe00f}} 
+Vk\+Pipeline {\bfseries m\+\_\+graphics\+Pipeline}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a9dffe70784f31be7ff879ab164573d60}\label{class_vulkan_base_app_a9dffe70784f31be7ff879ab164573d60}} 
+std\+::vector$<$ Vk\+Framebuffer $>$ {\bfseries m\+\_\+swap\+Chain\+Framebuffers}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a1ad23e89cd8511b6b45667fae7fdd474}\label{class_vulkan_base_app_a1ad23e89cd8511b6b45667fae7fdd474}} 
+Vk\+Command\+Pool {\bfseries m\+\_\+command\+Pool}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a5e4f8f8eb22d4bef8ea9f9dd90db3028}\label{class_vulkan_base_app_a5e4f8f8eb22d4bef8ea9f9dd90db3028}} 
+std\+::vector$<$ Vk\+Command\+Buffer $>$ {\bfseries m\+\_\+command\+Buffers}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a155a1253d3a9b5cc6e5d877a8ce807ea}\label{class_vulkan_base_app_a155a1253d3a9b5cc6e5d877a8ce807ea}} 
+std\+::vector$<$ Vk\+Semaphore $>$ {\bfseries m\+\_\+image\+Available\+Semaphores}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_af5044b1b1e0fc74827ee8a9d1039cd0c}\label{class_vulkan_base_app_af5044b1b1e0fc74827ee8a9d1039cd0c}} 
+std\+::vector$<$ Vk\+Semaphore $>$ {\bfseries m\+\_\+render\+Finished\+Semaphores}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_ae44d6e51879e3c9894353c4d3e5cd5ae}\label{class_vulkan_base_app_ae44d6e51879e3c9894353c4d3e5cd5ae}} 
+std\+::vector$<$ Vk\+Fence $>$ {\bfseries m\+\_\+in\+Flight\+Fences}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a944a0096a597b070fd2f8b5a4616af83}\label{class_vulkan_base_app_a944a0096a597b070fd2f8b5a4616af83}} 
+std\+::vector$<$ Vk\+Buffer $>$ {\bfseries m\+\_\+uniform\+Buffers}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a3552f3af54e2c854625dc4887ff15259}\label{class_vulkan_base_app_a3552f3af54e2c854625dc4887ff15259}} 
+std\+::vector$<$ Vk\+Device\+Memory $>$ {\bfseries m\+\_\+uniform\+Memory}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_abb4a585460c2d44f9c7e3cf53a35a9a3}\label{class_vulkan_base_app_abb4a585460c2d44f9c7e3cf53a35a9a3}} 
+Vk\+Descriptor\+Set\+Layout {\bfseries m\+\_\+descriptor\+Set\+Layout}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a539f42976ddcf5f62d7ea0df56fe1bdf}\label{class_vulkan_base_app_a539f42976ddcf5f62d7ea0df56fe1bdf}} 
+Vk\+Descriptor\+Pool {\bfseries m\+\_\+descriptor\+Pool}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a3f9866fa013a50675d460cc9d8dff655}\label{class_vulkan_base_app_a3f9866fa013a50675d460cc9d8dff655}} 
+std\+::vector$<$ Vk\+Descriptor\+Set $>$ {\bfseries m\+\_\+descriptor\+Sets}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a02fbb4aeae5fae624fff9af03f030e6e}\label{class_vulkan_base_app_a02fbb4aeae5fae624fff9af03f030e6e}} 
+Vk\+Image {\bfseries m\+\_\+depth\+Image}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a565fa63ec877bbf7b61da7510c228cf1}\label{class_vulkan_base_app_a565fa63ec877bbf7b61da7510c228cf1}} 
+Vk\+Device\+Memory {\bfseries m\+\_\+depth\+Image\+Memory}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a258108588755e8b5dfade0871905b09b}\label{class_vulkan_base_app_a258108588755e8b5dfade0871905b09b}} 
+Vk\+Image\+View {\bfseries m\+\_\+depth\+Image\+View}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a1943028bb35623b36f05c621323d3fd1}\label{class_vulkan_base_app_a1943028bb35623b36f05c621323d3fd1}} 
+size\+\_\+t {\bfseries m\+\_\+current\+Frame}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a3181712054680273f18f556543c921e8}\label{class_vulkan_base_app_a3181712054680273f18f556543c921e8}} 
+bool {\bfseries m\+\_\+framebuffer\+Resized}
+\item 
+\mbox{\Hypertarget{class_vulkan_base_app_a27d1736d5eb8da1519e71a2a0077687b}\label{class_vulkan_base_app_a27d1736d5eb8da1519e71a2a0077687b}} 
+uint8\+\_\+t {\bfseries m\+\_\+vk\+Device\+UUID} \mbox{[}VK\+\_\+\+UUID\+\_\+\+SIZE\mbox{]}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/samples/2\+\_\+\+Cookbook/20\+\_\+hip\+\_\+vulkan/Vulkan\+Base\+App.\+h\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/samples/2\+\_\+\+Cookbook/20\+\_\+hip\+\_\+vulkan/Vulkan\+Base\+App.\+cpp\end{DoxyCompactItemize}

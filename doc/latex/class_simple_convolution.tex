@@ -1,0 +1,183 @@
+\hypertarget{class_simple_convolution}{}\doxysection{Simple\+Convolution Class Reference}
+\label{class_simple_convolution}\index{SimpleConvolution@{SimpleConvolution}}
+
+
+{\ttfamily \#include $<$Simple\+Convolution.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_simple_convolution_a5a3c0ed48df9018bf12170f554b5129f}{Simple\+Convolution}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_a1ae59c3159f5d312e1261613b80a2c7f}{setup\+Simple\+Convolution}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_a8369046134d20406e54180b6e14b2cea}{set\+Work\+Group\+Size}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_ab26d78beb979f9538dae24fef2fc9d2c}{setup\+HIP}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_a1e88da6336d70cb2769b73dc97442f01}{run\+Kernels}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_aded5de6deaf4e0cf0c904288a009f19d}{run\+Non\+Separable\+Kernels}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_a21d5addc11419b0ed2a04c7ec560f8fd}{run\+Separable\+Kernels}} ()
+\item 
+void \mbox{\hyperlink{class_simple_convolution_a7d0b149f44c35302209879607e415aa7}{CPUReference}} ()
+\item 
+void \mbox{\hyperlink{class_simple_convolution_a313c9e8315019b9efdd33e4bbdbc5fde}{print\+Stats}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_aca5c104f8034096cad8d3c60e2c3b304}{initialize}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_aa3c677d4d56a7faa766472935046ae90}{setup}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_ae16c1a6516a68c7c92884620cce6d0d4}{run}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_af8bd24bf2e51ba496025c7a0144e4a67}{cleanup}} ()
+\item 
+int \mbox{\hyperlink{class_simple_convolution_a6b6b9613bc0a6b0018720224cffc795a}{verify\+Results}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}} $\ast$ \mbox{\hyperlink{class_simple_convolution_a93e53c1d7f6bccca5e35ff2fb5928444}{sample\+Args}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_simple_convolution}{Simple\+Convolution}} Class implements HIP \mbox{\hyperlink{class_simple_convolution}{Simple\+Convolution}} sample 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_simple_convolution_a5a3c0ed48df9018bf12170f554b5129f}\label{class_simple_convolution_a5a3c0ed48df9018bf12170f554b5129f}} 
+\index{SimpleConvolution@{SimpleConvolution}!SimpleConvolution@{SimpleConvolution}}
+\index{SimpleConvolution@{SimpleConvolution}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{SimpleConvolution()}{SimpleConvolution()}}
+{\footnotesize\ttfamily Simple\+Convolution\+::\+Simple\+Convolution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor Initialize member variables 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_simple_convolution_af8bd24bf2e51ba496025c7a0144e4a67}\label{class_simple_convolution_af8bd24bf2e51ba496025c7a0144e4a67}} 
+\index{SimpleConvolution@{SimpleConvolution}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Cleanup memory allocations \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_a7d0b149f44c35302209879607e415aa7}\label{class_simple_convolution_a7d0b149f44c35302209879607e415aa7}} 
+\index{SimpleConvolution@{SimpleConvolution}!CPUReference@{CPUReference}}
+\index{CPUReference@{CPUReference}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{CPUReference()}{CPUReference()}}
+{\footnotesize\ttfamily void Simple\+Convolution\+::\+CPUReference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Reference CPU implementation of Simple Convolution for performance comparison \mbox{\Hypertarget{class_simple_convolution_aca5c104f8034096cad8d3c60e2c3b304}\label{class_simple_convolution_aca5c104f8034096cad8d3c60e2c3b304}} 
+\index{SimpleConvolution@{SimpleConvolution}!initialize@{initialize}}
+\index{initialize@{initialize}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Initialize command line parser, add custom options \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_a313c9e8315019b9efdd33e4bbdbc5fde}\label{class_simple_convolution_a313c9e8315019b9efdd33e4bbdbc5fde}} 
+\index{SimpleConvolution@{SimpleConvolution}!printStats@{printStats}}
+\index{printStats@{printStats}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{printStats()}{printStats()}}
+{\footnotesize\ttfamily void Simple\+Convolution\+::print\+Stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Print sample stats. \mbox{\Hypertarget{class_simple_convolution_ae16c1a6516a68c7c92884620cce6d0d4}\label{class_simple_convolution_ae16c1a6516a68c7c92884620cce6d0d4}} 
+\index{SimpleConvolution@{SimpleConvolution}!run@{run}}
+\index{run@{run}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Run HIP \mbox{\hyperlink{class_simple_convolution}{Simple\+Convolution}} kernel \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_a1e88da6336d70cb2769b73dc97442f01}\label{class_simple_convolution_a1e88da6336d70cb2769b73dc97442f01}} 
+\index{SimpleConvolution@{SimpleConvolution}!runKernels@{runKernels}}
+\index{runKernels@{runKernels}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{runKernels()}{runKernels()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::run\+Kernels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Call both non-\/separable and separable HIP implementation of Convolution \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_aded5de6deaf4e0cf0c904288a009f19d}\label{class_simple_convolution_aded5de6deaf4e0cf0c904288a009f19d}} 
+\index{SimpleConvolution@{SimpleConvolution}!runNonSeparableKernels@{runNonSeparableKernels}}
+\index{runNonSeparableKernels@{runNonSeparableKernels}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{runNonSeparableKernels()}{runNonSeparableKernels()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::run\+Non\+Separable\+Kernels (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Set values for Non-\/\+Separable kernels\textquotesingle{} arguments, enqueue calls to the kernels on to the command queue, wait till end of kernel execution. Get kernel start and end time if timing is enabled \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_a21d5addc11419b0ed2a04c7ec560f8fd}\label{class_simple_convolution_a21d5addc11419b0ed2a04c7ec560f8fd}} 
+\index{SimpleConvolution@{SimpleConvolution}!runSeparableKernels@{runSeparableKernels}}
+\index{runSeparableKernels@{runSeparableKernels}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{runSeparableKernels()}{runSeparableKernels()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::run\+Separable\+Kernels (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Set values for Separable kernels\textquotesingle{} arguments, enqueue calls to the kernels on to the command queue, wait till end of kernel execution. Get kernel start and end time if timing is enabled \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_aa3c677d4d56a7faa766472935046ae90}\label{class_simple_convolution_aa3c677d4d56a7faa766472935046ae90}} 
+\index{SimpleConvolution@{SimpleConvolution}!setup@{setup}}
+\index{setup@{setup}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample, adjust width and height of execution domain, perform all sample setup \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_ab26d78beb979f9538dae24fef2fc9d2c}\label{class_simple_convolution_ab26d78beb979f9538dae24fef2fc9d2c}} 
+\index{SimpleConvolution@{SimpleConvolution}!setupHIP@{setupHIP}}
+\index{setupHIP@{setupHIP}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{setupHIP()}{setupHIP()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::setup\+HIP (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+HIP related initialisations. Set up Context, Device list, \mbox{\hyperlink{class_command}{Command}} Queue, Memory buffers Build kernel program executable \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_a1ae59c3159f5d312e1261613b80a2c7f}\label{class_simple_convolution_a1ae59c3159f5d312e1261613b80a2c7f}} 
+\index{SimpleConvolution@{SimpleConvolution}!setupSimpleConvolution@{setupSimpleConvolution}}
+\index{setupSimpleConvolution@{setupSimpleConvolution}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{setupSimpleConvolution()}{setupSimpleConvolution()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::setup\+Simple\+Convolution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allocate and initialize host memory array with random values \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_a8369046134d20406e54180b6e14b2cea}\label{class_simple_convolution_a8369046134d20406e54180b6e14b2cea}} 
+\index{SimpleConvolution@{SimpleConvolution}!setWorkGroupSize@{setWorkGroupSize}}
+\index{setWorkGroupSize@{setWorkGroupSize}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{setWorkGroupSize()}{setWorkGroupSize()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::set\+Work\+Group\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Calculates the value of Work\+Group Size based in global NDRange and kernel properties \begin{DoxyReturn}{Returns}
+0 on success and nonzero on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_simple_convolution_a6b6b9613bc0a6b0018720224cffc795a}\label{class_simple_convolution_a6b6b9613bc0a6b0018720224cffc795a}} 
+\index{SimpleConvolution@{SimpleConvolution}!verifyResults@{verifyResults}}
+\index{verifyResults@{verifyResults}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{verifyResults()}{verifyResults()}}
+{\footnotesize\ttfamily int Simple\+Convolution\+::verify\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Verify against reference implementation \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE0 on failure 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_simple_convolution_a93e53c1d7f6bccca5e35ff2fb5928444}\label{class_simple_convolution_a93e53c1d7f6bccca5e35ff2fb5928444}} 
+\index{SimpleConvolution@{SimpleConvolution}!sampleArgs@{sampleArgs}}
+\index{sampleArgs@{sampleArgs}!SimpleConvolution@{SimpleConvolution}}
+\doxysubsubsection{\texorpdfstring{sampleArgs}{sampleArgs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}}$\ast$ Simple\+Convolution\+::sample\+Args}
+
+HIPCommand argument class 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/\+Simple\+Convolution/Simple\+Convolution.\+hpp\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/\+Simple\+Convolution/Simple\+Convolution.\+cpp\end{DoxyCompactItemize}

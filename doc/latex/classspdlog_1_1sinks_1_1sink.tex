@@ -1,0 +1,49 @@
+\hypertarget{classspdlog_1_1sinks_1_1sink}{}\doxysection{spdlog\+::sinks\+::sink Class Reference}
+\label{classspdlog_1_1sinks_1_1sink}\index{spdlog::sinks::sink@{spdlog::sinks::sink}}
+Inheritance diagram for spdlog\+::sinks\+::sink\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.825137cm]{classspdlog_1_1sinks_1_1sink}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_a8523cd526092feffd549cf7a8b5f38fe}\label{classspdlog_1_1sinks_1_1sink_a8523cd526092feffd549cf7a8b5f38fe}} 
+{\bfseries sink} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1pattern__formatter}{spdlog\+::pattern\+\_\+formatter}} $>$ \mbox{\hyperlink{classspdlog_1_1formatter}{formatter}})
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_a51d8f34ad79064e0dc13c6013236e427}\label{classspdlog_1_1sinks_1_1sink_a51d8f34ad79064e0dc13c6013236e427}} 
+virtual void {\bfseries log} (const \mbox{\hyperlink{structspdlog_1_1details_1_1log__msg}{details\+::log\+\_\+msg}} \&msg)=0
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_a8a0674ae3bca8f1617aef820e23a2ccd}\label{classspdlog_1_1sinks_1_1sink_a8a0674ae3bca8f1617aef820e23a2ccd}} 
+virtual void {\bfseries flush} ()=0
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_a7e5cfd4b683c8bfa8fbd602d7f409632}\label{classspdlog_1_1sinks_1_1sink_a7e5cfd4b683c8bfa8fbd602d7f409632}} 
+virtual void {\bfseries set\+\_\+pattern} (const std\+::string \&pattern)=0
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_ac410f2229e583a75337a5fdf45d020be}\label{classspdlog_1_1sinks_1_1sink_ac410f2229e583a75337a5fdf45d020be}} 
+virtual void {\bfseries set\+\_\+formatter} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1formatter}{spdlog\+::formatter}} $>$ sink\+\_\+formatter)=0
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_a1c932f19f67057fbe7518999bdd5c422}\label{classspdlog_1_1sinks_1_1sink_a1c932f19f67057fbe7518999bdd5c422}} 
+bool {\bfseries should\+\_\+log} (level\+::level\+\_\+enum msg\+\_\+level) const
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_a038a91409395dca18a7ccca81622fd83}\label{classspdlog_1_1sinks_1_1sink_a038a91409395dca18a7ccca81622fd83}} 
+void {\bfseries set\+\_\+level} (level\+::level\+\_\+enum log\+\_\+level)
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_ae59ca2b418c5cdfed1c04e49a444be1c}\label{classspdlog_1_1sinks_1_1sink_ae59ca2b418c5cdfed1c04e49a444be1c}} 
+level\+::level\+\_\+enum {\bfseries level} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_a435da07b59e1165b38d53635cdada30a}\label{classspdlog_1_1sinks_1_1sink_a435da07b59e1165b38d53635cdada30a}} 
+level\+\_\+t {\bfseries level\+\_\+}
+\item 
+\mbox{\Hypertarget{classspdlog_1_1sinks_1_1sink_aa0d19f09363a11b63b4a9b1d46f8a4b3}\label{classspdlog_1_1sinks_1_1sink_aa0d19f09363a11b63b4a9b1d46f8a4b3}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classspdlog_1_1formatter}{spdlog\+::formatter}} $>$ {\bfseries formatter\+\_\+}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/spdlog/sinks/sink.\+h\end{DoxyCompactItemize}

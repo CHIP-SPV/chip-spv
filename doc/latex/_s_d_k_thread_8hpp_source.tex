@@ -1,0 +1,594 @@
+\hypertarget{_s_d_k_thread_8hpp_source}{}\doxysection{SDKThread.\+hpp}
+\label{_s_d_k_thread_8hpp_source}\index{/Users/pvelesko/local/CHIP-\/SPV/samples/hip-\/cuda/include/SDKThread.hpp@{/Users/pvelesko/local/CHIP-\/SPV/samples/hip-\/cuda/include/SDKThread.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/**********************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{Copyright ©2015 Advanced Micro Devices, Inc. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{•   Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{7 \textcolor{comment}{•   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or}}
+\DoxyCodeLine{8 \textcolor{comment}{ other materials provided with the distribution.}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "{}AS IS"{} AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED}}
+\DoxyCodeLine{11 \textcolor{comment}{ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY}}
+\DoxyCodeLine{12 \textcolor{comment}{ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS}}
+\DoxyCodeLine{13 \textcolor{comment}{ OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING}}
+\DoxyCodeLine{14 \textcolor{comment}{ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{15 \textcolor{comment}{********************************************************************/}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#ifndef \_SDK\_THREAD\_H\_}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define \_SDK\_THREAD\_H}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#ifndef \_WIN32\_WINNT}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define \_WIN32\_WINNT 0x0501}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include "{}windows.h"{}}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <deque>}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include "{}assert.h"{}}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <process.h>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define EXPORT \_\_declspec(dllexport)}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#include "{}pthread.h"{}}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define EXPORT}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#if defined(\_\_INTEL\_COMPILER)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#pragma warning(disable : 810)}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{comment}{//\#define PRINT\_COND\_VAR\_ERROR\_MSG}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#ifdef PRINT\_COND\_VAR\_ERROR\_MSG}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define PRINT\_ERROR\_MSG(errorcode, msg) \(\backslash\)}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{    if(errorcode != 0) \(\backslash\)}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{        printf("{}\%s \(\backslash\)n"{}}, msg)}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define PRINT\_ERROR\_MSG(errorcode, msg)}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// PRINT\_COND\_VAR\_ERROR\_MSG}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{61 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceappsdk}{appsdk}}}
+\DoxyCodeLine{62 \{}
+\DoxyCodeLine{67 \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* (*threadFunc)(\textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structappsdk_1_1____args_to_thread_func}{\_\_argsToThreadFunc}}}
+\DoxyCodeLine{71 \{}
+\DoxyCodeLine{72     \mbox{\hyperlink{namespaceappsdk_aef59f4c22bbec890343cdb77b17abb44}{threadFunc}} func;}
+\DoxyCodeLine{73     \textcolor{keywordtype}{void}* data;}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \} \mbox{\hyperlink{namespaceappsdk_ad2c3c3adb9c44bae806f522d71a2610e}{argsToThreadFunc}};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{100 \textcolor{keyword}{class }EXPORT \mbox{\hyperlink{classappsdk_1_1_thread_lock}{ThreadLock}}}
+\DoxyCodeLine{101 \{}
+\DoxyCodeLine{102     \textcolor{keyword}{public}:}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{107         \mbox{\hyperlink{classappsdk_1_1_thread_lock_a92cb8d82d28bc96d7f2c020b4706cba6}{ThreadLock}}()}
+\DoxyCodeLine{108         \{}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{110             InitializeCriticalSection(\&\_cs);}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{112             pthread\_mutex\_init(\&\_lock, NULL);}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{114         \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{119         \mbox{\hyperlink{classappsdk_1_1_thread_lock_a608c4791eed1d663e6bb306b8c19c6d3}{\string~ThreadLock}}()}
+\DoxyCodeLine{120         \{}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{122             DeleteCriticalSection(\&\_cs);}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{124             pthread\_mutex\_destroy(\&\_lock);}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{126         \}}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{131         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_thread_lock_a3cc2e942cfafdf654f666ce48be82567}{isLocked}}()}
+\DoxyCodeLine{132         \{}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{134             \textcolor{keywordflow}{return} (\_cs.LockCount != \string~0x0);}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{136             \textcolor{keywordflow}{if}(pthread\_mutex\_trylock(\&\_lock) != 0)}
+\DoxyCodeLine{137             \{}
+\DoxyCodeLine{138                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{139             \}}
+\DoxyCodeLine{140             pthread\_mutex\_unlock(\&\_lock);}
+\DoxyCodeLine{141             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{143         \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{148         \textcolor{keywordtype}{void} \mbox{\hyperlink{classappsdk_1_1_thread_lock_ac039a89ccb8a1a5924af02642342165c}{lock}}()}
+\DoxyCodeLine{149         \{}
+\DoxyCodeLine{150 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{151             EnterCriticalSection(\&\_cs);}
+\DoxyCodeLine{152 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{153             pthread\_mutex\_lock(\&\_lock);}
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{155         \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{160         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_thread_lock_ab38db8bb6b935bd2c6b277e138bee79e}{tryLock}}()}
+\DoxyCodeLine{161         \{}
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{163             \textcolor{keywordflow}{return} (TryEnterCriticalSection(\&\_cs) != 0);}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{165             \textcolor{keywordflow}{return} !((bool)pthread\_mutex\_trylock(\&\_lock));}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{167         \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{172         \textcolor{keywordtype}{void} \mbox{\hyperlink{classappsdk_1_1_thread_lock_ab608c6584dd75c1e598b6b3c7d89ce63}{unlock}}()}
+\DoxyCodeLine{173         \{}
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{175             LeaveCriticalSection(\&\_cs);}
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{177             pthread\_mutex\_unlock(\&\_lock);}
+\DoxyCodeLine{178 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{179         \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{keyword}{private}:}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{190 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{191         CRITICAL\_SECTION \_cs;}
+\DoxyCodeLine{192 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{193         pthread\_mutex\_t \_lock;}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{195 \};}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 }
+\DoxyCodeLine{204 \textcolor{keyword}{class }CondVarImpl;}
+\DoxyCodeLine{205 \textcolor{keyword}{class }EXPORT \mbox{\hyperlink{classappsdk_1_1_cond_var}{CondVar}}}
+\DoxyCodeLine{206 \{}
+\DoxyCodeLine{207     \textcolor{keyword}{public}:}
+\DoxyCodeLine{213         \mbox{\hyperlink{classappsdk_1_1_cond_var}{CondVar}}();}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \mbox{\hyperlink{classappsdk_1_1_cond_var}{\string~CondVar}}();}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{220         \textcolor{keywordtype}{bool} init(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} maxThreadCount);}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{225         \textcolor{keywordtype}{bool} destroy();}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{230         \textcolor{keywordtype}{void} syncThreads();}
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{keyword}{private}:}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{238         \mbox{\hyperlink{classappsdk_1_1_cond_var_impl}{CondVarImpl}}* \_condVarImpl;}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 \};}
+\DoxyCodeLine{241 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{242 \textcolor{keywordtype}{unsigned} \_stdcall win32ThreadFunc(\textcolor{keywordtype}{void}* args);}
+\DoxyCodeLine{243 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{249 \textcolor{keyword}{class }EXPORT \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread}{SDKThread}}}
+\DoxyCodeLine{250 \{}
+\DoxyCodeLine{251     \textcolor{keyword}{public}:}
+\DoxyCodeLine{257         \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_a4672c238f6508d61d50c1eaa34a4fdeb}{SDKThread}}() : \_tid(0), \_data(0)}
+\DoxyCodeLine{258         \{}
+\DoxyCodeLine{259         \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261         \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread}{\string~SDKThread}}()}
+\DoxyCodeLine{262         \{}
+\DoxyCodeLine{263 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{264             \textcolor{keywordflow}{if}(\_tid)}
+\DoxyCodeLine{265             \{}
+\DoxyCodeLine{266                 CloseHandle(\_tid);}
+\DoxyCodeLine{267                 \_tid = 0;}
+\DoxyCodeLine{268             \}}
+\DoxyCodeLine{269 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{270         \}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{276         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_ad960a6cae586b89f00ba726a5b8dd253}{create}}(\mbox{\hyperlink{namespaceappsdk_aef59f4c22bbec890343cdb77b17abb44}{threadFunc}} func, \textcolor{keywordtype}{void}* arg)}
+\DoxyCodeLine{277         \{}
+\DoxyCodeLine{278             \textcolor{comment}{// Save the data internally}}
+\DoxyCodeLine{279             \_data = arg;}
+\DoxyCodeLine{280 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{281             \textcolor{comment}{// Setup the callback struct for thread function and pass to the}}
+\DoxyCodeLine{282             \textcolor{comment}{// begin thread routine}}
+\DoxyCodeLine{283             \textcolor{comment}{// xxx The following struct is allocated but never freed!!!!}}
+\DoxyCodeLine{284             \mbox{\hyperlink{structappsdk_1_1____args_to_thread_func}{argsToThreadFunc}} *args =  \textcolor{keyword}{new} \mbox{\hyperlink{namespaceappsdk_ad2c3c3adb9c44bae806f522d71a2610e}{argsToThreadFunc}};}
+\DoxyCodeLine{285             args-\/>func = func;}
+\DoxyCodeLine{286             args-\/>data = \textcolor{keyword}{this};}
+\DoxyCodeLine{287             \_tid = (HANDLE)\_beginthreadex(NULL, 0, win32ThreadFunc, args, 0, NULL);}
+\DoxyCodeLine{288             \textcolor{keywordflow}{if}(\_tid == 0)}
+\DoxyCodeLine{289             \{}
+\DoxyCodeLine{290                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{291             \}}
+\DoxyCodeLine{292 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{294             \textcolor{keywordtype}{int} retVal = pthread\_create(\&\_tid, NULL, func, arg);}
+\DoxyCodeLine{295             \textcolor{keywordflow}{if}(retVal != 0)}
+\DoxyCodeLine{296             \{}
+\DoxyCodeLine{297                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{298             \}}
+\DoxyCodeLine{299 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{300             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{301         \}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{307         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_a686208082afbbee378f41300130dcc2a}{join}}()}
+\DoxyCodeLine{308         \{}
+\DoxyCodeLine{309             \textcolor{keywordflow}{if}(\_tid)}
+\DoxyCodeLine{310             \{}
+\DoxyCodeLine{311 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{312                 DWORD rc = WaitForSingleObject(\_tid, INFINITE);}
+\DoxyCodeLine{313                 CloseHandle(\_tid);}
+\DoxyCodeLine{314                 \textcolor{keywordflow}{if}(rc == WAIT\_FAILED)}
+\DoxyCodeLine{315                 \{}
+\DoxyCodeLine{316                     printf(\textcolor{stringliteral}{"{}Bad call to function(invalid handle?)\(\backslash\)n"{}});}
+\DoxyCodeLine{317                 \}}
+\DoxyCodeLine{318 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{319                 \textcolor{keywordtype}{int} rc = pthread\_join(\_tid, NULL);}
+\DoxyCodeLine{320 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{321                 \_tid = 0;}
+\DoxyCodeLine{322                 \textcolor{keywordflow}{if}(rc != 0)}
+\DoxyCodeLine{323                 \{}
+\DoxyCodeLine{324                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{325                 \}}
+\DoxyCodeLine{326             \}}
+\DoxyCodeLine{327             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{328         \}}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{333         \textcolor{keywordtype}{void}* \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_a3f44f2aa1bb991eacc3b177bcb28c246}{getData}}()}
+\DoxyCodeLine{334         \{}
+\DoxyCodeLine{335             \textcolor{keywordflow}{return} \_data;}
+\DoxyCodeLine{336         \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{341         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_ae16ab888b36c4c4d8589ae4d391939d1}{getID}}()}
+\DoxyCodeLine{342         \{}
+\DoxyCodeLine{343 \textcolor{preprocessor}{\#if defined(\_\_MINGW32\_\_) \&\& defined(\_\_MINGW64\_VERSION\_MAJOR)}}
+\DoxyCodeLine{344             \textcolor{comment}{//This is to fix compilation issue with MinGW64-\/w64}}
+\DoxyCodeLine{345             \textcolor{keywordflow}{return} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})(\textcolor{keywordtype}{long} long)\_tid;}
+\DoxyCodeLine{346 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{347             \textcolor{keywordflow}{return} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int})\_tid;}
+\DoxyCodeLine{348 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//\_\_MINGW32\_\_  and \_\_MINGW64\_VERSION\_MAJOR}}
+\DoxyCodeLine{349         \}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351     \textcolor{keyword}{private}:}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{357 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{361         HANDLE \_tid;}
+\DoxyCodeLine{362 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{363         pthread\_t \_tid;}
+\DoxyCodeLine{364 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366         \textcolor{keywordtype}{void} *\_data;}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368 \};}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{373 \textcolor{keywordtype}{unsigned} \_stdcall win32ThreadFunc(\textcolor{keywordtype}{void}* args)}
+\DoxyCodeLine{374 \{}
+\DoxyCodeLine{375     \mbox{\hyperlink{namespaceappsdk_ad2c3c3adb9c44bae806f522d71a2610e}{argsToThreadFunc}}* ptr = (\mbox{\hyperlink{namespaceappsdk_ad2c3c3adb9c44bae806f522d71a2610e}{argsToThreadFunc}}*) args;}
+\DoxyCodeLine{376     SDKThread *obj = (SDKThread *) ptr-\/>data;}
+\DoxyCodeLine{377     ptr-\/>func(obj-\/>getData());}
+\DoxyCodeLine{378     \textcolor{keyword}{delete} args;}
+\DoxyCodeLine{379     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{380 \}}
+\DoxyCodeLine{381 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{391 \textcolor{keyword}{class }\mbox{\hyperlink{classappsdk_1_1_cond_var_impl}{CondVarImpl}}}
+\DoxyCodeLine{392 \{}
+\DoxyCodeLine{393     \textcolor{keyword}{public}:}
+\DoxyCodeLine{397         \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_a6a3165fab5c6e3e1c3f067df35337a19}{CondVarImpl}}() : \_count(0xFFFFFFFF), \_maxThreads(0xFFFFFFFF)}
+\DoxyCodeLine{398         \{}
+\DoxyCodeLine{399         \}}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401 }
+\DoxyCodeLine{405         \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_a280f3ba876bf1454a2b927b38a248953}{\string~CondVarImpl}}()}
+\DoxyCodeLine{406         \{}
+\DoxyCodeLine{407         \}}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{412         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_acceaa959707c0bbc55f9e6fdf6100a29}{init}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} maxThreadCount)}
+\DoxyCodeLine{413         \{}
+\DoxyCodeLine{414             \textcolor{keywordtype}{int} rc = 0;}
+\DoxyCodeLine{416             \_count = 0xFFFFFFFF;}
+\DoxyCodeLine{417             \_maxThreads = maxThreadCount;}
+\DoxyCodeLine{418 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{419             \_nLockCount = 0;}
+\DoxyCodeLine{420             \textcolor{comment}{// Initialize the critical section that protects access to}}
+\DoxyCodeLine{421             \textcolor{comment}{// the wait set. There is no way to check for errors here.}}
+\DoxyCodeLine{422             InitializeCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{423             \textcolor{comment}{// Initialize the critical section that provides synchronization}}
+\DoxyCodeLine{424             \textcolor{comment}{// to the client. There is no way to check for errors here.}}
+\DoxyCodeLine{425             InitializeCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{426 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{427             pthread\_mutex\_init(\&\_condVarLock, NULL);}
+\DoxyCodeLine{428             PRINT\_ERROR\_MSG(rc, \textcolor{stringliteral}{"{}Failed to initialize condition variable lock"{}});}
+\DoxyCodeLine{429             rc = pthread\_cond\_init(\&\_condVar, NULL);}
+\DoxyCodeLine{430             PRINT\_ERROR\_MSG(rc, \textcolor{stringliteral}{"{}Failed to Initialize condition variable"{}});}
+\DoxyCodeLine{431 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{432             \textcolor{keywordflow}{if}(rc != 0)}
+\DoxyCodeLine{433             \{}
+\DoxyCodeLine{434                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{435             \}}
+\DoxyCodeLine{436             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{437         \}}
+\DoxyCodeLine{438 }
+\DoxyCodeLine{442         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_a6b545250ae5b4b3eed633991eea9fe41}{destroy}}()}
+\DoxyCodeLine{443         \{}
+\DoxyCodeLine{444             \textcolor{keywordtype}{int} rc = 0;}
+\DoxyCodeLine{445 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{446             \textcolor{comment}{// Uninitialize critical sections. Win32 allows no error checking}}
+\DoxyCodeLine{447             \textcolor{comment}{// here.}}
+\DoxyCodeLine{448             DeleteCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{449             DeleteCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{450             \textcolor{comment}{// Destroying this thing while threads are waiting is a client}}
+\DoxyCodeLine{451             \textcolor{comment}{// programmer mistake.}}
+\DoxyCodeLine{452             assert( \_deqWaitSet.empty() );}
+\DoxyCodeLine{453 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{455             pthread\_mutex\_destroy(\&\_condVarLock);}
+\DoxyCodeLine{456             PRINT\_ERROR\_MSG(rc, \textcolor{stringliteral}{"{}Failed to destroy condition variable lock"{}});}
+\DoxyCodeLine{458             rc = pthread\_cond\_destroy(\&\_condVar);}
+\DoxyCodeLine{459             PRINT\_ERROR\_MSG(rc, \textcolor{stringliteral}{"{}Failed to destroy condition variable"{}});}
+\DoxyCodeLine{460 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{461             \textcolor{keywordflow}{if}(rc != 0)}
+\DoxyCodeLine{462             \{}
+\DoxyCodeLine{463                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{464             \}}
+\DoxyCodeLine{465             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{466         \}}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{471         \textcolor{keywordtype}{void} \mbox{\hyperlink{classappsdk_1_1_cond_var_impl_af1ab36e64bd44a909f45bce508ed5ecf}{syncThreads}}()}
+\DoxyCodeLine{472         \{}
+\DoxyCodeLine{474             beginSynchronized();}
+\DoxyCodeLine{475             \textcolor{keywordtype}{int} rc = 0;}
+\DoxyCodeLine{477             \textcolor{keywordflow}{if}(\_count == 0xFFFFFFFF)}
+\DoxyCodeLine{478             \{}
+\DoxyCodeLine{479                 \_count = 0;}
+\DoxyCodeLine{480             \}}
+\DoxyCodeLine{481             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{482             \{}
+\DoxyCodeLine{483                 \_count++;}
+\DoxyCodeLine{484             \}}
+\DoxyCodeLine{485             \textcolor{keywordflow}{if}(\_count >= \_maxThreads -\/ 1)}
+\DoxyCodeLine{486             \{}
+\DoxyCodeLine{488                 \_count = 0xFFFFFFFF;}
+\DoxyCodeLine{490 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{491                 rc = broadcast();}
+\DoxyCodeLine{492                 \textcolor{keywordflow}{if}(rc == 0)}
+\DoxyCodeLine{493                 \{}
+\DoxyCodeLine{494                     printf(\textcolor{stringliteral}{"{}Problem while calling broadcast\(\backslash\)n"{}});}
+\DoxyCodeLine{495                 \}}
+\DoxyCodeLine{496 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{497                 rc = pthread\_cond\_broadcast(\&\_condVar);}
+\DoxyCodeLine{498                 PRINT\_ERROR\_MSG(rc, \textcolor{stringliteral}{"{}Problem while calling pthread\_cond\_broadcast()"{}});}
+\DoxyCodeLine{499 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_WIN32}}
+\DoxyCodeLine{500             \}}
+\DoxyCodeLine{501             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{502             \{}
+\DoxyCodeLine{504 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{505                 wait();}
+\DoxyCodeLine{506 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{507                 \textcolor{keywordflow}{if}(\_count < \_maxThreads -\/ 1)}
+\DoxyCodeLine{508                 \{}
+\DoxyCodeLine{509                     rc = pthread\_cond\_wait(\&\_condVar, \&\_condVarLock);}
+\DoxyCodeLine{510                     PRINT\_ERROR\_MSG(rc, \textcolor{stringliteral}{"{}Problem while calling pthread\_cond\_wait()"{}});}
+\DoxyCodeLine{511                 \}}
+\DoxyCodeLine{512 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_WIN32}}
+\DoxyCodeLine{513             \}}
+\DoxyCodeLine{515             endSynchronized();}
+\DoxyCodeLine{516         \}}
+\DoxyCodeLine{517 }
+\DoxyCodeLine{518 }
+\DoxyCodeLine{519     \textcolor{keyword}{private}:}
+\DoxyCodeLine{520 }
+\DoxyCodeLine{524         \textcolor{keywordtype}{void} beginSynchronized()}
+\DoxyCodeLine{525         \{}
+\DoxyCodeLine{526 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{527             \textcolor{comment}{// Acquire lock. Win32 allows no error checking here.}}
+\DoxyCodeLine{528             EnterCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{529             \textcolor{comment}{// Record the lock acquisition for proper release in Wait().}}
+\DoxyCodeLine{530             ++\_nLockCount;}
+\DoxyCodeLine{531 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{532             pthread\_mutex\_lock(\&\_condVarLock);}
+\DoxyCodeLine{533 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_WIN32}}
+\DoxyCodeLine{534         \}}
+\DoxyCodeLine{535 }
+\DoxyCodeLine{539         \textcolor{keywordtype}{int} endSynchronized()}
+\DoxyCodeLine{540         \{}
+\DoxyCodeLine{541 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{542             \textcolor{keywordflow}{if}(! \_lockHeldByCallingThread())}
+\DoxyCodeLine{543             \{}
+\DoxyCodeLine{544                 ::SetLastError(ERROR\_INVALID\_FUNCTION); \textcolor{comment}{// for the lack of better...}}
+\DoxyCodeLine{545                 \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{546             \}}
+\DoxyCodeLine{547             \textcolor{comment}{// Record the lock release for proper release in Wait().}}
+\DoxyCodeLine{548             -\/-\/\_nLockCount;}
+\DoxyCodeLine{549             \textcolor{comment}{// Release lock. Win32 allows no error checking here.}}
+\DoxyCodeLine{550             ::LeaveCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{551 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{552             pthread\_mutex\_unlock(\&\_condVarLock);}
+\DoxyCodeLine{553 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_WIN32}}
+\DoxyCodeLine{554             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{555         \}}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{562         DWORD wait(DWORD dwMillisecondsTimeout = INFINITE, BOOL bAlertable = FALSE)}
+\DoxyCodeLine{563         \{}
+\DoxyCodeLine{564             \textcolor{keywordflow}{if}(! \_lockHeldByCallingThread())}
+\DoxyCodeLine{565             \{}
+\DoxyCodeLine{566                 ::SetLastError(ERROR\_INVALID\_FUNCTION); \textcolor{comment}{// for the lack of better...}}
+\DoxyCodeLine{567                 \textcolor{keywordflow}{return} WAIT\_FAILED;}
+\DoxyCodeLine{568             \}}
+\DoxyCodeLine{569             \textcolor{comment}{// Enter a new event handle into the wait set.}}
+\DoxyCodeLine{570             HANDLE hWaitEvent = \_push();}
+\DoxyCodeLine{571             \textcolor{keywordflow}{if}(NULL == hWaitEvent)}
+\DoxyCodeLine{572             \{}
+\DoxyCodeLine{573                 \textcolor{keywordflow}{return} WAIT\_FAILED;}
+\DoxyCodeLine{574             \}}
+\DoxyCodeLine{575             \textcolor{comment}{// Store the current lock count for re-\/acquisition.}}
+\DoxyCodeLine{576             \textcolor{keywordtype}{int} nThisThreadsLockCount = \_nLockCount;}
+\DoxyCodeLine{577             \_nLockCount = 0;}
+\DoxyCodeLine{578             \textcolor{comment}{// Release the synchronization lock the appropriate number of times.}}
+\DoxyCodeLine{579             \textcolor{comment}{// Win32 allows no error checking here.}}
+\DoxyCodeLine{580             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < nThisThreadsLockCount; ++i)}
+\DoxyCodeLine{581             \{}
+\DoxyCodeLine{582                 LeaveCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{583             \}}
+\DoxyCodeLine{584             \textcolor{comment}{// NOTE: Conceptually, releasing the lock and entering the wait}}
+\DoxyCodeLine{585             \textcolor{comment}{// state is done in one atomic step. Technically, that is not}}
+\DoxyCodeLine{586             \textcolor{comment}{// true here, because we first leave the critical section and}}
+\DoxyCodeLine{587             \textcolor{comment}{// then, in a separate line of code, call WaitForSingleObjectEx.}}
+\DoxyCodeLine{588             \textcolor{comment}{// The reason why this code is correct is that our thread is placed}}
+\DoxyCodeLine{589             \textcolor{comment}{// in the wait set *before* the lock is released. Therefore, if}}
+\DoxyCodeLine{590             \textcolor{comment}{// we get preempted right here and another thread notifies us, then}}
+\DoxyCodeLine{591             \textcolor{comment}{// that notification will *not* be missed: the wait operation below}}
+\DoxyCodeLine{592             \textcolor{comment}{// will find the event signalled.}}
+\DoxyCodeLine{593             \textcolor{comment}{// Wait for the event to become signalled.}}
+\DoxyCodeLine{594             DWORD dwWaitResult = ::WaitForSingleObjectEx(hWaitEvent, dwMillisecondsTimeout,}
+\DoxyCodeLine{595                                  bAlertable);}
+\DoxyCodeLine{596             \textcolor{comment}{// If the wait failed, store the last error because it will get}}
+\DoxyCodeLine{597             \textcolor{comment}{// overwritten when acquiring the lock.}}
+\DoxyCodeLine{598             DWORD dwLastError = 0;}
+\DoxyCodeLine{599             \textcolor{keywordflow}{if}(WAIT\_FAILED == dwWaitResult)}
+\DoxyCodeLine{600             \{}
+\DoxyCodeLine{601                 dwLastError = ::GetLastError();}
+\DoxyCodeLine{602             \}}
+\DoxyCodeLine{603             \textcolor{comment}{// Acquire the synchronization lock the appropriate number of times.}}
+\DoxyCodeLine{604             \textcolor{comment}{// Win32 allows no error checking here.}}
+\DoxyCodeLine{605             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < nThisThreadsLockCount; ++j)}
+\DoxyCodeLine{606             \{}
+\DoxyCodeLine{607                 EnterCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{608             \}}
+\DoxyCodeLine{609             \textcolor{comment}{// Restore lock count.}}
+\DoxyCodeLine{610             \_nLockCount = nThisThreadsLockCount;}
+\DoxyCodeLine{611             \textcolor{comment}{// Close event handle}}
+\DoxyCodeLine{612             \textcolor{keywordflow}{if}(! CloseHandle(hWaitEvent))}
+\DoxyCodeLine{613             \{}
+\DoxyCodeLine{614                 \textcolor{keywordflow}{return} WAIT\_FAILED;}
+\DoxyCodeLine{615             \}}
+\DoxyCodeLine{616             \textcolor{keywordflow}{if}(WAIT\_FAILED == dwWaitResult)}
+\DoxyCodeLine{617             \{}
+\DoxyCodeLine{618                 ::SetLastError(dwLastError);}
+\DoxyCodeLine{619             \}}
+\DoxyCodeLine{620             \textcolor{keywordflow}{return} dwWaitResult;}
+\DoxyCodeLine{621         \}}
+\DoxyCodeLine{622 }
+\DoxyCodeLine{626         BOOL broadcast()}
+\DoxyCodeLine{627         \{}
+\DoxyCodeLine{628             \textcolor{comment}{// Signal all events on the deque, then clear it. Win32 allows no}}
+\DoxyCodeLine{629             \textcolor{comment}{// error checking on entering and leaving the critical section.}}
+\DoxyCodeLine{630             EnterCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{631             std::deque<HANDLE>::const\_iterator it\_run = \_deqWaitSet.begin();}
+\DoxyCodeLine{632             std::deque<HANDLE>::const\_iterator it\_end = \_deqWaitSet.end();}
+\DoxyCodeLine{633             \textcolor{keywordflow}{for}( ; it\_run < it\_end; ++it\_run)}
+\DoxyCodeLine{634             \{}
+\DoxyCodeLine{635                 \textcolor{keywordflow}{if}(! SetEvent(*it\_run))}
+\DoxyCodeLine{636                 \{}
+\DoxyCodeLine{637                     \textcolor{keywordflow}{return} FALSE;}
+\DoxyCodeLine{638                 \}}
+\DoxyCodeLine{639             \}}
+\DoxyCodeLine{640             \_deqWaitSet.clear();}
+\DoxyCodeLine{641             LeaveCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{642             \textcolor{keywordflow}{return} TRUE;}
+\DoxyCodeLine{643         \}}
+\DoxyCodeLine{644 }
+\DoxyCodeLine{651         HANDLE \_push()}
+\DoxyCodeLine{652         \{}
+\DoxyCodeLine{653             \textcolor{comment}{// Create the new event.}}
+\DoxyCodeLine{654             HANDLE hWaitEvent = ::CreateEvent(NULL, \textcolor{comment}{// no security}}
+\DoxyCodeLine{655                                               FALSE, \textcolor{comment}{// auto-\/reset event}}
+\DoxyCodeLine{656                                               FALSE, \textcolor{comment}{// initially unsignalled}}
+\DoxyCodeLine{657                                               NULL); \textcolor{comment}{// string name}}
+\DoxyCodeLine{658             \textcolor{keywordflow}{if}(NULL == hWaitEvent)}
+\DoxyCodeLine{659             \{}
+\DoxyCodeLine{660                 \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{661             \}}
+\DoxyCodeLine{662             \textcolor{comment}{// Push the handle on the deque.}}
+\DoxyCodeLine{663             EnterCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{664             \_deqWaitSet.push\_back(hWaitEvent);}
+\DoxyCodeLine{665             LeaveCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{666             \textcolor{keywordflow}{return} hWaitEvent;}
+\DoxyCodeLine{667         \}}
+\DoxyCodeLine{668 }
+\DoxyCodeLine{673         HANDLE \_pop()}
+\DoxyCodeLine{674         \{}
+\DoxyCodeLine{675             \textcolor{comment}{// Pop the first handle off the deque.}}
+\DoxyCodeLine{676             EnterCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{677             HANDLE hWaitEvent = NULL;}
+\DoxyCodeLine{678             \textcolor{keywordflow}{if}(0 != \_deqWaitSet.size())}
+\DoxyCodeLine{679             \{}
+\DoxyCodeLine{680                 hWaitEvent = \_deqWaitSet.front();}
+\DoxyCodeLine{681                 \_deqWaitSet.pop\_front();}
+\DoxyCodeLine{682             \}}
+\DoxyCodeLine{683             LeaveCriticalSection(\&\_critsecWaitSetProtection);}
+\DoxyCodeLine{684             \textcolor{keywordflow}{return} hWaitEvent;}
+\DoxyCodeLine{685         \}}
+\DoxyCodeLine{686 }
+\DoxyCodeLine{690         BOOL \_lockHeldByCallingThread()}
+\DoxyCodeLine{691         \{}
+\DoxyCodeLine{692             BOOL bTryLockResult = TryEnterCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{693             \textcolor{comment}{// If we didn't get the lock, someone else has it.}}
+\DoxyCodeLine{694             \textcolor{keywordflow}{if}(!bTryLockResult)}
+\DoxyCodeLine{695             \{}
+\DoxyCodeLine{696                 \textcolor{keywordflow}{return} FALSE;}
+\DoxyCodeLine{697             \}}
+\DoxyCodeLine{698             \textcolor{comment}{// If we got the lock, but the lock count is zero, then nobody had it.}}
+\DoxyCodeLine{699             \textcolor{keywordflow}{if}(0 == \_nLockCount)}
+\DoxyCodeLine{700             \{}
+\DoxyCodeLine{701                 assert(bTryLockResult);}
+\DoxyCodeLine{702                 LeaveCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{703                 \textcolor{keywordflow}{return} FALSE;}
+\DoxyCodeLine{704             \}}
+\DoxyCodeLine{705             \textcolor{comment}{// Release lock once. NOTE: we still have it after this release.}}
+\DoxyCodeLine{706             \textcolor{comment}{// Win32 allows no error checking here.}}
+\DoxyCodeLine{707             assert(bTryLockResult \&\& 0 < \_nLockCount);}
+\DoxyCodeLine{708             LeaveCriticalSection(\&\_condVarLock);}
+\DoxyCodeLine{709             \textcolor{keywordflow}{return} TRUE;}
+\DoxyCodeLine{710         \}}
+\DoxyCodeLine{711 }
+\DoxyCodeLine{712 }
+\DoxyCodeLine{716         std::deque<HANDLE> \_deqWaitSet;}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{721         CRITICAL\_SECTION \_critsecWaitSetProtection;}
+\DoxyCodeLine{722 }
+\DoxyCodeLine{726         CRITICAL\_SECTION \_condVarLock;}
+\DoxyCodeLine{727 }
+\DoxyCodeLine{733         \textcolor{keywordtype}{int} \_nLockCount;}
+\DoxyCodeLine{734 }
+\DoxyCodeLine{735 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{736 }
+\DoxyCodeLine{740         pthread\_cond\_t \_condVar;}
+\DoxyCodeLine{741 }
+\DoxyCodeLine{745         pthread\_mutex\_t \_condVarLock;}
+\DoxyCodeLine{746 }
+\DoxyCodeLine{747 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{748 }
+\DoxyCodeLine{752         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \_maxThreads;}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{757         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \_count;}
+\DoxyCodeLine{758 }
+\DoxyCodeLine{759 \};}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{761         \mbox{\hyperlink{classappsdk_1_1_cond_var_a1fbf2718cb5713f2f90cf111fef58c8c}{CondVar::CondVar}}()}
+\DoxyCodeLine{762         \{}
+\DoxyCodeLine{763             \_condVarImpl = \textcolor{keyword}{new} \mbox{\hyperlink{classappsdk_1_1_cond_var_impl}{CondVarImpl}}();}
+\DoxyCodeLine{764         \}}
+\DoxyCodeLine{765         CondVar::\string~CondVar()}
+\DoxyCodeLine{766         \{}
+\DoxyCodeLine{767             \textcolor{keyword}{delete} \_condVarImpl;}
+\DoxyCodeLine{768         \}}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{773         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_cond_var_a1f177ea45472beae30189d58a73bc2a1}{CondVar::init}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} maxThreadCount)}
+\DoxyCodeLine{774         \{}
+\DoxyCodeLine{775             \textcolor{keywordflow}{return} \_condVarImpl-\/>\mbox{\hyperlink{classappsdk_1_1_cond_var_impl_acceaa959707c0bbc55f9e6fdf6100a29}{init}}(maxThreadCount);}
+\DoxyCodeLine{776         \}}
+\DoxyCodeLine{777 }
+\DoxyCodeLine{781         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classappsdk_1_1_cond_var_af555ffb659d536ecf09681d999e0b784}{CondVar::destroy}}()}
+\DoxyCodeLine{782         \{}
+\DoxyCodeLine{783             \textcolor{keywordflow}{return} \_condVarImpl-\/>\mbox{\hyperlink{classappsdk_1_1_cond_var_impl_a6b545250ae5b4b3eed633991eea9fe41}{destroy}}();}
+\DoxyCodeLine{784         \}}
+\DoxyCodeLine{785 }
+\DoxyCodeLine{789         \textcolor{keywordtype}{void} \mbox{\hyperlink{classappsdk_1_1_cond_var_a590538e5b1b2ee04294b5f107d3f50eb}{CondVar::syncThreads}}()}
+\DoxyCodeLine{790         \{}
+\DoxyCodeLine{791             \_condVarImpl-\/>\mbox{\hyperlink{classappsdk_1_1_cond_var_impl_af1ab36e64bd44a909f45bce508ed5ecf}{syncThreads}}();}
+\DoxyCodeLine{792         \}}
+\DoxyCodeLine{793 }
+\DoxyCodeLine{794 }
+\DoxyCodeLine{795 \}}
+\DoxyCodeLine{796 }
+\DoxyCodeLine{797 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_CPU\_THREAD\_H\_}}
+
+\end{DoxyCode}

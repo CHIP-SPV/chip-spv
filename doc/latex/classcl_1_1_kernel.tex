@@ -1,0 +1,259 @@
+\hypertarget{classcl_1_1_kernel}{}\doxysection{cl\+::Kernel Class Reference}
+\label{classcl_1_1_kernel}\index{cl::Kernel@{cl::Kernel}}
+
+
+Class interface for cl\+\_\+kernel.  
+
+
+
+
+{\ttfamily \#include $<$cl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Kernel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcl_1_1_kernel}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a351422a7e7125812c23610628b0f9de7}\label{classcl_1_1_kernel_a351422a7e7125812c23610628b0f9de7}} 
+{\bfseries Kernel} (const \mbox{\hyperlink{classcl_1_1_program}{Program}} \&program, const char $\ast$name, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a69b2fc97f80d90a23927a74395d09ec9}\label{classcl_1_1_kernel_a69b2fc97f80d90a23927a74395d09ec9}} 
+{\bfseries Kernel} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS \mbox{\hyperlink{classcl_1_1_kernel_aaeecc4a7a7a3bed7f8c7d22563b78384}{Kernel}} (const cl\+\_\+kernel \&kernel)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+kernel -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \& \mbox{\hyperlink{classcl_1_1_kernel_ab9fbaa8ff250cc478a84387c017493f0}{operator=}} (const cl\+\_\+kernel \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment operator from cl\+\_\+kernel -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a93b516f37993297101dd9d30a4572b23}\label{classcl_1_1_kernel_a93b516f37993297101dd9d30a4572b23}} 
+{\bfseries Kernel} (const \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&kernel)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a52ba1d47a5dae7b90d57760cac3507d0}\label{classcl_1_1_kernel_a52ba1d47a5dae7b90d57760cac3507d0}} 
+\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&kernel)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a32b57f5ba1c9fb5d3fe1c8f5c8f067f9}\label{classcl_1_1_kernel_a32b57f5ba1c9fb5d3fe1c8f5c8f067f9}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+kernel\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_adb440842026bdfdd9451b183aa55508f}\label{classcl_1_1_kernel_adb440842026bdfdd9451b183aa55508f}} 
+{\footnotesize template$<$cl\+\_\+int name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+kernel\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_ae4e8cba9366c1198454766e6b392ed1d}\label{classcl_1_1_kernel_ae4e8cba9366c1198454766e6b392ed1d}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Work\+Group\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+kernel\+\_\+work\+\_\+group\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a7f497343cb5112734a23779307bf5efd}\label{classcl_1_1_kernel_a7f497343cb5112734a23779307bf5efd}} 
+{\footnotesize template$<$cl\+\_\+int name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+kernel\+\_\+work\+\_\+group\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Work\+Group\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_ae8fd90bcf9d6783a132c59aa228c6077}\label{classcl_1_1_kernel_ae8fd90bcf9d6783a132c59aa228c6077}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries set\+Arg} (cl\+\_\+uint index, const T \&value)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_af2de65bc284925e1954e3957d300a379}\label{classcl_1_1_kernel_af2de65bc284925e1954e3957d300a379}} 
+cl\+\_\+int {\bfseries set\+Arg} (cl\+\_\+uint index, \+::\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+t}} size, const void $\ast$arg\+Ptr)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a351422a7e7125812c23610628b0f9de7}\label{classcl_1_1_kernel_a351422a7e7125812c23610628b0f9de7}} 
+{\bfseries Kernel} (const \mbox{\hyperlink{classcl_1_1_program}{Program}} \&program, const char $\ast$name, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a69b2fc97f80d90a23927a74395d09ec9}\label{classcl_1_1_kernel_a69b2fc97f80d90a23927a74395d09ec9}} 
+{\bfseries Kernel} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_kernel_a0c71f37cb53fbe492847fbb2dff2bfed}{Kernel}} (const cl\+\_\+kernel \&kernel, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+kernel -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \& \mbox{\hyperlink{classcl_1_1_kernel_ab9fbaa8ff250cc478a84387c017493f0}{operator=}} (const cl\+\_\+kernel \&rhs)
+\begin{DoxyCompactList}\small\item\em Assignment operator from cl\+\_\+kernel -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a93b516f37993297101dd9d30a4572b23}\label{classcl_1_1_kernel_a93b516f37993297101dd9d30a4572b23}} 
+{\bfseries Kernel} (const \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&kernel)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a52ba1d47a5dae7b90d57760cac3507d0}\label{classcl_1_1_kernel_a52ba1d47a5dae7b90d57760cac3507d0}} 
+\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&kernel)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a0869347f24520f2d59222f74297c5fe5}\label{classcl_1_1_kernel_a0869347f24520f2d59222f74297c5fe5}} 
+{\bfseries Kernel} (\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&\&kernel) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\begin{DoxyCompactList}\small\item\em Move constructor to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a9388f0ab102312588a38457c41c68ac0}\label{classcl_1_1_kernel_a9388f0ab102312588a38457c41c68ac0}} 
+\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \& {\bfseries operator=} (\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \&\&kernel)
+\begin{DoxyCompactList}\small\item\em Move assignment to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a32b57f5ba1c9fb5d3fe1c8f5c8f067f9}\label{classcl_1_1_kernel_a32b57f5ba1c9fb5d3fe1c8f5c8f067f9}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Info} (cl\+\_\+kernel\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_adb440842026bdfdd9451b183aa55508f}\label{classcl_1_1_kernel_adb440842026bdfdd9451b183aa55508f}} 
+{\footnotesize template$<$cl\+\_\+kernel\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+kernel\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Info} (cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_af52642f08f20f79de92b7c0f8ea68765}\label{classcl_1_1_kernel_af52642f08f20f79de92b7c0f8ea68765}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Arg\+Info} (cl\+\_\+uint arg\+Index, cl\+\_\+kernel\+\_\+arg\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a7012ef805463f3f85241beb5b656891b}\label{classcl_1_1_kernel_a7012ef805463f3f85241beb5b656891b}} 
+{\footnotesize template$<$cl\+\_\+kernel\+\_\+arg\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+kernel\+\_\+arg\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Arg\+Info} (cl\+\_\+uint arg\+Index, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_ae4e8cba9366c1198454766e6b392ed1d}\label{classcl_1_1_kernel_ae4e8cba9366c1198454766e6b392ed1d}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries get\+Work\+Group\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+kernel\+\_\+work\+\_\+group\+\_\+info name, T $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a7f497343cb5112734a23779307bf5efd}\label{classcl_1_1_kernel_a7f497343cb5112734a23779307bf5efd}} 
+{\footnotesize template$<$cl\+\_\+kernel\+\_\+work\+\_\+group\+\_\+info name$>$ }\\\mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+kernel\+\_\+work\+\_\+group\+\_\+info, name $>$\+::param\+\_\+type {\bfseries get\+Work\+Group\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{Device}} \&device, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a6b28ded6ef25514adb7450868373ee10}\label{classcl_1_1_kernel_a6b28ded6ef25514adb7450868373ee10}} 
+cl\+\_\+int {\bfseries get\+Sub\+Group\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{cl\+::\+Device}} \&dev, cl\+\_\+kernel\+\_\+sub\+\_\+group\+\_\+info name, const \mbox{\hyperlink{classcl_1_1_n_d_range}{cl\+::\+NDRange}} \&range, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} $\ast$param) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_ad59bdc88fe5c881ecb27d9bb212de176}\label{classcl_1_1_kernel_ad59bdc88fe5c881ecb27d9bb212de176}} 
+{\footnotesize template$<$cl\+\_\+kernel\+\_\+sub\+\_\+group\+\_\+info name$>$ }\\\mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} {\bfseries get\+Sub\+Group\+Info} (const \mbox{\hyperlink{classcl_1_1_device}{cl\+::\+Device}} \&dev, const \mbox{\hyperlink{classcl_1_1_n_d_range}{cl\+::\+NDRange}} \&range, cl\+\_\+int $\ast$err=NULL) const
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a3ec081fb9656b0780d808563256dfeff}\label{classcl_1_1_kernel_a3ec081fb9656b0780d808563256dfeff}} 
+{\footnotesize template$<$typename T , class D $>$ }\\cl\+\_\+int {\bfseries set\+Arg} (cl\+\_\+uint index, const cl\+::pointer$<$ T, D $>$ \&arg\+Ptr)
+\begin{DoxyCompactList}\small\item\em set\+Arg overload taking a shared\+\_\+ptr type \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a9516e70e10909526dfb01f6cfe8b61bd}\label{classcl_1_1_kernel_a9516e70e10909526dfb01f6cfe8b61bd}} 
+{\footnotesize template$<$typename T , class Alloc $>$ }\\cl\+\_\+int {\bfseries set\+Arg} (cl\+\_\+uint index, const cl\+::vector$<$ T, Alloc $>$ \&arg\+Ptr)
+\begin{DoxyCompactList}\small\item\em set\+Arg overload taking a vector type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a4d14a69325def406165c391aee2c844b}\label{classcl_1_1_kernel_a4d14a69325def406165c391aee2c844b}} 
+{\footnotesize template$<$typename T $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+pointer$<$ T $>$\+::value, cl\+\_\+int $>$\+::type {\bfseries set\+Arg} (cl\+\_\+uint index, const T arg\+Ptr)
+\begin{DoxyCompactList}\small\item\em set\+Arg overload taking a pointer type \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a7d5ad9296c70602f6c04b841115afec6}\label{classcl_1_1_kernel_a7d5ad9296c70602f6c04b841115afec6}} 
+{\footnotesize template$<$typename T $>$ }\\std\+::enable\+\_\+if$<$!std\+::is\+\_\+pointer$<$ T $>$\+::value, cl\+\_\+int $>$\+::type {\bfseries set\+Arg} (cl\+\_\+uint index, const T \&value)
+\begin{DoxyCompactList}\small\item\em set\+Arg overload taking a POD type \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_ae10c336ea5a49bd7199995a6ab4c23de}\label{classcl_1_1_kernel_ae10c336ea5a49bd7199995a6ab4c23de}} 
+cl\+\_\+int {\bfseries set\+Arg} (cl\+\_\+uint index, \mbox{\hyperlink{classcl_1_1size__t}{size\+\_\+type}} size, const void $\ast$arg\+Ptr)
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_kernel_a36633bcfea86c512cbb4fd9b20c6087e}{set\+SVMPointers}} (const vector$<$ void $\ast$ $>$ \&pointer\+List)
+\item 
+{\footnotesize template$<$int Array\+Length$>$ }\\cl\+\_\+int \mbox{\hyperlink{classcl_1_1_kernel_abadacb0037f711f3460cf5c44b2d4796}{set\+SVMPointers}} (const std\+::array$<$ void $\ast$, Array\+Length $>$ \&pointer\+List)
+\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_kernel_aed996666686cddb41d660839e709fcd0}{enable\+Fine\+Grained\+System\+SVM}} (bool svm\+Enabled)
+\begin{DoxyCompactList}\small\item\em Enable fine-\/grained system SVM. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a09bbe9eac712ad45cda4b7363c39aa4b}\label{classcl_1_1_kernel_a09bbe9eac712ad45cda4b7363c39aa4b}} 
+{\footnotesize template$<$int index, int Array\+Length, class D , typename T0 , typename T1 , typename... Ts$>$ }\\void {\bfseries set\+SVMPointers\+Helper} (std\+::array$<$ void $\ast$, Array\+Length $>$ \&pointer\+List, const pointer$<$ T0, D $>$ \&t0, const pointer$<$ T1, D $>$ \&t1, Ts \&... ts)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a91d7ebccccc549147118e3b5f2b44971}\label{classcl_1_1_kernel_a91d7ebccccc549147118e3b5f2b44971}} 
+{\footnotesize template$<$int index, int Array\+Length, typename T0 , typename T1 , typename... Ts$>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+pointer$<$ T0 $>$\+::value, void $>$\+::type {\bfseries set\+SVMPointers\+Helper} (std\+::array$<$ void $\ast$, Array\+Length $>$ \&pointer\+List, T0 t0, T1 t1, Ts... ts)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a16d2f73d0e8e1a175bba604ae5e38b2d}\label{classcl_1_1_kernel_a16d2f73d0e8e1a175bba604ae5e38b2d}} 
+{\footnotesize template$<$int index, int Array\+Length, typename T0 , class D $>$ }\\void {\bfseries set\+SVMPointers\+Helper} (std\+::array$<$ void $\ast$, Array\+Length $>$ \&pointer\+List, const pointer$<$ T0, D $>$ \&t0)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_afef1f3539dcf18238b9518db9bf31842}\label{classcl_1_1_kernel_afef1f3539dcf18238b9518db9bf31842}} 
+{\footnotesize template$<$int index, int Array\+Length, typename T0 $>$ }\\std\+::enable\+\_\+if$<$ std\+::is\+\_\+pointer$<$ T0 $>$\+::value, void $>$\+::type {\bfseries set\+SVMPointers\+Helper} (std\+::array$<$ void $\ast$, Array\+Length $>$ \&pointer\+List, T0 t0)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a4ecc854da95b1d0c12a8072d9efb41df}\label{classcl_1_1_kernel_a4ecc854da95b1d0c12a8072d9efb41df}} 
+{\footnotesize template$<$typename T0 , typename... Ts$>$ }\\cl\+\_\+int {\bfseries set\+SVMPointers} (const T0 \&t0, Ts \&... ts)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a85ecb20acddef088e63d91af4ca71976}\label{classcl_1_1_kernel_a85ecb20acddef088e63d91af4ca71976}} 
+{\footnotesize template$<$typename T $>$ }\\cl\+\_\+int {\bfseries set\+Exec\+Info} (cl\+\_\+kernel\+\_\+exec\+\_\+info param\+\_\+name, const T \&val)
+\item 
+\mbox{\Hypertarget{classcl_1_1_kernel_a5839ea6d2e1fe0fc4068d964e1875e7e}\label{classcl_1_1_kernel_a5839ea6d2e1fe0fc4068d964e1875e7e}} 
+{\footnotesize template$<$cl\+\_\+kernel\+\_\+exec\+\_\+info name$>$ }\\cl\+\_\+int {\bfseries set\+Exec\+Info} (typename \mbox{\hyperlink{structcl_1_1detail_1_1param__traits}{detail\+::param\+\_\+traits}}$<$ detail\+::cl\+\_\+kernel\+\_\+exec\+\_\+info, name $>$\+::param\+\_\+type \&val)
+\item 
+\mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \mbox{\hyperlink{classcl_1_1_kernel_aec57511d2e4ef1080c27918f79bcb917}{clone}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class interface for cl\+\_\+kernel. 
+
+\begin{DoxyNote}{Note}
+Copies of these objects are shallow, meaning that the copy will refer to the same underlying cl\+\_\+kernel as the original. For details, see cl\+Retain\+Kernel() and cl\+Release\+Kernel().
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+cl\+\_\+kernel 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_kernel_aaeecc4a7a7a3bed7f8c7d22563b78384}\label{classcl_1_1_kernel_aaeecc4a7a7a3bed7f8c7d22563b78384}} 
+\index{cl::Kernel@{cl::Kernel}!Kernel@{Kernel}}
+\index{Kernel@{Kernel}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{Kernel()}{Kernel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+CL\+\_\+\+EXPLICIT\+\_\+\+CONSTRUCTORS cl\+::\+Kernel\+::\+Kernel (\begin{DoxyParamCaption}\item[{const cl\+\_\+kernel \&}]{kernel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor from cl\+\_\+kernel -\/ takes ownership. 
+
+This effectively transfers ownership of a refcount on the cl\+\_\+kernel into the new \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} object. \mbox{\Hypertarget{classcl_1_1_kernel_a0c71f37cb53fbe492847fbb2dff2bfed}\label{classcl_1_1_kernel_a0c71f37cb53fbe492847fbb2dff2bfed}} 
+\index{cl::Kernel@{cl::Kernel}!Kernel@{Kernel}}
+\index{Kernel@{Kernel}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{Kernel()}{Kernel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cl\+::\+Kernel\+::\+Kernel (\begin{DoxyParamCaption}\item[{const cl\+\_\+kernel \&}]{kernel,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+kernel -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions. This effectively transfers ownership of a refcount on the cl\+\_\+kernel into the new \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} object. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_kernel_aec57511d2e4ef1080c27918f79bcb917}\label{classcl_1_1_kernel_aec57511d2e4ef1080c27918f79bcb917}} 
+\index{cl::Kernel@{cl::Kernel}!clone@{clone}}
+\index{clone@{clone}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} cl\+::\+Kernel\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Make a deep copy of the kernel object including its arguments. \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a}{A}} new kernel object with internal state entirely separate from that of the original but with any arguments set on the original intact. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcl_1_1_kernel_aed996666686cddb41d660839e709fcd0}\label{classcl_1_1_kernel_aed996666686cddb41d660839e709fcd0}} 
+\index{cl::Kernel@{cl::Kernel}!enableFineGrainedSystemSVM@{enableFineGrainedSystemSVM}}
+\index{enableFineGrainedSystemSVM@{enableFineGrainedSystemSVM}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{enableFineGrainedSystemSVM()}{enableFineGrainedSystemSVM()}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Kernel\+::enable\+Fine\+Grained\+System\+SVM (\begin{DoxyParamCaption}\item[{bool}]{svm\+Enabled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enable fine-\/grained system SVM. 
+
+\begin{DoxyNote}{Note}
+It is only possible to enable fine-\/grained system SVM if all devices in the context associated with kernel support it.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em svm\+Enabled} & True if fine-\/grained system SVM is requested. False otherwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+CL\+\_\+\+SUCCESS if the function was executed succesfully. CL\+\_\+\+INVALID\+\_\+\+OPERATION if no devices in the context support fine-\/grained system SVM.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+cl\+Set\+Kernel\+Exec\+Info 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classcl_1_1_kernel_ab9fbaa8ff250cc478a84387c017493f0}\label{classcl_1_1_kernel_ab9fbaa8ff250cc478a84387c017493f0}} 
+\index{cl::Kernel@{cl::Kernel}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \& cl\+::\+Kernel\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+kernel \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment operator from cl\+\_\+kernel -\/ takes ownership. 
+
+This effectively transfers ownership of a refcount on the rhs and calls cl\+Release\+Kernel() on the value previously held by this instance. \mbox{\Hypertarget{classcl_1_1_kernel_ab9fbaa8ff250cc478a84387c017493f0}\label{classcl_1_1_kernel_ab9fbaa8ff250cc478a84387c017493f0}} 
+\index{cl::Kernel@{cl::Kernel}!operator=@{operator=}}
+\index{operator=@{operator=}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcl_1_1_kernel}{Kernel}} \& cl\+::\+Kernel\+::operator= (\begin{DoxyParamCaption}\item[{const cl\+\_\+kernel \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment operator from cl\+\_\+kernel -\/ takes ownership. 
+
+This effectively transfers ownership of a refcount on the rhs and calls cl\+Release\+Kernel() on the value previously held by this instance. \mbox{\Hypertarget{classcl_1_1_kernel_abadacb0037f711f3460cf5c44b2d4796}\label{classcl_1_1_kernel_abadacb0037f711f3460cf5c44b2d4796}} 
+\index{cl::Kernel@{cl::Kernel}!setSVMPointers@{setSVMPointers}}
+\index{setSVMPointers@{setSVMPointers}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{setSVMPointers()}{setSVMPointers()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$int Array\+Length$>$ \\
+cl\+\_\+int cl\+::\+Kernel\+::set\+SVMPointers (\begin{DoxyParamCaption}\item[{const std\+::array$<$ void $\ast$, Array\+Length $>$ \&}]{pointer\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Specify a std\+::array of SVM pointers that the kernel may access in addition to its arguments. \mbox{\Hypertarget{classcl_1_1_kernel_a36633bcfea86c512cbb4fd9b20c6087e}\label{classcl_1_1_kernel_a36633bcfea86c512cbb4fd9b20c6087e}} 
+\index{cl::Kernel@{cl::Kernel}!setSVMPointers@{setSVMPointers}}
+\index{setSVMPointers@{setSVMPointers}!cl::Kernel@{cl::Kernel}}
+\doxysubsubsection{\texorpdfstring{setSVMPointers()}{setSVMPointers()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+Kernel\+::set\+SVMPointers (\begin{DoxyParamCaption}\item[{const vector$<$ void $\ast$ $>$ \&}]{pointer\+List }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Specify a vector of SVM pointers that the kernel may access in addition to its arguments. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{cl_8hpp}{cl.\+hpp}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

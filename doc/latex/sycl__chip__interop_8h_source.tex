@@ -1,0 +1,25 @@
+\hypertarget{sycl__chip__interop_8h_source}{}\doxysection{sycl\+\_\+chip\+\_\+interop.\+h}
+\label{sycl__chip__interop_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/samples/sycl\_hip\_interop/sycl\_chip\_interop.h@{/Users/pvelesko/local/CHIP-\/SPV/samples/sycl\_hip\_interop/sycl\_chip\_interop.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef \_\_sycl\_chip\_interop\_H\_\_}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define \_\_sycl\_chip\_interop\_H\_\_}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{5 \textcolor{comment}{// Initialize CHIP-\/SPV Level-\/Zero Backend via providing native runtime}}
+\DoxyCodeLine{6 \textcolor{comment}{// information}}
+\DoxyCodeLine{7 \textcolor{keywordtype}{int} hipInitFromOutside(\textcolor{keywordtype}{void}* driverPtr, \textcolor{keywordtype}{void}* deviePtr, \textcolor{keywordtype}{void}* contextPtr,}
+\DoxyCodeLine{8                        \textcolor{keywordtype}{void}* queueptr);}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{comment}{// Run GEMM test via CHIP-\/SPV Level-\/Zero Backend via USM data transfer}}
+\DoxyCodeLine{11 \textcolor{keywordtype}{int} hipMatrixMultiplicationUSMTest(\textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{class_a}{A}}, \textcolor{keyword}{const} \textcolor{keywordtype}{float}* B, \textcolor{keywordtype}{float}* C,}
+\DoxyCodeLine{12                                    \textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N);}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{// Run GEMM test via CHIP-\/SPV Level-\/Zero Backend}}
+\DoxyCodeLine{15 \textcolor{keywordtype}{int} hipMatrixMultiplicationTest(\textcolor{keyword}{const} \textcolor{keywordtype}{float}* \mbox{\hyperlink{class_a}{A}}, \textcolor{keyword}{const} \textcolor{keywordtype}{float}* B, \textcolor{keywordtype}{float}* C, \textcolor{keywordtype}{int} M,}
+\DoxyCodeLine{16                                 \textcolor{keywordtype}{int} N);}
+\DoxyCodeLine{17 \}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

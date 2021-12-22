@@ -24,11 +24,10 @@ Inheritance diagram for CHIPBackend\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_c_h_i_p_backend_a32a882a442b96fb178e6a8eafa5f38cf}\label{class_c_h_i_p_backend_a32a882a442b96fb178e6a8eafa5f38cf}} 
 {\bfseries $\sim$\+CHIPBackend} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_c_h_i_p_backend}{CHIPBackend}} objectk. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_c_h_i_p_backend_a4a6fcbc6ebcd65e7ae42d9faca085238}{initialize}} (std\+::string platform\+\_\+str, std\+::string device\+\_\+type\+\_\+str, std\+::string device\+\_\+ids\+\_\+str)
+void \mbox{\hyperlink{class_c_h_i_p_backend_a4a6fcbc6ebcd65e7ae42d9faca085238}{initialize}} (std\+::string platform\+\_\+str, std\+::string device\+\_\+type\+\_\+str, std\+::string device\+\_\+ids\+\_\+str)
 \begin{DoxyCompactList}\small\item\em Initialize this backend with given environment flags. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_c_h_i_p_backend_a1feebf02400e235c83e3077d4c3ed3b5}\label{class_c_h_i_p_backend_a1feebf02400e235c83e3077d4c3ed3b5}} 
-virtual void {\bfseries initialize} ()=0
-\item 
+virtual void \mbox{\hyperlink{class_c_h_i_p_backend_a7760a3f08873929a938fe268bbc99e96}{initialize\+\_\+}} (std\+::string platform\+\_\+str, std\+::string device\+\_\+type\+\_\+str, std\+::string device\+\_\+ids\+\_\+str)=0
+\begin{DoxyCompactList}\small\item\em Initialize this backend with given environment flags. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_backend_a17e88d76e4d051b337571056a33f510f}\label{class_c_h_i_p_backend_a17e88d76e4d051b337571056a33f510f}} 
 virtual void {\bfseries uninitialize} ()=0
 \item 
@@ -67,16 +66,32 @@ virtual bool \mbox{\hyperlink{class_c_h_i_p_backend_a652a732a1a527e5c12b90d49b02
 \begin{DoxyCompactList}\small\item\em Register this function as a kernel for all devices initialized in this backend. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_backend_ae49a2aba857eebeb7ca7ecdb63f5826d}{find\+Device\+Matching\+Props}} (const hip\+Device\+Prop\+\_\+t $\ast$props)
 \begin{DoxyCompactList}\small\item\em Return a device which meets or exceeds the requirements. \end{DoxyCompactList}\item 
-hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_backend_a74f6eba63a841fe0234a597e26299227}{add\+Module}} (\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} $\ast$chip\+\_\+module)
+\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_backend_a82263576ceaf972d6252df8ca59d3ff5}{find\+Queue}} (\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$q)
+\begin{DoxyCompactList}\small\item\em Find a given queue in this backend. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_backend_a85bb57a5eb88c2c616dc6fee2a9d56b1}{create\+CHIPTexture}} (intptr\+\_\+t image\+\_\+, intptr\+\_\+t sampler\+\_\+)=0
 \begin{DoxyCompactList}\small\item\em Add a \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} to every initialized device. \end{DoxyCompactList}\item 
-hip\+Error\+\_\+t \mbox{\hyperlink{class_c_h_i_p_backend_a6a43733426c1ce74cc9f03727eb4ea51}{remove\+Module}} (\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} $\ast$chip\+\_\+module)
-\begin{DoxyCompactList}\small\item\em Remove this module from every device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{class_c_h_i_p_backend_a441a2fcb4222fdce2a4a95aeac3cb83c}\label{class_c_h_i_p_backend_a441a2fcb4222fdce2a4a95aeac3cb83c}} 
+virtual \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ {\bfseries create\+CHIPQueue} (\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$chip\+\_\+dev)=0
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_backend_a123cc9aee4b3d8b77c0659e334252a2b}\label{class_c_h_i_p_backend_a123cc9aee4b3d8b77c0659e334252a2b}} 
+virtual \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} $\ast$ {\bfseries create\+CHIPEvent} (\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$chip\+\_\+ctx\+\_\+, CHIPEvent\+Type event\+\_\+type\+\_\+)=0
+\item 
+virtual \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_backend_aedb8f6a7fa8f9fb8009c1c35eaeddbfc}{create\+Callback\+Data}} (hip\+Stream\+Callback\+\_\+t callback, void $\ast$user\+Data, \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$chip\+\_\+queue\+\_\+)=0
+\begin{DoxyCompactList}\small\item\em Create a Callback Obj object Each backend must implement this function which calls a derived \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_backend_a8c4b3aff671ec109d8b80c14e6ddcff6}\label{class_c_h_i_p_backend_a8c4b3aff671ec109d8b80c14e6ddcff6}} 
+virtual \mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEvent\+Monitor}} $\ast$ {\bfseries create\+Event\+Monitor} ()=0
+\item 
+bool \mbox{\hyperlink{class_c_h_i_p_backend_afca81a5e90ec8aedd9dbe317dc57ba40}{get\+Callback}} (\mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} $\ast$$\ast$callback\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Get the Callback object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_c_h_i_p_backend_a666504e278e70bd6c522a0f11fd2659f}\label{class_c_h_i_p_backend_a666504e278e70bd6c522a0f11fd2659f}} 
-\mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocation\+Tracker}} {\bfseries Allocation\+Tracker}
-\begin{DoxyCompactList}\small\item\em Keep track of pointers allocated on the device. Used to get info about allocaitons based on device poitner in case that find\+Pointer\+Info() is not overriden. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_backend_a64e50348a21584a2325fbb1de7c63595}\label{class_c_h_i_p_backend_a64e50348a21584a2325fbb1de7c63595}} 
+std\+::mutex {\bfseries callback\+\_\+stack\+\_\+mtx}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_backend_a4e4930f48e7b0dced56cec14597a1557}\label{class_c_h_i_p_backend_a4e4930f48e7b0dced56cec14597a1557}} 
+std\+::stack$<$ \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} $\ast$ $>$ {\bfseries callback\+\_\+stack}
+\item 
 \mbox{\Hypertarget{class_c_h_i_p_backend_a547b872d24efaf90f06439021db7da20}\label{class_c_h_i_p_backend_a547b872d24efaf90f06439021db7da20}} 
 std\+::stack$<$ \mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExec\+Item}} $\ast$ $>$ {\bfseries chip\+\_\+execstack}
 \item 
@@ -94,7 +109,7 @@ std\+::vector$<$ \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} $\ast$ $>$ 
 \item 
 \mbox{\Hypertarget{class_c_h_i_p_backend_a3bd7079feec8797b732cf991a558859c}\label{class_c_h_i_p_backend_a3bd7079feec8797b732cf991a558859c}} 
 static thread\+\_\+local hip\+Error\+\_\+t {\bfseries tls\+\_\+last\+\_\+error} = hip\+Success
-\item 
+\begin{DoxyCompactList}\small\item\em Keep track of pointers allocated on the device. Used to get info about allocaitons based on device poitner in case that find\+Pointer\+Info() is not overriden. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_c_h_i_p_backend_a23c04f1265e4e30775ee9cbbd61cd0a1}\label{class_c_h_i_p_backend_a23c04f1265e4e30775ee9cbbd61cd0a1}} 
 static thread\+\_\+local \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} $\ast$ {\bfseries tls\+\_\+active\+\_\+ctx}
 \end{DoxyCompactItemize}
@@ -152,24 +167,6 @@ Add a device to this backend.
 {\em dev\+\_\+in} & \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_c_h_i_p_backend_a74f6eba63a841fe0234a597e26299227}\label{class_c_h_i_p_backend_a74f6eba63a841fe0234a597e26299227}} 
-\index{CHIPBackend@{CHIPBackend}!addModule@{addModule}}
-\index{addModule@{addModule}!CHIPBackend@{CHIPBackend}}
-\doxysubsubsection{\texorpdfstring{addModule()}{addModule()}}
-{\footnotesize\ttfamily hip\+Error\+\_\+t CHIPBackend\+::add\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} $\ast$}]{chip\+\_\+module }\end{DoxyParamCaption})}
-
-
-
-Add a \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} to every initialized device. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em chip\+\_\+module} & pointer to \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} object \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-hip\+Error\+\_\+t 
-\end{DoxyReturn}
 \mbox{\Hypertarget{class_c_h_i_p_backend_a33b79f3321109309ca68f7c2e9a05b75}\label{class_c_h_i_p_backend_a33b79f3321109309ca68f7c2e9a05b75}} 
 \index{CHIPBackend@{CHIPBackend}!addQueue@{addQueue}}
 \index{addQueue@{addQueue}!CHIPBackend@{CHIPBackend}}
@@ -209,6 +206,55 @@ Configure an upcoming kernel call.
 \begin{DoxyReturn}{Returns}
 hip\+Error\+\_\+t 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_c_h_i_p_backend_aedb8f6a7fa8f9fb8009c1c35eaeddbfc}\label{class_c_h_i_p_backend_aedb8f6a7fa8f9fb8009c1c35eaeddbfc}} 
+\index{CHIPBackend@{CHIPBackend}!createCallbackData@{createCallbackData}}
+\index{createCallbackData@{createCallbackData}!CHIPBackend@{CHIPBackend}}
+\doxysubsubsection{\texorpdfstring{createCallbackData()}{createCallbackData()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} $\ast$ CHIPBackend\+::create\+Callback\+Data (\begin{DoxyParamCaption}\item[{hip\+Stream\+Callback\+\_\+t}]{callback,  }\item[{void $\ast$}]{user\+Data,  }\item[{\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$}]{chip\+\_\+queue\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Create a Callback Obj object Each backend must implement this function which calls a derived \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} constructor. 
+
+\begin{DoxyReturn}{Returns}
+CHIPCallback\+Data$\ast$ pointer to newly allocated \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} object. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_c_h_i_p_backend_level0_ad6eba47ba10bd042c59acb2e1325170a}{CHIPBackend\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_backend_open_c_l_a4f45af540dd135a417e6dcb4e01e6fe8}{CHIPBackend\+Open\+CL}}.
+
+\mbox{\Hypertarget{class_c_h_i_p_backend_a85bb57a5eb88c2c616dc6fee2a9d56b1}\label{class_c_h_i_p_backend_a85bb57a5eb88c2c616dc6fee2a9d56b1}} 
+\index{CHIPBackend@{CHIPBackend}!createCHIPTexture@{createCHIPTexture}}
+\index{createCHIPTexture@{createCHIPTexture}!CHIPBackend@{CHIPBackend}}
+\doxysubsubsection{\texorpdfstring{createCHIPTexture()}{createCHIPTexture()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}} $\ast$ CHIPBackend\+::create\+CHIPTexture (\begin{DoxyParamCaption}\item[{intptr\+\_\+t}]{image\+\_\+,  }\item[{intptr\+\_\+t}]{sampler\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Add a \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} to every initialized device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chip\+\_\+module} & pointer to \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+hip\+Error\+\_\+t
+\end{DoxyReturn}
+Remove this module from every device
+
+
+\begin{DoxyParams}{Parameters}
+{\em chip\+\_\+module} & pointer to the module which is to be removed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+hip\+Error\+\_\+t 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_c_h_i_p_backend_level0_ad8b917cecc67cbf934a02bd34cdc8e95}{CHIPBackend\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_backend_open_c_l_a0088a8f34d7bae78582a197ba7cc4ff8}{CHIPBackend\+Open\+CL}}.
+
 \mbox{\Hypertarget{class_c_h_i_p_backend_ae49a2aba857eebeb7ca7ecdb63f5826d}\label{class_c_h_i_p_backend_ae49a2aba857eebeb7ca7ecdb63f5826d}} 
 \index{CHIPBackend@{CHIPBackend}!findDeviceMatchingProps@{findDeviceMatchingProps}}
 \index{findDeviceMatchingProps@{findDeviceMatchingProps}!CHIPBackend@{CHIPBackend}}
@@ -226,6 +272,24 @@ Return a device which meets or exceeds the requirements.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 CHIPDevice$\ast$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_h_i_p_backend_a82263576ceaf972d6252df8ca59d3ff5}\label{class_c_h_i_p_backend_a82263576ceaf972d6252df8ca59d3ff5}} 
+\index{CHIPBackend@{CHIPBackend}!findQueue@{findQueue}}
+\index{findQueue@{findQueue}!CHIPBackend@{CHIPBackend}}
+\doxysubsubsection{\texorpdfstring{findQueue()}{findQueue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$ CHIPBackend\+::find\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} $\ast$}]{q }\end{DoxyParamCaption})}
+
+
+
+Find a given queue in this backend. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & queue to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+CHIPQueue$\ast$ return queue or nullptr if not found 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_c_h_i_p_backend_a6aa8c4c8dec9f2f6a43bff2212e8c684}\label{class_c_h_i_p_backend_a6aa8c4c8dec9f2f6a43bff2212e8c684}} 
 \index{CHIPBackend@{CHIPBackend}!getActiveContext@{getActiveContext}}
@@ -265,6 +329,26 @@ Get the Active Queue object.
 
 \begin{DoxyReturn}{Returns}
 CHIPQueue$\ast$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_h_i_p_backend_afca81a5e90ec8aedd9dbe317dc57ba40}\label{class_c_h_i_p_backend_afca81a5e90ec8aedd9dbe317dc57ba40}} 
+\index{CHIPBackend@{CHIPBackend}!getCallback@{getCallback}}
+\index{getCallback@{getCallback}!CHIPBackend@{CHIPBackend}}
+\doxysubsubsection{\texorpdfstring{getCallback()}{getCallback()}}
+{\footnotesize\ttfamily bool CHIPBackend\+::get\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallback\+Data}} $\ast$$\ast$}]{callback\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the Callback object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback\+\_\+data} & pointer to callback object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true callback object available 
+
+false callback object not available 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_c_h_i_p_backend_a3d3e11a25d6f8e1ccc56f2f591b3d41f}\label{class_c_h_i_p_backend_a3d3e11a25d6f8e1ccc56f2f591b3d41f}} 
 \index{CHIPBackend@{CHIPBackend}!getModulesStr@{getModulesStr}}
@@ -309,7 +393,26 @@ std\+::vector$<$\+CHIPQueue$\ast$$>$\&
 \index{CHIPBackend@{CHIPBackend}!initialize@{initialize}}
 \index{initialize@{initialize}!CHIPBackend@{CHIPBackend}}
 \doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
-{\footnotesize\ttfamily void CHIPBackend\+::initialize (\begin{DoxyParamCaption}\item[{std\+::string}]{platform\+\_\+str,  }\item[{std\+::string}]{device\+\_\+type\+\_\+str,  }\item[{std\+::string}]{device\+\_\+ids\+\_\+str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily void CHIPBackend\+::initialize (\begin{DoxyParamCaption}\item[{std\+::string}]{platform\+\_\+str,  }\item[{std\+::string}]{device\+\_\+type\+\_\+str,  }\item[{std\+::string}]{device\+\_\+ids\+\_\+str }\end{DoxyParamCaption})}
+
+
+
+Initialize this backend with given environment flags. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em platform\+\_\+str} & \\
+\hline
+{\em device\+\_\+type\+\_\+str} & \\
+\hline
+{\em device\+\_\+ids\+\_\+str} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_h_i_p_backend_a7760a3f08873929a938fe268bbc99e96}\label{class_c_h_i_p_backend_a7760a3f08873929a938fe268bbc99e96}} 
+\index{CHIPBackend@{CHIPBackend}!initialize\_@{initialize\_}}
+\index{initialize\_@{initialize\_}!CHIPBackend@{CHIPBackend}}
+\doxysubsubsection{\texorpdfstring{initialize\_()}{initialize\_()}}
+{\footnotesize\ttfamily virtual void CHIPBackend\+::initialize\+\_\+ (\begin{DoxyParamCaption}\item[{std\+::string}]{platform\+\_\+str,  }\item[{std\+::string}]{device\+\_\+type\+\_\+str,  }\item[{std\+::string}]{device\+\_\+ids\+\_\+str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -326,7 +429,7 @@ Initialize this backend with given environment flags.
 \end{DoxyParams}
 
 
-Reimplemented in \mbox{\hyperlink{class_c_h_i_p_backend_level0_a9ca8b3d935593a3f9788dfd836e2ffa7}{CHIPBackend\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_backend_open_c_l_ab829c228e2382ddbb057e242ec4d5c6e}{CHIPBackend\+Open\+CL}}.
+Implemented in \mbox{\hyperlink{class_c_h_i_p_backend_level0_a37d93fb1117415fdb80ae0e45a1b619c}{CHIPBackend\+Level0}}, and \mbox{\hyperlink{class_c_h_i_p_backend_open_c_l_af520a9da68d9cc2f0da46de8c9ea2797}{CHIPBackend\+Open\+CL}}.
 
 \mbox{\Hypertarget{class_c_h_i_p_backend_a652a732a1a527e5c12b90d49b029897f}\label{class_c_h_i_p_backend_a652a732a1a527e5c12b90d49b029897f}} 
 \index{CHIPBackend@{CHIPBackend}!registerFunctionAsKernel@{registerFunctionAsKernel}}
@@ -377,24 +480,6 @@ false
 {\em mod\+\_\+str} & \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_c_h_i_p_backend_a6a43733426c1ce74cc9f03727eb4ea51}\label{class_c_h_i_p_backend_a6a43733426c1ce74cc9f03727eb4ea51}} 
-\index{CHIPBackend@{CHIPBackend}!removeModule@{removeModule}}
-\index{removeModule@{removeModule}!CHIPBackend@{CHIPBackend}}
-\doxysubsubsection{\texorpdfstring{removeModule()}{removeModule()}}
-{\footnotesize\ttfamily hip\+Error\+\_\+t CHIPBackend\+::remove\+Module (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} $\ast$}]{chip\+\_\+module }\end{DoxyParamCaption})}
-
-
-
-Remove this module from every device. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em chip\+\_\+module} & pointer to the module which is to be removed \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-hip\+Error\+\_\+t 
-\end{DoxyReturn}
 \mbox{\Hypertarget{class_c_h_i_p_backend_aa155d872ebff76e734ab484be7a36e85}\label{class_c_h_i_p_backend_aa155d872ebff76e734ab484be7a36e85}} 
 \index{CHIPBackend@{CHIPBackend}!setActiveDevice@{setActiveDevice}}
 \index{setActiveDevice@{setActiveDevice}!CHIPBackend@{CHIPBackend}}
@@ -447,5 +532,5 @@ hip\+Error\+\_\+t
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
-/\+Users/pvelesko/local/\+HIPxx/src/CHIPBackend.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/CHIPBackend.\+cc\end{DoxyCompactItemize}

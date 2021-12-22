@@ -12,14 +12,59 @@ Class for keeping track of device allocations.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{class_c_h_i_p_allocation_tracker_ac0802b0677c3cb64400fcb85b44d750b}{CHIPAllocation\+Tracker}} (size\+\_\+t global\+\_\+mem\+\_\+size\+\_\+, std\+::string name\+\_\+)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocation\+Tracker}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_aa1af7b5eb5f8ee53db36cf54d787527a}\label{class_c_h_i_p_allocation_tracker_aa1af7b5eb5f8ee53db36cf54d787527a}} 
+{\bfseries $\sim$\+CHIPAllocation\+Tracker} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocation\+Tracker}} object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_afe77cb55e816e947538f086628d917ed}{get\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the Name object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structallocation__info}{allocation\+\_\+info}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a1bb390011b14cbbadbc474c78efe3fe4}{get\+By\+Host\+Ptr}} (const void $\ast$)
 \begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{structallocation__info}{allocation\+\_\+info}} based on host pointer. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structallocation__info}{allocation\+\_\+info}} $\ast$ \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_af9ae5c2c59ca00cca00a7c85aa8a0f68}{get\+By\+Dev\+Ptr}} (const void $\ast$)
-\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{structallocation__info}{allocation\+\_\+info}} based on device pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{structallocation__info}{allocation\+\_\+info}} based on device pointer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a335d9e806c72fb65a0359026058c2775}{reserve\+Mem}} (size\+\_\+t bytes)
+\begin{DoxyCompactList}\small\item\em Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a46d1cf5b6d07e19424c6f7f1369c3202}{release\+Mem\+Reservation}} (size\+\_\+t bytes)
+\begin{DoxyCompactList}\small\item\em Release some of the reserved memory. Called by free() \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a45057c59e2b56470d717f3b0814629e1}{record\+Allocation}} (void $\ast$dev\+\_\+ptr, size\+\_\+t size\+\_\+)
+\begin{DoxyCompactList}\small\item\em Record the pointer received from \mbox{\hyperlink{class_c_h_i_p_context_a3ad920ded6df2e7a66396ed77ab442b2}{CHIPContext\+::allocate\+\_\+()}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_a62cbdb4cda95b7d938c7cb08d0d0db10}\label{class_c_h_i_p_allocation_tracker_a62cbdb4cda95b7d938c7cb08d0d0db10}} 
+size\+\_\+t {\bfseries global\+\_\+mem\+\_\+size}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_a368d330189e4fc9dad046f61b94580f4}\label{class_c_h_i_p_allocation_tracker_a368d330189e4fc9dad046f61b94580f4}} 
+size\+\_\+t {\bfseries total\+\_\+mem\+\_\+used}
+\item 
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_a114b879084ab6ac54899cbb771154bec}\label{class_c_h_i_p_allocation_tracker_a114b879084ab6ac54899cbb771154bec}} 
+size\+\_\+t {\bfseries max\+\_\+mem\+\_\+used}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class for keeping track of device allocations. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_ac0802b0677c3cb64400fcb85b44d750b}\label{class_c_h_i_p_allocation_tracker_ac0802b0677c3cb64400fcb85b44d750b}} 
+\index{CHIPAllocationTracker@{CHIPAllocationTracker}!CHIPAllocationTracker@{CHIPAllocationTracker}}
+\index{CHIPAllocationTracker@{CHIPAllocationTracker}!CHIPAllocationTracker@{CHIPAllocationTracker}}
+\doxysubsubsection{\texorpdfstring{CHIPAllocationTracker()}{CHIPAllocationTracker()}}
+{\footnotesize\ttfamily CHIPAllocation\+Tracker\+::\+CHIPAllocation\+Tracker (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{global\+\_\+mem\+\_\+size\+\_\+,  }\item[{std\+::string}]{name\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocation\+Tracker}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+\_\+mem\+\_\+size\+\_\+} & Total available global memory on the device \\
+\hline
+{\em name\+\_\+} & name for this allocation tracker for logging. Normally device name \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_af9ae5c2c59ca00cca00a7c85aa8a0f68}\label{class_c_h_i_p_allocation_tracker_af9ae5c2c59ca00cca00a7c85aa8a0f68}} 
@@ -48,9 +93,77 @@ Get \mbox{\hyperlink{structallocation__info}{allocation\+\_\+info}} based on hos
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{structallocation__info}{allocation\+\_\+info}} contains the base pointer and allocation size; 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_afe77cb55e816e947538f086628d917ed}\label{class_c_h_i_p_allocation_tracker_afe77cb55e816e947538f086628d917ed}} 
+\index{CHIPAllocationTracker@{CHIPAllocationTracker}!getName@{getName}}
+\index{getName@{getName}!CHIPAllocationTracker@{CHIPAllocationTracker}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string CHIPAllocation\+Tracker\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Name object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_a45057c59e2b56470d717f3b0814629e1}\label{class_c_h_i_p_allocation_tracker_a45057c59e2b56470d717f3b0814629e1}} 
+\index{CHIPAllocationTracker@{CHIPAllocationTracker}!recordAllocation@{recordAllocation}}
+\index{recordAllocation@{recordAllocation}!CHIPAllocationTracker@{CHIPAllocationTracker}}
+\doxysubsubsection{\texorpdfstring{recordAllocation()}{recordAllocation()}}
+{\footnotesize\ttfamily void CHIPAllocation\+Tracker\+::record\+Allocation (\begin{DoxyParamCaption}\item[{void $\ast$}]{dev\+\_\+ptr,  }\item[{size\+\_\+t}]{size\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Record the pointer received from \mbox{\hyperlink{class_c_h_i_p_context_a3ad920ded6df2e7a66396ed77ab442b2}{CHIPContext\+::allocate\+\_\+()}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dev\+\_\+ptr} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_a46d1cf5b6d07e19424c6f7f1369c3202}\label{class_c_h_i_p_allocation_tracker_a46d1cf5b6d07e19424c6f7f1369c3202}} 
+\index{CHIPAllocationTracker@{CHIPAllocationTracker}!releaseMemReservation@{releaseMemReservation}}
+\index{releaseMemReservation@{releaseMemReservation}!CHIPAllocationTracker@{CHIPAllocationTracker}}
+\doxysubsubsection{\texorpdfstring{releaseMemReservation()}{releaseMemReservation()}}
+{\footnotesize\ttfamily bool CHIPAllocation\+Tracker\+::release\+Mem\+Reservation (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{bytes }\end{DoxyParamCaption})}
+
+
+
+Release some of the reserved memory. Called by free() 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_h_i_p_allocation_tracker_a335d9e806c72fb65a0359026058c2775}\label{class_c_h_i_p_allocation_tracker_a335d9e806c72fb65a0359026058c2775}} 
+\index{CHIPAllocationTracker@{CHIPAllocationTracker}!reserveMem@{reserveMem}}
+\index{reserveMem@{reserveMem}!CHIPAllocationTracker@{CHIPAllocationTracker}}
+\doxysubsubsection{\texorpdfstring{reserveMem()}{reserveMem()}}
+{\footnotesize\ttfamily bool CHIPAllocation\+Tracker\+::reserve\+Mem (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{bytes }\end{DoxyParamCaption})}
+
+
+
+Reserve memory for an allocation. This method is run prior to allocations to keep track of how much memory is available on the device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Reservation successful 
+
+false Not enough available memory for reservation of this size. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/pvelesko/local/\+HIPxx/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
-/\+Users/pvelesko/local/\+HIPxx/src/CHIPBackend.\+cc\end{DoxyCompactItemize}
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/\mbox{\hyperlink{_c_h_i_p_backend_8hh}{CHIPBackend.\+hh}}\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/src/CHIPBackend.\+cc\end{DoxyCompactItemize}

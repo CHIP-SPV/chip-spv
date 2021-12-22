@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['populatedeviceproperties_0',['populateDeviceProperties',['../class_c_h_i_p_device.html#ab8fb4cdbe080397c5639d2d742c33f2b',1,'CHIPDevice::populateDeviceProperties()'],['../class_c_h_i_p_device_open_c_l.html#af4a2ab7d0d56063710d875ab2505755f',1,'CHIPDeviceOpenCL::populateDeviceProperties()'],['../class_c_h_i_p_device_level0.html#abaf4099949c7c45c133d16feeb37956c',1,'CHIPDeviceLevel0::populateDeviceProperties()']]]
+  ['populatedeviceproperties_0',['populateDeviceProperties',['../class_c_h_i_p_device.html#a5194693b5813c5bc1551d293d48b3899',1,'CHIPDevice']]],
+  ['populatedeviceproperties_5f_1',['populateDeviceProperties_',['../class_c_h_i_p_device_level0.html#a76728b527fe3f8570a9f6402e1a0ee52',1,'CHIPDeviceLevel0::populateDeviceProperties_()'],['../class_c_h_i_p_device_open_c_l.html#a7baeebbfab0342cb95a0df689a6af50b',1,'CHIPDeviceOpenCL::populateDeviceProperties_()'],['../class_c_h_i_p_device.html#aa7bfa85e318cda92cfe5c5cc394f6eca',1,'CHIPDevice::populateDeviceProperties_()']]]
 ];

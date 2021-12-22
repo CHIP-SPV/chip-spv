@@ -1,0 +1,1171 @@
+\hypertarget{clara_8hpp_source}{}\doxysection{clara.\+hpp}
+\label{clara_8hpp_source}\index{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/clara/clara.hpp@{/Users/pvelesko/local/CHIP-\/SPV/HIP/tests/src/clara/clara.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// v1.0-\/develop.2}}
+\DoxyCodeLine{2 \textcolor{comment}{// See https://github.com/philsquared/Clara}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#ifndef CLARA\_HPP\_INCLUDED}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#define CLARA\_HPP\_INCLUDED}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef CLARA\_CONFIG\_CONSOLE\_WIDTH}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define CLARA\_CONFIG\_CONSOLE\_WIDTH 80}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef CLARA\_TEXTFLOW\_CONFIG\_CONSOLE\_WIDTH}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define CLARA\_TEXTFLOW\_CONFIG\_CONSOLE\_WIDTH CLARA\_CONFIG\_CONSOLE\_WIDTH}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ \#included from clara\_textflow.hpp -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{comment}{// TextFlowCpp}}
+\DoxyCodeLine{18 \textcolor{comment}{//}}
+\DoxyCodeLine{19 \textcolor{comment}{// A single-\/header library for wrapping and laying out basic text, by Phil Nash}}
+\DoxyCodeLine{20 \textcolor{comment}{//}}
+\DoxyCodeLine{21 \textcolor{comment}{// This work is licensed under the BSD 2-\/Clause license.}}
+\DoxyCodeLine{22 \textcolor{comment}{// See the accompanying LICENSE file, or the one at https://opensource.org/licenses/BSD-\/2-\/Clause}}
+\DoxyCodeLine{23 \textcolor{comment}{//}}
+\DoxyCodeLine{24 \textcolor{comment}{// This project is hosted at https://github.com/philsquared/textflowcpp}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#ifndef CLARA\_TEXTFLOW\_HPP\_INCLUDED}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define CLARA\_TEXTFLOW\_HPP\_INCLUDED}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <ostream>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#ifndef CLARA\_TEXTFLOW\_CONFIG\_CONSOLE\_WIDTH}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define CLARA\_TEXTFLOW\_CONFIG\_CONSOLE\_WIDTH 80}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{namespace }clara \{}
+\DoxyCodeLine{40 \textcolor{keyword}{namespace }TextFlow \{}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{inline} \textcolor{keyword}{auto} isWhitespace(\textcolor{keywordtype}{char} c) -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{43     \textcolor{keyword}{static} std::string chars = \textcolor{stringliteral}{"{} \(\backslash\)t\(\backslash\)n\(\backslash\)r"{}};}
+\DoxyCodeLine{44     \textcolor{keywordflow}{return} chars.find(c) != std::string::npos;}
+\DoxyCodeLine{45 \}}
+\DoxyCodeLine{46 \textcolor{keyword}{inline} \textcolor{keyword}{auto} isBreakableBefore(\textcolor{keywordtype}{char} c) -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{47     \textcolor{keyword}{static} std::string chars = \textcolor{stringliteral}{"{}[(\{<|"{}};}
+\DoxyCodeLine{48     \textcolor{keywordflow}{return} chars.find(c) != std::string::npos;}
+\DoxyCodeLine{49 \}}
+\DoxyCodeLine{50 \textcolor{keyword}{inline} \textcolor{keyword}{auto} isBreakableAfter(\textcolor{keywordtype}{char} c) -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{51     \textcolor{keyword}{static} std::string chars = \textcolor{stringliteral}{"{}])\}>.,:;*+-\/=\&/\(\backslash\)\(\backslash\)"{}};}
+\DoxyCodeLine{52     \textcolor{keywordflow}{return} chars.find(c) != std::string::npos;}
+\DoxyCodeLine{53 \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{keyword}{class }Columns;}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}} \{}
+\DoxyCodeLine{58     std::vector<std::string> m\_strings;}
+\DoxyCodeLine{59     \textcolor{keywordtype}{size\_t} m\_width = CLARA\_TEXTFLOW\_CONFIG\_CONSOLE\_WIDTH;}
+\DoxyCodeLine{60     \textcolor{keywordtype}{size\_t} m\_indent = 0;}
+\DoxyCodeLine{61     \textcolor{keywordtype}{size\_t} m\_initialIndent = std::string::npos;}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63    \textcolor{keyword}{public}:}
+\DoxyCodeLine{64     \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}} \{}
+\DoxyCodeLine{65         \textcolor{keyword}{friend} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}} \textcolor{keyword}{const}\& m\_column;}
+\DoxyCodeLine{68         \textcolor{keywordtype}{size\_t} m\_stringIndex = 0;}
+\DoxyCodeLine{69         \textcolor{keywordtype}{size\_t} m\_pos = 0;}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \textcolor{keywordtype}{size\_t} m\_len = 0;}
+\DoxyCodeLine{72         \textcolor{keywordtype}{size\_t} m\_end = 0;}
+\DoxyCodeLine{73         \textcolor{keywordtype}{bool} m\_suffix = \textcolor{keyword}{false};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}}(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}} \textcolor{keyword}{const}\& column, \textcolor{keywordtype}{size\_t} stringIndex)}
+\DoxyCodeLine{76             : m\_column(column), m\_stringIndex(stringIndex) \{\}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{keyword}{auto} line() \textcolor{keyword}{const} -\/> std::string \textcolor{keyword}{const}\& \{ \textcolor{keywordflow}{return} m\_column.m\_strings[m\_stringIndex]; \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{keyword}{auto} isBoundary(\textcolor{keywordtype}{size\_t} at) \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{81             assert(at > 0);}
+\DoxyCodeLine{82             assert(at <= line().size());}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84             \textcolor{keywordflow}{return} at == line().size() ||}
+\DoxyCodeLine{85                    (isWhitespace(line()[at]) \&\& !isWhitespace(line()[at -\/ 1])) ||}
+\DoxyCodeLine{86                    isBreakableBefore(line()[at]) || isBreakableAfter(line()[at -\/ 1]);}
+\DoxyCodeLine{87         \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         \textcolor{keywordtype}{void} calcLength() \{}
+\DoxyCodeLine{90             assert(m\_stringIndex < m\_column.m\_strings.size());}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92             m\_suffix = \textcolor{keyword}{false};}
+\DoxyCodeLine{93             \textcolor{keyword}{auto} width = m\_column.m\_width -\/ indent();}
+\DoxyCodeLine{94             m\_end = m\_pos;}
+\DoxyCodeLine{95             \textcolor{keywordflow}{while} (m\_end < line().size() \&\& line()[m\_end] != \textcolor{charliteral}{'\(\backslash\)n'}) ++m\_end;}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97             \textcolor{keywordflow}{if} (m\_end < m\_pos + width) \{}
+\DoxyCodeLine{98                 m\_len = m\_end -\/ m\_pos;}
+\DoxyCodeLine{99             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{100                 \textcolor{keywordtype}{size\_t} len = width;}
+\DoxyCodeLine{101                 \textcolor{keywordflow}{while} (len > 0 \&\& !isBoundary(m\_pos + len)) -\/-\/len;}
+\DoxyCodeLine{102                 \textcolor{keywordflow}{while} (len > 0 \&\& isWhitespace(line()[m\_pos + len -\/ 1])) -\/-\/len;}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104                 \textcolor{keywordflow}{if} (len > 0) \{}
+\DoxyCodeLine{105                     m\_len = len;}
+\DoxyCodeLine{106                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{107                     m\_suffix = \textcolor{keyword}{true};}
+\DoxyCodeLine{108                     m\_len = width -\/ 1;}
+\DoxyCodeLine{109                 \}}
+\DoxyCodeLine{110             \}}
+\DoxyCodeLine{111         \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113         \textcolor{keyword}{auto} indent() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{size\_t} \{}
+\DoxyCodeLine{114             \textcolor{keyword}{auto} initial =}
+\DoxyCodeLine{115                 m\_pos == 0 \&\& m\_stringIndex == 0 ? m\_column.m\_initialIndent : std::string::npos;}
+\DoxyCodeLine{116             \textcolor{keywordflow}{return} initial == std::string::npos ? m\_column.m\_indent : initial;}
+\DoxyCodeLine{117         \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119         \textcolor{keyword}{auto} addIndentAndSuffix(std::string \textcolor{keyword}{const}\& plain) \textcolor{keyword}{const} -\/> std::string \{}
+\DoxyCodeLine{120             \textcolor{keywordflow}{return} std::string(indent(), \textcolor{charliteral}{' '}) + (m\_suffix ? plain + \textcolor{stringliteral}{"{}-\/"{}} : plain);}
+\DoxyCodeLine{121         \}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123        \textcolor{keyword}{public}:}
+\DoxyCodeLine{124         \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}}(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}} \textcolor{keyword}{const}\& column) : m\_column(column) \{}
+\DoxyCodeLine{125             assert(m\_column.m\_width > m\_column.m\_indent);}
+\DoxyCodeLine{126             assert(m\_column.m\_initialIndent == std::string::npos ||}
+\DoxyCodeLine{127                    m\_column.m\_width > m\_column.m\_initialIndent);}
+\DoxyCodeLine{128             calcLength();}
+\DoxyCodeLine{129             \textcolor{keywordflow}{if} (m\_len == 0) m\_stringIndex++;  \textcolor{comment}{// Empty string}}
+\DoxyCodeLine{130         \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         \textcolor{keyword}{auto} operator*() \textcolor{keyword}{const} -\/> std::string \{}
+\DoxyCodeLine{133             assert(m\_stringIndex < m\_column.m\_strings.size());}
+\DoxyCodeLine{134             assert(m\_pos <= m\_end);}
+\DoxyCodeLine{135             \textcolor{keywordflow}{if} (m\_pos + m\_column.m\_width < m\_end)}
+\DoxyCodeLine{136                 \textcolor{keywordflow}{return} addIndentAndSuffix(line().substr(m\_pos, m\_len));}
+\DoxyCodeLine{137             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{138                 \textcolor{keywordflow}{return} addIndentAndSuffix(line().substr(m\_pos, m\_end -\/ m\_pos));}
+\DoxyCodeLine{139         \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141         \textcolor{keyword}{auto} operator++() -\/> \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}}\& \{}
+\DoxyCodeLine{142             m\_pos += m\_len;}
+\DoxyCodeLine{143             \textcolor{keywordflow}{if} (m\_pos < line().size() \&\& line()[m\_pos] == \textcolor{charliteral}{'\(\backslash\)n'})}
+\DoxyCodeLine{144                 m\_pos += 1;}
+\DoxyCodeLine{145             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{146                 \textcolor{keywordflow}{while} (m\_pos < line().size() \&\& isWhitespace(line()[m\_pos])) ++m\_pos;}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148             \textcolor{keywordflow}{if} (m\_pos == line().size()) \{}
+\DoxyCodeLine{149                 m\_pos = 0;}
+\DoxyCodeLine{150                 ++m\_stringIndex;}
+\DoxyCodeLine{151             \}}
+\DoxyCodeLine{152             \textcolor{keywordflow}{if} (m\_stringIndex < m\_column.m\_strings.size()) calcLength();}
+\DoxyCodeLine{153             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{154         \}}
+\DoxyCodeLine{155         \textcolor{keyword}{auto} operator++(\textcolor{keywordtype}{int}) -\/> \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}} \{}
+\DoxyCodeLine{156             \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}} prev(*\textcolor{keyword}{this});}
+\DoxyCodeLine{157             operator++();}
+\DoxyCodeLine{158             \textcolor{keywordflow}{return} prev;}
+\DoxyCodeLine{159         \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keyword}{auto} operator==(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}} \textcolor{keyword}{const}\& other) \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{162             \textcolor{keywordflow}{return} m\_pos == other.m\_pos \&\& m\_stringIndex == other.m\_stringIndex \&\&}
+\DoxyCodeLine{163                    \&m\_column == \&other.m\_column;}
+\DoxyCodeLine{164         \}}
+\DoxyCodeLine{165         \textcolor{keyword}{auto} operator!=(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}} \textcolor{keyword}{const}\& other) \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{ \textcolor{keywordflow}{return} !operator==(other); \}}
+\DoxyCodeLine{166     \};}
+\DoxyCodeLine{167     \textcolor{keyword}{using} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{const\_iterator}} = \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column_1_1iterator}{iterator}};}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}}(std::string \textcolor{keyword}{const}\& text) \{ m\_strings.push\_back(text); \}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171     \textcolor{keyword}{auto} width(\textcolor{keywordtype}{size\_t} newWidth) -\/> \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}}\& \{}
+\DoxyCodeLine{172         assert(newWidth > 0);}
+\DoxyCodeLine{173         m\_width = newWidth;}
+\DoxyCodeLine{174         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{175     \}}
+\DoxyCodeLine{176     \textcolor{keyword}{auto} indent(\textcolor{keywordtype}{size\_t} newIndent) -\/> Column\& \{}
+\DoxyCodeLine{177         m\_indent = newIndent;}
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180     \textcolor{keyword}{auto} initialIndent(\textcolor{keywordtype}{size\_t} newIndent) -\/> Column\& \{}
+\DoxyCodeLine{181         m\_initialIndent = newIndent;}
+\DoxyCodeLine{182         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{183     \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     \textcolor{keyword}{auto} width() const -\/> \textcolor{keywordtype}{size\_t} \{ \textcolor{keywordflow}{return} m\_width; \}}
+\DoxyCodeLine{186     \textcolor{keyword}{auto} begin() const -\/> iterator \{ \textcolor{keywordflow}{return} iterator(*\textcolor{keyword}{this}); \}}
+\DoxyCodeLine{187     \textcolor{keyword}{auto} end() const -\/> iterator \{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, m\_strings.size()\}; \}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \textcolor{keyword}{inline} \textcolor{keyword}{friend} std::ostream\& operator<<(std::ostream\& os, Column \textcolor{keyword}{const}\& col) \{}
+\DoxyCodeLine{190         \textcolor{keywordtype}{bool} first = \textcolor{keyword}{true};}
+\DoxyCodeLine{191         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} line : col) \{}
+\DoxyCodeLine{192             \textcolor{keywordflow}{if} (first)}
+\DoxyCodeLine{193                 first = \textcolor{keyword}{false};}
+\DoxyCodeLine{194             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{195                 os << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{196             os << line;}
+\DoxyCodeLine{197         \}}
+\DoxyCodeLine{198         \textcolor{keywordflow}{return} os;}
+\DoxyCodeLine{199     \}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201     \textcolor{keyword}{auto} operator+(Column \textcolor{keyword}{const}\& other) -\/> Columns;}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \textcolor{keyword}{auto} toString() const -\/> std::\textcolor{keywordtype}{string} \{}
+\DoxyCodeLine{204         std::ostringstream oss;}
+\DoxyCodeLine{205         oss << *\textcolor{keyword}{this};}
+\DoxyCodeLine{206         \textcolor{keywordflow}{return} oss.str();}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 \};}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1_text_flow_1_1_spacer}{Spacer}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}} \{}
+\DoxyCodeLine{211    \textcolor{keyword}{public}:}
+\DoxyCodeLine{212     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_spacer}{Spacer}}(\textcolor{keywordtype}{size\_t} spaceWidth) : \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{Column}}(\textcolor{stringliteral}{"{}"{}}) \{ width(spaceWidth); \}}
+\DoxyCodeLine{213 \};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns}{Columns}} \{}
+\DoxyCodeLine{216     std::vector<Column> m\_columns;}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218    \textcolor{keyword}{public}:}
+\DoxyCodeLine{219     \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}} \{}
+\DoxyCodeLine{220         \textcolor{keyword}{friend} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns}{Columns}};}
+\DoxyCodeLine{221         \textcolor{keyword}{struct }EndTag \{\};}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223         std::vector<Column> \textcolor{keyword}{const}\& m\_columns;}
+\DoxyCodeLine{224         std::vector<Column::iterator> m\_iterators;}
+\DoxyCodeLine{225         \textcolor{keywordtype}{size\_t} m\_activeIterators;}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227         \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}}(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns}{Columns}} \textcolor{keyword}{const}\& columns, EndTag)}
+\DoxyCodeLine{228             : m\_columns(columns.m\_columns), m\_activeIterators(0) \{}
+\DoxyCodeLine{229             m\_iterators.reserve(m\_columns.size());}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& col : m\_columns) m\_iterators.push\_back(col.end());}
+\DoxyCodeLine{232         \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234        \textcolor{keyword}{public}:}
+\DoxyCodeLine{235         \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}}(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns}{Columns}} \textcolor{keyword}{const}\& columns)}
+\DoxyCodeLine{236             : m\_columns(columns.m\_columns), m\_activeIterators(m\_columns.size()) \{}
+\DoxyCodeLine{237             m\_iterators.reserve(m\_columns.size());}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& col : m\_columns) m\_iterators.push\_back(col.begin());}
+\DoxyCodeLine{240         \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242         \textcolor{keyword}{auto} operator==(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}} \textcolor{keyword}{const}\& other) \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{243             \textcolor{keywordflow}{return} m\_iterators == other.m\_iterators;}
+\DoxyCodeLine{244         \}}
+\DoxyCodeLine{245         \textcolor{keyword}{auto} operator!=(\mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}} \textcolor{keyword}{const}\& other) \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{246             \textcolor{keywordflow}{return} m\_iterators != other.m\_iterators;}
+\DoxyCodeLine{247         \}}
+\DoxyCodeLine{248         \textcolor{keyword}{auto} operator*() \textcolor{keyword}{const} -\/> std::string \{}
+\DoxyCodeLine{249             std::string row, padding;}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{251             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < m\_columns.size(); ++i) \{}
+\DoxyCodeLine{252                 \textcolor{keyword}{auto} width = m\_columns[i].width();}
+\DoxyCodeLine{253                 \textcolor{keywordflow}{if} (m\_iterators[i] != m\_columns[i].end()) \{}
+\DoxyCodeLine{254                     std::string col = *m\_iterators[i];}
+\DoxyCodeLine{255                     row += padding + col;}
+\DoxyCodeLine{256                     \textcolor{keywordflow}{if} (col.size() < width)}
+\DoxyCodeLine{257                         padding = std::string(width -\/ col.size(), \textcolor{charliteral}{' '});}
+\DoxyCodeLine{258                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{259                         padding = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{260                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{261                     padding += std::string(width, \textcolor{charliteral}{' '});}
+\DoxyCodeLine{262                 \}}
+\DoxyCodeLine{263             \}}
+\DoxyCodeLine{264             \textcolor{keywordflow}{return} row;}
+\DoxyCodeLine{265         \}}
+\DoxyCodeLine{266         \textcolor{keyword}{auto} operator++() -\/> \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}}\& \{}
+\DoxyCodeLine{267             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < m\_columns.size(); ++i) \{}
+\DoxyCodeLine{268                 \textcolor{keywordflow}{if} (m\_iterators[i] != m\_columns[i].end()) ++m\_iterators[i];}
+\DoxyCodeLine{269             \}}
+\DoxyCodeLine{270             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{271         \}}
+\DoxyCodeLine{272         \textcolor{keyword}{auto} operator++(\textcolor{keywordtype}{int}) -\/> \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}} \{}
+\DoxyCodeLine{273             \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}} prev(*\textcolor{keyword}{this});}
+\DoxyCodeLine{274             operator++();}
+\DoxyCodeLine{275             \textcolor{keywordflow}{return} prev;}
+\DoxyCodeLine{276         \}}
+\DoxyCodeLine{277     \};}
+\DoxyCodeLine{278     \textcolor{keyword}{using} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{const\_iterator}} = \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}};}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280     \textcolor{keyword}{auto} begin() const -\/> \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}} \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classclara_1_1_text_flow_1_1_columns_1_1iterator}{iterator}}(*\textcolor{keyword}{this}); \}}
+\DoxyCodeLine{281     \textcolor{keyword}{auto} end() const -\/> iterator \{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, iterator::EndTag()\}; \}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283     \textcolor{keyword}{auto} operator+=(Column \textcolor{keyword}{const}\& col) -\/> Columns\& \{}
+\DoxyCodeLine{284         m\_columns.push\_back(col);}
+\DoxyCodeLine{285         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287     \textcolor{keyword}{auto} operator+(Column \textcolor{keyword}{const}\& col) -\/> Columns \{}
+\DoxyCodeLine{288         Columns combined = *\textcolor{keyword}{this};}
+\DoxyCodeLine{289         combined += col;}
+\DoxyCodeLine{290         \textcolor{keywordflow}{return} combined;}
+\DoxyCodeLine{291     \}}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293     \textcolor{keyword}{inline} \textcolor{keyword}{friend} std::ostream\& operator<<(std::ostream\& os, Columns \textcolor{keyword}{const}\& cols) \{}
+\DoxyCodeLine{294         \textcolor{keywordtype}{bool} first = \textcolor{keyword}{true};}
+\DoxyCodeLine{295         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} line : cols) \{}
+\DoxyCodeLine{296             \textcolor{keywordflow}{if} (first)}
+\DoxyCodeLine{297                 first = \textcolor{keyword}{false};}
+\DoxyCodeLine{298             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{299                 os << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{300             os << line;}
+\DoxyCodeLine{301         \}}
+\DoxyCodeLine{302         \textcolor{keywordflow}{return} os;}
+\DoxyCodeLine{303     \}}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305     \textcolor{keyword}{auto} toString() const -\/> std::\textcolor{keywordtype}{string} \{}
+\DoxyCodeLine{306         std::ostringstream oss;}
+\DoxyCodeLine{307         oss << *\textcolor{keyword}{this};}
+\DoxyCodeLine{308         \textcolor{keywordflow}{return} oss.str();}
+\DoxyCodeLine{309     \}}
+\DoxyCodeLine{310 \};}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312 \textcolor{keyword}{inline} \textcolor{keyword}{auto} Column::operator+(Column \textcolor{keyword}{const}\& other) -\/> Columns \{}
+\DoxyCodeLine{313     Columns cols;}
+\DoxyCodeLine{314     cols += *\textcolor{keyword}{this};}
+\DoxyCodeLine{315     cols += other;}
+\DoxyCodeLine{316     \textcolor{keywordflow}{return} cols;}
+\DoxyCodeLine{317 \}}
+\DoxyCodeLine{318 \}  \textcolor{comment}{// namespace TextFlow}}
+\DoxyCodeLine{319 \}  \textcolor{comment}{// namespace clara}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// CLARA\_TEXTFLOW\_HPP\_INCLUDED}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ end of \#include from clara\_textflow.hpp -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{324 \textcolor{comment}{// ........... back in clara.hpp}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{328 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331 \textcolor{preprocessor}{\#if !defined(CLARA\_PLATFORM\_WINDOWS) \&\&                                                            \(\backslash\)}}
+\DoxyCodeLine{332 \textcolor{preprocessor}{    (defined(WIN32) || defined(\_\_WIN32\_\_) || defined(\_WIN32) || defined(\_MSC\_VER))}}
+\DoxyCodeLine{333 \textcolor{preprocessor}{\#define CLARA\_PLATFORM\_WINDOWS}}
+\DoxyCodeLine{334 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336 \textcolor{keyword}{namespace }clara \{}
+\DoxyCodeLine{337 \textcolor{keyword}{namespace }detail \{}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{339 \textcolor{comment}{// Traits for extracting arg and return type of lambdas (for single argument lambdas)}}
+\DoxyCodeLine{340 \textcolor{keyword}{template} <\textcolor{keyword}{typename} L>}
+\DoxyCodeLine{341 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_unary_lambda_traits}{UnaryLambdaTraits}} : \mbox{\hyperlink{structclara_1_1detail_1_1_unary_lambda_traits}{UnaryLambdaTraits}}<decltype(\&L::operator())> \{\};}
+\DoxyCodeLine{342 }
+\DoxyCodeLine{343 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ClassT, \textcolor{keyword}{typename} ReturnT, \textcolor{keyword}{typename}... \mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}}>}
+\DoxyCodeLine{344 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_unary_lambda_traits}{UnaryLambdaTraits}}<ReturnT (ClassT::*)(Args...) const> \{}
+\DoxyCodeLine{345     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} isValid = \textcolor{keyword}{false};}
+\DoxyCodeLine{346 \};}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ClassT, \textcolor{keyword}{typename} ReturnT, \textcolor{keyword}{typename} ArgT>}
+\DoxyCodeLine{349 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_unary_lambda_traits}{UnaryLambdaTraits}}<ReturnT (ClassT::*)(ArgT) const> \{}
+\DoxyCodeLine{350     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} isValid = \textcolor{keyword}{true};}
+\DoxyCodeLine{351     \textcolor{keyword}{using} ArgType = \textcolor{keyword}{typename} std::remove\_const<typename std::remove\_reference<ArgT>::type>::type;}
+\DoxyCodeLine{352     ;}
+\DoxyCodeLine{353     \textcolor{keyword}{using} ReturnType = ReturnT;}
+\DoxyCodeLine{354 \};}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}};}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{358 \textcolor{comment}{// Transport for raw args (copied from main args, or supplied via init list for testing)}}
+\DoxyCodeLine{359 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}} \{}
+\DoxyCodeLine{360     \textcolor{keyword}{friend} \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}};}
+\DoxyCodeLine{361     std::string m\_exeName;}
+\DoxyCodeLine{362     std::vector<std::string> m\_args;}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364    \textcolor{keyword}{public}:}
+\DoxyCodeLine{365     \mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[]) \{}
+\DoxyCodeLine{366         m\_exeName = argv[0];}
+\DoxyCodeLine{367         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 1; i < argc; ++i) m\_args.push\_back(argv[i]);}
+\DoxyCodeLine{368     \}}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370     \mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}}(std::initializer\_list<std::string> args)}
+\DoxyCodeLine{371         : m\_exeName(*args.begin()), m\_args(args.begin() + 1, args.end()) \{\}}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373     \textcolor{keyword}{auto} exeName() \textcolor{keyword}{const} -\/> std::string \{ \textcolor{keywordflow}{return} m\_exeName; \}}
+\DoxyCodeLine{374 \};}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376 \textcolor{comment}{// Wraps a token coming from a token stream. These may not directly correspond to strings as a}}
+\DoxyCodeLine{377 \textcolor{comment}{// single string may encode an option + its argument if the : or = form is used}}
+\DoxyCodeLine{378 \textcolor{keyword}{enum class} TokenType \{ Option, Argument \};}
+\DoxyCodeLine{379 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_token}{Token}} \{}
+\DoxyCodeLine{380     TokenType type;}
+\DoxyCodeLine{381     std::string token;}
+\DoxyCodeLine{382 \};}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384 \textcolor{keyword}{inline} \textcolor{keyword}{auto} isOptPrefix(\textcolor{keywordtype}{char} c) -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{385     \textcolor{keywordflow}{return} c == \textcolor{charliteral}{'-\/'}}
+\DoxyCodeLine{386 \textcolor{preprocessor}{\#ifdef CLARA\_PLATFORM\_WINDOWS}}
+\DoxyCodeLine{387            || c == \textcolor{charliteral}{'/'}}
+\DoxyCodeLine{388 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{389         ;}
+\DoxyCodeLine{390 \}}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{392 \textcolor{comment}{// Abstracts iterators into args as a stream of tokens, with option arguments uniformly handled}}
+\DoxyCodeLine{393 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \{}
+\DoxyCodeLine{394     \textcolor{keyword}{using} Iterator = std::vector<std::string>::const\_iterator;}
+\DoxyCodeLine{395     Iterator it;}
+\DoxyCodeLine{396     Iterator itEnd;}
+\DoxyCodeLine{397     std::vector<Token> m\_tokenBuffer;}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399     \textcolor{keywordtype}{void} loadBuffer() \{}
+\DoxyCodeLine{400         m\_tokenBuffer.resize(0);}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{402         \textcolor{comment}{// Skip any empty strings}}
+\DoxyCodeLine{403         \textcolor{keywordflow}{while} (it != itEnd \&\& it-\/>empty()) ++it;}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{405         \textcolor{keywordflow}{if} (it != itEnd) \{}
+\DoxyCodeLine{406             \textcolor{keyword}{auto} \textcolor{keyword}{const}\& next = *it;}
+\DoxyCodeLine{407             \textcolor{keywordflow}{if} (isOptPrefix(next[0])) \{}
+\DoxyCodeLine{408                 \textcolor{keyword}{auto} delimiterPos = next.find\_first\_of(\textcolor{stringliteral}{"{} :="{}});}
+\DoxyCodeLine{409                 \textcolor{keywordflow}{if} (delimiterPos != std::string::npos) \{}
+\DoxyCodeLine{410                     m\_tokenBuffer.push\_back(\{TokenType::Option, next.substr(0, delimiterPos)\});}
+\DoxyCodeLine{411                     m\_tokenBuffer.push\_back(\{TokenType::Argument, next.substr(delimiterPos + 1)\});}
+\DoxyCodeLine{412                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{413                     \textcolor{keywordflow}{if} (next[1] != \textcolor{charliteral}{'-\/'} \&\& next.size() > 2) \{}
+\DoxyCodeLine{414                         std::string opt = \textcolor{stringliteral}{"{}-\/ "{}};}
+\DoxyCodeLine{415                         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 1; i < next.size(); ++i) \{}
+\DoxyCodeLine{416                             opt[1] = next[i];}
+\DoxyCodeLine{417                             m\_tokenBuffer.push\_back(\{TokenType::Option, opt\});}
+\DoxyCodeLine{418                         \}}
+\DoxyCodeLine{419                     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{420                         m\_tokenBuffer.push\_back(\{TokenType::Option, next\});}
+\DoxyCodeLine{421                     \}}
+\DoxyCodeLine{422                 \}}
+\DoxyCodeLine{423             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{424                 m\_tokenBuffer.push\_back(\{TokenType::Argument, next\});}
+\DoxyCodeLine{425             \}}
+\DoxyCodeLine{426         \}}
+\DoxyCodeLine{427     \}}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{429    \textcolor{keyword}{public}:}
+\DoxyCodeLine{430     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}}(\mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}} \textcolor{keyword}{const}\& args) : \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}}(args.m\_args.begin(), args.m\_args.end()) \{\}}
+\DoxyCodeLine{431 }
+\DoxyCodeLine{432     \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}}(Iterator it, Iterator itEnd) : it(it), itEnd(itEnd) \{ loadBuffer(); \}}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434     \textcolor{keyword}{explicit} \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} !m\_tokenBuffer.empty() || it != itEnd; \}}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436     \textcolor{keyword}{auto} count() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{size\_t} \{ \textcolor{keywordflow}{return} m\_tokenBuffer.size() + (itEnd -\/ it); \}}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438     \textcolor{keyword}{auto} operator*() \textcolor{keyword}{const} -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_token}{Token}} \{}
+\DoxyCodeLine{439         assert(!m\_tokenBuffer.empty());}
+\DoxyCodeLine{440         \textcolor{keywordflow}{return} m\_tokenBuffer.front();}
+\DoxyCodeLine{441     \}}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{443     \textcolor{keyword}{auto} operator-\/> () \textcolor{keyword}{const} -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_token}{Token}} \textcolor{keyword}{const}* \{}
+\DoxyCodeLine{444         assert(!m\_tokenBuffer.empty());}
+\DoxyCodeLine{445         \textcolor{keywordflow}{return} \&m\_tokenBuffer.front();}
+\DoxyCodeLine{446     \}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{448     \textcolor{keyword}{auto} operator++() -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}}\& \{}
+\DoxyCodeLine{449         \textcolor{keywordflow}{if} (m\_tokenBuffer.size() >= 2) \{}
+\DoxyCodeLine{450             m\_tokenBuffer.erase(m\_tokenBuffer.begin());}
+\DoxyCodeLine{451         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{452             \textcolor{keywordflow}{if} (it != itEnd) ++it;}
+\DoxyCodeLine{453             loadBuffer();}
+\DoxyCodeLine{454         \}}
+\DoxyCodeLine{455         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{456     \}}
+\DoxyCodeLine{457 \};}
+\DoxyCodeLine{458 }
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{ResultBase}} \{}
+\DoxyCodeLine{461    \textcolor{keyword}{public}:}
+\DoxyCodeLine{462     \textcolor{keyword}{enum} Type \{ Ok, LogicError, RuntimeError \};}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464    \textcolor{keyword}{protected}:}
+\DoxyCodeLine{465     \mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{ResultBase}}(Type type) : m\_type(type) \{\}}
+\DoxyCodeLine{466     \textcolor{keyword}{virtual} \mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{\string~ResultBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{468     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} enforceOk() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{469 }
+\DoxyCodeLine{470     Type m\_type;}
+\DoxyCodeLine{471 \};}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{473 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{474 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{ResultBase}} \{}
+\DoxyCodeLine{475    \textcolor{keyword}{public}:}
+\DoxyCodeLine{476     \textcolor{keyword}{auto} value() \textcolor{keyword}{const} -\/> T \textcolor{keyword}{const}\& \{}
+\DoxyCodeLine{477         enforceOk();}
+\DoxyCodeLine{478         \textcolor{keywordflow}{return} m\_value;}
+\DoxyCodeLine{479     \}}
+\DoxyCodeLine{480 }
+\DoxyCodeLine{481    \textcolor{keyword}{protected}:}
+\DoxyCodeLine{482     \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}}(Type type) : \mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{ResultBase}}(type) \{\}}
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484     \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}}(\mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}} \textcolor{keyword}{const}\& other) : \mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{ResultBase}}(other) \{}
+\DoxyCodeLine{485         \textcolor{keywordflow}{if} (m\_type == ResultBase::Ok) \textcolor{keyword}{new} (\&m\_value) T(other.m\_value);}
+\DoxyCodeLine{486     \}}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488     \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}}(Type, T \textcolor{keyword}{const}\& value) : \mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{ResultBase}}(Ok) \{ \textcolor{keyword}{new} (\&m\_value) T(value); \}}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490     \textcolor{keyword}{auto} operator=(\mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}} \textcolor{keyword}{const}\& other) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}}\& \{}
+\DoxyCodeLine{491         \textcolor{keywordflow}{if} (m\_type == ResultBase::Ok) m\_value.\string~T();}
+\DoxyCodeLine{492         ResultBase::operator=(other);}
+\DoxyCodeLine{493         \textcolor{keywordflow}{if} (m\_type == ResultBase::Ok) \textcolor{keyword}{new} (\&m\_value) T(other.m\_value);}
+\DoxyCodeLine{494         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{495     \}}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497     \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{\string~ResultValueBase}}() \{}
+\DoxyCodeLine{498         \textcolor{keywordflow}{if} (m\_type == Ok) m\_value.\string~T();}
+\DoxyCodeLine{499     \}}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501     \textcolor{keyword}{union }\{}
+\DoxyCodeLine{502         T m\_value;}
+\DoxyCodeLine{503     \};}
+\DoxyCodeLine{504 \};}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{506 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{507 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}}<void> : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_result_base}{ResultBase}} \{}
+\DoxyCodeLine{508    \textcolor{keyword}{protected}:}
+\DoxyCodeLine{509     \textcolor{keyword}{using} ResultBase::ResultBase;}
+\DoxyCodeLine{510 \};}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = \textcolor{keywordtype}{void}>}
+\DoxyCodeLine{513 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase}}<T> \{}
+\DoxyCodeLine{514    \textcolor{keyword}{public}:}
+\DoxyCodeLine{515     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{516     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult}}(\mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult<U>}} \textcolor{keyword}{const}\& other)}
+\DoxyCodeLine{517         : \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase<T>}}(other.type()), m\_errorMessage(other.errorMessage()) \{}
+\DoxyCodeLine{518         assert(type() != ResultBase::Ok);}
+\DoxyCodeLine{519     \}}
+\DoxyCodeLine{520 }
+\DoxyCodeLine{521     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U>}
+\DoxyCodeLine{522     \textcolor{keyword}{static} \textcolor{keyword}{auto} ok(U \textcolor{keyword}{const}\& value) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult}} \{}
+\DoxyCodeLine{523         \textcolor{keywordflow}{return} \{ResultBase::Ok, value\};}
+\DoxyCodeLine{524     \}}
+\DoxyCodeLine{525     \textcolor{keyword}{static} \textcolor{keyword}{auto} ok() -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult}} \{ \textcolor{keywordflow}{return} \{ResultBase::Ok\}; \}}
+\DoxyCodeLine{526     \textcolor{keyword}{static} \textcolor{keyword}{auto} logicError(std::string \textcolor{keyword}{const}\& message) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult}} \{}
+\DoxyCodeLine{527         \textcolor{keywordflow}{return} \{ResultBase::LogicError, message\};}
+\DoxyCodeLine{528     \}}
+\DoxyCodeLine{529     \textcolor{keyword}{static} \textcolor{keyword}{auto} runtimeError(std::string \textcolor{keyword}{const}\& message) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult}} \{}
+\DoxyCodeLine{530         \textcolor{keywordflow}{return} \{ResultBase::RuntimeError, message\};}
+\DoxyCodeLine{531     \}}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{533     \textcolor{keyword}{explicit} \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_type == ResultBase::Ok; \}}
+\DoxyCodeLine{534     \textcolor{keyword}{auto} type() \textcolor{keyword}{const} -\/> ResultBase::Type \{ \textcolor{keywordflow}{return} m\_type; \}}
+\DoxyCodeLine{535     \textcolor{keyword}{auto} errorMessage() \textcolor{keyword}{const} -\/> std::string \{ \textcolor{keywordflow}{return} m\_errorMessage; \}}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537    \textcolor{keyword}{protected}:}
+\DoxyCodeLine{538     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} enforceOk()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{539         \textcolor{comment}{// !TBD: If no exceptions, std::terminate here or something}}
+\DoxyCodeLine{540         \textcolor{keywordflow}{switch} (m\_type) \{}
+\DoxyCodeLine{541             \textcolor{keywordflow}{case} ResultBase::LogicError:}
+\DoxyCodeLine{542                 \textcolor{keywordflow}{throw} std::logic\_error(m\_errorMessage);}
+\DoxyCodeLine{543             \textcolor{keywordflow}{case} ResultBase::RuntimeError:}
+\DoxyCodeLine{544                 \textcolor{keywordflow}{throw} std::runtime\_error(m\_errorMessage);}
+\DoxyCodeLine{545             \textcolor{keywordflow}{case} ResultBase::Ok:}
+\DoxyCodeLine{546                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{547         \}}
+\DoxyCodeLine{548     \}}
+\DoxyCodeLine{549 }
+\DoxyCodeLine{550     std::string m\_errorMessage;  \textcolor{comment}{// Only populated if resultType is an error}}
+\DoxyCodeLine{551 }
+\DoxyCodeLine{552     \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult}}(ResultBase::Type type, std::string \textcolor{keyword}{const}\& message)}
+\DoxyCodeLine{553         : \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase<T>}}(type), m\_errorMessage(message) \{}
+\DoxyCodeLine{554         assert(m\_type != ResultBase::Ok);}
+\DoxyCodeLine{555     \}}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557     \textcolor{keyword}{using} \mbox{\hyperlink{classclara_1_1detail_1_1_result_value_base}{ResultValueBase<T>::ResultValueBase}};}
+\DoxyCodeLine{558     \textcolor{keyword}{using} ResultBase::m\_type;}
+\DoxyCodeLine{559 \};}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561 \textcolor{keyword}{enum class} ParseResultType \{ Matched, NoMatch, ShortCircuitAll, ShortCircuitSame \};}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{563 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}} \{}
+\DoxyCodeLine{564    \textcolor{keyword}{public}:}
+\DoxyCodeLine{565     \mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(ParseResultType type, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \textcolor{keyword}{const}\& remainingTokens)}
+\DoxyCodeLine{566         : m\_type(type), m\_remainingTokens(remainingTokens) \{\}}
+\DoxyCodeLine{567 }
+\DoxyCodeLine{568     \textcolor{keyword}{auto} type() \textcolor{keyword}{const} -\/> ParseResultType \{ \textcolor{keywordflow}{return} m\_type; \}}
+\DoxyCodeLine{569     \textcolor{keyword}{auto} remainingTokens() \textcolor{keyword}{const} -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \{ \textcolor{keywordflow}{return} m\_remainingTokens; \}}
+\DoxyCodeLine{570 }
+\DoxyCodeLine{571    \textcolor{keyword}{private}:}
+\DoxyCodeLine{572     ParseResultType m\_type;}
+\DoxyCodeLine{573     \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} m\_remainingTokens;}
+\DoxyCodeLine{574 \};}
+\DoxyCodeLine{575 }
+\DoxyCodeLine{576 \textcolor{keyword}{using} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}} = \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult<void>}};}
+\DoxyCodeLine{577 \textcolor{keyword}{using} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} = \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult<ParseResultType>}};}
+\DoxyCodeLine{578 \textcolor{keyword}{using} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}} = \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{BasicResult<ParseState>}};}
+\DoxyCodeLine{579 }
+\DoxyCodeLine{580 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_help_columns}{HelpColumns}} \{}
+\DoxyCodeLine{581     std::string left;}
+\DoxyCodeLine{582     std::string right;}
+\DoxyCodeLine{583 \};}
+\DoxyCodeLine{584 }
+\DoxyCodeLine{585 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{586 \textcolor{keyword}{inline} \textcolor{keyword}{auto} convertInto(std::string \textcolor{keyword}{const}\& source, T\& target) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \{}
+\DoxyCodeLine{587     std::stringstream ss;}
+\DoxyCodeLine{588     ss << source;}
+\DoxyCodeLine{589     ss >> target;}
+\DoxyCodeLine{590     \textcolor{keywordflow}{if} (ss.fail())}
+\DoxyCodeLine{591         \textcolor{keywordflow}{return} ParserResult::runtimeError(\textcolor{stringliteral}{"{}Unable to convert '"{}} + source + \textcolor{stringliteral}{"{}' to destination type"{}});}
+\DoxyCodeLine{592     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{593         \textcolor{keywordflow}{return} ParserResult::ok(ParseResultType::Matched);}
+\DoxyCodeLine{594 \}}
+\DoxyCodeLine{595 \textcolor{keyword}{inline} \textcolor{keyword}{auto} convertInto(std::string \textcolor{keyword}{const}\& source, std::string\& target) -\/> ParserResult \{}
+\DoxyCodeLine{596     target = source;}
+\DoxyCodeLine{597     \textcolor{keywordflow}{return} ParserResult::ok(ParseResultType::Matched);}
+\DoxyCodeLine{598 \}}
+\DoxyCodeLine{599 \textcolor{keyword}{inline} \textcolor{keyword}{auto} convertInto(std::string \textcolor{keyword}{const}\& source, \textcolor{keywordtype}{bool}\& target) -\/> ParserResult \{}
+\DoxyCodeLine{600     std::string srcLC = source;}
+\DoxyCodeLine{601     std::transform(srcLC.begin(), srcLC.end(), srcLC.begin(),}
+\DoxyCodeLine{602                    [](\textcolor{keywordtype}{char} c) \{ return static\_cast<char>(::tolower(c)); \});}
+\DoxyCodeLine{603     \textcolor{keywordflow}{if} (srcLC == \textcolor{stringliteral}{"{}y"{}} || srcLC == \textcolor{stringliteral}{"{}1"{}} || srcLC == \textcolor{stringliteral}{"{}true"{}} || srcLC == \textcolor{stringliteral}{"{}yes"{}} || srcLC == \textcolor{stringliteral}{"{}on"{}})}
+\DoxyCodeLine{604         target = \textcolor{keyword}{true};}
+\DoxyCodeLine{605     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (srcLC == \textcolor{stringliteral}{"{}n"{}} || srcLC == \textcolor{stringliteral}{"{}0"{}} || srcLC == \textcolor{stringliteral}{"{}false"{}} || srcLC == \textcolor{stringliteral}{"{}no"{}} || srcLC == \textcolor{stringliteral}{"{}off"{}})}
+\DoxyCodeLine{606         target = \textcolor{keyword}{false};}
+\DoxyCodeLine{607     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{608         \textcolor{keywordflow}{return} ParserResult::runtimeError(\textcolor{stringliteral}{"{}Expected a boolean value but did not recognise: '"{}} +}
+\DoxyCodeLine{609                                           source + \textcolor{stringliteral}{"{}'"{}});}
+\DoxyCodeLine{610     \textcolor{keywordflow}{return} ParserResult::ok(ParseResultType::Matched);}
+\DoxyCodeLine{611 \}}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{613 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}} \{}
+\DoxyCodeLine{614     \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{615     \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}}(\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}} \textcolor{keyword}{const}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{616     \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}}(\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}}\&\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{617     \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}}\& operator=(\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}} \textcolor{keyword}{const}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{618     \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}}\& operator=(\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}}\&\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{620     \textcolor{keyword}{virtual} \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{\string~BoundRefBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{621 }
+\DoxyCodeLine{622     \textcolor{keyword}{virtual} \textcolor{keyword}{auto} isFlag() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} = 0;}
+\DoxyCodeLine{623     \textcolor{keyword}{virtual} \textcolor{keyword}{auto} isContainer() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{624     \textcolor{keyword}{virtual} \textcolor{keyword}{auto} setValue(std::string \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} = 0;}
+\DoxyCodeLine{625     \textcolor{keyword}{virtual} \textcolor{keyword}{auto} setFlag(\textcolor{keywordtype}{bool} flag) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} = 0;}
+\DoxyCodeLine{626 \};}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{628 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_value_ref_base}{BoundValueRefBase}} : \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}} \{}
+\DoxyCodeLine{629     \textcolor{keyword}{auto} isFlag() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \textcolor{keyword}{override} \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631     \textcolor{keyword}{auto} setFlag(\textcolor{keywordtype}{bool}) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{632         \textcolor{keywordflow}{return} ParserResult::logicError(\textcolor{stringliteral}{"{}Flags can only be set on boolean fields"{}});}
+\DoxyCodeLine{633     \}}
+\DoxyCodeLine{634 \};}
+\DoxyCodeLine{635 }
+\DoxyCodeLine{636 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_ref_base}{BoundFlagRefBase}} : \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref_base}{BoundRefBase}} \{}
+\DoxyCodeLine{637     \textcolor{keyword}{auto} isFlag() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \textcolor{keyword}{override} \{ \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{638 }
+\DoxyCodeLine{639     \textcolor{keyword}{auto} setValue(std::string \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{640         \textcolor{keywordtype}{bool} flag;}
+\DoxyCodeLine{641         \textcolor{keyword}{auto} result = convertInto(arg, flag);}
+\DoxyCodeLine{642         \textcolor{keywordflow}{if} (result) setFlag(flag);}
+\DoxyCodeLine{643         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{644     \}}
+\DoxyCodeLine{645 \};}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{647 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{648 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref}{BoundRef}} : \mbox{\hyperlink{structclara_1_1detail_1_1_bound_value_ref_base}{BoundValueRefBase}} \{}
+\DoxyCodeLine{649     T\& m\_ref;}
+\DoxyCodeLine{650 }
+\DoxyCodeLine{651     \textcolor{keyword}{explicit} \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref}{BoundRef}}(T\& ref) : m\_ref(ref) \{\}}
+\DoxyCodeLine{652 }
+\DoxyCodeLine{653     \textcolor{keyword}{auto} setValue(std::string \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{654         \textcolor{keywordflow}{return} convertInto(arg, m\_ref);}
+\DoxyCodeLine{655     \}}
+\DoxyCodeLine{656 \};}
+\DoxyCodeLine{657 }
+\DoxyCodeLine{658 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{659 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref}{BoundRef}}<std::vector<T>> : \mbox{\hyperlink{structclara_1_1detail_1_1_bound_value_ref_base}{BoundValueRefBase}} \{}
+\DoxyCodeLine{660     std::vector<T>\& m\_ref;}
+\DoxyCodeLine{661 }
+\DoxyCodeLine{662     \textcolor{keyword}{explicit} \mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref}{BoundRef}}(std::vector<T>\& ref) : m\_ref(ref) \{\}}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{664     \textcolor{keyword}{auto} isContainer() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \textcolor{keyword}{override} \{ \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{665 }
+\DoxyCodeLine{666     \textcolor{keyword}{auto} setValue(std::string \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{667         T temp;}
+\DoxyCodeLine{668         \textcolor{keyword}{auto} result = convertInto(arg, temp);}
+\DoxyCodeLine{669         \textcolor{keywordflow}{if} (result) m\_ref.push\_back(temp);}
+\DoxyCodeLine{670         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{671     \}}
+\DoxyCodeLine{672 \};}
+\DoxyCodeLine{673 }
+\DoxyCodeLine{674 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_ref}{BoundFlagRef}} : \mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_ref_base}{BoundFlagRefBase}} \{}
+\DoxyCodeLine{675     \textcolor{keywordtype}{bool}\& m\_ref;}
+\DoxyCodeLine{676 }
+\DoxyCodeLine{677     \textcolor{keyword}{explicit} \mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_ref}{BoundFlagRef}}(\textcolor{keywordtype}{bool}\& ref) : m\_ref(ref) \{\}}
+\DoxyCodeLine{678 }
+\DoxyCodeLine{679     \textcolor{keyword}{auto} setFlag(\textcolor{keywordtype}{bool} flag) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{680         m\_ref = flag;}
+\DoxyCodeLine{681         \textcolor{keywordflow}{return} ParserResult::ok(ParseResultType::Matched);}
+\DoxyCodeLine{682     \}}
+\DoxyCodeLine{683 \};}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ReturnType>}
+\DoxyCodeLine{686 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_lambda_invoker}{LambdaInvoker}} \{}
+\DoxyCodeLine{687     \textcolor{keyword}{static\_assert}(std::is\_same<ReturnType, ParserResult>::value,}
+\DoxyCodeLine{688                   \textcolor{stringliteral}{"{}Lambda must return void or clara::ParserResult"{}});}
+\DoxyCodeLine{689 }
+\DoxyCodeLine{690     \textcolor{keyword}{template} <\textcolor{keyword}{typename} L, \textcolor{keyword}{typename} ArgType>}
+\DoxyCodeLine{691     \textcolor{keyword}{static} \textcolor{keyword}{auto} invoke(L \textcolor{keyword}{const}\& lambda, ArgType \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \{}
+\DoxyCodeLine{692         \textcolor{keywordflow}{return} lambda(arg);}
+\DoxyCodeLine{693     \}}
+\DoxyCodeLine{694 \};}
+\DoxyCodeLine{695 }
+\DoxyCodeLine{696 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{697 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_lambda_invoker}{LambdaInvoker}}<void> \{}
+\DoxyCodeLine{698     \textcolor{keyword}{template} <\textcolor{keyword}{typename} L, \textcolor{keyword}{typename} ArgType>}
+\DoxyCodeLine{699     \textcolor{keyword}{static} \textcolor{keyword}{auto} invoke(L \textcolor{keyword}{const}\& lambda, ArgType \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \{}
+\DoxyCodeLine{700         lambda(arg);}
+\DoxyCodeLine{701         \textcolor{keywordflow}{return} ParserResult::ok(ParseResultType::Matched);}
+\DoxyCodeLine{702     \}}
+\DoxyCodeLine{703 \};}
+\DoxyCodeLine{704 }
+\DoxyCodeLine{705 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ArgType, \textcolor{keyword}{typename} L>}
+\DoxyCodeLine{706 \textcolor{keyword}{inline} \textcolor{keyword}{auto} invokeLambda(L \textcolor{keyword}{const}\& lambda, std::string \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \{}
+\DoxyCodeLine{707     ArgType temp;}
+\DoxyCodeLine{708     \textcolor{keyword}{auto} result = convertInto(arg, temp);}
+\DoxyCodeLine{709     \textcolor{keywordflow}{return} !result ? result}
+\DoxyCodeLine{710                    : \mbox{\hyperlink{structclara_1_1detail_1_1_lambda_invoker}{LambdaInvoker<typename UnaryLambdaTraits<L>::ReturnType}}>::invoke(lambda, temp);}
+\DoxyCodeLine{711 \};}
+\DoxyCodeLine{712 }
+\DoxyCodeLine{713 }
+\DoxyCodeLine{714 \textcolor{keyword}{template} <\textcolor{keyword}{typename} L>}
+\DoxyCodeLine{715 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_lambda}{BoundLambda}} : \mbox{\hyperlink{structclara_1_1detail_1_1_bound_value_ref_base}{BoundValueRefBase}} \{}
+\DoxyCodeLine{716     L m\_lambda;}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{718     \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{structclara_1_1detail_1_1_unary_lambda_traits}{UnaryLambdaTraits<L>::isValid}}, \textcolor{stringliteral}{"{}Supplied lambda must take exactly one argument"{}});}
+\DoxyCodeLine{719     \textcolor{keyword}{explicit} \mbox{\hyperlink{structclara_1_1detail_1_1_bound_lambda}{BoundLambda}}(L \textcolor{keyword}{const}\& lambda) : m\_lambda(lambda) \{\}}
+\DoxyCodeLine{720 }
+\DoxyCodeLine{721     \textcolor{keyword}{auto} setValue(std::string \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{722         \textcolor{keywordflow}{return} invokeLambda<typename UnaryLambdaTraits<L>::ArgType>(m\_lambda, arg);}
+\DoxyCodeLine{723     \}}
+\DoxyCodeLine{724 \};}
+\DoxyCodeLine{725 }
+\DoxyCodeLine{726 \textcolor{keyword}{template} <\textcolor{keyword}{typename} L>}
+\DoxyCodeLine{727 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_lambda}{BoundFlagLambda}} : \mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_ref_base}{BoundFlagRefBase}} \{}
+\DoxyCodeLine{728     L m\_lambda;}
+\DoxyCodeLine{729 }
+\DoxyCodeLine{730     \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{structclara_1_1detail_1_1_unary_lambda_traits}{UnaryLambdaTraits<L>::isValid}}, \textcolor{stringliteral}{"{}Supplied lambda must take exactly one argument"{}});}
+\DoxyCodeLine{731     \textcolor{keyword}{static\_assert}(std::is\_same<typename UnaryLambdaTraits<L>::ArgType, \textcolor{keywordtype}{bool}>::value,}
+\DoxyCodeLine{732                   \textcolor{stringliteral}{"{}flags must be boolean"{}});}
+\DoxyCodeLine{733 }
+\DoxyCodeLine{734     \textcolor{keyword}{explicit} \mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_lambda}{BoundFlagLambda}}(L \textcolor{keyword}{const}\& lambda) : m\_lambda(lambda) \{\}}
+\DoxyCodeLine{735 }
+\DoxyCodeLine{736     \textcolor{keyword}{auto} setFlag(\textcolor{keywordtype}{bool} flag) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{737         \textcolor{keywordflow}{return} \mbox{\hyperlink{structclara_1_1detail_1_1_lambda_invoker}{LambdaInvoker<typename UnaryLambdaTraits<L>::ReturnType}}>::invoke(m\_lambda, flag);}
+\DoxyCodeLine{738     \}}
+\DoxyCodeLine{739 \};}
+\DoxyCodeLine{740 }
+\DoxyCodeLine{741 \textcolor{keyword}{enum class} Optionality \{ Optional, Required \};}
+\DoxyCodeLine{742 }
+\DoxyCodeLine{743 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}};}
+\DoxyCodeLine{744 }
+\DoxyCodeLine{745 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{ParserBase}} \{}
+\DoxyCodeLine{746    \textcolor{keyword}{public}:}
+\DoxyCodeLine{747     \textcolor{keyword}{virtual} \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{\string~ParserBase}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{748     \textcolor{keyword}{virtual} \textcolor{keyword}{auto} validate() \textcolor{keyword}{const} -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}} \{ \textcolor{keywordflow}{return} Result::ok(); \}}
+\DoxyCodeLine{749     \textcolor{keyword}{virtual} \textcolor{keyword}{auto} parse(std::string \textcolor{keyword}{const}\& exeName, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \textcolor{keyword}{const}\& tokens) \textcolor{keyword}{const}}
+\DoxyCodeLine{750         -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}} = 0;}
+\DoxyCodeLine{751     \textcolor{keyword}{virtual} \textcolor{keyword}{auto} cardinality() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{size\_t} \{ \textcolor{keywordflow}{return} 1; \}}
+\DoxyCodeLine{752 }
+\DoxyCodeLine{753     \textcolor{keyword}{auto} parse(\mbox{\hyperlink{classclara_1_1detail_1_1_args}{Args}} \textcolor{keyword}{const}\& args) \textcolor{keyword}{const} -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}} \{}
+\DoxyCodeLine{754         \textcolor{keywordflow}{return} parse(args.exeName(), \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}}(args));}
+\DoxyCodeLine{755     \}}
+\DoxyCodeLine{756 \};}
+\DoxyCodeLine{757 }
+\DoxyCodeLine{758 \textcolor{keyword}{template} <\textcolor{keyword}{typename} DerivedT>}
+\DoxyCodeLine{759 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_composable_parser_impl}{ComposableParserImpl}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{ParserBase}} \{}
+\DoxyCodeLine{760    \textcolor{keyword}{public}:}
+\DoxyCodeLine{761     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{762     \textcolor{keyword}{auto} operator|(T \textcolor{keyword}{const}\& other) \textcolor{keyword}{const} -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}};}
+\DoxyCodeLine{763 \};}
+\DoxyCodeLine{764 }
+\DoxyCodeLine{765 \textcolor{comment}{// Common code and state for Args and Opts}}
+\DoxyCodeLine{766 \textcolor{keyword}{template} <\textcolor{keyword}{typename} DerivedT>}
+\DoxyCodeLine{767 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_composable_parser_impl}{ComposableParserImpl}}<DerivedT> \{}
+\DoxyCodeLine{768    \textcolor{keyword}{protected}:}
+\DoxyCodeLine{769     Optionality m\_optionality = Optionality::Optional;}
+\DoxyCodeLine{770     std::shared\_ptr<BoundRefBase> m\_ref;}
+\DoxyCodeLine{771     std::string m\_hint;}
+\DoxyCodeLine{772     std::string m\_description;}
+\DoxyCodeLine{773 }
+\DoxyCodeLine{774     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}(std::shared\_ptr<BoundRefBase> \textcolor{keyword}{const}\& ref) : m\_ref(ref) \{\}}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{776    \textcolor{keyword}{public}:}
+\DoxyCodeLine{777     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{778     \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}(T\& ref, std::string \textcolor{keyword}{const}\& hint)}
+\DoxyCodeLine{779         : m\_ref(std::make\_shared<\mbox{\hyperlink{structclara_1_1detail_1_1_bound_ref}{BoundRef<T>}}>(ref)), m\_hint(hint) \{\}}
+\DoxyCodeLine{780 }
+\DoxyCodeLine{781     \textcolor{keyword}{template} <\textcolor{keyword}{typename} LambdaT>}
+\DoxyCodeLine{782     \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}(LambdaT \textcolor{keyword}{const}\& ref, std::string \textcolor{keyword}{const}\& hint)}
+\DoxyCodeLine{783         : m\_ref(std::make\_shared<\mbox{\hyperlink{structclara_1_1detail_1_1_bound_lambda}{BoundLambda<LambdaT>}}>(ref)), m\_hint(hint) \{\}}
+\DoxyCodeLine{784 }
+\DoxyCodeLine{785     \textcolor{keyword}{auto} operator()(std::string \textcolor{keyword}{const}\& description) -\/> DerivedT\& \{}
+\DoxyCodeLine{786         m\_description = description;}
+\DoxyCodeLine{787         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}DerivedT\&\textcolor{keyword}{>}(*this);}
+\DoxyCodeLine{788     \}}
+\DoxyCodeLine{789 }
+\DoxyCodeLine{790     \textcolor{keyword}{auto} optional() -\/> DerivedT\& \{}
+\DoxyCodeLine{791         m\_optionality = Optionality::Optional;}
+\DoxyCodeLine{792         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}DerivedT\&\textcolor{keyword}{>}(*this);}
+\DoxyCodeLine{793     \};}
+\DoxyCodeLine{794 }
+\DoxyCodeLine{795     \textcolor{keyword}{auto} required() -\/> DerivedT\& \{}
+\DoxyCodeLine{796         m\_optionality = Optionality::Required;}
+\DoxyCodeLine{797         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}DerivedT\&\textcolor{keyword}{>}(*this);}
+\DoxyCodeLine{798     \};}
+\DoxyCodeLine{799 }
+\DoxyCodeLine{800     \textcolor{keyword}{auto} isOptional() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{ \textcolor{keywordflow}{return} m\_optionality == Optionality::Optional; \}}
+\DoxyCodeLine{801 }
+\DoxyCodeLine{802     \textcolor{keyword}{auto} cardinality() \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{size\_t} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{803         \textcolor{keywordflow}{if} (m\_ref-\/>isContainer())}
+\DoxyCodeLine{804             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{805         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{806             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{807     \}}
+\DoxyCodeLine{808 }
+\DoxyCodeLine{809     \textcolor{keyword}{auto} hint() \textcolor{keyword}{const} -\/> std::string \{ \textcolor{keywordflow}{return} m\_hint; \}}
+\DoxyCodeLine{810 \};}
+\DoxyCodeLine{811 }
+\DoxyCodeLine{812 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_composable_parser_impl}{ComposableParserImpl}}<ExeName> \{}
+\DoxyCodeLine{813     std::shared\_ptr<std::string> m\_name;}
+\DoxyCodeLine{814     std::shared\_ptr<BoundRefBase> m\_ref;}
+\DoxyCodeLine{815 }
+\DoxyCodeLine{816     \textcolor{keyword}{template} <\textcolor{keyword}{typename} LambdaT>}
+\DoxyCodeLine{817     \textcolor{keyword}{static} \textcolor{keyword}{auto} makeRef(LambdaT \textcolor{keyword}{const}\& lambda) -\/> std::shared\_ptr<BoundRefBase> \{}
+\DoxyCodeLine{818         \textcolor{keywordflow}{return} std::make\_shared<BoundLambda<LambdaT>>(lambda);}
+\DoxyCodeLine{819     \}}
+\DoxyCodeLine{820 }
+\DoxyCodeLine{821    \textcolor{keyword}{public}:}
+\DoxyCodeLine{822     \mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}}() : m\_name(std::make\_shared<std::string>(\textcolor{stringliteral}{"{}<executable>"{}})) \{\}}
+\DoxyCodeLine{823 }
+\DoxyCodeLine{824     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}}(std::string\& ref) : \mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}}() \{}
+\DoxyCodeLine{825         m\_ref = std::make\_shared<BoundRef<std::string>>(ref);}
+\DoxyCodeLine{826     \}}
+\DoxyCodeLine{827 }
+\DoxyCodeLine{828     \textcolor{keyword}{template} <\textcolor{keyword}{typename} LambdaT>}
+\DoxyCodeLine{829     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}}(LambdaT \textcolor{keyword}{const}\& lambda) : \mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}}() \{}
+\DoxyCodeLine{830         m\_ref = std::make\_shared<BoundLambda<LambdaT>>(lambda);}
+\DoxyCodeLine{831     \}}
+\DoxyCodeLine{832 }
+\DoxyCodeLine{833     \textcolor{comment}{// The exe name is not parsed out of the normal tokens, but is handled specially}}
+\DoxyCodeLine{834     \textcolor{keyword}{auto} parse(std::string \textcolor{keyword}{const}\&, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \textcolor{keyword}{const}\& tokens) \textcolor{keyword}{const}}
+\DoxyCodeLine{835         -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{836         \textcolor{keywordflow}{return} InternalParseResult::ok(\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(ParseResultType::NoMatch, tokens));}
+\DoxyCodeLine{837     \}}
+\DoxyCodeLine{838 }
+\DoxyCodeLine{839     \textcolor{keyword}{auto} name() \textcolor{keyword}{const} -\/> std::string \{ \textcolor{keywordflow}{return} *m\_name; \}}
+\DoxyCodeLine{840     \textcolor{keyword}{auto} set(std::string \textcolor{keyword}{const}\& newName) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{ParserResult}} \{}
+\DoxyCodeLine{841         \textcolor{keyword}{auto} lastSlash = newName.find\_last\_of(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)/"{}});}
+\DoxyCodeLine{842         \textcolor{keyword}{auto} filename = (lastSlash == std::string::npos) ? newName : newName.substr(lastSlash + 1);}
+\DoxyCodeLine{843 }
+\DoxyCodeLine{844         *m\_name = filename;}
+\DoxyCodeLine{845         \textcolor{keywordflow}{if} (m\_ref)}
+\DoxyCodeLine{846             \textcolor{keywordflow}{return} m\_ref-\/>setValue(filename);}
+\DoxyCodeLine{847         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{848             \textcolor{keywordflow}{return} ParserResult::ok(ParseResultType::Matched);}
+\DoxyCodeLine{849     \}}
+\DoxyCodeLine{850 \};}
+\DoxyCodeLine{851 }
+\DoxyCodeLine{852 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_arg}{Arg}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}<Arg> \{}
+\DoxyCodeLine{853    \textcolor{keyword}{public}:}
+\DoxyCodeLine{854     \textcolor{keyword}{using} ParserRefImpl::ParserRefImpl;}
+\DoxyCodeLine{855 }
+\DoxyCodeLine{856     \textcolor{keyword}{auto} parse(std::string \textcolor{keyword}{const}\&, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \textcolor{keyword}{const}\& tokens) \textcolor{keyword}{const}}
+\DoxyCodeLine{857         -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{858         \textcolor{keyword}{auto} validationResult = validate();}
+\DoxyCodeLine{859         \textcolor{keywordflow}{if} (!validationResult) \textcolor{keywordflow}{return} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}}(validationResult);}
+\DoxyCodeLine{860 }
+\DoxyCodeLine{861         \textcolor{keyword}{auto} remainingTokens = tokens;}
+\DoxyCodeLine{862         \textcolor{keyword}{auto} \textcolor{keyword}{const}\& token = *remainingTokens;}
+\DoxyCodeLine{863         \textcolor{keywordflow}{if} (token.type != TokenType::Argument)}
+\DoxyCodeLine{864             \textcolor{keywordflow}{return} InternalParseResult::ok(\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(ParseResultType::NoMatch, remainingTokens));}
+\DoxyCodeLine{865 }
+\DoxyCodeLine{866         \textcolor{keyword}{auto} result = m\_ref-\/>setValue(remainingTokens-\/>token);}
+\DoxyCodeLine{867         \textcolor{keywordflow}{if} (!result)}
+\DoxyCodeLine{868             \textcolor{keywordflow}{return} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}}(result);}
+\DoxyCodeLine{869         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{870             \textcolor{keywordflow}{return} InternalParseResult::ok(\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(ParseResultType::Matched, ++remainingTokens));}
+\DoxyCodeLine{871     \}}
+\DoxyCodeLine{872 \};}
+\DoxyCodeLine{873 }
+\DoxyCodeLine{874 \textcolor{keyword}{inline} \textcolor{keyword}{auto} normaliseOpt(std::string \textcolor{keyword}{const}\& optName) -\/> std::string \{}
+\DoxyCodeLine{875 \textcolor{preprocessor}{\#ifdef CLARA\_PLATFORM\_WINDOWS}}
+\DoxyCodeLine{876     \textcolor{keywordflow}{if} (optName[0] == \textcolor{charliteral}{'/'})}
+\DoxyCodeLine{877         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}-\/"{}} + optName.substr(1);}
+\DoxyCodeLine{878     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{879 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{880         \textcolor{keywordflow}{return} optName;}
+\DoxyCodeLine{881 \}}
+\DoxyCodeLine{882 }
+\DoxyCodeLine{883 \textcolor{keyword}{class }\mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}} : \textcolor{keyword}{public} \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}<Opt> \{}
+\DoxyCodeLine{884    \textcolor{keyword}{protected}:}
+\DoxyCodeLine{885     std::vector<std::string> m\_optNames;}
+\DoxyCodeLine{886 }
+\DoxyCodeLine{887    \textcolor{keyword}{public}:}
+\DoxyCodeLine{888     \textcolor{keyword}{template} <\textcolor{keyword}{typename} LambdaT>}
+\DoxyCodeLine{889     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}}(LambdaT \textcolor{keyword}{const}\& ref)}
+\DoxyCodeLine{890         : \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}(std::make\_shared<\mbox{\hyperlink{structclara_1_1detail_1_1_bound_flag_lambda}{BoundFlagLambda<LambdaT>}}>(ref)) \{\}}
+\DoxyCodeLine{891 }
+\DoxyCodeLine{892     \textcolor{keyword}{explicit} \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}}(\textcolor{keywordtype}{bool}\& ref) : \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}(std::make\_shared<BoundFlagRef>(ref)) \{\}}
+\DoxyCodeLine{893 }
+\DoxyCodeLine{894     \textcolor{keyword}{template} <\textcolor{keyword}{typename} LambdaT>}
+\DoxyCodeLine{895     \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}}(LambdaT \textcolor{keyword}{const}\& ref, std::string \textcolor{keyword}{const}\& hint) : \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}(ref, hint) \{\}}
+\DoxyCodeLine{896 }
+\DoxyCodeLine{897     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{898     \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}}(T\& ref, std::string \textcolor{keyword}{const}\& hint) : \mbox{\hyperlink{classclara_1_1detail_1_1_parser_ref_impl}{ParserRefImpl}}(ref, hint) \{\}}
+\DoxyCodeLine{899 }
+\DoxyCodeLine{900     \textcolor{keyword}{auto} operator[](std::string \textcolor{keyword}{const}\& optName) -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}}\& \{}
+\DoxyCodeLine{901         m\_optNames.push\_back(optName);}
+\DoxyCodeLine{902         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{903     \}}
+\DoxyCodeLine{904 }
+\DoxyCodeLine{905     \textcolor{keyword}{auto} getHelpColumns() \textcolor{keyword}{const} -\/> std::vector<HelpColumns> \{}
+\DoxyCodeLine{906         std::ostringstream oss;}
+\DoxyCodeLine{907         \textcolor{keywordtype}{bool} first = \textcolor{keyword}{true};}
+\DoxyCodeLine{908         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& opt : m\_optNames) \{}
+\DoxyCodeLine{909             \textcolor{keywordflow}{if} (first)}
+\DoxyCodeLine{910                 first = \textcolor{keyword}{false};}
+\DoxyCodeLine{911             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{912                 oss << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{913             oss << opt;}
+\DoxyCodeLine{914         \}}
+\DoxyCodeLine{915         \textcolor{keywordflow}{if} (!m\_hint.empty()) oss << \textcolor{stringliteral}{"{} <"{}} << m\_hint << \textcolor{stringliteral}{"{}>"{}};}
+\DoxyCodeLine{916         \textcolor{keywordflow}{return} \{\{oss.str(), m\_description\}\};}
+\DoxyCodeLine{917     \}}
+\DoxyCodeLine{918 }
+\DoxyCodeLine{919     \textcolor{keyword}{auto} isMatch(std::string \textcolor{keyword}{const}\& optToken) \textcolor{keyword}{const} -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{920         \textcolor{keyword}{auto} normalisedToken = normaliseOpt(optToken);}
+\DoxyCodeLine{921         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& name : m\_optNames) \{}
+\DoxyCodeLine{922             \textcolor{keywordflow}{if} (normaliseOpt(name) == normalisedToken) \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{923         \}}
+\DoxyCodeLine{924         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{925     \}}
+\DoxyCodeLine{926 }
+\DoxyCodeLine{927     \textcolor{keyword}{using} ParserBase::parse;}
+\DoxyCodeLine{928 }
+\DoxyCodeLine{929     \textcolor{keyword}{auto} parse(std::string \textcolor{keyword}{const}\&, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \textcolor{keyword}{const}\& tokens) \textcolor{keyword}{const}}
+\DoxyCodeLine{930         -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{931         \textcolor{keyword}{auto} validationResult = validate();}
+\DoxyCodeLine{932         \textcolor{keywordflow}{if} (!validationResult) \textcolor{keywordflow}{return} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}}(validationResult);}
+\DoxyCodeLine{933 }
+\DoxyCodeLine{934         \textcolor{keyword}{auto} remainingTokens = tokens;}
+\DoxyCodeLine{935         \textcolor{keywordflow}{if} (remainingTokens \&\& remainingTokens-\/>type == TokenType::Option) \{}
+\DoxyCodeLine{936             \textcolor{keyword}{auto} \textcolor{keyword}{const}\& token = *remainingTokens;}
+\DoxyCodeLine{937             \textcolor{keywordflow}{if} (isMatch(token.token)) \{}
+\DoxyCodeLine{938                 \textcolor{keywordflow}{if} (m\_ref-\/>isFlag()) \{}
+\DoxyCodeLine{939                     \textcolor{keyword}{auto} result = m\_ref-\/>setFlag(\textcolor{keyword}{true});}
+\DoxyCodeLine{940                     \textcolor{keywordflow}{if} (!result) \textcolor{keywordflow}{return} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}}(result);}
+\DoxyCodeLine{941                     \textcolor{keywordflow}{if} (result.value() == ParseResultType::ShortCircuitAll)}
+\DoxyCodeLine{942                         \textcolor{keywordflow}{return} InternalParseResult::ok(\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(result.value(), remainingTokens));}
+\DoxyCodeLine{943                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{944                     ++remainingTokens;}
+\DoxyCodeLine{945                     \textcolor{keywordflow}{if} (!remainingTokens)}
+\DoxyCodeLine{946                         \textcolor{keywordflow}{return} InternalParseResult::runtimeError(\textcolor{stringliteral}{"{}Expected argument following "{}} +}
+\DoxyCodeLine{947                                                                  token.token);}
+\DoxyCodeLine{948                     \textcolor{keyword}{auto} \textcolor{keyword}{const}\& argToken = *remainingTokens;}
+\DoxyCodeLine{949                     \textcolor{keywordflow}{if} (argToken.type != TokenType::Argument)}
+\DoxyCodeLine{950                         \textcolor{keywordflow}{return} InternalParseResult::runtimeError(\textcolor{stringliteral}{"{}Expected argument following "{}} +}
+\DoxyCodeLine{951                                                                  token.token);}
+\DoxyCodeLine{952                     \textcolor{keyword}{auto} result = m\_ref-\/>setValue(argToken.token);}
+\DoxyCodeLine{953                     \textcolor{keywordflow}{if} (!result) \textcolor{keywordflow}{return} \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}}(result);}
+\DoxyCodeLine{954                     \textcolor{keywordflow}{if} (result.value() == ParseResultType::ShortCircuitAll)}
+\DoxyCodeLine{955                         \textcolor{keywordflow}{return} InternalParseResult::ok(\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(result.value(), remainingTokens));}
+\DoxyCodeLine{956                 \}}
+\DoxyCodeLine{957                 \textcolor{keywordflow}{return} InternalParseResult::ok(}
+\DoxyCodeLine{958                     \mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(ParseResultType::Matched, ++remainingTokens));}
+\DoxyCodeLine{959             \}}
+\DoxyCodeLine{960         \}}
+\DoxyCodeLine{961         \textcolor{keywordflow}{return} InternalParseResult::ok(\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(ParseResultType::NoMatch, remainingTokens));}
+\DoxyCodeLine{962     \}}
+\DoxyCodeLine{963 }
+\DoxyCodeLine{964     \textcolor{keyword}{auto} validate() \textcolor{keyword}{const} -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{965         \textcolor{keywordflow}{if} (m\_optNames.empty()) \textcolor{keywordflow}{return} Result::logicError(\textcolor{stringliteral}{"{}No options supplied to Opt"{}});}
+\DoxyCodeLine{966         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& name : m\_optNames) \{}
+\DoxyCodeLine{967             \textcolor{keywordflow}{if} (name.empty()) \textcolor{keywordflow}{return} Result::logicError(\textcolor{stringliteral}{"{}Option name cannot be empty"{}});}
+\DoxyCodeLine{968 \textcolor{preprocessor}{\#ifdef CLARA\_PLATFORM\_WINDOWS}}
+\DoxyCodeLine{969             \textcolor{keywordflow}{if} (name[0] != \textcolor{charliteral}{'-\/'} \&\& name[0] != \textcolor{charliteral}{'/'})}
+\DoxyCodeLine{970                 \textcolor{keywordflow}{return} Result::logicError(\textcolor{stringliteral}{"{}Option name must begin with '-\/' or '/'"{}});}
+\DoxyCodeLine{971 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{972             \textcolor{keywordflow}{if} (name[0] != \textcolor{charliteral}{'-\/'}) \textcolor{keywordflow}{return} Result::logicError(\textcolor{stringliteral}{"{}Option name must begin with '-\/'"{}});}
+\DoxyCodeLine{973 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{974         \}}
+\DoxyCodeLine{975         \textcolor{keywordflow}{return} ParserRefImpl::validate();}
+\DoxyCodeLine{976     \}}
+\DoxyCodeLine{977 \};}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{979 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_help}{Help}} : \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}} \{}
+\DoxyCodeLine{980     \mbox{\hyperlink{structclara_1_1detail_1_1_help}{Help}}(\textcolor{keywordtype}{bool}\& showHelpFlag)}
+\DoxyCodeLine{981         : \mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}}([\&](\textcolor{keywordtype}{bool} flag) \{}
+\DoxyCodeLine{982               showHelpFlag = flag;}
+\DoxyCodeLine{983               \textcolor{keywordflow}{return} ParserResult::ok(ParseResultType::ShortCircuitAll);}
+\DoxyCodeLine{984           \}) \{}
+\DoxyCodeLine{985         \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}}\&\textcolor{keyword}{>} (*this)(\textcolor{stringliteral}{"{}display usage information"{}})[\textcolor{stringliteral}{"{}-\/?"{}}][\textcolor{stringliteral}{"{}-\/h"{}}][\textcolor{stringliteral}{"{}-\/-\/help"{}}].optional();}
+\DoxyCodeLine{986     \}}
+\DoxyCodeLine{987 \};}
+\DoxyCodeLine{988 }
+\DoxyCodeLine{989 }
+\DoxyCodeLine{990 \textcolor{keyword}{struct }\mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} : \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{ParserBase}} \{}
+\DoxyCodeLine{991     \textcolor{keyword}{mutable} \mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}} m\_exeName;}
+\DoxyCodeLine{992     std::vector<Opt> m\_options;}
+\DoxyCodeLine{993     std::vector<Arg> m\_args;}
+\DoxyCodeLine{994 }
+\DoxyCodeLine{995     \textcolor{keyword}{auto} operator|=(\mbox{\hyperlink{classclara_1_1detail_1_1_exe_name}{ExeName}} \textcolor{keyword}{const}\& exeName) -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}}\& \{}
+\DoxyCodeLine{996         m\_exeName = exeName;}
+\DoxyCodeLine{997         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{998     \}}
+\DoxyCodeLine{999 }
+\DoxyCodeLine{1000     \textcolor{keyword}{auto} operator|=(\mbox{\hyperlink{classclara_1_1detail_1_1_arg}{Arg}} \textcolor{keyword}{const}\& arg) -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}}\& \{}
+\DoxyCodeLine{1001         m\_args.push\_back(arg);}
+\DoxyCodeLine{1002         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1003     \}}
+\DoxyCodeLine{1004 }
+\DoxyCodeLine{1005     \textcolor{keyword}{auto} operator|=(\mbox{\hyperlink{classclara_1_1detail_1_1_opt}{Opt}} \textcolor{keyword}{const}\& opt) -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}}\& \{}
+\DoxyCodeLine{1006         m\_options.push\_back(opt);}
+\DoxyCodeLine{1007         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1008     \}}
+\DoxyCodeLine{1009 }
+\DoxyCodeLine{1010     \textcolor{keyword}{auto} operator|=(\mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \textcolor{keyword}{const}\& other) -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}}\& \{}
+\DoxyCodeLine{1011         m\_options.insert(m\_options.end(), other.m\_options.begin(), other.m\_options.end());}
+\DoxyCodeLine{1012         m\_args.insert(m\_args.end(), other.m\_args.begin(), other.m\_args.end());}
+\DoxyCodeLine{1013         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1014     \}}
+\DoxyCodeLine{1015 }
+\DoxyCodeLine{1016     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{1017     \textcolor{keyword}{auto} operator|(T \textcolor{keyword}{const}\& other) \textcolor{keyword}{const} -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \{}
+\DoxyCodeLine{1018         \textcolor{keywordflow}{return} \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}}(*\textcolor{keyword}{this}) |= other;}
+\DoxyCodeLine{1019     \}}
+\DoxyCodeLine{1020 }
+\DoxyCodeLine{1021     \textcolor{keyword}{auto} getHelpColumns() \textcolor{keyword}{const} -\/> std::vector<HelpColumns> \{}
+\DoxyCodeLine{1022         std::vector<HelpColumns> cols;}
+\DoxyCodeLine{1023         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& o : m\_options) \{}
+\DoxyCodeLine{1024             \textcolor{keyword}{auto} childCols = o.getHelpColumns();}
+\DoxyCodeLine{1025             cols.insert(cols.end(), childCols.begin(), childCols.end());}
+\DoxyCodeLine{1026         \}}
+\DoxyCodeLine{1027         \textcolor{keywordflow}{return} cols;}
+\DoxyCodeLine{1028     \}}
+\DoxyCodeLine{1029 }
+\DoxyCodeLine{1030     \textcolor{keywordtype}{void} writeToStream(std::ostream\& os)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1031         \textcolor{keywordflow}{if} (!m\_exeName.name().empty()) \{}
+\DoxyCodeLine{1032             os << \textcolor{stringliteral}{"{}usage:\(\backslash\)n"{}}}
+\DoxyCodeLine{1033                << \textcolor{stringliteral}{"{}  "{}} << m\_exeName.name() << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{1034             \textcolor{keywordtype}{bool} required = \textcolor{keyword}{true}, first = \textcolor{keyword}{true};}
+\DoxyCodeLine{1035             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& arg : m\_args) \{}
+\DoxyCodeLine{1036                 \textcolor{keywordflow}{if} (first)}
+\DoxyCodeLine{1037                     first = \textcolor{keyword}{false};}
+\DoxyCodeLine{1038                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1039                     os << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{1040                 \textcolor{keywordflow}{if} (arg.isOptional() \&\& required) \{}
+\DoxyCodeLine{1041                     os << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{1042                     required = \textcolor{keyword}{false};}
+\DoxyCodeLine{1043                 \}}
+\DoxyCodeLine{1044                 os << \textcolor{stringliteral}{"{}<"{}} << arg.hint() << \textcolor{stringliteral}{"{}>"{}};}
+\DoxyCodeLine{1045                 \textcolor{keywordflow}{if} (arg.cardinality() == 0) os << \textcolor{stringliteral}{"{} ... "{}};}
+\DoxyCodeLine{1046             \}}
+\DoxyCodeLine{1047             \textcolor{keywordflow}{if} (!required) os << \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{1048             \textcolor{keywordflow}{if} (!m\_options.empty()) os << \textcolor{stringliteral}{"{} options"{}};}
+\DoxyCodeLine{1049             os << \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nwhere options are:"{}} << std::endl;}
+\DoxyCodeLine{1050         \}}
+\DoxyCodeLine{1051 }
+\DoxyCodeLine{1052         \textcolor{keyword}{auto} rows = getHelpColumns();}
+\DoxyCodeLine{1053         \textcolor{keywordtype}{size\_t} consoleWidth = CLARA\_CONFIG\_CONSOLE\_WIDTH;}
+\DoxyCodeLine{1054         \textcolor{keywordtype}{size\_t} optWidth = 0;}
+\DoxyCodeLine{1055         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& cols : rows) optWidth = (std::max)(optWidth, cols.left.size() + 2);}
+\DoxyCodeLine{1056 }
+\DoxyCodeLine{1057         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& cols : rows) \{}
+\DoxyCodeLine{1058             \textcolor{keyword}{auto} row = \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{TextFlow::Column}}(cols.left).width(optWidth).indent(2) + \mbox{\hyperlink{classclara_1_1_text_flow_1_1_spacer}{TextFlow::Spacer}}(4) +}
+\DoxyCodeLine{1059                        \mbox{\hyperlink{classclara_1_1_text_flow_1_1_column}{TextFlow::Column}}(cols.right).width(consoleWidth -\/ 7 -\/ optWidth);}
+\DoxyCodeLine{1060             os << row << std::endl;}
+\DoxyCodeLine{1061         \}}
+\DoxyCodeLine{1062     \}}
+\DoxyCodeLine{1063 }
+\DoxyCodeLine{1064     \textcolor{keyword}{friend} \textcolor{keyword}{auto} operator<<(std::ostream\& os, \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \textcolor{keyword}{const}\& parser) -\/> std::ostream\& \{}
+\DoxyCodeLine{1065         parser.writeToStream(os);}
+\DoxyCodeLine{1066         \textcolor{keywordflow}{return} os;}
+\DoxyCodeLine{1067     \}}
+\DoxyCodeLine{1068 }
+\DoxyCodeLine{1069     \textcolor{keyword}{auto} validate() \textcolor{keyword}{const} -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{Result}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{1070         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& opt : m\_options) \{}
+\DoxyCodeLine{1071             \textcolor{keyword}{auto} result = opt.validate();}
+\DoxyCodeLine{1072             \textcolor{keywordflow}{if} (!result) \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{1073         \}}
+\DoxyCodeLine{1074         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& arg : m\_args) \{}
+\DoxyCodeLine{1075             \textcolor{keyword}{auto} result = arg.validate();}
+\DoxyCodeLine{1076             \textcolor{keywordflow}{if} (!result) \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{1077         \}}
+\DoxyCodeLine{1078         \textcolor{keywordflow}{return} Result::ok();}
+\DoxyCodeLine{1079     \}}
+\DoxyCodeLine{1080 }
+\DoxyCodeLine{1081     \textcolor{keyword}{using} ParserBase::parse;}
+\DoxyCodeLine{1082 }
+\DoxyCodeLine{1083     \textcolor{keyword}{auto} parse(std::string \textcolor{keyword}{const}\& exeName, \mbox{\hyperlink{classclara_1_1detail_1_1_token_stream}{TokenStream}} \textcolor{keyword}{const}\& tokens) \textcolor{keyword}{const}}
+\DoxyCodeLine{1084         -\/> \mbox{\hyperlink{classclara_1_1detail_1_1_basic_result}{InternalParseResult}} \textcolor{keyword}{override} \{}
+\DoxyCodeLine{1085         \textcolor{keyword}{struct }ParserInfo \{}
+\DoxyCodeLine{1086             \mbox{\hyperlink{classclara_1_1detail_1_1_parser_base}{ParserBase}} \textcolor{keyword}{const}* parser = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1087             \textcolor{keywordtype}{size\_t} count = 0;}
+\DoxyCodeLine{1088         \};}
+\DoxyCodeLine{1089         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} totalParsers = m\_options.size() + m\_args.size();}
+\DoxyCodeLine{1090         assert(totalParsers < 512);}
+\DoxyCodeLine{1091         \textcolor{comment}{// ParserInfo parseInfos[totalParsers]; // <-\/-\/ this is what we really want to do}}
+\DoxyCodeLine{1092         ParserInfo parseInfos[512];}
+\DoxyCodeLine{1093 }
+\DoxyCodeLine{1094         \{}
+\DoxyCodeLine{1095             \textcolor{keywordtype}{size\_t} i = 0;}
+\DoxyCodeLine{1096             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& opt : m\_options) parseInfos[i++].parser = \&opt;}
+\DoxyCodeLine{1097             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}\& arg : m\_args) parseInfos[i++].parser = \&arg;}
+\DoxyCodeLine{1098         \}}
+\DoxyCodeLine{1099 }
+\DoxyCodeLine{1100         m\_exeName.set(exeName);}
+\DoxyCodeLine{1101 }
+\DoxyCodeLine{1102         \textcolor{keyword}{auto} result = InternalParseResult::ok(\mbox{\hyperlink{classclara_1_1detail_1_1_parse_state}{ParseState}}(ParseResultType::NoMatch, tokens));}
+\DoxyCodeLine{1103         \textcolor{keywordflow}{while} (result.value().remainingTokens()) \{}
+\DoxyCodeLine{1104             \textcolor{keywordtype}{bool} tokenParsed = \textcolor{keyword}{false};}
+\DoxyCodeLine{1105 }
+\DoxyCodeLine{1106             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < totalParsers; ++i) \{}
+\DoxyCodeLine{1107                 \textcolor{keyword}{auto}\& parseInfo = parseInfos[i];}
+\DoxyCodeLine{1108                 \textcolor{keywordflow}{if} (parseInfo.parser-\/>cardinality() == 0 ||}
+\DoxyCodeLine{1109                     parseInfo.count < parseInfo.parser-\/>cardinality()) \{}
+\DoxyCodeLine{1110                     result = parseInfo.parser-\/>parse(exeName, result.value().remainingTokens());}
+\DoxyCodeLine{1111                     \textcolor{keywordflow}{if} (!result) \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{1112                     \textcolor{keywordflow}{if} (result.value().type() != ParseResultType::NoMatch) \{}
+\DoxyCodeLine{1113                         tokenParsed = \textcolor{keyword}{true};}
+\DoxyCodeLine{1114                         ++parseInfo.count;}
+\DoxyCodeLine{1115                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{1116                     \}}
+\DoxyCodeLine{1117                 \}}
+\DoxyCodeLine{1118             \}}
+\DoxyCodeLine{1119 }
+\DoxyCodeLine{1120             \textcolor{keywordflow}{if} (result.value().type() == ParseResultType::ShortCircuitAll) \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{1121             \textcolor{keywordflow}{if} (!tokenParsed)}
+\DoxyCodeLine{1122                 \textcolor{keywordflow}{return} InternalParseResult::runtimeError(\textcolor{stringliteral}{"{}Unrecognised token: "{}} +}
+\DoxyCodeLine{1123                                                          result.value().remainingTokens()-\/>token);}
+\DoxyCodeLine{1124         \}}
+\DoxyCodeLine{1125         \textcolor{comment}{// !TBD Check missing required options}}
+\DoxyCodeLine{1126         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{1127     \}}
+\DoxyCodeLine{1128 \};}
+\DoxyCodeLine{1129 }
+\DoxyCodeLine{1130 \textcolor{keyword}{template} <\textcolor{keyword}{typename} DerivedT>}
+\DoxyCodeLine{1131 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{1132 \textcolor{keyword}{auto} \mbox{\hyperlink{classclara_1_1detail_1_1_composable_parser_impl}{ComposableParserImpl<DerivedT>::operator|}}(T \textcolor{keyword}{const}\& other) \textcolor{keyword}{const} -\/> \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}} \{}
+\DoxyCodeLine{1133     \textcolor{keywordflow}{return} \mbox{\hyperlink{structclara_1_1detail_1_1_parser}{Parser}}() | \textcolor{keyword}{static\_cast<}DerivedT const\&\textcolor{keyword}{>}(*this) | other;}
+\DoxyCodeLine{1134 \}}
+\DoxyCodeLine{1135 \}  \textcolor{comment}{// namespace detail}}
+\DoxyCodeLine{1136 }
+\DoxyCodeLine{1137 }
+\DoxyCodeLine{1138 \textcolor{comment}{// A Combined parser}}
+\DoxyCodeLine{1139 \textcolor{keyword}{using} detail::Parser;}
+\DoxyCodeLine{1140 }
+\DoxyCodeLine{1141 \textcolor{comment}{// A parser for options}}
+\DoxyCodeLine{1142 \textcolor{keyword}{using} detail::Opt;}
+\DoxyCodeLine{1143 }
+\DoxyCodeLine{1144 \textcolor{comment}{// A parser for arguments}}
+\DoxyCodeLine{1145 \textcolor{keyword}{using} detail::Arg;}
+\DoxyCodeLine{1146 }
+\DoxyCodeLine{1147 \textcolor{comment}{// Wrapper for argc, argv from main()}}
+\DoxyCodeLine{1148 \textcolor{keyword}{using} detail::Args;}
+\DoxyCodeLine{1149 }
+\DoxyCodeLine{1150 \textcolor{comment}{// Specifies the name of the executable}}
+\DoxyCodeLine{1151 \textcolor{keyword}{using} detail::ExeName;}
+\DoxyCodeLine{1152 }
+\DoxyCodeLine{1153 \textcolor{comment}{// Convenience wrapper for option parser that specifies the help option}}
+\DoxyCodeLine{1154 \textcolor{keyword}{using} detail::Help;}
+\DoxyCodeLine{1155 }
+\DoxyCodeLine{1156 \textcolor{comment}{// enum of result types from a parse}}
+\DoxyCodeLine{1157 \textcolor{keyword}{using} detail::ParseResultType;}
+\DoxyCodeLine{1158 }
+\DoxyCodeLine{1159 \textcolor{comment}{// Result type for parser operation}}
+\DoxyCodeLine{1160 \textcolor{keyword}{using} detail::ParserResult;}
+\DoxyCodeLine{1161 }
+\DoxyCodeLine{1162 }
+\DoxyCodeLine{1163 \}  \textcolor{comment}{// namespace clara}}
+\DoxyCodeLine{1164 }
+\DoxyCodeLine{1165 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// CLARA\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

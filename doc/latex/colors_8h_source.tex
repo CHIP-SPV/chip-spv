@@ -1,0 +1,263 @@
+\hypertarget{colors_8h_source}{}\doxysection{colors.\+h}
+\label{colors_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/bundled/colors.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/fmt/bundled/colors.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Formatting library for C++ -\/ the core API}}
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{// Copyright (c) 2012 -\/ present, Victor Zverovich}}
+\DoxyCodeLine{4 \textcolor{comment}{// All rights reserved.}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{// For the license information refer to format.h.}}
+\DoxyCodeLine{7 \textcolor{comment}{//}}
+\DoxyCodeLine{8 \textcolor{comment}{// Copyright (c) 2018 -\/ present, Remotion (Igor Schulz)}}
+\DoxyCodeLine{9 \textcolor{comment}{// All Rights Reserved}}
+\DoxyCodeLine{10 \textcolor{comment}{// \{fmt\} support for rgb color output.}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifndef FMT\_COLORS\_H\_}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define FMT\_COLORS\_H\_}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}format.h"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 FMT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{// rgb is a struct for red, green and blue colors.}}
+\DoxyCodeLine{20 \textcolor{comment}{// We use rgb as name because some editors will show it as color direct in the}}
+\DoxyCodeLine{21 \textcolor{comment}{// editor.}}
+\DoxyCodeLine{22 \textcolor{keyword}{struct }\mbox{\hyperlink{structrgb}{rgb}}}
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{24     FMT\_CONSTEXPR\_DECL \mbox{\hyperlink{structrgb}{rgb}}()}
+\DoxyCodeLine{25         : r(0)}
+\DoxyCodeLine{26         , g(0)}
+\DoxyCodeLine{27         , b(0)}
+\DoxyCodeLine{28     \{}
+\DoxyCodeLine{29     \}}
+\DoxyCodeLine{30     FMT\_CONSTEXPR\_DECL \mbox{\hyperlink{structrgb}{rgb}}(uint8\_t r\_, uint8\_t g\_, uint8\_t b\_)}
+\DoxyCodeLine{31         : r(r\_)}
+\DoxyCodeLine{32         , g(g\_)}
+\DoxyCodeLine{33         , b(b\_)}
+\DoxyCodeLine{34     \{}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36     FMT\_CONSTEXPR\_DECL \mbox{\hyperlink{structrgb}{rgb}}(uint32\_t hex)}
+\DoxyCodeLine{37         : r((hex >> 16) \& 0xFF)}
+\DoxyCodeLine{38         , g((hex >> 8) \& 0xFF)}
+\DoxyCodeLine{39         , b((hex)\&0xFF)}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42     uint8\_t r;}
+\DoxyCodeLine{43     uint8\_t g;}
+\DoxyCodeLine{44     uint8\_t b;}
+\DoxyCodeLine{45 \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keyword}{namespace }internal \{}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 FMT\_CONSTEXPR \textcolor{keyword}{inline} \textcolor{keywordtype}{void} to\_esc(uint8\_t c, \textcolor{keywordtype}{char} out[], \textcolor{keywordtype}{int} offset)}
+\DoxyCodeLine{50 \{}
+\DoxyCodeLine{51     out[offset + 0] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(\textcolor{charliteral}{'0'} + c / 100);}
+\DoxyCodeLine{52     out[offset + 1] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(\textcolor{charliteral}{'0'} + c / 10 \% 10);}
+\DoxyCodeLine{53     out[offset + 2] = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(\textcolor{charliteral}{'0'} + c \% 10);}
+\DoxyCodeLine{54 \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \} \textcolor{comment}{// namespace internal}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 FMT\_FUNC \textcolor{keywordtype}{void} vprint\_rgb(\mbox{\hyperlink{structrgb}{rgb}} fd, \mbox{\hyperlink{classbasic__string__view}{string\_view}} format, \mbox{\hyperlink{structformat__args}{format\_args}} args)}
+\DoxyCodeLine{59 \{}
+\DoxyCodeLine{60     \textcolor{keywordtype}{char} escape\_fd[] = \textcolor{stringliteral}{"{}\(\backslash\)x1b[38;2;000;000;000m"{}};}
+\DoxyCodeLine{61     \textcolor{keyword}{static} FMT\_CONSTEXPR\_DECL \textcolor{keyword}{const} \textcolor{keywordtype}{char} RESET\_COLOR[] = \textcolor{stringliteral}{"{}\(\backslash\)x1b[0m"{}};}
+\DoxyCodeLine{62     internal::to\_esc(fd.r, escape\_fd, 7);}
+\DoxyCodeLine{63     internal::to\_esc(fd.g, escape\_fd, 11);}
+\DoxyCodeLine{64     internal::to\_esc(fd.b, escape\_fd, 15);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     std::fputs(escape\_fd, stdout);}
+\DoxyCodeLine{67     vprint(format, args);}
+\DoxyCodeLine{68     std::fputs(RESET\_COLOR, stdout);}
+\DoxyCodeLine{69 \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 FMT\_FUNC \textcolor{keywordtype}{void} vprint\_rgb(\mbox{\hyperlink{structrgb}{rgb}} fd, \mbox{\hyperlink{structrgb}{rgb}} bg, \mbox{\hyperlink{classbasic__string__view}{string\_view}} format, \mbox{\hyperlink{structformat__args}{format\_args}} args)}
+\DoxyCodeLine{72 \{}
+\DoxyCodeLine{73     \textcolor{keywordtype}{char} escape\_fd[] = \textcolor{stringliteral}{"{}\(\backslash\)x1b[38;2;000;000;000m"{}}; \textcolor{comment}{// foreground color}}
+\DoxyCodeLine{74     \textcolor{keywordtype}{char} escape\_bg[] = \textcolor{stringliteral}{"{}\(\backslash\)x1b[48;2;000;000;000m"{}}; \textcolor{comment}{// background color}}
+\DoxyCodeLine{75     \textcolor{keyword}{static} FMT\_CONSTEXPR\_DECL \textcolor{keyword}{const} \textcolor{keywordtype}{char} RESET\_COLOR[] = \textcolor{stringliteral}{"{}\(\backslash\)x1b[0m"{}};}
+\DoxyCodeLine{76     internal::to\_esc(fd.r, escape\_fd, 7);}
+\DoxyCodeLine{77     internal::to\_esc(fd.g, escape\_fd, 11);}
+\DoxyCodeLine{78     internal::to\_esc(fd.b, escape\_fd, 15);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     internal::to\_esc(bg.r, escape\_bg, 7);}
+\DoxyCodeLine{81     internal::to\_esc(bg.g, escape\_bg, 11);}
+\DoxyCodeLine{82     internal::to\_esc(bg.b, escape\_bg, 15);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     std::fputs(escape\_fd, stdout);}
+\DoxyCodeLine{85     std::fputs(escape\_bg, stdout);}
+\DoxyCodeLine{86     vprint(format, args);}
+\DoxyCodeLine{87     std::fputs(RESET\_COLOR, stdout);}
+\DoxyCodeLine{88 \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{91 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} print\_rgb(\mbox{\hyperlink{structrgb}{rgb}} fd, \mbox{\hyperlink{classbasic__string__view}{string\_view}} format\_str, \textcolor{keyword}{const} Args \&... args)}
+\DoxyCodeLine{92 \{}
+\DoxyCodeLine{93     vprint\_rgb(fd, format\_str, make\_format\_args(args...));}
+\DoxyCodeLine{94 \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{comment}{// rgb foreground color}}
+\DoxyCodeLine{97 \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{98 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} print(\mbox{\hyperlink{structrgb}{rgb}} fd, \mbox{\hyperlink{classbasic__string__view}{string\_view}} format\_str, \textcolor{keyword}{const} Args \&... args)}
+\DoxyCodeLine{99 \{}
+\DoxyCodeLine{100     vprint\_rgb(fd, format\_str, make\_format\_args(args...));}
+\DoxyCodeLine{101 \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{comment}{// rgb foreground color and background color}}
+\DoxyCodeLine{104 \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{105 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} print(\mbox{\hyperlink{structrgb}{rgb}} fd, \mbox{\hyperlink{structrgb}{rgb}} bg, \mbox{\hyperlink{classbasic__string__view}{string\_view}} format\_str, \textcolor{keyword}{const} Args \&... args)}
+\DoxyCodeLine{106 \{}
+\DoxyCodeLine{107     vprint\_rgb(fd, bg, format\_str, make\_format\_args(args...));}
+\DoxyCodeLine{108 \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{enum class} color : uint32\_t}
+\DoxyCodeLine{111 \{}
+\DoxyCodeLine{112     alice\_blue = 0xF0F8FF,              \textcolor{comment}{// rgb(240,248,255)}}
+\DoxyCodeLine{113     antique\_white = 0xFAEBD7,           \textcolor{comment}{// rgb(250,235,215)}}
+\DoxyCodeLine{114     aqua = 0x00FFFF,                    \textcolor{comment}{// rgb(0,255,255)}}
+\DoxyCodeLine{115     aquamarine = 0x7FFFD4,              \textcolor{comment}{// rgb(127,255,212)}}
+\DoxyCodeLine{116     azure = 0xF0FFFF,                   \textcolor{comment}{// rgb(240,255,255)}}
+\DoxyCodeLine{117     beige = 0xF5F5DC,                   \textcolor{comment}{// rgb(245,245,220)}}
+\DoxyCodeLine{118     bisque = 0xFFE4C4,                  \textcolor{comment}{// rgb(255,228,196)}}
+\DoxyCodeLine{119     black = 0x000000,                   \textcolor{comment}{// rgb(0,0,0)}}
+\DoxyCodeLine{120     blanched\_almond = 0xFFEBCD,         \textcolor{comment}{// rgb(255,235,205)}}
+\DoxyCodeLine{121     blue = 0x0000FF,                    \textcolor{comment}{// rgb(0,0,255)}}
+\DoxyCodeLine{122     blue\_violet = 0x8A2BE2,             \textcolor{comment}{// rgb(138,43,226)}}
+\DoxyCodeLine{123     brown = 0xA52A2A,                   \textcolor{comment}{// rgb(165,42,42)}}
+\DoxyCodeLine{124     burly\_wood = 0xDEB887,              \textcolor{comment}{// rgb(222,184,135)}}
+\DoxyCodeLine{125     cadet\_blue = 0x5F9EA0,              \textcolor{comment}{// rgb(95,158,160)}}
+\DoxyCodeLine{126     chartreuse = 0x7FFF00,              \textcolor{comment}{// rgb(127,255,0)}}
+\DoxyCodeLine{127     chocolate = 0xD2691E,               \textcolor{comment}{// rgb(210,105,30)}}
+\DoxyCodeLine{128     coral = 0xFF7F50,                   \textcolor{comment}{// rgb(255,127,80)}}
+\DoxyCodeLine{129     cornflower\_blue = 0x6495ED,         \textcolor{comment}{// rgb(100,149,237)}}
+\DoxyCodeLine{130     cornsilk = 0xFFF8DC,                \textcolor{comment}{// rgb(255,248,220)}}
+\DoxyCodeLine{131     crimson = 0xDC143C,                 \textcolor{comment}{// rgb(220,20,60)}}
+\DoxyCodeLine{132     cyan = 0x00FFFF,                    \textcolor{comment}{// rgb(0,255,255)}}
+\DoxyCodeLine{133     dark\_blue = 0x00008B,               \textcolor{comment}{// rgb(0,0,139)}}
+\DoxyCodeLine{134     dark\_cyan = 0x008B8B,               \textcolor{comment}{// rgb(0,139,139)}}
+\DoxyCodeLine{135     dark\_golden\_rod = 0xB8860B,         \textcolor{comment}{// rgb(184,134,11)}}
+\DoxyCodeLine{136     dark\_gray = 0xA9A9A9,               \textcolor{comment}{// rgb(169,169,169)}}
+\DoxyCodeLine{137     dark\_green = 0x006400,              \textcolor{comment}{// rgb(0,100,0)}}
+\DoxyCodeLine{138     dark\_khaki = 0xBDB76B,              \textcolor{comment}{// rgb(189,183,107)}}
+\DoxyCodeLine{139     dark\_magenta = 0x8B008B,            \textcolor{comment}{// rgb(139,0,139)}}
+\DoxyCodeLine{140     dark\_olive\_green = 0x556B2F,        \textcolor{comment}{// rgb(85,107,47)}}
+\DoxyCodeLine{141     dark\_orange = 0xFF8C00,             \textcolor{comment}{// rgb(255,140,0)}}
+\DoxyCodeLine{142     dark\_orchid = 0x9932CC,             \textcolor{comment}{// rgb(153,50,204)}}
+\DoxyCodeLine{143     dark\_red = 0x8B0000,                \textcolor{comment}{// rgb(139,0,0)}}
+\DoxyCodeLine{144     dark\_salmon = 0xE9967A,             \textcolor{comment}{// rgb(233,150,122)}}
+\DoxyCodeLine{145     dark\_sea\_green = 0x8FBC8F,          \textcolor{comment}{// rgb(143,188,143)}}
+\DoxyCodeLine{146     dark\_slate\_blue = 0x483D8B,         \textcolor{comment}{// rgb(72,61,139)}}
+\DoxyCodeLine{147     dark\_slate\_gray = 0x2F4F4F,         \textcolor{comment}{// rgb(47,79,79)}}
+\DoxyCodeLine{148     dark\_turquoise = 0x00CED1,          \textcolor{comment}{// rgb(0,206,209)}}
+\DoxyCodeLine{149     dark\_violet = 0x9400D3,             \textcolor{comment}{// rgb(148,0,211)}}
+\DoxyCodeLine{150     deep\_pink = 0xFF1493,               \textcolor{comment}{// rgb(255,20,147)}}
+\DoxyCodeLine{151     deep\_sky\_blue = 0x00BFFF,           \textcolor{comment}{// rgb(0,191,255)}}
+\DoxyCodeLine{152     dim\_gray = 0x696969,                \textcolor{comment}{// rgb(105,105,105)}}
+\DoxyCodeLine{153     dodger\_blue = 0x1E90FF,             \textcolor{comment}{// rgb(30,144,255)}}
+\DoxyCodeLine{154     fire\_brick = 0xB22222,              \textcolor{comment}{// rgb(178,34,34)}}
+\DoxyCodeLine{155     floral\_white = 0xFFFAF0,            \textcolor{comment}{// rgb(255,250,240)}}
+\DoxyCodeLine{156     forest\_green = 0x228B22,            \textcolor{comment}{// rgb(34,139,34)}}
+\DoxyCodeLine{157     fuchsia = 0xFF00FF,                 \textcolor{comment}{// rgb(255,0,255)}}
+\DoxyCodeLine{158     gainsboro = 0xDCDCDC,               \textcolor{comment}{// rgb(220,220,220)}}
+\DoxyCodeLine{159     ghost\_white = 0xF8F8FF,             \textcolor{comment}{// rgb(248,248,255)}}
+\DoxyCodeLine{160     gold = 0xFFD700,                    \textcolor{comment}{// rgb(255,215,0)}}
+\DoxyCodeLine{161     golden\_rod = 0xDAA520,              \textcolor{comment}{// rgb(218,165,32)}}
+\DoxyCodeLine{162     gray = 0x808080,                    \textcolor{comment}{// rgb(128,128,128)}}
+\DoxyCodeLine{163     green = 0x008000,                   \textcolor{comment}{// rgb(0,128,0)}}
+\DoxyCodeLine{164     green\_yellow = 0xADFF2F,            \textcolor{comment}{// rgb(173,255,47)}}
+\DoxyCodeLine{165     honey\_dew = 0xF0FFF0,               \textcolor{comment}{// rgb(240,255,240)}}
+\DoxyCodeLine{166     hot\_pink = 0xFF69B4,                \textcolor{comment}{// rgb(255,105,180)}}
+\DoxyCodeLine{167     indian\_red = 0xCD5C5C,              \textcolor{comment}{// rgb(205,92,92)}}
+\DoxyCodeLine{168     indigo = 0x4B0082,                  \textcolor{comment}{// rgb(75,0,130)}}
+\DoxyCodeLine{169     ivory = 0xFFFFF0,                   \textcolor{comment}{// rgb(255,255,240)}}
+\DoxyCodeLine{170     khaki = 0xF0E68C,                   \textcolor{comment}{// rgb(240,230,140)}}
+\DoxyCodeLine{171     lavender = 0xE6E6FA,                \textcolor{comment}{// rgb(230,230,250)}}
+\DoxyCodeLine{172     lavender\_blush = 0xFFF0F5,          \textcolor{comment}{// rgb(255,240,245)}}
+\DoxyCodeLine{173     lawn\_green = 0x7CFC00,              \textcolor{comment}{// rgb(124,252,0)}}
+\DoxyCodeLine{174     lemon\_chiffon = 0xFFFACD,           \textcolor{comment}{// rgb(255,250,205)}}
+\DoxyCodeLine{175     light\_blue = 0xADD8E6,              \textcolor{comment}{// rgb(173,216,230)}}
+\DoxyCodeLine{176     light\_coral = 0xF08080,             \textcolor{comment}{// rgb(240,128,128)}}
+\DoxyCodeLine{177     light\_cyan = 0xE0FFFF,              \textcolor{comment}{// rgb(224,255,255)}}
+\DoxyCodeLine{178     light\_golden\_rod\_yellow = 0xFAFAD2, \textcolor{comment}{// rgb(250,250,210)}}
+\DoxyCodeLine{179     light\_gray = 0xD3D3D3,              \textcolor{comment}{// rgb(211,211,211)}}
+\DoxyCodeLine{180     light\_green = 0x90EE90,             \textcolor{comment}{// rgb(144,238,144)}}
+\DoxyCodeLine{181     light\_pink = 0xFFB6C1,              \textcolor{comment}{// rgb(255,182,193)}}
+\DoxyCodeLine{182     light\_salmon = 0xFFA07A,            \textcolor{comment}{// rgb(255,160,122)}}
+\DoxyCodeLine{183     light\_sea\_green = 0x20B2AA,         \textcolor{comment}{// rgb(32,178,170)}}
+\DoxyCodeLine{184     light\_sky\_blue = 0x87CEFA,          \textcolor{comment}{// rgb(135,206,250)}}
+\DoxyCodeLine{185     light\_slate\_gray = 0x778899,        \textcolor{comment}{// rgb(119,136,153)}}
+\DoxyCodeLine{186     light\_steel\_blue = 0xB0C4DE,        \textcolor{comment}{// rgb(176,196,222)}}
+\DoxyCodeLine{187     light\_yellow = 0xFFFFE0,            \textcolor{comment}{// rgb(255,255,224)}}
+\DoxyCodeLine{188     lime = 0x00FF00,                    \textcolor{comment}{// rgb(0,255,0)}}
+\DoxyCodeLine{189     lime\_green = 0x32CD32,              \textcolor{comment}{// rgb(50,205,50)}}
+\DoxyCodeLine{190     linen = 0xFAF0E6,                   \textcolor{comment}{// rgb(250,240,230)}}
+\DoxyCodeLine{191     magenta = 0xFF00FF,                 \textcolor{comment}{// rgb(255,0,255)}}
+\DoxyCodeLine{192     maroon = 0x800000,                  \textcolor{comment}{// rgb(128,0,0)}}
+\DoxyCodeLine{193     medium\_aqua\_marine = 0x66CDAA,      \textcolor{comment}{// rgb(102,205,170)}}
+\DoxyCodeLine{194     medium\_blue = 0x0000CD,             \textcolor{comment}{// rgb(0,0,205)}}
+\DoxyCodeLine{195     medium\_orchid = 0xBA55D3,           \textcolor{comment}{// rgb(186,85,211)}}
+\DoxyCodeLine{196     medium\_purple = 0x9370DB,           \textcolor{comment}{// rgb(147,112,219)}}
+\DoxyCodeLine{197     medium\_sea\_green = 0x3CB371,        \textcolor{comment}{// rgb(60,179,113)}}
+\DoxyCodeLine{198     medium\_slate\_blue = 0x7B68EE,       \textcolor{comment}{// rgb(123,104,238)}}
+\DoxyCodeLine{199     medium\_spring\_green = 0x00FA9A,     \textcolor{comment}{// rgb(0,250,154)}}
+\DoxyCodeLine{200     medium\_turquoise = 0x48D1CC,        \textcolor{comment}{// rgb(72,209,204)}}
+\DoxyCodeLine{201     medium\_violet\_red = 0xC71585,       \textcolor{comment}{// rgb(199,21,133)}}
+\DoxyCodeLine{202     midnight\_blue = 0x191970,           \textcolor{comment}{// rgb(25,25,112)}}
+\DoxyCodeLine{203     mint\_cream = 0xF5FFFA,              \textcolor{comment}{// rgb(245,255,250)}}
+\DoxyCodeLine{204     misty\_rose = 0xFFE4E1,              \textcolor{comment}{// rgb(255,228,225)}}
+\DoxyCodeLine{205     moccasin = 0xFFE4B5,                \textcolor{comment}{// rgb(255,228,181)}}
+\DoxyCodeLine{206     navajo\_white = 0xFFDEAD,            \textcolor{comment}{// rgb(255,222,173)}}
+\DoxyCodeLine{207     navy = 0x000080,                    \textcolor{comment}{// rgb(0,0,128)}}
+\DoxyCodeLine{208     old\_lace = 0xFDF5E6,                \textcolor{comment}{// rgb(253,245,230)}}
+\DoxyCodeLine{209     olive = 0x808000,                   \textcolor{comment}{// rgb(128,128,0)}}
+\DoxyCodeLine{210     olive\_drab = 0x6B8E23,              \textcolor{comment}{// rgb(107,142,35)}}
+\DoxyCodeLine{211     orange = 0xFFA500,                  \textcolor{comment}{// rgb(255,165,0)}}
+\DoxyCodeLine{212     orange\_red = 0xFF4500,              \textcolor{comment}{// rgb(255,69,0)}}
+\DoxyCodeLine{213     orchid = 0xDA70D6,                  \textcolor{comment}{// rgb(218,112,214)}}
+\DoxyCodeLine{214     pale\_golden\_rod = 0xEEE8AA,         \textcolor{comment}{// rgb(238,232,170)}}
+\DoxyCodeLine{215     pale\_green = 0x98FB98,              \textcolor{comment}{// rgb(152,251,152)}}
+\DoxyCodeLine{216     pale\_turquoise = 0xAFEEEE,          \textcolor{comment}{// rgb(175,238,238)}}
+\DoxyCodeLine{217     pale\_violet\_red = 0xDB7093,         \textcolor{comment}{// rgb(219,112,147)}}
+\DoxyCodeLine{218     papaya\_whip = 0xFFEFD5,             \textcolor{comment}{// rgb(255,239,213)}}
+\DoxyCodeLine{219     peach\_puff = 0xFFDAB9,              \textcolor{comment}{// rgb(255,218,185)}}
+\DoxyCodeLine{220     peru = 0xCD853F,                    \textcolor{comment}{// rgb(205,133,63)}}
+\DoxyCodeLine{221     pink = 0xFFC0CB,                    \textcolor{comment}{// rgb(255,192,203)}}
+\DoxyCodeLine{222     plum = 0xDDA0DD,                    \textcolor{comment}{// rgb(221,160,221)}}
+\DoxyCodeLine{223     powder\_blue = 0xB0E0E6,             \textcolor{comment}{// rgb(176,224,230)}}
+\DoxyCodeLine{224     purple = 0x800080,                  \textcolor{comment}{// rgb(128,0,128)}}
+\DoxyCodeLine{225     rebecca\_purple = 0x663399,          \textcolor{comment}{// rgb(102,51,153)}}
+\DoxyCodeLine{226     red = 0xFF0000,                     \textcolor{comment}{// rgb(255,0,0)}}
+\DoxyCodeLine{227     rosy\_brown = 0xBC8F8F,              \textcolor{comment}{// rgb(188,143,143)}}
+\DoxyCodeLine{228     royal\_blue = 0x4169E1,              \textcolor{comment}{// rgb(65,105,225)}}
+\DoxyCodeLine{229     saddle\_brown = 0x8B4513,            \textcolor{comment}{// rgb(139,69,19)}}
+\DoxyCodeLine{230     salmon = 0xFA8072,                  \textcolor{comment}{// rgb(250,128,114)}}
+\DoxyCodeLine{231     sandy\_brown = 0xF4A460,             \textcolor{comment}{// rgb(244,164,96)}}
+\DoxyCodeLine{232     sea\_green = 0x2E8B57,               \textcolor{comment}{// rgb(46,139,87)}}
+\DoxyCodeLine{233     sea\_shell = 0xFFF5EE,               \textcolor{comment}{// rgb(255,245,238)}}
+\DoxyCodeLine{234     sienna = 0xA0522D,                  \textcolor{comment}{// rgb(160,82,45)}}
+\DoxyCodeLine{235     silver = 0xC0C0C0,                  \textcolor{comment}{// rgb(192,192,192)}}
+\DoxyCodeLine{236     sky\_blue = 0x87CEEB,                \textcolor{comment}{// rgb(135,206,235)}}
+\DoxyCodeLine{237     slate\_blue = 0x6A5ACD,              \textcolor{comment}{// rgb(106,90,205)}}
+\DoxyCodeLine{238     slate\_gray = 0x708090,              \textcolor{comment}{// rgb(112,128,144)}}
+\DoxyCodeLine{239     snow = 0xFFFAFA,                    \textcolor{comment}{// rgb(255,250,250)}}
+\DoxyCodeLine{240     spring\_green = 0x00FF7F,            \textcolor{comment}{// rgb(0,255,127)}}
+\DoxyCodeLine{241     steel\_blue = 0x4682B4,              \textcolor{comment}{// rgb(70,130,180)}}
+\DoxyCodeLine{242     tan = 0xD2B48C,                     \textcolor{comment}{// rgb(210,180,140)}}
+\DoxyCodeLine{243     teal = 0x008080,                    \textcolor{comment}{// rgb(0,128,128)}}
+\DoxyCodeLine{244     thistle = 0xD8BFD8,                 \textcolor{comment}{// rgb(216,191,216)}}
+\DoxyCodeLine{245     tomato = 0xFF6347,                  \textcolor{comment}{// rgb(255,99,71)}}
+\DoxyCodeLine{246     turquoise = 0x40E0D0,               \textcolor{comment}{// rgb(64,224,208)}}
+\DoxyCodeLine{247     violet = 0xEE82EE,                  \textcolor{comment}{// rgb(238,130,238)}}
+\DoxyCodeLine{248     wheat = 0xF5DEB3,                   \textcolor{comment}{// rgb(245,222,179)}}
+\DoxyCodeLine{249     white = 0xFFFFFF,                   \textcolor{comment}{// rgb(255,255,255)}}
+\DoxyCodeLine{250     white\_smoke = 0xF5F5F5,             \textcolor{comment}{// rgb(245,245,245)}}
+\DoxyCodeLine{251     yellow = 0xFFFF00,                  \textcolor{comment}{// rgb(255,255,0)}}
+\DoxyCodeLine{252     yellow\_green = 0x9ACD32,            \textcolor{comment}{// rgb(154,205,50)}}
+\DoxyCodeLine{253 \};                                      \textcolor{comment}{// enum class colors}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 FMT\_END\_NAMESPACE}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// FMT\_COLORS\_H\_}}
+
+\end{DoxyCode}

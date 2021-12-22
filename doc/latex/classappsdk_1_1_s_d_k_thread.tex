@@ -1,0 +1,56 @@
+\hypertarget{classappsdk_1_1_s_d_k_thread}{}\doxysection{appsdk\+::SDKThread Class Reference}
+\label{classappsdk_1_1_s_d_k_thread}\index{appsdk::SDKThread@{appsdk::SDKThread}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_a4672c238f6508d61d50c1eaa34a4fdeb}{SDKThread}} ()
+\item 
+bool \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_ad960a6cae586b89f00ba726a5b8dd253}{create}} (\mbox{\hyperlink{namespaceappsdk_aef59f4c22bbec890343cdb77b17abb44}{thread\+Func}} func, void $\ast$arg)
+\item 
+bool \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_a686208082afbbee378f41300130dcc2a}{join}} ()
+\item 
+void $\ast$ \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_a3f44f2aa1bb991eacc3b177bcb28c246}{get\+Data}} ()
+\item 
+unsigned int \mbox{\hyperlink{classappsdk_1_1_s_d_k_thread_ae16ab888b36c4c4d8589ae4d391939d1}{get\+ID}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_s_d_k_thread_a4672c238f6508d61d50c1eaa34a4fdeb}\label{classappsdk_1_1_s_d_k_thread_a4672c238f6508d61d50c1eaa34a4fdeb}} 
+\index{appsdk::SDKThread@{appsdk::SDKThread}!SDKThread@{SDKThread}}
+\index{SDKThread@{SDKThread}!appsdk::SDKThread@{appsdk::SDKThread}}
+\doxysubsubsection{\texorpdfstring{SDKThread()}{SDKThread()}}
+{\footnotesize\ttfamily appsdk\+::\+SDKThread\+::\+SDKThread (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\hyperlink{class_thread}{Thread}} constructor and destructor. Note that the thread is NOT created in the constructor. The thread creation takes place in the create method 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_s_d_k_thread_ad960a6cae586b89f00ba726a5b8dd253}\label{classappsdk_1_1_s_d_k_thread_ad960a6cae586b89f00ba726a5b8dd253}} 
+\index{appsdk::SDKThread@{appsdk::SDKThread}!create@{create}}
+\index{create@{create}!appsdk::SDKThread@{appsdk::SDKThread}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily bool appsdk\+::\+SDKThread\+::create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceappsdk_aef59f4c22bbec890343cdb77b17abb44}{thread\+Func}}}]{func,  }\item[{void $\ast$}]{arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Wrapper for pthread\+\_\+create. Pass the thread\textquotesingle{}s entry point and data to be passed to the routine Now create the thread with pointer to self as the data\mbox{\Hypertarget{classappsdk_1_1_s_d_k_thread_a3f44f2aa1bb991eacc3b177bcb28c246}\label{classappsdk_1_1_s_d_k_thread_a3f44f2aa1bb991eacc3b177bcb28c246}} 
+\index{appsdk::SDKThread@{appsdk::SDKThread}!getData@{getData}}
+\index{getData@{getData}!appsdk::SDKThread@{appsdk::SDKThread}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily void $\ast$ appsdk\+::\+SDKThread\+::get\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the thread data passed by the application \mbox{\Hypertarget{classappsdk_1_1_s_d_k_thread_ae16ab888b36c4c4d8589ae4d391939d1}\label{classappsdk_1_1_s_d_k_thread_ae16ab888b36c4c4d8589ae4d391939d1}} 
+\index{appsdk::SDKThread@{appsdk::SDKThread}!getID@{getID}}
+\index{getID@{getID}!appsdk::SDKThread@{appsdk::SDKThread}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily unsigned int appsdk\+::\+SDKThread\+::get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the thread ID \mbox{\Hypertarget{classappsdk_1_1_s_d_k_thread_a686208082afbbee378f41300130dcc2a}\label{classappsdk_1_1_s_d_k_thread_a686208082afbbee378f41300130dcc2a}} 
+\index{appsdk::SDKThread@{appsdk::SDKThread}!join@{join}}
+\index{join@{join}!appsdk::SDKThread@{appsdk::SDKThread}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily bool appsdk\+::\+SDKThread\+::join (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Wrapper for pthread\+\_\+join. The calling thread will wait until {\itshape this} thread exits 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/include/SDKThread.\+hpp\end{DoxyCompactItemize}

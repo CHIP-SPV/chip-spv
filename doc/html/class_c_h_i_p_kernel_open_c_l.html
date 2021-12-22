@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.0.1</span>
+   <div id="projectname">CHIP-SPV<span id="projectnumber">&#160;0.1.0</span>
    </div>
    <div id="projectbrief">Multiple backend interface for HIP</div>
   </td>
@@ -81,9 +81,9 @@ Inheritance diagram for CHIPKernelOpenCL:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad579d3d87dbacfeb57aab1164c87b950"><td class="memItemLeft" align="right" valign="top"><a id="ad579d3d87dbacfeb57aab1164c87b950" name="ad579d3d87dbacfeb57aab1164c87b950"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPKernelOpenCL</b> (const cl::Kernel &amp;&amp;cl_kernel, OpenCLFunctionInfoMap &amp;func_info_map)</td></tr>
-<tr class="separator:ad579d3d87dbacfeb57aab1164c87b950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2884d4568959121ed79c82f12864b7b8"><td class="memItemLeft" align="right" valign="top"><a id="a2884d4568959121ed79c82f12864b7b8" name="a2884d4568959121ed79c82f12864b7b8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPKernelOpenCL</b> (const cl::Kernel &amp;&amp;cl_kernel, std::string host_f_name_, <a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *func_info_)</td></tr>
+<tr class="separator:a2884d4568959121ed79c82f12864b7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf7311f6c086617ff2ed1e2b36de25a7"><td class="memItemLeft" align="right" valign="top"><a id="adf7311f6c086617ff2ed1e2b36de25a7" name="adf7311f6c086617ff2ed1e2b36de25a7"></a>
 <a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_func_info</b> () const</td></tr>
 <tr class="separator:adf7311f6c086617ff2ed1e2b36de25a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,6 +100,9 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTotalArgSize</b>
 <tr class="memitem:ac7a16cdbdb05de96ea3fa04b4f625d33 inherit pub_methods_class_c_h_i_p_kernel"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_kernel.html#ac7a16cdbdb05de96ea3fa04b4f625d33">getName</a> ()</td></tr>
 <tr class="memdesc:ac7a16cdbdb05de96ea3fa04b4f625d33 inherit pub_methods_class_c_h_i_p_kernel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Name object.  <a href="class_c_h_i_p_kernel.html#ac7a16cdbdb05de96ea3fa04b4f625d33">More...</a><br /></td></tr>
 <tr class="separator:ac7a16cdbdb05de96ea3fa04b4f625d33 inherit pub_methods_class_c_h_i_p_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65fc718337be4853774fdc8e6f86f5ba inherit pub_methods_class_c_h_i_p_kernel"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_kernel.html#a65fc718337be4853774fdc8e6f86f5ba">getFuncInfo</a> ()</td></tr>
+<tr class="memdesc:a65fc718337be4853774fdc8e6f86f5ba inherit pub_methods_class_c_h_i_p_kernel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Func Info object.  <a href="class_c_h_i_p_kernel.html#a65fc718337be4853774fdc8e6f86f5ba">More...</a><br /></td></tr>
+<tr class="separator:a65fc718337be4853774fdc8e6f86f5ba inherit pub_methods_class_c_h_i_p_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a15ce1cd2760e9e28006ff0e9dcf740 inherit pub_methods_class_c_h_i_p_kernel"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_h_i_p_kernel.html#a7a15ce1cd2760e9e28006ff0e9dcf740">getHostPtr</a> ()</td></tr>
 <tr class="memdesc:a7a15ce1cd2760e9e28006ff0e9dcf740 inherit pub_methods_class_c_h_i_p_kernel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the associated host pointer to a host function.  <a href="class_c_h_i_p_kernel.html#a7a15ce1cd2760e9e28006ff0e9dcf740">More...</a><br /></td></tr>
 <tr class="separator:a7a15ce1cd2760e9e28006ff0e9dcf740 inherit pub_methods_class_c_h_i_p_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,10 +122,10 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTotalArgSize</b>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_class_c_h_i_p_kernel"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_c_h_i_p_kernel')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a></td></tr>
-<tr class="memitem:a097d99fa464626f26bfdc0e14254820f inherit pro_methods_class_c_h_i_p_kernel"><td class="memItemLeft" align="right" valign="top"><a id="a097d99fa464626f26bfdc0e14254820f" name="a097d99fa464626f26bfdc0e14254820f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPKernel</b> ()=default</td></tr>
-<tr class="memdesc:a097d99fa464626f26bfdc0e14254820f inherit pro_methods_class_c_h_i_p_kernel"><td class="mdescLeft">&#160;</td><td class="mdescRight">hidden default constructor. Only derived type constructor should be called. <br /></td></tr>
-<tr class="separator:a097d99fa464626f26bfdc0e14254820f inherit pro_methods_class_c_h_i_p_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f6a315e2c38973f180b77558aae5192 inherit pro_methods_class_c_h_i_p_kernel"><td class="memItemLeft" align="right" valign="top"><a id="a8f6a315e2c38973f180b77558aae5192" name="a8f6a315e2c38973f180b77558aae5192"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CHIPKernel</b> (std::string host_f_name_, <a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *func_info_)</td></tr>
+<tr class="memdesc:a8f6a315e2c38973f180b77558aae5192 inherit pro_methods_class_c_h_i_p_kernel"><td class="mdescLeft">&#160;</td><td class="mdescRight">hidden default constructor. Only derived type constructor should be called. <br /></td></tr>
+<tr class="separator:a8f6a315e2c38973f180b77558aae5192 inherit pro_methods_class_c_h_i_p_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_c_h_i_p_kernel"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_c_h_i_p_kernel')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_c_h_i_p_kernel.html">CHIPKernel</a></td></tr>
 <tr class="memitem:a50a2dca3383cb0a00e94d9c56596528b inherit pro_attribs_class_c_h_i_p_kernel"><td class="memItemLeft" align="right" valign="top"><a id="a50a2dca3383cb0a00e94d9c56596528b" name="a50a2dca3383cb0a00e94d9c56596528b"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>host_f_name</b></td></tr>
@@ -136,9 +139,13 @@ const void *&#160;</td><td class="memItemRight" valign="bottom"><b>host_f_ptr</b
 const void *&#160;</td><td class="memItemRight" valign="bottom"><b>dev_f_ptr</b></td></tr>
 <tr class="memdesc:a3fc76a9d6028b090652482da4a06be69 inherit pro_attribs_class_c_h_i_p_kernel"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the device function. <br /></td></tr>
 <tr class="separator:a3fc76a9d6028b090652482da4a06be69 inherit pro_attribs_class_c_h_i_p_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8af9e7c17ddfc0e7cc351b9d703898 inherit pro_attribs_class_c_h_i_p_kernel"><td class="memItemLeft" align="right" valign="top"><a id="a8b8af9e7c17ddfc0e7cc351b9d703898" name="a8b8af9e7c17ddfc0e7cc351b9d703898"></a>
+<a class="el" href="struct_o_c_l_func_info.html">OCLFuncInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>func_info</b></td></tr>
+<tr class="separator:a8b8af9e7c17ddfc0e7cc351b9d703898 inherit pro_attribs_class_c_h_i_p_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/pvelesko/local/HIPxx/src/backend/OpenCL/<a class="el" href="_c_h_i_p_backend_open_c_l_8hh_source.html">CHIPBackendOpenCL.hh</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/OpenCL/<a class="el" href="_c_h_i_p_backend_open_c_l_8hh_source.html">CHIPBackendOpenCL.hh</a></li>
+<li>/Users/pvelesko/local/CHIP-SPV/src/backend/OpenCL/CHIPBackendOpenCL.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

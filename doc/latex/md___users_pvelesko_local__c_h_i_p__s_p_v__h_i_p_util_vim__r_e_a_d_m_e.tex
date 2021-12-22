@@ -1,0 +1,20 @@
+
+\begin{DoxyEnumerate}
+\item Add the {\ttfamily hip.\+vim} to {\ttfamily $\sim$/.vim/syntax/} directory
+\item Add the following text to the end of {\ttfamily $\sim$/.vimrc}
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{augroup filetypedetect}
+\DoxyCodeLine{ au BufNewFile,BufRead *.cpp set filetype=cpp syntax=hip}
+\DoxyCodeLine{augroup END}
+\DoxyCodeLine{augroup filetypedetect}
+\DoxyCodeLine{ au BufNewFile,BufRead *.c set filetype=c syntax=hip}
+\DoxyCodeLine{augroup END}
+\DoxyCodeLine{augroup filetypedetect}
+\DoxyCodeLine{ au BufNewFile,BufRead *.cu set filetype=cu syntax=hip}
+\DoxyCodeLine{augroup END}
+
+\end{DoxyCode}
+ 

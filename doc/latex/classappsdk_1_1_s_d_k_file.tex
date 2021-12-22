@@ -1,0 +1,102 @@
+\hypertarget{classappsdk_1_1_s_d_k_file}{}\doxysection{appsdk\+::SDKFile Class Reference}
+\label{classappsdk_1_1_s_d_k_file}\index{appsdk::SDKFile@{appsdk::SDKFile}}
+
+
+{\ttfamily \#include $<$SDKFile.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classappsdk_1_1_s_d_k_file_ac025b554eaacd98427206beeb9773c84}{SDKFile}} ()
+\item 
+\mbox{\hyperlink{classappsdk_1_1_s_d_k_file_a5b2e6e63c76769dc3971d98c01b0a2e1}{$\sim$\+SDKFile}} ()
+\item 
+bool \mbox{\hyperlink{classappsdk_1_1_s_d_k_file_ac2c34b0ec6c05736a45bb328b4cc52e6}{open}} (const char $\ast$file\+Name)
+\item 
+int \mbox{\hyperlink{classappsdk_1_1_s_d_k_file_abc070c21647f0054e99e91689a754798}{write\+Binary\+To\+File}} (const char $\ast$file\+Name, const char $\ast$binary, size\+\_\+t num\+Bytes)
+\item 
+int \mbox{\hyperlink{classappsdk_1_1_s_d_k_file_a7293e6f9e5721a79030f0dacbc380d29}{read\+Binary\+From\+File}} (const char $\ast$file\+Name)
+\item 
+void \mbox{\hyperlink{classappsdk_1_1_s_d_k_file_a6ec4cce886a257b087dcd93d394538f2}{replace\+Newline\+With\+Spaces}} ()
+\item 
+const std\+::string \& \mbox{\hyperlink{classappsdk_1_1_s_d_k_file_a99f7600fec4af1298032777b4f2d5e43}{source}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class \mbox{\hyperlink{classappsdk_1_1_s_d_k_file}{SDKFile}} for the opencl program file processing 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_s_d_k_file_ac025b554eaacd98427206beeb9773c84}\label{classappsdk_1_1_s_d_k_file_ac025b554eaacd98427206beeb9773c84}} 
+\index{appsdk::SDKFile@{appsdk::SDKFile}!SDKFile@{SDKFile}}
+\index{SDKFile@{SDKFile}!appsdk::SDKFile@{appsdk::SDKFile}}
+\doxysubsubsection{\texorpdfstring{SDKFile()}{SDKFile()}}
+{\footnotesize\ttfamily appsdk\+::\+SDKFile\+::\+SDKFile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Default constructor \mbox{\Hypertarget{classappsdk_1_1_s_d_k_file_a5b2e6e63c76769dc3971d98c01b0a2e1}\label{classappsdk_1_1_s_d_k_file_a5b2e6e63c76769dc3971d98c01b0a2e1}} 
+\index{appsdk::SDKFile@{appsdk::SDKFile}!````~SDKFile@{$\sim$SDKFile}}
+\index{````~SDKFile@{$\sim$SDKFile}!appsdk::SDKFile@{appsdk::SDKFile}}
+\doxysubsubsection{\texorpdfstring{$\sim$SDKFile()}{~SDKFile()}}
+{\footnotesize\ttfamily appsdk\+::\+SDKFile\+::$\sim$\+SDKFile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classappsdk_1_1_s_d_k_file_ac2c34b0ec6c05736a45bb328b4cc52e6}\label{classappsdk_1_1_s_d_k_file_ac2c34b0ec6c05736a45bb328b4cc52e6}} 
+\index{appsdk::SDKFile@{appsdk::SDKFile}!open@{open}}
+\index{open@{open}!appsdk::SDKFile@{appsdk::SDKFile}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily bool appsdk\+::\+SDKFile\+::open (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Opens the CL program file \begin{DoxyReturn}{Returns}
+true if success else false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classappsdk_1_1_s_d_k_file_a7293e6f9e5721a79030f0dacbc380d29}\label{classappsdk_1_1_s_d_k_file_a7293e6f9e5721a79030f0dacbc380d29}} 
+\index{appsdk::SDKFile@{appsdk::SDKFile}!readBinaryFromFile@{readBinaryFromFile}}
+\index{readBinaryFromFile@{readBinaryFromFile}!appsdk::SDKFile@{appsdk::SDKFile}}
+\doxysubsubsection{\texorpdfstring{readBinaryFromFile()}{readBinaryFromFile()}}
+{\footnotesize\ttfamily int appsdk\+::\+SDKFile\+::read\+Binary\+From\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+read\+Binary\+To\+File 
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & name of file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if success else false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classappsdk_1_1_s_d_k_file_a6ec4cce886a257b087dcd93d394538f2}\label{classappsdk_1_1_s_d_k_file_a6ec4cce886a257b087dcd93d394538f2}} 
+\index{appsdk::SDKFile@{appsdk::SDKFile}!replaceNewlineWithSpaces@{replaceNewlineWithSpaces}}
+\index{replaceNewlineWithSpaces@{replaceNewlineWithSpaces}!appsdk::SDKFile@{appsdk::SDKFile}}
+\doxysubsubsection{\texorpdfstring{replaceNewlineWithSpaces()}{replaceNewlineWithSpaces()}}
+{\footnotesize\ttfamily void appsdk\+::\+SDKFile\+::replace\+Newline\+With\+Spaces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Replaces Newline with spaces \mbox{\Hypertarget{classappsdk_1_1_s_d_k_file_a99f7600fec4af1298032777b4f2d5e43}\label{classappsdk_1_1_s_d_k_file_a99f7600fec4af1298032777b4f2d5e43}} 
+\index{appsdk::SDKFile@{appsdk::SDKFile}!source@{source}}
+\index{source@{source}!appsdk::SDKFile@{appsdk::SDKFile}}
+\doxysubsubsection{\texorpdfstring{source()}{source()}}
+{\footnotesize\ttfamily const std\+::string \& appsdk\+::\+SDKFile\+::source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+source Returns a pointer to the string object with the source code \mbox{\Hypertarget{classappsdk_1_1_s_d_k_file_abc070c21647f0054e99e91689a754798}\label{classappsdk_1_1_s_d_k_file_abc070c21647f0054e99e91689a754798}} 
+\index{appsdk::SDKFile@{appsdk::SDKFile}!writeBinaryToFile@{writeBinaryToFile}}
+\index{writeBinaryToFile@{writeBinaryToFile}!appsdk::SDKFile@{appsdk::SDKFile}}
+\doxysubsubsection{\texorpdfstring{writeBinaryToFile()}{writeBinaryToFile()}}
+{\footnotesize\ttfamily int appsdk\+::\+SDKFile\+::write\+Binary\+To\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+Name,  }\item[{const char $\ast$}]{binary,  }\item[{size\+\_\+t}]{num\+Bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+write\+Binary\+To\+File 
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & Name of the file \\
+\hline
+{\em binary} & char binary array \\
+\hline
+{\em num\+Bytes} & number of bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if success else false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/include/SDKFile.\+hpp\end{DoxyCompactItemize}

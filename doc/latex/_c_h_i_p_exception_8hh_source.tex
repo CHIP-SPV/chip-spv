@@ -1,0 +1,71 @@
+\hypertarget{_c_h_i_p_exception_8hh_source}{}\doxysection{CHIPException.\+hh}
+\label{_c_h_i_p_exception_8hh_source}\index{/Users/pvelesko/local/CHIP-\/SPV/src/CHIPException.hh@{/Users/pvelesko/local/CHIP-\/SPV/src/CHIPException.hh}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CHIP\_EXCEPTION\_HH}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CHIP\_EXCEPTION\_HH}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}hip/hip\_runtime\_api.h"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_error}{CHIPError}} \{}
+\DoxyCodeLine{7   std::string msg;}
+\DoxyCodeLine{8   hipError\_t err;}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10  \textcolor{keyword}{public}:}
+\DoxyCodeLine{11   \mbox{\hyperlink{class_c_h_i_p_error}{CHIPError}}(std::string msg\_ = \textcolor{stringliteral}{"{}"{}}, hipError\_t err\_ = hipErrorUnknown)}
+\DoxyCodeLine{12       : msg(msg\_), err(err\_) \{\}}
+\DoxyCodeLine{13   \textcolor{keyword}{virtual} hipError\_t toHIPError() \{ \textcolor{keywordflow}{return} err; \}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15   std::string getMsgStr() \{ \textcolor{keywordflow}{return} msg.c\_str(); \}}
+\DoxyCodeLine{16   std::string getErrStr() \{ \textcolor{keywordflow}{return} std::string(hipGetErrorName(err)); \}}
+\DoxyCodeLine{17 \};}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define CHIPERR\_LOG\_AND\_THROW(msg, errtype)                                \(\backslash\)}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{  do \{                                                                     \(\backslash\)}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{    logError("{}\{\} (\{\}) in \{\}:\{\}:\{\}\(\backslash\)n"{}}, CHIPError(msg, errtype).getErrStr(), \(\backslash\)}
+\DoxyCodeLine{22              CHIPError(msg, errtype).getMsgStr(), \_\_FILE\_\_, \_\_LINE\_\_,      \(\backslash\)}
+\DoxyCodeLine{23              \_\_func\_\_);                                                    \(\backslash\)}
+\DoxyCodeLine{24     throw CHIPError(msg, errtype);                                         \(\backslash\)}
+\DoxyCodeLine{25   \} while (0)}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define CHIPERR\_CHECK\_LOG\_AND\_THROW(status, success, errtype, ...) \(\backslash\)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{  do \{                                                             \(\backslash\)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{    if (status != success) \{                                       \(\backslash\)}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{      std::string error\_msg = std::string(resultToString(status)); \(\backslash\)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{      std::string custom\_msg = std::string(\_\_VA\_ARGS\_\_);           \(\backslash\)}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{      std::string msg\_ = error\_msg + "{} "{}} + custom\_msg;             \(\backslash\)}
+\DoxyCodeLine{33       CHIPERR\_LOG\_AND\_THROW(msg\_, errtype);                        \(\backslash\)}
+\DoxyCodeLine{34     \}                                                              \(\backslash\)}
+\DoxyCodeLine{35   \} while (0)}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define CHIP\_TRY try \{}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define CHIP\_CATCH                \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{  \}                               \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{  catch (CHIPError \_status) \{     \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{    RETURN(\_status.toHIPError()); \(\backslash\)}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{  \}}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define CHIP\_CATCH\_NO\_RETURN                         \(\backslash\)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{  \}                                                  \(\backslash\)}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{  catch (CHIPError \_status) \{                        \(\backslash\)}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{    logError(hipGetErrorName(\_status.toHIPError())); \(\backslash\)}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{  \}}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} checkIfNullptr(\textcolor{keywordtype}{int} numargs, ...) \{}
+\DoxyCodeLine{51   va\_list ap;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53   va\_start(ap, numargs);}
+\DoxyCodeLine{54   \textcolor{keywordflow}{while} (numargs-\/-\/)}
+\DoxyCodeLine{55     \textcolor{keywordflow}{if} (va\_arg(ap, \textcolor{keyword}{const} \textcolor{keywordtype}{void}*) == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{56       CHIPERR\_LOG\_AND\_THROW(\textcolor{stringliteral}{"{}passed in nullptr"{}}, hipErrorInvalidValue);}
+\DoxyCodeLine{57   va\_end(ap);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{60 \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define NUMARGS(...) (sizeof((const void*[])\{\_\_VA\_ARGS\_\_\}) / sizeof(void*))}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define NULLCHECK(...) checkIfNullptr(NUMARGS(\_\_VA\_ARGS\_\_), \_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// ifdef guard}}
+
+\end{DoxyCode}

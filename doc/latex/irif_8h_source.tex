@@ -1,0 +1,301 @@
+\hypertarget{irif_8h_source}{}\doxysection{irif.\+h}
+\label{irif_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/bitcode/OCML/irif.h@{/Users/pvelesko/local/CHIP-\/SPV/bitcode/OCML/irif.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*===-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{ *                   ROCm Device Libraries (orig. repo location: irif/inc)}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * This file is distributed under the University of Illinois Open Source}}
+\DoxyCodeLine{5 \textcolor{comment}{ * License. See LICENSE.TXT for details.}}
+\DoxyCodeLine{6 \textcolor{comment}{ *===-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef IRIF\_H}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define IRIF\_H}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#pragma OPENCL EXTENSION cl\_khr\_fp16 : enable}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define REQUIRES\_16BIT\_INSTS \_\_attribute\_\_((target("{}16-\/bit-\/insts"{}})))}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define REQUIRES\_GFX9\_INSTS \_\_attribute\_\_((target("{}gfx9-\/insts"{}})))}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{// Generic intrinsics}}
+\DoxyCodeLine{17 \textcolor{keyword}{extern} \_\_attribute\_\_((\textcolor{keyword}{const})) half \_\_llvm\_sqrt\_f16(half) \_\_asm("{}llvm.sqrt.f16"{});}
+\DoxyCodeLine{18 extern \_\_attribute\_\_((const)) half \_\_llvm\_exp2\_f16(half) \_\_asm("{}llvm.exp2.f16"{});}
+\DoxyCodeLine{19 extern \_\_attribute\_\_((const)) half \_\_llvm\_exp\_f16(half) \_\_asm("{}llvm.exp.f16"{});}
+\DoxyCodeLine{20 extern \_\_attribute\_\_((const)) half \_\_llvm\_log\_f16(half) \_\_asm("{}llvm.log.f16"{});}
+\DoxyCodeLine{21 extern \_\_attribute\_\_((const)) half \_\_llvm\_log2\_f16(half) \_\_asm("{}llvm.log2.f16"{});}
+\DoxyCodeLine{22 extern \_\_attribute\_\_((const)) half \_\_llvm\_log10\_f16(half) \_\_asm("{}llvm.log10.f16"{});}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 extern \_\_attribute\_\_((const)) half \_\_llvm\_sin\_f16(half) \_\_asm("{}llvm.sin.f16"{});}
+\DoxyCodeLine{25 extern \_\_attribute\_\_((const)) half \_\_llvm\_cos\_f16(half) \_\_asm("{}llvm.cos.f16"{});}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 extern \_\_attribute\_\_((const)) half \_\_llvm\_fma\_f16(half, half, half) \_\_asm("{}llvm.fma.f16"{});}
+\DoxyCodeLine{28 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_fma\_2f16(half2, half2, half2) \_\_asm("{}llvm.fma.v2f16"{});}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 extern \_\_attribute\_\_((const)) half \_\_llvm\_fabs\_f16(half) \_\_asm("{}llvm.fabs.f16"{});}
+\DoxyCodeLine{31 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_fabs\_2f16(half2) \_\_asm("{}llvm.fabs.v2f16"{});}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 extern \_\_attribute\_\_((const)) half \_\_llvm\_minnum\_f16(half, half) \_\_asm("{}llvm.minnum.f16"{});}
+\DoxyCodeLine{34 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_minnum\_2f16(half2, half2) \_\_asm("{}llvm.minnum.v2f16"{});}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 extern \_\_attribute\_\_((const)) half \_\_llvm\_maxnum\_f16(half, half) \_\_asm("{}llvm.maxnum.f16"{});}
+\DoxyCodeLine{37 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_maxnum\_2f16(half2, half2) \_\_asm("{}llvm.maxnum.v2f16"{});}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 extern \_\_attribute\_\_((const)) half \_\_llvm\_copysign\_f16(half, half) \_\_asm("{}llvm.copysign.f16"{});}
+\DoxyCodeLine{40 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_copysign\_2f16(half2, half2) \_\_asm("{}llvm.copysign.v2f16"{});}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 extern \_\_attribute\_\_((const)) half \_\_llvm\_floor\_f16(half) \_\_asm("{}llvm.floor.f16"{});}
+\DoxyCodeLine{43 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_floor\_2f16(half2) \_\_asm("{}llvm.floor.v2f16"{});}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 extern \_\_attribute\_\_((const)) half \_\_llvm\_ceil\_f16(half) \_\_asm("{}llvm.ceil.f16"{});}
+\DoxyCodeLine{46 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_ceil\_2f16(half2) \_\_asm("{}llvm.ceil.v2f16"{});}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 extern \_\_attribute\_\_((const)) half \_\_llvm\_trunc\_f16(half) \_\_asm("{}llvm.trunc.f16"{});}
+\DoxyCodeLine{49 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_trunc\_2f16(half2) \_\_asm("{}llvm.trunc.v2f16"{});}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 extern \_\_attribute\_\_((const)) half \_\_llvm\_rint\_f16(half) \_\_asm("{}llvm.rint.f16"{});}
+\DoxyCodeLine{52 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_rint\_2f16(half2) \_\_asm("{}llvm.rint.v2f16"{});}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 extern \_\_attribute\_\_((const)) half \_\_llvm\_canonicalize\_f16(half) \_\_asm("{}llvm.canonicalize.f16"{});}
+\DoxyCodeLine{56 extern \_\_attribute\_\_((const)) half2 \_\_llvm\_canonicalize\_2f16(half2) \_\_asm("{}llvm.canonicalize.v2f16"{});}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{comment}{// Intrinsics requiring wrapping}}
+\DoxyCodeLine{59 extern \_\_attribute\_\_((const)) uchar \_\_llvm\_ctlz\_i8(uchar);}
+\DoxyCodeLine{60 extern \_\_attribute\_\_((const)) ushort \_\_llvm\_ctlz\_i16(ushort);}
+\DoxyCodeLine{61 extern \_\_attribute\_\_((const)) uint \_\_llvm\_ctlz\_i32(uint);}
+\DoxyCodeLine{62 extern \_\_attribute\_\_((const)) ulong \_\_llvm\_ctlz\_i64(ulong);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 extern \_\_attribute\_\_((const)) uchar \_\_llvm\_cttz\_i8(uchar);}
+\DoxyCodeLine{65 extern \_\_attribute\_\_((const)) ushort \_\_llvm\_cttz\_i16(ushort);}
+\DoxyCodeLine{66 extern \_\_attribute\_\_((const)) uint \_\_llvm\_cttz\_i32(uint);}
+\DoxyCodeLine{67 extern \_\_attribute\_\_((const)) ulong \_\_llvm\_cttz\_i64(ulong);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{comment}{// Fence intrinsics}}
+\DoxyCodeLine{70 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_acq\_wi(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{71 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_acq\_sg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{72 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_acq\_wg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{73 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_acq\_dev(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{74 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_acq\_sys(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{75 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_rel\_wi(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{76 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_rel\_sg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{77 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_rel\_wg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{78 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_rel\_dev(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{79 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_rel\_sys(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{80 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_ar\_wi(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{81 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_ar\_sg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{82 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_ar\_wg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{83 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_ar\_dev(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{84 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_ar\_sys(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{85 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_sc\_wi(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{86 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_sc\_sg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{87 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_sc\_wg(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{88 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_sc\_dev(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{89 extern \textcolor{keywordtype}{void} \_\_llvm\_fence\_sc\_sys(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{comment}{// Atomics}}
+\DoxyCodeLine{92 extern uint \_\_llvm\_ld\_atomic\_a1\_x\_dev\_i32(\_\_global uint *);}
+\DoxyCodeLine{93 extern ulong \_\_llvm\_ld\_atomic\_a1\_x\_dev\_i64(\_\_global ulong *);}
+\DoxyCodeLine{94 extern uint \_\_llvm\_ld\_atomic\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *);}
+\DoxyCodeLine{95 extern ulong \_\_llvm\_ld\_atomic\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 extern \textcolor{keywordtype}{void} \_\_llvm\_st\_atomic\_a1\_x\_dev\_i32(\_\_global uint *, uint);}
+\DoxyCodeLine{98 extern \textcolor{keywordtype}{void} \_\_llvm\_st\_atomic\_a1\_x\_dev\_i64(\_\_global ulong *, ulong);}
+\DoxyCodeLine{99 extern \textcolor{keywordtype}{void} \_\_llvm\_st\_atomic\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *, uint);}
+\DoxyCodeLine{100 extern \textcolor{keywordtype}{void} \_\_llvm\_st\_atomic\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *, ulong);}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 extern uint \_\_llvm\_atomic\_add\_a1\_x\_dev\_i32(\_\_global uint *, uint);}
+\DoxyCodeLine{103 extern ulong \_\_llvm\_atomic\_add\_a1\_x\_dev\_i64(\_\_global ulong *, ulong);}
+\DoxyCodeLine{104 extern uint \_\_llvm\_atomic\_add\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *, uint);}
+\DoxyCodeLine{105 extern ulong \_\_llvm\_atomic\_add\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *, ulong);}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 extern uint \_\_llvm\_atomic\_and\_a1\_x\_dev\_i32(\_\_global uint *, uint);}
+\DoxyCodeLine{108 extern ulong \_\_llvm\_atomic\_and\_a1\_x\_dev\_i64(\_\_global ulong *, ulong);}
+\DoxyCodeLine{109 extern uint \_\_llvm\_atomic\_and\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *, uint);}
+\DoxyCodeLine{110 extern ulong \_\_llvm\_atomic\_and\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *, ulong);}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 extern uint \_\_llvm\_atomic\_or\_a1\_x\_dev\_i32(\_\_global uint *, uint);}
+\DoxyCodeLine{113 extern ulong \_\_llvm\_atomic\_or\_a1\_x\_dev\_i64(\_\_global ulong *, ulong);}
+\DoxyCodeLine{114 extern uint \_\_llvm\_atomic\_or\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *, uint);}
+\DoxyCodeLine{115 extern ulong \_\_llvm\_atomic\_or\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *, ulong);}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 extern uint \_\_llvm\_atomic\_max\_a1\_x\_dev\_i32(\_\_global \textcolor{keywordtype}{int} *, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{118 extern uint \_\_llvm\_atomic\_umax\_a1\_x\_dev\_i32(\_\_global uint *, uint);}
+\DoxyCodeLine{119 extern ulong \_\_llvm\_atomic\_max\_a1\_x\_dev\_i64(\_\_global \textcolor{keywordtype}{long} *, \textcolor{keywordtype}{long});}
+\DoxyCodeLine{120 extern ulong \_\_llvm\_atomic\_umax\_a1\_x\_dev\_i64(\_\_global ulong *, ulong);}
+\DoxyCodeLine{121 extern uint \_\_llvm\_atomic\_max\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} \textcolor{keywordtype}{int} *, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{122 extern uint \_\_llvm\_atomic\_umax\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *, uint);}
+\DoxyCodeLine{123 extern ulong \_\_llvm\_atomic\_max\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} \textcolor{keywordtype}{long} *, \textcolor{keywordtype}{long});}
+\DoxyCodeLine{124 extern ulong \_\_llvm\_atomic\_umax\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *, ulong);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 extern uint \_\_llvm\_atomic\_min\_a1\_x\_dev\_i32(\_\_global \textcolor{keywordtype}{int} *, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{127 extern uint \_\_llvm\_atomic\_umin\_a1\_x\_dev\_i32(\_\_global uint *, uint);}
+\DoxyCodeLine{128 extern ulong \_\_llvm\_atomic\_min\_a1\_x\_dev\_i64(\_\_global \textcolor{keywordtype}{long} *, \textcolor{keywordtype}{long});}
+\DoxyCodeLine{129 extern ulong \_\_llvm\_atomic\_umin\_a1\_x\_dev\_i64(\_\_global ulong *, ulong);}
+\DoxyCodeLine{130 extern uint \_\_llvm\_atomic\_min\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} \textcolor{keywordtype}{int} *, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{131 extern uint \_\_llvm\_atomic\_umin\_a3\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *, uint);}
+\DoxyCodeLine{132 extern ulong \_\_llvm\_atomic\_min\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} \textcolor{keywordtype}{long} *, \textcolor{keywordtype}{long});}
+\DoxyCodeLine{133 extern ulong \_\_llvm\_atomic\_umin\_a3\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *, ulong);}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 extern uint \_\_llvm\_cmpxchg\_a1\_x\_x\_dev\_i32(\_\_global uint *, uint, uint);}
+\DoxyCodeLine{136 extern ulong \_\_llvm\_cmpxchg\_a1\_x\_x\_dev\_i64(\_\_global ulong *, ulong, ulong);}
+\DoxyCodeLine{137 extern uint \_\_llvm\_cmpxchg\_a3\_x\_x\_wg\_i32(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} uint *, uint, uint);}
+\DoxyCodeLine{138 extern ulong \_\_llvm\_cmpxchg\_a3\_x\_x\_wg\_i64(\mbox{\hyperlink{namespacecl_a8c0bd8b2f6874ca5a62e2f25e5116c64}{\_\_local}} ulong *, ulong, ulong);}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{comment}{// AMDGPU intrinsics}}
+\DoxyCodeLine{141 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{bool} \_\_llvm\_amdgcn\_class\_f16(half, \textcolor{keywordtype}{int}) \_\_asm("{}llvm.amdgcn.class.f16"{});}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 extern \_\_attribute\_\_((const)) half \_\_llvm\_amdgcn\_fract\_f16(half) \_\_asm("{}llvm.amdgcn.fract.f16"{});}
+\DoxyCodeLine{144 extern \_\_attribute\_\_((const)) half \_\_llvm\_amdgcn\_rcp\_f16(half) \_\_asm("{}llvm.amdgcn.rcp.f16"{});}
+\DoxyCodeLine{145 extern \_\_attribute\_\_((const)) half \_\_llvm\_amdgcn\_rsq\_f16(half) \_\_asm("{}llvm.amdgcn.rsq.f16"{});}
+\DoxyCodeLine{146 extern \_\_attribute\_\_((const)) half \_\_llvm\_amdgcn\_ldexp\_f16(half, \textcolor{keywordtype}{int}) \_\_asm("{}llvm.amdgcn.ldexp.f16"{});}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 extern \_\_attribute\_\_((const)) half \_\_llvm\_amdgcn\_frexp\_mant\_f16(half) \_\_asm("{}llvm.amdgcn.frexp.mant.f16"{});}
+\DoxyCodeLine{150 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{short} \_\_llvm\_amdgcn\_frexp\_exp\_i16\_f16(half) \_\_asm("{}llvm.amdgcn.frexp.exp.i16.f16"{});}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{comment}{// llvm.amdgcn.update.dpp.i32 <old> <src> <dpp\_ctrl> <row\_mask> <bank\_mask> <bound\_ctrl>}}
+\DoxyCodeLine{153 extern uint \_\_llvm\_amdgcn\_update\_dpp\_i32(uint, uint, uint, uint, uint, \textcolor{keywordtype}{bool}) \_\_asm("{}llvm.amdgcn.update.dpp.i32"{});}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \textcolor{comment}{// Operand bits: [0..3]=VM\_CNT, [4..6]=EXP\_CNT (Export), [8..11]=LGKM\_CNT (LDS, GDS, Konstant, Message)}}
+\DoxyCodeLine{156 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_s\_waitcnt(\textcolor{keywordtype}{int}) \_\_asm("{}llvm.amdgcn.s.waitcnt"{});}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_mbcnt\_lo(uint, uint) \_\_asm("{}llvm.amdgcn.mbcnt.lo"{});}
+\DoxyCodeLine{159 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_mbcnt\_hi(uint, uint) \_\_asm("{}llvm.amdgcn.mbcnt.hi"{});}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_ubfe\_i32(uint, uint, uint) \_\_asm("{}llvm.amdgcn.ubfe.i32"{});}
+\DoxyCodeLine{162 extern \_\_attribute\_\_((const)) \textcolor{keywordtype}{int} \_\_llvm\_amdgcn\_sbfe\_i32(\textcolor{keywordtype}{int}, uint, uint) \_\_asm("{}llvm.amdgcn.sbfe.i32"{});}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_alignbit(uint, uint, uint) \_\_asm("{}llvm.amdgcn.alignbit"{});}
+\DoxyCodeLine{165 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_alignbyte(uint, uint, uint) \_\_asm("{}llvm.amdgcn.alignbyte"{});}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 extern \_\_attribute\_\_((const)) ulong \_\_llvm\_amdgcn\_mqsad\_pk\_u16\_u8(ulong, uint, ulong) \_\_asm("{}llvm.amdgcn.mqsad.pk.u16.u8"{});}
+\DoxyCodeLine{168 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_cvt\_pk\_u8\_f32(\textcolor{keywordtype}{float}, uint, uint) \_\_asm("{}llvm.amdgcn.cvt.pk.u8.f32"{});}
+\DoxyCodeLine{169 extern \_\_attribute\_\_((const)) ulong \_\_llvm\_amdgcn\_qsad\_pk\_u16\_u8(ulong, uint, ulong) \_\_asm("{}llvm.amdgcn.qsad.pk.u16.u8"{});}
+\DoxyCodeLine{170 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_sad\_u8(uint, uint, uint) \_\_asm("{}llvm.amdgcn.sad.u8"{});}
+\DoxyCodeLine{171 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_sad\_hi\_u8(uint, uint, uint) \_\_asm("{}llvm.amdgcn.sad.hi.u8"{});}
+\DoxyCodeLine{172 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_sad\_u16(uint, uint, uint) \_\_asm("{}llvm.amdgcn.sad.u16"{});}
+\DoxyCodeLine{173 extern \_\_attribute\_\_((const)) uint \_\_llvm\_amdgcn\_msad\_u8(uint, uint, uint) \_\_asm("{}llvm.amdgcn.msad.u8"{});}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 \textcolor{comment}{// Buffer Load/Store}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_buffer\_load\_format\_v4f32(uint4 v, uint i, uint o, \textcolor{keywordtype}{bool} glc, \textcolor{keywordtype}{bool} slc) \_\_asm("{}llvm.amdgcn.buffer.load.format.v4f32"{});}
+\DoxyCodeLine{178 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_buffer\_load\_format\_v4f16(uint4 v, uint i, uint o, \textcolor{keywordtype}{bool} glc, \textcolor{keywordtype}{bool} slc) \_\_asm("{}llvm.amdgcn.buffer.load.format.v4f16"{});}
+\DoxyCodeLine{179 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_buffer\_store\_format\_v4f32(float4 p, uint4 v, uint i, uint o, \textcolor{keywordtype}{bool} glc, \textcolor{keywordtype}{bool} slc) \_\_asm("{}llvm.amdgcn.buffer.store.format.v4f32"{});}
+\DoxyCodeLine{180 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_buffer\_store\_format\_v4f16(half4 p, uint4 v, uint i, uint o, \textcolor{keywordtype}{bool} glc, \textcolor{keywordtype}{bool} slc) \_\_asm("{}llvm.amdgcn.buffer.store.format.v4f16"{});}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \textcolor{comment}{// Image load, store, sample, gather}}
+\DoxyCodeLine{183 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_1d\_v4f32\_i32(uint ix, uint8 t);}
+\DoxyCodeLine{184 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_2d\_v4f32\_i32(uint ix, uint iy, uint8 t);}
+\DoxyCodeLine{185 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_3d\_v4f32\_i32(uint ix, uint iy, uint iz, uint8 t);}
+\DoxyCodeLine{186 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_cube\_v4f32\_i32(uint ix, uint iy, uint iface, uint8 t);}
+\DoxyCodeLine{187 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_1darray\_v4f32\_i32(uint ix, uint islice, uint8 t);}
+\DoxyCodeLine{188 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_2darray\_v4f32\_i32(uint ix, uint iy, uint islice, uint8 t);}
+\DoxyCodeLine{189 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_mip\_1d\_v4f32\_i32(uint ix, uint imip, uint8 t);}
+\DoxyCodeLine{190 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_mip\_2d\_v4f32\_i32(uint ix, uint iy, uint imip, uint8 t);}
+\DoxyCodeLine{191 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_mip\_3d\_v4f32\_i32(uint ix, uint iy, uint iz, uint imip, uint8 t);}
+\DoxyCodeLine{192 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_mip\_cube\_v4f32\_i32(uint ix, uint iy, uint iface, uint imip, uint8 t);}
+\DoxyCodeLine{193 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_mip\_1darray\_v4f32\_i32(uint ix, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{194 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_load\_mip\_2darray\_v4f32\_i32(uint ix, uint iy, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_1d\_v4f16\_i32(uint ix, uint8 t);}
+\DoxyCodeLine{197 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_2d\_v4f16\_i32(uint ix, uint iy, uint8 t);}
+\DoxyCodeLine{198 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_3d\_v4f16\_i32(uint ix, uint iy, uint iz, uint8 t);}
+\DoxyCodeLine{199 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_cube\_v4f16\_i32(uint ix, uint iy, uint iface, uint8 t);}
+\DoxyCodeLine{200 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_1darray\_v4f16\_i32(uint ix, uint islice, uint8 t);}
+\DoxyCodeLine{201 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_2darray\_v4f16\_i32(uint ix, uint iy, uint islice, uint8 t);}
+\DoxyCodeLine{202 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_mip\_1d\_v4f16\_i32(uint ix, uint imip, uint8 t);}
+\DoxyCodeLine{203 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_mip\_2d\_v4f16\_i32(uint ix, uint iy, uint imip, uint8 t);}
+\DoxyCodeLine{204 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_mip\_3d\_v4f16\_i32(uint ix, uint iy, uint iz, uint imip, uint8 t);}
+\DoxyCodeLine{205 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_mip\_cube\_v4f16\_i32(uint ix, uint iy, uint iface, uint imip, uint8 t);}
+\DoxyCodeLine{206 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_mip\_1darray\_v4f16\_i32(uint ix, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{207 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_load\_mip\_2darray\_v4f16\_i32(uint ix, uint iy, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_load\_2d\_f32\_i32(uint ix, uint iy, uint8 t);}
+\DoxyCodeLine{210 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_load\_2darray\_f32\_i32(uint ix, uint iy, uint islice, uint8 t);}
+\DoxyCodeLine{211 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_load\_mip\_2d\_f32\_i32(uint ix, uint iy, uint imip, uint8 t);}
+\DoxyCodeLine{212 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_load\_mip\_2darray\_f32\_i32(uint ix, uint iy, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_1d\_v4f32\_i32(float4 pix, uint ix, uint8 t);}
+\DoxyCodeLine{215 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_2d\_v4f32\_i32(float4 pix, uint ix, uint iy, uint8 t);}
+\DoxyCodeLine{216 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_3d\_v4f32\_i32(float4 pix, uint ix, uint iy, uint iz, uint8 t);}
+\DoxyCodeLine{217 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_cube\_v4f32\_i32(float4 pix, uint ix, uint iy, uint iface, uint8 t);}
+\DoxyCodeLine{218 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_1darray\_v4f32\_i32(float4 pix, uint ix, uint islice, uint8 t);}
+\DoxyCodeLine{219 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_2darray\_v4f32\_i32(float4 pix, uint ix, uint iy, uint islice, uint8 t);}
+\DoxyCodeLine{220 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_1d\_v4f32\_i32(float4 pix, uint ix, uint imip, uint8 t);}
+\DoxyCodeLine{221 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_2d\_v4f32\_i32(float4 pix, uint ix, uint iy, uint imip, uint8 t);}
+\DoxyCodeLine{222 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_3d\_v4f32\_i32(float4 pix, uint ix, uint iy, uint iz, uint imip, uint8 t);}
+\DoxyCodeLine{223 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_cube\_v4f32\_i32(float4 pix, uint ix, uint iy, uint iface, uint imip, uint8 t);}
+\DoxyCodeLine{224 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_1darray\_v4f32\_i32(float4 pix, uint ix, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{225 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_2darray\_v4f32\_i32(float4 pix, uint ix, uint iy, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_1d\_v4f16\_i32(half4 pix, uint ix, uint8 t);}
+\DoxyCodeLine{228 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_2d\_v4f16\_i32(half4 pix, uint ix, uint iy, uint8 t);}
+\DoxyCodeLine{229 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_3d\_v4f16\_i32(half4 pix, uint ix, uint iy, uint iz, uint8 t);}
+\DoxyCodeLine{230 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_cube\_v4f16\_i32(half4 pix, uint ix, uint iy, uint iface, uint8 t);}
+\DoxyCodeLine{231 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_1darray\_v4f16\_i32(half4 pix, uint ix, uint islice, uint8 t);}
+\DoxyCodeLine{232 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_2darray\_v4f16\_i32(half4 pix, uint ix, uint iy, uint islice, uint8 t);}
+\DoxyCodeLine{233 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_1d\_v4f16\_i32(half4 pix, uint ix, uint imip, uint8 t);}
+\DoxyCodeLine{234 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_2d\_v4f16\_i32(half4 pix, uint ix, uint iy, uint imip, uint8 t);}
+\DoxyCodeLine{235 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_3d\_v4f16\_i32(half4 pix, uint ix, uint iy, uint iz, uint imip, uint8 t);}
+\DoxyCodeLine{236 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_cube\_v4f16\_i32(half4 pix, uint ix, uint iy, uint iface, uint imip, uint8 t);}
+\DoxyCodeLine{237 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_1darray\_v4f16\_i32(half4 pix, uint ix, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{238 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_2darray\_v4f16\_i32(half4 pix, uint ix, uint iy, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_2d\_f32\_i32(\textcolor{keywordtype}{float} pix, uint ix, uint iy, uint8 t);}
+\DoxyCodeLine{241 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_2darray\_f32\_i32(\textcolor{keywordtype}{float} pix, uint ix, uint iy, uint islice, uint8 t);}
+\DoxyCodeLine{242 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_2d\_f32\_i32(\textcolor{keywordtype}{float} pix, uint ix, uint iy, uint imip, uint8 t);}
+\DoxyCodeLine{243 extern \textcolor{keywordtype}{void} \_\_llvm\_amdgcn\_image\_store\_mip\_2darray\_f32\_i32(\textcolor{keywordtype}{float} pix, uint ix, uint iy, uint islice, uint imip, uint8 t);}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_lz\_1d\_v4f32\_f32(\textcolor{keywordtype}{float} x, uint8 t, uint4 s);}
+\DoxyCodeLine{246 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_l\_1d\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{247 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_d\_1d\_v4f32\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} x, uint8 t, uint4 s);}
+\DoxyCodeLine{248 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_lz\_2d\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{249 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_l\_2d\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{250 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_d\_2d\_v4f32\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{251 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_lz\_3d\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, uint8 t, uint4 s);}
+\DoxyCodeLine{252 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_l\_3d\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{253 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_d\_3d\_v4f32\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dzdh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} dzdv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, uint8 t, uint4 s);}
+\DoxyCodeLine{254 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_lz\_cube\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} face, uint8 t, uint4 s);}
+\DoxyCodeLine{255 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_l\_cube\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} face, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{256 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_lz\_1darray\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{257 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_l\_1darray\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} slice, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{258 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_d\_1darray\_v4f32\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{259 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_lz\_2darray\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{260 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_l\_2darray\_v4f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{261 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_sample\_d\_2darray\_v4f32\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_lz\_1d\_v4f16\_f32(\textcolor{keywordtype}{float} x, uint8 t, uint4 s);}
+\DoxyCodeLine{264 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_l\_1d\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{265 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_d\_1d\_v4f16\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} x, uint8 t, uint4 s);}
+\DoxyCodeLine{266 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_lz\_2d\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{267 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_l\_2d\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{268 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_d\_2d\_v4f16\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{269 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_lz\_3d\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, uint8 t, uint4 s);}
+\DoxyCodeLine{270 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_l\_3d\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{271 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_d\_3d\_v4f16\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dzdh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} dzdv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z, uint8 t, uint4 s);}
+\DoxyCodeLine{272 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_lz\_cube\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} face, uint8 t, uint4 s);}
+\DoxyCodeLine{273 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_l\_cube\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} face, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{274 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_lz\_1darray\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{275 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_l\_1darray\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} slice, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{276 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_d\_1darray\_v4f16\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{277 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_lz\_2darray\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{278 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_l\_2darray\_v4f16\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{279 extern \_\_attribute\_\_((pure)) half4 \_\_llvm\_amdgcn\_image\_sample\_d\_2darray\_v4f16\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_sample\_lz\_2d\_f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{282 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_sample\_l\_2d\_f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{283 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_sample\_d\_2d\_f32\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{284 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_sample\_lz\_2darray\_f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{285 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_sample\_l\_2darray\_f32\_f32(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, \textcolor{keywordtype}{float} lod, uint8 t, uint4 s);}
+\DoxyCodeLine{286 extern \_\_attribute\_\_((pure)) \textcolor{keywordtype}{float} \_\_llvm\_amdgcn\_image\_sample\_d\_2darray\_f32\_f32\_f32(\textcolor{keywordtype}{float} dxdh, \textcolor{keywordtype}{float} dydh, \textcolor{keywordtype}{float} dxdv, \textcolor{keywordtype}{float} dydv, \textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} slice, uint8 t, uint4 s);}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_gather4\_lz\_2d\_v4f32\_f32\_r(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{289 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_gather4\_lz\_2d\_v4f32\_f32\_g(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{290 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_gather4\_lz\_2d\_v4f32\_f32\_b(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{291 extern \_\_attribute\_\_((pure)) float4 \_\_llvm\_amdgcn\_image\_gather4\_lz\_2d\_v4f32\_f32\_a(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, uint8 t, uint4 s);}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294 \textcolor{preprocessor}{\#pragma OPENCL EXTENSION cl\_khr\_fp16 : disable}}
+\DoxyCodeLine{295 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// IRIF\_H}}
+
+\end{DoxyCode}

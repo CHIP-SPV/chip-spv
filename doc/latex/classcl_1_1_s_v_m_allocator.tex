@@ -1,0 +1,111 @@
+\hypertarget{classcl_1_1_s_v_m_allocator}{}\doxysection{cl\+::SVMAllocator\texorpdfstring{$<$}{<} T, SVMTrait \texorpdfstring{$>$}{>} Class Template Reference}
+\label{classcl_1_1_s_v_m_allocator}\index{cl::SVMAllocator$<$ T, SVMTrait $>$@{cl::SVMAllocator$<$ T, SVMTrait $>$}}
+
+
+{\ttfamily \#include $<$opencl.\+hpp$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcl_1_1_s_v_m_allocator_1_1rebind}{rebind}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a80bd529e576d0ff30cc55ee9f0ec3f8c}\label{classcl_1_1_s_v_m_allocator_a80bd529e576d0ff30cc55ee9f0ec3f8c}} 
+typedef T {\bfseries value\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a6222e5ff48358bc0f826885bb2a4a4ec}\label{classcl_1_1_s_v_m_allocator_a6222e5ff48358bc0f826885bb2a4a4ec}} 
+typedef value\+\_\+type $\ast$ {\bfseries pointer}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_af5daf4a4173794758e399e45a2f028a9}\label{classcl_1_1_s_v_m_allocator_af5daf4a4173794758e399e45a2f028a9}} 
+typedef const value\+\_\+type $\ast$ {\bfseries const\+\_\+pointer}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_aa9a3870b226f6286dbf1917ff1d8e03b}\label{classcl_1_1_s_v_m_allocator_aa9a3870b226f6286dbf1917ff1d8e03b}} 
+typedef value\+\_\+type \& {\bfseries reference}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a64a4984f03ddff3a757f200b4c4fb357}\label{classcl_1_1_s_v_m_allocator_a64a4984f03ddff3a757f200b4c4fb357}} 
+typedef const value\+\_\+type \& {\bfseries const\+\_\+reference}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_afe51e51ed34089444241a43aab0950ef}\label{classcl_1_1_s_v_m_allocator_afe51e51ed34089444241a43aab0950ef}} 
+typedef std\+::size\+\_\+t {\bfseries size\+\_\+type}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_aed0caac86c149d127e6d686a764e2073}\label{classcl_1_1_s_v_m_allocator_aed0caac86c149d127e6d686a764e2073}} 
+typedef std\+::ptrdiff\+\_\+t {\bfseries difference\+\_\+type}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a532a5219ffd5c855070a1e4f22832711}\label{classcl_1_1_s_v_m_allocator_a532a5219ffd5c855070a1e4f22832711}} 
+{\bfseries SVMAllocator} (\mbox{\hyperlink{classcl_1_1_context}{cl\+::\+Context}} context)
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a927ffbac7ec2a7cb0aee2d24a9f986b1}\label{classcl_1_1_s_v_m_allocator_a927ffbac7ec2a7cb0aee2d24a9f986b1}} 
+{\bfseries SVMAllocator} (const \mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{SVMAllocator}} \&other)
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_af103176d8c51fc469fb0b7d85a597a9f}\label{classcl_1_1_s_v_m_allocator_af103176d8c51fc469fb0b7d85a597a9f}} 
+{\footnotesize template$<$typename U $>$ }\\{\bfseries SVMAllocator} (const \mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{SVMAllocator}}$<$ U, SVMTrait $>$ \&other)
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a10ae2172078bf1aa987a0e3ace96cbb7}\label{classcl_1_1_s_v_m_allocator_a10ae2172078bf1aa987a0e3ace96cbb7}} 
+pointer {\bfseries address} (reference r) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_afcc4bd8a99bc004c286f49a7f3e84766}\label{classcl_1_1_s_v_m_allocator_afcc4bd8a99bc004c286f49a7f3e84766}} 
+const\+\_\+pointer {\bfseries address} (const\+\_\+reference r) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\item 
+pointer \mbox{\hyperlink{classcl_1_1_s_v_m_allocator_a44858d70971c7801aa62d7a64d18df00}{allocate}} (size\+\_\+type size, typename \mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{cl\+::\+SVMAllocator}}$<$ void, SVMTrait $>$\+::const\+\_\+pointer=0)
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a695f4693c4245c66285e7f4a0405cf84}\label{classcl_1_1_s_v_m_allocator_a695f4693c4245c66285e7f4a0405cf84}} 
+void {\bfseries deallocate} (pointer p, size\+\_\+type)
+\item 
+size\+\_\+type \mbox{\hyperlink{classcl_1_1_s_v_m_allocator_aec263261a88fb1ec64a3e5f9a4ef41a7}{max\+\_\+size}} () const CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a57e823e939f67e1209450d996556c080}\label{classcl_1_1_s_v_m_allocator_a57e823e939f67e1209450d996556c080}} 
+{\footnotesize template$<$class U , class... Args$>$ }\\void {\bfseries construct} (U $\ast$p, Args \&\&... args)
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a86498cce5cce2d8ac1c509862eb28977}\label{classcl_1_1_s_v_m_allocator_a86498cce5cce2d8ac1c509862eb28977}} 
+{\footnotesize template$<$class U $>$ }\\void {\bfseries destroy} (U $\ast$p)
+\item 
+bool \mbox{\hyperlink{classcl_1_1_s_v_m_allocator_abaa89b1232891a728d3530dbd71e7cb6}{operator==}} (\mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{SVMAllocator}} const \&rhs)
+\item 
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a72088f264071b2648aa80e20594d6398}\label{classcl_1_1_s_v_m_allocator_a72088f264071b2648aa80e20594d6398}} 
+bool {\bfseries operator!=} (\mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{SVMAllocator}} const \&a)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T, class SVMTrait$>$\newline
+class cl\+::\+SVMAllocator$<$ T, SVMTrait $>$}
+STL-\/like allocator class for managing SVM objects provided for convenience.
+
+Note that while this behaves like an allocator for the purposes of constructing vectors and similar objects, care must be taken when using with smart pointers. The allocator should not be used to construct a unique\+\_\+ptr if we are using coarse-\/grained SVM mode because the coarse-\/grained management behaviour would behave incorrectly with respect to reference counting.
+
+Instead the allocator embeds a Deleter which may be used with unique\+\_\+ptr and is used with the allocate\+\_\+shared and allocate\+\_\+ptr supplied operations. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_a44858d70971c7801aa62d7a64d18df00}\label{classcl_1_1_s_v_m_allocator_a44858d70971c7801aa62d7a64d18df00}} 
+\index{cl::SVMAllocator$<$ T, SVMTrait $>$@{cl::SVMAllocator$<$ T, SVMTrait $>$}!allocate@{allocate}}
+\index{allocate@{allocate}!cl::SVMAllocator$<$ T, SVMTrait $>$@{cl::SVMAllocator$<$ T, SVMTrait $>$}}
+\doxysubsubsection{\texorpdfstring{allocate()}{allocate()}}
+{\footnotesize\ttfamily template$<$typename T , class SVMTrait $>$ \\
+pointer \mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{cl\+::\+SVMAllocator}}$<$ T, SVMTrait $>$\+::allocate (\begin{DoxyParamCaption}\item[{size\+\_\+type}]{size,  }\item[{typename \mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{cl\+::\+SVMAllocator}}$<$ void, SVMTrait $>$\+::const\+\_\+pointer}]{ = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Allocate an SVM pointer.
+
+If the allocator is coarse-\/grained, this will take ownership to allow containers to correctly construct data in place. \mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_aec263261a88fb1ec64a3e5f9a4ef41a7}\label{classcl_1_1_s_v_m_allocator_aec263261a88fb1ec64a3e5f9a4ef41a7}} 
+\index{cl::SVMAllocator$<$ T, SVMTrait $>$@{cl::SVMAllocator$<$ T, SVMTrait $>$}!max\_size@{max\_size}}
+\index{max\_size@{max\_size}!cl::SVMAllocator$<$ T, SVMTrait $>$@{cl::SVMAllocator$<$ T, SVMTrait $>$}}
+\doxysubsubsection{\texorpdfstring{max\_size()}{max\_size()}}
+{\footnotesize\ttfamily template$<$typename T , class SVMTrait $>$ \\
+size\+\_\+type \mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{cl\+::\+SVMAllocator}}$<$ T, SVMTrait $>$\+::max\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return the maximum possible allocation size. This is the minimum of the maximum sizes of all devices in the context. \mbox{\Hypertarget{classcl_1_1_s_v_m_allocator_abaa89b1232891a728d3530dbd71e7cb6}\label{classcl_1_1_s_v_m_allocator_abaa89b1232891a728d3530dbd71e7cb6}} 
+\index{cl::SVMAllocator$<$ T, SVMTrait $>$@{cl::SVMAllocator$<$ T, SVMTrait $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!cl::SVMAllocator$<$ T, SVMTrait $>$@{cl::SVMAllocator$<$ T, SVMTrait $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename T , class SVMTrait $>$ \\
+bool \mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{cl\+::\+SVMAllocator}}$<$ T, SVMTrait $>$\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcl_1_1_s_v_m_allocator}{SVMAllocator}}$<$ T, SVMTrait $>$ const \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns true if the contexts match. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

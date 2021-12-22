@@ -1,0 +1,114 @@
+\hypertarget{fp16__conversion_8hpp_source}{}\doxysection{fp16\+\_\+conversion.\+hpp}
+\label{fp16__conversion_8hpp_source}\index{/Users/pvelesko/local/CHIP-\/SPV/samples/fp16/fp16\_conversion.hpp@{/Users/pvelesko/local/CHIP-\/SPV/samples/fp16/fp16\_conversion.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Copyright (c) 1993-\/2016, NVIDIA CORPORATION. All rights reserved.}}
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{4 \textcolor{comment}{// modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{5 \textcolor{comment}{// are met:}}
+\DoxyCodeLine{6 \textcolor{comment}{//  * Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{7 \textcolor{comment}{//    notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{8 \textcolor{comment}{//  * Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{9 \textcolor{comment}{//    notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{10 \textcolor{comment}{//    documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{11 \textcolor{comment}{//  * Neither the name of NVIDIA CORPORATION nor the names of its}}
+\DoxyCodeLine{12 \textcolor{comment}{//    contributors may be used to endorse or promote products derived}}
+\DoxyCodeLine{13 \textcolor{comment}{//    from this software without specific prior written permission.}}
+\DoxyCodeLine{14 \textcolor{comment}{//}}
+\DoxyCodeLine{15 \textcolor{comment}{// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY}}
+\DoxyCodeLine{16 \textcolor{comment}{// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE}}
+\DoxyCodeLine{17 \textcolor{comment}{// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR}}
+\DoxyCodeLine{18 \textcolor{comment}{// PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR}}
+\DoxyCodeLine{19 \textcolor{comment}{// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}}
+\DoxyCodeLine{20 \textcolor{comment}{// EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}}
+\DoxyCodeLine{21 \textcolor{comment}{// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}}
+\DoxyCodeLine{22 \textcolor{comment}{// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY}}
+\DoxyCodeLine{23 \textcolor{comment}{// OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
+\DoxyCodeLine{24 \textcolor{comment}{// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
+\DoxyCodeLine{25 \textcolor{comment}{// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{// This code modified from the public domain code here:}}
+\DoxyCodeLine{28 \textcolor{comment}{// https://gist.github.com/rygorous/2156668}}
+\DoxyCodeLine{29 \textcolor{comment}{// The URL above includes more robust conversion routines}}
+\DoxyCodeLine{30 \textcolor{comment}{// that handle Inf and NaN correctly.}}
+\DoxyCodeLine{31 \textcolor{comment}{//}}
+\DoxyCodeLine{32 \textcolor{comment}{// It is recommended to use the more robust versions in production code.}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} uint;}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keyword}{union }\mbox{\hyperlink{union_f_p32}{FP32}} \{}
+\DoxyCodeLine{37   uint u;}
+\DoxyCodeLine{38   \textcolor{keywordtype}{float} f;}
+\DoxyCodeLine{39   \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{40     uint Mantissa : 23;}
+\DoxyCodeLine{41     uint Exponent : 8;}
+\DoxyCodeLine{42     uint Sign : 1;}
+\DoxyCodeLine{43   \};}
+\DoxyCodeLine{44 \};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{union }\mbox{\hyperlink{union_f_p16}{FP16}} \{}
+\DoxyCodeLine{47   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} u;}
+\DoxyCodeLine{48   \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{49     uint Mantissa : 10;}
+\DoxyCodeLine{50     uint Exponent : 5;}
+\DoxyCodeLine{51     uint Sign : 1;}
+\DoxyCodeLine{52   \};}
+\DoxyCodeLine{53 \};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{comment}{// Approximate solution. This is faster but converts some sNaNs to}}
+\DoxyCodeLine{56 \textcolor{comment}{// infinity and doesn't round correctly. Handle with care.}}
+\DoxyCodeLine{57 \textcolor{comment}{// Approximate solution. This is faster but converts some sNaNs to}}
+\DoxyCodeLine{58 \textcolor{comment}{// infinity and doesn't round correctly. Handle with care.}}
+\DoxyCodeLine{59 \textcolor{keyword}{static} \textcolor{keyword}{const} half approx\_float\_to\_half(\textcolor{keywordtype}{float} fl) \{}
+\DoxyCodeLine{60   \mbox{\hyperlink{union_f_p32}{FP32}} f32infty = \{255 << 23\};}
+\DoxyCodeLine{61   \mbox{\hyperlink{union_f_p32}{FP32}} f16max = \{(127 + 16) << 23\};}
+\DoxyCodeLine{62   \mbox{\hyperlink{union_f_p32}{FP32}} magic = \{15 << 23\};}
+\DoxyCodeLine{63   \mbox{\hyperlink{union_f_p32}{FP32}} expinf = \{(255 \string^ 31) << 23\};}
+\DoxyCodeLine{64   uint sign\_mask = 0x80000000u;}
+\DoxyCodeLine{65   \mbox{\hyperlink{union_f_p16}{FP16}} o = \{0\};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67   \mbox{\hyperlink{union_f_p32}{FP32}} f = *((\mbox{\hyperlink{union_f_p32}{FP32}} *)\&fl);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69   uint sign = f.u \& sign\_mask;}
+\DoxyCodeLine{70   f.u \string^= sign;}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72   \textcolor{keywordflow}{if} (!(f.f < f32infty.u)) \textcolor{comment}{// Inf or NaN}}
+\DoxyCodeLine{73     o.u = f.u \string^ expinf.u;}
+\DoxyCodeLine{74   \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{75     if (f.f > f16max.f)}
+\DoxyCodeLine{76       f.f = f16max.f;}
+\DoxyCodeLine{77     f.f *= magic.f;}
+\DoxyCodeLine{78   \}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80   o.u = f.u >> 13; \textcolor{comment}{// Take the mantissa bits}}
+\DoxyCodeLine{81   o.u |= sign >> 16;}
+\DoxyCodeLine{82   \textcolor{keywordflow}{return} *((half *)\&o);}
+\DoxyCodeLine{83 \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{comment}{// from half-\/>float code -\/ just for verification.}}
+\DoxyCodeLine{86 \textcolor{keyword}{static} \textcolor{keywordtype}{float} half\_to\_float(half hf) \{}
+\DoxyCodeLine{87   \mbox{\hyperlink{union_f_p16}{FP16}} h = *((\mbox{\hyperlink{union_f_p16}{FP16}} *)\&hf);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89   \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{union_f_p32}{FP32}} magic = \{113 << 23\};}
+\DoxyCodeLine{90   \textcolor{keyword}{static} \textcolor{keyword}{const} uint shifted\_exp = 0x7c00 << 13; \textcolor{comment}{// exponent mask after shift}}
+\DoxyCodeLine{91   \mbox{\hyperlink{union_f_p32}{FP32}} o;}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93   o.u = (h.u \& 0x7fff) << 13;   \textcolor{comment}{// exponent/mantissa bits}}
+\DoxyCodeLine{94   uint exp = shifted\_exp \& o.u; \textcolor{comment}{// just the exponent}}
+\DoxyCodeLine{95   o.u += (127 -\/ 15) << 23;      \textcolor{comment}{// exponent adjust}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97   \textcolor{comment}{// handle exponent special cases}}
+\DoxyCodeLine{98   \textcolor{keywordflow}{if} (exp == shifted\_exp)    \textcolor{comment}{// Inf/NaN?}}
+\DoxyCodeLine{99     o.u += (128 -\/ 16) << 23; \textcolor{comment}{// extra exp adjust}}
+\DoxyCodeLine{100   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (exp == 0)         \textcolor{comment}{// Zero/Denormal?}}
+\DoxyCodeLine{101   \{}
+\DoxyCodeLine{102     o.u += 1 << 23; \textcolor{comment}{// extra exp adjust}}
+\DoxyCodeLine{103     o.f -\/= magic.f; \textcolor{comment}{// renormalize}}
+\DoxyCodeLine{104   \}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106   o.u |= (h.u \& 0x8000) << 16; \textcolor{comment}{// sign bit}}
+\DoxyCodeLine{107   \textcolor{keywordflow}{return} o.f;}
+\DoxyCodeLine{108 \}}
+
+\end{DoxyCode}

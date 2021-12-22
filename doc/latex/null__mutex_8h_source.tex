@@ -1,0 +1,51 @@
+\hypertarget{null__mutex_8h_source}{}\doxysection{null\+\_\+mutex.\+h}
+\label{null__mutex_8h_source}\index{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/null\_mutex.h@{/Users/pvelesko/local/CHIP-\/SPV/spdlog/details/null\_mutex.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Copyright(c) 2015 Gabi Melman.}}
+\DoxyCodeLine{3 \textcolor{comment}{// Distributed under the MIT License (http://opensource.org/licenses/MIT)}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{9 \textcolor{comment}{// null, no cost dummy "{}mutex"{} and dummy "{}atomic"{} int}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }spdlog \{}
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }details \{}
+\DoxyCodeLine{13 \textcolor{keyword}{struct }\mbox{\hyperlink{structspdlog_1_1details_1_1null__mutex}{null\_mutex}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     \textcolor{keywordtype}{void} lock() \{\}}
+\DoxyCodeLine{16     \textcolor{keywordtype}{void} unlock() \{\}}
+\DoxyCodeLine{17     \textcolor{keywordtype}{bool} try\_lock()}
+\DoxyCodeLine{18     \{}
+\DoxyCodeLine{19         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{20     \}}
+\DoxyCodeLine{21 \};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{struct }\mbox{\hyperlink{structspdlog_1_1details_1_1null__atomic__int}{null\_atomic\_int}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25     \textcolor{keywordtype}{int} value;}
+\DoxyCodeLine{26     \mbox{\hyperlink{structspdlog_1_1details_1_1null__atomic__int}{null\_atomic\_int}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{explicit} \mbox{\hyperlink{structspdlog_1_1details_1_1null__atomic__int}{null\_atomic\_int}}(\textcolor{keywordtype}{int} val)}
+\DoxyCodeLine{29         : value(val)}
+\DoxyCodeLine{30     \{}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} load(std::memory\_order)\textcolor{keyword}{ const}}
+\DoxyCodeLine{34 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{35         \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} store(\textcolor{keywordtype}{int} val)}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         value = val;}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \} \textcolor{comment}{// namespace details}}
+\DoxyCodeLine{45 \} \textcolor{comment}{// namespace spdlog}}
+
+\end{DoxyCode}

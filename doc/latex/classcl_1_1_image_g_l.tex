@@ -1,0 +1,67 @@
+\hypertarget{classcl_1_1_image_g_l}{}\doxysection{cl\+::Image\+GL Class Reference}
+\label{classcl_1_1_image_g_l}\index{cl::ImageGL@{cl::ImageGL}}
+
+
+general image interface for GL interop. We abstract the 2D and 3D GL images into a single instance here that wraps all GL sourced images on the grounds that setup information was performed by Open\+CL anyway.  
+
+
+
+
+{\ttfamily \#include $<$opencl.\+hpp$>$}
+
+Inheritance diagram for cl\+::Image\+GL\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.994652cm]{classcl_1_1_image_g_l}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcl_1_1_image_g_l_a57fafd5d3fb26b8e0b616f75fb4bf4b8}\label{classcl_1_1_image_g_l_a57fafd5d3fb26b8e0b616f75fb4bf4b8}} 
+{\bfseries Image\+GL} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+mem\+\_\+flags flags, cl\+\_\+\+GLenum target, cl\+\_\+\+GLint miplevel, cl\+\_\+\+GLuint texobj, cl\+\_\+int $\ast$err=NULL)
+\item 
+\mbox{\hyperlink{classcl_1_1_image_g_l_afc06fdce130a034e8dca89ac910a93ab}{Image\+GL}} (const cl\+\_\+mem \&image, bool retain\+Object=false)
+\begin{DoxyCompactList}\small\item\em Constructor from cl\+\_\+mem -\/ takes ownership. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image_g_l_a6325145504b05112e1bbc52751b8a7ab}\label{classcl_1_1_image_g_l_a6325145504b05112e1bbc52751b8a7ab}} 
+\mbox{\hyperlink{classcl_1_1_image_g_l}{Image\+GL}} \& {\bfseries operator=} (const cl\+\_\+mem \&rhs)
+\item 
+\mbox{\Hypertarget{classcl_1_1_image_g_l_a0d65fbe2960edcd3b2ba6f857d98b813}\label{classcl_1_1_image_g_l_a0d65fbe2960edcd3b2ba6f857d98b813}} 
+{\bfseries Image\+GL} (const \mbox{\hyperlink{classcl_1_1_image_g_l}{Image\+GL}} \&img)
+\begin{DoxyCompactList}\small\item\em Copy constructor to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image_g_l_a46092bcd96d5ea5d88431bbe3fd61e48}\label{classcl_1_1_image_g_l_a46092bcd96d5ea5d88431bbe3fd61e48}} 
+\mbox{\hyperlink{classcl_1_1_image_g_l}{Image\+GL}} \& {\bfseries operator=} (const \mbox{\hyperlink{classcl_1_1_image_g_l}{Image\+GL}} \&img)
+\begin{DoxyCompactList}\small\item\em Copy assignment to forward copy to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image_g_l_a838ca2ca2a61984f58fc4b4bba8ff225}\label{classcl_1_1_image_g_l_a838ca2ca2a61984f58fc4b4bba8ff225}} 
+{\bfseries Image\+GL} (\mbox{\hyperlink{classcl_1_1_image_g_l}{Image\+GL}} \&\&img) CL\+\_\+\+HPP\+\_\+\+NOEXCEPT\+\_\+
+\begin{DoxyCompactList}\small\item\em Move constructor to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_image_g_l_a9eaa30dda67b7da65d6217c1132966b0}\label{classcl_1_1_image_g_l_a9eaa30dda67b7da65d6217c1132966b0}} 
+\mbox{\hyperlink{classcl_1_1_image_g_l}{Image\+GL}} \& {\bfseries operator=} (\mbox{\hyperlink{classcl_1_1_image_g_l}{Image\+GL}} \&\&img)
+\begin{DoxyCompactList}\small\item\em Move assignment to forward move to the superclass correctly. Required for MSVC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+general image interface for GL interop. We abstract the 2D and 3D GL images into a single instance here that wraps all GL sourced images on the grounds that setup information was performed by Open\+CL anyway. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_image_g_l_afc06fdce130a034e8dca89ac910a93ab}\label{classcl_1_1_image_g_l_afc06fdce130a034e8dca89ac910a93ab}} 
+\index{cl::ImageGL@{cl::ImageGL}!ImageGL@{ImageGL}}
+\index{ImageGL@{ImageGL}!cl::ImageGL@{cl::ImageGL}}
+\doxysubsubsection{\texorpdfstring{ImageGL()}{ImageGL()}}
+{\footnotesize\ttfamily cl\+::\+Image\+GL\+::\+Image\+GL (\begin{DoxyParamCaption}\item[{const cl\+\_\+mem \&}]{image,  }\item[{bool}]{retain\+Object = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor from cl\+\_\+mem -\/ takes ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retain\+Object} & will cause the constructor to retain its cl object. Defaults to false to maintain compatibility with earlier versions. See \mbox{\hyperlink{classcl_1_1_memory}{Memory}} for further details. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

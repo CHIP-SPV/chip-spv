@@ -1,0 +1,11 @@
+
+\begin{DoxyItemize}
+\item host, host cpu \+: Executes the HIP runtime API and is capable of initiating kernel launches to one or more devices.
+\item default device \+: Each host thread maintains a \char`\"{}default device\char`\"{}. Most HIP runtime APIs (including memory allocation, copy commands, kernel launches) do not use accept an explicit device argument but instead implicitly use the default device. The default device can be set with hip\+Set\+Device.
+\item \char`\"{}active host thread\char`\"{} -\/ the thread which is running the HIP APIs.
+\item HIP-\/\+Clang -\/ Heterogeneous AMDGPU Compiler, with its capability to compile HIP programs on AMD platform (\href{https://github.com/RadeonOpenCompute/llvm-project}{\texttt{ https\+://github.\+com/\+Radeon\+Open\+Compute/llvm-\/project}}).
+\item ROCclr -\/ a virtual device interface that compute runtimes interact with different backends such as ROCr on Linux or PAL on Windows. The ROCclr (\href{https://github.com/ROCm-Developer-Tools/ROCclr}{\texttt{ https\+://github.\+com/\+ROCm-\/\+Developer-\/\+Tools/\+ROCclr}}) is an abstraction layer allowing runtimes to work on both OSes without much effort.
+\item hipify tools -\/ tools to convert CUDA code to portable C++ code (\href{https://github.com/ROCm-Developer-Tools/HIPIFY}{\texttt{ https\+://github.\+com/\+ROCm-\/\+Developer-\/\+Tools/\+HIPIFY}}).
+\item hipconfig -\/ tool to report various configuration properties of the target platform.
+\item nvcc = nvcc compiler, do not capitalize. 
+\end{DoxyItemize}

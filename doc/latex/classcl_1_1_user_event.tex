@@ -1,0 +1,64 @@
+\hypertarget{classcl_1_1_user_event}{}\doxysection{cl\+::User\+Event Class Reference}
+\label{classcl_1_1_user_event}\index{cl::UserEvent@{cl::UserEvent}}
+
+
+Class interface for user events (a subset of cl\+\_\+event\textquotesingle{}s).  
+
+
+
+
+{\ttfamily \#include $<$opencl.\+hpp$>$}
+
+Inheritance diagram for cl\+::User\+Event\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classcl_1_1_user_event}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcl_1_1_user_event_a4255beef279789245d402a00830c841f}{User\+Event}} (const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&context, cl\+\_\+int $\ast$err=NULL)
+\begin{DoxyCompactList}\small\item\em Constructs a user event on a given context. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcl_1_1_user_event_a1ee5bc016d511a4fec5f23b50a70821a}\label{classcl_1_1_user_event_a1ee5bc016d511a4fec5f23b50a70821a}} 
+{\bfseries User\+Event} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ initializes to NULL. \end{DoxyCompactList}\item 
+cl\+\_\+int \mbox{\hyperlink{classcl_1_1_user_event_ad1df3a34596fee2bf6f1de6893192ae5}{set\+Status}} (cl\+\_\+int status)
+\begin{DoxyCompactList}\small\item\em Sets the execution status of a user event object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class interface for user events (a subset of cl\+\_\+event\textquotesingle{}s). 
+
+See \mbox{\hyperlink{classcl_1_1_event}{Event}} for details about copy semantics, etc. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl_1_1_user_event_a4255beef279789245d402a00830c841f}\label{classcl_1_1_user_event_a4255beef279789245d402a00830c841f}} 
+\index{cl::UserEvent@{cl::UserEvent}!UserEvent@{UserEvent}}
+\index{UserEvent@{UserEvent}!cl::UserEvent@{cl::UserEvent}}
+\doxysubsubsection{\texorpdfstring{UserEvent()}{UserEvent()}}
+{\footnotesize\ttfamily cl\+::\+User\+Event\+::\+User\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classcl_1_1_context}{Context}} \&}]{context,  }\item[{cl\+\_\+int $\ast$}]{err = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a user event on a given context. 
+
+Wraps cl\+Create\+User\+Event(). 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl_1_1_user_event_ad1df3a34596fee2bf6f1de6893192ae5}\label{classcl_1_1_user_event_ad1df3a34596fee2bf6f1de6893192ae5}} 
+\index{cl::UserEvent@{cl::UserEvent}!setStatus@{setStatus}}
+\index{setStatus@{setStatus}!cl::UserEvent@{cl::UserEvent}}
+\doxysubsubsection{\texorpdfstring{setStatus()}{setStatus()}}
+{\footnotesize\ttfamily cl\+\_\+int cl\+::\+User\+Event\+::set\+Status (\begin{DoxyParamCaption}\item[{cl\+\_\+int}]{status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the execution status of a user event object. 
+
+Wraps cl\+Set\+User\+Event\+Status(). 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/\+CL/\mbox{\hyperlink{opencl_8hpp}{opencl.\+hpp}}\end{DoxyCompactItemize}

@@ -1,5 +1,5 @@
 \hypertarget{_c_h_i_p_backend_8hh_source}{}\doxysection{CHIPBackend.\+hh}
-\label{_c_h_i_p_backend_8hh_source}\index{/Users/pvelesko/local/HIPxx/src/CHIPBackend.hh@{/Users/pvelesko/local/HIPxx/src/CHIPBackend.hh}}
+\label{_c_h_i_p_backend_8hh_source}\index{/Users/pvelesko/local/CHIP-\/SPV/src/CHIPBackend.hh@{/Users/pvelesko/local/CHIP-\/SPV/src/CHIPBackend.hh}}
 \mbox{\hyperlink{_c_h_i_p_backend_8hh}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{1 }
@@ -9,424 +9,626 @@
 \DoxyCodeLine{17 \textcolor{preprocessor}{\#include <algorithm>}}
 \DoxyCodeLine{18 \textcolor{preprocessor}{\#include <iostream>}}
 \DoxyCodeLine{19 \textcolor{preprocessor}{\#include <map>}}
-\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <mutex>}}
-\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <string>}}
-\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <vector>}}
-\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <stack>}}
-\DoxyCodeLine{24 }
-\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}spirv.hh"{}}}
-\DoxyCodeLine{26 \textcolor{preprocessor}{\#include "{}include/hip/hip.hh"{}}}
-\DoxyCodeLine{27 }
-\DoxyCodeLine{28 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_h_i_p_driver_8hh}{CHIPDriver.hh}}"{}}}
-\DoxyCodeLine{29 \textcolor{preprocessor}{\#include "{}logging.hh"{}}}
-\DoxyCodeLine{30 \textcolor{preprocessor}{\#include "{}macros.hh"{}}}
-\DoxyCodeLine{31 }
-\DoxyCodeLine{32 \textcolor{keyword}{enum class} CHIPMemoryType : unsigned \{ Host = 0, Device = 1, Shared = 2 \};}
-\DoxyCodeLine{33 \textcolor{keyword}{enum class} CHIPEventType : unsigned \{}
-\DoxyCodeLine{34   Default = hipEventDefault,}
-\DoxyCodeLine{35   BlockingSync = hipEventBlockingSync,}
-\DoxyCodeLine{36   DisableTiming = hipEventDisableTiming,}
-\DoxyCodeLine{37   Interprocess = hipEventInterprocess}
-\DoxyCodeLine{38 \};}
-\DoxyCodeLine{39 }
-\DoxyCodeLine{40 \textcolor{keyword}{struct }\mbox{\hyperlink{structallocation__info}{allocation\_info}} \{}
-\DoxyCodeLine{41   \textcolor{keywordtype}{void}* base\_ptr;}
-\DoxyCodeLine{42   \textcolor{keywordtype}{size\_t} size;}
-\DoxyCodeLine{43 \};}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{49 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocationTracker}} \{}
-\DoxyCodeLine{50  \textcolor{keyword}{private}:}
-\DoxyCodeLine{51   std::unordered\_map<void*, void*> host\_to\_dev;}
-\DoxyCodeLine{52   std::unordered\_map<void*, void*> dev\_to\_host;}
-\DoxyCodeLine{53 }
-\DoxyCodeLine{54   std::unordered\_map<void*, allocation\_info> dev\_to\_allocation\_info;}
-\DoxyCodeLine{55 }
-\DoxyCodeLine{56  \textcolor{keyword}{public}:}
-\DoxyCodeLine{57   \mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocationTracker}}();}
-\DoxyCodeLine{58   \mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{\string~CHIPAllocationTracker}}();}
-\DoxyCodeLine{59 }
-\DoxyCodeLine{65   \mbox{\hyperlink{structallocation__info}{allocation\_info}}* \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a1bb390011b14cbbadbc474c78efe3fe4}{getByHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}*);}
-\DoxyCodeLine{71   \mbox{\hyperlink{structallocation__info}{allocation\_info}}* \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_af9ae5c2c59ca00cca00a7c85aa8a0f68}{getByDevPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}*);}
-\DoxyCodeLine{72 \};}
-\DoxyCodeLine{73 }
-\DoxyCodeLine{74 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}} \{}
-\DoxyCodeLine{75  \textcolor{keyword}{private}:}
-\DoxyCodeLine{76   std::string host\_var\_name;}
-\DoxyCodeLine{77   \textcolor{keywordtype}{void}* dev\_ptr;}
-\DoxyCodeLine{78   \textcolor{keywordtype}{size\_t} size;}
-\DoxyCodeLine{79 }
-\DoxyCodeLine{80  \textcolor{keyword}{public}:}
-\DoxyCodeLine{81   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}(std::string host\_var\_name\_, \textcolor{keywordtype}{void}* dev\_ptr\_, \textcolor{keywordtype}{size\_t} size);}
-\DoxyCodeLine{82   \mbox{\hyperlink{class_c_h_i_p_device_var}{\string~CHIPDeviceVar}}();}
-\DoxyCodeLine{83 }
-\DoxyCodeLine{84   \textcolor{keywordtype}{void}* getDevAddr();}
-\DoxyCodeLine{85   std::string getName();}
-\DoxyCodeLine{86   \textcolor{keywordtype}{size\_t} getSize();}
-\DoxyCodeLine{87 \};}
-\DoxyCodeLine{88 }
-\DoxyCodeLine{89 \textcolor{comment}{// fw declares}}
-\DoxyCodeLine{90 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExecItem}};}
-\DoxyCodeLine{91 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}};}
-\DoxyCodeLine{92 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}};}
-\DoxyCodeLine{93 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}};}
-\DoxyCodeLine{94 }
-\DoxyCodeLine{95 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} \{}
-\DoxyCodeLine{96  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{97   std::mutex mutex;}
-\DoxyCodeLine{98   event\_status\_e status;}
-\DoxyCodeLine{104   CHIPEventType \mbox{\hyperlink{class_c_h_i_p_event_acd8262b4e41f0c5d87ba2fac14c44bce}{flags}};}
-\DoxyCodeLine{109   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_event_a4321ad3fc8ba63180a803557a5d9c270}{chip\_context}};}
-\DoxyCodeLine{110 }
-\DoxyCodeLine{116   \mbox{\hyperlink{class_c_h_i_p_event_a68534577cfebbd2c089e8af0a494263c}{CHIPEvent}}() = \textcolor{keywordflow}{default};}
-\DoxyCodeLine{117 }
-\DoxyCodeLine{118  \textcolor{keyword}{public}:}
-\DoxyCodeLine{123   \mbox{\hyperlink{class_c_h_i_p_event_a68534577cfebbd2c089e8af0a494263c}{CHIPEvent}}(\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* ctx\_, CHIPEventType flags\_ = CHIPEventType::Default);}
-\DoxyCodeLine{128   \mbox{\hyperlink{class_c_h_i_p_event_a69301b0e97ad2bf26e4931a636a5d3dd}{\string~CHIPEvent}}();}
-\DoxyCodeLine{136   \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_event_a148183c687547c6d992b1717a33c61e7}{recordStream}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue\_);}
-\DoxyCodeLine{143   \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_event_a0bba2c6c5c13a27a7f948cc996065f29}{wait}}();}
-\DoxyCodeLine{150   \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_event_adf3684773f64efa1ccb7aa75694dc07e}{isFinished}}();}
-\DoxyCodeLine{158   \textcolor{keyword}{virtual} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_c_h_i_p_event_a0a52a68bd23cfd3cf0f6466869b85a80}{getElapsedTime}}(\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* other);}
-\DoxyCodeLine{159 \};}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <stack>}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include "{}spirv.hh"{}}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include "{}hip/hip\_runtime\_api.h"{}}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include "{}hip/spirv\_hip.hh"{}}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_c_h_i_p_driver_8hh}{CHIPDriver.hh}}"{}}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include "{}logging.hh"{}}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include "{}macros.hh"{}}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include "{}CHIPException.hh"{}}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEventMonitor}};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallbackData}} \{}
+\DoxyCodeLine{38  \textcolor{keyword}{public}:}
+\DoxyCodeLine{39   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue;}
+\DoxyCodeLine{40   \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* gpu\_ready;}
+\DoxyCodeLine{41   \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* cpu\_callback\_complete;}
+\DoxyCodeLine{42   \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* gpu\_ack;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44   hipError\_t status;}
+\DoxyCodeLine{45   \textcolor{keywordtype}{void}* callback\_args;}
+\DoxyCodeLine{46   hipStreamCallback\_t callback\_f;}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48   \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallbackData}}(hipStreamCallback\_t callback\_f\_, \textcolor{keywordtype}{void}* callback\_args\_,}
+\DoxyCodeLine{49                    \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue\_);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{55   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} setup();}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57   \textcolor{keywordtype}{void} execute(hipError\_t resultFromDependency) \{}
+\DoxyCodeLine{58     callback\_f(chip\_queue, resultFromDependency, callback\_args);}
+\DoxyCodeLine{59   \}}
+\DoxyCodeLine{60 \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keywordtype}{void}* monitor\_wrapper(\textcolor{keywordtype}{void}* event\_monitor\_);}
+\DoxyCodeLine{63 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEventMonitor}} \{}
+\DoxyCodeLine{64   std::mutex mtx;}
+\DoxyCodeLine{65   \textcolor{keyword}{typedef} \textcolor{keywordtype}{void}* (*THREADFUNCPTR)(\textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{68   \textcolor{comment}{// The thread ID for monitor thread}}
+\DoxyCodeLine{69   pthread\_t thread;}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue;}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73  \textcolor{keyword}{public}:}
+\DoxyCodeLine{77   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_event_monitor_a9e6868f572f2800675d16457f7725180}{monitor}}();}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79   \mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEventMonitor}}() \{}
+\DoxyCodeLine{80     logDebug(\textcolor{stringliteral}{"{}CHIPEventMonitor::CHIPEventMonitor()"{}});}
+\DoxyCodeLine{81     \textcolor{keyword}{auto} res = pthread\_create(\&thread, 0, (THREADFUNCPTR)\&monitor\_wrapper,}
+\DoxyCodeLine{82                               (\textcolor{keywordtype}{void}*)\textcolor{keyword}{this});}
+\DoxyCodeLine{83     logDebug(\textcolor{stringliteral}{"{}Thread Created with ID : \{\}"{}}, thread);}
+\DoxyCodeLine{84   \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{90   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_event_monitor_afc049028c58b7d1cdac7e01612ad832a}{wait}}();}
+\DoxyCodeLine{91 \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{keyword}{inline} \textcolor{keywordtype}{void}* monitor\_wrapper(\textcolor{keywordtype}{void}* event\_monitor\_) \{}
+\DoxyCodeLine{94   \mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEventMonitor}}* event\_monitor = (\mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEventMonitor}}*)event\_monitor\_;}
+\DoxyCodeLine{95   event\_monitor-\/>\mbox{\hyperlink{class_c_h_i_p_event_monitor_a9e6868f572f2800675d16457f7725180}{monitor}}();}
+\DoxyCodeLine{96   \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{97 \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}} \{}
+\DoxyCodeLine{100  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{101   \textcolor{comment}{// delete default constructor since texture needs both image and sampler}}
+\DoxyCodeLine{102   \mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}}() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104   \mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}}(intptr\_t image\_, intptr\_t sampler\_)}
+\DoxyCodeLine{105       : image(image\_), sampler(sampler\_) \{\}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107  \textcolor{keyword}{public}:}
+\DoxyCodeLine{108   intptr\_t image;}
+\DoxyCodeLine{109   intptr\_t sampler;}
+\DoxyCodeLine{110   hipTextureObject\_t tex\_obj;}
+\DoxyCodeLine{111   hipTextureObject\_t get() \{ \textcolor{keywordflow}{return} tex\_obj; \}}
+\DoxyCodeLine{112 \};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{115 std::string resultToString(T err);}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{keyword}{enum class} CHIPMemoryType : unsigned \{ Host = 0, Device = 1, Shared = 2 \};}
+\DoxyCodeLine{118 \textcolor{keyword}{enum class} CHIPEventType : unsigned \{}
+\DoxyCodeLine{119   Default = hipEventDefault,}
+\DoxyCodeLine{120   BlockingSync = hipEventBlockingSync,}
+\DoxyCodeLine{121   DisableTiming = hipEventDisableTiming,}
+\DoxyCodeLine{122   Interprocess = hipEventInterprocess}
+\DoxyCodeLine{123 \};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{keyword}{struct }\mbox{\hyperlink{structallocation__info}{allocation\_info}} \{}
+\DoxyCodeLine{126   \textcolor{keywordtype}{void}* base\_ptr;}
+\DoxyCodeLine{127   \textcolor{keywordtype}{size\_t} size;}
+\DoxyCodeLine{128 \};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{134 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocationTracker}} \{}
+\DoxyCodeLine{135  \textcolor{keyword}{private}:}
+\DoxyCodeLine{136   std::mutex mtx;}
+\DoxyCodeLine{137   std::unordered\_map<void*, void*> host\_to\_dev;}
+\DoxyCodeLine{138   std::unordered\_map<void*, void*> dev\_to\_host;}
+\DoxyCodeLine{139   std::string name;}
+\DoxyCodeLine{140   std::set<void*> ptr\_set;}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142   std::unordered\_map<void*, allocation\_info> dev\_to\_allocation\_info;}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144  \textcolor{keyword}{public}:}
+\DoxyCodeLine{145   \textcolor{keywordtype}{size\_t} global\_mem\_size, total\_mem\_used, max\_mem\_used;}
+\DoxyCodeLine{153   \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_ac0802b0677c3cb64400fcb85b44d750b}{CHIPAllocationTracker}}(\textcolor{keywordtype}{size\_t} global\_mem\_size\_, std::string name\_);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{159   \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_aa1af7b5eb5f8ee53db36cf54d787527a}{\string~CHIPAllocationTracker}}();}
 \DoxyCodeLine{160 }
-\DoxyCodeLine{169 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} \{}
-\DoxyCodeLine{170  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{171   std::mutex mtx;}
-\DoxyCodeLine{172   \textcolor{comment}{// Global variables}}
-\DoxyCodeLine{173   std::vector<CHIPDeviceVar*> chip\_vars;}
-\DoxyCodeLine{174   \textcolor{comment}{// Kernels}}
-\DoxyCodeLine{175   std::vector<CHIPKernel*> chip\_kernels;}
-\DoxyCodeLine{177   std::string \mbox{\hyperlink{class_c_h_i_p_module_a895e9ac2f3fef8205b48a34491ec183e}{src}};}
-\DoxyCodeLine{178   \textcolor{comment}{// Kernel JIT compilation can be lazy}}
-\DoxyCodeLine{179   std::once\_flag compiled;}
+\DoxyCodeLine{166   std::string \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_afe77cb55e816e947538f086628d917ed}{getName}}();}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{173   \mbox{\hyperlink{structallocation__info}{allocation\_info}}* \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a1bb390011b14cbbadbc474c78efe3fe4}{getByHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{179   \mbox{\hyperlink{structallocation__info}{allocation\_info}}* \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_af9ae5c2c59ca00cca00a7c85aa8a0f68}{getByDevPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}*);}
 \DoxyCodeLine{180 }
-\DoxyCodeLine{186   \mbox{\hyperlink{class_c_h_i_p_module_a98f3a83908e7a9afe65edf6abdbd832c}{CHIPModule}}() = \textcolor{keywordflow}{default};}
-\DoxyCodeLine{187 }
-\DoxyCodeLine{188  \textcolor{keyword}{public}:}
-\DoxyCodeLine{193   \mbox{\hyperlink{class_c_h_i_p_module_a65f542fe08ab0272ec27850fe1b480eb}{\string~CHIPModule}}();}
-\DoxyCodeLine{202   \mbox{\hyperlink{class_c_h_i_p_module_a98f3a83908e7a9afe65edf6abdbd832c}{CHIPModule}}(std::string* module\_str);}
-\DoxyCodeLine{208   \mbox{\hyperlink{class_c_h_i_p_module_a98f3a83908e7a9afe65edf6abdbd832c}{CHIPModule}}(std::string\&\& module\_str);}
-\DoxyCodeLine{209 }
-\DoxyCodeLine{219   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_module_aff1fa19df4e5b585949ba09a7cfd2885}{addKernel}}(\mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* kernel);}
-\DoxyCodeLine{220 }
-\DoxyCodeLine{226   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_module_aa9cef37d3934498397b8644af4619d57}{compileOnce}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev);}
-\DoxyCodeLine{238   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_module_a95a5aabb92f68116eb2eb2d24403d486}{compile}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev);}
-\DoxyCodeLine{246   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_module_ab38f04b5f853ae1bd4f2f91c840fb104}{getGlobalVar}}(std::string name);}
-\DoxyCodeLine{247 }
-\DoxyCodeLine{254   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_module_a786e902acb2d84248501b11660e2598d}{getKernel}}(std::string name);}
-\DoxyCodeLine{255 }
-\DoxyCodeLine{261   std::vector<CHIPKernel*>\& \mbox{\hyperlink{class_c_h_i_p_module_a706583e02dbd275aaff49f3aa8cde001}{getKernels}}();}
-\DoxyCodeLine{262 }
-\DoxyCodeLine{269   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_module_a786e902acb2d84248501b11660e2598d}{getKernel}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr);}
-\DoxyCodeLine{270 \};}
-\DoxyCodeLine{271 }
-\DoxyCodeLine{275 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} \{}
-\DoxyCodeLine{276  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{282   \mbox{\hyperlink{class_c_h_i_p_kernel_a097d99fa464626f26bfdc0e14254820f}{CHIPKernel}}() = \textcolor{keywordflow}{default};}
-\DoxyCodeLine{284   std::string \mbox{\hyperlink{class_c_h_i_p_kernel_a50a2dca3383cb0a00e94d9c56596528b}{host\_f\_name}};}
-\DoxyCodeLine{286   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a2b268efc85942aa181a435aea93e121b}{host\_f\_ptr}};}
-\DoxyCodeLine{288   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a3fc76a9d6028b090652482da4a06be69}{dev\_f\_ptr}};}
-\DoxyCodeLine{289 }
-\DoxyCodeLine{290  \textcolor{keyword}{public}:}
-\DoxyCodeLine{291   \mbox{\hyperlink{class_c_h_i_p_kernel}{\string~CHIPKernel}}();}
-\DoxyCodeLine{292 }
-\DoxyCodeLine{298   std::string \mbox{\hyperlink{class_c_h_i_p_kernel_ac7a16cdbdb05de96ea3fa04b4f625d33}{getName}}();}
-\DoxyCodeLine{304   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a7a15ce1cd2760e9e28006ff0e9dcf740}{getHostPtr}}();}
-\DoxyCodeLine{310   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a411f9e8c178291fa130ac9e75ed5e1f7}{getDevPtr}}();}
-\DoxyCodeLine{311 }
-\DoxyCodeLine{317   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_kernel_ac5c382df67e0146163cfd66b2c684b1e}{setName}}(std::string host\_f\_name\_);}
-\DoxyCodeLine{323   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_kernel_a7a980bcb034932bee59c2ffa407ce00a}{setHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr\_);}
-\DoxyCodeLine{329   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_kernel_a19fab059496c989652a4ce2dac586e03}{setDevPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hev\_f\_ptr\_);}
-\DoxyCodeLine{330 \};}
-\DoxyCodeLine{331 }
-\DoxyCodeLine{340 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExecItem}} \{}
-\DoxyCodeLine{341  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{342   \textcolor{keywordtype}{size\_t} shared\_mem;}
-\DoxyCodeLine{343   std::vector<uint8\_t> arg\_data;}
-\DoxyCodeLine{344   std::vector<std::tuple<size\_t, size\_t>> offset\_sizes;}
-\DoxyCodeLine{345 }
-\DoxyCodeLine{346   dim3 grid\_dim;}
-\DoxyCodeLine{347   dim3 block\_dim;}
-\DoxyCodeLine{348 }
-\DoxyCodeLine{349   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* stream;}
-\DoxyCodeLine{350   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* chip\_kernel;}
-\DoxyCodeLine{351   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue;}
-\DoxyCodeLine{352 }
-\DoxyCodeLine{353  \textcolor{keyword}{public}:}
-\DoxyCodeLine{359   \mbox{\hyperlink{class_c_h_i_p_exec_item_a24fc5df28634179d20a9286b846215e7}{CHIPExecItem}}() = \textcolor{keyword}{delete};}
-\DoxyCodeLine{368   \mbox{\hyperlink{class_c_h_i_p_exec_item_a24fc5df28634179d20a9286b846215e7}{CHIPExecItem}}(dim3 grid\_dim\_, dim3 block\_dim\_, \textcolor{keywordtype}{size\_t} shared\_mem\_,}
-\DoxyCodeLine{369                hipStream\_t chip\_queue\_);}
-\DoxyCodeLine{370 }
-\DoxyCodeLine{375   \mbox{\hyperlink{class_c_h_i_p_exec_item_ada66af43814c2b105cf1581d22eee8ae}{\string~CHIPExecItem}}();}
-\DoxyCodeLine{376 }
-\DoxyCodeLine{382   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_exec_item_a1cf75c746f3f05b653a577748c77bc44}{getKernel}}();}
-\DoxyCodeLine{388   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_exec_item_a0ab70870d2c58e6fa2a3e03762a5134a}{getQueue}}();}
-\DoxyCodeLine{389 }
-\DoxyCodeLine{395   dim3 \mbox{\hyperlink{class_c_h_i_p_exec_item_aa77c523d9cd1b910bbbc09f1099b2f5d}{getGrid}}();}
-\DoxyCodeLine{396 }
-\DoxyCodeLine{402   dim3 \mbox{\hyperlink{class_c_h_i_p_exec_item_aa7cd51c77750bf9f159a1cd6e9fa64e8}{getBlock}}();}
+\DoxyCodeLine{190   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a335d9e806c72fb65a0359026058c2775}{reserveMem}}(\textcolor{keywordtype}{size\_t} bytes);}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{199   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a46d1cf5b6d07e19424c6f7f1369c3202}{releaseMemReservation}}(\textcolor{keywordtype}{size\_t} bytes);}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{206   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_allocation_tracker_a45057c59e2b56470d717f3b0814629e1}{recordAllocation}}(\textcolor{keywordtype}{void}* dev\_ptr, \textcolor{keywordtype}{size\_t} size\_);}
+\DoxyCodeLine{207 \};}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}} \{}
+\DoxyCodeLine{210  \textcolor{keyword}{private}:}
+\DoxyCodeLine{211   std::string host\_var\_name;}
+\DoxyCodeLine{212   \textcolor{keywordtype}{void}* dev\_ptr;}
+\DoxyCodeLine{213   \textcolor{keywordtype}{size\_t} size;}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215  \textcolor{keyword}{public}:}
+\DoxyCodeLine{216   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}(std::string host\_var\_name\_, \textcolor{keywordtype}{void}* dev\_ptr\_, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{217   \mbox{\hyperlink{class_c_h_i_p_device_var}{\string~CHIPDeviceVar}}();}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219   \textcolor{keywordtype}{void}* getDevAddr();}
+\DoxyCodeLine{220   std::string getName();}
+\DoxyCodeLine{221   \textcolor{keywordtype}{size\_t} getSize();}
+\DoxyCodeLine{222 \};}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224 \textcolor{comment}{// fw declares}}
+\DoxyCodeLine{225 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExecItem}};}
+\DoxyCodeLine{226 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}};}
+\DoxyCodeLine{227 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}};}
+\DoxyCodeLine{228 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}};}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}} \{}
+\DoxyCodeLine{231  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{232   std::mutex mtx;}
+\DoxyCodeLine{233   event\_status\_e event\_status;}
+\DoxyCodeLine{239   CHIPEventType \mbox{\hyperlink{class_c_h_i_p_event_acd8262b4e41f0c5d87ba2fac14c44bce}{flags}};}
+\DoxyCodeLine{244   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_event_a4321ad3fc8ba63180a803557a5d9c270}{chip\_context}};}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{251   \mbox{\hyperlink{class_c_h_i_p_event_a68534577cfebbd2c089e8af0a494263c}{CHIPEvent}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253  \textcolor{keyword}{public}:}
+\DoxyCodeLine{258   \mbox{\hyperlink{class_c_h_i_p_event_a68534577cfebbd2c089e8af0a494263c}{CHIPEvent}}(\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* ctx\_, CHIPEventType flags\_ = CHIPEventType::Default);}
+\DoxyCodeLine{263   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_event_a1e2ac6d50f2823c66cc0df2049a3623d}{\string~CHIPEvent}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{271   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_event_a362bff72a0ab2faa563d16fdb85dc869}{recordStream}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue\_) = 0;}
+\DoxyCodeLine{278   \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_event_ab6b0d22539acd85209159e85f21807c8}{wait}}() = 0;}
+\DoxyCodeLine{285   \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_event_a892b65012e770b660f5d364483067f05}{isFinished}}() = 0;}
+\DoxyCodeLine{293   \textcolor{keyword}{virtual} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_c_h_i_p_event_a6ae00777df6af9b892ff03ccc221388a}{getElapsedTime}}(\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* other) = 0;}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{299   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_event_aafb096cc87dab294e41bc91ce849924b}{hostSignal}}() = 0;}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} barrier(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue\_) = 0;}
+\DoxyCodeLine{302 \};}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{312 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}} \{}
+\DoxyCodeLine{313  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{314   uint8\_t* funcIL;}
+\DoxyCodeLine{315   \textcolor{keywordtype}{size\_t} ilSize;}
+\DoxyCodeLine{316   std::mutex mtx;}
+\DoxyCodeLine{317   \textcolor{comment}{// Global variables}}
+\DoxyCodeLine{318   std::vector<CHIPDeviceVar*> chip\_vars;}
+\DoxyCodeLine{319   \textcolor{comment}{// Kernels}}
+\DoxyCodeLine{320   std::vector<CHIPKernel*> chip\_kernels;}
+\DoxyCodeLine{322   std::string \mbox{\hyperlink{class_c_h_i_p_module_a895e9ac2f3fef8205b48a34491ec183e}{src}};}
+\DoxyCodeLine{323   \textcolor{comment}{// Kernel JIT compilation can be lazy}}
+\DoxyCodeLine{324   std::once\_flag compiled;}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326   int32\_t* binary\_data;}
+\DoxyCodeLine{327   OpenCLFunctionInfoMap func\_infos;}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{334   \mbox{\hyperlink{class_c_h_i_p_module_a98f3a83908e7a9afe65edf6abdbd832c}{CHIPModule}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336  \textcolor{keyword}{public}:}
+\DoxyCodeLine{341   \mbox{\hyperlink{class_c_h_i_p_module_a65f542fe08ab0272ec27850fe1b480eb}{\string~CHIPModule}}();}
+\DoxyCodeLine{350   \mbox{\hyperlink{class_c_h_i_p_module_a98f3a83908e7a9afe65edf6abdbd832c}{CHIPModule}}(std::string* module\_str);}
+\DoxyCodeLine{356   \mbox{\hyperlink{class_c_h_i_p_module_a98f3a83908e7a9afe65edf6abdbd832c}{CHIPModule}}(std::string\&\& module\_str);}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{367   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_module_aff1fa19df4e5b585949ba09a7cfd2885}{addKernel}}(\mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* kernel);}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{374   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_module_aa9cef37d3934498397b8644af4619d57}{compileOnce}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev);}
+\DoxyCodeLine{386   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_module_a0493338e82ba6a27c9364ce32c6d85c9}{compile}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev) = 0;}
+\DoxyCodeLine{394   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_module_ab38f04b5f853ae1bd4f2f91c840fb104}{getGlobalVar}}(std::string name);}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{402   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_module_a786e902acb2d84248501b11660e2598d}{getKernel}}(std::string name);}
 \DoxyCodeLine{403 }
-\DoxyCodeLine{412   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_exec_item_ab095e25ece8b9edba9afee4db705f68e}{setArg}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* arg, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} offset);}
-\DoxyCodeLine{413 }
-\DoxyCodeLine{421   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_exec_item_a9bc7d3cb9c57e4843db0dd3601f09da9}{launch}}(\mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* Kernel);}
-\DoxyCodeLine{422 }
-\DoxyCodeLine{430   hipError\_t \mbox{\hyperlink{class_c_h_i_p_exec_item_a4f2b77c74962ea43bc49349e8639257a}{launchByHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hostPtr);}
-\DoxyCodeLine{431 \};}
-\DoxyCodeLine{432 }
-\DoxyCodeLine{436 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} \{}
-\DoxyCodeLine{437  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{438   std::string device\_name;}
-\DoxyCodeLine{439   std::mutex mtx;}
-\DoxyCodeLine{440   std::vector<CHIPKernel*> chip\_kernels;}
-\DoxyCodeLine{441   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* ctx;}
-\DoxyCodeLine{442   std::vector<CHIPQueue*> chip\_queues;}
-\DoxyCodeLine{443   \textcolor{keywordtype}{int} active\_queue\_id = 0;}
-\DoxyCodeLine{444 }
-\DoxyCodeLine{445   hipDeviceAttribute\_t attrs;}
-\DoxyCodeLine{446   hipDeviceProp\_t hip\_device\_props;}
-\DoxyCodeLine{447 }
-\DoxyCodeLine{448  \textcolor{keyword}{public}:}
-\DoxyCodeLine{450   std::vector<std::string*> \mbox{\hyperlink{class_c_h_i_p_device_a2afd57cc57c94db499b9be4449b73a97}{modules\_str}};}
-\DoxyCodeLine{452   std::vector<CHIPModule*> \mbox{\hyperlink{class_c_h_i_p_device_a51ee6a67de68d89f75855c43a2c1bc74}{chip\_modules}};}
-\DoxyCodeLine{453 }
-\DoxyCodeLine{455   std::unordered\_map<const void*, std::string*> \mbox{\hyperlink{class_c_h_i_p_device_a202318bfc413c9707ee1fb1ef2b76fed}{host\_f\_ptr\_to\_module\_str\_map}};}
-\DoxyCodeLine{457   std::unordered\_map<const void*, CHIPModule*> \mbox{\hyperlink{class_c_h_i_p_device_a88f651b661540d283294a9c7da333059}{host\_f\_ptr\_to\_chipmodule\_map}};}
-\DoxyCodeLine{459   std::unordered\_map<const void*, std::string> \mbox{\hyperlink{class_c_h_i_p_device_ae3b9aa2c990aef24ce42b3e3652ed274}{host\_f\_ptr\_to\_host\_f\_name\_map}};}
-\DoxyCodeLine{461   std::unordered\_map<const void*, CHIPKernel*> \mbox{\hyperlink{class_c_h_i_p_device_a10819a071232f19e24f851e821b4288e}{host\_ptr\_to\_chipkernel\_map}};}
-\DoxyCodeLine{464   std::unordered\_map<const void*, CHIPDeviceVar*>}
-\DoxyCodeLine{465       \mbox{\hyperlink{class_c_h_i_p_device_aac39e7bdde8added5691357cd31a3d27}{host\_var\_ptr\_to\_chipdevicevar\_stat}};}
-\DoxyCodeLine{468   std::unordered\_map<const void*, CHIPDeviceVar*>}
-\DoxyCodeLine{469       \mbox{\hyperlink{class_c_h_i_p_device_a6ea939f900db1167fddcaab422459092}{host\_var\_ptr\_to\_chipdevicevar\_dyn}};}
-\DoxyCodeLine{470 }
-\DoxyCodeLine{471   \textcolor{keywordtype}{int} idx;}
-\DoxyCodeLine{472   \textcolor{keywordtype}{size\_t} total\_used\_mem, max\_used\_mem;}
-\DoxyCodeLine{477   \mbox{\hyperlink{class_c_h_i_p_device_a4922603bb72ecad2e9deeffd034b0993}{CHIPDevice}}();}
-\DoxyCodeLine{482   \mbox{\hyperlink{class_c_h_i_p_device_a4994ef9c50511e2522d0397c69871d1a}{\string~CHIPDevice}}();}
-\DoxyCodeLine{483 }
-\DoxyCodeLine{489   std::vector<CHIPKernel*>\& \mbox{\hyperlink{class_c_h_i_p_device_a46cae46416b74f4b0f912351503f450c}{getKernels}}();}
-\DoxyCodeLine{490 }
-\DoxyCodeLine{495   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_ab8fb4cdbe080397c5639d2d742c33f2b}{populateDeviceProperties}}() = 0;}
-\DoxyCodeLine{501   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a375f7ce1038f3bfc9c3d98bc4ee18c6d}{copyDeviceProperties}}(hipDeviceProp\_t* prop);}
-\DoxyCodeLine{502 }
-\DoxyCodeLine{509   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_device_a79ebc10bb0b3ee3f208a6bd4742d16ca}{findKernelByHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hostPtr);}
-\DoxyCodeLine{510 }
-\DoxyCodeLine{517   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_device_a967f4b9220725a2debcb6f66d22060fd}{getContext}}();}
-\DoxyCodeLine{526   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a343592eef975d362baac0006456e8337}{addQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue\_);}
-\DoxyCodeLine{527 }
-\DoxyCodeLine{533   std::vector<CHIPQueue*> \mbox{\hyperlink{class_c_h_i_p_device_a13160a0a12a1e885faa15f20c88e3923}{getQueues}}();  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{540 \textcolor{comment}{}  \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_device_aebb742c0c5df3f563d1a8f5c13c3b6d4}{getActiveQueue}}();  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{548 \textcolor{comment}{}  \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_device_ae49f9f351ba18e15a8baaa7c734ee679}{removeQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q);  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{549 }
-\DoxyCodeLine{556   \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_device_a0647eabfa0ae2fe14b1ea95666919090}{getDeviceId}}();}
-\DoxyCodeLine{562   \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{class_c_h_i_p_device_a98cebf6120181daeeeab073832c28b7b}{getName}}() = 0;}
-\DoxyCodeLine{563 }
-\DoxyCodeLine{574   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_device_ab57d0ccdf88628f1851645750e9cdc1f}{reserveMem}}(\textcolor{keywordtype}{size\_t} bytes);}
-\DoxyCodeLine{575 }
-\DoxyCodeLine{584   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_device_a75cbad24717ec1390e631f354c5fea3e}{releaseMemReservation}}(\textcolor{keywordtype}{size\_t} bytes);}
-\DoxyCodeLine{585 }
-\DoxyCodeLine{591   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_abd7d4be48339d070b09fcf5d6270caaa}{reset}}() = 0;}
-\DoxyCodeLine{592 }
-\DoxyCodeLine{600   \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_device_a11990aabcfa593917f152ed9614fb2fd}{getAttr}}(hipDeviceAttribute\_t attr);}
-\DoxyCodeLine{601 }
-\DoxyCodeLine{607   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_h_i_p_device_a9ae23fb248d2338119fc81d52cdb8b91}{getGlobalMemSize}}();}
-\DoxyCodeLine{608 }
-\DoxyCodeLine{614   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a65db2a50eb14046390e872911edde527}{setCacheConfig}}(hipFuncCache\_t cfg);}
+\DoxyCodeLine{409   std::vector<CHIPKernel*>\& \mbox{\hyperlink{class_c_h_i_p_module_a706583e02dbd275aaff49f3aa8cde001}{getKernels}}();}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{417   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_module_a786e902acb2d84248501b11660e2598d}{getKernel}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr);}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{423   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_module_a1a498223339fde624c01ee0d5e813068}{consumeSPIRV}}();}
+\DoxyCodeLine{424 \};}
+\DoxyCodeLine{425 }
+\DoxyCodeLine{429 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}} \{}
+\DoxyCodeLine{430  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{436   \mbox{\hyperlink{class_c_h_i_p_kernel_a8f6a315e2c38973f180b77558aae5192}{CHIPKernel}}(std::string host\_f\_name\_, \mbox{\hyperlink{struct_o_c_l_func_info}{OCLFuncInfo}}* func\_info\_);}
+\DoxyCodeLine{438   std::string \mbox{\hyperlink{class_c_h_i_p_kernel_a50a2dca3383cb0a00e94d9c56596528b}{host\_f\_name}};}
+\DoxyCodeLine{440   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a2b268efc85942aa181a435aea93e121b}{host\_f\_ptr}};}
+\DoxyCodeLine{442   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a3fc76a9d6028b090652482da4a06be69}{dev\_f\_ptr}};}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444   \mbox{\hyperlink{struct_o_c_l_func_info}{OCLFuncInfo}}* func\_info;}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446  \textcolor{keyword}{public}:}
+\DoxyCodeLine{447   \mbox{\hyperlink{class_c_h_i_p_kernel}{\string~CHIPKernel}}();}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{454   std::string \mbox{\hyperlink{class_c_h_i_p_kernel_ac7a16cdbdb05de96ea3fa04b4f625d33}{getName}}();}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{461   \mbox{\hyperlink{struct_o_c_l_func_info}{OCLFuncInfo}}* \mbox{\hyperlink{class_c_h_i_p_kernel_a65fc718337be4853774fdc8e6f86f5ba}{getFuncInfo}}();}
+\DoxyCodeLine{467   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a7a15ce1cd2760e9e28006ff0e9dcf740}{getHostPtr}}();}
+\DoxyCodeLine{473   \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_kernel_a411f9e8c178291fa130ac9e75ed5e1f7}{getDevPtr}}();}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{480   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_kernel_ac5c382df67e0146163cfd66b2c684b1e}{setName}}(std::string host\_f\_name\_);}
+\DoxyCodeLine{486   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_kernel_a7a980bcb034932bee59c2ffa407ce00a}{setHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr\_);}
+\DoxyCodeLine{492   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_kernel_a19fab059496c989652a4ce2dac586e03}{setDevPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hev\_f\_ptr\_);}
+\DoxyCodeLine{493 \};}
+\DoxyCodeLine{494 }
+\DoxyCodeLine{503 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExecItem}} \{}
+\DoxyCodeLine{504  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{505   \textcolor{keywordtype}{size\_t} shared\_mem;}
+\DoxyCodeLine{506   \textcolor{comment}{// Structures for old HIP launch API.}}
+\DoxyCodeLine{507   std::vector<uint8\_t> arg\_data;}
+\DoxyCodeLine{508   std::vector<std::tuple<size\_t, size\_t>> offset\_sizes;}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510   dim3 grid\_dim;}
+\DoxyCodeLine{511   dim3 block\_dim;}
+\DoxyCodeLine{512 }
+\DoxyCodeLine{513   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* stream;}
+\DoxyCodeLine{514   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* chip\_kernel;}
+\DoxyCodeLine{515   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue;}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{517   \textcolor{comment}{// Structures for new HIP launch API.}}
+\DoxyCodeLine{518   \textcolor{keywordtype}{void}** ArgsPointer = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520  \textcolor{keyword}{public}:}
+\DoxyCodeLine{526   \mbox{\hyperlink{class_c_h_i_p_exec_item_a24fc5df28634179d20a9286b846215e7}{CHIPExecItem}}() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{535   \mbox{\hyperlink{class_c_h_i_p_exec_item_a24fc5df28634179d20a9286b846215e7}{CHIPExecItem}}(dim3 grid\_dim\_, dim3 block\_dim\_, \textcolor{keywordtype}{size\_t} shared\_mem\_,}
+\DoxyCodeLine{536                hipStream\_t chip\_queue\_);}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{542   \mbox{\hyperlink{class_c_h_i_p_exec_item_ada66af43814c2b105cf1581d22eee8ae}{\string~CHIPExecItem}}();}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{549   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_exec_item_a1cf75c746f3f05b653a577748c77bc44}{getKernel}}();}
+\DoxyCodeLine{555   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_exec_item_a0ab70870d2c58e6fa2a3e03762a5134a}{getQueue}}();}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557   std::vector<uint8\_t> getArgData();}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{564   dim3 \mbox{\hyperlink{class_c_h_i_p_exec_item_aa77c523d9cd1b910bbbc09f1099b2f5d}{getGrid}}();}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{571   dim3 \mbox{\hyperlink{class_c_h_i_p_exec_item_aa7cd51c77750bf9f159a1cd6e9fa64e8}{getBlock}}();}
+\DoxyCodeLine{572 }
+\DoxyCodeLine{578   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_h_i_p_exec_item_a14d1a06fed7ed4204cd3a66b50ca0eea}{getSharedMem}}();}
+\DoxyCodeLine{579 }
+\DoxyCodeLine{588   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_exec_item_ab095e25ece8b9edba9afee4db705f68e}{setArg}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* arg, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} offset);}
+\DoxyCodeLine{589 }
+\DoxyCodeLine{595   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_exec_item_a662d2529f1b5aa74a9b530d1dc88edb5}{setArgPointer}}(\textcolor{keywordtype}{void}** args) \{ ArgsPointer = args; \}}
+\DoxyCodeLine{596 }
+\DoxyCodeLine{604   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_exec_item_ad1bdab25f8dd647ea0ba0db925b2d21f}{setupAllArgs}}();}
+\DoxyCodeLine{605 }
+\DoxyCodeLine{613   hipError\_t \mbox{\hyperlink{class_c_h_i_p_exec_item_a4f2b77c74962ea43bc49349e8639257a}{launchByHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hostPtr);}
+\DoxyCodeLine{614 \};}
 \DoxyCodeLine{615 }
-\DoxyCodeLine{621   \textcolor{keyword}{virtual} hipFuncCache\_t \mbox{\hyperlink{class_c_h_i_p_device_a8d72d74a69af43d2c66eb6e28199e235}{getCacheConfig}}();}
-\DoxyCodeLine{622 }
-\DoxyCodeLine{628   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a283a360f01661d90183ec293e2e51fdb}{setSharedMemConfig}}(hipSharedMemConfig config);}
-\DoxyCodeLine{629 }
-\DoxyCodeLine{635   \textcolor{keyword}{virtual} hipSharedMemConfig \mbox{\hyperlink{class_c_h_i_p_device_a73e0e41a593edc15c7337183018cae5b}{getSharedMemConfig}}();}
-\DoxyCodeLine{636 }
-\DoxyCodeLine{644   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a444a7a27aea6312d84d5d02ee195ac30}{setFuncCacheConfig}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* func, hipFuncCache\_t config);}
-\DoxyCodeLine{645 }
-\DoxyCodeLine{656   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_device_aebacdaea53d302b0ad0e5758f95c5cfd}{hasPCIBusId}}(\textcolor{keywordtype}{int} pciDomainID, \textcolor{keywordtype}{int} pciBusID, \textcolor{keywordtype}{int} pciDeviceID);}
-\DoxyCodeLine{657 }
-\DoxyCodeLine{664   \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_device_aa293773bba48a9bf66b2fc02f0b7e7f8}{getPeerAccess}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* peerDevice);}
+\DoxyCodeLine{619 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}} \{}
+\DoxyCodeLine{620  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{621   std::string device\_name;}
+\DoxyCodeLine{622   std::mutex mtx;}
+\DoxyCodeLine{623   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* ctx;}
+\DoxyCodeLine{624   std::vector<CHIPQueue*> chip\_queues;}
+\DoxyCodeLine{625   \textcolor{keywordtype}{int} active\_queue\_id = 0;}
+\DoxyCodeLine{626   std::once\_flag propsPopulated;}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{628   hipDeviceAttribute\_t attrs;}
+\DoxyCodeLine{629   hipDeviceProp\_t hip\_device\_props;}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631   \textcolor{keywordtype}{size\_t} TotalUsedMem;}
+\DoxyCodeLine{632   \textcolor{keywordtype}{size\_t} MaxUsedMem;}
+\DoxyCodeLine{633 }
+\DoxyCodeLine{634  \textcolor{keyword}{public}:}
+\DoxyCodeLine{636   std::vector<std::string*> \mbox{\hyperlink{class_c_h_i_p_device_a2afd57cc57c94db499b9be4449b73a97}{modules\_str}};}
+\DoxyCodeLine{638   std::vector<CHIPModule*> \mbox{\hyperlink{class_c_h_i_p_device_a51ee6a67de68d89f75855c43a2c1bc74}{chip\_modules}};}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{641   std::unordered\_map<const void*, std::string*> \mbox{\hyperlink{class_c_h_i_p_device_a202318bfc413c9707ee1fb1ef2b76fed}{host\_f\_ptr\_to\_module\_str\_map}};}
+\DoxyCodeLine{643   std::unordered\_map<const void*, CHIPModule*> \mbox{\hyperlink{class_c_h_i_p_device_a88f651b661540d283294a9c7da333059}{host\_f\_ptr\_to\_chipmodule\_map}};}
+\DoxyCodeLine{645   std::unordered\_map<const void*, std::string> \mbox{\hyperlink{class_c_h_i_p_device_ae3b9aa2c990aef24ce42b3e3652ed274}{host\_f\_ptr\_to\_host\_f\_name\_map}};}
+\DoxyCodeLine{647   std::unordered\_map<const void*, CHIPKernel*> \mbox{\hyperlink{class_c_h_i_p_device_a10819a071232f19e24f851e821b4288e}{host\_ptr\_to\_chipkernel\_map}};}
+\DoxyCodeLine{650   std::unordered\_map<const void*, CHIPDeviceVar*>}
+\DoxyCodeLine{651       \mbox{\hyperlink{class_c_h_i_p_device_aac39e7bdde8added5691357cd31a3d27}{host\_var\_ptr\_to\_chipdevicevar\_stat}};}
+\DoxyCodeLine{654   std::unordered\_map<const void*, CHIPDeviceVar*>}
+\DoxyCodeLine{655       \mbox{\hyperlink{class_c_h_i_p_device_a6ea939f900db1167fddcaab422459092}{host\_var\_ptr\_to\_chipdevicevar\_dyn}};}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657   \textcolor{keywordtype}{int} idx;}
+\DoxyCodeLine{658   \mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocationTracker}}* allocation\_tracker = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{659 }
+\DoxyCodeLine{664   \mbox{\hyperlink{class_c_h_i_p_device_a4922603bb72ecad2e9deeffd034b0993}{CHIPDevice}}(\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* ctx\_);}
 \DoxyCodeLine{665 }
-\DoxyCodeLine{674   hipError\_t \mbox{\hyperlink{class_c_h_i_p_device_adf4b2dfdf3e022ff3f266ff4d96935ff}{setPeerAccess}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* peer, \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{bool} canAccessPeer);}
-\DoxyCodeLine{675 }
-\DoxyCodeLine{681   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_h_i_p_device_adfc125b715bd7bfa8d63d684ddf65433}{getUsedGlobalMem}}();}
-\DoxyCodeLine{682 }
-\DoxyCodeLine{689   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_device_a02c0e81ba452d2736a0803f381b36cfe}{getDynGlobalVar}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_var\_ptr);}
-\DoxyCodeLine{690 }
-\DoxyCodeLine{697   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_device_af0fb162a43b0afd71c8d36fb13890729}{getStatGlobalVar}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_var\_ptr);}
-\DoxyCodeLine{698 }
-\DoxyCodeLine{705   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_device_a97317260a798fc0d79d1c51c29d60f07}{getGlobalVar}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_var\_ptr);}
-\DoxyCodeLine{706 }
-\DoxyCodeLine{715   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_aff26bc18398f030d01f92e0ef3d69244}{registerFunctionAsKernel}}(std::string* module\_str, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr,}
-\DoxyCodeLine{716                                 \textcolor{keyword}{const} \textcolor{keywordtype}{char}* host\_f\_name);}
-\DoxyCodeLine{717 \};}
+\DoxyCodeLine{670   \mbox{\hyperlink{class_c_h_i_p_device_a4922603bb72ecad2e9deeffd034b0993}{CHIPDevice}}();}
+\DoxyCodeLine{671 }
+\DoxyCodeLine{676   \mbox{\hyperlink{class_c_h_i_p_device_a4994ef9c50511e2522d0397c69871d1a}{\string~CHIPDevice}}();}
+\DoxyCodeLine{677 }
+\DoxyCodeLine{683   std::vector<CHIPKernel*> \mbox{\hyperlink{class_c_h_i_p_device_aed8c7dfb1b40e78260cb4011cc0509dd}{getKernels}}();}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{690   std::vector<CHIPModule*>\& \mbox{\hyperlink{class_c_h_i_p_device_a0381200acd5010c1657c6c39c4c25632}{getModules}}();}
+\DoxyCodeLine{691 }
+\DoxyCodeLine{696   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a5194693b5813c5bc1551d293d48b3899}{populateDeviceProperties}}();}
+\DoxyCodeLine{697 }
+\DoxyCodeLine{702   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_aa7bfa85e318cda92cfe5c5cc394f6eca}{populateDeviceProperties\_}}() = 0;}
+\DoxyCodeLine{703 }
+\DoxyCodeLine{709   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a375f7ce1038f3bfc9c3d98bc4ee18c6d}{copyDeviceProperties}}(hipDeviceProp\_t* prop);}
+\DoxyCodeLine{710 }
+\DoxyCodeLine{717   \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* \mbox{\hyperlink{class_c_h_i_p_device_a79ebc10bb0b3ee3f208a6bd4742d16ca}{findKernelByHostPtr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hostPtr);}
 \DoxyCodeLine{718 }
-\DoxyCodeLine{725 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} \{}
-\DoxyCodeLine{726  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{727   std::vector<CHIPDevice*> chip\_devices;}
-\DoxyCodeLine{728   std::vector<CHIPQueue*> chip\_queues;}
-\DoxyCodeLine{729   std::mutex mtx;}
-\DoxyCodeLine{730 }
-\DoxyCodeLine{731  \textcolor{keyword}{public}:}
-\DoxyCodeLine{736   \mbox{\hyperlink{class_c_h_i_p_context_a271cd26573639cba0f3952c1a864b2b0}{CHIPContext}}();}
-\DoxyCodeLine{741   \mbox{\hyperlink{class_c_h_i_p_context_ac2ba6ad31278cb28ec9a48f848dfcffa}{\string~CHIPContext}}();}
-\DoxyCodeLine{742 }
-\DoxyCodeLine{750   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_context_aab9f64f142801289bdb91afbbc4ed990}{addDevice}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* dev);}
-\DoxyCodeLine{756   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_aa8cbc5f609c668c6fd8ed2161b8f5b4f}{addQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q);}
-\DoxyCodeLine{757 }
-\DoxyCodeLine{763   std::vector<CHIPDevice*>\& \mbox{\hyperlink{class_c_h_i_p_context_aa6de7c121936615b9020e9459fa260d6}{getDevices}}();}
-\DoxyCodeLine{764 }
-\DoxyCodeLine{770   std::vector<CHIPQueue*>\& \mbox{\hyperlink{class_c_h_i_p_context_ae4dec6fa8019567f64b3ee02cc813529}{getQueues}}();}
-\DoxyCodeLine{771 }
-\DoxyCodeLine{780   hipStream\_t \mbox{\hyperlink{class_c_h_i_p_context_a99c99574c4bd42209058f51ed2b0c909}{findQueue}}(hipStream\_t stream);}
+\DoxyCodeLine{725   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_device_a967f4b9220725a2debcb6f66d22060fd}{getContext}}();}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{735   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_device_acd1d6b81696a43296a485647ec07f596}{addQueue}}(}
+\DoxyCodeLine{736       \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags,}
+\DoxyCodeLine{737       \textcolor{keywordtype}{int} priority) = 0;  \textcolor{comment}{// TODO how do I instantiate a CHIPQueue derived type}}
+\DoxyCodeLine{738                           \textcolor{comment}{// in a generic way?}}
+\DoxyCodeLine{739 }
+\DoxyCodeLine{745   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_acd1d6b81696a43296a485647ec07f596}{addQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue\_);}
+\DoxyCodeLine{751   std::vector<CHIPQueue*> \mbox{\hyperlink{class_c_h_i_p_device_a13160a0a12a1e885faa15f20c88e3923}{getQueues}}();}
+\DoxyCodeLine{758   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_device_aebb742c0c5df3f563d1a8f5c13c3b6d4}{getActiveQueue}}();}
+\DoxyCodeLine{766   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_device_ae49f9f351ba18e15a8baaa7c734ee679}{removeQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q);}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{774   \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_device_a0647eabfa0ae2fe14b1ea95666919090}{getDeviceId}}();}
+\DoxyCodeLine{780   std::string \mbox{\hyperlink{class_c_h_i_p_device_aca3d9af44bd816743e81eaf840066928}{getName}}();}
 \DoxyCodeLine{781 }
-\DoxyCodeLine{792   \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a1f405ec128310904efe82e680e417ead}{allocate}}(\textcolor{keywordtype}{size\_t} size);}
-\DoxyCodeLine{793 }
-\DoxyCodeLine{804   \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a1f405ec128310904efe82e680e417ead}{allocate}}(\textcolor{keywordtype}{size\_t} size, CHIPMemoryType mem\_type);}
-\DoxyCodeLine{805 }
-\DoxyCodeLine{817   \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a1f405ec128310904efe82e680e417ead}{allocate}}(\textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} alignment, CHIPMemoryType mem\_type);}
+\DoxyCodeLine{787   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_abd7d4be48339d070b09fcf5d6270caaa}{reset}}() = 0;}
+\DoxyCodeLine{788 }
+\DoxyCodeLine{796   \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_device_a11990aabcfa593917f152ed9614fb2fd}{getAttr}}(hipDeviceAttribute\_t attr);}
+\DoxyCodeLine{797 }
+\DoxyCodeLine{803   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_h_i_p_device_a9ae23fb248d2338119fc81d52cdb8b91}{getGlobalMemSize}}();}
+\DoxyCodeLine{804 }
+\DoxyCodeLine{810   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a65db2a50eb14046390e872911edde527}{setCacheConfig}}(hipFuncCache\_t cfg);}
+\DoxyCodeLine{811 }
+\DoxyCodeLine{817   \textcolor{keyword}{virtual} hipFuncCache\_t \mbox{\hyperlink{class_c_h_i_p_device_a8d72d74a69af43d2c66eb6e28199e235}{getCacheConfig}}();}
 \DoxyCodeLine{818 }
-\DoxyCodeLine{829   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a3ad920ded6df2e7a66396ed77ab442b2}{allocate\_}}(\textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} alignment,}
-\DoxyCodeLine{830                           CHIPMemoryType mem\_type) = 0;}
-\DoxyCodeLine{831 }
-\DoxyCodeLine{840   hipError\_t \mbox{\hyperlink{class_c_h_i_p_context_a65074e4320308218e6af6ab97413da5c}{free}}(\textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{824   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a283a360f01661d90183ec293e2e51fdb}{setSharedMemConfig}}(hipSharedMemConfig config);}
+\DoxyCodeLine{825 }
+\DoxyCodeLine{831   \textcolor{keyword}{virtual} hipSharedMemConfig \mbox{\hyperlink{class_c_h_i_p_device_a73e0e41a593edc15c7337183018cae5b}{getSharedMemConfig}}();}
+\DoxyCodeLine{832 }
+\DoxyCodeLine{840   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_a444a7a27aea6312d84d5d02ee195ac30}{setFuncCacheConfig}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* func, hipFuncCache\_t config);}
 \DoxyCodeLine{841 }
-\DoxyCodeLine{850   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_aff2c9209a0ff52dd241188065a1f489a}{free\_}}(\textcolor{keywordtype}{void}* ptr) = 0;}
-\DoxyCodeLine{851 }
-\DoxyCodeLine{861   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_context_aa2541d2c5d3f61cf96263a59a41554ea}{memCopy}}(\textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} size,}
-\DoxyCodeLine{862                              hipStream\_t stream) = 0;}
-\DoxyCodeLine{863 }
-\DoxyCodeLine{868   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_a31d79308f3a70a9293923835122da23c}{finishAll}}();}
-\DoxyCodeLine{869 }
-\DoxyCodeLine{879   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_context_aad24b4b21e4b87cb2a3ab8bcba3f373e}{findPointerInfo}}(hipDeviceptr\_t* pbase, \textcolor{keywordtype}{size\_t}* psize,}
-\DoxyCodeLine{880                                      hipDeviceptr\_t dptr);}
-\DoxyCodeLine{881 }
-\DoxyCodeLine{887   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_context_a7f5bb1d44e61f476edfeb4a14d73bae8}{getFlags}}();}
-\DoxyCodeLine{888 }
-\DoxyCodeLine{894   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_a99583fe33f2dd9bf23b278e42fb168ec}{setFlags}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
-\DoxyCodeLine{895 }
-\DoxyCodeLine{901   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_a4b0f248e3f69b73f42ef7ad787e2fd44}{reset}}();}
+\DoxyCodeLine{852   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_device_aebacdaea53d302b0ad0e5758f95c5cfd}{hasPCIBusId}}(\textcolor{keywordtype}{int} pciDomainID, \textcolor{keywordtype}{int} pciBusID, \textcolor{keywordtype}{int} pciDeviceID);}
+\DoxyCodeLine{853 }
+\DoxyCodeLine{860   \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_device_aa293773bba48a9bf66b2fc02f0b7e7f8}{getPeerAccess}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* peerDevice);}
+\DoxyCodeLine{861 }
+\DoxyCodeLine{870   hipError\_t \mbox{\hyperlink{class_c_h_i_p_device_adf4b2dfdf3e022ff3f266ff4d96935ff}{setPeerAccess}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* peer, \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{bool} canAccessPeer);}
+\DoxyCodeLine{871 }
+\DoxyCodeLine{877   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_h_i_p_device_adfc125b715bd7bfa8d63d684ddf65433}{getUsedGlobalMem}}();}
+\DoxyCodeLine{878 }
+\DoxyCodeLine{885   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_device_a02c0e81ba452d2736a0803f381b36cfe}{getDynGlobalVar}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_var\_ptr);}
+\DoxyCodeLine{886 }
+\DoxyCodeLine{893   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_device_af0fb162a43b0afd71c8d36fb13890729}{getStatGlobalVar}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_var\_ptr);}
+\DoxyCodeLine{894 }
+\DoxyCodeLine{901   \mbox{\hyperlink{class_c_h_i_p_device_var}{CHIPDeviceVar}}* \mbox{\hyperlink{class_c_h_i_p_device_a97317260a798fc0d79d1c51c29d60f07}{getGlobalVar}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_var\_ptr);}
 \DoxyCodeLine{902 }
-\DoxyCodeLine{909   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_context_a7d03567273b7899b7d2e0df0e5f015cf}{retain}}();}
-\DoxyCodeLine{910 }
-\DoxyCodeLine{917   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_abff033626b0fa70dcd319a0d9406bfd3}{recordEvent}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q, \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* event);}
-\DoxyCodeLine{918 }
-\DoxyCodeLine{926   \textcolor{keyword}{virtual} CHIPTexture* \mbox{\hyperlink{class_c_h_i_p_context_a90a36c0230e9aa63e381c679433f63f3}{createImage}}(hipResourceDesc* resDesc,}
-\DoxyCodeLine{927                                    hipTextureDesc* texDesc);}
-\DoxyCodeLine{928 \};}
-\DoxyCodeLine{929 }
-\DoxyCodeLine{933 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_backend}{CHIPBackend}} \{}
-\DoxyCodeLine{934  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{941   std::vector<std::string*> \mbox{\hyperlink{class_c_h_i_p_backend_acaa96e44cb5c8e118f58821e2358360c}{modules\_str}};}
-\DoxyCodeLine{942   std::mutex mtx;}
-\DoxyCodeLine{943 }
-\DoxyCodeLine{944   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* active\_ctx;}
-\DoxyCodeLine{945   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* active\_dev;}
-\DoxyCodeLine{946   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* active\_q;}
-\DoxyCodeLine{947 }
-\DoxyCodeLine{948  \textcolor{keyword}{public}:}
-\DoxyCodeLine{955   \mbox{\hyperlink{class_c_h_i_p_allocation_tracker}{CHIPAllocationTracker}} \mbox{\hyperlink{class_c_h_i_p_backend_a666504e278e70bd6c522a0f11fd2659f}{AllocationTracker}};}
-\DoxyCodeLine{956   \textcolor{comment}{// Adds -\/std=c++17 requirement}}
-\DoxyCodeLine{957   \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{thread\_local} hipError\_t tls\_last\_error = hipSuccess;}
-\DoxyCodeLine{958   \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{thread\_local} \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* tls\_active\_ctx;}
-\DoxyCodeLine{959 }
-\DoxyCodeLine{960   std::stack<CHIPExecItem*> chip\_execstack;}
-\DoxyCodeLine{961   std::vector<CHIPContext*> chip\_contexts;}
-\DoxyCodeLine{962   std::vector<CHIPQueue*> chip\_queues;}
-\DoxyCodeLine{963   std::vector<CHIPDevice*> chip\_devices;}
+\DoxyCodeLine{911   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_device_aff26bc18398f030d01f92e0ef3d69244}{registerFunctionAsKernel}}(std::string* module\_str, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr,}
+\DoxyCodeLine{912                                 \textcolor{keyword}{const} \textcolor{keywordtype}{char}* host\_f\_name);}
+\DoxyCodeLine{913 }
+\DoxyCodeLine{914   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}}* addModule(std::string* module\_str) = 0;}
+\DoxyCodeLine{915 }
+\DoxyCodeLine{916   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}}* createTexture(}
+\DoxyCodeLine{917       \textcolor{keyword}{const} hipResourceDesc* pResDesc, \textcolor{keyword}{const} hipTextureDesc* pTexDesc,}
+\DoxyCodeLine{918       \textcolor{keyword}{const} \textcolor{keyword}{struct} hipResourceViewDesc* pResViewDesc) = 0;}
+\DoxyCodeLine{919 }
+\DoxyCodeLine{920   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} destroyTexture(\mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}}* textureObject) = 0;}
+\DoxyCodeLine{921 \};}
+\DoxyCodeLine{922 }
+\DoxyCodeLine{929 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}} \{}
+\DoxyCodeLine{930  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{931   std::vector<CHIPDevice*> chip\_devices;}
+\DoxyCodeLine{932   std::vector<CHIPQueue*> chip\_queues;}
+\DoxyCodeLine{933   std::mutex mtx;}
+\DoxyCodeLine{934   std::vector<void*> allocated\_ptrs;}
+\DoxyCodeLine{935 }
+\DoxyCodeLine{936   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{937 }
+\DoxyCodeLine{938  \textcolor{keyword}{public}:}
+\DoxyCodeLine{943   \mbox{\hyperlink{class_c_h_i_p_context_a271cd26573639cba0f3952c1a864b2b0}{CHIPContext}}();}
+\DoxyCodeLine{948   \mbox{\hyperlink{class_c_h_i_p_context_ac2ba6ad31278cb28ec9a48f848dfcffa}{\string~CHIPContext}}();}
+\DoxyCodeLine{949 }
+\DoxyCodeLine{957   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_a0a539403301fcc9a5ebff80a4791ec54}{addDevice}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* dev);}
+\DoxyCodeLine{963   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_aa8cbc5f609c668c6fd8ed2161b8f5b4f}{addQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q);}
 \DoxyCodeLine{964 }
-\DoxyCodeLine{965   \textcolor{comment}{// TODO}}
-\DoxyCodeLine{966   \textcolor{comment}{// key for caching compiled modules. To get a cached compiled module on a}}
-\DoxyCodeLine{967   \textcolor{comment}{// particular device you must make sure that you have a module which matches}}
-\DoxyCodeLine{968   \textcolor{comment}{// the host funciton pointer and also that this module was compiled for the}}
-\DoxyCodeLine{969   \textcolor{comment}{// same device model.}}
-\DoxyCodeLine{970   \textcolor{comment}{// typedef  std::pair<const void*, std::string> ptr\_dev;}}
-\DoxyCodeLine{971   \textcolor{comment}{// /**}}
-\DoxyCodeLine{972   \textcolor{comment}{//  * @brief}}
-\DoxyCodeLine{973   \textcolor{comment}{//  *}}
-\DoxyCodeLine{974   \textcolor{comment}{//  */}}
-\DoxyCodeLine{975   \textcolor{comment}{// std::unordered\_map<ptr\_dev, CHIPModule*> host\_f\_ptr\_to\_chipmodule\_map;}}
-\DoxyCodeLine{976 }
-\DoxyCodeLine{981   \mbox{\hyperlink{class_c_h_i_p_backend_ac09e581fd509911be5e741fe9a40a337}{CHIPBackend}}();}
-\DoxyCodeLine{986   \mbox{\hyperlink{class_c_h_i_p_backend_a32a882a442b96fb178e6a8eafa5f38cf}{\string~CHIPBackend}}();}
-\DoxyCodeLine{987 }
-\DoxyCodeLine{995   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a4a6fcbc6ebcd65e7ae42d9faca085238}{initialize}}(std::string platform\_str, std::string device\_type\_str,}
-\DoxyCodeLine{996                           std::string device\_ids\_str);}
-\DoxyCodeLine{997 }
-\DoxyCodeLine{1002   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a4a6fcbc6ebcd65e7ae42d9faca085238}{initialize}}() = 0;}
-\DoxyCodeLine{1003 }
-\DoxyCodeLine{1008   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} uninitialize() = 0;}
-\DoxyCodeLine{1009 }
-\DoxyCodeLine{1015   std::vector<CHIPQueue*>\& \mbox{\hyperlink{class_c_h_i_p_backend_a008a76d1aff94899c3a859a04ad3e5f4}{getQueues}}();}
-\DoxyCodeLine{1021   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_backend_a7559f78f2bb87a202f823a7bc350f49a}{getActiveQueue}}();}
-\DoxyCodeLine{1028   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_backend_a6aa8c4c8dec9f2f6a43bff2212e8c684}{getActiveContext}}();}
-\DoxyCodeLine{1035   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_backend_a8268d7b94c10eeb0f50a80ec496997c8}{getActiveDevice}}();}
-\DoxyCodeLine{1042   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_aa155d872ebff76e734ab484be7a36e85}{setActiveDevice}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev);}
-\DoxyCodeLine{1043 }
-\DoxyCodeLine{1044   std::vector<CHIPDevice*>\& getDevices();}
-\DoxyCodeLine{1050   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_h_i_p_backend_a17769144537540460d9d095843f335a4}{getNumDevices}}();}
-\DoxyCodeLine{1056   std::vector<std::string*>\& \mbox{\hyperlink{class_c_h_i_p_backend_a3d3e11a25d6f8e1ccc56f2f591b3d41f}{getModulesStr}}();}
-\DoxyCodeLine{1062   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_ab7f16be2cab912f686d365fd0b7cb82a}{addContext}}(\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* ctx\_in);}
-\DoxyCodeLine{1068   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a33b79f3321109309ca68f7c2e9a05b75}{addQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q\_in);}
-\DoxyCodeLine{1074   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a1d9cc1f762558b74bb4f4ef8bf880f7f}{addDevice}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* dev\_in);}
-\DoxyCodeLine{1080   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_ac961615e8b20b520ecf24ee3871e76ec}{registerModuleStr}}(std::string* mod\_str);}
-\DoxyCodeLine{1086   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a2b49fb13c24b853ffa404cb76d6eab43}{unregisterModuleStr}}(std::string* mod\_str);}
-\DoxyCodeLine{1096   hipError\_t \mbox{\hyperlink{class_c_h_i_p_backend_a9d802a4ed8ee1c36996ea05d346bdb1d}{configureCall}}(dim3 grid, dim3 block, \textcolor{keywordtype}{size\_t} shared, hipStream\_t q);}
-\DoxyCodeLine{1105   hipError\_t \mbox{\hyperlink{class_c_h_i_p_backend_ad3918280ea246aa55d7d5b6e056a99c7}{setArg}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* arg, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} offset);}
-\DoxyCodeLine{1106 }
-\DoxyCodeLine{1117   \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_backend_a652a732a1a527e5c12b90d49b029897f}{registerFunctionAsKernel}}(std::string* module\_str,}
-\DoxyCodeLine{1118                                         \textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr,}
-\DoxyCodeLine{1119                                         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* host\_f\_name);}
-\DoxyCodeLine{1120 }
-\DoxyCodeLine{1127   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_backend_ae49a2aba857eebeb7ca7ecdb63f5826d}{findDeviceMatchingProps}}(\textcolor{keyword}{const} hipDeviceProp\_t* props);}
-\DoxyCodeLine{1128 }
-\DoxyCodeLine{1135   hipError\_t \mbox{\hyperlink{class_c_h_i_p_backend_a74f6eba63a841fe0234a597e26299227}{addModule}}(\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}}* chip\_module);}
-\DoxyCodeLine{1142   hipError\_t \mbox{\hyperlink{class_c_h_i_p_backend_a6a43733426c1ce74cc9f03727eb4ea51}{removeModule}}(\mbox{\hyperlink{class_c_h_i_p_module}{CHIPModule}}* chip\_module);}
-\DoxyCodeLine{1143 \};}
-\DoxyCodeLine{1144 }
-\DoxyCodeLine{1148 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} \{}
-\DoxyCodeLine{1149  \textcolor{keyword}{protected}:}
-\DoxyCodeLine{1150   std::mutex mtx;}
-\DoxyCodeLine{1151   \textcolor{keywordtype}{int} priority;}
-\DoxyCodeLine{1152   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
-\DoxyCodeLine{1154   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_queue_a931f2895578dffb8c1f2434ba12c5754}{chip\_device}};}
-\DoxyCodeLine{1156   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_queue_adf51de007fa09b5ff2b1a9fb4ebe3341}{chip\_context}};}
-\DoxyCodeLine{1157 }
-\DoxyCodeLine{1158  \textcolor{keyword}{public}:}
-\DoxyCodeLine{1164   \mbox{\hyperlink{class_c_h_i_p_queue_ae298e327188182e819154c25633ca554}{CHIPQueue}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev);}
-\DoxyCodeLine{1171   \mbox{\hyperlink{class_c_h_i_p_queue_ae298e327188182e819154c25633ca554}{CHIPQueue}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
-\DoxyCodeLine{1179   \mbox{\hyperlink{class_c_h_i_p_queue_ae298e327188182e819154c25633ca554}{CHIPQueue}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{int} priority);}
-\DoxyCodeLine{1184   \mbox{\hyperlink{class_c_h_i_p_queue_a8acc0d8a03ba62beca18a55bbc87284b}{\string~CHIPQueue}}();}
-\DoxyCodeLine{1185 }
-\DoxyCodeLine{1195   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_a048fbad716d90dd1932f00da71e32f34}{memCopy}}(\textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} size);}
-\DoxyCodeLine{1204   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_a51223f0572a9a67c86851afb722b54dc}{memCopyAsync}}(\textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} size);}
-\DoxyCodeLine{1205 }
-\DoxyCodeLine{1214   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_queue_aedd41a24c72895ccb0a578e6914184ca}{memFill}}(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* pattern,}
-\DoxyCodeLine{1215                        \textcolor{keywordtype}{size\_t} pattern\_size);}
-\DoxyCodeLine{1216 }
-\DoxyCodeLine{1225   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_queue_a0bc51f0c05a8dc9eabe7679dfb5acb67}{memFillAsync}}(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* pattern,}
-\DoxyCodeLine{1226                             \textcolor{keywordtype}{size\_t} pattern\_size);}
-\DoxyCodeLine{1227 }
-\DoxyCodeLine{1235   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_ab647308242069e21491828b4fea2799c}{launch}}(\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExecItem}}* exec\_item);}
-\DoxyCodeLine{1236 }
-\DoxyCodeLine{1243   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_queue_a51a3ed46801b642ad48f5d7e71873ba1}{getDevice}}();}
-\DoxyCodeLine{1249   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_queue_a7b4d58bc6b0d35eada59ce1a0239da9b}{finish}}();}
-\DoxyCodeLine{1257   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_af3af332cd6734719316001897c16a1bd}{query}}();  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{1266 \textcolor{comment}{}  \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_queue_a5a9491f6087d089c340e2ca33c516691}{getPriorityRange}}(\textcolor{keywordtype}{int} lower\_or\_upper);  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{1275 \textcolor{comment}{}  \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_a10888a9a6d7b27c2313814ba44698c1e}{enqueueBarrierForEvent}}(\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* e);  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{1282 \textcolor{comment}{}  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_queue_a2146ab0b3a8b0adc47bb47dc3f7e28e3}{getFlags}}();  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{1289 \textcolor{comment}{}  \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_queue_a4572f51ceddd12d262d4a592843e011f}{getPriority}}();  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{1300 \textcolor{comment}{}  \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_a9c95ca4f0ee8d53828d85cd50cab8d02}{addCallback}}(hipStreamCallback\_t callback, \textcolor{keywordtype}{void}* userData);}
-\DoxyCodeLine{1310   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_ada089f192fa000cad8cfb0ea886af0f1}{memPrefetch}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr, \textcolor{keywordtype}{size\_t} count);}
-\DoxyCodeLine{1311 }
-\DoxyCodeLine{1323   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_aa5825bed6d4f82a8b237a6e685a00ee5}{launchHostFunc}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hostFunction, dim3 numBlocks, dim3 dimBlocks,}
-\DoxyCodeLine{1324                       \textcolor{keywordtype}{void}** args, \textcolor{keywordtype}{size\_t} sharedMemBytes);  \textcolor{comment}{// TODO CHIP}}
-\DoxyCodeLine{1325 }
-\DoxyCodeLine{1336   hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_a9f37eb5092629cac246e560f01b5da67}{launchWithKernelParams}}(dim3 grid, dim3 block,}
-\DoxyCodeLine{1337                                     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes, \textcolor{keywordtype}{void}** args,}
-\DoxyCodeLine{1338                                     \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* kernel);}
-\DoxyCodeLine{1339 }
-\DoxyCodeLine{1350   hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_aa0f64cf2adc1d78d91c8a182b145c566}{launchWithExtraParams}}(dim3 grid, dim3 block,}
-\DoxyCodeLine{1351                                    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes, \textcolor{keywordtype}{void}** extra,}
-\DoxyCodeLine{1352                                    \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* kernel);}
-\DoxyCodeLine{1353 \};}
-\DoxyCodeLine{1354 }
-\DoxyCodeLine{1355 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{970   std::vector<CHIPDevice*>\& \mbox{\hyperlink{class_c_h_i_p_context_aa6de7c121936615b9020e9459fa260d6}{getDevices}}();}
+\DoxyCodeLine{971 }
+\DoxyCodeLine{977   std::vector<CHIPQueue*>\& \mbox{\hyperlink{class_c_h_i_p_context_ae4dec6fa8019567f64b3ee02cc813529}{getQueues}}();}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{987   hipStream\_t \mbox{\hyperlink{class_c_h_i_p_context_a99c99574c4bd42209058f51ed2b0c909}{findQueue}}(hipStream\_t stream);}
+\DoxyCodeLine{988 }
+\DoxyCodeLine{999   \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a1f405ec128310904efe82e680e417ead}{allocate}}(\textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{1000 }
+\DoxyCodeLine{1011   \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a1f405ec128310904efe82e680e417ead}{allocate}}(\textcolor{keywordtype}{size\_t} size, CHIPMemoryType mem\_type);}
+\DoxyCodeLine{1012 }
+\DoxyCodeLine{1024   \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a1f405ec128310904efe82e680e417ead}{allocate}}(\textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} alignment, CHIPMemoryType mem\_type);}
+\DoxyCodeLine{1025 }
+\DoxyCodeLine{1036   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_c_h_i_p_context_a3ad920ded6df2e7a66396ed77ab442b2}{allocate\_}}(\textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} alignment,}
+\DoxyCodeLine{1037                           CHIPMemoryType mem\_type) = 0;}
+\DoxyCodeLine{1038 }
+\DoxyCodeLine{1047   hipError\_t \mbox{\hyperlink{class_c_h_i_p_context_a65074e4320308218e6af6ab97413da5c}{free}}(\textcolor{keywordtype}{void}* ptr);}
+\DoxyCodeLine{1048 }
+\DoxyCodeLine{1057   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_aff2c9209a0ff52dd241188065a1f489a}{free\_}}(\textcolor{keywordtype}{void}* ptr) = 0;}
+\DoxyCodeLine{1058 }
+\DoxyCodeLine{1068   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_context_a0fc1f032f9742d6348121870cc5be04c}{memCopy}}(\textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} size,}
+\DoxyCodeLine{1069                              hipStream\_t stream) \{}
+\DoxyCodeLine{1070     UNIMPLEMENTED(hipSuccess);}
+\DoxyCodeLine{1071   \};}
+\DoxyCodeLine{1072 }
+\DoxyCodeLine{1077   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_a31d79308f3a70a9293923835122da23c}{finishAll}}();}
+\DoxyCodeLine{1078 }
+\DoxyCodeLine{1088   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_context_aad24b4b21e4b87cb2a3ab8bcba3f373e}{findPointerInfo}}(hipDeviceptr\_t* pbase, \textcolor{keywordtype}{size\_t}* psize,}
+\DoxyCodeLine{1089                                      hipDeviceptr\_t dptr);}
+\DoxyCodeLine{1090 }
+\DoxyCodeLine{1096   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_context_a7f5bb1d44e61f476edfeb4a14d73bae8}{getFlags}}();}
+\DoxyCodeLine{1097 }
+\DoxyCodeLine{1103   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_a99583fe33f2dd9bf23b278e42fb168ec}{setFlags}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1104 }
+\DoxyCodeLine{1109   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_context_a4b0f248e3f69b73f42ef7ad787e2fd44}{reset}}();}
+\DoxyCodeLine{1110 }
+\DoxyCodeLine{1117   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_context_a7d03567273b7899b7d2e0df0e5f015cf}{retain}}();}
+\DoxyCodeLine{1118 }
+\DoxyCodeLine{1125   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* \mbox{\hyperlink{class_c_h_i_p_context_a4af79ee3405b648afb092ff3622577e6}{createEvent}}(\textcolor{keywordtype}{unsigned} flags) = 0;}
+\DoxyCodeLine{1126 \};}
+\DoxyCodeLine{1127 }
+\DoxyCodeLine{1131 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_backend}{CHIPBackend}} \{}
+\DoxyCodeLine{1132  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{1139   std::vector<std::string*> \mbox{\hyperlink{class_c_h_i_p_backend_acaa96e44cb5c8e118f58821e2358360c}{modules\_str}};}
+\DoxyCodeLine{1140   std::mutex mtx;}
+\DoxyCodeLine{1141 }
+\DoxyCodeLine{1142   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* active\_ctx;}
+\DoxyCodeLine{1143   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* active\_dev;}
+\DoxyCodeLine{1144   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* active\_q;}
+\DoxyCodeLine{1145 }
+\DoxyCodeLine{1146  \textcolor{keyword}{public}:}
+\DoxyCodeLine{1147   std::mutex callback\_stack\_mtx;}
+\DoxyCodeLine{1148   std::stack<CHIPCallbackData*> callback\_stack;}
+\DoxyCodeLine{1155   \textcolor{comment}{// Adds -\/std=c++17 requirement}}
+\DoxyCodeLine{1156   \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{thread\_local} hipError\_t \mbox{\hyperlink{class_c_h_i_p_backend_a3bd7079feec8797b732cf991a558859c}{tls\_last\_error}} = hipSuccess;}
+\DoxyCodeLine{1157   \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{thread\_local} \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* tls\_active\_ctx;}
+\DoxyCodeLine{1158 }
+\DoxyCodeLine{1159   std::stack<CHIPExecItem*> chip\_execstack;}
+\DoxyCodeLine{1160   std::vector<CHIPContext*> chip\_contexts;}
+\DoxyCodeLine{1161   std::vector<CHIPQueue*> chip\_queues;}
+\DoxyCodeLine{1162   std::vector<CHIPDevice*> chip\_devices;}
+\DoxyCodeLine{1163 }
+\DoxyCodeLine{1164   \textcolor{comment}{// TODO}}
+\DoxyCodeLine{1165   \textcolor{comment}{// key for caching compiled modules. To get a cached compiled module on a}}
+\DoxyCodeLine{1166   \textcolor{comment}{// particular device you must make sure that you have a module which matches}}
+\DoxyCodeLine{1167   \textcolor{comment}{// the host funciton pointer and also that this module was compiled for the}}
+\DoxyCodeLine{1168   \textcolor{comment}{// same device model.}}
+\DoxyCodeLine{1169   \textcolor{comment}{// typedef  std::pair<const void*, std::string> ptr\_dev;}}
+\DoxyCodeLine{1170   \textcolor{comment}{// /**}}
+\DoxyCodeLine{1171   \textcolor{comment}{//  * @brief}}
+\DoxyCodeLine{1172   \textcolor{comment}{//  *}}
+\DoxyCodeLine{1173   \textcolor{comment}{//  */}}
+\DoxyCodeLine{1174   \textcolor{comment}{// std::unordered\_map<ptr\_dev, CHIPModule*> host\_f\_ptr\_to\_chipmodule\_map;}}
+\DoxyCodeLine{1175 }
+\DoxyCodeLine{1180   \mbox{\hyperlink{class_c_h_i_p_backend_ac09e581fd509911be5e741fe9a40a337}{CHIPBackend}}();}
+\DoxyCodeLine{1185   \mbox{\hyperlink{class_c_h_i_p_backend_a32a882a442b96fb178e6a8eafa5f38cf}{\string~CHIPBackend}}();}
+\DoxyCodeLine{1186 }
+\DoxyCodeLine{1194   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a4a6fcbc6ebcd65e7ae42d9faca085238}{initialize}}(std::string platform\_str, std::string device\_type\_str,}
+\DoxyCodeLine{1195                   std::string device\_ids\_str);}
+\DoxyCodeLine{1196 }
+\DoxyCodeLine{1204   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a7760a3f08873929a938fe268bbc99e96}{initialize\_}}(std::string platform\_str,}
+\DoxyCodeLine{1205                            std::string device\_type\_str,}
+\DoxyCodeLine{1206                            std::string device\_ids\_str) = 0;}
+\DoxyCodeLine{1207 }
+\DoxyCodeLine{1212   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} uninitialize() = 0;}
+\DoxyCodeLine{1213 }
+\DoxyCodeLine{1219   std::vector<CHIPQueue*>\& \mbox{\hyperlink{class_c_h_i_p_backend_a008a76d1aff94899c3a859a04ad3e5f4}{getQueues}}();}
+\DoxyCodeLine{1225   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_backend_a7559f78f2bb87a202f823a7bc350f49a}{getActiveQueue}}();}
+\DoxyCodeLine{1232   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_backend_a6aa8c4c8dec9f2f6a43bff2212e8c684}{getActiveContext}}();}
+\DoxyCodeLine{1239   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_backend_a8268d7b94c10eeb0f50a80ec496997c8}{getActiveDevice}}();}
+\DoxyCodeLine{1246   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_aa155d872ebff76e734ab484be7a36e85}{setActiveDevice}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev);}
+\DoxyCodeLine{1247 }
+\DoxyCodeLine{1248   std::vector<CHIPDevice*>\& getDevices();}
+\DoxyCodeLine{1254   \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_h_i_p_backend_a17769144537540460d9d095843f335a4}{getNumDevices}}();}
+\DoxyCodeLine{1260   std::vector<std::string*>\& \mbox{\hyperlink{class_c_h_i_p_backend_a3d3e11a25d6f8e1ccc56f2f591b3d41f}{getModulesStr}}();}
+\DoxyCodeLine{1266   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_ab7f16be2cab912f686d365fd0b7cb82a}{addContext}}(\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* ctx\_in);}
+\DoxyCodeLine{1272   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a33b79f3321109309ca68f7c2e9a05b75}{addQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q\_in);}
+\DoxyCodeLine{1278   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a1d9cc1f762558b74bb4f4ef8bf880f7f}{addDevice}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* dev\_in);}
+\DoxyCodeLine{1284   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_ac961615e8b20b520ecf24ee3871e76ec}{registerModuleStr}}(std::string* mod\_str);}
+\DoxyCodeLine{1290   \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_backend_a2b49fb13c24b853ffa404cb76d6eab43}{unregisterModuleStr}}(std::string* mod\_str);}
+\DoxyCodeLine{1300   hipError\_t \mbox{\hyperlink{class_c_h_i_p_backend_a9d802a4ed8ee1c36996ea05d346bdb1d}{configureCall}}(dim3 grid, dim3 block, \textcolor{keywordtype}{size\_t} shared, hipStream\_t q);}
+\DoxyCodeLine{1309   hipError\_t \mbox{\hyperlink{class_c_h_i_p_backend_ad3918280ea246aa55d7d5b6e056a99c7}{setArg}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* arg, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} offset);}
+\DoxyCodeLine{1310 }
+\DoxyCodeLine{1321   \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_backend_a652a732a1a527e5c12b90d49b029897f}{registerFunctionAsKernel}}(std::string* module\_str,}
+\DoxyCodeLine{1322                                         \textcolor{keyword}{const} \textcolor{keywordtype}{void}* host\_f\_ptr,}
+\DoxyCodeLine{1323                                         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* host\_f\_name);}
+\DoxyCodeLine{1324 }
+\DoxyCodeLine{1331   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_backend_ae49a2aba857eebeb7ca7ecdb63f5826d}{findDeviceMatchingProps}}(\textcolor{keyword}{const} hipDeviceProp\_t* props);}
+\DoxyCodeLine{1332 }
+\DoxyCodeLine{1339   \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* \mbox{\hyperlink{class_c_h_i_p_backend_a82263576ceaf972d6252df8ca59d3ff5}{findQueue}}(\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* q);}
+\DoxyCodeLine{1340 }
+\DoxyCodeLine{1347   \textcolor{comment}{// CHIPModule* addModule(std::string* module\_src);}}
+\DoxyCodeLine{1354 \textcolor{comment}{}  \textcolor{comment}{// hipError\_t removeModule(CHIPModule* chip\_module);}}
+\DoxyCodeLine{1355 }
+\DoxyCodeLine{1356 \textcolor{comment}{  /************Factories***************/}}
+\DoxyCodeLine{1357 }
+\DoxyCodeLine{1358   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}}* \mbox{\hyperlink{class_c_h_i_p_backend_a85bb57a5eb88c2c616dc6fee2a9d56b1}{createCHIPTexture}}(intptr\_t image\_,}
+\DoxyCodeLine{1359                                          intptr\_t sampler\_) = 0;}
+\DoxyCodeLine{1360   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* createCHIPQueue(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev) = 0;}
+\DoxyCodeLine{1361   \textcolor{comment}{// virtual CHIPDevice* createCHIPDevice(CHIPContext* ctx\_) = 0;}}
+\DoxyCodeLine{1362   \textcolor{comment}{// virtual CHIPContext* createCHIPContext() = 0;}}
+\DoxyCodeLine{1363   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* createCHIPEvent(\mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* chip\_ctx\_,}
+\DoxyCodeLine{1364                                      CHIPEventType event\_type\_) = 0;}
+\DoxyCodeLine{1365 }
+\DoxyCodeLine{1373   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallbackData}}* \mbox{\hyperlink{class_c_h_i_p_backend_aedb8f6a7fa8f9fb8009c1c35eaeddbfc}{createCallbackData}}(hipStreamCallback\_t callback,}
+\DoxyCodeLine{1374                                                \textcolor{keywordtype}{void}* userData,}
+\DoxyCodeLine{1375                                                \mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}}* chip\_queue\_) = 0;}
+\DoxyCodeLine{1376 }
+\DoxyCodeLine{1377   \textcolor{keyword}{virtual} \mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEventMonitor}}* createEventMonitor() = 0;}
+\DoxyCodeLine{1378 }
+\DoxyCodeLine{1386   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_backend_afca81a5e90ec8aedd9dbe317dc57ba40}{getCallback}}(\mbox{\hyperlink{class_c_h_i_p_callback_data}{CHIPCallbackData}}** callback\_data) \{}
+\DoxyCodeLine{1387     \textcolor{keywordtype}{bool} res = \textcolor{keyword}{false};}
+\DoxyCodeLine{1388     \{}
+\DoxyCodeLine{1389       std::lock\_guard<std::mutex> Lock(callback\_stack\_mtx);}
+\DoxyCodeLine{1390       \textcolor{keywordflow}{if} (this-\/>callback\_stack.size()) \{}
+\DoxyCodeLine{1391         *callback\_data = callback\_stack.top();}
+\DoxyCodeLine{1392         callback\_stack.pop();}
+\DoxyCodeLine{1393 }
+\DoxyCodeLine{1394         res = \textcolor{keyword}{true};}
+\DoxyCodeLine{1395       \}}
+\DoxyCodeLine{1396     \}}
+\DoxyCodeLine{1397 }
+\DoxyCodeLine{1398     \textcolor{keywordflow}{return} res;}
+\DoxyCodeLine{1399   \}}
+\DoxyCodeLine{1400 \};}
+\DoxyCodeLine{1401 }
+\DoxyCodeLine{1405 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_h_i_p_queue}{CHIPQueue}} \{}
+\DoxyCodeLine{1406  \textcolor{keyword}{protected}:}
+\DoxyCodeLine{1407   std::mutex mtx;}
+\DoxyCodeLine{1408   \textcolor{keywordtype}{int} priority;}
+\DoxyCodeLine{1409   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags;}
+\DoxyCodeLine{1411   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_queue_a931f2895578dffb8c1f2434ba12c5754}{chip\_device}};}
+\DoxyCodeLine{1413   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* \mbox{\hyperlink{class_c_h_i_p_queue_adf51de007fa09b5ff2b1a9fb4ebe3341}{chip\_context}};}
+\DoxyCodeLine{1414 }
+\DoxyCodeLine{1415   \mbox{\hyperlink{class_c_h_i_p_event_monitor}{CHIPEventMonitor}}* event\_monitor = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1416 }
+\DoxyCodeLine{1417  \textcolor{keyword}{public}:}
+\DoxyCodeLine{1420   \mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* \mbox{\hyperlink{class_c_h_i_p_queue_a27dd9f3c768ae545f02fb13df697faa4}{LastEvent}};}
+\DoxyCodeLine{1421 }
+\DoxyCodeLine{1427   \mbox{\hyperlink{class_c_h_i_p_queue_ae298e327188182e819154c25633ca554}{CHIPQueue}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev);}
+\DoxyCodeLine{1434   \mbox{\hyperlink{class_c_h_i_p_queue_ae298e327188182e819154c25633ca554}{CHIPQueue}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{1442   \mbox{\hyperlink{class_c_h_i_p_queue_ae298e327188182e819154c25633ca554}{CHIPQueue}}(\mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* chip\_dev, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{int} priority);}
+\DoxyCodeLine{1447   \mbox{\hyperlink{class_c_h_i_p_queue_a8acc0d8a03ba62beca18a55bbc87284b}{\string~CHIPQueue}}();}
+\DoxyCodeLine{1448 }
+\DoxyCodeLine{1458   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_a764ca839ae19a406e79f8a17807d64f8}{memCopy}}(}
+\DoxyCodeLine{1459       \textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{1460       \textcolor{keywordtype}{size\_t} size) = 0;  \textcolor{comment}{// Implement using Async with wait?}}
+\DoxyCodeLine{1469 \textcolor{comment}{}  \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_a94257094d35a810506e3163c8b6ebb2d}{memCopyAsync}}(\textcolor{keywordtype}{void}* dst, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} size) = 0;}
+\DoxyCodeLine{1470 }
+\DoxyCodeLine{1479   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_queue_aedd41a24c72895ccb0a578e6914184ca}{memFill}}(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* pattern,}
+\DoxyCodeLine{1480                        \textcolor{keywordtype}{size\_t} pattern\_size);}
+\DoxyCodeLine{1481 }
+\DoxyCodeLine{1490   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_queue_ac173fb5ca3d0ec542ce7a3a735e008f5}{memFillAsync}}(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* pattern,}
+\DoxyCodeLine{1491                             \textcolor{keywordtype}{size\_t} pattern\_size) = 0;}
+\DoxyCodeLine{1492 }
+\DoxyCodeLine{1493   \textcolor{comment}{// The memory copy 2D support}}
+\DoxyCodeLine{1494   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} memCopy2D(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{1495                          \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height);}
+\DoxyCodeLine{1496 }
+\DoxyCodeLine{1497   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} memCopy2DAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src,}
+\DoxyCodeLine{1498                               \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height) = 0;}
+\DoxyCodeLine{1499 }
+\DoxyCodeLine{1500   \textcolor{comment}{// The memory copy 3D support}}
+\DoxyCodeLine{1501   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} memCopy3D(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, \textcolor{keywordtype}{size\_t} dspitch,}
+\DoxyCodeLine{1502                          \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} sspitch,}
+\DoxyCodeLine{1503                          \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height, \textcolor{keywordtype}{size\_t} depth);}
+\DoxyCodeLine{1504 }
+\DoxyCodeLine{1505   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} memCopy3DAsync(\textcolor{keywordtype}{void}* dst, \textcolor{keywordtype}{size\_t} dpitch, \textcolor{keywordtype}{size\_t} dspitch,}
+\DoxyCodeLine{1506                               \textcolor{keyword}{const} \textcolor{keywordtype}{void}* src, \textcolor{keywordtype}{size\_t} spitch, \textcolor{keywordtype}{size\_t} sspitch,}
+\DoxyCodeLine{1507                               \textcolor{keywordtype}{size\_t} width, \textcolor{keywordtype}{size\_t} height, \textcolor{keywordtype}{size\_t} depth) = 0;}
+\DoxyCodeLine{1508 }
+\DoxyCodeLine{1509   \textcolor{comment}{// Memory copy to texture object, i.e. image}}
+\DoxyCodeLine{1510   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} memCopyToTexture(\mbox{\hyperlink{class_c_h_i_p_texture}{CHIPTexture}}* texObj, \textcolor{keywordtype}{void}* src) = 0;}
+\DoxyCodeLine{1518   \textcolor{keyword}{virtual} hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_ac7b9c53a719655c0cae37479e670e99a}{launch}}(\mbox{\hyperlink{class_c_h_i_p_exec_item}{CHIPExecItem}}* exec\_item) = 0;}
+\DoxyCodeLine{1519 }
+\DoxyCodeLine{1526   \mbox{\hyperlink{class_c_h_i_p_device}{CHIPDevice}}* \mbox{\hyperlink{class_c_h_i_p_queue_a51a3ed46801b642ad48f5d7e71873ba1}{getDevice}}();}
+\DoxyCodeLine{1532   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_queue_abf779db7f06ee6280326b9efa66d1a6f}{finish}}() = 0;}
+\DoxyCodeLine{1540   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_af3af332cd6734719316001897c16a1bd}{query}}();  \textcolor{comment}{// TODO Depends on Events}}
+\DoxyCodeLine{1549 \textcolor{comment}{}  \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_queue_a5a9491f6087d089c340e2ca33c516691}{getPriorityRange}}(\textcolor{keywordtype}{int} lower\_or\_upper);  \textcolor{comment}{// TODO CHIP}}
+\DoxyCodeLine{1558 \textcolor{comment}{}  \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_h_i_p_queue_a168ae9587a5ae954749e6da60bab3966}{enqueueBarrier}}(\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* eventToSignal,}
+\DoxyCodeLine{1559                               std::vector<CHIPEvent*>* eventsToWaitFor) = 0;}
+\DoxyCodeLine{1560 }
+\DoxyCodeLine{1561   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} enqueueSignal(\mbox{\hyperlink{class_c_h_i_p_event}{CHIPEvent}}* eventToSignal) = 0;}
+\DoxyCodeLine{1568   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_queue_a2146ab0b3a8b0adc47bb47dc3f7e28e3}{getFlags}}();  \textcolor{comment}{// TODO CHIP}}
+\DoxyCodeLine{1575 \textcolor{comment}{}  \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_h_i_p_queue_a4572f51ceddd12d262d4a592843e011f}{getPriority}}();  \textcolor{comment}{// TODO CHIP}}
+\DoxyCodeLine{1586 \textcolor{comment}{}  \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_a9c95ca4f0ee8d53828d85cd50cab8d02}{addCallback}}(hipStreamCallback\_t callback, \textcolor{keywordtype}{void}* userData);}
+\DoxyCodeLine{1596   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_ada089f192fa000cad8cfb0ea886af0f1}{memPrefetch}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* ptr, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{1597 }
+\DoxyCodeLine{1609   \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_h_i_p_queue_aa5825bed6d4f82a8b237a6e685a00ee5}{launchHostFunc}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* hostFunction, dim3 numBlocks, dim3 dimBlocks,}
+\DoxyCodeLine{1610                       \textcolor{keywordtype}{void}** args, \textcolor{keywordtype}{size\_t} sharedMemBytes);}
+\DoxyCodeLine{1611 }
+\DoxyCodeLine{1622   hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_a9f37eb5092629cac246e560f01b5da67}{launchWithKernelParams}}(dim3 grid, dim3 block,}
+\DoxyCodeLine{1623                                     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes, \textcolor{keywordtype}{void}** args,}
+\DoxyCodeLine{1624                                     \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* kernel);}
+\DoxyCodeLine{1625 }
+\DoxyCodeLine{1636   hipError\_t \mbox{\hyperlink{class_c_h_i_p_queue_aa0f64cf2adc1d78d91c8a182b145c566}{launchWithExtraParams}}(dim3 grid, dim3 block,}
+\DoxyCodeLine{1637                                    \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} sharedMemBytes, \textcolor{keywordtype}{void}** extra,}
+\DoxyCodeLine{1638                                    \mbox{\hyperlink{class_c_h_i_p_kernel}{CHIPKernel}}* kernel);}
+\DoxyCodeLine{1639 }
+\DoxyCodeLine{1640   \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} getBackendHandles(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}* nativeInfo, \textcolor{keywordtype}{int}* size) = 0;}
+\DoxyCodeLine{1641 }
+\DoxyCodeLine{1642   \mbox{\hyperlink{class_c_h_i_p_context}{CHIPContext}}* getContext() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_h_i_p_queue_adf51de007fa09b5ff2b1a9fb4ebe3341}{chip\_context}}; \}}
+\DoxyCodeLine{1643 \};}
+\DoxyCodeLine{1644 }
+\DoxyCodeLine{1645 \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

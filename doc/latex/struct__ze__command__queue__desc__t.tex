@@ -1,0 +1,56 @@
+\hypertarget{struct__ze__command__queue__desc__t}{}\doxysection{\+\_\+ze\+\_\+command\+\_\+queue\+\_\+desc\+\_\+t Struct Reference}
+\label{struct__ze__command__queue__desc__t}\index{\_ze\_command\_queue\_desc\_t@{\_ze\_command\_queue\_desc\_t}}
+
+
+\mbox{\hyperlink{class_command}{Command}} Queue descriptor.  
+
+
+
+
+{\ttfamily \#include $<$ze\+\_\+api.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__ze__command__queue__desc__t_ad8cb76843cbd37279a1a63e1fcacdd82}\label{struct__ze__command__queue__desc__t_ad8cb76843cbd37279a1a63e1fcacdd82}} 
+ze\+\_\+structure\+\_\+type\+\_\+t {\bfseries stype}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} type of this structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__command__queue__desc__t_a40300e049406d50568fe5deddab3c774}\label{struct__ze__command__queue__desc__t_a40300e049406d50568fe5deddab3c774}} 
+const void $\ast$ {\bfseries p\+Next}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]}\mbox{[}optional\mbox{]} pointer to extension-\/specific structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__command__queue__desc__t_a3bede2ffca413fa8bef6f08a40c7c807}\label{struct__ze__command__queue__desc__t_a3bede2ffca413fa8bef6f08a40c7c807}} 
+uint32\+\_\+t {\bfseries ordinal}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} command queue group ordinal \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{struct__ze__command__queue__desc__t_a2849fdf4b61229929be3615b464e17c3}{index}}
+\item 
+ze\+\_\+command\+\_\+queue\+\_\+flags\+\_\+t \mbox{\hyperlink{struct__ze__command__queue__desc__t_aeaf69f40b5e8cae153db3d382f567c5b}{flags}}
+\item 
+\mbox{\Hypertarget{struct__ze__command__queue__desc__t_af0dbd83f841979c66322ce593dd3f8fd}\label{struct__ze__command__queue__desc__t_af0dbd83f841979c66322ce593dd3f8fd}} 
+ze\+\_\+command\+\_\+queue\+\_\+mode\+\_\+t {\bfseries mode}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} operation mode \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__ze__command__queue__desc__t_a76e79ba59c4301b2650e6336e555192c}\label{struct__ze__command__queue__desc__t_a76e79ba59c4301b2650e6336e555192c}} 
+ze\+\_\+command\+\_\+queue\+\_\+priority\+\_\+t {\bfseries priority}
+\begin{DoxyCompactList}\small\item\em \mbox{[}in\mbox{]} priority \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_command}{Command}} Queue descriptor. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct__ze__command__queue__desc__t_aeaf69f40b5e8cae153db3d382f567c5b}\label{struct__ze__command__queue__desc__t_aeaf69f40b5e8cae153db3d382f567c5b}} 
+\index{\_ze\_command\_queue\_desc\_t@{\_ze\_command\_queue\_desc\_t}!flags@{flags}}
+\index{flags@{flags}!\_ze\_command\_queue\_desc\_t@{\_ze\_command\_queue\_desc\_t}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily ze\+\_\+command\+\_\+queue\+\_\+flags\+\_\+t \+\_\+ze\+\_\+command\+\_\+queue\+\_\+desc\+\_\+t\+::flags}
+
+\mbox{[}in\mbox{]} usage flags. must be 0 (default) or a valid combination of \+::ze\+\_\+command\+\_\+queue\+\_\+flag\+\_\+t; default behavior may use implicit driver-\/based heuristics to balance latency and throughput. \mbox{\Hypertarget{struct__ze__command__queue__desc__t_a2849fdf4b61229929be3615b464e17c3}\label{struct__ze__command__queue__desc__t_a2849fdf4b61229929be3615b464e17c3}} 
+\index{\_ze\_command\_queue\_desc\_t@{\_ze\_command\_queue\_desc\_t}!index@{index}}
+\index{index@{index}!\_ze\_command\_queue\_desc\_t@{\_ze\_command\_queue\_desc\_t}}
+\doxysubsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+ze\+\_\+command\+\_\+queue\+\_\+desc\+\_\+t\+::index}
+
+\mbox{[}in\mbox{]} command queue index within the group; must be zero if \+::\+ZE\+\_\+\+COMMAND\+\_\+\+QUEUE\+\_\+\+FLAG\+\_\+\+EXPLICIT\+\_\+\+ONLY is not set 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/include/ze\+\_\+api.\+h\end{DoxyCompactItemize}

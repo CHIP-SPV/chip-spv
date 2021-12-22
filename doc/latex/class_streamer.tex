@@ -1,0 +1,95 @@
+\hypertarget{class_streamer}{}\doxysection{Streamer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_streamer}\index{Streamer$<$ T $>$@{Streamer$<$ T $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_streamer_a608d40470200347a8c5a17e8b0e8f11d}\label{class_streamer_a608d40470200347a8c5a17e8b0e8f11d}} 
+{\bfseries Streamer} (size\+\_\+t num\+Elements, bool use\+Null\+Stream=false)
+\item 
+\mbox{\Hypertarget{class_streamer_ae95d03b8d80a42022305ad3ce0424a64}\label{class_streamer_ae95d03b8d80a42022305ad3ce0424a64}} 
+void {\bfseries enque\+Async} ()
+\item 
+\mbox{\Hypertarget{class_streamer_a42ac1384f518763de678fde903116106}\label{class_streamer_a42ac1384f518763de678fde903116106}} 
+void {\bfseries query\+Until\+Complete} ()
+\item 
+\mbox{\Hypertarget{class_streamer_a96ccab3bfd2c0d93598ed98d3032cbba}\label{class_streamer_a96ccab3bfd2c0d93598ed98d3032cbba}} 
+void {\bfseries reset} ()
+\item 
+\mbox{\Hypertarget{class_streamer_a427d5feeb2268f7b70022c9101dde7ff}\label{class_streamer_a427d5feeb2268f7b70022c9101dde7ff}} 
+void {\bfseries H2D} ()
+\item 
+\mbox{\Hypertarget{class_streamer_adea8e8a2b72ffa1aa848885b5ef2f63c}\label{class_streamer_adea8e8a2b72ffa1aa848885b5ef2f63c}} 
+void {\bfseries D2H} ()
+\item 
+\mbox{\Hypertarget{class_streamer_a386df6ed2ad1d5a79d14cb486229db39}\label{class_streamer_a386df6ed2ad1d5a79d14cb486229db39}} 
+{\bfseries Streamer} (int device\+Id, T $\ast$input, size\+\_\+t num\+Elements, int command\+Type)
+\item 
+\mbox{\Hypertarget{class_streamer_a2b86e98ca3a4ea10ff512afac2c1c6c1}\label{class_streamer_a2b86e98ca3a4ea10ff512afac2c1c6c1}} 
+void {\bfseries run\+Async\+After} (\mbox{\hyperlink{class_streamer}{Streamer}}$<$ T $>$ $\ast$dep\+Streamer, bool wait\+Same\+Stream=false)
+\item 
+\mbox{\Hypertarget{class_streamer_a97a4ee0651c0605d4b4f20170a040f3b}\label{class_streamer_a97a4ee0651c0605d4b4f20170a040f3b}} 
+void {\bfseries run\+Async\+Wait\+Same\+Stream} ()
+\item 
+\mbox{\Hypertarget{class_streamer_a42ac1384f518763de678fde903116106}\label{class_streamer_a42ac1384f518763de678fde903116106}} 
+void {\bfseries query\+Until\+Complete} ()
+\item 
+\mbox{\Hypertarget{class_streamer_a314dfb5e07a03ae3af78065a11cc9331}\label{class_streamer_a314dfb5e07a03ae3af78065a11cc9331}} 
+size\+\_\+t {\bfseries check} (int streamer\+Num, T init\+Value, T expected\+Offset, bool expect\+Pass=true)
+\item 
+\mbox{\Hypertarget{class_streamer_a498da1afc4b71586b844a668e18902f0}\label{class_streamer_a498da1afc4b71586b844a668e18902f0}} 
+void {\bfseries copy\+To\+Host} (\mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} copy\+Stream)
+\item 
+\mbox{\Hypertarget{class_streamer_a0a54d5ea544d450d3199845f4cc0c40b}\label{class_streamer_a0a54d5ea544d450d3199845f4cc0c40b}} 
+\mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}} {\bfseries event} ()
+\item 
+\mbox{\Hypertarget{class_streamer_ab2f5b088695189640fcf9a643c3f0a3d}\label{class_streamer_ab2f5b088695189640fcf9a643c3f0a3d}} 
+int {\bfseries device\+Id} () const
+\item 
+\mbox{\Hypertarget{class_streamer_acfea7236b3696dcae5cda5530718db64}\label{class_streamer_acfea7236b3696dcae5cda5530718db64}} 
+size\+\_\+t {\bfseries mismatch\+Count} () const
+\item 
+\mbox{\Hypertarget{class_streamer_a6a889d3ec8e6062cc677363c037de140}\label{class_streamer_a6a889d3ec8e6062cc677363c037de140}} 
+T $\ast$ {\bfseries C\+\_\+d} ()
+\item 
+\mbox{\Hypertarget{class_streamer_a0e8eaa12d89c5cd5d2ea86f9ff65e011}\label{class_streamer_a0e8eaa12d89c5cd5d2ea86f9ff65e011}} 
+int {\bfseries expected\+Add} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_streamer_ac1af716236244baca9e7e92437a715b0}\label{class_streamer_ac1af716236244baca9e7e92437a715b0}} 
+T $\ast$ {\bfseries \+\_\+\+A\+\_\+h}
+\item 
+\mbox{\Hypertarget{class_streamer_a2042c42ea6f45d6b73ce3def9d4793c4}\label{class_streamer_a2042c42ea6f45d6b73ce3def9d4793c4}} 
+T $\ast$ {\bfseries \+\_\+\+B\+\_\+h}
+\item 
+\mbox{\Hypertarget{class_streamer_aaca0bbc1e1441f63221b220785896bf1}\label{class_streamer_aaca0bbc1e1441f63221b220785896bf1}} 
+T $\ast$ {\bfseries \+\_\+\+C\+\_\+h}
+\item 
+\mbox{\Hypertarget{class_streamer_ad72a70bb4c2bc4e8f9d4217738090800}\label{class_streamer_ad72a70bb4c2bc4e8f9d4217738090800}} 
+T $\ast$ {\bfseries \+\_\+\+A\+\_\+d}
+\item 
+\mbox{\Hypertarget{class_streamer_a292a3a6b94d8a45bdf2a2da294d5a39e}\label{class_streamer_a292a3a6b94d8a45bdf2a2da294d5a39e}} 
+T $\ast$ {\bfseries \+\_\+\+B\+\_\+d}
+\item 
+\mbox{\Hypertarget{class_streamer_ae95c07e9d2ae86c5c5318bd44553fc13}\label{class_streamer_ae95c07e9d2ae86c5c5318bd44553fc13}} 
+T $\ast$ {\bfseries \+\_\+\+C\+\_\+d}
+\item 
+\mbox{\Hypertarget{class_streamer_acb2bc1116c0b410ca1951846eedd3e3f}\label{class_streamer_acb2bc1116c0b410ca1951846eedd3e3f}} 
+\mbox{\hyperlink{class_c_h_i_p_queue}{hip\+Stream\+\_\+t}} {\bfseries \+\_\+stream}
+\item 
+\mbox{\Hypertarget{class_streamer_a1ccfff7950cf79c41ea739adfdc0d23e}\label{class_streamer_a1ccfff7950cf79c41ea739adfdc0d23e}} 
+\mbox{\hyperlink{class_c_h_i_p_event}{hip\+Event\+\_\+t}} {\bfseries \+\_\+event}
+\item 
+\mbox{\Hypertarget{class_streamer_a3300cf696f877db69da281226ba3c350}\label{class_streamer_a3300cf696f877db69da281226ba3c350}} 
+size\+\_\+t {\bfseries \+\_\+num\+Elements}
+\item 
+\mbox{\Hypertarget{class_streamer_a2cf1bf66f253311dc6aad05cfa6af94b}\label{class_streamer_a2cf1bf66f253311dc6aad05cfa6af94b}} 
+int {\bfseries \+\_\+command\+Type}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/src/runtime\+Api/stream/hip\+Null\+Stream.\+cpp\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/\+HIP/tests/src/runtime\+Api/stream/hip\+Stream\+Wait\+Event.\+cpp\end{DoxyCompactItemize}

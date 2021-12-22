@@ -1,0 +1,140 @@
+\hypertarget{class_binomial_option}{}\doxysection{Binomial\+Option Class Reference}
+\label{class_binomial_option}\index{BinomialOption@{BinomialOption}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_binomial_option_a6176c8c985b0fbcf1c0446c1713e2765}{Binomial\+Option}} ()
+\item 
+\mbox{\Hypertarget{class_binomial_option_a5de5e3f93a78b045238c66566fa784a1}\label{class_binomial_option_a5de5e3f93a78b045238c66566fa784a1}} 
+long long {\bfseries get\+\_\+time} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_ab7a08b743727ed59cedaba40e3300701}{setup\+Binomial\+Option}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_acb6cb2c1b52b0af19373fded3b4fd900}{setup\+HIP}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_a4ac8dae8d045857026a7fea4122ccb6a}{run\+Kernels}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_aeeb455866f94143470290fa83179ca11}{binomial\+Option\+CPUReference}} ()
+\item 
+void \mbox{\hyperlink{class_binomial_option_ada1e7a1eb3a12dc9d062dc1243220856}{print\+Stats}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_ab622c2ca9ba825a0d1afec575e744209}{initialize}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_ab69752bbbb212cc847294bc544778540}{setup}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_a1eb7b3ef8430b4c62950ff82a791584c}{run}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_a256a3ed2a0e7d5e03f8fa6781dfd74b9}{cleanup}} ()
+\item 
+int \mbox{\hyperlink{class_binomial_option_adbe3824e4b57791a55497e9943137203}{verify\+Results}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_binomial_option_af919b9cb5a647fbeb842758202295817}\label{class_binomial_option_af919b9cb5a647fbeb842758202295817}} 
+\mbox{\hyperlink{classappsdk_1_1_h_i_p_command_args}{HIPCommand\+Args}} $\ast$ {\bfseries sample\+Args}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_binomial_option_a6176c8c985b0fbcf1c0446c1713e2765}\label{class_binomial_option_a6176c8c985b0fbcf1c0446c1713e2765}} 
+\index{BinomialOption@{BinomialOption}!BinomialOption@{BinomialOption}}
+\index{BinomialOption@{BinomialOption}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{BinomialOption()}{BinomialOption()}}
+{\footnotesize\ttfamily Binomial\+Option\+::\+Binomial\+Option (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor Initialize member variables 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_binomial_option_aeeb455866f94143470290fa83179ca11}\label{class_binomial_option_aeeb455866f94143470290fa83179ca11}} 
+\index{BinomialOption@{BinomialOption}!binomialOptionCPUReference@{binomialOptionCPUReference}}
+\index{binomialOptionCPUReference@{binomialOptionCPUReference}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{binomialOptionCPUReference()}{binomialOptionCPUReference()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::binomial\+Option\+CPUReference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Reference CPU implementation of Binomial Option for performance comparison \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_a256a3ed2a0e7d5e03f8fa6781dfd74b9}\label{class_binomial_option_a256a3ed2a0e7d5e03f8fa6781dfd74b9}} 
+\index{BinomialOption@{BinomialOption}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::cleanup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Cleanup memory allocations \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_ab622c2ca9ba825a0d1afec575e744209}\label{class_binomial_option_ab622c2ca9ba825a0d1afec575e744209}} 
+\index{BinomialOption@{BinomialOption}!initialize@{initialize}}
+\index{initialize@{initialize}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Initialize command line parser, add custom options \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_ada1e7a1eb3a12dc9d062dc1243220856}\label{class_binomial_option_ada1e7a1eb3a12dc9d062dc1243220856}} 
+\index{BinomialOption@{BinomialOption}!printStats@{printStats}}
+\index{printStats@{printStats}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{printStats()}{printStats()}}
+{\footnotesize\ttfamily void Binomial\+Option\+::print\+Stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample. Print sample stats. \mbox{\Hypertarget{class_binomial_option_a1eb7b3ef8430b4c62950ff82a791584c}\label{class_binomial_option_a1eb7b3ef8430b4c62950ff82a791584c}} 
+\index{BinomialOption@{BinomialOption}!run@{run}}
+\index{run@{run}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Run HIP \mbox{\hyperlink{class_binomial_option}{Binomial\+Option}} \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_a4ac8dae8d045857026a7fea4122ccb6a}\label{class_binomial_option_a4ac8dae8d045857026a7fea4122ccb6a}} 
+\index{BinomialOption@{BinomialOption}!runKernels@{runKernels}}
+\index{runKernels@{runKernels}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{runKernels()}{runKernels()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::run\+Kernels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Set values for kernels\textquotesingle{} arguments, enqueue calls to the kernels on to the command queue, wait till end of kernel execution. Get kernel start and end time if timing is enabled \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_ab69752bbbb212cc847294bc544778540}\label{class_binomial_option_ab69752bbbb212cc847294bc544778540}} 
+\index{BinomialOption@{BinomialOption}!setup@{setup}}
+\index{setup@{setup}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample, adjust width and height of execution domain, perform all sample setup \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_ab7a08b743727ed59cedaba40e3300701}\label{class_binomial_option_ab7a08b743727ed59cedaba40e3300701}} 
+\index{BinomialOption@{BinomialOption}!setupBinomialOption@{setupBinomialOption}}
+\index{setupBinomialOption@{setupBinomialOption}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{setupBinomialOption()}{setupBinomialOption()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::setup\+Binomial\+Option (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allocate and initialize host memory array with random values \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_acb6cb2c1b52b0af19373fded3b4fd900}\label{class_binomial_option_acb6cb2c1b52b0af19373fded3b4fd900}} 
+\index{BinomialOption@{BinomialOption}!setupHIP@{setupHIP}}
+\index{setupHIP@{setupHIP}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{setupHIP()}{setupHIP()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::setup\+HIP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+HIP related initialisations. \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_binomial_option_adbe3824e4b57791a55497e9943137203}\label{class_binomial_option_adbe3824e4b57791a55497e9943137203}} 
+\index{BinomialOption@{BinomialOption}!verifyResults@{verifyResults}}
+\index{verifyResults@{verifyResults}!BinomialOption@{BinomialOption}}
+\doxysubsubsection{\texorpdfstring{verifyResults()}{verifyResults()}}
+{\footnotesize\ttfamily int Binomial\+Option\+::verify\+Results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Override from SDKSample Verify against reference implementation \begin{DoxyReturn}{Returns}
+SDK\+\_\+\+SUCCESS on success and SDK\+\_\+\+FAILURE on failure 
+\end{DoxyReturn}
+reference implementation it overwrites the input array with the output
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/pvelesko/local/\+CHIP-\/\+SPV/samples/hip-\/cuda/\+Binomial\+Option/Binomial\+Option.\+cpp\end{DoxyCompactItemize}
