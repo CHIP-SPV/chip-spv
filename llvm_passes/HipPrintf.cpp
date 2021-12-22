@@ -40,7 +40,13 @@ char HipPrintfToOpenCLPrintfLegacyPass::ID = 0;
 static RegisterPass<HipPrintfToOpenCLPrintfLegacyPass>
     X("hip-printf", "Convert printf calls to OpenCL compatible ones.");
 
-Value* convertFormatString(Value *HipFmtStrArg, Instruction *Before) {
+// Converts the address space of the format string to OpenCL compatible one
+// by creating a copy of it in the module global scope.
+//
+// Also counts the number of format args for replacing the return
+// value of the printf() call with it for CUDA emulation.
+Value* convertFormatString(Value *HipFmtStrArg, Instruction *Before,
+                           unsigned &NumberOfFormatSpecs) {
 
   Module *M = Before->getParent()->getParent()->getParent();
 
@@ -55,9 +61,31 @@ Value* convertFormatString(Value *HipFmtStrArg, Instruction *Before) {
   GlobalVariable *OrigFmtStr =
     cast<GlobalVariable>(GEP->getPointerOperand());
 
+  Constant *FmtStrData = OrigFmtStr->getInitializer();
+
+  NumberOfFormatSpecs = 0;
+  int I = 0;
+  while (Constant *Chr = FmtStrData->getAggregateElement(I)) {
+    char C = cast<ConstantInt>(Chr)->getZExtValue();
+
+    char NextC = 0;
+    if (Constant *NextChr = FmtStrData->getAggregateElement(I + 1))
+      NextC = cast<ConstantInt>(NextChr)->getZExtValue();
+
+    if (C == '%') {
+      if (NextC == '%') {
+        I += 2;
+      } else {
+        ++NumberOfFormatSpecs;
+        ++I;
+      }
+    } else
+      ++I;
+  }
+
   GlobalVariable *NewFmtStr = new GlobalVariable(
       *M, OrigFmtStr->getValueType(), true, OrigFmtStr->getLinkage(),
-      OrigFmtStr->getInitializer(), OrigFmtStr->getName() + ".cl",
+      FmtStrData, OrigFmtStr->getName() + ".cl",
       (GlobalVariable *)nullptr, OrigFmtStr->getThreadLocalMode(),
       SPIRV_OPENCL_PRINTF_FMT_ARG_AS);
   NewFmtStr->copyAttributesFrom(OrigFmtStr);
@@ -76,6 +104,7 @@ Value* convertFormatString(Value *HipFmtStrArg, Instruction *Before) {
     llvm::ConstantExpr::getGetElementPtr(nullptr, NewFmtStr, Indices);
   return NewCE;
 }
+
 
 PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(
   Function &F,
@@ -120,23 +149,38 @@ PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(
         continue;
       CallInst &OrigCall = cast<CallInst>(I);
       std::vector<Value *> Args;
+      unsigned FmtSpecCount;
       for (auto &OrigArg : OrigCall.args()) {
         if (Args.size() == 0) {
-          Args.push_back(convertFormatString(OrigArg, &OrigCall));
+          Args.push_back(
+            convertFormatString(OrigArg, &OrigCall, FmtSpecCount));
           continue;
         }
         Args.push_back(OrigArg);
       }
       CallInst *NewCall =
         CallInst::Create(OpenCLPrintf, Args, "", &OrigCall);
+
       // CHECK: Does this invalidate I?
       OrigCall.replaceAllUsesWith(NewCall);
+
+
+      // Instead of returning the success/failure from the OpenCL printf(),
+      // assume that the parsing succeeds and return the number of format
+      // strings. A slight improvement would be to return 0 in case of a
+      // failure, but it still would not necessary conform to CUDA nor HIP
+      // since it should return the number of valid format replacements?
+      IntegerType *Int32Ty = Type::getInt32Ty(M->getContext());
+      ConstantInt *RV = ConstantInt::get(Int32Ty, FmtSpecCount);
+      NewCall->replaceAllUsesWith(RV);
+
       EraseList.insert(&I);
     }
   }
   for (auto I : EraseList)
     I->eraseFromParent();
-  return EraseList.size() > 0 ? PreservedAnalyses::none() : PreservedAnalyses::all();
+  return EraseList.size() > 0 ?
+    PreservedAnalyses::none() : PreservedAnalyses::all();
 }
 
 namespace {
