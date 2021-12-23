@@ -15,7 +15,7 @@ void _setupSpdlog() {
 
   const char *loglevel = getenv("CHIP_LOGLEVEL");
   if (loglevel) {
-    std::cout << "CHIP_LOGLEVEL=" << loglevel << "\n";
+    // std::cout << "CHIP_LOGLEVEL=" << loglevel << "\n";
     std::string level(loglevel);
     if (level == "debug") spd_loglevel = spdlog::level::debug;
     if (level == "info") spd_loglevel = spdlog::level::info;
@@ -24,7 +24,7 @@ void _setupSpdlog() {
     if (level == "crit") spd_loglevel = spdlog::level::critical;
     if (level == "off") spd_loglevel = spdlog::level::off;
   } else {
-    std::cout << "CHIP_LOGLEVEL was not set. Default to trace\n";
+    // std::cout << "CHIP_LOGLEVEL was not set. Default to trace\n";
     spd_loglevel = spdlog::level::trace;
   }
 

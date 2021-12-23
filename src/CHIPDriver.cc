@@ -45,11 +45,9 @@ void read_env_vars(std::string& CHIPPlatformStr, std::string& CHIPDeviceTypeStr,
   CHIPDeviceStr = read_env_var("CHIP_DEVICE");
   if (CHIPDeviceStr.size() == 0) CHIPDeviceStr = "0";
 
-  std::cout << "\n";
-  std::cout << "CHIP_PLATFORM=" << CHIPPlatformStr << std::endl;
-  std::cout << "CHIP_DEVICE_TYPE=" << CHIPDeviceTypeStr << std::endl;
-  std::cout << "CHIP_DEVICE=" << CHIPDeviceStr << std::endl;
-  std::cout << "\n";
+  logDebug("CHIP_PLATFORM={}", CHIPPlatformStr.c_str());
+  logDebug("CHIP_DEVICE_TYPE={}", CHIPDeviceTypeStr.c_str());
+  logDebug("CHIP_DEVICE={}", CHIPDeviceStr.c_str());
 };
 
 void CHIPInitializeCallOnce(std::string BE) {
