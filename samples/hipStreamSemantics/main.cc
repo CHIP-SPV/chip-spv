@@ -63,5 +63,5 @@ int main() {
   }
 
   std::cout << "Num Errors: " << num_errors << std::endl;
-  std::cout << (pass ? "PASS" : "FAIL") << std::endl;
+  std::cout << (pass ? "PASSED!" : "FAIL") << std::endl;
 }
