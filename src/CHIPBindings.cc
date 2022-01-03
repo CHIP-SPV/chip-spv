@@ -2017,7 +2017,6 @@ extern "C" void __hipUnregisterFatBinary(void *data) {
     CHIPUninitialize();
   }
 
-  delete module;
   CHIP_CATCH_NO_RETURN
 }
 
