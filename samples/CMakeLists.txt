@@ -92,7 +92,8 @@ set(SAMPLES
     hipStreamSemantics
     hipInfo
     hipSymbol
-    hipDeviceLink
+    hip-cuda
+    hipDeviceLink # must be last in this list due to how hacky using multiple compilers with CMake is
 )
 
 # Add samples that depend on Intel's oneAPI compiler - if available.

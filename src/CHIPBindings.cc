@@ -1047,7 +1047,8 @@ hipError_t hipHostGetDevicePointer(void **devPtr, void *hstPtr,
   CHIPInitialize();
   NULLCHECK(devPtr, hstPtr);
 
-  UNIMPLEMENTED(hipErrorNotSupported);
+  // FIX: use a hostPtr-to-devPtr map
+  *devPtr = hstPtr;
 
   RETURN(hipSuccess);
   CHIP_CATCH
