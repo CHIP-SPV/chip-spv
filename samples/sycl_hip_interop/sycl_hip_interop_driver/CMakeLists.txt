@@ -14,7 +14,7 @@ add_test(NAME "sycl_chip_interop"
          )
 
 set_tests_properties("sycl_chip_interop" PROPERTIES
-         PASS_REGULAR_EXPRESSION "${TEST_PASS}"
+         PASS_REGULAR_EXPRESSION "PASSED"
          TIMEOUT 60
          )
 
@@ -31,6 +31,6 @@ add_test(NAME "sycl_chip_interop_usm"
          )
 
 set_tests_properties("sycl_chip_interop_usm" PROPERTIES
-         PASS_REGULAR_EXPRESSION "${TEST_PASS}"
+         PASS_REGULAR_EXPRESSION "PASSED"
          TIMEOUT 60
          )
