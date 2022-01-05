@@ -149,7 +149,7 @@ class CHIPQueueOpenCL : public CHIPQueue {
   CHIPQueueOpenCL(CHIPDevice *chip_device);
   ~CHIPQueueOpenCL();
 
-  void updateLastEvent(cl_event e_);
+  void updateLastEvent(cl::Event &e_);
 
   virtual hipError_t launch(CHIPExecItem *exec_item) override;
   virtual void finish() override;
@@ -256,16 +256,16 @@ class CHIPBackendOpenCL : public CHIPBackend {
 
 class CHIPEventOpenCL : public CHIPEvent {
  public:
-  cl_event ev;
+  cl::Event ev;
 
  public:
-  CHIPEventOpenCL(CHIPContextOpenCL *chip_ctx_, cl_event ev_,
+  CHIPEventOpenCL(CHIPContextOpenCL *chip_ctx_, cl::Event ev_,
                   CHIPEventType event_type_ = CHIPEventType::Default)
       : CHIPEvent((CHIPContext *)(chip_ctx_), event_type_), ev(ev_) {}
 
   CHIPEventOpenCL(CHIPContextOpenCL *chip_ctx_,
                   CHIPEventType event_type_ = CHIPEventType::Default)
-      : CHIPEvent((CHIPContext *)(chip_ctx_), event_type_), ev(nullptr) {}
+      : CHIPEvent((CHIPContext *)(chip_ctx_), event_type_), ev() {}
 
   void recordStream(CHIPQueue *chip_queue_) override;
   bool wait() override;
@@ -277,14 +277,12 @@ class CHIPEventOpenCL : public CHIPEvent {
 
   virtual bool updateFinishStatus() override;
 
-  cl_event get() { return ev; }
+  cl::Event &get() { return ev; }
 
   uint64_t getFinishTime() {
     std::lock_guard<std::mutex> Lock(mtx);
     int status;
-    uint64_t ret;
-    status = clGetEventProfilingInfo(ev, CL_PROFILING_COMMAND_END, sizeof(ret),
-                                     &ret, NULL);
+    uint64_t ret = ev.getProfilingInfo<CL_PROFILING_COMMAND_END>(&status);
 
     CHIPERR_CHECK_LOG_AND_THROW(status, CL_SUCCESS, hipErrorTbd,
                                 "Failed to query event for profiling info.");
@@ -292,9 +290,8 @@ class CHIPEventOpenCL : public CHIPEvent {
   }
 
   int getRefCount() {
-    cl_uint refc;
-    int status =
-        ::clGetEventInfo(this->get(), CL_EVENT_REFERENCE_COUNT, 4, &refc, NULL);
+    int status;
+    cl_uint refc = ev.getInfo<CL_EVENT_REFERENCE_COUNT>(&status);
     CHIPERR_CHECK_LOG_AND_THROW(status, CL_SUCCESS, hipErrorTbd);
     return refc;
   }
