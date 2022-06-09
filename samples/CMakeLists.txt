@@ -120,4 +120,4 @@ foreach (SAMPLE ${SAMPLES})
   add_subdirectory(${SAMPLE})
 endforeach()
 
-#add_subdirectory(hip-cuda)
+add_subdirectory(cuda_samples)
