@@ -37,6 +37,16 @@ THE SOFTWARE.
 #define __DRIVER_TYPES_H__
 #endif
 
+// Pretend to be CUDA 8.0.
+#ifndef __CUDART_VERSION__
+#define __CUDART_VERSION__ 8000
+#endif
+
+// Pretend compute capability to be 2.0
+#ifndef __CUDA_ARCH__
+#define __CUDA_ARCH__ 200
+#endif
+
 #define cudaSuccess hipSuccess
 #define cudaErrorInvalidValue hipErrorInvalidValue
 #define cudaErrorNotReady hipErrorNotReady
