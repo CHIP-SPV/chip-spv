@@ -302,3 +302,5 @@ install(EXPORT CHIPTargets
   FILE CHIPTargets.cmake
   NAMESPACE CHIP::
   DESTINATION cmake/CHIP)
+
+add_subdirectory(bin)

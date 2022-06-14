@@ -1,0 +1,9 @@
+#!/bin/bash
+# CUDA-SPIRV compiler - A compiler wrapper for compiling CUDA sources directly.
+#
+# CUDA sources are compiled in HIP mode with an include search path to
+# cuda_runtime.h wrapper which translates CUDA API to HIP API.
+@CMAKE_CXX_COMPILER@ \
+ -D__HIP_PLATFORM_SPIRV__= -x hip --hip-path=@CMAKE_INSTALL_PREFIX@ \
+ --offload=spirv64 -nohipwrapperinc -I@CMAKE_INSTALL_PREFIX@/include/cuspv \
+ "$@"
