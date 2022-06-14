@@ -869,6 +869,9 @@ NON_OVLD void GEN_NAME(global_fence)();
 }
 EXPORT void __threadfence() { GEN_NAME(global_fence)(); }
 
+unsigned __activemask()
+    __attribute__((unavailable("unsupported in CHIP-SPV.")));
+
 EXPORT clock_t clock() { return 0; }
 
 EXPORT unsigned long long clock64() { return 0; }
@@ -906,6 +909,9 @@ EXPORT unsigned long long clock64();
 EXPORT void *memset(void *ptr, int value, size_t size);
 EXPORT void *memcpy(void *dest, const void *src, size_t n);
 #endif
+
+EXPORT unsigned __activemask()
+    __attribute__((unavailable("unsupported in CHIP-SPV.")));
 
 // NAN/NANF
 
