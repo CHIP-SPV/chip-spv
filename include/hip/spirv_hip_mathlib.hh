@@ -75,8 +75,7 @@ THE SOFTWARE.
 __DEVICE__
 inline float __fadd_rd(float x, float y) { return __ocml_add_rtn_f32(x, y); }
 #endif
-__DEVICE__
-// inline float __fadd_rn(float x, float y) { return x + y; }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __fadd_ru(float x, float y) { return __ocml_add_rtp_f32(x, y); }
@@ -85,8 +84,7 @@ inline float __fadd_rz(float x, float y) { return __ocml_add_rtz_f32(x, y); }
 __DEVICE__
 inline float __fdiv_rd(float x, float y) { return __ocml_div_rtn_f32(x, y); }
 #endif
-__DEVICE__
-// inline float __fdiv_rn(float x, float y) { return x / y; }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __fdiv_ru(float x, float y) { return __ocml_div_rtp_f32(x, y); }
@@ -117,8 +115,7 @@ inline float __fmaf_rz(float x, float y, float z) {
 __DEVICE__
 inline float __fmul_rd(float x, float y) { return __ocml_mul_rtn_f32(x, y); }
 #endif
-__DEVICE__
-// inline float __fmul_rn(float x, float y) { return x * y; }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __fmul_ru(float x, float y) { return __ocml_mul_rtp_f32(x, y); }
@@ -130,8 +127,7 @@ inline float __frcp_rd(float x) {
   return 1;
 }
 #endif
-__DEVICE__
-// inline float __frcp_rn(float x) { return __llvm_amdgcn_rcp_f32(x); }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __frcp_ru(float x) {
