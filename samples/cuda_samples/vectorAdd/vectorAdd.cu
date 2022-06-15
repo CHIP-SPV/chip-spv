@@ -140,7 +140,9 @@ int main(void) {
   }
 
   // Launch the Vector Add CUDA Kernel
-  int threadsPerBlock = 256;
+  cudaDeviceProp deviceProps;
+  checkCudaErrors(cudaGetDeviceProperties(&deviceProps, 0));
+  int threadsPerBlock = deviceProps.maxThreadsPerBlock;
   int blocksPerGrid = (numElements + threadsPerBlock - 1) / threadsPerBlock;
   printf("CUDA kernel launch with %d blocks of %d threads\n", blocksPerGrid,
          threadsPerBlock);
