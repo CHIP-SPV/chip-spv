@@ -88,8 +88,7 @@ int main(int argc, char *argv[]) {
   checkCudaErrors(cudaMemset(d_a, 255, nbytes));
 
   // set kernel launch configuration
-  // FIXME: use maxThreadsPerBlock property for portability.
-  dim3 threads = dim3(256, 1);
+  dim3 threads = dim3(deviceProps.maxThreadsPerBlock, 1);
   dim3 blocks = dim3(n / threads.x, 1);
 
   // create cuda event handles
@@ -105,14 +104,13 @@ int main(int argc, char *argv[]) {
   float gpu_time = 0.0f;
 
   // asynchronously issue work to the GPU (all to stream 0)
-
   // Profiling is not supported by CHIP-SPV (yet?).
   // checkCudaErrors(cudaProfilerStart());
   sdkStartTimer(&timer);
   cudaEventRecord(start, 0);
-  cudaMemcpyAsync(d_a, a, nbytes, cudaMemcpyHostToDevice);
+  cudaMemcpyAsync(d_a, a, nbytes, cudaMemcpyHostToDevice, 0);
   increment_kernel<<<blocks, threads, 0, 0>>>(d_a, value);
-  cudaMemcpyAsync(a, d_a, nbytes, cudaMemcpyDeviceToHost);
+  cudaMemcpyAsync(a, d_a, nbytes, cudaMemcpyDeviceToHost, 0);
   cudaEventRecord(stop, 0);
   sdkStopTimer(&timer);
   // checkCudaErrors(cudaProfilerStop());
