@@ -24,13 +24,12 @@ THE SOFTWARE.
  * traslate CUDA API functions to corresponding ones in HIP.
  */
 
-#include <hip/hip_runtime.h>
-
-// CUDA runtime header include guard. Some CUDA programs may use this
-// to detect CUDA compilation.
+// Using same include guard name as in CUDA SDK's cuda_runtime.h so it
+// gets excluded if it happens to be in the include search paths.
 #ifndef __CUDA_RUNTIME_H__
 #define __CUDA_RUNTIME_H__
-#endif
+
+#include <hip/hip_runtime.h>
 
 // Needed for some CUDA samples.
 #ifndef __DRIVER_TYPES_H__
@@ -195,3 +194,5 @@ static inline cudaError_t cudaEventElapsedTime(float *ms, cudaEvent_t start,
 }
 
 static inline cudaError_t cudaGetLastError() { return hipGetLastError(); }
+
+#endif
