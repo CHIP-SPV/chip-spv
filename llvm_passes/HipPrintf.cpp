@@ -105,15 +105,7 @@ GlobalVariable *findGlobalStr(Value *Arg) {
 // NumberOfFormatSpecs to returns it as a final return value.
 static std::vector<std::string>
 getFormatStringPieces(Value *FmtStrArg, unsigned &NumberOfFormatSpecs) {
-
-  Type *Int8Ty = IntegerType::get(FmtStrArg->getContext(), 8);
-
-  ConstantExpr *CE = cast<ConstantExpr>(FmtStrArg);
-
-  Value *FmtStrOpr = findGlobalStr(CE->getOperand(0));
-
-  GlobalVariable *OrigFmtStr = findGlobalStr(CE->getOperand(0));
-
+  auto *OrigFmtStr = findGlobalStr(FmtStrArg);
   std::vector<std::string> FmtStrPieces;
   ConstantDataSequential *FmtStrData =
       dyn_cast<ConstantDataSequential>(OrigFmtStr->getInitializer());
@@ -180,8 +172,6 @@ Value *HipPrintfToOpenCLPrintfPass::cloneStrArgToConstantAS(
   if (CE == nullptr)
     return nullptr;
 
-  Type *Int8Ty = IntegerType::get(M_->getContext(), 8);
-
   Value *StrOpr = CE->getOperand(0);
 
   GlobalVariable *OrigStr = findGlobalStr(StrOpr);
@@ -198,11 +188,11 @@ bool isLiteralString(const GlobalVariable &Var) {
   if (!Var.isConstant())
     return false;
 
-  auto ArrayTy = dyn_cast<ArrayType>(Var.getType()->getElementType());
+  auto ArrayTy = dyn_cast<ArrayType>(Var.getType()->getArrayElementType());
   if (!ArrayTy)
     return false;
 
-  auto IntTy = dyn_cast<IntegerType>(ArrayTy->getElementType());
+  auto IntTy = dyn_cast<IntegerType>(ArrayTy->getArrayElementType());
   if (!IntTy)
     return false;
 
@@ -219,18 +209,8 @@ HipPrintfToOpenCLPrintfPass::getOrCreateStrLiteralArg(const std::string &Str,
   if (LiteralArg != nullptr)
     return LiteralArg;
 
-  auto *LiteralStr = B.CreateGlobalString(Str.c_str(), ".cl_printf_fmt_str",
-                                          SPIRV_OPENCL_PRINTF_FMT_ARG_AS);
-
-  IntegerType *Int64Ty = Type::getInt64Ty(M_->getContext());
-  ConstantInt *Zero = ConstantInt::get(Int64Ty, 0);
-  std::array<Constant *, 2> Indices = {Zero, Zero};
-
-  PointerType *PtrTy =
-      cast<PointerType>(LiteralStr->getType()->getScalarType());
-
-  return LiteralArg = llvm::ConstantExpr::getGetElementPtr(
-             PtrTy->getElementType(), LiteralStr, Indices);
+  return B.CreateGlobalString(Str.c_str(), ".cl_printf_fmt_str",
+                              SPIRV_OPENCL_PRINTF_FMT_ARG_AS);
 }
 
 Function *HipPrintfToOpenCLPrintfPass::getOrCreatePrintStringF() {
@@ -251,6 +231,26 @@ Function *HipPrintfToOpenCLPrintfPass::getOrCreatePrintStringF() {
   cast<Function>(PrintStrF.getCallee())
       ->setCallingConv(llvm::CallingConv::SPIR_FUNC);
   return cast<Function>(PrintStrF.getCallee());
+}
+
+// Get called function from 'CI' call or return nullptr the call is indirect.
+static Function* getCalledFunction(CallInst *CI, const LLVMContext &Ctx) {
+  assert(CI);
+  if (auto *Callee = CI->getCalledFunction())
+    return Callee;
+
+  if (CI->isIndirectCall())
+    return nullptr;
+  // A call with mismatched call signature.
+
+#if LLVM_VERSION_MAJOR > 14
+  if (Ctx.hasSetOpaquePointersValue())
+    return cast<Function>(CI->getCalledOperand());
+#endif
+
+  auto *CalledOp = dyn_cast<ConstantExpr>(CI->getCalledOperand());
+  assert(CalledOp && CalledOp->getOpcode() == Instruction::BitCast);
+  return cast<Function>(CalledOp->getOperand(0));
 }
 
 PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
@@ -305,14 +305,9 @@ PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
         auto *CI = dyn_cast<CallInst>(&I);
         if (!CI)
           continue;
-        auto *Callee = CI->getCalledFunction();
-        if (!Callee) {
-          // There is a call signature mismatch if getCalledFunction() returns
-          // nullptr.
-          auto *CalledOp = dyn_cast<ConstantExpr>(CI->getCalledOperand());
-          assert(CalledOp && CalledOp->getOpcode() == Instruction::BitCast);
-          Callee = cast<Function>(CalledOp->getOperand(0));
-        }
+        auto *Callee = getCalledFunction(CI, Ctx);
+        if (!Callee)
+          continue; // CI is indirect call.
         if (Callee->getName() != ORIG_PRINTF_FUNC_NAME)
           continue;
 
@@ -320,7 +315,6 @@ PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
         unsigned TotalFmtSpecCount;
         auto FmtSpecPieces =
             getFormatStringPieces(*OrigCall.args().begin(), TotalFmtSpecCount);
-        auto FmtI = FmtSpecPieces.begin();
 
         IRBuilder<> B(&I);
 
