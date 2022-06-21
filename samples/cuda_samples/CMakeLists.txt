@@ -24,6 +24,7 @@ add_cuda_sample(cuda-vectorAdd vectorAdd/vectorAdd.cu)
 add_cuda_sample(cuda-matrixMul matrixMul/matrixMul.cu)
 add_cuda_sample(cuda-asyncAPI asyncAPI/asyncAPI.cu)
 add_cuda_sample(cuda-template template/template.cu template/template_cpu.cpp)
+add_cuda_sample(cuda-lambda lambda.cu)
 
 # DISABLED: Due to the following error:
 #
