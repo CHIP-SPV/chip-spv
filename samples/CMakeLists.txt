@@ -99,6 +99,7 @@ set(SAMPLES
     hip-cuda
     printf
     texture
+    simple_kernel
 
     # DISABLED for LLVM 15. Fails due to clang inserting -lamdhip64
     # into the linking phase.
