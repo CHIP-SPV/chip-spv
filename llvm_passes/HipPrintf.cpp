@@ -57,6 +57,8 @@
 #include <string>
 #include <iostream>
 
+#define DEBUG_TYPE "hip-printf"
+
 #define SPIRV_OPENCL_CONSTANT_AS 2
 #define SPIRV_OPENCL_GENERIC_AS 4
 #define SPIRV_OPENCL_PRINTF_FMT_ARG_AS SPIRV_OPENCL_CONSTANT_AS
@@ -82,20 +84,23 @@ unsigned NumFormatSpecs(StringRef FmtString) {
 // literal and return it.
 GlobalVariable *findGlobalStr(Value *Arg) {
 
+  if (auto *GV = dyn_cast<GlobalVariable>(Arg))
+    return GV;
+
   if (auto GEP = dyn_cast<GetElementPtrInst>(Arg)) {
-    Arg = GEP->getPointerOperand();
     assert(GEP->hasAllZeroIndices());
+    return findGlobalStr(GEP->getPointerOperand());
   }
-  if (auto ASCast = dyn_cast<AddrSpaceCastInst>(Arg)) {
-    Arg = ASCast->getPointerOperand();
-  } else if (auto CE = dyn_cast<ConstantExpr>(Arg)) {
-    if (CE->getOpcode() == llvm::Instruction::AddrSpaceCast) {
-      Arg = CE->getOperand(0);
-    } else {
+  if (auto ASCast = dyn_cast<AddrSpaceCastInst>(Arg))
+    return findGlobalStr(ASCast->getPointerOperand());
+  else if (auto CE = dyn_cast<ConstantExpr>(Arg)) {
+    if (CE->getOpcode() == llvm::Instruction::AddrSpaceCast ||
+        CE->getOpcode() == llvm::Instruction::GetElementPtr)
+      return findGlobalStr(CE->getOperand(0));
+    else
       llvm_unreachable("Unexpected printf format string format!");
-    }
   }
-  return cast<GlobalVariable>(Arg);
+  llvm_unreachable("Unrecognized instruction or constant expression.");
 }
 
 // Extracts the format string in the printf argument passed as FmtStrArg,
@@ -209,8 +214,23 @@ HipPrintfToOpenCLPrintfPass::getOrCreateStrLiteralArg(const std::string &Str,
   if (LiteralArg != nullptr)
     return LiteralArg;
 
+#if LLVM_VERSION_MAJOR <= 14
+  auto *LiteralStr = B.CreateGlobalString(Str.c_str(), ".cl_printf_fmt_str",
+                                          SPIRV_OPENCL_PRINTF_FMT_ARG_AS);
+
+  IntegerType *Int64Ty = Type::getInt64Ty(M_->getContext());
+  ConstantInt *Zero = ConstantInt::get(Int64Ty, 0);
+  std::array<Constant *, 2> Indices = {Zero, Zero};
+
+  PointerType *PtrTy =
+      cast<PointerType>(LiteralStr->getType()->getScalarType());
+
+  return LiteralArg = llvm::ConstantExpr::getGetElementPtr(
+             PtrTy->getElementType(), LiteralStr, Indices);
+#else
   return B.CreateGlobalString(Str.c_str(), ".cl_printf_fmt_str",
                               SPIRV_OPENCL_PRINTF_FMT_ARG_AS);
+#endif
 }
 
 Function *HipPrintfToOpenCLPrintfPass::getOrCreatePrintStringF() {
@@ -265,6 +285,7 @@ PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
   // No printf decl in the module, no printf calls to handle.
   if (Printf == nullptr)
     return PreservedAnalyses::all();
+  LLVM_DEBUG(dbgs() << "Found printf decl: "; Printf->dump());
 
   Function *PrintfF = cast<Function>(Printf);
 
@@ -310,6 +331,8 @@ PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
           continue; // CI is indirect call.
         if (Callee->getName() != ORIG_PRINTF_FUNC_NAME)
           continue;
+
+        LLVM_DEBUG(dbgs() << "Original printf call: "; CI->dump());
 
         CallInst &OrigCall = cast<CallInst>(I);
         unsigned TotalFmtSpecCount;
