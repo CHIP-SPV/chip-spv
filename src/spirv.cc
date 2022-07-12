@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "common.hh"
 #include "spirv.hh"
 #include "logging.hh"
 
@@ -341,7 +342,7 @@ public:
     }
     ++StreamIntPtr;
 
-    if (*StreamIntPtr != spv::Version10 && *StreamIntPtr != spv::Version11) {
+    if (*StreamIntPtr < spv::Version10 || *StreamIntPtr > spv::Version12) {
       logError("Unsupported SPIR-V version.");
       return false;
     }
