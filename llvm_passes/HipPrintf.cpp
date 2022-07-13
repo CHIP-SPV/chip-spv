@@ -57,6 +57,8 @@
 #include <string>
 #include <iostream>
 
+#define DEBUG_TYPE "hip-printf"
+
 #define SPIRV_OPENCL_CONSTANT_AS 2
 #define SPIRV_OPENCL_GENERIC_AS 4
 #define SPIRV_OPENCL_PRINTF_FMT_ARG_AS SPIRV_OPENCL_CONSTANT_AS
@@ -82,20 +84,23 @@ unsigned NumFormatSpecs(StringRef FmtString) {
 // literal and return it.
 GlobalVariable *findGlobalStr(Value *Arg) {
 
+  if (auto *GV = dyn_cast<GlobalVariable>(Arg))
+    return GV;
+
   if (auto GEP = dyn_cast<GetElementPtrInst>(Arg)) {
-    Arg = GEP->getPointerOperand();
     assert(GEP->hasAllZeroIndices());
+    return findGlobalStr(GEP->getPointerOperand());
   }
-  if (auto ASCast = dyn_cast<AddrSpaceCastInst>(Arg)) {
-    Arg = ASCast->getPointerOperand();
-  } else if (auto CE = dyn_cast<ConstantExpr>(Arg)) {
-    if (CE->getOpcode() == llvm::Instruction::AddrSpaceCast) {
-      Arg = CE->getOperand(0);
-    } else {
+  if (auto ASCast = dyn_cast<AddrSpaceCastInst>(Arg))
+    return findGlobalStr(ASCast->getPointerOperand());
+  else if (auto CE = dyn_cast<ConstantExpr>(Arg)) {
+    if (CE->getOpcode() == llvm::Instruction::AddrSpaceCast ||
+        CE->getOpcode() == llvm::Instruction::GetElementPtr)
+      return findGlobalStr(CE->getOperand(0));
+    else
       llvm_unreachable("Unexpected printf format string format!");
-    }
   }
-  return cast<GlobalVariable>(Arg);
+  llvm_unreachable("Unrecognized instruction or constant expression.");
 }
 
 // Extracts the format string in the printf argument passed as FmtStrArg,
@@ -105,15 +110,7 @@ GlobalVariable *findGlobalStr(Value *Arg) {
 // NumberOfFormatSpecs to returns it as a final return value.
 static std::vector<std::string>
 getFormatStringPieces(Value *FmtStrArg, unsigned &NumberOfFormatSpecs) {
-
-  Type *Int8Ty = IntegerType::get(FmtStrArg->getContext(), 8);
-
-  ConstantExpr *CE = cast<ConstantExpr>(FmtStrArg);
-
-  Value *FmtStrOpr = findGlobalStr(CE->getOperand(0));
-
-  GlobalVariable *OrigFmtStr = findGlobalStr(CE->getOperand(0));
-
+  auto *OrigFmtStr = findGlobalStr(FmtStrArg);
   std::vector<std::string> FmtStrPieces;
   ConstantDataSequential *FmtStrData =
       dyn_cast<ConstantDataSequential>(OrigFmtStr->getInitializer());
@@ -180,8 +177,6 @@ Value *HipPrintfToOpenCLPrintfPass::cloneStrArgToConstantAS(
   if (CE == nullptr)
     return nullptr;
 
-  Type *Int8Ty = IntegerType::get(M_->getContext(), 8);
-
   Value *StrOpr = CE->getOperand(0);
 
   GlobalVariable *OrigStr = findGlobalStr(StrOpr);
@@ -198,11 +193,11 @@ bool isLiteralString(const GlobalVariable &Var) {
   if (!Var.isConstant())
     return false;
 
-  auto ArrayTy = dyn_cast<ArrayType>(Var.getType()->getElementType());
+  auto ArrayTy = dyn_cast<ArrayType>(Var.getType()->getArrayElementType());
   if (!ArrayTy)
     return false;
 
-  auto IntTy = dyn_cast<IntegerType>(ArrayTy->getElementType());
+  auto IntTy = dyn_cast<IntegerType>(ArrayTy->getArrayElementType());
   if (!IntTy)
     return false;
 
@@ -219,6 +214,7 @@ HipPrintfToOpenCLPrintfPass::getOrCreateStrLiteralArg(const std::string &Str,
   if (LiteralArg != nullptr)
     return LiteralArg;
 
+#if LLVM_VERSION_MAJOR <= 14
   auto *LiteralStr = B.CreateGlobalString(Str.c_str(), ".cl_printf_fmt_str",
                                           SPIRV_OPENCL_PRINTF_FMT_ARG_AS);
 
@@ -231,6 +227,10 @@ HipPrintfToOpenCLPrintfPass::getOrCreateStrLiteralArg(const std::string &Str,
 
   return LiteralArg = llvm::ConstantExpr::getGetElementPtr(
              PtrTy->getElementType(), LiteralStr, Indices);
+#else
+  return B.CreateGlobalString(Str.c_str(), ".cl_printf_fmt_str",
+                              SPIRV_OPENCL_PRINTF_FMT_ARG_AS);
+#endif
 }
 
 Function *HipPrintfToOpenCLPrintfPass::getOrCreatePrintStringF() {
@@ -253,6 +253,26 @@ Function *HipPrintfToOpenCLPrintfPass::getOrCreatePrintStringF() {
   return cast<Function>(PrintStrF.getCallee());
 }
 
+// Get called function from 'CI' call or return nullptr the call is indirect.
+static Function* getCalledFunction(CallInst *CI, const LLVMContext &Ctx) {
+  assert(CI);
+  if (auto *Callee = CI->getCalledFunction())
+    return Callee;
+
+  if (CI->isIndirectCall())
+    return nullptr;
+  // A call with mismatched call signature.
+
+#if LLVM_VERSION_MAJOR > 14
+  if (Ctx.hasSetOpaquePointersValue())
+    return cast<Function>(CI->getCalledOperand());
+#endif
+
+  auto *CalledOp = dyn_cast<ConstantExpr>(CI->getCalledOperand());
+  assert(CalledOp && CalledOp->getOpcode() == Instruction::BitCast);
+  return cast<Function>(CalledOp->getOperand(0));
+}
+
 PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
                                                    ModuleAnalysisManager &AM) {
 
@@ -265,6 +285,7 @@ PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
   // No printf decl in the module, no printf calls to handle.
   if (Printf == nullptr)
     return PreservedAnalyses::all();
+  LLVM_DEBUG(dbgs() << "Found printf decl: "; Printf->dump());
 
   Function *PrintfF = cast<Function>(Printf);
 
@@ -305,22 +326,18 @@ PreservedAnalyses HipPrintfToOpenCLPrintfPass::run(Module &Mod,
         auto *CI = dyn_cast<CallInst>(&I);
         if (!CI)
           continue;
-        auto *Callee = CI->getCalledFunction();
-        if (!Callee) {
-          // There is a call signature mismatch if getCalledFunction() returns
-          // nullptr.
-          auto *CalledOp = dyn_cast<ConstantExpr>(CI->getCalledOperand());
-          assert(CalledOp && CalledOp->getOpcode() == Instruction::BitCast);
-          Callee = cast<Function>(CalledOp->getOperand(0));
-        }
+        auto *Callee = getCalledFunction(CI, Ctx);
+        if (!Callee)
+          continue; // CI is indirect call.
         if (Callee->getName() != ORIG_PRINTF_FUNC_NAME)
           continue;
+
+        LLVM_DEBUG(dbgs() << "Original printf call: "; CI->dump());
 
         CallInst &OrigCall = cast<CallInst>(I);
         unsigned TotalFmtSpecCount;
         auto FmtSpecPieces =
             getFormatStringPieces(*OrigCall.args().begin(), TotalFmtSpecCount);
-        auto FmtI = FmtSpecPieces.begin();
 
         IRBuilder<> B(&I);
 

@@ -100,7 +100,11 @@ set(SAMPLES
     hip-cuda
     printf
     texture
-    hipDeviceLink # must be last in this list due to how hacky using multiple compilers with CMake is
+    simple_kernel
+
+    # DISABLED for LLVM 15. Fails due to clang inserting -lamdhip64
+    # into the linking phase.
+    # hipDeviceLink # must be last in this list due to how hacky using multiple compilers with CMake is
 )
 
 include(mkl_and_icpx)

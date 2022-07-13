@@ -30,6 +30,7 @@ option(BUILD_SHARED_LIBS "Build CHIP-SPV as a shared library" ON)
 option(ENFORCE_QUEUE_SYNCHRONIZATION "Enforce the correct HIP stream semantics of synchronizing queues with the default queue" ON)
 option(PER_THREAD_DEFAULT_STREAM "Each thread has a thread local default stream. Default: OFF - use legacy stream" OFF)
 option(LEVEL_ZERO_IMMEDIATE_QUEUES "Enable/disable the use of immediate command queues" OFF)
+option(LLVM_USE_INTERGRATED_SPIRV "Use LLVM's intergrated SPIR-V backend for emitting device binary instead of SPIR-V translator. Requires LLVM 15" OFF)
 set(HIP_SPIRV_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE PATH "Path to HIP SPIRV directory containing HIP_SPIRV_DIR/share/kernellib.bc and HIP_SPIRV_DIR/lib/llvm")
 
 # If custom HIP_SPIRV_DIR is given, check that kernellib.bc exists
@@ -140,6 +141,16 @@ include(cmake/FindLLVM.cmake)
 
 set(HIP_PATH HIP)
 
+if(LLVM_USE_INTERGRATED_SPIRV)
+  if("${LLVM_VERSION}" VERSION_GREATER_EQUAL 14)
+    set(SPIRV_EMITTER_OPTS "-fintegrated-objemitter")
+  else()
+    message(FATAL_ERROR "-DLLVM_USE_INTERGRATED_SPIRV=On is not supported for LLVM 13 and less")
+  endif()
+else()
+  set(SPIRV_EMITTER_OPTS "")
+endif()
+
 if(DEFINED LLVM_VERSION AND "${LLVM_VERSION}" VERSION_LESS 14)
   # Definitions for the older forked, experimental HIP-Clang.
   set(HIP_LINK_LINE
@@ -163,13 +174,17 @@ else()
     # excludes the wrappers.
     "-nohipwrapperinc")
   set(OFFLOAD_ARCH_STR
-
     # TODO: Consider integrating the '-D__HIP_PLATFORM_SPIRV__=' into
-    # HIPSPV's tool chain.
+    #       HIPSPV's tool chain.
     -D__HIP_PLATFORM_SPIRV__= -x hip --target=x86_64-linux-gnu
-    --offload=spirv64 ${HIP_LINK_LINE})
+    --offload=spirv64 ${HIP_LINK_LINE} ${SPIRV_EMITTER_OPTS}) 
 
-  set(HIP_OFFLOAD_ARCH -D__HIP_PLATFORM_SPIRV__= -x hip --target=x86_64-linux-gnu --offload=spirv64 --hip-path=${CMAKE_INSTALL_PREFIX} -nohipwrapperinc)
+  # Why do we have a similar sounding variable?
+  set(HIP_OFFLOAD_ARCH -D__HIP_PLATFORM_SPIRV__= -x hip
+    --target=x86_64-linux-gnu --offload=spirv64
+    --hip-path=${CMAKE_INSTALL_PREFIX} -nohipwrapperinc
+    ${SPIRV_EMITTER_OPTS})
+
 endif()
 
 # Workaround istead of trying to generate the CMake generator expression

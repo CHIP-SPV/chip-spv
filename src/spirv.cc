@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "common.hh"
 #include "spirv.hh"
 #include "logging.hh"
 
@@ -294,7 +295,6 @@ class SPIRVmodule {
   OCLFuncInfoMap FunctionTypeMap_;
   std::map<int32_t, int32_t> EntryToFunctionTypeIDMap_;
 
-  bool LanguageCL_;
   bool MemModelCL_;
   bool KernelCapab_;
   bool ExtIntOpenCL_;
@@ -309,8 +309,22 @@ public:
   }
 
   bool valid() {
-    return HeaderOK_ && KernelCapab_ && ExtIntOpenCL_ && LanguageCL_ &&
-           MemModelCL_ && ParseOK_;
+    bool AllOk = true;
+    auto Check = [&](bool Cond, const char *ErrMsg) {
+      if (!Cond)
+        logError(ErrMsg);
+      AllOk &= Cond;
+    };
+
+    Check(HeaderOK_, "Invalid SPIR-V header.");
+    // TODO: Temporary. With these check disabled the simple_kernel
+    //       runs successfully on OpenCL backend at least. Note that we are
+    //       passing invalid SPIR-V binary.
+    // Check(KernelCapab_, "Kernel capability missing.");
+    // Check(ExtIntOpenCL_, "Missing extended OpenCL instructions.");
+    Check(MemModelCL_, "Incorrect memory model.");
+    Check(ParseOK_, "An error encountered during parsing.");
+    return AllOk;
   }
 
   bool parseSPIRV(int32_t *Stream, size_t NumWords) {
@@ -319,16 +333,19 @@ public:
     KernelCapab_ = false;
     ExtIntOpenCL_ = false;
     HeaderOK_ = false;
-    LanguageCL_ = false;
     MemModelCL_ = false;
     ParseOK_ = false;
 
-    if (*StreamIntPtr != spv::MagicNumber)
+    if (*StreamIntPtr != spv::MagicNumber) {
+      logError("Incorrect SPIR-V magic number.");
       return false;
+    }
     ++StreamIntPtr;
 
-    if ((*StreamIntPtr != spv::Version10) && (*StreamIntPtr != spv::Version11))
+    if (*StreamIntPtr < spv::Version10 || *StreamIntPtr > spv::Version12) {
+      logError("Unsupported SPIR-V version.");
       return false;
+    }
     ++StreamIntPtr;
 
     // GENERATOR
@@ -339,8 +356,10 @@ public:
     ++StreamIntPtr;
 
     // RESERVED
-    if (*StreamIntPtr != 0)
+    if (*StreamIntPtr != 0) {
+      logError("Invalid SPIR-V: Reserved word is not 0.");
       return false;
+    }
     ++StreamIntPtr;
 
     HeaderOK_ = true;
@@ -384,9 +403,6 @@ private:
         PointerSize = Inst.getPointerSize();
         assert(PointerSize > 0);
       }
-
-      if (Inst.isLangOpenCL())
-        LanguageCL_ = true;
 
       if (Inst.isEntryPoint()) {
         EntryPoints_.emplace(

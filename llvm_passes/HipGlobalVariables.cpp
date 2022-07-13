@@ -40,8 +40,8 @@ static Instruction *createKernelStub(Module &M, StringRef Name,
 }
 
 // Emit a shadow kernel for relaying properties about the original variable.
-static void emitGlobalVarInfoShadowKernel(Module &M, const GlobalVariable *GVar,
-                                          const GlobalVariable *OriginalGVar) {
+static void emitGlobalVarInfoShadowKernel(Module &M,
+                                          const GlobalVariable *GVar) {
   // Emit the following shadow kernel in pseudo code:
   //
   // void <ChipVarInfoPrefix><GVar-name>(int64_t *info) {
@@ -50,28 +50,26 @@ static void emitGlobalVarInfoShadowKernel(Module &M, const GlobalVariable *GVar,
   //   info[2] = <HasInitializer>; // [0, 1].
   // }
 
-  assert(GVar->getValueType()->isPointerTy());
-  auto Name = std::string(ChipVarInfoPrefix) + OriginalGVar->getName().str();
+  auto Name = std::string(ChipVarInfoPrefix) + GVar->getName().str();
   IRBuilder<> Builder(createKernelStub(
       M, Name, {Type::getInt64PtrTy(M.getContext(), SpirvCrossWorkGroupAS)}));
 
-  auto *OrigTy = GVar->getValueType()->getPointerElementType();
   const auto &DL = M.getDataLayout();
   auto *InfoArg = Builder.GetInsertBlock()->getParent()->getArg(0);
 
   // info[0] = <GVar-size>;
-  auto Size = DL.getTypeStoreSize(OrigTy);
+  auto Size = DL.getTypeStoreSize(GVar->getValueType());
   Builder.CreateStore(Builder.getInt64(Size), InfoArg);
 
   // info[1] = <GVar-alignment>;
-  uint64_t Alignment = OriginalGVar->getAlign().valueOrOne().value();
+  uint64_t Alignment = GVar->getAlign().valueOrOne().value();
   Value *Ptr =
       Builder.CreateConstInBoundsGEP1_64(Builder.getInt64Ty(), InfoArg, 1);
   Builder.CreateStore(Builder.getInt64(Alignment), Ptr);
 
   // info[2] = <HasInitializer>;
   Ptr = Builder.CreateConstInBoundsGEP1_64(Builder.getInt64Ty(), InfoArg, 2);
-  Builder.CreateStore(Builder.getInt64(OriginalGVar->hasInitializer()), Ptr);
+  Builder.CreateStore(Builder.getInt64(GVar->hasInitializer()), Ptr);
 }
 
 // Emit a shadow kernel for setting the transformed global variable to point to
@@ -150,8 +148,6 @@ static void emitGlobalVarInitShadowKernel(Module &M, GlobalVariable *GVar,
 
   assert(GVar->getValueType()->isPointerTy());
   assert(OriginalGVar->hasInitializer());
-  assert(OriginalGVar->getInitializer()->getType() ==
-         GVar->getValueType()->getPointerElementType());
 
   auto Name = std::string(ChipVarInitPrefix) + OriginalGVar->getName().str();
   IRBuilder<> Builder(createKernelStub(M, Name, {}));
@@ -353,7 +349,7 @@ static bool lowerGlobalVariables(Module &M) {
   GVarMapT GVarMap = emitIndirectGlobalVariables(M);
   if (!GVarMap.empty()) {
     for (auto Kv : GVarMap) {
-      emitGlobalVarInfoShadowKernel(M, Kv.second, Kv.first);
+      emitGlobalVarInfoShadowKernel(M, Kv.first);
       emitGlobalVarBindShadowKernel(M, Kv.second, Kv.first);
       if (Kv.first->hasInitializer())
         emitGlobalVarInitShadowKernel(M, Kv.second, Kv.first, GVarMap);

@@ -26,6 +26,7 @@
 #include "hip/hip_runtime_api.h"
 #include "hip/hip_interop.h"
 #include "hip_conversions.hh"
+#include "common.hh"
 #include "macros.hh"
 
 #define SPIR_BUNDLE_ID "hip-spir64-unknown-unknown"

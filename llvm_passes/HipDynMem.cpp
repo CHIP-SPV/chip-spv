@@ -147,7 +147,7 @@ private:
 
     // AT & ELT are only for OpenCL metadata.
     // [1024 * float]
-    ArrayType *AT = dyn_cast<ArrayType>(GVT->getElementType());
+    ArrayType *AT = dyn_cast<ArrayType>(GV->getValueType());
     // float
     Type *ELT = AT->getElementType();
 
@@ -227,7 +227,7 @@ private:
       PointerType *GVT = GV->getType();
       ArrayType *AT;
       if (GV->hasName() == true && GVT->getAddressSpace() == SPIR_LOCAL_AS &&
-          (AT = dyn_cast<ArrayType>(GVT->getElementType())) != nullptr &&
+          (AT = dyn_cast<ArrayType>(GV->getValueType())) &&
           (AT->getArrayNumElements() == 4294967295)) {
 
         Function *F = getFunctionUsingGlobalVar(GV);

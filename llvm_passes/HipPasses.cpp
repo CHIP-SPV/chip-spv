@@ -32,6 +32,35 @@ public:
   static bool isRequired() { return true; }
 };
 
+// LLVM commit 15a1769631ff0b2b3e830b03e51ae5f54f08a0ab introduces
+// 'opencl.ocl.version' module metadata into device code. This triggers an
+// assertion in SPIRV-LLVM Translator if the HIP device code and linked device
+// bitcode has mixed OpenCL version metadata. The commit in question inserts
+// OpenCL version 0.0 in HIP compilation mode (in CUDA mode it is 2.0).
+//
+// This pass works around the issue until some fix is introduced in Clang. The
+// issue is fixed by setting OpenCL version to the same as bitcode library
+// (2.0).
+class HipFixOpenCLMDPass : public PassInfoMixin<HipFixOpenCLMDPass> {
+public:
+  PreservedAnalyses run(Module &M, ModuleAnalysisManager &AM) {
+    constexpr auto OCLVersionMDName = "opencl.ocl.version";
+    if (auto *OCLVersionMD = M.getNamedMetadata(OCLVersionMDName)) {
+      auto &Ctx = M.getContext();
+      auto *Int32Ty = IntegerType::get(Ctx, 32);
+      M.eraseNamedMetadata(OCLVersionMD);
+      Metadata *OCLVerElts[] = {
+          ConstantAsMetadata::get(ConstantInt::get(Int32Ty, 2)),
+          ConstantAsMetadata::get(ConstantInt::get(Int32Ty, 0))};
+      OCLVersionMD = M.getOrInsertNamedMetadata(OCLVersionMDName);
+      OCLVersionMD->addOperand(MDNode::get(Ctx, OCLVerElts));
+    }
+    // Altering OpenCL metadata probably does not invalidate any analyses.
+    return PreservedAnalyses::all();
+  }
+  static bool isRequired() { return true; }
+};
+
 static void addFullLinkTimePasses(ModulePassManager &MPM) {
   // Remove attributes that may prevent the device code from being optimized.
   MPM.addPass(RemoveNoInlineOptNoneAttrsPass());
@@ -67,6 +96,8 @@ static void addFullLinkTimePasses(ModulePassManager &MPM) {
   MPM.addPass(HipStripUsedIntrinsicsPass());
   MPM.addPass(createModuleToFunctionPassAdaptor(DCEPass()));
   MPM.addPass(GlobalDCEPass());
+
+  MPM.addPass(HipFixOpenCLMDPass());
 }
 
 #if LLVM_VERSION_MAJOR < 14
