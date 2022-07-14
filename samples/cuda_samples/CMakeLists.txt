@@ -1,7 +1,11 @@
 
 # ARGN = additional source files
-function(add_cuda_sample TEST_NAME MAIN_SOURCE)
-  set(SOURCES ${MAIN_SOURCE} ${ARGN})
+function(add_cuda_sample TEST_NAME SUBDIR MAIN_SOURCE)
+  set(SOURCES "")
+  foreach(SOURCE ${MAIN_SOURCE} ${ARGN})
+    list(APPEND SOURCES "${SUBDIR}/${SOURCE}")
+  endforeach()
+
   set(EXEC_NAME ${TEST_NAME})
   set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
   add_executable("${EXEC_NAME}" ${SOURCES})
@@ -12,19 +16,21 @@ function(add_cuda_sample TEST_NAME MAIN_SOURCE)
 
   target_link_libraries("${EXEC_NAME}" CHIP)
   target_include_directories("${EXEC_NAME}"
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Common)
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Common ${SUBDIR})
   install(TARGETS "${EXEC_NAME}"
     RUNTIME DESTINATION "${CHIP_SAMPLE_BINDIR}/cuda_samples")
 
-  add_test(NAME "${EXEC_NAME}"
+  add_test(NAME "${TEST_NAME}"
     COMMAND "${CMAKE_CURRENT_BINARY_DIR}/${EXEC_NAME}")
+  set_property(TEST "${EXEC_NAME}" PROPERTY LABELS "internal;cuda")
+
 endfunction()
 
-add_cuda_sample(cuda-vectorAdd vectorAdd/vectorAdd.cu)
-add_cuda_sample(cuda-matrixMul matrixMul/matrixMul.cu)
-add_cuda_sample(cuda-asyncAPI asyncAPI/asyncAPI.cu)
-add_cuda_sample(cuda-template template/template.cu template/template_cpu.cpp)
-add_cuda_sample(cuda-lambda lambda.cu)
+add_cuda_sample(cuda-vectorAdd vectorAdd vectorAdd.cu)
+add_cuda_sample(cuda-matrixMul matrixMul matrixMul.cu)
+add_cuda_sample(cuda-asyncAPI asyncAPI asyncAPI.cu)
+add_cuda_sample(cuda-template template template.cu template_cpu.cpp)
+add_cuda_sample(cuda-lambda lambda lambda.cu)
 
 # DISABLED: Due to the following error:
 #
@@ -36,3 +42,12 @@ add_cuda_sample(cuda-lambda lambda.cu)
 # a Clang issue which only appear in HIP-SPIRV path.
 #
 # add_cuda_sample(cuda-cppOverload cppOverload/cppOverload.cu)
+
+add_cuda_sample(cuda-binomialoptions  4_Finance/binomialOptions binomialOptions.cpp  binomialOptions_gold.cpp  binomialOptions_kernel.cu)
+add_cuda_sample(cuda-blackscholes  4_Finance/BlackScholes BlackScholes.cu  BlackScholes_gold.cpp)
+add_cuda_sample(cuda-qrng  4_Finance/quasirandomGenerator quasirandomGenerator.cpp  quasirandomGenerator_gold.cpp  quasirandomGenerator_kernel.cu)
+
+add_cuda_sample(cuda-mergesort  6_Advanced/mergeSort bitonic.cu  main.cpp  mergeSort.cu  mergeSort_host.cpp  mergeSort_validate.cpp)
+add_cuda_sample(cuda-scalarprod  6_Advanced/scalarProd scalarProd_cpu.cpp  scalarProd.cu)
+add_cuda_sample(cuda-scan  6_Advanced/scan scan.cu  main.cpp scan_gold.cpp)
+add_cuda_sample(cuda-sortnet  6_Advanced/sortingNetworks bitonicSort.cu  main.cpp  oddEvenMergeSort.cu  sortingNetworks_validate.cpp)
