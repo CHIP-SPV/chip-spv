@@ -25,6 +25,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// CUDA runtime
+#include <cuda_runtime.h>
+
 // These are helper functions for the SDK samples (string parsing,
 // timers, image helpers, etc)
 #ifndef COMMON_HELPER_FUNCTIONS_H_
