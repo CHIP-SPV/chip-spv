@@ -53,7 +53,8 @@ THE SOFTWARE.
 
 #define cudaMemcpyHostToDevice hipMemcpyHostToDevice
 #define cudaMemcpyDeviceToHost hipMemcpyDeviceToHost
-// TODO: other memcpy flags.
+#define cudaMemcpyDeviceToDevice hipMemcpyDeviceToDevice
+#define cudaMemcpyHostToHost hipMemcpyHostToHost
 
 #define cudaDevAttrComputeMode hipDeviceAttributeComputeMode
 
@@ -85,6 +86,7 @@ using cudaDeviceAttribute_t = hipDeviceAttribute_t;
 using cudaComputeMode = hipComputeMode;
 using cudaMemcpyKind = hipMemcpyKind;
 using cudaDeviceProp = hipDeviceProp_t;
+using cudaFuncAttributes = hipFuncAttributes;
 using cudaStream_t = hipStream_t;
 using cudaEvent_t = hipEvent_t;
 
@@ -194,5 +196,42 @@ static inline cudaError_t cudaEventElapsedTime(float *ms, cudaEvent_t start,
 }
 
 static inline cudaError_t cudaGetLastError() { return hipGetLastError(); }
+
+static inline cudaError_t cudaFuncGetAttributes(cudaFuncAttributes *Attr,
+                                                const void *Func) {
+  return hipFuncGetAttributes(Attr, Func);
+}
+
+static inline cudaError_t
+cudaMemcpyToSymbol(const void *Symbol, const void *Src, size_t SizeBytes,
+                   size_t Offset = 0,
+                   cudaMemcpyKind Kind = cudaMemcpyHostToDevice) {
+  return hipMemcpyToSymbol(Symbol, Src, SizeBytes, Offset, Kind);
+}
+
+static inline cudaError_t
+cudaMemcpyToSymbolAsync(const void *Symbol, const void *Src, size_t SizeBytes,
+                        size_t Offset, cudaMemcpyKind Kind,
+                        cudaStream_t Stream = 0) {
+  return hipMemcpyToSymbolAsync(Symbol, Src, SizeBytes, Offset, Kind, Stream);
+}
+
+static inline cudaError_t
+cudaMemcpyFromSymbol(void *Dst, const void *Symbol, size_t SizeBytes,
+                     size_t Offset = 0,
+                     cudaMemcpyKind Kind = cudaMemcpyDeviceToHost) {
+  return hipMemcpyFromSymbol(Dst, Symbol, SizeBytes, Offset, Kind);
+}
+
+static inline cudaError_t
+cudaMemcpyFromSymbolAsync(void *Dst, const void *Symbol, size_t SizeBytes,
+                          size_t Offset, cudaMemcpyKind Kind,
+                          cudaStream_t Stream = 0) {
+  return hipMemcpyFromSymbolAsync(Dst, Symbol, SizeBytes, Offset, Kind, Stream);
+}
+
+static inline cudaError_t cudaGetSymbolSize(size_t *Size, const void *Symbol) {
+  return hipGetSymbolSize(Size, Symbol);
+}
 
 #endif
