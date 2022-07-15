@@ -786,6 +786,8 @@ CHIPKernelOpenCL::CHIPKernelOpenCL(const cl::Kernel &&ClKernel,
   PrivateSize_ =
       OclKernel_.getWorkGroupInfo<CL_KERNEL_PRIVATE_MEM_SIZE>(*Device->get());
 
+  Name_ = OclKernel_.getInfo<CL_KERNEL_FUNCTION_NAME>();
+
   if (NumArgs > 0) {
     logTrace("Kernel {} numArgs: {} \n", Name_, NumArgs);
     logTrace("  RET_TYPE: {} {} {}\n", FuncInfo_->RetTypeInfo.Size,
@@ -894,6 +896,12 @@ CHIPEvent *CHIPQueueOpenCL::launchImpl(CHIPExecItem *ExecItem) {
   const cl::NDRange Global(GridDim.x * BlockDim.x, GridDim.y * BlockDim.y,
                            GridDim.z * BlockDim.z);
   const cl::NDRange Local(BlockDim.x, BlockDim.y, BlockDim.z);
+
+  logTrace("Launch GLOBAL: {} {} {}", Global.get()[0], Global.get()[1],
+           Global.get()[2]);
+
+  logTrace("Launch LOCAL: {} {} {}", Local.get()[0], Local.get()[1],
+           Local.get()[2]);
 
   cl::Event Ev;
   int Err = ClQueue_->enqueueNDRangeKernel(*Kernel->get(), cl::NullRange,
