@@ -197,9 +197,10 @@ static inline cudaError_t cudaEventElapsedTime(float *ms, cudaEvent_t start,
 
 static inline cudaError_t cudaGetLastError() { return hipGetLastError(); }
 
+template <typename Fun>
 static inline cudaError_t cudaFuncGetAttributes(cudaFuncAttributes *Attr,
-                                                const void *Func) {
-  return hipFuncGetAttributes(Attr, Func);
+                                                Fun *Func) {
+  return hipFuncGetAttributes(Attr, (void *)Func);
 }
 
 static inline cudaError_t
