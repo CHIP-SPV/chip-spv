@@ -1,0 +1,8 @@
+#!/bin/bash
+# CUDA-SPIRV compiler - A compiler wrapper for compiling CUDA sources directly.
+#
+# CUDA sources are compiled in HIP mode with an include search path to
+# cuda_runtime.h wrapper which translates CUDA API to HIP API.
+#
+# NOTE: this file is not meant only to be usable in CHIP-SPV build directory.
+@CMAKE_CXX_COMPILER@ @HIP_CLANG_OPTIONS@ @CHIP_INCLUDES@ "$@"

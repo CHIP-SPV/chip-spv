@@ -75,8 +75,7 @@ THE SOFTWARE.
 __DEVICE__
 inline float __fadd_rd(float x, float y) { return __ocml_add_rtn_f32(x, y); }
 #endif
-__DEVICE__
-// inline float __fadd_rn(float x, float y) { return x + y; }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __fadd_ru(float x, float y) { return __ocml_add_rtp_f32(x, y); }
@@ -85,8 +84,7 @@ inline float __fadd_rz(float x, float y) { return __ocml_add_rtz_f32(x, y); }
 __DEVICE__
 inline float __fdiv_rd(float x, float y) { return __ocml_div_rtn_f32(x, y); }
 #endif
-__DEVICE__
-// inline float __fdiv_rn(float x, float y) { return x / y; }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __fdiv_ru(float x, float y) { return __ocml_div_rtp_f32(x, y); }
@@ -117,8 +115,7 @@ inline float __fmaf_rz(float x, float y, float z) {
 __DEVICE__
 inline float __fmul_rd(float x, float y) { return __ocml_mul_rtn_f32(x, y); }
 #endif
-__DEVICE__
-// inline float __fmul_rn(float x, float y) { return x * y; }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __fmul_ru(float x, float y) { return __ocml_mul_rtp_f32(x, y); }
@@ -130,8 +127,7 @@ inline float __frcp_rd(float x) {
   return 1;
 }
 #endif
-__DEVICE__
-// inline float __frcp_rn(float x) { return __llvm_amdgcn_rcp_f32(x); }
+
 #if defined OCML_BASIC_ROUNDED_OPERATIONS
 __DEVICE__
 inline float __frcp_ru(float x) {
@@ -873,6 +869,9 @@ NON_OVLD void GEN_NAME(global_fence)();
 }
 EXPORT void __threadfence() { GEN_NAME(global_fence)(); }
 
+unsigned __activemask()
+    __attribute__((unavailable("unsupported in CHIP-SPV.")));
+
 EXPORT clock_t clock() { return 0; }
 
 EXPORT unsigned long long clock64() { return 0; }
@@ -910,6 +909,9 @@ EXPORT unsigned long long clock64();
 EXPORT void *memset(void *ptr, int value, size_t size);
 EXPORT void *memcpy(void *dest, const void *src, size_t n);
 #endif
+
+EXPORT unsigned __activemask()
+    __attribute__((unavailable("unsupported in CHIP-SPV.")));
 
 // NAN/NANF
 
@@ -1245,6 +1247,7 @@ EXPORT unsigned int __usad(unsigned int x, unsigned int y, unsigned int z) {
 #endif
 
 // BEGIN INTEGER
+/*
 EXPORT int abs(int x) {
   int sgn = x >> (sizeof(int) * CHAR_BIT - 1);
   return (x ^ sgn) - sgn;
@@ -1262,6 +1265,7 @@ EXPORT long long llabs(long long x) {
 EXPORT long abs(long x) { return labs(x); }
 EXPORT long long abs(long long x) { return llabs(x); }
 #endif
+*/
 // END INTEGER
 
 EXPORT float fma(float x, float y, float z) { return fmaf(x, y, z); }
@@ -1393,9 +1397,6 @@ __DEF_FUN1(double, trunc);
   EXPORT                        \
   float func(float x, int y) { return func##f(x, y); }
 __DEF_FLOAT_FUN2I(scalbn)
-
-EXPORT int min(int arg1, int arg2) { return (arg1 < arg2) ? arg1 : arg2; }
-EXPORT int max(int arg1, int arg2) { return (arg1 > arg2) ? arg1 : arg2; }
 
 EXPORT float max(float x, float y) { return fmaxf(x, y); }
 
@@ -1615,6 +1616,181 @@ EXPORT int __any(int predicate);
 EXPORT uint64_t __ballot(int predicate);
 
 #endif
+
+#if defined(__HIP_DEVICE_COMPILE__)
+extern "C" {
+NON_OVLD int GEN_NAME2(max, i)(int a, int b);
+NON_OVLD unsigned GEN_NAME2(max, u)(unsigned int a, unsigned int b);
+NON_OVLD long int GEN_NAME2(max, l)(long int a, long int b);
+NON_OVLD unsigned long int GEN_NAME2(max, ul)(unsigned long int a,
+                                              unsigned long int b);
+
+NON_OVLD int GEN_NAME2(min, i)(int a, int b);
+NON_OVLD unsigned GEN_NAME2(min, u)(unsigned int a, unsigned int b);
+NON_OVLD long int GEN_NAME2(min, l)(long int a, long int b);
+NON_OVLD unsigned long int GEN_NAME2(min, ul)(unsigned long int a,
+                                              unsigned long int b);
+
+NON_OVLD int GEN_NAME2(abs, i)(int a);
+NON_OVLD long int GEN_NAME2(abs, l)(long int a);
+}
+
+EXPORT OVLD int abs(int a) { return GEN_NAME2(abs, i)(a); }
+EXPORT OVLD long int labs(long int a) { return GEN_NAME2(abs, l)(a); }
+
+EXPORT OVLD unsigned long int max(const unsigned long int a,
+                                  const unsigned long int b) {
+  return GEN_NAME2(max, ul)(a, b);
+}
+EXPORT OVLD unsigned long int max(const unsigned long int a, const long int b) {
+  return (b < 0) ? a : GEN_NAME2(max, ul)(a, (unsigned long)b);
+}
+EXPORT OVLD unsigned long int max(const long int a, const unsigned long int b) {
+  return max(b, a);
+}
+EXPORT OVLD long int max(const long int a, const long int b) {
+  return GEN_NAME2(max, l)(a, b);
+}
+
+EXPORT OVLD unsigned int max(const unsigned int a, const unsigned int b) {
+  return GEN_NAME2(max, u)(a, b);
+}
+EXPORT OVLD int max(const int a, const int b) {
+  return GEN_NAME2(max, i)(a, b);
+}
+EXPORT OVLD unsigned int max(const unsigned int a, const int b) {
+  return (b < 0) ? a : GEN_NAME2(max, u)(a, (unsigned)b);
+}
+EXPORT OVLD unsigned int max(const int a, const unsigned int b) {
+  return max(b, a);
+}
+
+EXPORT OVLD unsigned long int min(const unsigned long int a,
+                                  const unsigned long int b) {
+  return GEN_NAME2(min, ul)(a, b);
+}
+EXPORT OVLD unsigned long int min(const unsigned long int a, const long int b) {
+  return (b < 0) ? a : GEN_NAME2(min, ul)(a, (unsigned long)b);
+}
+EXPORT OVLD unsigned long int min(const long int a, const unsigned long int b) {
+  return min(b, a);
+}
+EXPORT OVLD long int min(const long int a, const long int b) {
+  return GEN_NAME2(min, l)(a, b);
+}
+
+EXPORT OVLD unsigned int min(const unsigned int a, const unsigned int b) {
+  return GEN_NAME2(min, u)(a, b);
+}
+EXPORT OVLD int min(const int a, const int b) {
+  return GEN_NAME2(min, i)(a, b);
+}
+EXPORT OVLD unsigned int min(const unsigned int a, const int b) {
+  return (b < 0) ? a : GEN_NAME2(min, u)(a, (unsigned)b);
+}
+EXPORT OVLD unsigned int min(const int a, const unsigned int b) {
+  return min(b, a);
+}
+
+EXPORT OVLD unsigned int umax(const unsigned int a, const unsigned int b) {
+  return GEN_NAME2(max, u)(a, b);
+}
+EXPORT OVLD unsigned int umin(const unsigned int a, const unsigned int b) {
+  return GEN_NAME2(min, u)(a, b);
+}
+
+#else
+EXPORT OVLD int abs(int a);
+// Calculate the absolute value of the input int argument.
+EXPORT OVLD long int labs(long int a);
+// Calculate the absolute value of the input longint argument.
+
+EXPORT OVLD unsigned long int max(const unsigned long int a, const long int b);
+// Calculate the maximum value of the input unsignedlongint and longint
+// arguments.
+EXPORT OVLD unsigned long int max(const long int a, const unsigned long int b);
+// Calculate the maximum value of the input longint and unsignedlongint
+// arguments.
+EXPORT OVLD unsigned long int max(const unsigned long int a,
+                                  const unsigned long int b);
+// Calculate the maximum value of the input unsignedlongint arguments.
+EXPORT OVLD long int max(const long int a, const long int b);
+// Calculate the maximum value of the input longint arguments.
+EXPORT OVLD unsigned int max(const unsigned int a, const int b);
+// Calculate the maximum value of the input unsignedint and int arguments.
+EXPORT OVLD unsigned int max(const int a, const unsigned int b);
+// Calculate the maximum value of the input int and unsignedint arguments.
+EXPORT OVLD unsigned int max(const unsigned int a, const unsigned int b);
+// Calculate the maximum value of the input unsignedint arguments.
+EXPORT OVLD int max(const int a, const int b);
+// Calculate the maximum value of the input int arguments.
+
+EXPORT OVLD unsigned long int min(const unsigned long int a, const long int b);
+// Calculate the minimum value of the input unsignedlongint and longint
+// arguments.
+EXPORT OVLD unsigned long int min(const long int a, const unsigned long int b);
+// Calculate the minimum value of the input longint and unsignedlongint
+// arguments.
+EXPORT OVLD unsigned long int min(const unsigned long int a,
+                                  const unsigned long int b);
+// Calculate the minimum value of the input unsignedlongint arguments.
+EXPORT OVLD long int min(const long int a, const long int b);
+// Calculate the minimum value of the input longint arguments.
+EXPORT OVLD unsigned int min(const unsigned int a, const int b);
+// Calculate the minimum value of the input unsignedint and int arguments.
+EXPORT OVLD unsigned int min(const int a, const unsigned int b);
+// Calculate the minimum value of the input int and unsignedint arguments.
+EXPORT OVLD unsigned int min(const unsigned int a, const unsigned int b);
+// Calculate the minimum value of the input unsignedint arguments.
+EXPORT OVLD int min(const int a, const int b);
+// Calculate the minimum value of the input int arguments.
+
+EXPORT OVLD unsigned int umax(const unsigned int a, const unsigned int b);
+// Calculate the maximum value of the input unsignedint arguments.
+EXPORT OVLD unsigned int umin(const unsigned int a, const unsigned int b);
+// Calculate the minimum value of the input unsignedint arguments.
+#endif
+
+/*
+
+EXPORT long long int max ( const long long int a, const long long int b )
+    // Calculate the maximum value of the input longlongint arguments.
+EXPORT unsigned long long int min ( const unsigned long long int a, const long
+long int b )
+    // Calculate the minimum value of the input unsignedlonglongint and
+longlongint arguments. EXPORT unsigned long long int min ( const long long int
+a, const unsigned long long int b )
+    // Calculate the minimum value of the input longlongint and
+unsignedlonglongint arguments. EXPORT unsigned long long int min ( const
+unsigned long long int a, const unsigned long long int b )
+    // Calculate the minimum value of the input unsignedlonglongint arguments.
+EXPORT long long int min ( const long long int a, const long long int b )
+    // Calculate the minimum value of the input longlongint arguments.
+
+
+EXPORT unsigned long long int ullmax ( const unsigned long long int a, const
+unsigned long long int b )
+    // Calculate the maximum value of the input unsignedlonglongint arguments.
+EXPORT unsigned long long int ullmin ( const unsigned long long int a, const
+unsigned long long int b )
+    // Calculate the minimum value of the input unsignedlonglongint arguments.
+EXPORT long long int llabs ( long long int a )
+    // Calculate the absolute value of the input longlongint argument.
+EXPORT long long int llmax ( const long long int a, const long long int b )
+    // Calculate the maximum value of the input longlongint arguments.
+EXPORT long long int llmin ( const long long int a, const long long int b )
+    // Calculate the minimum value of the input longlongint arguments.
+
+EXPORT unsigned long long int max ( const unsigned long long int a, const long
+long int b )
+    // Calculate the maximum value of the input unsignedlonglongint and
+longlongint arguments. EXPORT unsigned long long int max ( const long long int
+a, const unsigned long long int b )
+    // Calculate the maximum value of the input longlongint and
+unsignedlonglongint arguments. EXPORT unsigned long long int max ( const
+unsigned long long int a, const unsigned long long int b )
+    // Calculate the maximum value of the input unsignedlonglongint arguments.
+*/
 
 #include <hip/spirv_hip_runtime.h>
 

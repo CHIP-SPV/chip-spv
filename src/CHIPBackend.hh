@@ -887,6 +887,14 @@ public:
   void setDevPtr(const void *DevFPtr);
 
   /**
+   * @brief Get the associated kernel information (max threads and so on)
+   *
+   * @return hipError_t
+   * @return hipFuncAttributes
+   */
+  virtual hipError_t getAttributes(hipFuncAttributes *Attr) = 0;
+
+  /**
    * @brief Return the parent module of the kernel.
    */
   virtual CHIPModule *getModule() = 0;

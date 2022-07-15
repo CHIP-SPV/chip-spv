@@ -192,11 +192,18 @@ private:
   std::string Name_;
   size_t TotalArgSize_;
   cl::Kernel OclKernel_;
+  size_t MaxDynamicLocalSize_;
+  size_t MaxWorkGroupSize_;
+  size_t StaticLocalSize_;
+  size_t PrivateSize_;
+
   CHIPModuleOpenCL *Module;
+  CHIPDeviceOpenCL *Device;
 
 public:
-  CHIPKernelOpenCL(const cl::Kernel &&ClKernel, std::string HostFName,
-                   OCLFuncInfo *FuncInfo, CHIPModuleOpenCL *Parent);
+  CHIPKernelOpenCL(const cl::Kernel &&ClKernel, CHIPDeviceOpenCL *Dev,
+                   std::string HostFName, OCLFuncInfo *FuncInfo,
+                   CHIPModuleOpenCL *Parent);
   virtual ~CHIPKernelOpenCL() {}
   OCLFuncInfo *getFuncInfo() const;
   std::string getName();
@@ -205,6 +212,7 @@ public:
 
   CHIPModuleOpenCL *getModule() override { return Module; }
   const CHIPModuleOpenCL *getModule() const override { return Module; }
+  virtual hipError_t getAttributes(hipFuncAttributes *Attr) override;
 };
 
 class CHIPExecItemOpenCL : public CHIPExecItem {

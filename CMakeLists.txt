@@ -189,7 +189,10 @@ target_link_libraries(CHIP PUBLIC ${CHIP_SPV_LINK_FLAGS} ${PTHREAD_LIBRARY})
 target_include_directories(CHIP
   PUBLIC
   "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-  "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/HIP/include;${CMAKE_SOURCE_DIR}/include>"
+  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/cuspv>"
+  "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/HIP/include>"
+  "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>"
+  "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/cuspv>"
   PRIVATE
   "${CMAKE_SOURCE_DIR}/src"
   "${CMAKE_SOURCE_DIR}/include"
@@ -209,6 +212,7 @@ add_dependencies(driver LLVMHipPasses)
 
 enable_testing()
 add_subdirectory(HIP/tests/catch catch)
+add_subdirectory(tests/cuda)
 
 set(CHIP_SAMPLE_BINDIR ${CMAKE_INSTALL_PREFIX}/bin/samples)
 add_subdirectory(./samples samples)
@@ -299,3 +303,5 @@ install(EXPORT CHIPTargets
   FILE CHIPTargets.cmake
   NAMESPACE CHIP::
   DESTINATION cmake/CHIP)
+
+add_subdirectory(bin)

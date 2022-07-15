@@ -104,6 +104,8 @@ static Value *expandConstant(Constant *C, GVarMapT &GVarMap,
 
   if (isa<ConstantData>(C)) return C;
 
+  if (isa<ConstantAggregate>(C)) return C;
+
   if (auto *GVar = dyn_cast<GlobalVariable>(C)) {
     if (GVarMap.count(GVar)) {
       // Replace with pointer load. All constant expressions depending
