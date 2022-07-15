@@ -300,20 +300,26 @@ public:
 class CHIPKernelLevel0 : public CHIPKernel {
 protected:
   ze_kernel_handle_t ZeKernel_;
+  std::string Name_;
+  size_t MaxDynamicLocalSize_;
+  size_t MaxWorkGroupSize_;
+  size_t StaticLocalSize_;
+  size_t PrivateSize_;
+
   CHIPModuleLevel0 *Module;
+  CHIPDeviceLevel0 *Device;
 
 public:
   CHIPKernelLevel0();
   virtual ~CHIPKernelLevel0() { logDebug("CHIPKernelLevel0 DEST"); }
-  CHIPKernelLevel0(ze_kernel_handle_t ZeKernel, std::string FuncName,
-                   OCLFuncInfo *FuncInfo, CHIPModuleLevel0 *Parent);
+  CHIPKernelLevel0(ze_kernel_handle_t ZeKernel, CHIPDeviceLevel0 *Dev,
+                   std::string FuncName, OCLFuncInfo *FuncInfo,
+                   CHIPModuleLevel0 *Parent);
   ze_kernel_handle_t get();
 
   CHIPModuleLevel0 *getModule() override { return Module; }
   const CHIPModuleLevel0 *getModule() const override { return Module; }
-  virtual hipError_t getAttributes(hipFuncAttributes *Attr) override {
-    return hipSuccess;
-  }
+  virtual hipError_t getAttributes(hipFuncAttributes *Attr) override;
 };
 
 // The struct that accomodate the L0/Hip texture object's content

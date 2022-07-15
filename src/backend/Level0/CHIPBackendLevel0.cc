@@ -577,12 +577,45 @@ void CHIPStaleEventMonitorLevel0::monitor() {
 ze_kernel_handle_t CHIPKernelLevel0::get() { return ZeKernel_; }
 
 CHIPKernelLevel0::CHIPKernelLevel0(ze_kernel_handle_t ZeKernel,
-                                   std::string HostFName, OCLFuncInfo *FuncInfo,
+                                   CHIPDeviceLevel0 *Dev, std::string HostFName,
+                                   OCLFuncInfo *FuncInfo,
                                    CHIPModuleLevel0 *Parent)
-    : CHIPKernel(HostFName, FuncInfo), ZeKernel_(ZeKernel), Module(Parent) {
+    : CHIPKernel(HostFName, FuncInfo), ZeKernel_(ZeKernel), Module(Parent),
+      Device(Dev), Name_(HostFName) {
   logTrace("CHIPKernelLevel0 constructor via ze_kernel_handle");
+
+  ze_kernel_properties_t Props = {ZE_STRUCTURE_TYPE_KERNEL_PROPERTIES, 0};
+
+  ze_result_t Status = zeKernelGetProperties(ZeKernel, &Props);
+  CHIPERR_CHECK_LOG_AND_THROW(Status, ZE_RESULT_SUCCESS, hipErrorTbd);
+
+  PrivateSize_ = Props.privateMemSize;
+  StaticLocalSize_ = Props.localMemSize;
+
+  // TODO there doesn't seem to exist a way to get these from L0 API
+  MaxDynamicLocalSize_ =
+      Device->getAttr(hipDeviceAttributeMaxSharedMemoryPerBlock) -
+      StaticLocalSize_;
+  MaxWorkGroupSize_ = Device->getAttr(hipDeviceAttributeMaxThreadsPerBlock);
 }
 // End CHIPKernelLevelZero
+
+hipError_t CHIPKernelLevel0::getAttributes(hipFuncAttributes *Attr) {
+
+  Attr->binaryVersion = 10;
+  Attr->cacheModeCA = 0;
+
+  Attr->constSizeBytes = 0; // TODO
+  Attr->localSizeBytes = PrivateSize_;
+
+  Attr->maxThreadsPerBlock = MaxWorkGroupSize_;
+  Attr->sharedSizeBytes = StaticLocalSize_;
+  Attr->maxDynamicSharedSizeBytes = MaxDynamicLocalSize_;
+
+  Attr->numRegs = 0;
+  Attr->preferredShmemCarveout = 0;
+  Attr->ptxVersion = 10;
+}
 
 // CHIPQueueLevelZero
 // ***********************************************************************
@@ -1821,8 +1854,9 @@ void CHIPModuleLevel0::compile(CHIPDevice *ChipDev) {
                                  nullptr};
 
   CHIPContextLevel0 *ChipCtxLz = (CHIPContextLevel0 *)(ChipDev->getContext());
+  CHIPDeviceLevel0 *LzDev = (CHIPDeviceLevel0 *)ChipDev;
 
-  ze_device_handle_t ZeDev = ((CHIPDeviceLevel0 *)ChipDev)->get();
+  ze_device_handle_t ZeDev = LzDev->get();
   ze_context_handle_t ZeCtx = ChipCtxLz->get();
 
   ze_module_build_log_handle_t Log;
@@ -1879,7 +1913,7 @@ void CHIPModuleLevel0::compile(CHIPDevice *ChipDev) {
     CHIPERR_CHECK_LOG_AND_THROW(Status, ZE_RESULT_SUCCESS, hipErrorTbd);
     logTrace("LZ KERNEL CREATION via calling zeKernelCreate {} ", Status);
     CHIPKernelLevel0 *ChipZeKernel =
-        new CHIPKernelLevel0(ZeKernel, HostFName, FuncInfo, this);
+        new CHIPKernelLevel0(ZeKernel, LzDev, HostFName, FuncInfo, this);
     addKernel(ChipZeKernel);
   }
 }
