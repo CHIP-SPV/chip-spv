@@ -70,8 +70,8 @@ extern "C" void initTableGPU(unsigned int tableCPU[QRNG_DIMENSIONS][QRNG_RESOLUT
 //Host-side interface
 extern "C" void quasirandomGeneratorGPU(float *d_Output, unsigned int seed, unsigned int N)
 {
-    dim3 threads(128, QRNG_DIMENSIONS);
-    quasirandomGeneratorKernel<<<128, threads>>>(d_Output, seed, N);
+    dim3 threads(64, QRNG_DIMENSIONS);
+    quasirandomGeneratorKernel<<<64, threads>>>(d_Output, seed, N);
     getLastCudaError("quasirandomGeneratorKernel() execution failed.\n");
 }
 
