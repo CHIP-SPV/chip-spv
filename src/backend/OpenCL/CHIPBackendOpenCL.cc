@@ -716,8 +716,8 @@ void CHIPModuleOpenCL::compile(CHIPDevice *ChipDev) {
       // CHIPERR_LOG_AND_THROW("Failed to find kernel in OpenCLFunctionInfoMap",
       //                      hipErrorInitializationError);
     }
-    CHIPKernelOpenCL *ChipKernel =
-        new CHIPKernelOpenCL(std::move(Kernel), HostFName, FuncInfo, this);
+    CHIPKernelOpenCL *ChipKernel = new CHIPKernelOpenCL(
+        std::move(Kernel), ChipDevOcl, HostFName, FuncInfo, this);
     addKernel(ChipKernel);
   }
 }
@@ -742,10 +742,32 @@ std::string CHIPKernelOpenCL::getName() { return Name_; }
 cl::Kernel *CHIPKernelOpenCL::get() { return &OclKernel_; }
 size_t CHIPKernelOpenCL::getTotalArgSize() const { return TotalArgSize_; };
 
+hipError_t CHIPKernelOpenCL::getAttributes(hipFuncAttributes *Attr) {
+
+  Attr->binaryVersion = 10;
+  Attr->cacheModeCA = 0;
+
+  Attr->constSizeBytes = 0; // TODO
+  Attr->localSizeBytes = PrivateSize_;
+
+  Attr->maxThreadsPerBlock = MaxWorkGroupSize_;
+  Attr->sharedSizeBytes = StaticLocalSize_;
+  Attr->maxDynamicSharedSizeBytes = MaxDynamicLocalSize_;
+
+  Attr->numRegs = 0;
+  Attr->preferredShmemCarveout = 0;
+  Attr->ptxVersion = 10;
+
+  return hipSuccess;
+}
+
 CHIPKernelOpenCL::CHIPKernelOpenCL(const cl::Kernel &&ClKernel,
-                                   std::string HostFName, OCLFuncInfo *FuncInfo,
+                                   CHIPDeviceOpenCL *Dev, std::string HostFName,
+                                   OCLFuncInfo *FuncInfo,
                                    CHIPModuleOpenCL *Parent)
-    : CHIPKernel(HostFName, FuncInfo), Module(Parent) {
+    : CHIPKernel(HostFName, FuncInfo), Module(Parent), TotalArgSize_(0),
+      Device(Dev) {
+
   OclKernel_ = ClKernel;
   int Err = 0;
   // TODO attributes
@@ -753,6 +775,16 @@ CHIPKernelOpenCL::CHIPKernelOpenCL(const cl::Kernel &&ClKernel,
   CHIPERR_CHECK_LOG_AND_THROW(Err, CL_SUCCESS, hipErrorTbd,
                               "Failed to get num args for kernel");
   assert(FuncInfo_->ArgTypeInfo.size() == NumArgs);
+
+  MaxWorkGroupSize_ =
+      OclKernel_.getWorkGroupInfo<CL_KERNEL_WORK_GROUP_SIZE>(*Device->get());
+  StaticLocalSize_ =
+      OclKernel_.getWorkGroupInfo<CL_KERNEL_LOCAL_MEM_SIZE>(*Device->get());
+  MaxDynamicLocalSize_ =
+      (size_t)Device->getAttr(hipDeviceAttributeMaxSharedMemoryPerBlock) -
+      StaticLocalSize_;
+  PrivateSize_ =
+      OclKernel_.getWorkGroupInfo<CL_KERNEL_PRIVATE_MEM_SIZE>(*Device->get());
 
   if (NumArgs > 0) {
     logTrace("Kernel {} numArgs: {} \n", Name_, NumArgs);

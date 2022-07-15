@@ -311,6 +311,9 @@ public:
 
   CHIPModuleLevel0 *getModule() override { return Module; }
   const CHIPModuleLevel0 *getModule() const override { return Module; }
+  virtual hipError_t getAttributes(hipFuncAttributes *Attr) override {
+    return hipSuccess;
+  }
 };
 
 // The struct that accomodate the L0/Hip texture object's content
