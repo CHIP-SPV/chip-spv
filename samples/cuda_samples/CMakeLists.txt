@@ -26,11 +26,13 @@ function(add_cuda_sample TEST_NAME SUBDIR MAIN_SOURCE)
 
 endfunction()
 
-add_cuda_sample(cuda-vectorAdd vectorAdd vectorAdd.cu)
-add_cuda_sample(cuda-matrixMul matrixMul matrixMul.cu)
-add_cuda_sample(cuda-asyncAPI asyncAPI asyncAPI.cu)
-add_cuda_sample(cuda-template template template.cu template_cpu.cpp)
-add_cuda_sample(cuda-lambda lambda lambda.cu)
+## 0_Simple
+
+add_cuda_sample(cuda-vectorAdd 0_Simple/vectorAdd vectorAdd.cu)
+add_cuda_sample(cuda-matrixMul 0_Simple/matrixMul matrixMul.cu)
+add_cuda_sample(cuda-asyncAPI 0_Simple/asyncAPI asyncAPI.cu)
+add_cuda_sample(cuda-template 0_Simple/template template.cu template_cpu.cpp)
+add_cuda_sample(cuda-lambda 0_Simple/lambda lambda.cu)
 
 # DISABLED: Due to the following error:
 #
