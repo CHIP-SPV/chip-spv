@@ -45,6 +45,93 @@ private:
     }
   }
 
+  // float AS3*, [0xfloat] AS3*,
+  // [0x float], float
+  static void recursivelyReplaceArrayWithPointer(Value *DestV, Value *SrcV, Type *ArrayType, Type *ElemType, Function *F, IRBuilder<> &B) {
+    //std::cerr << "############ REPLACING (SrcV): \n";
+    //SrcV->dump(); // AScast to [0 x float] addrspace(4)*
+    //std::cerr << "############ WITH (DestV): \n";
+    //DestV->dump(); // AScast to float addrspace(4)*
+    //std::cerr << "######################## REPL BEGIN users: \n";
+    SmallVector<Instruction *> InstsToDelete;
+
+    for (auto U : SrcV->users()) {
+
+      if (U->getType() == nullptr)
+        continue;
+
+      if (llvm::AddrSpaceCastInst *ASCI = dyn_cast<AddrSpaceCastInst>(U)) {
+        //std::cerr << "is ASCI\n";
+        B.SetInsertPoint(ASCI);
+        PointerType *PT = PointerType::get(ElemType, ASCI->getDestAddressSpace());
+        Value *NewASCI = B.CreateAddrSpaceCast(DestV, PT);
+
+        recursivelyReplaceArrayWithPointer(NewASCI, ASCI, ArrayType, ElemType, F, B);
+
+        // check users == 0, delete old ASCI
+        if (ASCI->getNumUses() == 0) {
+          //std::cerr << "ASCI users empty, deleting\n";
+          InstsToDelete.push_back(ASCI);
+        }
+        continue;
+      }
+
+      if (llvm::GetElementPtrInst *GEP = dyn_cast<GetElementPtrInst>(U)) {
+        //std::cerr << "@@@@@@@@@@@@@@@@@@@@@ \n is GEP; OLD GEP:\n";
+        //GEP->dump(); // getelementptr inbounds [0 x float], [0 x float] addrspace(4)* %1, i64 0, i64 %idxprom79
+
+        //float addrspace(4)*
+        //GEP->getResultElementType()->dump();
+        // 3
+        //std::cerr << "num operands : " << GEP->getNumOperands() << "\n";
+        // 2
+        //std::cerr << "num indices : " << GEP->getNumIndices() << "\n";
+
+        B.SetInsertPoint(GEP);
+        SmallVector<Value *> Indices;
+        // we skip the first Operand (pointer) and also the first Index
+        for (unsigned i = 1; i < GEP->getNumIndices(); ++i) {
+//          std::cerr << "OPERAND  " << 1+i << " : ";
+//          GEP->getOperand(1+i)->dump();
+//          std::cerr << "\n";
+          Indices.push_back(GEP->getOperand(1+i));
+        }
+//        std::cerr << "DestV gettype getScalartype: \n";
+//        DestV->getType()->getScalarType()->dump();
+//        std::cerr << "DestV gettype getArrayElementType: \n";
+//        DestV->getType()->getArrayElementType()->dump();
+//        std::cerr << "DestV gettype getArrayElementType: \n";
+//        DestV->getType()->getArrayElementType()->dump();
+
+        Value *VV = B.CreateGEP(ElemType, DestV, Indices);
+        GetElementPtrInst *NewGEP = dyn_cast<GetElementPtrInst>(VV);
+        //std::cerr << "NEW GEP: \n";
+        NewGEP->dump();
+
+        //std::cerr << "RESULT TYPES: \n";
+        //GEP->getResultElementType()->dump();
+        //NewGEP->getResultElementType()->dump();
+
+        GEP->replaceAllUsesWith(NewGEP);
+        if (GEP->getNumUses() == 0) {
+          //std::cerr << "GEP users empty, deleting\n";
+          InstsToDelete.push_back(GEP);
+        }
+
+        continue;
+      }
+
+      U->dump();
+      assert (0 && "Unknown user type (not GEP & not AScast)");
+    }
+
+    for (auto I : InstsToDelete) {
+      I->eraseFromParent();
+    }
+
+    //std::cerr << "######################## REPL END users \n";
+  }
+
   // Recursively descend a Value's users and convert any constant expressions
   // into regular instructions. returns true if it modified Func
   static bool breakConstantExpressions(Value *Val, Function *Func) {
@@ -149,13 +236,15 @@ private:
     // [1024 * float]
     ArrayType *AT = dyn_cast<ArrayType>(GVT->getElementType());
     // float
-    Type *ELT = AT->getElementType();
+    Type *ElemT = AT->getElementType();
+    // float addrspace(3)*
+    PointerType *AS3_PTR = PointerType::get(ElemT, GV->getAddressSpace());
 
     for (Function::const_arg_iterator i = F->arg_begin(), e = F->arg_end();
          i != e; ++i) {
       Parameters.push_back(i->getType());
     }
-    Parameters.push_back(GVT);
+    Parameters.push_back(AS3_PTR);
 
     // Create the new function.
     FunctionType *FT =
@@ -183,7 +272,7 @@ private:
 #endif
 
     // float* (without AS, for MDNode)
-    PointerType *AS0_PTR = PointerType::get(ELT, 0);
+    PointerType *AS0_PTR = PointerType::get(ElemT, 0);
     updateFunctionMD(NewF, M, AS0_PTR);
 
     M.getOrInsertFunction(NewF->getName(), NewF->getFunctionType(),
@@ -199,10 +288,17 @@ private:
       IRBuilder<> B(M.getContext());
       B.SetInsertPoint(NewF->getEntryBlock().getFirstNonPHI());
 
-      GV->replaceAllUsesWith(last_arg);
+      Value *BitcastV = B.CreateBitOrPointerCast(last_arg, GVT, "casted_last_arg");
+      Instruction *LastArgBitcast = dyn_cast<Instruction>(BitcastV);
+
+      GV->replaceAllUsesWith(BitcastV);
+      recursivelyReplaceArrayWithPointer(last_arg, LastArgBitcast, AT, ElemT, NewF, B);
+
+      assert(LastArgBitcast->getNumUses() == 0 && "Something still uses LastArg bitcast - bug!");
+      LastArgBitcast->eraseFromParent();
     }
 
-    assert(GV->getNumUses() == 0 && "Some uses still remain - bug!");
+    assert(GV->getNumUses() == 0 && "Some GlobalVar uses still remain - bug!");
     GV->eraseFromParent();
 
     return NewF;
@@ -228,7 +324,8 @@ private:
       ArrayType *AT;
       if (GV->hasName() == true && GVT->getAddressSpace() == SPIR_LOCAL_AS &&
           (AT = dyn_cast<ArrayType>(GVT->getElementType())) != nullptr &&
-          (AT->getArrayNumElements() == 4294967295)) {
+          (AT->getArrayNumElements() == 4294967295 || AT->getArrayNumElements() == 0)
+          ) {
 
         Function *F = getFunctionUsingGlobalVar(GV);
         if (F == nullptr) {
