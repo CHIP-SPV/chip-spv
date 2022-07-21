@@ -48,7 +48,7 @@ if("${LLVM_VERSION}" VERSION_GREATER 9.0)
 endif()
 
 if("${LLVM_VERSION}" VERSION_GREATER_EQUAL 11.0)
-  add_library(LLVMHipPasses MODULE HipPasses.cpp
+  add_library(LLVMHipPasses MODULE HipPasses.cpp HipBreakConstantGEPs.cpp
     HipDynMem.cpp HipStripUsedIntrinsics.cpp HipDefrost.cpp
     HipPrintf.cpp HipGlobalVariables.cpp HipTextureLowering.cpp HipAbort.cpp)
 
