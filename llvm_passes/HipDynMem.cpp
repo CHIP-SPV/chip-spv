@@ -5,6 +5,7 @@
 #include "HipDynMem.h"
 
 #include "llvm/ADT/SmallPtrSet.h"
+#include "llvm/ADT/SetVector.h"
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/GlobalValue.h"
@@ -27,11 +28,53 @@ using namespace llvm;
 #define SPIR_LOCAL_AS 3
 #define GENERIC_AS 4
 
-typedef llvm::SmallPtrSet<Function *, 8> FSet;
+typedef llvm::SmallPtrSet<Function *, 16> FSet;
+typedef llvm::SetVector<Function *> OrderedFSet;
 
 class HipDynMemExternReplacePass : public ModulePass {
 private:
-  static void recursivelyFindFunctions(Value *V, FSet &FS) {
+
+  static bool isGVarUsedInFunction(GlobalVariable *GV, Function *F) {
+    for (Function::iterator BB = F->begin(); BB != F->end(); ++BB) {
+      for (BasicBlock::iterator i = BB->begin(); i != BB->end(); ++i) {
+        //
+        // Scan through the operands of this instruction & check for GV
+        //
+        Instruction * I = &*i;
+        for (unsigned index = 0; index < I->getNumOperands(); ++index) {
+          if (GlobalVariable *ArgGV = dyn_cast<GlobalVariable>(I->getOperand(index))) {
+            if (ArgGV == GV)
+              return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  static void replaceGVarUsesWith(GlobalVariable *GV, Function *F, Value *Repl) {
+    SmallVector<unsigned, 8> OperToReplace;
+    for (Function::iterator BB = F->begin(); BB != F->end(); ++BB) {
+      for (BasicBlock::iterator i = BB->begin(); i != BB->end(); ++i) {
+        //
+        // Scan through the operands of this instruction & check for GV
+        //
+        Instruction * I = &*i;
+        OperToReplace.clear();
+        for (unsigned index = 0; index < I->getNumOperands(); ++index) {
+          if (GlobalVariable *ArgGV = dyn_cast<GlobalVariable>(I->getOperand(index))) {
+            if (ArgGV == GV)
+              OperToReplace.push_back(index);
+          }
+        }
+        for (unsigned index : OperToReplace) {
+          I->setOperand(index, Repl);
+        }
+      }
+    }
+  }
+
+  static void recursivelyFindDirectUsers(Value *V, FSet &FS) {
     for (auto U : V->users()) {
       Instruction *Inst = dyn_cast<Instruction>(U);
       if (Inst) {
@@ -40,8 +83,27 @@ private:
           continue;
         FS.insert(IF);
       } else {
-        recursivelyFindFunctions(U, FS);
+        recursivelyFindDirectUsers(U, FS);
       }
+    }
+  }
+
+  static void recursivelyFindIndirectUsers(Value *V, OrderedFSet &FS) {
+    OrderedFSet Temp;
+    for (auto U : V->users()) {
+      Instruction *Inst = dyn_cast<Instruction>(U);
+      if (Inst) {
+        Function *IF = Inst->getFunction();
+        if (!IF)
+          continue;
+        if (FS.count(IF) == 0) {
+          FS.insert(IF);
+          Temp.insert(IF);
+        }
+      }
+    }
+    for (auto F : Temp) {
+     recursivelyFindIndirectUsers(F, FS);
     }
   }
 
@@ -91,22 +153,22 @@ private:
         SmallVector<Value *> Indices;
         // we skip the first Operand (pointer) and also the first Index
         for (unsigned i = 1; i < GEP->getNumIndices(); ++i) {
-//          std::cerr << "OPERAND  " << 1+i << " : ";
-//          GEP->getOperand(1+i)->dump();
-//          std::cerr << "\n";
+          //std::cerr << "OPERAND  " << 1+i << " : ";
+          //GEP->getOperand(1+i)->dump();
+          //std::cerr << "\n";
           Indices.push_back(GEP->getOperand(1+i));
         }
-//        std::cerr << "DestV gettype getScalartype: \n";
-//        DestV->getType()->getScalarType()->dump();
-//        std::cerr << "DestV gettype getArrayElementType: \n";
-//        DestV->getType()->getArrayElementType()->dump();
-//        std::cerr << "DestV gettype getArrayElementType: \n";
-//        DestV->getType()->getArrayElementType()->dump();
+        //std::cerr << "DestV gettype getScalartype: \n";
+        //DestV->getType()->getScalarType()->dump();
+        //std::cerr << "DestV gettype getArrayElementType: \n";
+        //DestV->getType()->getArrayElementType()->dump();
+        //std::cerr << "DestV gettype getArrayElementType: \n";
+        //DestV->getType()->getArrayElementType()->dump();
 
         Value *VV = B.CreateGEP(ElemType, DestV, Indices);
         GetElementPtrInst *NewGEP = dyn_cast<GetElementPtrInst>(VV);
         //std::cerr << "NEW GEP: \n";
-        NewGEP->dump();
+        //NewGEP->dump();
 
         //std::cerr << "RESULT TYPES: \n";
         //GEP->getResultElementType()->dump();
@@ -121,8 +183,32 @@ private:
         continue;
       }
 
+      if (llvm::BitCastInst *BCI = dyn_cast<BitCastInst>(U)) {
+        //std::cerr << "is BCI\n";
+        //BCI->dump();
+
+          B.SetInsertPoint(BCI);
+          //PointerType *SrcPT = dyn_cast<PointerType>(BCI->getSrcTy());
+          //PointerType *PT = PointerType::get(ElemType, SrcPT->getAddressSpace());
+          Value *NewBCI = B.CreateBitCast(DestV, BCI->getDestTy());
+          BCI->replaceAllUsesWith(NewBCI);
+
+          //recursivelyReplaceArrayWithPointer(NewBCI, BCI, ArrayType, ElemType, F, B);
+
+          // check users == 0, delete old BCI
+          if (BCI->getNumUses() == 0) {
+          //  std::cerr << "BCI users empty, deleting\n";
+            InstsToDelete.push_back(BCI);
+          }
+        continue;
+      }
+
+      if (llvm::ReturnInst *RI = dyn_cast<ReturnInst>(U)) {
+        continue;
+      }
+
       U->dump();
-      assert (0 && "Unknown user type (not GEP & not AScast)");
+      llvm_unreachable("Unknown user type (not GEP & not AScast)");
     }
 
     for (auto I : InstsToDelete) {
@@ -130,47 +216,6 @@ private:
     }
 
     //std::cerr << "######################## REPL END users \n";
-  }
-
-  // Recursively descend a Value's users and convert any constant expressions
-  // into regular instructions. returns true if it modified Func
-  static bool breakConstantExpressions(Value *Val, Function *Func) {
-    bool Modified = false;
-    std::vector<Value *> Users(Val->user_begin(), Val->user_end());
-    for (auto *U : Users) {
-      if (auto *CE = dyn_cast<ConstantExpr>(U)) {
-        // First, make sure no users of this constant expression are themselves
-        // constant expressions.
-        Modified |= breakConstantExpressions(U, Func);
-
-        // Convert this constant expression to an instruction.
-        llvm::Instruction *I = CE->getAsInstruction();
-        I->insertBefore(&*Func->begin()->begin());
-        CE->replaceAllUsesWith(I);
-        CE->destroyConstant();
-        Modified = true;
-      }
-    }
-    return Modified;
-  }
-
-  static Function *getFunctionUsingGlobalVar(GlobalVariable *GV) {
-    FSet FuncSet;
-    recursivelyFindFunctions(GV, FuncSet);
-    /* Assuming dynamic shmem variables are always used only by one function.
-     * TODO is it possible there would be a local variable used by >1 func ? */
-    assert(FuncSet.size() <= 1 &&
-           "more than one function uses dynamic mem variable!");
-    if (FuncSet.size() == 1)
-      return *(FuncSet.begin());
-    else
-      return nullptr;
-  }
-
-  static bool isValueUsedByFunction(Value *V, Function *F) {
-    FSet FuncSet;
-    recursivelyFindFunctions(V, FuncSet);
-    return (FuncSet.find(F) != FuncSet.end());
   }
 
   // get Function metadata "MDName" and append NN to it
@@ -225,7 +270,7 @@ private:
 
   /* clones a function with an additional argument */
   static Function *cloneFunctionWithDynMemArg(Function *F, Module &M,
-                                       GlobalVariable *GV) {
+                                              GlobalVariable *GV) {
 
     SmallVector<Type *, 8> Parameters;
 
@@ -252,6 +297,7 @@ private:
     Function *NewF =
         Function::Create(FT, F->getLinkage(), F->getAddressSpace(), "", &M);
     NewF->takeName(F);
+    F->setName("old_replaced_func");
 
     Function::arg_iterator AI = NewF->arg_begin();
     ValueToValueMapTy VV;
@@ -261,7 +307,7 @@ private:
       VV[&*i] = &*AI;
       ++AI;
     }
-    AI->setName(Twine("__hidden_dyn_local_mem"));
+    AI->setName(GV->getName() + "__hidden_dyn_local_mem");
 
     SmallVector<ReturnInst *, 1> RI;
 
@@ -270,36 +316,85 @@ private:
 #else
     CloneFunctionInto(NewF, F, VV, true, RI);
 #endif
+    IRBuilder<> B(M.getContext());
 
     // float* (without AS, for MDNode)
     PointerType *AS0_PTR = PointerType::get(ElemT, 0);
     updateFunctionMD(NewF, M, AS0_PTR);
 
+    // insert new function with dynamic mem = last argument
     M.getOrInsertFunction(NewF->getName(), NewF->getFunctionType(),
                           NewF->getAttributes());
+
+    // find all calls/uses of this function...
+    std::vector<CallInst *>  CallInstUses;
+    for (const auto &U : F->users()) {
+      //std::cerr << "Old version of Function " << NewF->getName().str() << " still has users, replacing now:\n";
+      //std::cerr << "########## F user:\n";
+      //U->dump();
+      CallInst *CI = dyn_cast<CallInst>(U);
+      if (CI) {
+        CallInstUses.push_back(CI);
+      } else {
+        llvm_unreachable("unknown instruction - bug");
+      }
+    }
+
+    // ... and replace them with calls to new function
+    for (CallInst *CI : CallInstUses) {
+      llvm::SmallVector<Value *, 12> Args;
+      Function *CallerF = CI->getCaller();
+      assert(CallerF);
+      assert(CallerF->arg_size() > 0);
+      for (Value *V : CI->args()) {
+        Args.push_back(V);
+      }
+      Argument *LastArg = CallerF->getArg(CallerF->arg_size() - 1);
+      Args.push_back(LastArg);
+      B.SetInsertPoint(CI);
+      CallInst *NewCI = B.CreateCall(FT, NewF, Args);
+      CI->replaceAllUsesWith(NewCI);
+      CI->eraseFromParent();
+    }
+
+    // now we can safely delete the old function
+    if(F->getNumUses() != 0) llvm_unreachable("old function still has uses - bug!");
     F->eraseFromParent();
 
     Argument *last_arg = NewF->arg_end();
     --last_arg;
 
-    // replace all dynamic shared mem uses with local argument
-    if (GV->getNumUses() > 0) {
-
-      IRBuilder<> B(M.getContext());
+    // if the function uses dynamic shared memory (via the GVar),
+    // replace all uses of GVar inside function with the new dyn mem Argument
+    if (isGVarUsedInFunction(GV, NewF)) {
+      //std::cerr << "@@@@@ GVAR: " << GV->getName().str() << " is USED in:  " << NewF->getName().str() << "\n";
       B.SetInsertPoint(NewF->getEntryBlock().getFirstNonPHI());
 
+      // insert a bitcast of dyn mem argument to [N x Type] Array
       Value *BitcastV = B.CreateBitOrPointerCast(last_arg, GVT, "casted_last_arg");
       Instruction *LastArgBitcast = dyn_cast<Instruction>(BitcastV);
 
-      GV->replaceAllUsesWith(BitcastV);
+      // replace GVar references with the [N x Type] bitcast
+      replaceGVarUsesWith(GV, NewF, BitcastV);
+
+      // now the code should be without GVar references, but still potentially
+      // contains [0 x ElemType] arrays; we need to get rid of those
+
+      //std::cerr << "##################################################### APTER GV replace\n";
+      //NewF->dump();
+      //std::cerr << "#####################################################\n";
+
+      // replace all [N x Type]* bitcast uses with direct use of ElemT*-type dyn mem argument
       recursivelyReplaceArrayWithPointer(last_arg, LastArgBitcast, AT, ElemT, NewF, B);
 
-      assert(LastArgBitcast->getNumUses() == 0 && "Something still uses LastArg bitcast - bug!");
+      //std::cerr << "##################################################### APTER LASTARG replace\n";
+      //NewF->dump();
+      //std::cerr << "#####################################################\n";
+
+      // the bitcast to [N x Type] should now be unused
+      if(LastArgBitcast->getNumUses() != 0) llvm_unreachable("Something still uses LastArg bitcast - bug!");
       LastArgBitcast->eraseFromParent();
     }
-
-    assert(GV->getNumUses() == 0 && "Some GlobalVar uses still remain - bug!");
-    GV->eraseFromParent();
 
     return NewF;
   }
@@ -308,11 +403,18 @@ private:
 
     bool Modified = false;
 
+    SmallVector<GlobalVariable *> GVars;
+
     /* unfortunately the M.global_begin/end iterators hide some of the
      * global variables, therefore are not usable here; must use VST */
     ValueSymbolTable &VST = M.getValueSymbolTable();
     ValueSymbolTable::iterator VSTI;
 
+    //std::cerr << "##################################################### MODULE BEFORE\n";
+    //M.dump();
+    //std::cerr << "#####################################################\n";
+
+    // find global variables that represent dynamic shared memory (__shared__)
     for (VSTI = VST.begin(); VSTI != VST.end(); ++VSTI) {
 
       Value *V = VSTI->getValue();
@@ -322,23 +424,85 @@ private:
 
       PointerType *GVT = GV->getType();
       ArrayType *AT;
+
+      // Dynamic shared arrays declared as "extern __shared__ int something[]"
+      // are 0 sized, and this causes problems for SPIRV translator, so we need
+      // to fix them by converting to pointers
+      // Dynamic shared arrays declared with HIP_DYNAMIC_SHARED macro are declared as
+      // "__shared__ type var[4294967295];"
       if (GV->hasName() == true && GVT->getAddressSpace() == SPIR_LOCAL_AS &&
           (AT = dyn_cast<ArrayType>(GVT->getElementType())) != nullptr &&
           (AT->getArrayNumElements() == 4294967295 || AT->getArrayNumElements() == 0)
           ) {
+        GVars.push_back(GV);
+      }
+    }
 
-        Function *F = getFunctionUsingGlobalVar(GV);
-        if (F == nullptr) {
-          continue;
-        }
+    for (GlobalVariable *GV : GVars) {
+      //std::cerr << "@@@@@@@@@@@@@ Processing GVar: " << GV->getName().str() << "\n";
+      FSet DirectUserSet;
+      // first, find functions that directly use the GVar. However, these may be
+      // called from other functions, so we need to append the
+      // dynamic shared memory argument recursively.
+      recursivelyFindDirectUsers(GV, DirectUserSet);
+      if (DirectUserSet.empty())
+        continue;
 
-        breakConstantExpressions(GV, F);
+      OrderedFSet IndirectUserSet;
+      for (Function *F : DirectUserSet) {
+        //std::cerr << "Direct User (Function) found: " << F->getName().str() << "\n";
+        recursivelyFindIndirectUsers(F, IndirectUserSet);
+      }
+
+      // find the functions that indirectly use the GVar. These will be processed (cloned with dyn mem arg) first,
+      // so that the direct users can rely on dyn mem argument being present in their caller.
+      for (auto FI = IndirectUserSet.rbegin(); FI != IndirectUserSet.rend(); ++FI) {
+        Function *F = *FI;
+        //std::cerr << "Indirect User (Function) found: " << F->getName().str() << ", cloning\n";
+        Function *NewF = cloneFunctionWithDynMemArg(F, M, GV);
+        if(NewF == nullptr) llvm_unreachable("cloning failed");
+      }
+
+      // now clone the direct users and replace GVar references inside them
+      for (Function *F : DirectUserSet) {
+        //std::cerr << "CONVERTING FUNCTION " << F->getName().str() << "\n";
 
         Function *NewF = cloneFunctionWithDynMemArg(F, M, GV);
-        assert(NewF && "cloning failed");
-
+        if(NewF == nullptr) llvm_unreachable("cloning failed");
         Modified = true;
       }
+
+      //std::cerr << "##################################################### MODULE AFTER CONV:\n";
+      //M.dump();
+      //std::cerr << "#####################################################\n";
+
+      // it seems that the
+      bool Deleted = true;
+      while (Deleted && GV->getNumUses()) {
+        Deleted = false;
+        User *U = *GV->user_begin();
+        //std::cerr << "@@@@@ USER: \n";
+        //U->dump();
+        if (Instruction *I = dyn_cast<Instruction>(U)) {
+          //std::cerr << "Instruction, Used in function: " << I->getFunction()->getName().str() << "\n";
+          if (I->getParent()) {
+            I->eraseFromParent();
+            Deleted = true;
+          }
+        } else
+        if (ConstantExpr *CE = dyn_cast<ConstantExpr>(U)) {
+          //std::cerr << "is ConstExpr, Uses: " << U->getNumUses() << "\n";
+          if (U->getNumUses() <= 1) {
+            CE->destroyConstant();
+            Deleted = true;
+          }
+        } else
+        llvm_unreachable("unknown User of Global Variable - bug!");
+      }
+
+      if (GV->getNumUses() != 0)
+        llvm_unreachable("Some uses still remain - bug!");
+      GV->eraseFromParent();
     }
 
     return Modified;
@@ -361,6 +525,7 @@ public:
   }
 };
 
+// Identifier variable for the pass
 char HipDynMemExternReplacePass::ID = 0;
 static RegisterPass<HipDynMemExternReplacePass>
     X("hip-dyn-mem",
