@@ -109,7 +109,7 @@ private:
 
   // float AS3*, [0xfloat] AS3*,
   // [0x float], float
-  static void recursivelyReplaceArrayWithPointer(Value *DestV, Value *SrcV, Type *ArrayType, Type *ElemType, Function *F, IRBuilder<> &B) {
+  static void recursivelyReplaceArrayWithPointer(Value *DestV, Value *SrcV, Type *ElemType, IRBuilder<> &B) {
     //std::cerr << "############ REPLACING (SrcV): \n";
     //SrcV->dump(); // AScast to [0 x float] addrspace(4)*
     //std::cerr << "############ WITH (DestV): \n";
@@ -128,7 +128,7 @@ private:
         PointerType *PT = PointerType::get(ElemType, ASCI->getDestAddressSpace());
         Value *NewASCI = B.CreateAddrSpaceCast(DestV, PT);
 
-        recursivelyReplaceArrayWithPointer(NewASCI, ASCI, ArrayType, ElemType, F, B);
+        recursivelyReplaceArrayWithPointer(NewASCI, ASCI, ElemType, B);
 
         // check users == 0, delete old ASCI
         if (ASCI->getNumUses() == 0) {
@@ -274,14 +274,17 @@ private:
 
     SmallVector<Type *, 8> Parameters;
 
-    // [1024 * float] AS3*
-    PointerType *GVT = GV->getType();
+    // [1024 * float] (value type is not pointer)
+    Type *GVTy = GV->getValueType();
+//    std::cerr << "GVar type: \n";
+//    GVTy->dump();
 
-    // AT & ELT are only for OpenCL metadata.
-    // [1024 * float]
-    ArrayType *AT = dyn_cast<ArrayType>(GVT->getElementType());
+    assert(dyn_cast<ArrayType>(GVTy) != nullptr);
     // float
-    Type *ElemT = AT->getElementType();
+    Type *ElemT = GVTy->getArrayElementType();
+//    std::cerr << "GVar Array elem type: \n";
+//    ElemT->dump();
+
     // float addrspace(3)*
     PointerType *AS3_PTR = PointerType::get(ElemT, GV->getAddressSpace());
 
@@ -371,7 +374,7 @@ private:
       B.SetInsertPoint(NewF->getEntryBlock().getFirstNonPHI());
 
       // insert a bitcast of dyn mem argument to [N x Type] Array
-      Value *BitcastV = B.CreateBitOrPointerCast(last_arg, GVT, "casted_last_arg");
+      Value *BitcastV = B.CreateBitOrPointerCast(last_arg, GV->getType(), "casted_last_arg");
       Instruction *LastArgBitcast = dyn_cast<Instruction>(BitcastV);
 
       // replace GVar references with the [N x Type] bitcast
@@ -385,7 +388,7 @@ private:
       //std::cerr << "#####################################################\n";
 
       // replace all [N x Type]* bitcast uses with direct use of ElemT*-type dyn mem argument
-      recursivelyReplaceArrayWithPointer(last_arg, LastArgBitcast, AT, ElemT, NewF, B);
+      recursivelyReplaceArrayWithPointer(last_arg, LastArgBitcast, ElemT, B);
 
       //std::cerr << "##################################################### APTER LASTARG replace\n";
       //NewF->dump();
@@ -422,16 +425,18 @@ private:
       if (GV == nullptr)
         continue;
 
-      PointerType *GVT = GV->getType();
-      ArrayType *AT;
+      Type *GVT = GV->getValueType();
+//      std::cerr << "*** CHECKING GVar VALUEtype: \n";
+//      GVT->dump();
+      Type *AT = nullptr;
 
       // Dynamic shared arrays declared as "extern __shared__ int something[]"
       // are 0 sized, and this causes problems for SPIRV translator, so we need
       // to fix them by converting to pointers
       // Dynamic shared arrays declared with HIP_DYNAMIC_SHARED macro are declared as
       // "__shared__ type var[4294967295];"
-      if (GV->hasName() == true && GVT->getAddressSpace() == SPIR_LOCAL_AS &&
-          (AT = dyn_cast<ArrayType>(GVT->getElementType())) != nullptr &&
+      if (GV->hasName() == true && GV->getAddressSpace() == SPIR_LOCAL_AS &&
+          (AT = dyn_cast<ArrayType>(GV->getValueType())) != nullptr &&
           (AT->getArrayNumElements() == 4294967295 || AT->getArrayNumElements() == 0)
           ) {
         GVars.push_back(GV);
