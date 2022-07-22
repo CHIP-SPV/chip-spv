@@ -7,6 +7,7 @@
 #include "HipPrintf.h"
 #include "HipGlobalVariables.h"
 #include "HipTextureLowering.h"
+#include "HipBreakConstantGEPs.h"
 
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
@@ -36,7 +37,10 @@ static void addFullLinkTimePasses(ModulePassManager &MPM) {
   // Remove attributes that may prevent the device code from being optimized.
   MPM.addPass(RemoveNoInlineOptNoneAttrsPass());
 
-  // Run a collection of passes run at device link time.
+  // replace constantexpr GEPs with GEP instructions
+  MPM.addPass(HipBreakConstantGEPsPass());
+
+  // transform dynamic shared memory (extern __shared__) global variables into kernel arguments
   MPM.addPass(HipDynMemExternReplaceNewPass());
 
   // Prepare device code for texture function lowering which does not yet work
